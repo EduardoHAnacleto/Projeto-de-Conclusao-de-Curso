@@ -1,0 +1,550 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="packages\NUnit.3.13.3\build\NUnit.props" Condition="Exists('packages\NUnit.3.13.3\build\NUnit.props')" />
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{4FF3655D-7A2A-455C-BB5C-D5389A63B740}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>ProjetoEduardoAnacletoWindowsForm1</RootNamespace>
+    <AssemblyName>ProjetoEduardoAnacletoWindowsForm1</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=3.13.3.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">
+      <HintPath>packages\NUnit.3.13.3\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.OracleClient" />
+    <Reference Include="System.Data.SqlClient, Version=4.6.1.5, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>packages\System.Data.SqlClient.4.8.5\lib\net461\System.Data.SqlClient.dll</HintPath>
+    </Reference>
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceProcess" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\Users_Controller.cs" />
+    <Compile Include="DAO\Users_DAO.cs" />
+    <Compile Include="FormsCreate\Frm_Create_Services.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Services.Designer.cs">
+      <DependentUpon>Frm_Create_Services.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Suppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Suppliers.Designer.cs">
+      <DependentUpon>Frm_Create_Suppliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_PaymentConditions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_PaymentConditions.Designer.cs">
+      <DependentUpon>Frm_Find_PaymentConditions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Services.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Services.Designer.cs">
+      <DependentUpon>Frm_Find_Services.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Suppliers.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Suppliers.Designer.cs">
+      <DependentUpon>Frm_Find_Suppliers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Next\Frm_Create_BillsToPay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Next\Frm_Create_BillsToPay.Designer.cs">
+      <DependentUpon>Frm_Create_BillsToPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Next\MasterDetails_BillsToReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Next\MasterDetails_BillsToReceive.Designer.cs">
+      <DependentUpon>MasterDetails_BillsToReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Controllers\Clients_Controller.cs" />
+    <Compile Include="Controllers\Countries_Controller.cs" />
+    <Compile Include="Controllers\Products_Controller.cs" />
+    <Compile Include="Next\BillsToReceive_DAO.cs" />
+    <Compile Include="Controllers\PhoneClassifications_Controller.cs" />
+    <Compile Include="DAO\Clients_DAO.cs" />
+    <Compile Include="DAO\PhoneClassifications_DAO.cs" />
+    <Compile Include="FormsCreate\Frm_Create_Brands.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Brands.Designer.cs">
+      <DependentUpon>Frm_Create_Brands.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Cities.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Cities.Designer.cs">
+      <DependentUpon>Frm_Create_Cities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Clients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Clients.Designer.cs">
+      <DependentUpon>Frm_Create_Clients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Countries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Countries.Designer.cs">
+      <DependentUpon>Frm_Create_Countries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Employees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Employees.Designer.cs">
+      <DependentUpon>Frm_Create_Employees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_PaymentConditions.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_PaymentConditions.Designer.cs">
+      <DependentUpon>Frm_Create_PaymentConditions.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_PaymentMethods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_PaymentMethods.Designer.cs">
+      <DependentUpon>Frm_Create_PaymentMethods.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_People.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_People.Designer.cs">
+      <DependentUpon>Frm_Create_People.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_PhoneClassifications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_PhoneClassifications.Designer.cs">
+      <DependentUpon>Frm_Create_PhoneClassifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_ProductGroups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_ProductGroups.Designer.cs">
+      <DependentUpon>Frm_Create_ProductGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Products.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Products.Designer.cs">
+      <DependentUpon>Frm_Create_Products.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_States.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_States.Designer.cs">
+      <DependentUpon>Frm_Create_States.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Next\Frm_Create_BillsToReceive.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Next\Frm_Create_BillsToReceive.Designer.cs">
+      <DependentUpon>Frm_Create_BillsToReceive.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Users.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormsCreate\Frm_Create_Users.Designer.cs">
+      <DependentUpon>Frm_Create_Users.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Clients.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Clients.Designer.cs">
+      <DependentUpon>Frm_Find_Clients.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Employees.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Employees.Designer.cs">
+      <DependentUpon>Frm_Find_Employees.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_PaymentMethods.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_PaymentMethods.Designer.cs">
+      <DependentUpon>Frm_Find_PaymentMethods.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_People.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_People.Designer.cs">
+      <DependentUpon>Frm_Find_People.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_PhoneClassifications.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_PhoneClassifications.Designer.cs">
+      <DependentUpon>Frm_Find_PhoneClassifications.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_ProductGroups.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_ProductGroups.Designer.cs">
+      <DependentUpon>Frm_Find_ProductGroups.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Products.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Products.Designer.cs">
+      <DependentUpon>Frm_Find_Products.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InheritForms\Frm_Create_Master.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InheritForms\Frm_Create_Master.Designer.cs">
+      <DependentUpon>Frm_Create_Master.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Clients.cs" />
+    <Compile Include="Next\PurchaseItems.cs" />
+    <Compile Include="Next\PurchaseItems_Controller.cs" />
+    <Compile Include="Next\PurchaseItems_DAO.cs" />
+    <Compile Include="Next\Purchases.cs" />
+    <Compile Include="Next\Purchases_Controller.cs" />
+    <Compile Include="Next\Purchases_DAO.cs" />
+    <Compile Include="Next\SaleItems_DAO.cs" />
+    <Compile Include="Next\Sales_DAO.cs" />
+    <Compile Include="Next\ServiceOrders_DAO.cs" />
+    <Compile Include="Controllers\BillsInstalments_Controller.cs" />
+    <Compile Include="Next\BillsToPay_Controller.cs" />
+    <Compile Include="Next\BillsToReceive_Controller.cs" />
+    <Compile Include="Controllers\Brands_Controller.cs" />
+    <Compile Include="Controllers\Cities_Controller.cs" />
+    <Compile Include="Controllers\Employees_Controller.cs" />
+    <Compile Include="Controllers\Master_Controller.cs" />
+    <Compile Include="Controllers\PaymentConditions_Controller.cs" />
+    <Compile Include="Controllers\PaymentMethods_Controller.cs" />
+    <Compile Include="Controllers\People_Controller.cs" />
+    <Compile Include="Controllers\ProductGroups_Controller.cs" />
+    <Compile Include="Controllers\SaleItems_Controller.cs" />
+    <Compile Include="Controllers\Sales_Controller.cs" />
+    <Compile Include="Controllers\ServiceOrders_Controller.cs" />
+    <Compile Include="Controllers\Services_Controller.cs" />
+    <Compile Include="Controllers\States_Controller.cs" />
+    <Compile Include="Controllers\Suppliers_Controller.cs" />
+    <Compile Include="Next\BillsInstalments_DAO.cs" />
+    <Compile Include="Next\BillsToPay_DAO.cs" />
+    <Compile Include="DAO\Brands_DAO.cs" />
+    <Compile Include="DAO\Cities_DAO.cs" />
+    <Compile Include="DAO\Countries_DAO.cs" />
+    <Compile Include="DAO\Employees_DAO.cs" />
+    <Compile Include="DAO\Master_DAO.cs" />
+    <Compile Include="DAO\PaymentConditions_DAO.cs" />
+    <Compile Include="DAO\PaymentMethods_DAO.cs" />
+    <Compile Include="Next\People_DAO.cs" />
+    <Compile Include="DAO\ProductGroups_DAO.cs" />
+    <Compile Include="DAO\Products_DAO.cs" />
+    <Compile Include="DAO\Services_DAO.cs" />
+    <Compile Include="DAO\States_DAO.cs" />
+    <Compile Include="DAO\Suppliers_DAO.cs" />
+    <Compile Include="MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Brands.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Brands.Designer.cs">
+      <DependentUpon>Frm_Find_Brands.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Cities.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Cities.Designer.cs">
+      <DependentUpon>Frm_Find_Cities.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Countries.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_Countries.Designer.cs">
+      <DependentUpon>Frm_Find_Countries.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_States.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms_Find\Frm_Find_States.Designer.cs">
+      <DependentUpon>Frm_Find_States.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Next\Frm_Sale.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Next\Frm_Sale.Designer.cs">
+      <DependentUpon>Frm_Sale.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InheritForms\Frm_Find_Master.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InheritForms\Frm_Find_Master.Designer.cs">
+      <DependentUpon>Frm_Find_Master.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InheritForms\Frm_UserControl_Login.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="InheritForms\Frm_UserControl_Login.Designer.cs">
+      <DependentUpon>Frm_UserControl_Login.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Next\MasterDetails_Sales.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Next\MasterDetails_Sales.Designer.cs">
+      <DependentUpon>MasterDetails_Sales.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Addresses.cs" />
+    <Compile Include="Models\BillsInstalments.cs" />
+    <Compile Include="Next\BillsToPay.cs" />
+    <Compile Include="Next\BillsToReceive.cs" />
+    <Compile Include="Models\Brands.cs" />
+    <Compile Include="Models\Cities.cs" />
+    <Compile Include="Models\Countries.cs" />
+    <Compile Include="Models\Employees.cs" />
+    <Compile Include="Models\Identifications.cs" />
+    <Compile Include="Models\PaymentMethods.cs" />
+    <Compile Include="Models\People.cs" />
+    <Compile Include="Models\PhoneClassifications.cs" />
+    <Compile Include="Models\ProductGroups.cs" />
+    <Compile Include="Models\Products.cs" />
+    <Compile Include="Models\PaymentConditions.cs" />
+    <Compile Include="Next\SaleItems.cs" />
+    <Compile Include="Next\Sales.cs" />
+    <Compile Include="Models\ServiceOrders.cs" />
+    <Compile Include="Models\Services.cs" />
+    <Compile Include="Models\States.cs" />
+    <Compile Include="Models\Suppliers.cs" />
+    <Compile Include="Models\Users.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utility\Validator.cs" />
+    <Compile Include="Utility\TaxesCalculator.cs" />
+    <Compile Include="Utility\Utilities.cs" />
+    <EmbeddedResource Include="FormsCreate\Frm_Create_Services.resx">
+      <DependentUpon>Frm_Create_Services.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_Suppliers.resx">
+      <DependentUpon>Frm_Create_Suppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_PaymentConditions.resx">
+      <DependentUpon>Frm_Find_PaymentConditions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_Services.resx">
+      <DependentUpon>Frm_Find_Services.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_Suppliers.resx">
+      <DependentUpon>Frm_Find_Suppliers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Next\Frm_Create_BillsToPay.resx">
+      <DependentUpon>Frm_Create_BillsToPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Next\MasterDetails_BillsToReceive.resx">
+      <DependentUpon>MasterDetails_BillsToReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_Brands.resx">
+      <DependentUpon>Frm_Create_Brands.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_Cities.resx">
+      <DependentUpon>Frm_Create_Cities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_Clients.resx">
+      <DependentUpon>Frm_Create_Clients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_Countries.resx">
+      <DependentUpon>Frm_Create_Countries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_Employees.resx">
+      <DependentUpon>Frm_Create_Employees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_PaymentConditions.resx">
+      <DependentUpon>Frm_Create_PaymentConditions.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_PaymentMethods.resx">
+      <DependentUpon>Frm_Create_PaymentMethods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_People.resx">
+      <DependentUpon>Frm_Create_People.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_PhoneClassifications.resx">
+      <DependentUpon>Frm_Create_PhoneClassifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_ProductGroups.resx">
+      <DependentUpon>Frm_Create_ProductGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_Products.resx">
+      <DependentUpon>Frm_Create_Products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_States.resx">
+      <DependentUpon>Frm_Create_States.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Next\Frm_Create_BillsToReceive.resx">
+      <DependentUpon>Frm_Create_BillsToReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormsCreate\Frm_Create_Users.resx">
+      <DependentUpon>Frm_Create_Users.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_Clients.resx">
+      <DependentUpon>Frm_Find_Clients.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_Employees.resx">
+      <DependentUpon>Frm_Find_Employees.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_PaymentMethods.resx">
+      <DependentUpon>Frm_Find_PaymentMethods.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_People.resx">
+      <DependentUpon>Frm_Find_People.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_PhoneClassifications.resx">
+      <DependentUpon>Frm_Find_PhoneClassifications.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_ProductGroups.resx">
+      <DependentUpon>Frm_Find_ProductGroups.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_Products.resx">
+      <DependentUpon>Frm_Find_Products.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InheritForms\Frm_Create_Master.resx">
+      <DependentUpon>Frm_Create_Master.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.en.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_Brands.resx">
+      <DependentUpon>Frm_Find_Brands.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_Cities.resx">
+      <DependentUpon>Frm_Find_Cities.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_Countries.resx">
+      <DependentUpon>Frm_Find_Countries.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms_Find\Frm_Find_States.resx">
+      <DependentUpon>Frm_Find_States.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Next\Frm_Sale.resx">
+      <DependentUpon>Frm_Sale.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InheritForms\Frm_Find_Master.resx">
+      <DependentUpon>Frm_Find_Master.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InheritForms\Frm_UserControl_Login.resx">
+      <DependentUpon>Frm_UserControl_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Next\MasterDetails_Sales.resx">
+      <DependentUpon>MasterDetails_Sales.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.8">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.8 %28x86 e x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('packages\NUnit.3.13.3\build\NUnit.props')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NUnit.3.13.3\build\NUnit.props'))" />
+    <Error Condition="!Exists('packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" Text="$([System.String]::Format('$(ErrorText)', 'packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets'))" />
+  </Target>
+  <Import Project="packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets" Condition="Exists('packages\NETStandard.Library.2.0.3\build\netstandard2.0\NETStandard.Library.targets')" />
+</Project>

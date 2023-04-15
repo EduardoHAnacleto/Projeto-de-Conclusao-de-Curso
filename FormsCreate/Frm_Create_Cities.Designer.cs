@@ -1,0 +1,171 @@
+﻿namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
+{
+    partial class Frm_Create_Cities
+    {
+        /// <summary>
+        /// Variável de designer necessária.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Limpar os recursos que estão sendo usados.
+        /// </summary>
+        /// <param name="disposing">true se for necessário descartar os recursos gerenciados; caso contrário, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Código gerado pelo Windows Form Designer
+
+        /// <summary>
+        /// Método necessário para suporte ao Designer - não modifique 
+        /// o conteúdo deste método com o editor de código.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.lbl_stateId = new System.Windows.Forms.Label();
+            this.edt_stateId = new System.Windows.Forms.TextBox();
+            this.edt_state = new System.Windows.Forms.TextBox();
+            this.lbl_State = new System.Windows.Forms.Label();
+            this.btn_SearchState = new System.Windows.Forms.Button();
+            this.edt_phonePrefix = new System.Windows.Forms.TextBox();
+            this.edt_cityName = new System.Windows.Forms.TextBox();
+            this.lbl_phonePrefix = new System.Windows.Forms.Label();
+            this.lbl_cityName = new System.Windows.Forms.Label();
+            this.gbox_dates.SuspendLayout();
+            this.SuspendLayout();
+            // 
+            // 
+            // lbl_stateId
+            // 
+            this.lbl_stateId.AutoSize = true;
+            this.lbl_stateId.Location = new System.Drawing.Point(57, 64);
+            this.lbl_stateId.Name = "lbl_stateId";
+            this.lbl_stateId.Size = new System.Drawing.Size(18, 13);
+            this.lbl_stateId.TabIndex = 32;
+            this.lbl_stateId.Text = "ID";
+            // 
+            // edt_stateId
+            // 
+            this.edt_stateId.Enabled = false;
+            this.edt_stateId.Location = new System.Drawing.Point(56, 80);
+            this.edt_stateId.Name = "edt_stateId";
+            this.edt_stateId.Size = new System.Drawing.Size(36, 20);
+            this.edt_stateId.TabIndex = 31;
+            this.edt_stateId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_stateId_KeyPress);
+            // 
+            // edt_state
+            // 
+            this.edt_state.Enabled = false;
+            this.edt_state.Location = new System.Drawing.Point(108, 81);
+            this.edt_state.Name = "edt_state";
+            this.edt_state.Size = new System.Drawing.Size(199, 20);
+            this.edt_state.TabIndex = 30;
+            this.edt_state.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_state_KeyPress);
+            // 
+            // lbl_State
+            // 
+            this.lbl_State.AutoSize = true;
+            this.lbl_State.Location = new System.Drawing.Point(105, 65);
+            this.lbl_State.Name = "lbl_State";
+            this.lbl_State.Size = new System.Drawing.Size(32, 13);
+            this.lbl_State.TabIndex = 29;
+            this.lbl_State.Text = "State";
+            // 
+            // btn_SearchState
+            // 
+            this.btn_SearchState.Location = new System.Drawing.Point(313, 80);
+            this.btn_SearchState.Name = "btn_SearchState";
+            this.btn_SearchState.Size = new System.Drawing.Size(75, 20);
+            this.btn_SearchState.TabIndex = 28;
+            this.btn_SearchState.Text = "Search";
+            this.btn_SearchState.UseVisualStyleBackColor = true;
+            this.btn_SearchState.Click += new System.EventHandler(this.btn_SearchState_Click);
+            // 
+            // edt_phonePrefix
+            // 
+            this.edt_phonePrefix.Location = new System.Drawing.Point(378, 24);
+            this.edt_phonePrefix.Name = "edt_phonePrefix";
+            this.edt_phonePrefix.Size = new System.Drawing.Size(45, 20);
+            this.edt_phonePrefix.TabIndex = 27;
+            // 
+            // edt_cityName
+            // 
+            this.edt_cityName.Location = new System.Drawing.Point(56, 24);
+            this.edt_cityName.Name = "edt_cityName";
+            this.edt_cityName.Size = new System.Drawing.Size(300, 20);
+            this.edt_cityName.TabIndex = 26;
+            // 
+            // lbl_phonePrefix
+            // 
+            this.lbl_phonePrefix.AutoSize = true;
+            this.lbl_phonePrefix.Location = new System.Drawing.Point(375, 8);
+            this.lbl_phonePrefix.Name = "lbl_phonePrefix";
+            this.lbl_phonePrefix.Size = new System.Drawing.Size(67, 13);
+            this.lbl_phonePrefix.TabIndex = 25;
+            this.lbl_phonePrefix.Text = "Phone Prefix";
+            // 
+            // lbl_cityName
+            // 
+            this.lbl_cityName.AutoSize = true;
+            this.lbl_cityName.Location = new System.Drawing.Point(53, 8);
+            this.lbl_cityName.Name = "lbl_cityName";
+            this.lbl_cityName.Size = new System.Drawing.Size(24, 13);
+            this.lbl_cityName.TabIndex = 24;
+            this.lbl_cityName.Text = "City";
+            // 
+            // Frm_Create_Cities
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(672, 379);
+            this.Controls.Add(this.lbl_stateId);
+            this.Controls.Add(this.edt_stateId);
+            this.Controls.Add(this.edt_state);
+            this.Controls.Add(this.lbl_State);
+            this.Controls.Add(this.btn_SearchState);
+            this.Controls.Add(this.edt_phonePrefix);
+            this.Controls.Add(this.edt_cityName);
+            this.Controls.Add(this.lbl_phonePrefix);
+            this.Controls.Add(this.lbl_cityName);
+            this.Name = "Frm_Create_Cities";
+            this.Text = "Create Cities";
+            this.Controls.SetChildIndex(this.btn_exit, 0);
+            this.Controls.SetChildIndex(this.btn_NewSave, 0);
+            this.Controls.SetChildIndex(this.edt_id, 0);
+            this.Controls.SetChildIndex(this.btn_SelectDelete, 0);
+            this.Controls.SetChildIndex(this.btn_Edit, 0);
+            this.Controls.SetChildIndex(this.gbox_dates, 0);
+            this.Controls.SetChildIndex(this.lbl_cityName, 0);
+            this.Controls.SetChildIndex(this.lbl_phonePrefix, 0);
+            this.Controls.SetChildIndex(this.edt_cityName, 0);
+            this.Controls.SetChildIndex(this.edt_phonePrefix, 0);
+            this.Controls.SetChildIndex(this.btn_SearchState, 0);
+            this.Controls.SetChildIndex(this.lbl_State, 0);
+            this.Controls.SetChildIndex(this.edt_state, 0);
+            this.Controls.SetChildIndex(this.edt_stateId, 0);
+            this.Controls.SetChildIndex(this.lbl_stateId, 0);
+            this.gbox_dates.ResumeLayout(false);
+            this.gbox_dates.PerformLayout();
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.Label lbl_stateId;
+        private System.Windows.Forms.TextBox edt_stateId;
+        private System.Windows.Forms.TextBox edt_state;
+        private System.Windows.Forms.Label lbl_State;
+        private System.Windows.Forms.Button btn_SearchState;
+        private System.Windows.Forms.TextBox edt_phonePrefix;
+        private System.Windows.Forms.TextBox edt_cityName;
+        private System.Windows.Forms.Label lbl_phonePrefix;
+        private System.Windows.Forms.Label lbl_cityName;
+    }
+}
