@@ -69,7 +69,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 edt_stock.Focus();
                 return false;
             }
-            else if (!Utilities.HasOnlyDigits((edt_stock.Text), "Bar Code"))
+            else if (!Utilities.HasOnlyDigits((edt_barCode.Text), "Bar Code") || Utilities.HasOnlySpaces(edt_barCode.Text,"Bar Code"))
             {
                 edt_barCode.Focus();
                 return false;
@@ -321,6 +321,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 }
             }
             UnlockCamps();
+        }
+
+        private void edt_ProfitPerc_ValueChanged(object sender, EventArgs e)
+        {
+            var profit = Convert.ToDecimal(edt_productCost.Text) * ((edt_ProfitPerc.Value * 100) + 1);
+            edt_productSalePrice.Text = profit.ToString();
         }
     }
 }

@@ -212,6 +212,53 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             return null;
         }
 
+        public Products SelectFromDb(long id)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM PRODUCTS WHERE PRODUCT_BARCODE = @ID";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@ID", id);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                ProductGroups_Controller _PController = new ProductGroups_Controller();
+                                Brands_Controller _BController = new Brands_Controller();
+                                Products obj = new Products
+                                {
+                                    id = Convert.ToInt32(reader["id_product"]),
+                                    productName = Convert.ToString(reader["product_name"]),
+                                    salePrice = Convert.ToDouble(reader["product_sale_price"]),
+                                    productCost = Convert.ToDouble(reader["product_cost"]),
+                                    stock = Convert.ToInt32(reader["stock"]),
+                                    productGroup = _PController.FindItemId(Convert.ToInt32(reader["product_group_id"])),
+                                    BarCode = Convert.ToInt64(reader["product_barCode"]),
+                                    brand = _BController.FindItemId(Convert.ToInt32(reader["brand_id"])),
+                                    dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                                    dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
+                                };
+                                return obj;
+                            }
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return null;
+        }
+
         public Products SelectFromDb(string name)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))

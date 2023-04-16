@@ -11,7 +11,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
 
         public BillsToReceive()
         {
-            People person = new People();
+            Clients client = new Clients();
             PaymentMethods paymentForms = new PaymentMethods();
             Sales sale = new Sales();
             BillsInstalments billInstalment = new BillsInstalments();
@@ -19,7 +19,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
 
         public int isPaid { get; set; }
         public Sales sale { get; set; }
-        public People person { get; set; }
+        public Clients client { get; set; }
         public PaymentMethods paymentForm { get; set; }
         public BillsInstalments billInstalment { get; set; }
         public DateTime dueDate { get; set; }

@@ -29,7 +29,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 + ", "
                 + billToReceive.instalmentValue
                 + ", "
-                + billToReceive.person.id
+                + billToReceive.client.id
                 + ", "
                 + billToReceive.paymentForm.id
                 + ", "
@@ -73,7 +73,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             string sql = "UPDATE SALEITEMS SET " +
                 "INSTALMENT_VALUE = " + billToReceive.instalmentValue +
                 ",IS_PAID = " + billToReceive.isPaid+
-                ",PERSON_ID = " +billToReceive.person.id+
+                ",PERSON_ID = " +billToReceive.client.id+
                 ",PAYFORM_ID = " +billToReceive.paymentForm.id+
                 ",INSTALMENT_NUMBER = " + billToReceive.billInstalment.id+
                 ",DATE_LAST_UPDATE = '" + billToReceive.dateOfLastUpdate.ToString() +

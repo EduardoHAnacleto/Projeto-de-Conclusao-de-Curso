@@ -138,13 +138,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                 foreach (DataRow dr in dt.Rows)
                 {
                     DGV_Products.Rows.Add();
-                    for (int k = 0; k < dr.Table.Columns.Count - 3; k++)
-                    {
-                        if (dr[k] != null)
-                        {
-                            DGV_Products.Rows[i].Cells[k].Value = dr[k].ToString();
-                        }
-                    }
+                    //for (int k = 0; k < dr.Table.Columns.Count - 4; k++)
+                    //{
+                    //    if (dr[k] != null)
+                    //    {
+                    //        DGV_Products.Rows[i].Cells[k].Value = dr[k].ToString();
+                    //    }
+                    //}
+                    DGV_Products.Rows[i].Cells["DGVIdProduct"].Value = dr["id_product"].ToString();
+                    DGV_Products.Rows[i].Cells["DGVProductName"].Value = dr["product_name"].ToString();
+                    DGV_Products.Rows[i].Cells["DGVProductValue"].Value = dr["product_sale_price"].ToString();
+                    DGV_Products.Rows[i].Cells["DGVProductGroup"].Value = dr["product_group_id"].ToString();
+                    DGV_Products.Rows[i].Cells["DGVProductBrand"].Value = dr["brand_id"].ToString();
+                    DGV_Products.Rows[i].Cells["DGVProductStock"].Value = dr["stock"].ToString();
                     i++;
                 }
             }

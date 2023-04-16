@@ -239,6 +239,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
         }
 
+        public Products SearchItemByBarCode()
+        {
+            try
+            {
+                return _PController.FindItemBarCode(Convert.ToInt64(edt_barCode.Value));
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
         public void CalculateFinalPrice() //Calcula valor total com desconto % e $
         {
             decimal value = 0;
@@ -341,6 +353,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         private void edt_discountPerc_Leave(object sender, EventArgs e)
         {
             CalculateFinalPrice();
+        }
+
+        private void edt_barCode_ValueChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -33,8 +33,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         public BillsToReceive getBillToReceive()  //Cria um OBJ a partir dos campos
         {
             BillsToReceive bill = new BillsToReceive();
-            bill.person.id = Convert.ToInt32(edt_clientId.Text);
-            bill.person.name = edt_clientName.Text;
+            bill.client.id = Convert.ToInt32(edt_clientId.Text);
+            bill.client.name = edt_clientName.Text;
             bill.paymentForm.id = cbox_paymentMethod.SelectedIndex; //verificar se vai entrar na ordem certa
             bill.instalmentValue = Convert.ToDouble(medt_instalmentValue.Text);
             bill.emissionDate = Convert.ToDateTime(datePicker_emission.Text);

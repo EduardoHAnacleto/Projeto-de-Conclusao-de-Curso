@@ -582,6 +582,7 @@
             this.edt_barCode.Name = "edt_barCode";
             this.edt_barCode.Size = new System.Drawing.Size(258, 20);
             this.edt_barCode.TabIndex = 29;
+            this.edt_barCode.ValueChanged += new System.EventHandler(this.edt_barCode_ValueChanged);
             // 
             // edt_amount
             // 

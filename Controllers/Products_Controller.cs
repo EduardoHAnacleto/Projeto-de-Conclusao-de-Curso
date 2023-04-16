@@ -36,6 +36,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _productsDAO.SelectFromDb(name);
         }
+        public Products FindItemBarCode(long id)
+        {
+            return _productsDAO.SelectFromDb(id);
+        }
         public new void DeleteItem(int id)
         {
             _productsDAO.DeleteFromDb(id);
