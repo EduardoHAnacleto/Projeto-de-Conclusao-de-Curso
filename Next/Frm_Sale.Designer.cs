@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_SaleProducts = new System.Windows.Forms.DataGridView();
-            this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_Salesman = new System.Windows.Forms.GroupBox();
             this.edt_userId = new System.Windows.Forms.NumericUpDown();
             this.edt_userName = new System.Windows.Forms.TextBox();
@@ -77,7 +72,7 @@
             this.edt_barCode = new System.Windows.Forms.NumericUpDown();
             this.edt_amount = new System.Windows.Forms.NumericUpDown();
             this.edt_UNCost = new System.Windows.Forms.NumericUpDown();
-            this.edt_totalCost = new System.Windows.Forms.NumericUpDown();
+            this.edt_totalPValue = new System.Windows.Forms.NumericUpDown();
             this.edt_productId = new System.Windows.Forms.NumericUpDown();
             this.gbox_date = new System.Windows.Forms.GroupBox();
             this.medt_date = new System.Windows.Forms.MaskedTextBox();
@@ -96,6 +91,14 @@
             this.edt_payCondition = new System.Windows.Forms.TextBox();
             this.edt_payConditionId = new System.Windows.Forms.NumericUpDown();
             this.lbl_payConditionID = new System.Windows.Forms.Label();
+            this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.medt_CancelDate = new System.Windows.Forms.MaskedTextBox();
+            this.lbl_CancelDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -111,7 +114,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_barCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_amount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_UNCost)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_totalCost)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_totalPValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_productId)).BeginInit();
             this.gbox_date.SuspendLayout();
             this.gbox_paymentCondition.SuspendLayout();
@@ -129,6 +132,7 @@
             this.DGV_SaleProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdProduct,
             this.NameProduct,
+            this.ProductCost,
             this.QuantityProduct,
             this.UnValueProduct,
             this.ProductTotalValue});
@@ -140,41 +144,6 @@
             this.DGV_SaleProducts.Size = new System.Drawing.Size(606, 221);
             this.DGV_SaleProducts.TabIndex = 5;
             this.DGV_SaleProducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_SaleProducts_RowsRemoved);
-            // 
-            // IdProduct
-            // 
-            this.IdProduct.HeaderText = "ID";
-            this.IdProduct.Name = "IdProduct";
-            this.IdProduct.ReadOnly = true;
-            this.IdProduct.Width = 55;
-            // 
-            // NameProduct
-            // 
-            this.NameProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameProduct.HeaderText = "Product";
-            this.NameProduct.Name = "NameProduct";
-            this.NameProduct.ReadOnly = true;
-            // 
-            // QuantityProduct
-            // 
-            this.QuantityProduct.HeaderText = "Quantity";
-            this.QuantityProduct.Name = "QuantityProduct";
-            this.QuantityProduct.ReadOnly = true;
-            this.QuantityProduct.Width = 55;
-            // 
-            // UnValueProduct
-            // 
-            this.UnValueProduct.HeaderText = "UN Value";
-            this.UnValueProduct.Name = "UnValueProduct";
-            this.UnValueProduct.ReadOnly = true;
-            this.UnValueProduct.Width = 65;
-            // 
-            // ProductTotalValue
-            // 
-            this.ProductTotalValue.HeaderText = "Total Value";
-            this.ProductTotalValue.Name = "ProductTotalValue";
-            this.ProductTotalValue.ReadOnly = true;
-            this.ProductTotalValue.Width = 75;
             // 
             // gbox_Salesman
             // 
@@ -558,7 +527,7 @@
             this.gbox_Product.Controls.Add(this.edt_barCode);
             this.gbox_Product.Controls.Add(this.edt_amount);
             this.gbox_Product.Controls.Add(this.edt_UNCost);
-            this.gbox_Product.Controls.Add(this.edt_totalCost);
+            this.gbox_Product.Controls.Add(this.edt_totalPValue);
             this.gbox_Product.Controls.Add(this.edt_productId);
             this.gbox_Product.Controls.Add(this.btn_FindProduct);
             this.gbox_Product.Controls.Add(this.lbl_TotalCost);
@@ -605,14 +574,14 @@
             this.edt_UNCost.Size = new System.Drawing.Size(55, 20);
             this.edt_UNCost.TabIndex = 27;
             // 
-            // edt_totalCost
+            // edt_totalPValue
             // 
-            this.edt_totalCost.DecimalPlaces = 2;
-            this.edt_totalCost.Enabled = false;
-            this.edt_totalCost.Location = new System.Drawing.Point(122, 130);
-            this.edt_totalCost.Name = "edt_totalCost";
-            this.edt_totalCost.Size = new System.Drawing.Size(61, 20);
-            this.edt_totalCost.TabIndex = 26;
+            this.edt_totalPValue.DecimalPlaces = 2;
+            this.edt_totalPValue.Enabled = false;
+            this.edt_totalPValue.Location = new System.Drawing.Point(122, 130);
+            this.edt_totalPValue.Name = "edt_totalPValue";
+            this.edt_totalPValue.Size = new System.Drawing.Size(61, 20);
+            this.edt_totalPValue.TabIndex = 26;
             // 
             // edt_productId
             // 
@@ -623,18 +592,20 @@
             // 
             // gbox_date
             // 
+            this.gbox_date.Controls.Add(this.lbl_CancelDate);
+            this.gbox_date.Controls.Add(this.medt_CancelDate);
             this.gbox_date.Controls.Add(this.medt_date);
             this.gbox_date.Controls.Add(this.lbl_date);
             this.gbox_date.Location = new System.Drawing.Point(12, 504);
             this.gbox_date.Name = "gbox_date";
-            this.gbox_date.Size = new System.Drawing.Size(167, 42);
+            this.gbox_date.Size = new System.Drawing.Size(196, 63);
             this.gbox_date.TabIndex = 26;
             this.gbox_date.TabStop = false;
-            this.gbox_date.Text = "Information";
+            this.gbox_date.Text = "Date";
             // 
             // medt_date
             // 
-            this.medt_date.Location = new System.Drawing.Point(53, 16);
+            this.medt_date.Location = new System.Drawing.Point(71, 16);
             this.medt_date.Mask = "00/00/0000 90:00";
             this.medt_date.Name = "medt_date";
             this.medt_date.Size = new System.Drawing.Size(100, 20);
@@ -646,9 +617,9 @@
             this.lbl_date.AutoSize = true;
             this.lbl_date.Location = new System.Drawing.Point(11, 19);
             this.lbl_date.Name = "lbl_date";
-            this.lbl_date.Size = new System.Drawing.Size(36, 13);
+            this.lbl_date.Size = new System.Drawing.Size(54, 13);
             this.lbl_date.TabIndex = 0;
-            this.lbl_date.Text = "Date :";
+            this.lbl_date.Text = "Emission :";
             // 
             // gbox_paymentCondition
             // 
@@ -784,11 +755,73 @@
             this.lbl_payConditionID.TabIndex = 0;
             this.lbl_payConditionID.Text = "ID";
             // 
+            // IdProduct
+            // 
+            this.IdProduct.HeaderText = "ID";
+            this.IdProduct.Name = "IdProduct";
+            this.IdProduct.ReadOnly = true;
+            this.IdProduct.Width = 45;
+            // 
+            // NameProduct
+            // 
+            this.NameProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameProduct.HeaderText = "Product";
+            this.NameProduct.Name = "NameProduct";
+            this.NameProduct.ReadOnly = true;
+            // 
+            // ProductCost
+            // 
+            this.ProductCost.HeaderText = "Product Cost";
+            this.ProductCost.Name = "ProductCost";
+            this.ProductCost.ReadOnly = true;
+            this.ProductCost.Width = 55;
+            // 
+            // QuantityProduct
+            // 
+            this.QuantityProduct.HeaderText = "Quantity";
+            this.QuantityProduct.Name = "QuantityProduct";
+            this.QuantityProduct.ReadOnly = true;
+            this.QuantityProduct.Width = 50;
+            // 
+            // UnValueProduct
+            // 
+            this.UnValueProduct.HeaderText = "UN Value";
+            this.UnValueProduct.Name = "UnValueProduct";
+            this.UnValueProduct.ReadOnly = true;
+            this.UnValueProduct.Width = 55;
+            // 
+            // ProductTotalValue
+            // 
+            this.ProductTotalValue.HeaderText = "Total Value";
+            this.ProductTotalValue.Name = "ProductTotalValue";
+            this.ProductTotalValue.ReadOnly = true;
+            this.ProductTotalValue.Width = 75;
+            // 
+            // medt_CancelDate
+            // 
+            this.medt_CancelDate.Location = new System.Drawing.Point(71, 42);
+            this.medt_CancelDate.Mask = "00/00/0000 90:00";
+            this.medt_CancelDate.Name = "medt_CancelDate";
+            this.medt_CancelDate.Size = new System.Drawing.Size(100, 20);
+            this.medt_CancelDate.TabIndex = 2;
+            this.medt_CancelDate.ValidatingType = typeof(System.DateTime);
+            this.medt_CancelDate.Visible = false;
+            // 
+            // lbl_CancelDate
+            // 
+            this.lbl_CancelDate.AutoSize = true;
+            this.lbl_CancelDate.Location = new System.Drawing.Point(11, 45);
+            this.lbl_CancelDate.Name = "lbl_CancelDate";
+            this.lbl_CancelDate.Size = new System.Drawing.Size(60, 13);
+            this.lbl_CancelDate.TabIndex = 3;
+            this.lbl_CancelDate.Text = "Cancelled :";
+            this.lbl_CancelDate.Visible = false;
+            // 
             // Frm_Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(936, 567);
+            this.ClientSize = new System.Drawing.Size(936, 579);
             this.Controls.Add(this.gbox_paymentCondition);
             this.Controls.Add(this.gbox_date);
             this.Controls.Add(this.gbox_Product);
@@ -798,7 +831,7 @@
             this.Controls.Add(this.gbox_Salesman);
             this.Controls.Add(this.DGV_SaleProducts);
             this.Name = "Frm_Sale";
-            this.Text = "Frm_Sale";
+            this.Text = "Vendas";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Frm_Sale_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).EndInit();
             this.gbox_Salesman.ResumeLayout(false);
@@ -820,7 +853,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_barCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_amount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_UNCost)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_totalCost)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_totalPValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_productId)).EndInit();
             this.gbox_date.ResumeLayout(false);
             this.gbox_date.PerformLayout();
@@ -873,7 +906,7 @@
         private System.Windows.Forms.Label lbl_date;
         private System.Windows.Forms.NumericUpDown edt_userId;
         private System.Windows.Forms.NumericUpDown edt_clientId;
-        private System.Windows.Forms.NumericUpDown edt_totalCost;
+        private System.Windows.Forms.NumericUpDown edt_totalPValue;
         private System.Windows.Forms.NumericUpDown edt_productId;
         private System.Windows.Forms.NumericUpDown edt_UNCost;
         private System.Windows.Forms.NumericUpDown edt_amount;
@@ -885,11 +918,6 @@
         private System.Windows.Forms.NumericUpDown edt_discountCash;
         private System.Windows.Forms.Label lbl_discountCash;
         private System.Windows.Forms.Label lbl_findClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UnValueProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductTotalValue;
         private System.Windows.Forms.GroupBox gbox_paymentCondition;
         private System.Windows.Forms.NumericUpDown edt_payConditionId;
         private System.Windows.Forms.Label lbl_payConditionID;
@@ -904,5 +932,13 @@
         private System.Windows.Forms.Label lbl_payConditionDiscount;
         private System.Windows.Forms.Label lbl_payConditionFine;
         private System.Windows.Forms.Label lbl_payConditionFees;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UnValueProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductTotalValue;
+        private System.Windows.Forms.Label lbl_CancelDate;
+        private System.Windows.Forms.MaskedTextBox medt_CancelDate;
     }
 }

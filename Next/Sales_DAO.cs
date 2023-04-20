@@ -49,101 +49,99 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "INSERT INTO SALES ( CLIENT_ID , SALE_TOTAL_VALUE, SALE_TOTAL_COST, SALE_DISCOUNT, TOTAL_ITEMS_QUANTITY, EMISSION_DATE, CANCEL_DATE, BILL_TO_RECEIVE_ID, DATE_CREATION, DATE_LAST_UPDATE) "
-                         + " VALUES ("
-                         + +sale.client.id 
-                         + ", "
-                         + +sale.totalValue
-                         + ", "
-                         + +sale.totalCost
-                         + ", "
-                         + +sale.saleDiscountCash
-                         + ", "
-                         + +sale.totalItemsQuantity
-                         + ", '"
-                         + sale.emissionDate.ToString()
-                         + "', '"
-                         + sale.cancelDate.ToString()
-                         + "', "
-                         + +sale.BillToReceive.id
-                         + ", '"
-                         + sale.dateOfCreation.ToString()
-                         + "', '"
-                         + sale.dateOfLastUpdate.ToString()
-                         + "' );";
+            //string sql = "INSERT INTO SALES ( CLIENT_ID , SALE_TOTAL_VALUE, SALE_TOTAL_COST, SALE_DISCOUNT, TOTAL_ITEMS_QUANTITY, EMISSION_DATE, CANCEL_DATE, BILL_TO_RECEIVE_ID, DATE_CREATION, DATE_LAST_UPDATE) "
+            //             + " VALUES ("
+            //             + +sale.Client.id 
+            //             + ", "
+            //             + +sale.TotalValue
+            //             + ", "
+            //             + +sale.saleDiscountCash
+            //             + ", "
+            //             + +sale.totalItemsQuantity
+            //             + ", '"
+            //             + sale.emissionDate.ToString()
+            //             + "', '"
+            //             + sale.cancelDate.ToString()
+            //             + "', "
+            //             + +sale.BillToReceive.id
+            //             + ", '"
+            //             + sale.dateOfCreation.ToString()
+            //             + "', '"
+            //             + sale.dateOfLastUpdate.ToString()
+            //             + "' );";
 
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            con.Open();
-            try
-            {
-                int i = cmd.ExecuteNonQuery();
-                if (i > 0)
-                {
-                    MessageBox.Show("Register added with success!");
-                    status = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-                return status;
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //con.Open();
+            //try
+            //{
+            //    int i = cmd.ExecuteNonQuery();
+            //    if (i > 0)
+            //    {
+            //        MessageBox.Show("Register added with success!");
+            //        status = true;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //    return status;
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return status;
         }
 
         public bool EditFromDB(Sales sale)
         {
             bool status = false;
-            string sql = "UPDATE SALES SET SALE_TOTAL_COST = "
-                         + +sale.totalCost
-                         + ", SALE_TOTAL_VALUE = "
-                         + +sale.totalValue
-                         + ", CLIENT_ID = "
-                         + +sale.client.id
-                         + ", SALE_DISCOUNT = "
-                         + +sale.saleDiscountCash
-                         + ", TOTAL_ITEMS_QUANTITY = "
-                         + +sale.totalItemsQuantity
-                         + ", EMISSION_DATE = '"
-                         + sale.emissionDate.ToString()
-                         + "', CANCEL_DATE = '"
-                         + sale.cancelDate.ToString()
-                         + "', BILL_TO_RECEIVE_ID = "
-                         + +sale.BillToReceive.id
-                         + ", DATE_LAST_UPDATE = '"
-                         + sale.dateOfLastUpdate.ToString()
-                         + "' WHERE ID_SALE = "
-                         + sale.id
-                         + " ;";
+            //string sql = "UPDATE SALES SET SALE_TOTAL_COST = "
+            //             + +sale.totalCost
+            //             + ", SALE_TOTAL_VALUE = "
+            //             + +sale.totalValue
+            //             + ", CLIENT_ID = "
+            //             + +sale.client.id
+            //             + ", SALE_DISCOUNT = "
+            //             + +sale.saleDiscountCash
+            //             + ", TOTAL_ITEMS_QUANTITY = "
+            //             + +sale.totalItemsQuantity
+            //             + ", EMISSION_DATE = '"
+            //             + sale.emissionDate.ToString()
+            //             + "', CANCEL_DATE = '"
+            //             + sale.cancelDate.ToString()
+            //             + "', BILL_TO_RECEIVE_ID = "
+            //             + +sale.BillToReceive.id
+            //             + ", DATE_LAST_UPDATE = '"
+            //             + sale.dateOfLastUpdate.ToString()
+            //             + "' WHERE ID_SALE = "
+            //             + sale.id
+            //             + " ;";
 
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            con.Open();
-            try
-            {
-                int i = cmd.ExecuteNonQuery();
-                if (i > 0)
-                {
-                    MessageBox.Show("Register altered with success!");
-                    status = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-                return status;
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //con.Open();
+            //try
+            //{
+            //    int i = cmd.ExecuteNonQuery();
+            //    if (i > 0)
+            //    {
+            //        MessageBox.Show("Register altered with success!");
+            //        status = true;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //    return status;
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return status;
         }
 

@@ -10,14 +10,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
     {
         public BillsInstalments()
         {
-            PaymentMethods paymentMethod = new PaymentMethods();
-            PaymentConditions paymentCondition = new PaymentConditions();
+            PaymentMethods PaymentMethod = new PaymentMethods();
         }
 
         public int InstalmentNumber { get; set; }
-        public int totalDays { get; set; }
-        public double valuePercentage { get; set; }
-        public PaymentMethods paymentMethod { get; set; }
-        public PaymentConditions paymentCondition { get; set; }
+        public int TotalDays { get; set; }
+        public double ValuePercentage { get; set; }
+        public PaymentMethods PaymentMethod { get; set; }
     }
 }

@@ -10,22 +10,23 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
     {
         public Sales()
         {
-            BillsToReceive billsToReceive = new BillsToReceive();
+            List<BillsToReceive> billsToReceive = new List<BillsToReceive>();
             List<SaleItems> saleItems = new List<SaleItems>();
-            People client = new People();
+            Clients client = new Clients();
             Users user = new Users();
         }
 
-        public Users user { get; set; }
-        public People client { get; set; }
-        public DateTime cancelDate { get; set; }
-        public BillsToReceive BillToReceive { get; set; }
-        public DateTime emissionDate { get; set; }
-        public double totalCost { get; set; }
-        public double totalValue { get; set; }
-        public List<SaleItems> saleItems { get; set; }
-        public double saleDiscountCash { get; set; }
-        public double saleDiscountPerc { get; set; }
-        public int totalItemsQuantity { get; set;}
+        public Users User { get; set; }
+        public Clients Client { get; set; }
+        //public bool IsCanceled { get; set; }
+        public DateTime? CancelDate { get; set; }
+        public List<BillsToReceive> BillToReceive { get; set; }
+        public DateTime EmissionDate { get; set; }
+        public double TotalCost { get; set; }
+        public double TotalValue { get; set; }
+        public List<SaleItems> SaleItems { get; set; }
+        public double SaleDiscountCash { get; set; }
+        public double SaleDiscountPerc { get; set; }
+        public int TotalItemsQuantity { get; set;}
     }
 }

@@ -11,20 +11,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
 
         public BillsToReceive()
         {
-            Clients client = new Clients();
-            PaymentMethods paymentForms = new PaymentMethods();
-            Sales sale = new Sales();
-            BillsInstalments billInstalment = new BillsInstalments();
+            Clients Client = new Clients();
+            PaymentConditions Condition = new PaymentConditions();
+            BillsInstalments BillInstalment = new BillsInstalments();
         }
 
-        public int isPaid { get; set; }
-        public Sales sale { get; set; }
-        public Clients client { get; set; }
-        public PaymentMethods paymentForm { get; set; }
-        public BillsInstalments billInstalment { get; set; }
-        public DateTime dueDate { get; set; }
-        public DateTime emissionDate { get; set; }
-        public double instalmentValue { get; set; }
+        public bool IsPaid { get; set; }
+        public Clients Client { get; set; }
+        public PaymentConditions Condition { get; set; }    
+        public int InstalmentNumber { get; set; }
+        public int InstalmentsQtd { get; set; }
+        public DateTime DueDate { get; set; }
+        public DateTime EmissionDate { get; set; }
+        public double InstalmentValue { get; set; }
 
 
     }

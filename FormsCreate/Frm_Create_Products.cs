@@ -322,11 +322,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             UnlockCamps();
         }
-
-        private void edt_ProfitPerc_ValueChanged(object sender, EventArgs e)
+        
+        public void CalculateProfit()
         {
             var profit = Convert.ToDecimal(edt_productCost.Text) * ((edt_ProfitPerc.Value * 100) + 1);
             edt_productSalePrice.Text = profit.ToString();
+        }
+
+        private void edt_ProfitPerc_ValueChanged(object sender, EventArgs e)
+        {
+            CalculateProfit();
         }
     }
 }

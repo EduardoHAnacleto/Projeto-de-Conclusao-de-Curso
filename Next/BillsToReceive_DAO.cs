@@ -20,117 +20,117 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "INSERT INTO SALEITEMS ( ID_BILL_TO_RECEIVE,IS_PAID, INSTALMENT_VALUE, PERSON_ID, PAYFORM_ID, INSTALMENT_NUMBER,"
-                + " DUE_DATE, EMISSION_DATE, DATE_CREATION, DATE_LAST_UPDATE) "
-                + " VALUES ("
-                + billToReceive.id
-                + ", "
-                + billToReceive.isPaid
-                + ", "
-                + billToReceive.instalmentValue
-                + ", "
-                + billToReceive.client.id
-                + ", "
-                + billToReceive.paymentForm.id
-                + ", "
-                + billToReceive.billInstalment.id
-                + ", "
-                + billToReceive.instalmentValue
-                + ", '"
-                + billToReceive.dateOfCreation.ToString()
-                + "', '"
-                + billToReceive.dateOfLastUpdate.ToString()
-                + "' );";
+            //string sql = "INSERT INTO BILLSTORECEIVE ( ID_BILL_TO_RECEIVE,IS_PAID, INSTALMENT_VALUE, PERSON_ID, PAYFORM_ID, INSTALMENT_NUMBER,"
+            //    + " DUE_DATE, EMISSION_DATE, DATE_CREATION, DATE_LAST_UPDATE) "
+            //    + " VALUES ("
+            //    + billToReceive.id
+            //    + ", "
+            //    + billToReceive.isPaid
+            //    + ", "
+            //    + billToReceive.instalmentValue
+            //    + ", "
+            //    + billToReceive.client.id
+            //    + ", "
+            //    + billToReceive.paymentForm.id
+            //    + ", "
+            //    + billToReceive.billInstalment.id
+            //    + ", "
+            //    + billToReceive.instalmentValue
+            //    + ", '"
+            //    + billToReceive.dateOfCreation.ToString()
+            //    + "', '"
+            //    + billToReceive.dateOfLastUpdate.ToString()
+            //    + "' );";
 
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            con.Open();
-            try
-            {
-                int i = cmd.ExecuteNonQuery();
-                if (i > 0)
-                {
-                    MessageBox.Show("Register added with success!");
-                    status = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-                return status;
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //con.Open();
+            //try
+            //{
+            //    int i = cmd.ExecuteNonQuery();
+            //    if (i > 0)
+            //    {
+            //        MessageBox.Show("Register added with success!");
+            //        status = true;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //    return status;
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return status;
         }
 
         public bool EditFromDB(BillsToReceive billToReceive)
         {
             bool status = false;
-            string sql = "UPDATE SALEITEMS SET " +
-                "INSTALMENT_VALUE = " + billToReceive.instalmentValue +
-                ",IS_PAID = " + billToReceive.isPaid+
-                ",PERSON_ID = " +billToReceive.client.id+
-                ",PAYFORM_ID = " +billToReceive.paymentForm.id+
-                ",INSTALMENT_NUMBER = " + billToReceive.billInstalment.id+
-                ",DATE_LAST_UPDATE = '" + billToReceive.dateOfLastUpdate.ToString() +
-                "' WHERE ID_BILL_TO_RECEIVE = " + billToReceive.id + " ;";
+            //string sql = "UPDATE SALEITEMS SET " +
+            //    "INSTALMENT_VALUE = " + billToReceive.instalmentValue +
+            //    ",IS_PAID = " + billToReceive.isPaid+
+            //    ",PERSON_ID = " +billToReceive.client.id+
+            //    ",PAYFORM_ID = " +billToReceive.paymentForm.id+
+            //    ",INSTALMENT_NUMBER = " + billToReceive.billInstalment.id+
+            //    ",DATE_LAST_UPDATE = '" + billToReceive.dateOfLastUpdate.ToString() +
+            //    "' WHERE ID_BILL_TO_RECEIVE = " + billToReceive.id + " ;";
 
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            con.Open();
-            try
-            {
-                int i = cmd.ExecuteNonQuery();
-                if (i > 0)
-                {
-                    MessageBox.Show("Register altered with success!");
-                    status = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-                return status;
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //con.Open();
+            //try
+            //{
+            //    int i = cmd.ExecuteNonQuery();
+            //    if (i > 0)
+            //    {
+            //        MessageBox.Show("Register altered with success!");
+            //        status = true;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //    return status;
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return status;
         }
 
         public bool DeleteFromDb(int id)
         {
             bool status = false;
-            string sql = "DELETE FROM SALEITEMS WHERE IS_BILLS_TO_RECEIVE = " + id + " ;";
+            //string sql = "DELETE FROM SALEITEMS WHERE IS_BILLS_TO_RECEIVE = " + id + " ;";
 
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            con.Open();
-            try
-            {
-                int i = cmd.ExecuteNonQuery();
-                if (i > 0)
-                {
-                    MessageBox.Show("Register erased with success!");
-                    status = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-                return status;
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //con.Open();
+            //try
+            //{
+            //    int i = cmd.ExecuteNonQuery();
+            //    if (i > 0)
+            //    {
+            //        MessageBox.Show("Register erased with success!");
+            //        status = true;
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //    return status;
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return status;
         }
 
@@ -139,151 +139,154 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             string sql = "SELECT * FROM SALEITEMS AS S JOIN PEOPLE AS P ON P.ID_PERSON = S.PERSON_ID = " + id + " ;";
 
             List<BillsToReceive> billToReceive = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        billToReceive = new List<BillsToReceive>();
-                        foreach (BillsToReceive item in reader)
-                        {
-                            billToReceive.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        billToReceive = null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //try
+            //{
+            //    con.Open();
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        if (reader.HasRows)
+            //        {
+            //            billToReceive = new List<BillsToReceive>();
+            //            foreach (BillsToReceive item in reader)
+            //            {
+            //                billToReceive.Add(item);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            billToReceive = null;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return billToReceive;
         }
+
         public List<BillsToReceive> SelectSaleFromDb(int id)
         {
             string sql = "SELECT * FROM SALEITEMS WHERE SALE_ID = " + id + " ;";
 
             List<BillsToReceive> billToReceive = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        billToReceive = new List<BillsToReceive>();
-                        foreach (BillsToReceive item in reader)
-                        {
-                            billToReceive.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        billToReceive = null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //try
+            //{
+            //    con.Open();
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        if (reader.HasRows)
+            //        {
+            //            billToReceive = new List<BillsToReceive>();
+            //            foreach (BillsToReceive item in reader)
+            //            {
+            //                billToReceive.Add(item);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            billToReceive = null;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return billToReceive;
         }
+
         public List<BillsToReceive> SelectFromDb(int id)
         {
             string sql = "SELECT * FROM SALEITEMS WHERE ID_BILL_TO_RECEIVE = " + id + " ;";
 
             List<BillsToReceive> billToReceive = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        billToReceive = new List<BillsToReceive>();
-                        foreach (BillsToReceive item in reader)
-                        {
-                            billToReceive.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        billToReceive = null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //try
+            //{
+            //    con.Open();
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        if (reader.HasRows)
+            //        {
+            //            billToReceive = new List<BillsToReceive>();
+            //            foreach (BillsToReceive item in reader)
+            //            {
+            //                billToReceive.Add(item);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            billToReceive = null;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return billToReceive;
         }
+
         public List<BillsToReceive> SelectIsPaidFromDb(int id)
         {
             string sql = "SELECT * FROM SALEITEMS WHERE IS_PAID = " + id + " ;";
 
             List<BillsToReceive> billToReceive = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        billToReceive = new List<BillsToReceive>();
-                        foreach (BillsToReceive item in reader)
-                        {
-                            billToReceive.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        billToReceive = null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //try
+            //{
+            //    con.Open();
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        if (reader.HasRows)
+            //        {
+            //            billToReceive = new List<BillsToReceive>();
+            //            foreach (BillsToReceive item in reader)
+            //            {
+            //                billToReceive.Add(item);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            billToReceive = null;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return billToReceive;
         }
 
@@ -293,148 +296,150 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                          + name
                          + "';";
             List<BillsToReceive> billToReceive = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        billToReceive = new List<BillsToReceive>();
-                        foreach (BillsToReceive item in reader)
-                        {
-                            billToReceive.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        billToReceive = null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //try
+            //{
+            //    con.Open();
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        if (reader.HasRows)
+            //        {
+            //            billToReceive = new List<BillsToReceive>();
+            //            foreach (BillsToReceive item in reader)
+            //            {
+            //                billToReceive.Add(item);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            billToReceive = null;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return billToReceive;
         }
+
         public List<BillsToReceive> SelectEmissionDateFromDb(string date)
         {
             string sql = "SELECT * FROM SALEITEMS WHERE EMISSION_DATE = '" + date + "';";
             List<BillsToReceive> billToReceive = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        billToReceive = new List<BillsToReceive>();
-                        foreach (BillsToReceive item in reader)
-                        {
-                            billToReceive.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        billToReceive = null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //try
+            //{
+            //    con.Open();
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        if (reader.HasRows)
+            //        {
+            //            billToReceive = new List<BillsToReceive>();
+            //            foreach (BillsToReceive item in reader)
+            //            {
+            //                billToReceive.Add(item);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            billToReceive = null;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return billToReceive;
         }
+
         public List<BillsToReceive> SelectDueDateFromDb(string date)
         {
             string sql = "SELECT * FROM SALEITEMS WHERE DUE_DATE = '" + date + "';";
             List<BillsToReceive> billToReceive = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        billToReceive = new List<BillsToReceive>();
-                        foreach (BillsToReceive item in reader)
-                        {
-                            billToReceive.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        billToReceive = null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //try
+            //{
+            //    con.Open();
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        if (reader.HasRows)
+            //        {
+            //            billToReceive = new List<BillsToReceive>();
+            //            foreach (BillsToReceive item in reader)
+            //            {
+            //                billToReceive.Add(item);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            billToReceive = null;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return billToReceive;
         }
         public List<BillsToReceive> SelectAllFromDb()
         {
             string sql = "SELECT * FROM SALEITEMS ;";
             List<BillsToReceive> billToReceive = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
-                {
-                    if (reader.HasRows)
-                    {
-                        billToReceive = new List<BillsToReceive>();
-                        foreach (BillsToReceive item in reader)
-                        {
-                            billToReceive.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        billToReceive = null;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
+            //SqlConnection con = new SqlConnection(connectionString);
+            //SqlCommand cmd = new SqlCommand(sql, con);
+            //cmd.CommandType = CommandType.Text;
+            //try
+            //{
+            //    con.Open();
+            //    SqlDataReader reader = cmd.ExecuteReader();
+            //    while (reader.Read())
+            //    {
+            //        if (reader.HasRows)
+            //        {
+            //            billToReceive = new List<BillsToReceive>();
+            //            foreach (BillsToReceive item in reader)
+            //            {
+            //                billToReceive.Add(item);
+            //            }
+            //        }
+            //        else
+            //        {
+            //            billToReceive = null;
+            //        }
+            //    }
+            //}
+            //catch (Exception ex)
+            //{
+            //    MessageBox.Show("Error : " + ex.Message);
+            //}
+            //finally
+            //{
+            //    con.Close();
+            //}
             return billToReceive;
         }
 

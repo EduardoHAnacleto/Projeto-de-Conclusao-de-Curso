@@ -108,9 +108,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         SqlCommand command = new SqlCommand(sqlString, connection);
                         command.Parameters.AddWithValue("@CONDID", condId);
                         command.Parameters.AddWithValue("@INUM", bill.InstalmentNumber);
-                        command.Parameters.AddWithValue("@DAYS", bill.totalDays);
-                        command.Parameters.AddWithValue("@METHODID", bill.paymentMethod.id);
-                        command.Parameters.AddWithValue("@VALUEPERCENTAGE", (decimal)bill.valuePercentage);
+                        command.Parameters.AddWithValue("@DAYS", bill.TotalDays);
+                        command.Parameters.AddWithValue("@METHODID", bill.PaymentMethod.id);
+                        command.Parameters.AddWithValue("@VALUEPERCENTAGE", (decimal)bill.ValuePercentage);
                         int i = command.ExecuteNonQuery();
                         if (i > 0)
                         {
@@ -194,9 +194,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         SqlCommand command = new SqlCommand(sqlString, connection);
                         command.Parameters.AddWithValue("@CONDID", condId);
                         command.Parameters.AddWithValue("@INUM", bill.InstalmentNumber);
-                        command.Parameters.AddWithValue("@DAYS", bill.totalDays);
-                        command.Parameters.AddWithValue("@METHODID", bill.paymentMethod.id);
-                        command.Parameters.AddWithValue("@VALUEPERCENTAGE", (decimal)bill.valuePercentage);
+                        command.Parameters.AddWithValue("@DAYS", bill.TotalDays);
+                        command.Parameters.AddWithValue("@METHODID", bill.PaymentMethod.id);
+                        command.Parameters.AddWithValue("@VALUEPERCENTAGE", (decimal)bill.ValuePercentage);
                         int i = command.ExecuteNonQuery();
                         command.Parameters.Clear();                        
                         if (i <= 0)

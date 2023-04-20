@@ -64,5 +64,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             ds = _salesDAO.SelectDataSourceFromDB();
             return ds;
         }
+
+        public override int BringNewId()
+        {
+            return _salesDAO.NewId();
+        }
     }
 }

@@ -198,9 +198,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             {
                 bill = new BillsInstalments();
                 bill.InstalmentNumber = Convert.ToInt32(row.Cells["InstalmentNumber"].Value);
-                bill.totalDays = Convert.ToInt32(row.Cells["IntalmentDays"].Value);
-                bill.valuePercentage = Convert.ToDouble(row.Cells["InstalmentPercentage"].Value);
-                bill.paymentMethod = method.FindItemName(row.Cells["InstalmentPayMethod"].Value.ToString());
+                bill.TotalDays = Convert.ToInt32(row.Cells["IntalmentDays"].Value);
+                bill.ValuePercentage = Convert.ToDouble(row.Cells["InstalmentPercentage"].Value);
+                bill.PaymentMethod = method.FindItemName(row.Cells["InstalmentPayMethod"].Value.ToString());
 
                 billList.Add(bill);
             }

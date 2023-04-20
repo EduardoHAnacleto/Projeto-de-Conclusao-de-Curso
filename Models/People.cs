@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static ProjetoEduardoAnacletoWindowsForm1.Models.Addresses;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.Models
 {

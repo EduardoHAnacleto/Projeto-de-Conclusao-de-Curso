@@ -359,7 +359,6 @@
     <Compile Include="Next\MasterDetails_Sales.Designer.cs">
       <DependentUpon>MasterDetails_Sales.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\Addresses.cs" />
     <Compile Include="Models\BillsInstalments.cs" />
     <Compile Include="Next\BillsToPay.cs" />
     <Compile Include="Next\BillsToReceive.cs" />
