@@ -35,6 +35,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_payConditionFine.Controls[0].Visible = false;
             edt_payConditionQnt.Controls[0].Visible = false;
             edt_payConditionId.Controls[0].Visible = false;
+            edt_productId.Controls[0].Visible = false;
         }
 
         private Sales BackupSale = null;
@@ -104,7 +105,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            ProceedWithSale();
+            Save();
         }
 
         public void NewFormSearchProduct() //Abre form para encontrar e levar PRODUTO
@@ -121,6 +122,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     edt_productId.Value = product.id;
                     edt_productName.Text = product.productName;
                     edt_productName.Text = product.productName;
+                    edt_barCode.Value = product.BarCode;
                     edt_UNCost.Value = (decimal)product.salePrice;
                 }
             }
@@ -148,20 +150,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public void AddProductToDGV() //Pega obj produto e popula na DGV e chama CalculateSubTotal
         {
-            int amount = 1;
+            Products product = GetProduct();
+            int amount = (int)edt_amount.Value;
             decimal totalValue = (decimal)product.salePrice * edt_amount.Value;
-            if (edt_productId.Value != 0)
-            {
-                DGV_SaleProducts.Rows.Add(
-                    product.id,
-                    product.productName,
-                    product.productCost,
-                    amount,
-                    product.salePrice,
-                    totalValue);
+            DGV_SaleProducts.Rows.Add(
+                product.id,
+                product.productName,
+                product.productCost,
+                amount,
+                product.salePrice,
+                totalValue);
 
-                CalculateSubTotal();
-            }
+            CalculateSubTotal();
         }
 
         public void CalculateSubTotal() //Percorre a DGV, calculando o valor total de cada item, adicionando no Sub-Total
@@ -193,7 +193,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public void SearchProduct() //tenta procurar produto por ID->Nome, se achar, chama PopulateProduct
         {
-            if (edt_productId.Value > 1)
+            if (edt_productId.Value >= 1)
             {
                 product = SearchItemById();
                 if (product != null)
@@ -281,10 +281,37 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_total.Value = value;
         }
 
-        public void ProceedWithSale() //To do: Abre form de adicionar condição de pagamento para completar a venda
-        {
-            //Pipipipopopo
-            Save();
+        public bool ConfirmSale(Sales sale) //To do: Abre form de adicionar condição de pagamento para completar a venda
+        {           
+            string caption = "Confirm sale.";
+            string message = "Client : "
+                             + sale.Client.name
+                             + Environment.NewLine
+                             + "Payment Condition : "
+                             + sale.BillToReceive[0].Condition.conditionName
+                             + Environment.NewLine
+                             + "Sub-Total : "
+                             + edt_subtotal.Value.ToString()
+                             + Environment.NewLine
+                             + "Discount % : "
+                             + sale.SaleDiscountPerc.ToString()
+                             + Environment.NewLine
+                             + "Discount $ : "
+                             + sale.SaleDiscountCash.ToString()
+                             + Environment.NewLine
+                             + "Final Sale Cost : "
+                             + edt_total.Value.ToString()
+                             + Environment.NewLine
+                             + "Do you confirm the sale?";
+
+            MessageBoxIcon icon = MessageBoxIcon.Error;
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
+            if (dialogResult == DialogResult.Yes)
+            {
+                return true;
+            }
+            else return false;
         }
 
         public void HotkeyPressed(KeyPressEventArgs e) //Faz açoes de hotkeys F5 F7 F10
@@ -299,7 +326,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
             else if (e.KeyChar == (char)121) //F10
             {
-                ProceedWithSale();
+                Save();
             }
         }
 
@@ -315,8 +342,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         private void btn_AddProduct_Click(object sender, EventArgs e)
         {
-            SearchProduct();
-            AddProductToDGV();
+            if (edt_productId.Value >= 1)
+            {
+                AddProductToDGV();
+            }
         }
 
         private void btn_FindClient_Click(object sender, EventArgs e)
@@ -391,16 +420,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             if (CheckCamps())
             {
                 LockCamps();
+                Sales sale = this.GetObject();
                 try
                 {
                     if (btn_new.Text == "F5")
                     {
-                        _controller.SaveItem(this.GetObject());
-                        Populated(false);
+                        if (ConfirmSale(sale))
+                        {
+                            _controller.SaveItem(sale);
+                            Populated(false);
+                        }
                     }
                     else if (btn_new.Text == "Cancel")
                     {
-                        _controller.UpdateItem(this.GetObject());
+                        _controller.UpdateItem(sale);
                         SetFormToEdit();
                     }
                 }
@@ -429,8 +462,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             DateTime emissionDate = DateTime.Now;
             Sales sale = new Sales();
+            int idSale = _controller.BringNewId();
 
-            //sale.id = 
             sale.User = this.GetUser();
             sale.Client = this.GetClient(); 
             sale.CancelDate = null;
@@ -439,7 +472,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             sale.EmissionDate = emissionDate;
             sale.CancelDate = null;
 
-            sale.SaleItems = this.GetSaleItems();
+            sale.SaleItems = this.GetSaleItems(idSale);
             sale.TotalCost = this.GetTotalCost(sale.SaleItems);
             sale.SaleDiscountPerc = (double)edt_discountPerc.Value;
             sale.SaleDiscountCash = (double)edt_discountCash.Value;
@@ -458,11 +491,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             return totalCost;
         }
 
-        private List<SaleItems> GetSaleItems()
+        private List<SaleItems> GetSaleItems(int idSale)
         {
             List<SaleItems> list = new List<SaleItems>();
             SaleItems saleItem = new SaleItems();
-            int idSale = _controller.BringNewId();
             foreach (DataGridViewRow row in DGV_SaleProducts.Rows)
             {
                 saleItem.id = idSale;
@@ -482,6 +514,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             BillsToReceive bill = new BillsToReceive();
             Clients client = this.GetClient();          
             PaymentConditions Condition = GetCondition();
+            int instalQtd = Condition.BillsInstalments.Count;
             int num = 1;
             foreach (BillsInstalments instalment in Condition.BillsInstalments)
             {
@@ -490,8 +523,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 bill.Client = client;
                 bill.EmissionDate = emissionDate;
                 bill.DueDate = emissionDate.AddDays(instalment.TotalDays);
-                bill.InstalmentNumber = 0;
-                bill.InstalmentsQtd = Condition.BillsInstalments.Count;
+                bill.InstalmentNumber = num;
+                bill.InstalmentsQtd = instalQtd;
                 bill.InstalmentValue = instalment.ValuePercentage * totalValue;
                 list.Add(bill);
                 num++;
@@ -503,6 +536,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             PaymentConditions_Controller pController = new PaymentConditions_Controller();
             return pController.FindItemId((int)edt_payConditionId.Value);
+        }
+
+        private Products GetProduct()
+        {
+            if (edt_productId.Value >= 1)
+            {
+                return _pController.FindItemId((int)edt_productId.Value);
+            }
+            else return null;
         }
 
         private Clients GetClient()
@@ -721,6 +763,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 }
             }
             return true;
+        }
+
+        private void edt_amount_ValueChanged(object sender, EventArgs e)
+        {
+            edt_totalPValue.Value = edt_amount.Value * edt_UNCost.Value;
         }
     }
 }

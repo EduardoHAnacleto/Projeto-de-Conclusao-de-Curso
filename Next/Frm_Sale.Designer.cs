@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.DGV_SaleProducts = new System.Windows.Forms.DataGridView();
+            this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_Salesman = new System.Windows.Forms.GroupBox();
             this.edt_userId = new System.Windows.Forms.NumericUpDown();
             this.edt_userName = new System.Windows.Forms.TextBox();
@@ -75,6 +81,8 @@
             this.edt_totalPValue = new System.Windows.Forms.NumericUpDown();
             this.edt_productId = new System.Windows.Forms.NumericUpDown();
             this.gbox_date = new System.Windows.Forms.GroupBox();
+            this.lbl_CancelDate = new System.Windows.Forms.Label();
+            this.medt_CancelDate = new System.Windows.Forms.MaskedTextBox();
             this.medt_date = new System.Windows.Forms.MaskedTextBox();
             this.lbl_date = new System.Windows.Forms.Label();
             this.gbox_paymentCondition = new System.Windows.Forms.GroupBox();
@@ -91,14 +99,6 @@
             this.edt_payCondition = new System.Windows.Forms.TextBox();
             this.edt_payConditionId = new System.Windows.Forms.NumericUpDown();
             this.lbl_payConditionID = new System.Windows.Forms.Label();
-            this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.medt_CancelDate = new System.Windows.Forms.MaskedTextBox();
-            this.lbl_CancelDate = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -144,6 +144,48 @@
             this.DGV_SaleProducts.Size = new System.Drawing.Size(606, 221);
             this.DGV_SaleProducts.TabIndex = 5;
             this.DGV_SaleProducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_SaleProducts_RowsRemoved);
+            // 
+            // IdProduct
+            // 
+            this.IdProduct.HeaderText = "ID";
+            this.IdProduct.Name = "IdProduct";
+            this.IdProduct.ReadOnly = true;
+            this.IdProduct.Width = 45;
+            // 
+            // NameProduct
+            // 
+            this.NameProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameProduct.HeaderText = "Product";
+            this.NameProduct.Name = "NameProduct";
+            this.NameProduct.ReadOnly = true;
+            // 
+            // ProductCost
+            // 
+            this.ProductCost.HeaderText = "Product Cost";
+            this.ProductCost.Name = "ProductCost";
+            this.ProductCost.ReadOnly = true;
+            this.ProductCost.Width = 55;
+            // 
+            // QuantityProduct
+            // 
+            this.QuantityProduct.HeaderText = "Quantity";
+            this.QuantityProduct.Name = "QuantityProduct";
+            this.QuantityProduct.ReadOnly = true;
+            this.QuantityProduct.Width = 50;
+            // 
+            // UnValueProduct
+            // 
+            this.UnValueProduct.HeaderText = "UN Value";
+            this.UnValueProduct.Name = "UnValueProduct";
+            this.UnValueProduct.ReadOnly = true;
+            this.UnValueProduct.Width = 55;
+            // 
+            // ProductTotalValue
+            // 
+            this.ProductTotalValue.HeaderText = "Total Value";
+            this.ProductTotalValue.Name = "ProductTotalValue";
+            this.ProductTotalValue.ReadOnly = true;
+            this.ProductTotalValue.Width = 75;
             // 
             // gbox_Salesman
             // 
@@ -548,6 +590,11 @@
             // edt_barCode
             // 
             this.edt_barCode.Location = new System.Drawing.Point(54, 35);
+            this.edt_barCode.Maximum = new decimal(new int[] {
+            -559939585,
+            902409669,
+            54,
+            0});
             this.edt_barCode.Name = "edt_barCode";
             this.edt_barCode.Size = new System.Drawing.Size(258, 20);
             this.edt_barCode.TabIndex = 29;
@@ -556,6 +603,11 @@
             // edt_amount
             // 
             this.edt_amount.Location = new System.Drawing.Point(11, 130);
+            this.edt_amount.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.edt_amount.Name = "edt_amount";
             this.edt_amount.Size = new System.Drawing.Size(44, 20);
             this.edt_amount.TabIndex = 28;
@@ -564,12 +616,18 @@
             0,
             0,
             0});
+            this.edt_amount.ValueChanged += new System.EventHandler(this.edt_amount_ValueChanged);
             // 
             // edt_UNCost
             // 
             this.edt_UNCost.DecimalPlaces = 2;
             this.edt_UNCost.Enabled = false;
             this.edt_UNCost.Location = new System.Drawing.Point(61, 130);
+            this.edt_UNCost.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.edt_UNCost.Name = "edt_UNCost";
             this.edt_UNCost.Size = new System.Drawing.Size(55, 20);
             this.edt_UNCost.TabIndex = 27;
@@ -579,6 +637,11 @@
             this.edt_totalPValue.DecimalPlaces = 2;
             this.edt_totalPValue.Enabled = false;
             this.edt_totalPValue.Location = new System.Drawing.Point(122, 130);
+            this.edt_totalPValue.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.edt_totalPValue.Name = "edt_totalPValue";
             this.edt_totalPValue.Size = new System.Drawing.Size(61, 20);
             this.edt_totalPValue.TabIndex = 26;
@@ -603,8 +666,30 @@
             this.gbox_date.TabStop = false;
             this.gbox_date.Text = "Date";
             // 
+            // lbl_CancelDate
+            // 
+            this.lbl_CancelDate.AutoSize = true;
+            this.lbl_CancelDate.Location = new System.Drawing.Point(11, 45);
+            this.lbl_CancelDate.Name = "lbl_CancelDate";
+            this.lbl_CancelDate.Size = new System.Drawing.Size(60, 13);
+            this.lbl_CancelDate.TabIndex = 3;
+            this.lbl_CancelDate.Text = "Cancelled :";
+            this.lbl_CancelDate.Visible = false;
+            // 
+            // medt_CancelDate
+            // 
+            this.medt_CancelDate.Enabled = false;
+            this.medt_CancelDate.Location = new System.Drawing.Point(71, 42);
+            this.medt_CancelDate.Mask = "00/00/0000 90:00";
+            this.medt_CancelDate.Name = "medt_CancelDate";
+            this.medt_CancelDate.Size = new System.Drawing.Size(100, 20);
+            this.medt_CancelDate.TabIndex = 2;
+            this.medt_CancelDate.ValidatingType = typeof(System.DateTime);
+            this.medt_CancelDate.Visible = false;
+            // 
             // medt_date
             // 
+            this.medt_date.Enabled = false;
             this.medt_date.Location = new System.Drawing.Point(71, 16);
             this.medt_date.Mask = "00/00/0000 90:00";
             this.medt_date.Name = "medt_date";
@@ -754,68 +839,6 @@
             this.lbl_payConditionID.Size = new System.Drawing.Size(18, 13);
             this.lbl_payConditionID.TabIndex = 0;
             this.lbl_payConditionID.Text = "ID";
-            // 
-            // IdProduct
-            // 
-            this.IdProduct.HeaderText = "ID";
-            this.IdProduct.Name = "IdProduct";
-            this.IdProduct.ReadOnly = true;
-            this.IdProduct.Width = 45;
-            // 
-            // NameProduct
-            // 
-            this.NameProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameProduct.HeaderText = "Product";
-            this.NameProduct.Name = "NameProduct";
-            this.NameProduct.ReadOnly = true;
-            // 
-            // ProductCost
-            // 
-            this.ProductCost.HeaderText = "Product Cost";
-            this.ProductCost.Name = "ProductCost";
-            this.ProductCost.ReadOnly = true;
-            this.ProductCost.Width = 55;
-            // 
-            // QuantityProduct
-            // 
-            this.QuantityProduct.HeaderText = "Quantity";
-            this.QuantityProduct.Name = "QuantityProduct";
-            this.QuantityProduct.ReadOnly = true;
-            this.QuantityProduct.Width = 50;
-            // 
-            // UnValueProduct
-            // 
-            this.UnValueProduct.HeaderText = "UN Value";
-            this.UnValueProduct.Name = "UnValueProduct";
-            this.UnValueProduct.ReadOnly = true;
-            this.UnValueProduct.Width = 55;
-            // 
-            // ProductTotalValue
-            // 
-            this.ProductTotalValue.HeaderText = "Total Value";
-            this.ProductTotalValue.Name = "ProductTotalValue";
-            this.ProductTotalValue.ReadOnly = true;
-            this.ProductTotalValue.Width = 75;
-            // 
-            // medt_CancelDate
-            // 
-            this.medt_CancelDate.Location = new System.Drawing.Point(71, 42);
-            this.medt_CancelDate.Mask = "00/00/0000 90:00";
-            this.medt_CancelDate.Name = "medt_CancelDate";
-            this.medt_CancelDate.Size = new System.Drawing.Size(100, 20);
-            this.medt_CancelDate.TabIndex = 2;
-            this.medt_CancelDate.ValidatingType = typeof(System.DateTime);
-            this.medt_CancelDate.Visible = false;
-            // 
-            // lbl_CancelDate
-            // 
-            this.lbl_CancelDate.AutoSize = true;
-            this.lbl_CancelDate.Location = new System.Drawing.Point(11, 45);
-            this.lbl_CancelDate.Name = "lbl_CancelDate";
-            this.lbl_CancelDate.Size = new System.Drawing.Size(60, 13);
-            this.lbl_CancelDate.TabIndex = 3;
-            this.lbl_CancelDate.Text = "Cancelled :";
-            this.lbl_CancelDate.Visible = false;
             // 
             // Frm_Sale
             // 

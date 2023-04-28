@@ -31,7 +31,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         }
         public BillsInstalments FindItemId(int instalmentNumber, int paymentConditionId, int paymentMethodId)
         {
-            return _billInstalmentsDAO.SelectFromDb(instalmentNumber, paymentConditionId, paymentMethodId);
+            //return _billInstalmentsDAO.SelectFromDb(instalmentNumber, paymentConditionId, paymentMethodId);
+            return null;
         }
         public List<BillsInstalments> FindInstalments(int paymentConditionId)
         {
@@ -39,7 +40,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         }
         public void DeleteItem(int instalmentNumber, int paymentConditionId, int paymentMethodId)
         {
-            _billInstalmentsDAO.DeleteFromDb(instalmentNumber, paymentConditionId, paymentMethodId);
+            //_billInstalmentsDAO.DeleteFromDb(instalmentNumber, paymentConditionId, paymentMethodId);
         }
         public void UpdateItem(BillsInstalments billInstalment)
         {

@@ -28,8 +28,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                          + +saleItems.quantity
                          + ", "
                          + +saleItems.value
-                         + ", "
-                         + +saleItems.discount
                          + ", "                        
                          + saleItems.totalValue
                          + "', '"
@@ -72,8 +70,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                          + +saleItems.quantity
                          + ", SALE_VALUE = "
                          + +saleItems.value
-                         + ", DISCOUNT = "
-                         + +saleItems.discount
+                         //+ ", DISCOUNT = "
+                         //+ +saleItems.discount
                          + ", TOTAL_VALUE = "
                          + +saleItems.totalValue
                          + ", DATE_LAST_UPDATE = '"

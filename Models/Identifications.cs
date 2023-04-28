@@ -4,7 +4,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using static ProjetoEduardoAnacletoWindowsForm1.Models.Addresses;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.Models
 {

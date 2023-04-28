@@ -276,9 +276,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 {
                     DGV_Instalments.Rows.Add();
                     DGV_Instalments.Rows[i].Cells["InstalmentNumber"].Value = item.InstalmentNumber.ToString();
-                    DGV_Instalments.Rows[i].Cells["IntalmentDays"].Value = item.totalDays.ToString();
-                    DGV_Instalments.Rows[i].Cells["InstalmentPercentage"].Value = item.valuePercentage.ToString();
-                    DGV_Instalments.Rows[i].Cells["InstalmentPayMethod"].Value = item.paymentMethod.paymentMethod.ToString();
+                    DGV_Instalments.Rows[i].Cells["IntalmentDays"].Value = item.TotalDays.ToString();
+                    DGV_Instalments.Rows[i].Cells["InstalmentPercentage"].Value = item.ValuePercentage.ToString();
+                    DGV_Instalments.Rows[i].Cells["InstalmentPayMethod"].Value = item.PaymentMethod.paymentMethod.ToString();
                     i++;
                 }
             }
