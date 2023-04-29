@@ -41,21 +41,25 @@
             // 
             // edt_id
             // 
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.edt_id.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_id_KeyPress);
             // 
             // edt_serviceDescription
             // 
-            this.edt_serviceDescription.Location = new System.Drawing.Point(48, 22);
+            this.edt_serviceDescription.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_serviceDescription.Location = new System.Drawing.Point(64, 27);
+            this.edt_serviceDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.edt_serviceDescription.Name = "edt_serviceDescription";
-            this.edt_serviceDescription.Size = new System.Drawing.Size(312, 20);
+            this.edt_serviceDescription.Size = new System.Drawing.Size(415, 22);
             this.edt_serviceDescription.TabIndex = 7;
             this.edt_serviceDescription.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_serviceDescription_KeyPress);
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(366, 21);
+            this.btn_Search.Location = new System.Drawing.Point(488, 26);
+            this.btn_Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(75, 21);
+            this.btn_Search.Size = new System.Drawing.Size(100, 26);
             this.btn_Search.TabIndex = 8;
             this.btn_Search.Text = "&Search";
             this.btn_Search.UseVisualStyleBackColor = true;
@@ -70,12 +74,14 @@
             this.ServiceId,
             this.ServiceDescription,
             this.ServiceValue});
-            this.DGV_Services.Location = new System.Drawing.Point(10, 61);
+            this.DGV_Services.Location = new System.Drawing.Point(13, 75);
+            this.DGV_Services.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DGV_Services.MultiSelect = false;
             this.DGV_Services.Name = "DGV_Services";
             this.DGV_Services.ReadOnly = true;
+            this.DGV_Services.RowHeadersWidth = 51;
             this.DGV_Services.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_Services.Size = new System.Drawing.Size(578, 259);
+            this.DGV_Services.Size = new System.Drawing.Size(771, 319);
             this.DGV_Services.TabIndex = 9;
             this.DGV_Services.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Services_CellClick);
             this.DGV_Services.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Services_CellContentClick);
@@ -85,6 +91,7 @@
             // ServiceId
             // 
             this.ServiceId.HeaderText = "ID";
+            this.ServiceId.MinimumWidth = 6;
             this.ServiceId.Name = "ServiceId";
             this.ServiceId.ReadOnly = true;
             this.ServiceId.Width = 55;
@@ -93,12 +100,14 @@
             // 
             this.ServiceDescription.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.ServiceDescription.HeaderText = "Service Description";
+            this.ServiceDescription.MinimumWidth = 6;
             this.ServiceDescription.Name = "ServiceDescription";
             this.ServiceDescription.ReadOnly = true;
             // 
             // ServiceValue
             // 
             this.ServiceValue.HeaderText = "Value";
+            this.ServiceValue.MinimumWidth = 6;
             this.ServiceValue.Name = "ServiceValue";
             this.ServiceValue.ReadOnly = true;
             this.ServiceValue.Width = 80;
@@ -106,20 +115,22 @@
             // lbl_serviceDescription
             // 
             this.lbl_serviceDescription.AutoSize = true;
-            this.lbl_serviceDescription.Location = new System.Drawing.Point(45, 7);
+            this.lbl_serviceDescription.Location = new System.Drawing.Point(60, 9);
+            this.lbl_serviceDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_serviceDescription.Name = "lbl_serviceDescription";
-            this.lbl_serviceDescription.Size = new System.Drawing.Size(99, 13);
+            this.lbl_serviceDescription.Size = new System.Drawing.Size(124, 16);
             this.lbl_serviceDescription.TabIndex = 10;
             this.lbl_serviceDescription.Text = "Service Description";
             // 
             // Frm_Find_Services
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.lbl_serviceDescription);
             this.Controls.Add(this.DGV_Services);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.edt_serviceDescription);
+            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.Name = "Frm_Find_Services";
             this.Text = "Find Services";
             this.Controls.SetChildIndex(this.lbl_id, 0);

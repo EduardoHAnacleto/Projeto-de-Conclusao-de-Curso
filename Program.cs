@@ -19,5 +19,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Frm_Main());
         }
+        //		<add name ="DefaultConnection" connectionString="Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;"></add> 
     }
 }

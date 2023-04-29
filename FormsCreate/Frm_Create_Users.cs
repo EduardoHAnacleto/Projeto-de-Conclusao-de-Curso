@@ -32,7 +32,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override void SetNewId()
         {
-            edt_id.Value = controller.BringNewId();
+            edt_id.Value =  controller.BringNewId();
         }
 
         public void UnlockUser()
@@ -58,8 +58,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             {
                 Employees employee = new Employees();
                 employee = formEmployee.GetObject();
-                edt_employeeName.Text = employee.name;
-                edt_idEmployee.Value = employee.id;
+                if (employee != null)
+                {
+                    edt_employeeName.Text = employee.name;
+                    edt_idEmployee.Value = employee.id;
+                }
             }
             formEmployee.Close();
         }

@@ -40,29 +40,34 @@
             // 
             // edt_id
             // 
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.edt_id.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_id_KeyPress);
             // 
             // lbl_phoneClassification
             // 
             this.lbl_phoneClassification.AutoSize = true;
-            this.lbl_phoneClassification.Location = new System.Drawing.Point(61, 9);
+            this.lbl_phoneClassification.Location = new System.Drawing.Point(81, 11);
+            this.lbl_phoneClassification.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_phoneClassification.Name = "lbl_phoneClassification";
-            this.lbl_phoneClassification.Size = new System.Drawing.Size(101, 13);
+            this.lbl_phoneClassification.Size = new System.Drawing.Size(126, 16);
             this.lbl_phoneClassification.TabIndex = 18;
             this.lbl_phoneClassification.Text = "Phone classification";
             // 
             // edt_PhoneClassification
             // 
-            this.edt_PhoneClassification.Location = new System.Drawing.Point(64, 23);
+            this.edt_PhoneClassification.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_PhoneClassification.Location = new System.Drawing.Point(85, 28);
+            this.edt_PhoneClassification.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.edt_PhoneClassification.Name = "edt_PhoneClassification";
-            this.edt_PhoneClassification.Size = new System.Drawing.Size(200, 20);
+            this.edt_PhoneClassification.Size = new System.Drawing.Size(265, 22);
             this.edt_PhoneClassification.TabIndex = 17;
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(270, 20);
+            this.btn_Search.Location = new System.Drawing.Point(360, 25);
+            this.btn_Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(75, 23);
+            this.btn_Search.Size = new System.Drawing.Size(100, 28);
             this.btn_Search.TabIndex = 19;
             this.btn_Search.Text = "&Search";
             this.btn_Search.UseVisualStyleBackColor = true;
@@ -76,12 +81,14 @@
             this.DGV_PhoneClassification.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,
             this.PhoneClassification});
-            this.DGV_PhoneClassification.Location = new System.Drawing.Point(9, 66);
+            this.DGV_PhoneClassification.Location = new System.Drawing.Point(12, 81);
+            this.DGV_PhoneClassification.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DGV_PhoneClassification.MultiSelect = false;
             this.DGV_PhoneClassification.Name = "DGV_PhoneClassification";
             this.DGV_PhoneClassification.ReadOnly = true;
+            this.DGV_PhoneClassification.RowHeadersWidth = 51;
             this.DGV_PhoneClassification.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_PhoneClassification.Size = new System.Drawing.Size(579, 254);
+            this.DGV_PhoneClassification.Size = new System.Drawing.Size(772, 313);
             this.DGV_PhoneClassification.TabIndex = 20;
             this.DGV_PhoneClassification.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PhoneClassification_CellClick);
             this.DGV_PhoneClassification.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PhoneClassification_CellContentClick);
@@ -91,6 +98,7 @@
             // ID
             // 
             this.ID.HeaderText = "ID";
+            this.ID.MinimumWidth = 6;
             this.ID.Name = "ID";
             this.ID.ReadOnly = true;
             this.ID.Width = 65;
@@ -99,17 +107,19 @@
             // 
             this.PhoneClassification.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.PhoneClassification.HeaderText = "Phone Classification";
+            this.PhoneClassification.MinimumWidth = 6;
             this.PhoneClassification.Name = "PhoneClassification";
             this.PhoneClassification.ReadOnly = true;
             // 
             // Frm_Find_PhoneClassifications
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.DGV_PhoneClassification);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.lbl_phoneClassification);
             this.Controls.Add(this.edt_PhoneClassification);
+            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.Name = "Frm_Find_PhoneClassifications";
             this.Text = "Find Phone Classification";
             this.Controls.SetChildIndex(this.lbl_id, 0);

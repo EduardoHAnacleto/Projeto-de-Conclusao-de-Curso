@@ -18,7 +18,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 
         public override int NewId()
         {
-            int newId = 0;
+            var newId = "";
             string sql = "SELECT MAX(ID_USER) FROM USERS;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
@@ -26,7 +26,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             try
             {
                 con.Open();
-                newId = (int)cmd.ExecuteScalar();
+                newId = cmd.ExecuteScalar().ToString();
             }
             catch (Exception ex)
             {
@@ -36,7 +36,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             {
                 con.Close();
             }
-            return newId + 1;
+            if (newId != "")
+            {
+                int id = Convert.ToInt32(newId) + 1;
+                return id;
+            }
+            return 2;
         }
 
         public bool SaveToDb(Users obj)

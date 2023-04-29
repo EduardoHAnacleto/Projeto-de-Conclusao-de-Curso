@@ -338,5 +338,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         {
             SetAgeCamp();
         }
+
+        private void edt_age_TextChanged(object sender, EventArgs e)
+        {
+            Utilities.CalculateDateTimeAge(Convert.ToInt32(edt_age.Text));
+        }
     }
 }

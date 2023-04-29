@@ -29,21 +29,22 @@
         private void InitializeComponent()
         {
             this.DGV_Products = new System.Windows.Forms.DataGridView();
-            this.edt_productName = new System.Windows.Forms.TextBox();
-            this.lbl_ProductName = new System.Windows.Forms.Label();
-            this.btn_Search = new System.Windows.Forms.Button();
             this.DGVIdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGVProductName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGVProductValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGVProductGroup = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGVProductBrand = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGVProductStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.edt_productName = new System.Windows.Forms.TextBox();
+            this.lbl_ProductName = new System.Windows.Forms.Label();
+            this.btn_Search = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Products)).BeginInit();
             this.SuspendLayout();
             // 
             // edt_id
             // 
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.edt_id.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_id_KeyPress);
             // 
             // DGV_Products
@@ -58,47 +59,23 @@
             this.DGVProductGroup,
             this.DGVProductBrand,
             this.DGVProductStock});
-            this.DGV_Products.Location = new System.Drawing.Point(9, 82);
+            this.DGV_Products.Location = new System.Drawing.Point(12, 73);
+            this.DGV_Products.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.DGV_Products.MultiSelect = false;
             this.DGV_Products.Name = "DGV_Products";
             this.DGV_Products.ReadOnly = true;
+            this.DGV_Products.RowHeadersWidth = 51;
             this.DGV_Products.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_Products.Size = new System.Drawing.Size(582, 250);
+            this.DGV_Products.Size = new System.Drawing.Size(776, 336);
             this.DGV_Products.TabIndex = 6;
             this.DGV_Products.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Products_CellClick);
             this.DGV_Products.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Products_CellContentClick);
             this.DGV_Products.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Products_CellContentDoubleClick);
             // 
-            // edt_productName
-            // 
-            this.edt_productName.Location = new System.Drawing.Point(64, 23);
-            this.edt_productName.Name = "edt_productName";
-            this.edt_productName.Size = new System.Drawing.Size(259, 20);
-            this.edt_productName.TabIndex = 7;
-            this.edt_productName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_productName_KeyPress);
-            // 
-            // lbl_ProductName
-            // 
-            this.lbl_ProductName.AutoSize = true;
-            this.lbl_ProductName.Location = new System.Drawing.Point(61, 7);
-            this.lbl_ProductName.Name = "lbl_ProductName";
-            this.lbl_ProductName.Size = new System.Drawing.Size(44, 13);
-            this.lbl_ProductName.TabIndex = 8;
-            this.lbl_ProductName.Text = "Product";
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Location = new System.Drawing.Point(329, 23);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(75, 20);
-            this.btn_Search.TabIndex = 9;
-            this.btn_Search.Text = "&Search";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
-            // 
             // DGVIdProduct
             // 
             this.DGVIdProduct.HeaderText = "ID";
+            this.DGVIdProduct.MinimumWidth = 6;
             this.DGVIdProduct.Name = "DGVIdProduct";
             this.DGVIdProduct.ReadOnly = true;
             this.DGVIdProduct.Width = 55;
@@ -107,12 +84,14 @@
             // 
             this.DGVProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
             this.DGVProductName.HeaderText = "Product";
+            this.DGVProductName.MinimumWidth = 6;
             this.DGVProductName.Name = "DGVProductName";
             this.DGVProductName.ReadOnly = true;
             // 
             // DGVProductValue
             // 
             this.DGVProductValue.HeaderText = "Value";
+            this.DGVProductValue.MinimumWidth = 6;
             this.DGVProductValue.Name = "DGVProductValue";
             this.DGVProductValue.ReadOnly = true;
             this.DGVProductValue.Width = 60;
@@ -120,30 +99,67 @@
             // DGVProductGroup
             // 
             this.DGVProductGroup.HeaderText = "Group";
+            this.DGVProductGroup.MinimumWidth = 6;
             this.DGVProductGroup.Name = "DGVProductGroup";
             this.DGVProductGroup.ReadOnly = true;
+            this.DGVProductGroup.Width = 125;
             // 
             // DGVProductBrand
             // 
             this.DGVProductBrand.HeaderText = "Brand";
+            this.DGVProductBrand.MinimumWidth = 6;
             this.DGVProductBrand.Name = "DGVProductBrand";
             this.DGVProductBrand.ReadOnly = true;
+            this.DGVProductBrand.Width = 125;
             // 
             // DGVProductStock
             // 
             this.DGVProductStock.HeaderText = "Stock";
+            this.DGVProductStock.MinimumWidth = 6;
             this.DGVProductStock.Name = "DGVProductStock";
             this.DGVProductStock.ReadOnly = true;
             this.DGVProductStock.Width = 55;
             // 
+            // edt_productName
+            // 
+            this.edt_productName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_productName.Location = new System.Drawing.Point(85, 28);
+            this.edt_productName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_productName.Name = "edt_productName";
+            this.edt_productName.Size = new System.Drawing.Size(344, 22);
+            this.edt_productName.TabIndex = 7;
+            this.edt_productName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_productName_KeyPress);
+            // 
+            // lbl_ProductName
+            // 
+            this.lbl_ProductName.AutoSize = true;
+            this.lbl_ProductName.Location = new System.Drawing.Point(81, 9);
+            this.lbl_ProductName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_ProductName.Name = "lbl_ProductName";
+            this.lbl_ProductName.Size = new System.Drawing.Size(53, 16);
+            this.lbl_ProductName.TabIndex = 8;
+            this.lbl_ProductName.Text = "Product";
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(439, 28);
+            this.btn_Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(100, 25);
+            this.btn_Search.TabIndex = 9;
+            this.btn_Search.Text = "&Search";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            // 
             // Frm_Find_Products
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(600, 366);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.lbl_ProductName);
             this.Controls.Add(this.edt_productName);
             this.Controls.Add(this.DGV_Products);
+            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.Name = "Frm_Find_Products";
             this.Text = "Find Products";
             this.Controls.SetChildIndex(this.lbl_id, 0);

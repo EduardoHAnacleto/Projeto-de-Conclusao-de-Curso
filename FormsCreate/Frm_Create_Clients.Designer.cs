@@ -41,67 +41,77 @@
             // 
             // medt_regNumber
             // 
-            this.medt_regNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.medt_regNumber.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // edt_age
             // 
-            this.edt_age.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.edt_age.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // edt_Name
             // 
-            this.edt_Name.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.edt_Name.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_Name.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // edt_complement
             // 
-            this.edt_complement.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.edt_complement.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_complement.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // edt_district
             // 
-            this.edt_district.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.edt_district.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_district.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // edt_houseNumber
             // 
-            this.edt_houseNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.edt_houseNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_houseNumber.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // edt_street
             // 
-            this.edt_street.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.edt_street.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_street.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // medt_zipCode
             // 
-            this.medt_zipCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.medt_zipCode.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // edt_email
             // 
-            this.edt_email.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.edt_email.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_email.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // medt_phone3
             // 
-            this.medt_phone3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.medt_phone3.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // medt_phone2
             // 
-            this.medt_phone2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.medt_phone2.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // medt_phone1
             // 
-            this.medt_phone1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.medt_phone1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             // 
             // edt_StateFU
             // 
-            this.edt_StateFU.Margin = new System.Windows.Forms.Padding(4);
+            this.edt_StateFU.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_StateFU.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             // 
             // edt_countryAcronym
             // 
-            this.edt_countryAcronym.Margin = new System.Windows.Forms.Padding(4);
+            this.edt_countryAcronym.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_countryAcronym.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             // 
             // edt_city
             // 
-            this.edt_city.Margin = new System.Windows.Forms.Padding(4);
+            this.edt_city.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_city.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             // 
             // edt_homeType
             // 
-            this.edt_homeType.Margin = new System.Windows.Forms.Padding(4);
+            this.edt_homeType.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_homeType.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             // 
             // medt_dob
             // 
@@ -114,9 +124,10 @@
             // check_LegalClient
             // 
             this.check_LegalClient.AutoSize = true;
-            this.check_LegalClient.Location = new System.Drawing.Point(6, 43);
+            this.check_LegalClient.Location = new System.Drawing.Point(8, 53);
+            this.check_LegalClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.check_LegalClient.Name = "check_LegalClient";
-            this.check_LegalClient.Size = new System.Drawing.Size(52, 17);
+            this.check_LegalClient.Size = new System.Drawing.Size(63, 20);
             this.check_LegalClient.TabIndex = 35;
             this.check_LegalClient.Text = "Legal";
             this.check_LegalClient.UseVisualStyleBackColor = true;
@@ -125,9 +136,10 @@
             // check_NaturalClient
             // 
             this.check_NaturalClient.AutoSize = true;
-            this.check_NaturalClient.Location = new System.Drawing.Point(6, 19);
+            this.check_NaturalClient.Location = new System.Drawing.Point(8, 23);
+            this.check_NaturalClient.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.check_NaturalClient.Name = "check_NaturalClient";
-            this.check_NaturalClient.Size = new System.Drawing.Size(60, 17);
+            this.check_NaturalClient.Size = new System.Drawing.Size(72, 20);
             this.check_NaturalClient.TabIndex = 34;
             this.check_NaturalClient.Text = "Natural";
             this.check_NaturalClient.UseVisualStyleBackColor = true;
@@ -137,19 +149,21 @@
             // 
             this.gbox_clientType.Controls.Add(this.check_NaturalClient);
             this.gbox_clientType.Controls.Add(this.check_LegalClient);
-            this.gbox_clientType.Location = new System.Drawing.Point(418, 11);
+            this.gbox_clientType.Location = new System.Drawing.Point(557, 14);
+            this.gbox_clientType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.gbox_clientType.Name = "gbox_clientType";
-            this.gbox_clientType.Size = new System.Drawing.Size(114, 65);
+            this.gbox_clientType.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gbox_clientType.Size = new System.Drawing.Size(152, 80);
             this.gbox_clientType.TabIndex = 36;
             this.gbox_clientType.TabStop = false;
             this.gbox_clientType.Text = "Client Type";
             // 
             // Frm_Create_Clients
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(672, 379);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.ClientSize = new System.Drawing.Size(896, 466);
             this.Controls.Add(this.gbox_clientType);
-            this.Margin = new System.Windows.Forms.Padding(5);
+            this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
             this.Name = "Frm_Create_Clients";
             this.Text = "Create Clients";
             this.Controls.SetChildIndex(this.gbox_clientType, 0);

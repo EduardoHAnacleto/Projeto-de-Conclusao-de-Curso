@@ -432,6 +432,11 @@
             // edt_saleNumber
             // 
             this.edt_saleNumber.Location = new System.Drawing.Point(9, 40);
+            this.edt_saleNumber.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
             this.edt_saleNumber.Name = "edt_saleNumber";
             this.edt_saleNumber.Size = new System.Drawing.Size(99, 20);
             this.edt_saleNumber.TabIndex = 8;

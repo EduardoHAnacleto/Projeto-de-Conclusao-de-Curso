@@ -33,48 +33,70 @@
             this.lbl_description = new System.Windows.Forms.Label();
             this.lbl_productGroup = new System.Windows.Forms.Label();
             this.gbox_dates.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.SuspendLayout();
+            // 
+            // lbl_LastUpdate
+            // 
+            this.lbl_LastUpdate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            // 
+            // lbl_CreationDate
+            // 
+            this.lbl_CreationDate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            // 
+            // edt_id
+            // 
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5);
             // 
             // edt_groupDescription
             // 
-            this.edt_groupDescription.Location = new System.Drawing.Point(56, 73);
+            this.edt_groupDescription.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_groupDescription.Location = new System.Drawing.Point(75, 90);
+            this.edt_groupDescription.Margin = new System.Windows.Forms.Padding(4);
+            this.edt_groupDescription.MaxLength = 30;
             this.edt_groupDescription.Name = "edt_groupDescription";
-            this.edt_groupDescription.Size = new System.Drawing.Size(307, 20);
+            this.edt_groupDescription.Size = new System.Drawing.Size(408, 22);
             this.edt_groupDescription.TabIndex = 18;
             // 
             // edt_productGroupName
             // 
-            this.edt_productGroupName.Location = new System.Drawing.Point(56, 24);
+            this.edt_productGroupName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_productGroupName.Location = new System.Drawing.Point(75, 30);
+            this.edt_productGroupName.Margin = new System.Windows.Forms.Padding(4);
+            this.edt_productGroupName.MaxLength = 30;
             this.edt_productGroupName.Name = "edt_productGroupName";
-            this.edt_productGroupName.Size = new System.Drawing.Size(203, 20);
+            this.edt_productGroupName.Size = new System.Drawing.Size(269, 22);
             this.edt_productGroupName.TabIndex = 17;
             // 
             // lbl_description
             // 
             this.lbl_description.AutoSize = true;
-            this.lbl_description.Location = new System.Drawing.Point(53, 57);
+            this.lbl_description.Location = new System.Drawing.Point(71, 70);
+            this.lbl_description.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_description.Name = "lbl_description";
-            this.lbl_description.Size = new System.Drawing.Size(60, 13);
+            this.lbl_description.Size = new System.Drawing.Size(75, 16);
             this.lbl_description.TabIndex = 16;
             this.lbl_description.Text = "Description";
             // 
             // lbl_productGroup
             // 
             this.lbl_productGroup.AutoSize = true;
-            this.lbl_productGroup.Location = new System.Drawing.Point(53, 8);
+            this.lbl_productGroup.Location = new System.Drawing.Point(71, 10);
+            this.lbl_productGroup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_productGroup.Name = "lbl_productGroup";
-            this.lbl_productGroup.Size = new System.Drawing.Size(105, 13);
+            this.lbl_productGroup.Size = new System.Drawing.Size(130, 16);
             this.lbl_productGroup.TabIndex = 15;
             this.lbl_productGroup.Text = "Product Group name";
             // 
             // Frm_Create_ProductGroups
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(672, 379);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.ClientSize = new System.Drawing.Size(896, 466);
             this.Controls.Add(this.edt_groupDescription);
             this.Controls.Add(this.edt_productGroupName);
             this.Controls.Add(this.lbl_description);
             this.Controls.Add(this.lbl_productGroup);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Frm_Create_ProductGroups";
             this.Text = "Create Product Groups";
             this.Controls.SetChildIndex(this.lbl_id, 0);
@@ -90,6 +112,7 @@
             this.Controls.SetChildIndex(this.edt_groupDescription, 0);
             this.gbox_dates.ResumeLayout(false);
             this.gbox_dates.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

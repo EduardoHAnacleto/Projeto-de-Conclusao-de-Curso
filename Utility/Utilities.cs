@@ -30,6 +30,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             return age;
         }
 
+        public static DateTime CalculateDateTimeAge(int age)
+        {
+            //DateTime today = DateTime.Now;
+            //int years = new DateTime(DateTime.Now.Subtract(today).Ticks).Year - age;
+            //DateTime yob = new DateTime();
+            //yob.Year = years;
+            //return date;
+            return DateTime.Now;
+        }
+
         public static string RemoveRegMask(string maskedTxt)
         {
             var text = maskedTxt.Replace(",", string.Empty).Replace("-", string.Empty).Replace("/", string.Empty).

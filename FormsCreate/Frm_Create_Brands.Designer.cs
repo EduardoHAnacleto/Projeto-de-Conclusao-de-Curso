@@ -36,35 +36,45 @@
             // 
             // lbl_LastUpdate
             // 
-            this.lbl_LastUpdate.Size = new System.Drawing.Size(65, 13);
+            this.lbl_LastUpdate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbl_LastUpdate.Size = new System.Drawing.Size(71, 16);
             this.lbl_LastUpdate.Text = "18/03/2023";
+            // 
+            // lbl_CreationDate
+            // 
+            this.lbl_CreationDate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
             // 
             // edt_id
             // 
-            this.edt_id.Enabled = false;
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             // 
             // lbl_brandName
             // 
             this.lbl_brandName.AutoSize = true;
-            this.lbl_brandName.Location = new System.Drawing.Point(61, 8);
+            this.lbl_brandName.Location = new System.Drawing.Point(81, 10);
+            this.lbl_brandName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lbl_brandName.Name = "lbl_brandName";
-            this.lbl_brandName.Size = new System.Drawing.Size(66, 13);
+            this.lbl_brandName.Size = new System.Drawing.Size(83, 16);
             this.lbl_brandName.TabIndex = 16;
             this.lbl_brandName.Text = "Brand Name";
             // 
             // edt_BrandName
             // 
-            this.edt_BrandName.Location = new System.Drawing.Point(64, 24);
+            this.edt_BrandName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_BrandName.Location = new System.Drawing.Point(85, 30);
+            this.edt_BrandName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_BrandName.MaxLength = 30;
             this.edt_BrandName.Name = "edt_BrandName";
-            this.edt_BrandName.Size = new System.Drawing.Size(222, 20);
+            this.edt_BrandName.Size = new System.Drawing.Size(295, 22);
             this.edt_BrandName.TabIndex = 15;
             // 
             // Frm_Create_Brands
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(672, 379);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.ClientSize = new System.Drawing.Size(896, 466);
             this.Controls.Add(this.lbl_brandName);
             this.Controls.Add(this.edt_BrandName);
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "Frm_Create_Brands";
             this.Text = "Create Brand";
             this.Controls.SetChildIndex(this.lbl_id, 0);
