@@ -341,7 +341,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         private void edt_age_TextChanged(object sender, EventArgs e)
         {
-            Utilities.CalculateDateTimeAge(Convert.ToInt32(edt_age.Text));
+            medt_dob.Value = Utilities.CalculateDateTimeAge(Convert.ToInt32(edt_age.Text));
         }
     }
 }

@@ -41,115 +41,111 @@
             // 
             // medt_regNumber
             // 
-            this.medt_regNumber.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.medt_regNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // edt_age
             // 
-            this.edt_age.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.edt_age.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // edt_Name
             // 
-            this.edt_Name.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.edt_Name.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // edt_complement
             // 
-            this.edt_complement.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.edt_complement.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // edt_district
             // 
-            this.edt_district.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.edt_district.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // edt_houseNumber
             // 
-            this.edt_houseNumber.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.edt_houseNumber.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // edt_street
             // 
-            this.edt_street.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.edt_street.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // medt_zipCode
             // 
-            this.medt_zipCode.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.medt_zipCode.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // edt_email
             // 
-            this.edt_email.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.edt_email.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // medt_phone3
             // 
-            this.medt_phone3.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.medt_phone3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // medt_phone2
             // 
-            this.medt_phone2.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.medt_phone2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // medt_phone1
             // 
-            this.medt_phone1.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.medt_phone1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
             // edt_StateFU
             // 
-            this.edt_StateFU.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.edt_StateFU.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             // 
             // edt_countryAcronym
             // 
-            this.edt_countryAcronym.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.edt_countryAcronym.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             // 
             // edt_city
             // 
-            this.edt_city.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.edt_city.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             // 
             // edt_homeType
             // 
-            this.edt_homeType.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.edt_homeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             // 
             // edt_stateInscription
             // 
             this.edt_stateInscription.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_stateInscription.Location = new System.Drawing.Point(497, 30);
-            this.edt_stateInscription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_stateInscription.Location = new System.Drawing.Point(373, 24);
             this.edt_stateInscription.Name = "edt_stateInscription";
-            this.edt_stateInscription.Size = new System.Drawing.Size(131, 22);
+            this.edt_stateInscription.Size = new System.Drawing.Size(99, 20);
             this.edt_stateInscription.TabIndex = 33;
             // 
             // lbl_stateInscription
             // 
             this.lbl_stateInscription.AutoSize = true;
-            this.lbl_stateInscription.Location = new System.Drawing.Point(493, 10);
-            this.lbl_stateInscription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_stateInscription.Location = new System.Drawing.Point(370, 8);
             this.lbl_stateInscription.Name = "lbl_stateInscription";
-            this.lbl_stateInscription.Size = new System.Drawing.Size(101, 16);
+            this.lbl_stateInscription.Size = new System.Drawing.Size(87, 13);
             this.lbl_stateInscription.TabIndex = 34;
-            this.lbl_stateInscription.Text = "State Inscription";
+            this.lbl_stateInscription.Text = "*State Inscription";
             // 
             // edt_socialReason
             // 
             this.edt_socialReason.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_socialReason.Location = new System.Drawing.Point(321, 92);
-            this.edt_socialReason.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_socialReason.Location = new System.Drawing.Point(241, 75);
             this.edt_socialReason.Name = "edt_socialReason";
-            this.edt_socialReason.Size = new System.Drawing.Size(324, 22);
+            this.edt_socialReason.Size = new System.Drawing.Size(244, 20);
             this.edt_socialReason.TabIndex = 35;
             // 
             // lbl_socialReason
             // 
             this.lbl_socialReason.AutoSize = true;
-            this.lbl_socialReason.Location = new System.Drawing.Point(317, 73);
-            this.lbl_socialReason.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_socialReason.Location = new System.Drawing.Point(238, 59);
             this.lbl_socialReason.Name = "lbl_socialReason";
-            this.lbl_socialReason.Size = new System.Drawing.Size(96, 16);
+            this.lbl_socialReason.Size = new System.Drawing.Size(76, 13);
             this.lbl_socialReason.TabIndex = 36;
             this.lbl_socialReason.Text = "Social Reason";
             // 
             // Frm_Create_Suppliers
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(896, 466);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(672, 379);
             this.Controls.Add(this.lbl_socialReason);
             this.Controls.Add(this.edt_socialReason);
             this.Controls.Add(this.lbl_stateInscription);
             this.Controls.Add(this.edt_stateInscription);
-            this.Margin = new System.Windows.Forms.Padding(7, 6, 7, 6);
+            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
             this.Name = "Frm_Create_Suppliers";
             this.Text = "Create Supplier";
             this.Controls.SetChildIndex(this.lbl_id, 0);

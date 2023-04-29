@@ -40,35 +40,32 @@
             // 
             // edt_id
             // 
-            this.edt_id.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5);
             this.edt_id.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_id_KeyPress);
             // 
             // edt_productGroupName
             // 
             this.edt_productGroupName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_productGroupName.Location = new System.Drawing.Point(87, 28);
-            this.edt_productGroupName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_productGroupName.Location = new System.Drawing.Point(50, 23);
             this.edt_productGroupName.Name = "edt_productGroupName";
-            this.edt_productGroupName.Size = new System.Drawing.Size(341, 22);
+            this.edt_productGroupName.Size = new System.Drawing.Size(272, 20);
             this.edt_productGroupName.TabIndex = 19;
             this.edt_productGroupName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_productGroupName_KeyPress);
             // 
             // lbl_productGroup
             // 
             this.lbl_productGroup.AutoSize = true;
-            this.lbl_productGroup.Location = new System.Drawing.Point(83, 9);
-            this.lbl_productGroup.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_productGroup.Location = new System.Drawing.Point(47, 7);
             this.lbl_productGroup.Name = "lbl_productGroup";
-            this.lbl_productGroup.Size = new System.Drawing.Size(130, 16);
+            this.lbl_productGroup.Size = new System.Drawing.Size(105, 13);
             this.lbl_productGroup.TabIndex = 18;
             this.lbl_productGroup.Text = "Product Group name";
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(437, 28);
-            this.btn_Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Search.Location = new System.Drawing.Point(328, 23);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(100, 25);
+            this.btn_Search.Size = new System.Drawing.Size(75, 20);
             this.btn_Search.TabIndex = 20;
             this.btn_Search.Text = "&Search";
             this.btn_Search.UseVisualStyleBackColor = true;
@@ -82,14 +79,13 @@
             this.DGV_ProdGroups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PGroupId,
             this.PGroupName});
-            this.DGV_ProdGroups.Location = new System.Drawing.Point(12, 81);
-            this.DGV_ProdGroups.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_ProdGroups.Location = new System.Drawing.Point(9, 51);
             this.DGV_ProdGroups.MultiSelect = false;
             this.DGV_ProdGroups.Name = "DGV_ProdGroups";
             this.DGV_ProdGroups.ReadOnly = true;
             this.DGV_ProdGroups.RowHeadersWidth = 51;
             this.DGV_ProdGroups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_ProdGroups.Size = new System.Drawing.Size(776, 327);
+            this.DGV_ProdGroups.Size = new System.Drawing.Size(582, 281);
             this.DGV_ProdGroups.TabIndex = 21;
             this.DGV_ProdGroups.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_ProdGroups_CellClick);
             this.DGV_ProdGroups.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_ProdGroups_CellContentDoubleClick);
@@ -113,13 +109,13 @@
             // 
             // Frm_Find_ProductGroups
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.DGV_ProdGroups);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.edt_productGroupName);
             this.Controls.Add(this.lbl_productGroup);
-            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_ProductGroups";
             this.Text = "Find Product Groups";
             this.Controls.SetChildIndex(this.lbl_id, 0);

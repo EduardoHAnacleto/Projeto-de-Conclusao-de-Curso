@@ -162,7 +162,7 @@
             this.gbox_user.Size = new System.Drawing.Size(260, 175);
             this.gbox_user.TabIndex = 28;
             this.gbox_user.TabStop = false;
-            this.gbox_user.Text = "User Information";
+            this.gbox_user.Text = "*User Information";
             // 
             // gbox_employee
             // 
@@ -176,7 +176,7 @@
             this.gbox_employee.Size = new System.Drawing.Size(321, 103);
             this.gbox_employee.TabIndex = 29;
             this.gbox_employee.TabStop = false;
-            this.gbox_employee.Text = "Employee";
+            this.gbox_employee.Text = "*Employee";
             // 
             // lbl_empId
             // 

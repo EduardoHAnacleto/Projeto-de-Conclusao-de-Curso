@@ -39,6 +39,7 @@
             this.btn_exit = new System.Windows.Forms.Button();
             this.lbl_id = new System.Windows.Forms.Label();
             this.edt_id = new System.Windows.Forms.NumericUpDown();
+            this.lbl_requiredSymbol = new System.Windows.Forms.Label();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.SuspendLayout();
@@ -155,11 +156,21 @@
             this.edt_id.Size = new System.Drawing.Size(39, 20);
             this.edt_id.TabIndex = 15;
             // 
+            // lbl_requiredSymbol
+            // 
+            this.lbl_requiredSymbol.AutoSize = true;
+            this.lbl_requiredSymbol.Location = new System.Drawing.Point(192, 357);
+            this.lbl_requiredSymbol.Name = "lbl_requiredSymbol";
+            this.lbl_requiredSymbol.Size = new System.Drawing.Size(108, 13);
+            this.lbl_requiredSymbol.TabIndex = 16;
+            this.lbl_requiredSymbol.Text = "* Camps are required.";
+            // 
             // Frm_Create_Master
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(672, 379);
+            this.Controls.Add(this.lbl_requiredSymbol);
             this.Controls.Add(this.edt_id);
             this.Controls.Add(this.gbox_dates);
             this.Controls.Add(this.btn_Edit);
@@ -190,5 +201,6 @@
         public System.Windows.Forms.Button btn_exit;
         public System.Windows.Forms.Label lbl_id;
         public System.Windows.Forms.NumericUpDown edt_id;
+        private System.Windows.Forms.Label lbl_requiredSymbol;
     }
 }

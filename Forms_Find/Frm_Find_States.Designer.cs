@@ -50,40 +50,36 @@
             // lbl_StateName
             // 
             this.lbl_StateName.AutoSize = true;
-            this.lbl_StateName.Location = new System.Drawing.Point(107, 9);
-            this.lbl_StateName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_StateName.Location = new System.Drawing.Point(46, 7);
             this.lbl_StateName.Name = "lbl_StateName";
-            this.lbl_StateName.Size = new System.Drawing.Size(38, 16);
+            this.lbl_StateName.Size = new System.Drawing.Size(32, 13);
             this.lbl_StateName.TabIndex = 4;
             this.lbl_StateName.Text = "State";
             // 
             // lbl_FedUnit
             // 
             this.lbl_FedUnit.AutoSize = true;
-            this.lbl_FedUnit.Location = new System.Drawing.Point(536, 9);
-            this.lbl_FedUnit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_FedUnit.Location = new System.Drawing.Point(402, 7);
             this.lbl_FedUnit.Name = "lbl_FedUnit";
-            this.lbl_FedUnit.Size = new System.Drawing.Size(98, 16);
+            this.lbl_FedUnit.Size = new System.Drawing.Size(79, 13);
             this.lbl_FedUnit.TabIndex = 5;
             this.lbl_FedUnit.Text = "Federation Unit";
             // 
             // edt_stateName
             // 
             this.edt_stateName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_stateName.Location = new System.Drawing.Point(111, 28);
-            this.edt_stateName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_stateName.Location = new System.Drawing.Point(49, 23);
             this.edt_stateName.Name = "edt_stateName";
-            this.edt_stateName.Size = new System.Drawing.Size(399, 22);
+            this.edt_stateName.Size = new System.Drawing.Size(334, 20);
             this.edt_stateName.TabIndex = 7;
             this.edt_stateName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_stateName_KeyPress);
             // 
             // edt_FU
             // 
             this.edt_FU.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_FU.Location = new System.Drawing.Point(540, 28);
-            this.edt_FU.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_FU.Location = new System.Drawing.Point(405, 23);
             this.edt_FU.Name = "edt_FU";
-            this.edt_FU.Size = new System.Drawing.Size(59, 22);
+            this.edt_FU.Size = new System.Drawing.Size(45, 20);
             this.edt_FU.TabIndex = 8;
             this.edt_FU.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_FU_KeyPress);
             // 
@@ -95,14 +91,13 @@
             this.States,
             this.StateFederationUnit,
             this.StateCountryName});
-            this.DGV_States.Location = new System.Drawing.Point(12, 61);
-            this.DGV_States.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_States.Location = new System.Drawing.Point(9, 50);
             this.DGV_States.MultiSelect = false;
             this.DGV_States.Name = "DGV_States";
             this.DGV_States.ReadOnly = true;
             this.DGV_States.RowHeadersWidth = 51;
             this.DGV_States.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_States.Size = new System.Drawing.Size(776, 335);
+            this.DGV_States.Size = new System.Drawing.Size(582, 272);
             this.DGV_States.TabIndex = 9;
             this.DGV_States.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_States_CellClick);
             this.DGV_States.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_States_CellContentDoubleClick);
@@ -142,10 +137,9 @@
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(621, 27);
-            this.btn_Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Search.Location = new System.Drawing.Point(466, 22);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(100, 26);
+            this.btn_Search.Size = new System.Drawing.Size(75, 21);
             this.btn_Search.TabIndex = 11;
             this.btn_Search.Text = "&Search";
             this.btn_Search.UseVisualStyleBackColor = true;
@@ -153,15 +147,15 @@
             // 
             // Frm_Find_States
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.DGV_States);
             this.Controls.Add(this.edt_FU);
             this.Controls.Add(this.edt_stateName);
             this.Controls.Add(this.lbl_FedUnit);
             this.Controls.Add(this.lbl_StateName);
-            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_States";
             this.Text = "Find States";
             this.Controls.SetChildIndex(this.lbl_id, 0);

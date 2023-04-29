@@ -43,11 +43,11 @@
             // 
             // lbl_LastUpdate
             // 
-            this.lbl_LastUpdate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbl_LastUpdate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             // 
             // lbl_CreationDate
             // 
-            this.lbl_CreationDate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbl_CreationDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             // 
             // edt_id
             // 
@@ -55,10 +55,9 @@
             // 
             // btn_SearchCountry
             // 
-            this.btn_SearchCountry.Location = new System.Drawing.Point(431, 98);
-            this.btn_SearchCountry.Margin = new System.Windows.Forms.Padding(4);
+            this.btn_SearchCountry.Location = new System.Drawing.Point(323, 80);
             this.btn_SearchCountry.Name = "btn_SearchCountry";
-            this.btn_SearchCountry.Size = new System.Drawing.Size(100, 25);
+            this.btn_SearchCountry.Size = new System.Drawing.Size(75, 20);
             this.btn_SearchCountry.TabIndex = 19;
             this.btn_SearchCountry.Text = "Search";
             this.btn_SearchCountry.UseVisualStyleBackColor = true;
@@ -67,90 +66,82 @@
             // edt_FU
             // 
             this.edt_FU.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_FU.Location = new System.Drawing.Point(517, 30);
-            this.edt_FU.Margin = new System.Windows.Forms.Padding(4);
+            this.edt_FU.Location = new System.Drawing.Point(388, 24);
             this.edt_FU.MaxLength = 3;
             this.edt_FU.Name = "edt_FU";
-            this.edt_FU.Size = new System.Drawing.Size(59, 22);
+            this.edt_FU.Size = new System.Drawing.Size(45, 20);
             this.edt_FU.TabIndex = 18;
             // 
             // edt_stateName
             // 
             this.edt_stateName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_stateName.Location = new System.Drawing.Point(88, 30);
-            this.edt_stateName.Margin = new System.Windows.Forms.Padding(4);
+            this.edt_stateName.Location = new System.Drawing.Point(66, 24);
             this.edt_stateName.MaxLength = 50;
             this.edt_stateName.Name = "edt_stateName";
-            this.edt_stateName.Size = new System.Drawing.Size(399, 22);
+            this.edt_stateName.Size = new System.Drawing.Size(300, 20);
             this.edt_stateName.TabIndex = 17;
             // 
             // lbl_FedUnit
             // 
             this.lbl_FedUnit.AutoSize = true;
-            this.lbl_FedUnit.Location = new System.Drawing.Point(513, 10);
-            this.lbl_FedUnit.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_FedUnit.Location = new System.Drawing.Point(385, 8);
             this.lbl_FedUnit.Name = "lbl_FedUnit";
-            this.lbl_FedUnit.Size = new System.Drawing.Size(98, 16);
+            this.lbl_FedUnit.Size = new System.Drawing.Size(83, 13);
             this.lbl_FedUnit.TabIndex = 16;
-            this.lbl_FedUnit.Text = "Federation Unit";
+            this.lbl_FedUnit.Text = "*Federation Unit";
             // 
             // lbl_StateName
             // 
             this.lbl_StateName.AutoSize = true;
-            this.lbl_StateName.Location = new System.Drawing.Point(84, 10);
-            this.lbl_StateName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_StateName.Location = new System.Drawing.Point(63, 8);
             this.lbl_StateName.Name = "lbl_StateName";
-            this.lbl_StateName.Size = new System.Drawing.Size(38, 16);
+            this.lbl_StateName.Size = new System.Drawing.Size(36, 13);
             this.lbl_StateName.TabIndex = 15;
-            this.lbl_StateName.Text = "State";
+            this.lbl_StateName.Text = "*State";
             // 
             // lbl_Country
             // 
             this.lbl_Country.AutoSize = true;
-            this.lbl_Country.Location = new System.Drawing.Point(153, 80);
-            this.lbl_Country.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_Country.Location = new System.Drawing.Point(115, 65);
             this.lbl_Country.Name = "lbl_Country";
-            this.lbl_Country.Size = new System.Drawing.Size(52, 16);
+            this.lbl_Country.Size = new System.Drawing.Size(47, 13);
             this.lbl_Country.TabIndex = 20;
-            this.lbl_Country.Text = "Country";
+            this.lbl_Country.Text = "*Country";
             // 
             // edt_country
             // 
             this.edt_country.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_country.Enabled = false;
-            this.edt_country.Location = new System.Drawing.Point(157, 100);
-            this.edt_country.Margin = new System.Windows.Forms.Padding(4);
+            this.edt_country.Location = new System.Drawing.Point(118, 81);
             this.edt_country.MaxLength = 50;
             this.edt_country.Name = "edt_country";
-            this.edt_country.Size = new System.Drawing.Size(264, 22);
+            this.edt_country.Size = new System.Drawing.Size(199, 20);
             this.edt_country.TabIndex = 21;
             this.edt_country.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_country_KeyPress);
             // 
             // edt_countryId
             // 
             this.edt_countryId.Enabled = false;
-            this.edt_countryId.Location = new System.Drawing.Point(88, 98);
-            this.edt_countryId.Margin = new System.Windows.Forms.Padding(4);
+            this.edt_countryId.Location = new System.Drawing.Point(66, 80);
             this.edt_countryId.MaxLength = 9;
             this.edt_countryId.Name = "edt_countryId";
-            this.edt_countryId.Size = new System.Drawing.Size(47, 22);
+            this.edt_countryId.Size = new System.Drawing.Size(36, 20);
             this.edt_countryId.TabIndex = 22;
             this.edt_countryId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_countryId_KeyPress);
             // 
             // lbl_countryId
             // 
             this.lbl_countryId.AutoSize = true;
-            this.lbl_countryId.Location = new System.Drawing.Point(89, 79);
-            this.lbl_countryId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_countryId.Location = new System.Drawing.Point(67, 64);
             this.lbl_countryId.Name = "lbl_countryId";
-            this.lbl_countryId.Size = new System.Drawing.Size(20, 16);
+            this.lbl_countryId.Size = new System.Drawing.Size(22, 13);
             this.lbl_countryId.TabIndex = 23;
-            this.lbl_countryId.Text = "ID";
+            this.lbl_countryId.Text = "*ID";
             // 
             // Frm_Create_States
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(896, 466);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(672, 379);
             this.Controls.Add(this.lbl_countryId);
             this.Controls.Add(this.edt_countryId);
             this.Controls.Add(this.edt_country);
@@ -160,7 +151,7 @@
             this.Controls.Add(this.edt_stateName);
             this.Controls.Add(this.lbl_FedUnit);
             this.Controls.Add(this.lbl_StateName);
-            this.Margin = new System.Windows.Forms.Padding(5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Frm_Create_States";
             this.Text = "Create State";
             this.Controls.SetChildIndex(this.lbl_id, 0);

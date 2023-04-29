@@ -43,33 +43,31 @@
             // 
             // lbl_LastUpdate
             // 
-            this.lbl_LastUpdate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbl_LastUpdate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             // 
             // lbl_CreationDate
             // 
-            this.lbl_CreationDate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbl_CreationDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             // 
             // edt_id
             // 
-            this.edt_id.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5);
             // 
             // lbl_stateId
             // 
             this.lbl_stateId.AutoSize = true;
-            this.lbl_stateId.Location = new System.Drawing.Point(72, 80);
-            this.lbl_stateId.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_stateId.Location = new System.Drawing.Point(54, 65);
             this.lbl_stateId.Name = "lbl_stateId";
-            this.lbl_stateId.Size = new System.Drawing.Size(20, 16);
+            this.lbl_stateId.Size = new System.Drawing.Size(22, 13);
             this.lbl_stateId.TabIndex = 32;
-            this.lbl_stateId.Text = "ID";
+            this.lbl_stateId.Text = "*ID";
             // 
             // edt_stateId
             // 
             this.edt_stateId.Enabled = false;
-            this.edt_stateId.Location = new System.Drawing.Point(74, 101);
-            this.edt_stateId.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_stateId.Location = new System.Drawing.Point(56, 82);
             this.edt_stateId.Name = "edt_stateId";
-            this.edt_stateId.Size = new System.Drawing.Size(47, 22);
+            this.edt_stateId.Size = new System.Drawing.Size(36, 20);
             this.edt_stateId.TabIndex = 31;
             this.edt_stateId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_stateId_KeyPress);
             // 
@@ -77,30 +75,27 @@
             // 
             this.edt_state.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_state.Enabled = false;
-            this.edt_state.Location = new System.Drawing.Point(144, 100);
-            this.edt_state.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_state.Location = new System.Drawing.Point(108, 81);
             this.edt_state.MaxLength = 50;
             this.edt_state.Name = "edt_state";
-            this.edt_state.Size = new System.Drawing.Size(264, 22);
+            this.edt_state.Size = new System.Drawing.Size(199, 20);
             this.edt_state.TabIndex = 30;
             this.edt_state.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_state_KeyPress);
             // 
             // lbl_State
             // 
             this.lbl_State.AutoSize = true;
-            this.lbl_State.Location = new System.Drawing.Point(140, 80);
-            this.lbl_State.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_State.Location = new System.Drawing.Point(105, 65);
             this.lbl_State.Name = "lbl_State";
-            this.lbl_State.Size = new System.Drawing.Size(38, 16);
+            this.lbl_State.Size = new System.Drawing.Size(36, 13);
             this.lbl_State.TabIndex = 29;
-            this.lbl_State.Text = "State";
+            this.lbl_State.Text = "*State";
             // 
             // btn_SearchState
             // 
-            this.btn_SearchState.Location = new System.Drawing.Point(417, 98);
-            this.btn_SearchState.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_SearchState.Location = new System.Drawing.Point(313, 80);
             this.btn_SearchState.Name = "btn_SearchState";
-            this.btn_SearchState.Size = new System.Drawing.Size(100, 25);
+            this.btn_SearchState.Size = new System.Drawing.Size(75, 20);
             this.btn_SearchState.TabIndex = 28;
             this.btn_SearchState.Text = "Search";
             this.btn_SearchState.UseVisualStyleBackColor = true;
@@ -108,47 +103,43 @@
             // 
             // edt_phonePrefix
             // 
-            this.edt_phonePrefix.Location = new System.Drawing.Point(504, 30);
-            this.edt_phonePrefix.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_phonePrefix.Location = new System.Drawing.Point(378, 24);
             this.edt_phonePrefix.MaxLength = 4;
             this.edt_phonePrefix.Name = "edt_phonePrefix";
-            this.edt_phonePrefix.Size = new System.Drawing.Size(59, 22);
+            this.edt_phonePrefix.Size = new System.Drawing.Size(45, 20);
             this.edt_phonePrefix.TabIndex = 27;
             // 
             // edt_cityName
             // 
             this.edt_cityName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_cityName.Location = new System.Drawing.Point(75, 30);
-            this.edt_cityName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_cityName.Location = new System.Drawing.Point(56, 24);
             this.edt_cityName.MaxLength = 50;
             this.edt_cityName.Name = "edt_cityName";
-            this.edt_cityName.Size = new System.Drawing.Size(399, 22);
+            this.edt_cityName.Size = new System.Drawing.Size(300, 20);
             this.edt_cityName.TabIndex = 26;
             // 
             // lbl_phonePrefix
             // 
             this.lbl_phonePrefix.AutoSize = true;
-            this.lbl_phonePrefix.Location = new System.Drawing.Point(500, 10);
-            this.lbl_phonePrefix.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_phonePrefix.Location = new System.Drawing.Point(375, 8);
             this.lbl_phonePrefix.Name = "lbl_phonePrefix";
-            this.lbl_phonePrefix.Size = new System.Drawing.Size(82, 16);
+            this.lbl_phonePrefix.Size = new System.Drawing.Size(71, 13);
             this.lbl_phonePrefix.TabIndex = 25;
-            this.lbl_phonePrefix.Text = "Phone Prefix";
+            this.lbl_phonePrefix.Text = "*Phone Prefix";
             // 
             // lbl_cityName
             // 
             this.lbl_cityName.AutoSize = true;
-            this.lbl_cityName.Location = new System.Drawing.Point(71, 10);
-            this.lbl_cityName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_cityName.Location = new System.Drawing.Point(53, 8);
             this.lbl_cityName.Name = "lbl_cityName";
-            this.lbl_cityName.Size = new System.Drawing.Size(29, 16);
+            this.lbl_cityName.Size = new System.Drawing.Size(28, 13);
             this.lbl_cityName.TabIndex = 24;
-            this.lbl_cityName.Text = "City";
+            this.lbl_cityName.Text = "*City";
             // 
             // Frm_Create_Cities
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(896, 466);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(672, 379);
             this.Controls.Add(this.lbl_stateId);
             this.Controls.Add(this.edt_stateId);
             this.Controls.Add(this.edt_state);
@@ -158,7 +149,7 @@
             this.Controls.Add(this.edt_cityName);
             this.Controls.Add(this.lbl_phonePrefix);
             this.Controls.Add(this.lbl_cityName);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Frm_Create_Cities";
             this.Text = "Create Cities";
             this.Controls.SetChildIndex(this.lbl_id, 0);

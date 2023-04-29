@@ -32,12 +32,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
 
         public static DateTime CalculateDateTimeAge(int age)
         {
-            //DateTime today = DateTime.Now;
-            //int years = new DateTime(DateTime.Now.Subtract(today).Ticks).Year - age;
-            //DateTime yob = new DateTime();
-            //yob.Year = years;
-            //return date;
-            return DateTime.Now;
+            int nowYear = DateTime.Now.Year;
+            int yob = nowYear - age;
+            DateTime result = new DateTime(yob, 1, 1);
+            return result;
         }
 
         public static string RemoveRegMask(string maskedTxt)

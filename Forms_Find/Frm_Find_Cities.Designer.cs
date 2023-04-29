@@ -50,30 +50,27 @@
             // lbl_city
             // 
             this.lbl_city.AutoSize = true;
-            this.lbl_city.Location = new System.Drawing.Point(85, 11);
-            this.lbl_city.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_city.Location = new System.Drawing.Point(46, 7);
             this.lbl_city.Name = "lbl_city";
-            this.lbl_city.Size = new System.Drawing.Size(29, 16);
+            this.lbl_city.Size = new System.Drawing.Size(24, 13);
             this.lbl_city.TabIndex = 4;
             this.lbl_city.Text = "City";
             // 
             // lbl_phonePrefix
             // 
             this.lbl_phonePrefix.AutoSize = true;
-            this.lbl_phonePrefix.Location = new System.Drawing.Point(513, 9);
-            this.lbl_phonePrefix.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_phonePrefix.Location = new System.Drawing.Point(385, 7);
             this.lbl_phonePrefix.Name = "lbl_phonePrefix";
-            this.lbl_phonePrefix.Size = new System.Drawing.Size(82, 16);
+            this.lbl_phonePrefix.Size = new System.Drawing.Size(67, 13);
             this.lbl_phonePrefix.TabIndex = 5;
             this.lbl_phonePrefix.Text = "Phone Prefix";
             // 
             // edt_cityName
             // 
             this.edt_cityName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_cityName.Location = new System.Drawing.Point(89, 28);
-            this.edt_cityName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_cityName.Location = new System.Drawing.Point(49, 23);
             this.edt_cityName.Name = "edt_cityName";
-            this.edt_cityName.Size = new System.Drawing.Size(395, 22);
+            this.edt_cityName.Size = new System.Drawing.Size(333, 20);
             this.edt_cityName.TabIndex = 7;
             this.edt_cityName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_cityName_KeyPress);
             // 
@@ -81,10 +78,9 @@
             // 
             this.edt_cityPhonePrefix.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_cityPhonePrefix.Enabled = false;
-            this.edt_cityPhonePrefix.Location = new System.Drawing.Point(517, 28);
-            this.edt_cityPhonePrefix.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_cityPhonePrefix.Location = new System.Drawing.Point(388, 23);
             this.edt_cityPhonePrefix.Name = "edt_cityPhonePrefix";
-            this.edt_cityPhonePrefix.Size = new System.Drawing.Size(69, 22);
+            this.edt_cityPhonePrefix.Size = new System.Drawing.Size(53, 20);
             this.edt_cityPhonePrefix.TabIndex = 8;
             // 
             // DGV_Cities
@@ -95,14 +91,13 @@
             this.CityName,
             this.PhonePrefix,
             this.IdState});
-            this.DGV_Cities.Location = new System.Drawing.Point(9, 87);
-            this.DGV_Cities.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_Cities.Location = new System.Drawing.Point(7, 71);
             this.DGV_Cities.MultiSelect = false;
             this.DGV_Cities.Name = "DGV_Cities";
             this.DGV_Cities.ReadOnly = true;
             this.DGV_Cities.RowHeadersWidth = 51;
             this.DGV_Cities.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_Cities.Size = new System.Drawing.Size(775, 298);
+            this.DGV_Cities.Size = new System.Drawing.Size(581, 242);
             this.DGV_Cities.TabIndex = 9;
             this.DGV_Cities.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Cities_CellClick);
             this.DGV_Cities.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Cities_CellContentClick);
@@ -143,25 +138,24 @@
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(611, 27);
-            this.btn_Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Search.Location = new System.Drawing.Point(458, 22);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(100, 25);
+            this.btn_Search.Size = new System.Drawing.Size(75, 20);
             this.btn_Search.TabIndex = 10;
             this.btn_Search.Text = "Sea&rch";
             this.btn_Search.UseVisualStyleBackColor = true;
             // 
             // Frm_Find_Cities
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.DGV_Cities);
             this.Controls.Add(this.edt_cityPhonePrefix);
             this.Controls.Add(this.edt_cityName);
             this.Controls.Add(this.lbl_phonePrefix);
             this.Controls.Add(this.lbl_city);
-            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_Cities";
             this.Text = "Find City";
             this.Controls.SetChildIndex(this.lbl_id, 0);

@@ -38,62 +38,58 @@
             // 
             // lbl_LastUpdate
             // 
-            this.lbl_LastUpdate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbl_LastUpdate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             // 
             // lbl_CreationDate
             // 
-            this.lbl_CreationDate.Margin = new System.Windows.Forms.Padding(5, 0, 5, 0);
+            this.lbl_CreationDate.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             // 
             // edt_id
             // 
-            this.edt_id.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5);
             // 
             // lbl_serviceDescription
             // 
             this.lbl_serviceDescription.AutoSize = true;
-            this.lbl_serviceDescription.Location = new System.Drawing.Point(81, 10);
-            this.lbl_serviceDescription.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_serviceDescription.Location = new System.Drawing.Point(61, 8);
             this.lbl_serviceDescription.Name = "lbl_serviceDescription";
-            this.lbl_serviceDescription.Size = new System.Drawing.Size(122, 16);
+            this.lbl_serviceDescription.Size = new System.Drawing.Size(101, 13);
             this.lbl_serviceDescription.TabIndex = 16;
-            this.lbl_serviceDescription.Text = "Service description";
+            this.lbl_serviceDescription.Text = "*Service description";
             // 
             // lbl_serviceValue
             // 
             this.lbl_serviceValue.AutoSize = true;
-            this.lbl_serviceValue.Location = new System.Drawing.Point(535, 10);
-            this.lbl_serviceValue.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_serviceValue.Location = new System.Drawing.Point(401, 8);
             this.lbl_serviceValue.Name = "lbl_serviceValue";
-            this.lbl_serviceValue.Size = new System.Drawing.Size(42, 16);
+            this.lbl_serviceValue.Size = new System.Drawing.Size(38, 13);
             this.lbl_serviceValue.TabIndex = 17;
-            this.lbl_serviceValue.Text = "Value";
+            this.lbl_serviceValue.Text = "*Value";
             // 
             // edt_serviceDescription
             // 
             this.edt_serviceDescription.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_serviceDescription.Location = new System.Drawing.Point(85, 30);
-            this.edt_serviceDescription.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_serviceDescription.Location = new System.Drawing.Point(64, 24);
             this.edt_serviceDescription.Name = "edt_serviceDescription";
-            this.edt_serviceDescription.Size = new System.Drawing.Size(444, 22);
+            this.edt_serviceDescription.Size = new System.Drawing.Size(334, 20);
             this.edt_serviceDescription.TabIndex = 18;
             // 
             // edt_serviceValue
             // 
-            this.edt_serviceValue.Location = new System.Drawing.Point(539, 28);
-            this.edt_serviceValue.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_serviceValue.Location = new System.Drawing.Point(404, 23);
             this.edt_serviceValue.Name = "edt_serviceValue";
-            this.edt_serviceValue.Size = new System.Drawing.Size(69, 22);
+            this.edt_serviceValue.Size = new System.Drawing.Size(53, 20);
             this.edt_serviceValue.TabIndex = 19;
             // 
             // Frm_Create_Services
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(896, 466);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(672, 379);
             this.Controls.Add(this.edt_serviceValue);
             this.Controls.Add(this.edt_serviceDescription);
             this.Controls.Add(this.lbl_serviceValue);
             this.Controls.Add(this.lbl_serviceDescription);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "Frm_Create_Services";
             this.Text = "Create Services";
             this.Controls.SetChildIndex(this.lbl_id, 0);

@@ -44,7 +44,7 @@
             // 
             // edt_id
             // 
-            this.edt_id.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5);
             // 
             // DGV_PayConditions
             // 
@@ -58,14 +58,13 @@
             this.FineValue,
             this.DiscountPerc,
             this.InstalmentQuantity});
-            this.DGV_PayConditions.Location = new System.Drawing.Point(13, 60);
-            this.DGV_PayConditions.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_PayConditions.Location = new System.Drawing.Point(10, 49);
             this.DGV_PayConditions.MultiSelect = false;
             this.DGV_PayConditions.Name = "DGV_PayConditions";
             this.DGV_PayConditions.ReadOnly = true;
             this.DGV_PayConditions.RowHeadersWidth = 51;
             this.DGV_PayConditions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_PayConditions.Size = new System.Drawing.Size(771, 348);
+            this.DGV_PayConditions.Size = new System.Drawing.Size(578, 283);
             this.DGV_PayConditions.TabIndex = 7;
             this.DGV_PayConditions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayConditions_CellClick);
             this.DGV_PayConditions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayConditions_CellContentClick);
@@ -121,10 +120,9 @@
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(436, 28);
-            this.btn_Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Search.Location = new System.Drawing.Point(327, 23);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(85, 25);
+            this.btn_Search.Size = new System.Drawing.Size(64, 20);
             this.btn_Search.TabIndex = 8;
             this.btn_Search.Text = "&Search";
             this.btn_Search.UseVisualStyleBackColor = true;
@@ -133,31 +131,29 @@
             // lbl_payCond
             // 
             this.lbl_payCond.AutoSize = true;
-            this.lbl_payCond.Location = new System.Drawing.Point(79, 11);
-            this.lbl_payCond.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_payCond.Location = new System.Drawing.Point(47, 7);
             this.lbl_payCond.Name = "lbl_payCond";
-            this.lbl_payCond.Size = new System.Drawing.Size(119, 16);
+            this.lbl_payCond.Size = new System.Drawing.Size(95, 13);
             this.lbl_payCond.TabIndex = 9;
             this.lbl_payCond.Text = "Payment Condition";
             // 
             // edt_payCond
             // 
             this.edt_payCond.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_payCond.Location = new System.Drawing.Point(83, 28);
-            this.edt_payCond.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_payCond.Location = new System.Drawing.Point(50, 23);
             this.edt_payCond.Name = "edt_payCond";
-            this.edt_payCond.Size = new System.Drawing.Size(344, 22);
+            this.edt_payCond.Size = new System.Drawing.Size(271, 20);
             this.edt_payCond.TabIndex = 10;
             // 
             // Frm_Find_PaymentConditions
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.edt_payCond);
             this.Controls.Add(this.lbl_payCond);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.DGV_PayConditions);
-            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_PaymentConditions";
             this.Text = "Find Payment Conditions";
             this.Controls.SetChildIndex(this.lbl_id, 0);

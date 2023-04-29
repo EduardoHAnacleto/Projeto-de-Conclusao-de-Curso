@@ -40,26 +40,24 @@
             // 
             // edt_id
             // 
-            this.edt_id.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5);
             this.edt_id.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_id_KeyPress);
             // 
             // lbl_PaymentMethod
             // 
             this.lbl_PaymentMethod.AutoSize = true;
-            this.lbl_PaymentMethod.Location = new System.Drawing.Point(80, 9);
-            this.lbl_PaymentMethod.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_PaymentMethod.Location = new System.Drawing.Point(47, 7);
             this.lbl_PaymentMethod.Name = "lbl_PaymentMethod";
-            this.lbl_PaymentMethod.Size = new System.Drawing.Size(108, 16);
+            this.lbl_PaymentMethod.Size = new System.Drawing.Size(87, 13);
             this.lbl_PaymentMethod.TabIndex = 18;
             this.lbl_PaymentMethod.Text = "Payment Method";
             // 
             // edt_paymentMethod
             // 
             this.edt_paymentMethod.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_paymentMethod.Location = new System.Drawing.Point(84, 28);
-            this.edt_paymentMethod.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_paymentMethod.Location = new System.Drawing.Point(50, 23);
             this.edt_paymentMethod.Name = "edt_paymentMethod";
-            this.edt_paymentMethod.Size = new System.Drawing.Size(321, 22);
+            this.edt_paymentMethod.Size = new System.Drawing.Size(255, 20);
             this.edt_paymentMethod.TabIndex = 17;
             this.edt_paymentMethod.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_paymentMethod_KeyPress);
             // 
@@ -71,14 +69,13 @@
             this.DGV_PayMethods.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDPayMethod,
             this.Payment_Method});
-            this.DGV_PayMethods.Location = new System.Drawing.Point(12, 92);
-            this.DGV_PayMethods.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_PayMethods.Location = new System.Drawing.Point(9, 51);
             this.DGV_PayMethods.MultiSelect = false;
             this.DGV_PayMethods.Name = "DGV_PayMethods";
             this.DGV_PayMethods.ReadOnly = true;
             this.DGV_PayMethods.RowHeadersWidth = 51;
             this.DGV_PayMethods.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_PayMethods.Size = new System.Drawing.Size(776, 300);
+            this.DGV_PayMethods.Size = new System.Drawing.Size(582, 268);
             this.DGV_PayMethods.TabIndex = 19;
             this.DGV_PayMethods.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayMethods_CellClick);
             this.DGV_PayMethods.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayMethods_CellContentClick);
@@ -102,10 +99,9 @@
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(427, 28);
-            this.btn_Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Search.Location = new System.Drawing.Point(320, 23);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(100, 25);
+            this.btn_Search.Size = new System.Drawing.Size(75, 20);
             this.btn_Search.TabIndex = 20;
             this.btn_Search.Text = "&Search";
             this.btn_Search.UseVisualStyleBackColor = true;
@@ -113,13 +109,13 @@
             // 
             // Frm_Find_PaymentMethods
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.DGV_PayMethods);
             this.Controls.Add(this.lbl_PaymentMethod);
             this.Controls.Add(this.edt_paymentMethod);
-            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_PaymentMethods";
             this.Text = "Find Payment Method";
             this.Controls.SetChildIndex(this.lbl_id, 0);

@@ -40,35 +40,32 @@
             // 
             // edt_id
             // 
-            this.edt_id.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.edt_id.Margin = new System.Windows.Forms.Padding(5);
             this.edt_id.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_id_KeyPress);
             // 
             // edt_BrandName
             // 
             this.edt_BrandName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_BrandName.Location = new System.Drawing.Point(95, 28);
-            this.edt_BrandName.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_BrandName.Location = new System.Drawing.Point(50, 23);
             this.edt_BrandName.Name = "edt_BrandName";
-            this.edt_BrandName.Size = new System.Drawing.Size(295, 22);
+            this.edt_BrandName.Size = new System.Drawing.Size(243, 20);
             this.edt_BrandName.TabIndex = 4;
             this.edt_BrandName.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_BrandName_KeyPress);
             // 
             // lbl_brandName
             // 
             this.lbl_brandName.AutoSize = true;
-            this.lbl_brandName.Location = new System.Drawing.Point(91, 9);
-            this.lbl_brandName.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lbl_brandName.Location = new System.Drawing.Point(47, 7);
             this.lbl_brandName.Name = "lbl_brandName";
-            this.lbl_brandName.Size = new System.Drawing.Size(83, 16);
+            this.lbl_brandName.Size = new System.Drawing.Size(66, 13);
             this.lbl_brandName.TabIndex = 5;
             this.lbl_brandName.Text = "Brand Name";
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(399, 28);
-            this.btn_Search.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btn_Search.Location = new System.Drawing.Point(299, 23);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(72, 25);
+            this.btn_Search.Size = new System.Drawing.Size(54, 20);
             this.btn_Search.TabIndex = 7;
             this.btn_Search.Text = "Search";
             this.btn_Search.UseVisualStyleBackColor = true;
@@ -82,14 +79,13 @@
             this.DGV_Brands.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.BrandId,
             this.BrandName});
-            this.DGV_Brands.Location = new System.Drawing.Point(12, 80);
-            this.DGV_Brands.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.DGV_Brands.Location = new System.Drawing.Point(9, 65);
             this.DGV_Brands.MultiSelect = false;
             this.DGV_Brands.Name = "DGV_Brands";
             this.DGV_Brands.ReadOnly = true;
             this.DGV_Brands.RowHeadersWidth = 51;
             this.DGV_Brands.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_Brands.Size = new System.Drawing.Size(772, 299);
+            this.DGV_Brands.Size = new System.Drawing.Size(579, 243);
             this.DGV_Brands.TabIndex = 8;
             this.DGV_Brands.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Brands_CellClick);
             this.DGV_Brands.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Brands_CellContentClick);
@@ -113,13 +109,13 @@
             // 
             // Frm_Find_Brands
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.ClientSize = new System.Drawing.Size(600, 366);
             this.Controls.Add(this.DGV_Brands);
             this.Controls.Add(this.btn_Search);
             this.Controls.Add(this.lbl_brandName);
             this.Controls.Add(this.edt_BrandName);
-            this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_Brands";
             this.Text = "Find Brands";
             this.Controls.SetChildIndex(this.lbl_id, 0);

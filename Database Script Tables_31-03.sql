@@ -165,6 +165,7 @@
         brand_id int references Brands(id_brand),
         stock int not null,
         product_cost decimal (10,2) not null,
+        product_barcode bigint,
         date_creation datetime not null,
         date_last_update datetime not null
     );
