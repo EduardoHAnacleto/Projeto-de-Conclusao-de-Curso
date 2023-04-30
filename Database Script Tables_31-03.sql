@@ -220,9 +220,16 @@
         date_last_update datetime not null
     );
 
-    create table SERVICEORDERSPRODUCTS(
-        SONumber_id int not null references ServiceOrders(id_serviceOrder),
-        product_id int not null references Products(id_product)
+    create table OSITEMS(
+        ID_OSITEM int identity(2,1) primary key,
+		OS_ID int REFERENCES Sales(id_sale),
+        PRODUCT_ID int not null references Products(id_product),
+        QUANTITY int not null,
+        SALE_VALUE decimal not null,
+        DISCOUNT decimal not null,
+        TOTAL_VALUE decimal not null,
+        DATE_CREATION date not null,
+        DATE_LAST_UPDATE date not null
     );
 
     create table BILLSTORECEIVE(
