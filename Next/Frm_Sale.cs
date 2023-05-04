@@ -372,6 +372,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             formPayCondition.Close();
         }
 
+        public void PopulateBillsDGV(List<BillsInstalments> bills)
+        {
+            DGV_Instalments.Rows.Clear();
+            int i = 0;
+            if (bills != null)
+            {
+                foreach (BillsInstalments item in bills)
+                {
+                    DGV_Instalments.Rows.Add();
+                    DGV_Instalments.Rows[i].Cells["InstalmentNumber"].Value = item.InstalmentNumber.ToString();
+                    DGV_Instalments.Rows[i].Cells["IntalmentDays"].Value = item.TotalDays.ToString();
+                    DGV_Instalments.Rows[i].Cells["InstalmentPercentage"].Value = item.ValuePercentage.ToString();
+                    DGV_Instalments.Rows[i].Cells["InstalmentPayMethod"].Value = item.PaymentMethod.paymentMethod.ToString();
+                    i++;
+                }
+            }
+        }
+
         private void Frm_Sale_KeyPress(object sender, KeyPressEventArgs e)
         {
             HotkeyPressed(e);

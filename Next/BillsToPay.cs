@@ -12,7 +12,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public BillsToPay()
         {
             Suppliers suppliers = new Suppliers();
-            PaymentMethods paymentForms = new PaymentMethods();
+            PaymentMethods paymentMethod = new PaymentMethods();
         }
 
         public int billNumber { get; set; }

@@ -264,6 +264,7 @@
       <DependentUpon>Frm_Create_Master.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Clients.cs" />
+    <Compile Include="Next\OSItems.cs" />
     <Compile Include="Next\PurchaseItems.cs" />
     <Compile Include="Next\PurchaseItems_Controller.cs" />
     <Compile Include="Next\PurchaseItems_DAO.cs" />

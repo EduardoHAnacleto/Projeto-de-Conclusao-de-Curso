@@ -18,17 +18,5 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public string countryPhonePrefix { get; set; }
         public string countryCurrency { get; set; }
 
-
-        public Countries Clone(string name, string acronym, string phonePrefix, string currency)
-        {
-            Countries country = new Countries();
-            country.countryName = name;
-            country.countryAcronym = acronym;
-            country.countryPhonePrefix = phonePrefix;
-            country.countryCurrency = currency;
-
-            return country;
-        }
-
     }
 }

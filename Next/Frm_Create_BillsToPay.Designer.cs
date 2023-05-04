@@ -33,12 +33,12 @@
             this.edt_serieDanfe = new System.Windows.Forms.NumericUpDown();
             this.edt_numDanfe = new System.Windows.Forms.NumericUpDown();
             this.edt_pagDanfe = new System.Windows.Forms.NumericUpDown();
-            this.edt_tipoDanfe = new System.Windows.Forms.TextBox();
             this.lbl_pagDanfe = new System.Windows.Forms.Label();
             this.lbl_serieDanfe = new System.Windows.Forms.Label();
             this.lbl_tipoDanfe = new System.Windows.Forms.Label();
             this.lbl_numDanfe = new System.Windows.Forms.Label();
             this.gbox_supplier = new System.Windows.Forms.GroupBox();
+            this.btn_SearchSupplier = new System.Windows.Forms.Button();
             this.edt_supplierId = new System.Windows.Forms.NumericUpDown();
             this.edt_supplierName = new System.Windows.Forms.TextBox();
             this.lbl_supplierName = new System.Windows.Forms.Label();
@@ -55,7 +55,7 @@
             this.lbl_paymentMethod = new System.Windows.Forms.Label();
             this.gbox_billInfo = new System.Windows.Forms.GroupBox();
             this.edt_instalmentNumber = new System.Windows.Forms.NumericUpDown();
-            this.btn_SearchSupplier = new System.Windows.Forms.Button();
+            this.edt_tipoDanfe = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_danfe.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_serieDanfe)).BeginInit();
@@ -67,6 +67,7 @@
             this.gbox_isPaid.SuspendLayout();
             this.gbox_billInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_tipoDanfe)).BeginInit();
             this.SuspendLayout();
             // 
             // edt_id
@@ -83,10 +84,10 @@
             // 
             // gbox_danfe
             // 
+            this.gbox_danfe.Controls.Add(this.edt_tipoDanfe);
             this.gbox_danfe.Controls.Add(this.edt_serieDanfe);
             this.gbox_danfe.Controls.Add(this.edt_numDanfe);
             this.gbox_danfe.Controls.Add(this.edt_pagDanfe);
-            this.gbox_danfe.Controls.Add(this.edt_tipoDanfe);
             this.gbox_danfe.Controls.Add(this.lbl_pagDanfe);
             this.gbox_danfe.Controls.Add(this.lbl_serieDanfe);
             this.gbox_danfe.Controls.Add(this.lbl_tipoDanfe);
@@ -101,6 +102,11 @@
             // edt_serieDanfe
             // 
             this.edt_serieDanfe.Location = new System.Drawing.Point(161, 40);
+            this.edt_serieDanfe.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
             this.edt_serieDanfe.Name = "edt_serieDanfe";
             this.edt_serieDanfe.Size = new System.Drawing.Size(60, 20);
             this.edt_serieDanfe.TabIndex = 36;
@@ -108,6 +114,11 @@
             // edt_numDanfe
             // 
             this.edt_numDanfe.Location = new System.Drawing.Point(11, 39);
+            this.edt_numDanfe.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
             this.edt_numDanfe.Name = "edt_numDanfe";
             this.edt_numDanfe.Size = new System.Drawing.Size(73, 20);
             this.edt_numDanfe.TabIndex = 36;
@@ -115,16 +126,14 @@
             // edt_pagDanfe
             // 
             this.edt_pagDanfe.Location = new System.Drawing.Point(226, 40);
+            this.edt_pagDanfe.Maximum = new decimal(new int[] {
+            999,
+            0,
+            0,
+            0});
             this.edt_pagDanfe.Name = "edt_pagDanfe";
             this.edt_pagDanfe.Size = new System.Drawing.Size(45, 20);
             this.edt_pagDanfe.TabIndex = 36;
-            // 
-            // edt_tipoDanfe
-            // 
-            this.edt_tipoDanfe.Location = new System.Drawing.Point(90, 39);
-            this.edt_tipoDanfe.Name = "edt_tipoDanfe";
-            this.edt_tipoDanfe.Size = new System.Drawing.Size(65, 20);
-            this.edt_tipoDanfe.TabIndex = 5;
             // 
             // lbl_pagDanfe
             // 
@@ -176,9 +185,23 @@
             this.gbox_supplier.TabStop = false;
             this.gbox_supplier.Text = "Supplier";
             // 
+            // btn_SearchSupplier
+            // 
+            this.btn_SearchSupplier.Location = new System.Drawing.Point(275, 37);
+            this.btn_SearchSupplier.Name = "btn_SearchSupplier";
+            this.btn_SearchSupplier.Size = new System.Drawing.Size(75, 21);
+            this.btn_SearchSupplier.TabIndex = 37;
+            this.btn_SearchSupplier.Text = "&Search";
+            this.btn_SearchSupplier.UseVisualStyleBackColor = true;
+            // 
             // edt_supplierId
             // 
             this.edt_supplierId.Location = new System.Drawing.Point(6, 38);
+            this.edt_supplierId.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
             this.edt_supplierId.Name = "edt_supplierId";
             this.edt_supplierId.Size = new System.Drawing.Size(48, 20);
             this.edt_supplierId.TabIndex = 36;
@@ -186,6 +209,7 @@
             // edt_supplierName
             // 
             this.edt_supplierName.Location = new System.Drawing.Point(60, 38);
+            this.edt_supplierName.MaxLength = 30;
             this.edt_supplierName.Name = "edt_supplierName";
             this.edt_supplierName.Size = new System.Drawing.Size(210, 20);
             this.edt_supplierName.TabIndex = 20;
@@ -290,6 +314,7 @@
             // edt_totalValue
             // 
             this.edt_totalValue.Location = new System.Drawing.Point(110, 37);
+            this.edt_totalValue.MaxLength = 10;
             this.edt_totalValue.Name = "edt_totalValue";
             this.edt_totalValue.Size = new System.Drawing.Size(100, 20);
             this.edt_totalValue.TabIndex = 25;
@@ -321,18 +346,26 @@
             // edt_instalmentNumber
             // 
             this.edt_instalmentNumber.Location = new System.Drawing.Point(6, 37);
+            this.edt_instalmentNumber.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.edt_instalmentNumber.Name = "edt_instalmentNumber";
             this.edt_instalmentNumber.Size = new System.Drawing.Size(52, 20);
             this.edt_instalmentNumber.TabIndex = 35;
             // 
-            // btn_SearchSupplier
+            // edt_tipoDanfe
             // 
-            this.btn_SearchSupplier.Location = new System.Drawing.Point(275, 37);
-            this.btn_SearchSupplier.Name = "btn_SearchSupplier";
-            this.btn_SearchSupplier.Size = new System.Drawing.Size(75, 21);
-            this.btn_SearchSupplier.TabIndex = 37;
-            this.btn_SearchSupplier.Text = "&Search";
-            this.btn_SearchSupplier.UseVisualStyleBackColor = true;
+            this.edt_tipoDanfe.Location = new System.Drawing.Point(90, 39);
+            this.edt_tipoDanfe.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.edt_tipoDanfe.Name = "edt_tipoDanfe";
+            this.edt_tipoDanfe.Size = new System.Drawing.Size(65, 20);
+            this.edt_tipoDanfe.TabIndex = 37;
             // 
             // Frm_Create_BillsToPay
             // 
@@ -372,6 +405,7 @@
             this.gbox_billInfo.ResumeLayout(false);
             this.gbox_billInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_tipoDanfe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -381,7 +415,6 @@
 
         private System.Windows.Forms.ComboBox cbox_payMethod;
         private System.Windows.Forms.GroupBox gbox_danfe;
-        private System.Windows.Forms.TextBox edt_tipoDanfe;
         private System.Windows.Forms.Label lbl_pagDanfe;
         private System.Windows.Forms.Label lbl_serieDanfe;
         private System.Windows.Forms.Label lbl_tipoDanfe;
@@ -407,5 +440,6 @@
         private System.Windows.Forms.NumericUpDown edt_numDanfe;
         private System.Windows.Forms.NumericUpDown edt_serieDanfe;
         private System.Windows.Forms.Button btn_SearchSupplier;
+        private System.Windows.Forms.NumericUpDown edt_tipoDanfe;
     }
 }

@@ -44,10 +44,12 @@
             this.edt_clientName = new System.Windows.Forms.TextBox();
             this.lbl_clientName = new System.Windows.Forms.Label();
             this.gbox_client = new System.Windows.Forms.GroupBox();
+            this.edt_clientId = new System.Windows.Forms.NumericUpDown();
             this.btn_search = new System.Windows.Forms.Button();
             this.cbox_paymentMethod = new System.Windows.Forms.ComboBox();
             this.medt_instalmentValue = new System.Windows.Forms.MaskedTextBox();
             this.gbox_billInstalment = new System.Windows.Forms.GroupBox();
+            this.edt_instalmentId = new System.Windows.Forms.NumericUpDown();
             this.btn_AddInstalments = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.DGV_Instalments = new System.Windows.Forms.DataGridView();
@@ -56,16 +58,14 @@
             this.Value_Percentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentMethod_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Payment_Condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.edt_clientId = new System.Windows.Forms.NumericUpDown();
-            this.edt_instalmentId = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_isPaid.SuspendLayout();
             this.gbox_billDates.SuspendLayout();
             this.gbox_client.SuspendLayout();
-            this.gbox_billInstalment.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).BeginInit();
+            this.gbox_billInstalment.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentId)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
             this.SuspendLayout();
             // 
             // edt_id
@@ -192,6 +192,7 @@
             // edt_saleNumber
             // 
             this.edt_saleNumber.Location = new System.Drawing.Point(260, 112);
+            this.edt_saleNumber.MaxLength = 10;
             this.edt_saleNumber.Name = "edt_saleNumber";
             this.edt_saleNumber.Size = new System.Drawing.Size(65, 20);
             this.edt_saleNumber.TabIndex = 16;
@@ -199,6 +200,7 @@
             // edt_clientName
             // 
             this.edt_clientName.Location = new System.Drawing.Point(53, 32);
+            this.edt_clientName.MaxLength = 30;
             this.edt_clientName.Name = "edt_clientName";
             this.edt_clientName.Size = new System.Drawing.Size(196, 20);
             this.edt_clientName.TabIndex = 18;
@@ -225,6 +227,13 @@
             this.gbox_client.TabIndex = 20;
             this.gbox_client.TabStop = false;
             this.gbox_client.Text = "Client";
+            // 
+            // edt_clientId
+            // 
+            this.edt_clientId.Location = new System.Drawing.Point(5, 32);
+            this.edt_clientId.Name = "edt_clientId";
+            this.edt_clientId.Size = new System.Drawing.Size(42, 20);
+            this.edt_clientId.TabIndex = 25;
             // 
             // btn_search
             // 
@@ -265,6 +274,13 @@
             this.gbox_billInstalment.TabIndex = 23;
             this.gbox_billInstalment.TabStop = false;
             this.gbox_billInstalment.Text = "Instalment";
+            // 
+            // edt_instalmentId
+            // 
+            this.edt_instalmentId.Location = new System.Drawing.Point(6, 35);
+            this.edt_instalmentId.Name = "edt_instalmentId";
+            this.edt_instalmentId.Size = new System.Drawing.Size(39, 20);
+            this.edt_instalmentId.TabIndex = 26;
             // 
             // btn_AddInstalments
             // 
@@ -345,20 +361,6 @@
             this.Payment_Condition.Name = "Payment_Condition";
             this.Payment_Condition.ReadOnly = true;
             // 
-            // edt_clientId
-            // 
-            this.edt_clientId.Location = new System.Drawing.Point(5, 32);
-            this.edt_clientId.Name = "edt_clientId";
-            this.edt_clientId.Size = new System.Drawing.Size(42, 20);
-            this.edt_clientId.TabIndex = 25;
-            // 
-            // edt_instalmentId
-            // 
-            this.edt_instalmentId.Location = new System.Drawing.Point(6, 35);
-            this.edt_instalmentId.Name = "edt_instalmentId";
-            this.edt_instalmentId.Size = new System.Drawing.Size(39, 20);
-            this.edt_instalmentId.TabIndex = 26;
-            // 
             // Frm_Create_BillsToReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -396,11 +398,11 @@
             this.gbox_billDates.PerformLayout();
             this.gbox_client.ResumeLayout(false);
             this.gbox_client.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).EndInit();
             this.gbox_billInstalment.ResumeLayout(false);
             this.gbox_billInstalment.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentId)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

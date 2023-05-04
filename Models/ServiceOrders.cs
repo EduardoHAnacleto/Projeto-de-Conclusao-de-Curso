@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoEduardoAnacletoWindowsForm1.Next;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,17 +11,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
     {
         public ServiceOrders()
         {
-            People client = new People();
-            //List<Products> products = new List<Products>();
+            Clients Client = new Clients();
+            List<OSItems> OSItems = new List<OSItems>();
+            Services Service = new Services();
         }
 
-        public DateTime oSDateTime { get; set; }
-        public string equipment { get; set; }
-       // public List<Products> products { get; set; }   ?????????
-        public People client { get; set; }
-        public Services service { get; set; }
-        public double oSTotalValue { get; set; }
-        public string extraDetails { get; set; }
-
+        public DateTime OSDateTime { get; set; }
+        public List<OSItems> OSItems { get; set; }   
+        public Clients Client { get; set; }
+        public Services Service { get; set; }
+        public double OSTotalValue { get; set; }
+        public string ExtraDetails { get; set; }
+        public double ServiceCost { get; set; }
+        public double ServiceDiscountCash { get; set; }
+        public double ServiceDiscountPerc { get; set; }
+        public DateTime? CancelDate { get; set; }
     }
 }

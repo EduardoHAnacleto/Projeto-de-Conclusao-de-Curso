@@ -11,9 +11,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public People()
         {
             Cities city = new Cities();
-            PhoneClassifications phoneClass1 = new PhoneClassifications();
-            PhoneClassifications phoneClass2 = new PhoneClassifications();
-            PhoneClassifications phoneClass3 = new PhoneClassifications();
+            PhoneClassifications phoneClass1, phoneClass2, phoneClas3 = new PhoneClassifications();
         }
 
         public string name { get; set; }

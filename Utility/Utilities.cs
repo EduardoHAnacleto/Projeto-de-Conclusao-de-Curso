@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.Utility
 {
-    public class Utilities
+    public static class Utilities
     {
         public static bool EnterSearch(KeyPressEventArgs e)  
         {

@@ -21,8 +21,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
             string sql = "INSERT INTO SALEITEMS ( ID_SALEITEM, PRODUCT_ID,  QUANTITY, SALE_VALUE, DISCOUNT, TOTAL_VALUE, DATE_CREATION, DATE_LAST_UPDATE) "
                          + " VALUES ("
-                         + +saleItems.sale_id
-                         + ", "
                          + +saleItems.product.id 
                          + ", "
                          + +saleItems.quantity

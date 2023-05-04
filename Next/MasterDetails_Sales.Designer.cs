@@ -59,6 +59,7 @@
             // edt_clientName
             // 
             this.edt_clientName.Location = new System.Drawing.Point(54, 9);
+            this.edt_clientName.MaxLength = 30;
             this.edt_clientName.Name = "edt_clientName";
             this.edt_clientName.Size = new System.Drawing.Size(239, 20);
             this.edt_clientName.TabIndex = 2;

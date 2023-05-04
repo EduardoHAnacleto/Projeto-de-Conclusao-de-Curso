@@ -20,8 +20,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public int jobStatus { get; set; }
         public DateTime startDate { get; set; } //admissionDate
         // public DateTime endDate { get; set; }  //dismissedDate
-
-        // public Nullable<DateTime> endDate { get; set; }
         public DateTime? endDate { get; set; }
 
     }

@@ -99,6 +99,11 @@
             this.edt_payCondition = new System.Windows.Forms.TextBox();
             this.edt_payConditionId = new System.Windows.Forms.NumericUpDown();
             this.lbl_payConditionID = new System.Windows.Forms.Label();
+            this.DGV_Instalments = new System.Windows.Forms.DataGridView();
+            this.InstalmentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InstalmentDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InstalmentPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InstalmentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -123,6 +128,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
             this.SuspendLayout();
             // 
             // DGV_SaleProducts
@@ -136,12 +142,12 @@
             this.QuantityProduct,
             this.UnValueProduct,
             this.ProductTotalValue});
-            this.DGV_SaleProducts.Location = new System.Drawing.Point(12, 277);
+            this.DGV_SaleProducts.Location = new System.Drawing.Point(12, 260);
             this.DGV_SaleProducts.MultiSelect = false;
             this.DGV_SaleProducts.Name = "DGV_SaleProducts";
             this.DGV_SaleProducts.ReadOnly = true;
             this.DGV_SaleProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_SaleProducts.Size = new System.Drawing.Size(606, 221);
+            this.DGV_SaleProducts.Size = new System.Drawing.Size(745, 221);
             this.DGV_SaleProducts.TabIndex = 5;
             this.DGV_SaleProducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_SaleProducts_RowsRemoved);
             // 
@@ -203,6 +209,11 @@
             // edt_userId
             // 
             this.edt_userId.Location = new System.Drawing.Point(9, 32);
+            this.edt_userId.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
             this.edt_userId.Name = "edt_userId";
             this.edt_userId.Size = new System.Drawing.Size(46, 20);
             this.edt_userId.TabIndex = 3;
@@ -210,6 +221,7 @@
             // edt_userName
             // 
             this.edt_userName.Location = new System.Drawing.Point(9, 74);
+            this.edt_userName.MaxLength = 30;
             this.edt_userName.Name = "edt_userName";
             this.edt_userName.Size = new System.Drawing.Size(228, 20);
             this.edt_userName.TabIndex = 2;
@@ -243,7 +255,7 @@
             this.gbox_client.Controls.Add(this.edt_clientName);
             this.gbox_client.Location = new System.Drawing.Point(300, 3);
             this.gbox_client.Name = "gbox_client";
-            this.gbox_client.Size = new System.Drawing.Size(318, 100);
+            this.gbox_client.Size = new System.Drawing.Size(386, 100);
             this.gbox_client.TabIndex = 8;
             this.gbox_client.TabStop = false;
             this.gbox_client.Text = "Client";
@@ -261,6 +273,11 @@
             // 
             this.edt_clientId.Enabled = false;
             this.edt_clientId.Location = new System.Drawing.Point(9, 32);
+            this.edt_clientId.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
             this.edt_clientId.Name = "edt_clientId";
             this.edt_clientId.Size = new System.Drawing.Size(41, 20);
             this.edt_clientId.TabIndex = 12;
@@ -306,8 +323,9 @@
             // 
             this.edt_clientName.Enabled = false;
             this.edt_clientName.Location = new System.Drawing.Point(56, 32);
+            this.edt_clientName.MaxLength = 60;
             this.edt_clientName.Name = "edt_clientName";
-            this.edt_clientName.Size = new System.Drawing.Size(241, 20);
+            this.edt_clientName.Size = new System.Drawing.Size(284, 20);
             this.edt_clientName.TabIndex = 0;
             // 
             // lbl_productName
@@ -322,6 +340,7 @@
             // edt_productName
             // 
             this.edt_productName.Location = new System.Drawing.Point(11, 90);
+            this.edt_productName.MaxLength = 50;
             this.edt_productName.Name = "edt_productName";
             this.edt_productName.Size = new System.Drawing.Size(282, 20);
             this.edt_productName.TabIndex = 10;
@@ -335,7 +354,7 @@
             this.gbox_options.Controls.Add(this.btn_Save);
             this.gbox_options.Controls.Add(this.btn_FindClient);
             this.gbox_options.Controls.Add(this.btn_new);
-            this.gbox_options.Location = new System.Drawing.Point(624, 3);
+            this.gbox_options.Location = new System.Drawing.Point(692, 3);
             this.gbox_options.Name = "gbox_options";
             this.gbox_options.Size = new System.Drawing.Size(309, 100);
             this.gbox_options.TabIndex = 11;
@@ -419,16 +438,22 @@
             this.gbox_summary.Controls.Add(this.lbl_totalAmount);
             this.gbox_summary.Controls.Add(this.lbl_Discount);
             this.gbox_summary.Controls.Add(this.lbl_subTotal);
-            this.gbox_summary.Location = new System.Drawing.Point(624, 277);
+            this.gbox_summary.Location = new System.Drawing.Point(686, 109);
             this.gbox_summary.Name = "gbox_summary";
-            this.gbox_summary.Size = new System.Drawing.Size(309, 135);
+            this.gbox_summary.Size = new System.Drawing.Size(309, 125);
             this.gbox_summary.TabIndex = 12;
             this.gbox_summary.TabStop = false;
             this.gbox_summary.Text = "Summary";
             // 
             // edt_discountCash
             // 
+            this.edt_discountCash.DecimalPlaces = 2;
             this.edt_discountCash.Location = new System.Drawing.Point(71, 88);
+            this.edt_discountCash.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.edt_discountCash.Name = "edt_discountCash";
             this.edt_discountCash.Size = new System.Drawing.Size(54, 20);
             this.edt_discountCash.TabIndex = 12;
@@ -448,12 +473,18 @@
             this.edt_total.DecimalPlaces = 2;
             this.edt_total.Enabled = false;
             this.edt_total.Location = new System.Drawing.Point(222, 88);
+            this.edt_total.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
             this.edt_total.Name = "edt_total";
             this.edt_total.Size = new System.Drawing.Size(75, 20);
             this.edt_total.TabIndex = 10;
             // 
             // edt_discountPerc
             // 
+            this.edt_discountPerc.DecimalPlaces = 2;
             this.edt_discountPerc.Location = new System.Drawing.Point(71, 55);
             this.edt_discountPerc.Name = "edt_discountPerc";
             this.edt_discountPerc.Size = new System.Drawing.Size(54, 20);
@@ -466,8 +497,13 @@
             this.edt_subtotal.DecimalPlaces = 2;
             this.edt_subtotal.Enabled = false;
             this.edt_subtotal.Location = new System.Drawing.Point(71, 26);
+            this.edt_subtotal.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
             this.edt_subtotal.Name = "edt_subtotal";
-            this.edt_subtotal.Size = new System.Drawing.Size(62, 20);
+            this.edt_subtotal.Size = new System.Drawing.Size(72, 20);
             this.edt_subtotal.TabIndex = 8;
             this.edt_subtotal.ValueChanged += new System.EventHandler(this.edt_subtotal_ValueChanged);
             // 
@@ -580,9 +616,9 @@
             this.gbox_Product.Controls.Add(this.btn_AddProduct);
             this.gbox_Product.Controls.Add(this.lbl_productId);
             this.gbox_Product.Controls.Add(this.label1);
-            this.gbox_Product.Location = new System.Drawing.Point(12, 109);
+            this.gbox_Product.Location = new System.Drawing.Point(12, 104);
             this.gbox_Product.Name = "gbox_Product";
-            this.gbox_Product.Size = new System.Drawing.Size(478, 162);
+            this.gbox_Product.Size = new System.Drawing.Size(376, 155);
             this.gbox_Product.TabIndex = 25;
             this.gbox_Product.TabStop = false;
             this.gbox_Product.Text = "Product";
@@ -649,6 +685,11 @@
             // edt_productId
             // 
             this.edt_productId.Location = new System.Drawing.Point(11, 35);
+            this.edt_productId.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.edt_productId.Name = "edt_productId";
             this.edt_productId.Size = new System.Drawing.Size(36, 20);
             this.edt_productId.TabIndex = 25;
@@ -659,7 +700,7 @@
             this.gbox_date.Controls.Add(this.medt_CancelDate);
             this.gbox_date.Controls.Add(this.medt_date);
             this.gbox_date.Controls.Add(this.lbl_date);
-            this.gbox_date.Location = new System.Drawing.Point(12, 504);
+            this.gbox_date.Location = new System.Drawing.Point(12, 582);
             this.gbox_date.Name = "gbox_date";
             this.gbox_date.Size = new System.Drawing.Size(196, 63);
             this.gbox_date.TabIndex = 26;
@@ -708,6 +749,7 @@
             // 
             // gbox_paymentCondition
             // 
+            this.gbox_paymentCondition.Controls.Add(this.DGV_Instalments);
             this.gbox_paymentCondition.Controls.Add(this.lbl_payConditionInstalments);
             this.gbox_paymentCondition.Controls.Add(this.lbl_payConditionDiscount);
             this.gbox_paymentCondition.Controls.Add(this.lbl_payConditionFine);
@@ -721,9 +763,9 @@
             this.gbox_paymentCondition.Controls.Add(this.edt_payCondition);
             this.gbox_paymentCondition.Controls.Add(this.edt_payConditionId);
             this.gbox_paymentCondition.Controls.Add(this.lbl_payConditionID);
-            this.gbox_paymentCondition.Location = new System.Drawing.Point(496, 109);
+            this.gbox_paymentCondition.Location = new System.Drawing.Point(214, 487);
             this.gbox_paymentCondition.Name = "gbox_paymentCondition";
-            this.gbox_paymentCondition.Size = new System.Drawing.Size(437, 119);
+            this.gbox_paymentCondition.Size = new System.Drawing.Size(787, 166);
             this.gbox_paymentCondition.TabIndex = 27;
             this.gbox_paymentCondition.TabStop = false;
             this.gbox_paymentCondition.Text = "Payment Condition";
@@ -768,7 +810,7 @@
             // 
             this.btn_SearchPayCondition.Location = new System.Drawing.Point(337, 35);
             this.btn_SearchPayCondition.Name = "btn_SearchPayCondition";
-            this.btn_SearchPayCondition.Size = new System.Drawing.Size(75, 20);
+            this.btn_SearchPayCondition.Size = new System.Drawing.Size(57, 20);
             this.btn_SearchPayCondition.TabIndex = 8;
             this.btn_SearchPayCondition.Text = "Search";
             this.btn_SearchPayCondition.UseVisualStyleBackColor = true;
@@ -778,12 +820,18 @@
             // 
             this.edt_payConditionQnt.Enabled = false;
             this.edt_payConditionQnt.Location = new System.Drawing.Point(175, 82);
+            this.edt_payConditionQnt.Maximum = new decimal(new int[] {
+            300,
+            0,
+            0,
+            0});
             this.edt_payConditionQnt.Name = "edt_payConditionQnt";
             this.edt_payConditionQnt.Size = new System.Drawing.Size(43, 20);
             this.edt_payConditionQnt.TabIndex = 7;
             // 
             // edt_payConditionDiscount
             // 
+            this.edt_payConditionDiscount.DecimalPlaces = 2;
             this.edt_payConditionDiscount.Enabled = false;
             this.edt_payConditionDiscount.Location = new System.Drawing.Point(114, 82);
             this.edt_payConditionDiscount.Name = "edt_payConditionDiscount";
@@ -792,8 +840,14 @@
             // 
             // edt_payConditionFine
             // 
+            this.edt_payConditionFine.DecimalPlaces = 2;
             this.edt_payConditionFine.Enabled = false;
             this.edt_payConditionFine.Location = new System.Drawing.Point(63, 82);
+            this.edt_payConditionFine.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.edt_payConditionFine.Name = "edt_payConditionFine";
             this.edt_payConditionFine.Size = new System.Drawing.Size(45, 20);
             this.edt_payConditionFine.TabIndex = 5;
@@ -819,6 +873,7 @@
             // 
             this.edt_payCondition.Enabled = false;
             this.edt_payCondition.Location = new System.Drawing.Point(63, 35);
+            this.edt_payCondition.MaxLength = 30;
             this.edt_payCondition.Name = "edt_payCondition";
             this.edt_payCondition.Size = new System.Drawing.Size(271, 20);
             this.edt_payCondition.TabIndex = 2;
@@ -827,6 +882,11 @@
             // 
             this.edt_payConditionId.Enabled = false;
             this.edt_payConditionId.Location = new System.Drawing.Point(13, 35);
+            this.edt_payConditionId.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
             this.edt_payConditionId.Name = "edt_payConditionId";
             this.edt_payConditionId.Size = new System.Drawing.Size(44, 20);
             this.edt_payConditionId.TabIndex = 1;
@@ -840,11 +900,57 @@
             this.lbl_payConditionID.TabIndex = 0;
             this.lbl_payConditionID.Text = "ID";
             // 
+            // DGV_Instalments
+            // 
+            this.DGV_Instalments.AllowUserToAddRows = false;
+            this.DGV_Instalments.AllowUserToDeleteRows = false;
+            this.DGV_Instalments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Instalments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.InstalmentNumber,
+            this.InstalmentDays,
+            this.InstalmentPercentage,
+            this.InstalmentMethod});
+            this.DGV_Instalments.Enabled = false;
+            this.DGV_Instalments.Location = new System.Drawing.Point(400, 8);
+            this.DGV_Instalments.MultiSelect = false;
+            this.DGV_Instalments.Name = "DGV_Instalments";
+            this.DGV_Instalments.ReadOnly = true;
+            this.DGV_Instalments.Size = new System.Drawing.Size(381, 150);
+            this.DGV_Instalments.TabIndex = 13;
+            // 
+            // InstalmentNumber
+            // 
+            this.InstalmentNumber.HeaderText = "Num";
+            this.InstalmentNumber.Name = "InstalmentNumber";
+            this.InstalmentNumber.ReadOnly = true;
+            this.InstalmentNumber.Width = 45;
+            // 
+            // InstalmentDays
+            // 
+            this.InstalmentDays.HeaderText = "Days";
+            this.InstalmentDays.Name = "InstalmentDays";
+            this.InstalmentDays.ReadOnly = true;
+            this.InstalmentDays.Width = 45;
+            // 
+            // InstalmentPercentage
+            // 
+            this.InstalmentPercentage.HeaderText = "%";
+            this.InstalmentPercentage.Name = "InstalmentPercentage";
+            this.InstalmentPercentage.ReadOnly = true;
+            this.InstalmentPercentage.Width = 45;
+            // 
+            // InstalmentMethod
+            // 
+            this.InstalmentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.InstalmentMethod.HeaderText = "Method";
+            this.InstalmentMethod.Name = "InstalmentMethod";
+            this.InstalmentMethod.ReadOnly = true;
+            // 
             // Frm_Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(936, 579);
+            this.ClientSize = new System.Drawing.Size(1013, 657);
             this.Controls.Add(this.gbox_paymentCondition);
             this.Controls.Add(this.gbox_date);
             this.Controls.Add(this.gbox_Product);
@@ -887,6 +993,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -963,5 +1070,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductTotalValue;
         private System.Windows.Forms.Label lbl_CancelDate;
         private System.Windows.Forms.MaskedTextBox medt_CancelDate;
+        private System.Windows.Forms.DataGridView DGV_Instalments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentDays;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentPercentage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentMethod;
     }
 }

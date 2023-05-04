@@ -11,13 +11,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public SaleItems()
         {
             Products product = new Products();
+            Sales Sale = new Sales();
         }
 
-        public int sale_id { get; set; }
+        public Sales Sale { get; set; }
         public Products product { get; set; }
         public int quantity { get; set; }
         public double value { get; set; }
         public double totalValue { get; set; }
         public double productCost { get; set; }
+        public double ItemDiscountCash { get; set; }
+        public double ItemDiscountPerc { get; set; }
     }
 }
