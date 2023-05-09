@@ -1,6 +1,7 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
 using ProjetoEduardoAnacletoWindowsForm1.DAO;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
+using ProjetoEduardoAnacletoWindowsForm1.Next;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -30,37 +31,29 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToReceivesDAO.SelectAllFromDb();
         }
-        public List<BillsToReceive> FindItemId(int id) 
+        public BillsToReceive FindItemId(int saleId, int InstalmentQtd) 
         {
-            return _billToReceivesDAO.SelectFromDb(id);
+            return _billToReceivesDAO.SelectFromDb(saleId, InstalmentQtd);
         }
-        public List<BillsToReceive> FindPersonId(int id) 
+        public List<BillsToReceive> FindClientId(int id) 
         {
-            return _billToReceivesDAO.SelectPersonFromDb(id);
-        }
-        public List<BillsToReceive> FindPersonName(string name)
-        {
-            return _billToReceivesDAO.SelectPersonFromDb(name);
+            return _billToReceivesDAO.SelectClientFromDb(id);
         }
         public List<BillsToReceive> FindSaleId(int id) 
         {
             return _billToReceivesDAO.SelectSaleFromDb(id);
         }
-        public List<BillsToReceive> FindDueDate(string date) 
+        public List<BillsToReceive> FindDueDate(DateTime date) 
         {
             return _billToReceivesDAO.SelectDueDateFromDb(date);
         }
-        public List<BillsToReceive> FindEmissionDate(string date)
+        public List<BillsToReceive> FindIsPaid(bool isPaid)
         {
-            return _billToReceivesDAO.SelectEmissionDateFromDb(date);
+            return _billToReceivesDAO.SelectIsPaidFromDb(isPaid);
         }
-        public List<BillsToReceive> FindIsPaid(int status)
+        public void DeleteItem(int saleId, int InstalmentQtd)
         {
-            return _billToReceivesDAO.SelectIsPaidFromDb(status);
-        }
-        public void DeleteItem(int id)
-        {
-            _billToReceivesDAO.DeleteFromDb(id);
+            _billToReceivesDAO.DeleteFromDb(saleId, InstalmentQtd);
         }
         public void UpdateItem(BillsToReceive billToReceive)
         {

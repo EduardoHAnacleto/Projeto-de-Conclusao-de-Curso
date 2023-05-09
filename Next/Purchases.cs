@@ -10,27 +10,31 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 {
     public class Purchases : Identifications
     {
+        public int Status { get; set; }
+        public DateTime EmissionDate { get; set; }
+        public DateTime? ArrivalDate { get; set; }
+
+        public double Freight_Cost { get; set; }
+        public double Total_PurchaseValue { get; set; }
+        public double Total_Cost { get; set; }
+        public double ExtraExpenses { get; set; }
+        public double DiscountPerc { get; set; }
+        public double DiscountCash { get; set; }
+        public double InsuranceCost { get; set; }
+
+        public Users User { get; set; }
+        public PaymentConditions PayCondition { get; set; }
+        public List<PurchaseItems> PurchasedItems { get; set; }
+        public Suppliers Supplier { get; set; }
+        public List<BillsToPay> BillToPay { get; set; }
+
         public Purchases()
         {
-            PaymentConditions payConditon = new PaymentConditions();
-            Suppliers suppliers = new Suppliers();
-            BillsToPay billToPay = new BillsToPay();
-            List<PurchaseItems> purchase_items = new List<PurchaseItems>();
+            PaymentConditions PayConditon = new PaymentConditions();
+            Suppliers Supplier = new Suppliers();
+            List<BillsToPay> BillToPay = new List<BillsToPay>();
+            List<PurchaseItems> PurchasedItems = new List<PurchaseItems>();
+            Users User = new Users();
         }
-
-        public int status { get; set; }
-        public DateTime emissionDate { get; set; }
-        public DateTime arrivalDate { get; set; }
-        public double freight_Cost { get; set; }
-        public double total_PurchaseValue { get; set; }
-        public double total_Cost { get; set; }
-        public double expenses { get; set; }
-        public double discount { get; set; }
-        public double insurance { get; set; }
-        public PaymentConditions payCondition { get; set; }
-        public List<PurchaseItems> purchase_items { get; set; }
-        public Suppliers supplier { get; set; }
-        public BillsToPay billToPay { get; set; }
-
     }
 }

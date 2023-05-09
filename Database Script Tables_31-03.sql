@@ -251,18 +251,18 @@
     );
 
     create table BILLSTORECEIVE(
-        id_sale int not null references SALES(id_sale),
+        sale_id int not null references SALES(id_sale),
+        instalmentNumber int not null, 
         instalmentValue decimal not null,
         isPaid boolean not null,
         client_id int not null foreign key references CLIENTS(id_client),
         paycondition_id int not null foreign key references PAYMENTCONDITIONS(id_paycondition),
-        instalmentNumber int not null, 
         instalmentsQtd int not null,
         dueDate date not null,
         emissionDate date not null,
         date_creation date not null,
         date_last_update date not null,
-        primary key(id_sale,instalment_number)
+        primary key(sale_id,instalment_number)
     );
 
     create table SALES(
