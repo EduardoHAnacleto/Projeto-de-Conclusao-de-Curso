@@ -21,8 +21,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public PaymentConditions Condition { get; set; }    
         public int InstalmentNumber { get; set; }
         public int InstalmentsQtd { get; set; }
-        public DateTime DueDate { get; set; }
         public DateTime EmissionDate { get; set; }
+        public DateTime DueDate { get; set; }
+        public DateTime? PaidDate { get; set; }
         public double InstalmentValue { get; set; }
 
 

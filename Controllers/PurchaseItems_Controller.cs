@@ -34,10 +34,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             return _purchaseItemsDAO.SelectProductIdFromDb(id);
         }
-        public List<PurchaseItems> FindProductName(string name)
-        {
-            return _purchaseItemsDAO.SelectProductNameFromDb(name);
-        }
         public List<PurchaseItems> FindTotalValue(double minValue)
         {
             decimal value = (decimal)minValue;
@@ -51,15 +47,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             _purchaseItemsDAO.DeleteFromDb(id);
         }
-        public void UpdateItem(PurchaseItems purchaseItems)
-        {
-            _purchaseItems = purchaseItems;
-            string format = "yyyy-MM-dd";
-            _purchaseItems.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
-            _purchaseItemsDAO.EditFromDB(_purchaseItems);
-        }
 
-        public DataTable PopulateDGV() //Cria obj DataTable chama a DAO para trazer a conexao da tabela da DB
+        public DataTable PopulateDGV() 
         {
             DataTable ds = new DataTable();
             ds = _purchaseItemsDAO.SelectDataSourceFromDB();

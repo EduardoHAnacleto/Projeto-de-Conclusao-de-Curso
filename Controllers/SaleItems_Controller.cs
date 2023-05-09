@@ -1,6 +1,7 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
 using ProjetoEduardoAnacletoWindowsForm1.DAO;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
+using ProjetoEduardoAnacletoWindowsForm1.Next;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -29,40 +30,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _SaleItemsDAO.SelectAllFromDb();
         }
-        public List<SaleItems> FindItemId(int id)
-        { 
-            return _SaleItemsDAO.SelectFromDb(id);
-        }
         public List<SaleItems> FindProductId(int id)
         {
-            return _SaleItemsDAO.SelectProductFromDb(id);
+            return _SaleItemsDAO.SelectProductIdFromDb(id);
         }
-        public List<SaleItems> FindProductName(string name)
+        public List<SaleItems> FindSaleId(int id)
         {
-            return _SaleItemsDAO.SelectProductFromDb(name);
+            return _SaleItemsDAO.SelectSaleIdFromDb(id);
         }
         public List<SaleItems> FindTotalValue(double minValue)
         {
             decimal value = (decimal)minValue;
             return _SaleItemsDAO.SelectTotalValueFromDb(value);
         }
-        public List<SaleItems> FindSales(int id)
-        {
-            return _SaleItemsDAO.SelectSaleFromDb(id);
-        }
         public new void DeleteItem(int id)
         {
             _SaleItemsDAO.DeleteFromDb(id);
         }
-        public void UpdateItem(SaleItems employee)
-        {
-            _SaleItems = employee;
-            string format = "yyyy-MM-dd";
-            _SaleItems.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
-            _SaleItemsDAO.EditFromDB(_SaleItems);
-        }
-
-        public DataTable PopulateDGV() //Cria obj DataTable chama a DAO para trazer a conexao da tabela da DB
+        public DataTable PopulateDGV() 
         {
             DataTable ds = new DataTable();
             ds = _SaleItemsDAO.SelectDataSourceFromDB();

@@ -487,8 +487,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             sale.CancelDate = null;
             sale.TotalValue = (double)edt_total.Value;
             sale.BillToReceive = this.GetBillToReceive(sale.TotalValue, emissionDate);
-            sale.EmissionDate = emissionDate;
             sale.CancelDate = null;
+            sale.dateOfCreation = emissionDate;
+            sale.dateOfLastUpdate = emissionDate;
 
             sale.SaleItems = this.GetSaleItems(idSale);
             sale.TotalCost = this.GetTotalCost(sale.SaleItems);
@@ -504,7 +505,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             double totalCost = 0;
             foreach (SaleItems item in list)
             {
-                totalCost += item.productCost;
+                totalCost += item.ProductCost;
             }
             return totalCost;
         }
@@ -516,17 +517,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             foreach (DataGridViewRow row in DGV_SaleProducts.Rows)
             {
                 saleItem.id = idSale;
-                saleItem.product = _pController.FindItemId((int)row.Cells["IdProduct"].Value);
-                saleItem.quantity = (int)row.Cells["QuantityProduct"].Value;
-                saleItem.value = (double)row.Cells["UnValueProduct"].Value;
-                saleItem.totalValue = (double)row.Cells["ProductTotalValue"].Value;
-                saleItem.productCost = (double)row.Cells["ProductCost"].Value;
+                saleItem.Product = _pController.FindItemId((int)row.Cells["IdProduct"].Value);
+                saleItem.Quantity = (int)row.Cells["QuantityProduct"].Value;
+                saleItem.ProductValue = (double)row.Cells["UnValueProduct"].Value;
+                saleItem.TotalValue = (double)row.Cells["ProductTotalValue"].Value;
+                saleItem.ProductCost = (double)row.Cells["ProductCost"].Value;
                 list.Add(saleItem);
             }
             return list;
         }
 
-        private List<BillsToReceive> GetBillToReceive(double totalValue, DateTime emissionDate) //To do
+        private List<BillsToReceive> GetBillToReceive(double totalValue, DateTime emissionDate) //To do??
         {
             List<BillsToReceive> list = new List<BillsToReceive>();
             BillsToReceive bill = new BillsToReceive();
@@ -539,7 +540,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 bill.Condition = Condition;
                 bill.IsPaid = false;
                 bill.Client = client;
-                bill.EmissionDate = emissionDate;
+                bill.dateOfCreation = emissionDate;
                 bill.DueDate = emissionDate.AddDays(instalment.TotalDays);
                 bill.InstalmentNumber = num;
                 bill.InstalmentsQtd = instalQtd;
@@ -622,7 +623,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public void PopulateDate(Sales sale) 
         {
-            medt_date.Text = sale.EmissionDate.ToString();
+            medt_date.Text = sale.dateOfCreation.ToString();
             if (sale.CancelDate != null)
             {
                 medt_date.Visible = true;
@@ -668,12 +669,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             {
                 DataGridViewRow row = new DataGridViewRow();               
                 row.CreateCells(DGV_SaleProducts);
-                row.Cells["IdProduct"].Value = item.product.id;
-                row.Cells["NameProduct"].Value = item.product.productName;
-                row.Cells["ProductCost"].Value = item.productCost;
-                row.Cells["QuantityProduct"].Value = item.quantity;
-                row.Cells["UnValueProduct"].Value = item.value;
-                row.Cells["ProductTotalValue"].Value = item.value * item.quantity;
+                row.Cells["IdProduct"].Value = item.Product.id;
+                row.Cells["NameProduct"].Value = item.Product.productName;
+                row.Cells["ProductCost"].Value = item.ProductCost;
+                row.Cells["QuantityProduct"].Value = item.Quantity;
+                row.Cells["ItemDiscountCash"].Value = item.ItemDiscountCash;
+                row.Cells["ItemDiscountPerc"].Value = item.ItemDiscountPerc;
+                row.Cells["UnValueProduct"].Value = item.ProductValue;
+                row.Cells["ProductTotalValue"].Value = item.ProductValue * item.Quantity;
                 DGV_SaleProducts.Rows.Add(row);
             }
         }

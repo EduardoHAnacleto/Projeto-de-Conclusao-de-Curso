@@ -14,9 +14,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             Clients Client = new Clients();
             List<OSItems> OSItems = new List<OSItems>();
             Services Service = new Services();
+            Users User = new Users();
         }
 
-        public DateTime OSDateTime { get; set; }
+        public Users User { get; set; }
         public List<OSItems> OSItems { get; set; }   
         public Clients Client { get; set; }
         public Services Service { get; set; }
@@ -25,6 +26,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public double ServiceCost { get; set; }
         public double ServiceDiscountCash { get; set; }
         public double ServiceDiscountPerc { get; set; }
+        public DateTime? CompleteDate { get; set; }
         public DateTime? CancelDate { get; set; }
     }
 }

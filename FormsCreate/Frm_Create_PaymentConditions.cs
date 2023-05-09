@@ -197,6 +197,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             foreach (DataGridViewRow row in DGV_Instalments.Rows)
             {
                 bill = new BillsInstalments();
+                bill.id = conditions.id;
                 bill.InstalmentNumber = Convert.ToInt32(row.Cells["InstalmentNumber"].Value);
                 bill.TotalDays = Convert.ToInt32(row.Cells["IntalmentDays"].Value);
                 bill.ValuePercentage = Convert.ToDouble(row.Cells["InstalmentPercentage"].Value);

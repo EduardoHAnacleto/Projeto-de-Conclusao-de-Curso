@@ -12,6 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using NUnit.Framework.Internal;
 using System.Drawing;
 using System.Xml.Linq;
+using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
@@ -19,6 +20,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
     {
         //private string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
         string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+        private readonly BillsInstalments_Controller _billsInstalmentsController = new BillsInstalments_Controller();
 
         public override int NewId()
         {
@@ -71,11 +74,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     connection.Close();
                     if (i > 0)
                     {
-                        if (SaveInstalmentsToDb(cond.BillsInstalments, cond.id))
+                        foreach (BillsInstalments instalment in cond.BillsInstalments)
                         {
-                            MessageBox.Show("Register added with success!");
-                            status = true;
+                            if (instalment != null)
+                            {
+                                _billsInstalmentsController.SaveItem(instalment);
+                            }
                         }
+                        MessageBox.Show("Register added with success!");
+                        status = true;
                     }
                 }
                 catch (Exception ex)
@@ -91,46 +98,46 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
         }
 
-        public bool SaveInstalmentsToDb(List<BillsInstalments> instalments, int condId)
-        {
-            bool status = false;
+        //public bool SaveInstalmentsToDb(List<BillsInstalments> instalments, int condId)
+        //{
+        //    bool status = false;
 
-            string sqlString = "INSERT INTO PAYCONDITIONINSTALMENTS ( PAYCONDITION_ID, INSTALMENT_NUMBER, DAYS_COUNT, METHOD_ID, VALUE_PERCENTAGE)" +
-                    " VALUES (@CONDID, @INUM, @DAYS, @METHODID, @VALUEPERCENTAGE)";
+        //    string sqlString = "INSERT INTO PAYCONDITIONINSTALMENTS ( PAYCONDITION_ID, INSTALMENT_NUMBER, DAYS_COUNT, METHOD_ID, VALUE_PERCENTAGE)" +
+        //            " VALUES (@CONDID, @INUM, @DAYS, @METHODID, @VALUEPERCENTAGE)";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    connection.Open();
-                    foreach (BillsInstalments bill in instalments)
-                    {
-                        SqlCommand command = new SqlCommand(sqlString, connection);
-                        command.Parameters.AddWithValue("@CONDID", condId);
-                        command.Parameters.AddWithValue("@INUM", bill.InstalmentNumber);
-                        command.Parameters.AddWithValue("@DAYS", bill.TotalDays);
-                        command.Parameters.AddWithValue("@METHODID", bill.PaymentMethod.id);
-                        command.Parameters.AddWithValue("@VALUEPERCENTAGE", (decimal)bill.ValuePercentage);
-                        int i = command.ExecuteNonQuery();
-                        if (i > 0)
-                        {
-                            status = true;
-                        }
-                    }
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        try
+        //        {
+        //            connection.Open();
+        //            foreach (BillsInstalments bill in instalments)
+        //            {
+        //                SqlCommand command = new SqlCommand(sqlString, connection);
+        //                command.Parameters.AddWithValue("@CONDID", condId);
+        //                command.Parameters.AddWithValue("@INUM", bill.InstalmentNumber);
+        //                command.Parameters.AddWithValue("@DAYS", bill.TotalDays);
+        //                command.Parameters.AddWithValue("@METHODID", bill.PaymentMethod.id);
+        //                command.Parameters.AddWithValue("@VALUEPERCENTAGE", (decimal)bill.ValuePercentage);
+        //                int i = command.ExecuteNonQuery();
+        //                if (i > 0)
+        //                {
+        //                    status = true;
+        //                }
+        //            }
 
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error : " + ex.Message);
-                    return status;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-                return status;
-            }
-        }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Error : " + ex.Message);
+        //            return status;
+        //        }
+        //        finally
+        //        {
+        //            connection.Close();
+        //        }
+        //        return status;
+        //    }
+        //}
         
         public bool EditFromDB(PaymentConditions cond)
         {
@@ -156,11 +163,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     connection.Close();
                     if (i > 0)
                     {
-                        if (EditInstalmentsToDb(cond.BillsInstalments, cond.id))
+                        foreach (BillsInstalments instalment in cond.BillsInstalments)
                         {
-                            MessageBox.Show("Register altered with success!");
-                            status = true;
+                            if (instalment != null)
+                            {
+                                _billsInstalmentsController.UpdateItem(instalment);
+                            }
                         }
+                        MessageBox.Show("Register added with success!");
+                        status = true;
                     }
 
                 }
@@ -176,49 +187,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 return status;
             }
         }
-
-        public bool EditInstalmentsToDb(List<BillsInstalments> instalments, int condId)
-        {
-            bool status = false;
-
-            string sqlString = "UPDATE PAYCONDITIONINSTALMENTS SET INSTALMENT_NUMBER = @INUM, DAYS_COUNT = @DAYS, METHOD_ID = @METHODID, VALUE_PERCENTAGE = @VALUEPERCENTAGE" +
-                " WHERE PAYCONDITION_ID = @CONDID";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    connection.Open();
-                    foreach (BillsInstalments bill in instalments)
-                    {
-
-                        SqlCommand command = new SqlCommand(sqlString, connection);
-                        command.Parameters.AddWithValue("@CONDID", condId);
-                        command.Parameters.AddWithValue("@INUM", bill.InstalmentNumber);
-                        command.Parameters.AddWithValue("@DAYS", bill.TotalDays);
-                        command.Parameters.AddWithValue("@METHODID", bill.PaymentMethod.id);
-                        command.Parameters.AddWithValue("@VALUEPERCENTAGE", (decimal)bill.ValuePercentage);
-                        int i = command.ExecuteNonQuery();
-                        command.Parameters.Clear();                        
-                        if (i <= 0)
-                        {
-                            return false;
-                        }
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error : " + ex.Message);
-                    return status;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-                return status;
-            }
-        }
-
 
         public override bool DeleteFromDb(int id)
         {
@@ -276,6 +244,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     fineValue = Convert.ToDouble(reader["fine_value"]),
                                     discountPerc = Convert.ToDouble(reader["discount_perc"]),
                                     instalmentQuantity = Convert.ToInt32(reader["instalment_quantity"]),
+                                    BillsInstalments = _billsInstalmentsController.FindInstalments( Convert.ToInt32(reader["id_paycondition"])),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                                 };
@@ -319,6 +288,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     fineValue = Convert.ToDouble(reader["fine_value"]),
                                     discountPerc = Convert.ToDouble(reader["discount_perc"]),
                                     instalmentQuantity = Convert.ToInt32(reader["instalment_quantity"]),
+                                    BillsInstalments = _billsInstalmentsController.FindInstalments(Convert.ToInt32(reader["id_paycondition"])),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                                 };

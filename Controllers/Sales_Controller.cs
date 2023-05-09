@@ -33,11 +33,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _salesDAO.SelectFromDb(id);
         }
-        public List<Sales> FindEmissionDate(string date)
+        public List<Sales> FindEmissionDate(DateTime date)
         {
-            return _salesDAO.SelectEmissionDateFromDb(date);
+            return _salesDAO.SelectDateOfCreationFromDb(date);
         }
-        public List<Sales> FindCanceledDate(string date)
+        public List<Sales> FindCanceledDate(DateTime date)
         {
             return _salesDAO.SelectCanceledDateFromDb(date);
         }

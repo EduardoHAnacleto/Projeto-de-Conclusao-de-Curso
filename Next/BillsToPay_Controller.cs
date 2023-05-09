@@ -32,15 +32,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToPaysDAO.SelectFromDb(numDanfe, tipoDanfe, serieDanfe, pagDanfe, numParc);
         }
-        public List<BillsToPay> FindPurchaseId(int purchaseId)
-        {
-            return _billToPaysDAO.SelectPurchaseFromDb(purchaseId);
-        }
         public List<BillsToPay> FindSupplierId(int supplierId)
         {
             return _billToPaysDAO.SelectSupplierFromDb(supplierId);
         }
-        public List<BillsToPay> FindIsPaid(int isPaid)
+        public List<BillsToPay> FindIsPaid(bool isPaid)
         {
             return _billToPaysDAO.SelectisPaidFromDb(isPaid);
         }
@@ -56,7 +52,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             _billToPaysDAO.EditFromDB(_billToPay);
         }
 
-        public DataTable PopulateDGV() //Cria obj DataTable chama a DAO para trazer a conexao da tabela da DB
+        public DataTable PopulateDGV() 
         {
             DataTable ds = new DataTable();
             ds = _billToPaysDAO.SelectDataSourceFromDB();

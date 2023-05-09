@@ -9,303 +9,264 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
 using System.Configuration;
+using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using System.Drawing.Drawing2D;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
     public class BillsToPay_DAO //TO DO
     {
-        //private string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
         string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private readonly BillsInstalments_Controller _billsInstalmentsController = new BillsInstalments_Controller();
+        private readonly PaymentConditions_Controller _paymentConditionsController = new PaymentConditions_Controller();
+        private readonly PaymentMethods_Controller _paymentMethodsController = new PaymentMethods_Controller();
+        private readonly Suppliers_Controller _suppliersController = new Suppliers_Controller();
 
-
-        public bool SaveToDb(BillsToPay bill)
-        {
-            //bool status = false;
-
-            //string sql = "INSERT INTO BILLSTOPAY (NUM_PARC, NUM_DANFE, TIPO_DANFE, SERIE_DANFE, PAG_DANFE, VENC_FATURA, VALOR_FATURA, FORMAPAGTO_ID, FORNECEDOR_ID, IS_PAID, DATE_CREATION, DATE_LAST_UPDATE ) "
-            //             + " VALUES ("
-            //             + +bill.instalmentNumber
-            //             + ", "
-            //             + +bill.numDanfe
-            //             + ", '"
-            //             + +bill.tipoDanfe
-            //             + "' , "
-            //             + +bill.serieDanfe
-            //             + " , "
-            //             + +bill.pagDanfe
-            //             + ", "
-            //             + bill.dueDate
-            //             + ", "
-            //             + +bill.totalValue
-            //             + ", "
-            //             + +bill.isPaid
-            //             + ", '"
-            //             + bill.dateOfCreation.ToString()
-            //             + "', '"
-            //             + bill.dateOfLastUpdate.ToString()
-            //             + "' );";
-
-            //SqlConnection con = new SqlConnection(connectionString);
-            //SqlCommand cmd = new SqlCommand(sql, con);
-            //cmd.CommandType = CommandType.Text;
-            //con.Open();
-            //try
-            //{
-            //    int i = cmd.ExecuteNonQuery();
-            //    if (i > 0)
-            //    {
-            //        MessageBox.Show("Register added with success!");
-            //        status = true;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Error : " + ex.Message);
-            //    return status;
-            //}
-            //finally
-            //{
-            //    con.Close();
-            //}
-            //return status;
-            return true;
-        }
-
-        public bool EditFromDB(BillsToPay bill)
-        {
-            //bool status = false;
-            //string sql = "UPDATE BILLSTOPAY SET VENC_FATURA = '"
-            //             + bill.dueDate
-            //             + "', VALOR_FATURA = "
-            //             + bill.totalValue
-            //             + " , FORMAPAGTO_ID = "
-            //             + bill.paymentForm.id
-            //             + ", FORNECEDOR_ID = "
-            //             + bill.supplier.id
-            //             + ", IS_PAID = "
-            //             + bill.isPaid
-            //             + ", DATE_LAST_UPDATE = '"
-            //             + bill.dateOfLastUpdate.ToString()
-            //             + "' WHERE NUM_DANFE = "
-            //             + bill.numDanfe
-            //             + " AND TIPO_DANFE = "
-            //             + bill.tipoDanfe
-            //             + " AND SERIE_DANFE = "
-            //             + bill.DANFe.serieDanfe
-            //             + "AND PAG_DANFE = "
-            //             + bill.pagDanfe
-            //             + " AND NUM_PARC= "
-            //             + bill.instalmentNumber
-            //             + " ;";
-
-            //SqlConnection con = new SqlConnection(connectionString);
-            //SqlCommand cmd = new SqlCommand(sql, con);
-            //cmd.CommandType = CommandType.Text;
-            //con.Open();
-            //try
-            //{
-            //    int i = cmd.ExecuteNonQuery();
-            //    if (i > 0)
-            //    {
-            //        MessageBox.Show("Register altered with success!");
-            //        status = true;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Error : " + ex.Message);
-            //    return status;
-            //}
-            //finally
-            //{
-            //    con.Close();
-            //}
-            //return status;
-            return true;
-        }
-
-        public bool DeleteFromDb(int numDanfe, int tipoDanfe, int serieDanfe, int pagDanfe, int numParc)
+        public bool SaveToDb(BillsToPay obj)
         {
             bool status = false;
-            string sql = "DELETE FROM BILLSTOPAY WHERE NUM_DANFE = "
-                         + numDanfe
-                         + " AND TIPO_DANFE = "
-                         + tipoDanfe
-                         + " AND SERIE_DANFE = "
-                         + serieDanfe
-                         + "AND PAG_DANFE = "
-                         + pagDanfe
-                         + " AND NUM_PARC= "
-                         + numParc
-                         + " ;";
 
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            con.Open();
-            try
+            string sql = "INSERT INTO BILLSTOPAY ( BILLNUMBER, BILLSERIES, BILLMODEL, BILLPAGE, INSTALMENTNUMBER, DUEDATE, ISPAID, PAIDDATE," +
+                "BILLVALUE, PAYCONDITION_ID, PAYMETHOD_ID, SUPPLIER_ID, DATE_CREATION, DATE_LAST_UPDATE ) "
+                         + " VALUES (@BNUMBER, @BSERIES, @BMODEL, @BPAGE, @INUMBER, @DUEDATE, @ISPAID, @PDATE, @BVALUE, @CONDID, @METHODID," +
+                         "@SUPPLIERID, @DC, @DU);";
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                int i = cmd.ExecuteNonQuery();
-                if (i > 0)
+                try
                 {
-                    MessageBox.Show("Register erased with success!");
-                    status = true;
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@BNUMBER", obj.BillNumber);
+                    command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                    command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                    command.Parameters.AddWithValue("@BPAGE", obj.BillPage);
+                    command.Parameters.AddWithValue("@INUMBER", obj.BillInstalment.InstalmentNumber);
+                    command.Parameters.AddWithValue("@DUEDATE", obj.DueDate);
+                    command.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
+                    command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
+                    command.Parameters.AddWithValue("@BVALUE", (decimal)obj.TotalValue);
+                    command.Parameters.AddWithValue("@CONDID", obj.PayCondition.id);
+                    command.Parameters.AddWithValue("@METHODID", obj.PayMethod.id);
+                    command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                    command.Parameters.AddWithValue("@DC", obj.dateOfLastUpdate);
+                    command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    connection.Close();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Register added with success!");
+                        status = true;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
                 return status;
             }
-            finally
-            {
-                con.Close();
-            }
-            return status;
         }
 
-        public BillsToPay SelectFromDb(int numDanfe, int tipoDanfe, int serieDanfe, int pagDanfe, int numParc)
+        public bool EditFromDB(BillsToPay obj)
         {
-            string sql = "SELECT * FROM BILLSTOPAY WHERE NUM_DANFE = "
-                         + numDanfe
-                         + " AND TIPO_DANFE = "
-                         + tipoDanfe
-                         + " AND SERIE_DANFE = "
-                         + serieDanfe
-                         + "AND PAG_DANFE = "
-                         + pagDanfe
-                         + " AND NUM_PARC= "
-                         + numParc
-                         + " ;";
+            bool status = false;
 
-            BillsToPay bill = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
+            string sql = "UPDATE BILLSTOPAY SET DUEDATE = @DDATE, ISPAID = @IPAID, PAIDDATE = @PDATE, BILLVALUE = @BVALUE, PAYCONDITION_ID = @CONDID, " +
+                "PAYMETHOD_ID = @METHODID, SUPPLIER_ID = @SUPPLIERID, DATE_LAST_UPDATE = @DU " +
+                "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND BILLPAGE = @BPAGE AND INSTALMENTNUMBER = @INUMBER ; ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                try
                 {
-                    if (reader.HasRows)
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@DDATE", obj.DueDate);
+                    command.Parameters.AddWithValue("@IPAID", obj.IsPaid);
+                    command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
+                    command.Parameters.AddWithValue("@BVALUE", obj.TotalValue);
+                    command.Parameters.AddWithValue("@CONDID", obj.PayCondition.id);
+                    command.Parameters.AddWithValue("@METHODID", obj.PayMethod.id);
+                    command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                    command.Parameters.AddWithValue("@BNUMBER", obj.BillNumber);
+                    command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+
+                    command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                    command.Parameters.AddWithValue("@BPAGE", obj.BillPage);
+                    command.Parameters.AddWithValue("@INUMBER", obj.InstalmentNumber);
+                    command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
                     {
-                        //DANFes_DAO danfe_DAO = new DANFes_DAO();
-                        Suppliers_DAO supplier_DAO = new Suppliers_DAO();
-                        PaymentMethods_DAO method_DAO = new PaymentMethods_DAO();
-
-                        //var danfe = new DANFes();
-                        var supplier = new Suppliers();
-                        var method = new PaymentMethods();
-                        bill = new BillsToPay();
-                        int NDanfe = Convert.ToInt32(reader.GetSqlValue(0).ToString());
-                        int TDanfe = Convert.ToInt32(reader.GetSqlValue(1).ToString());
-                        int SDanfe = Convert.ToInt32(reader.GetSqlValue(2).ToString());
-                        int PDanfe = Convert.ToInt32(reader.GetSqlValue(3).ToString());
-                        //danfe = danfe_DAO.SelectFromDb(NDanfe,TDanfe,SDanfe,PDanfe);
-                        //bill.instalmentNumber = Convert.ToInt32(reader.GetSqlValue(4).ToString());
-                        bill.dueDate = Convert.ToDateTime(reader.GetSqlValue(5).ToString());
-                        bill.totalValue = Convert.ToDouble(reader.GetSqlValue(6).ToString());
-                        method = method_DAO.SelectFromDb(Convert.ToInt32(reader.GetSqlValue(7).ToString()));
-                      //  supplier = supplier_DAO.SelectFromDb(Convert.ToInt32(reader.GetSqlValue(8).ToString()));
-
-                        //bill.DANFe = danfe;
-                      //  bill.paymentForm = method;
-                        bill.supplier = supplier;
-                        bill.dateOfCreation = Convert.ToDateTime(reader.GetSqlValue(9).ToString());
-                        bill.dateOfLastUpdate = Convert.ToDateTime(reader.GetSqlValue(10).ToString());
+                        MessageBox.Show("Register altered with success!");
+                        status = true;
                     }
-                    else
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
+        public bool DeleteFromDb(int billNumber, int billModel, int billSeries, int billPage, int instalmentNumber)
+        {
+            bool status = false;
+            string sql = "DELETE FROM BILLSTOPAY WHERE BILLNUMBER = @BNUM AND BILLMODEL = @BMODEL AND BILLSERIES = @BSERIES AND BILLPAGE = @BPAGE " +
+                "AND INSTALMENTNUMBER = @INUM ;";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@BNUM", billNumber);
+                    command.Parameters.AddWithValue("@BMODEL", billModel);
+                    command.Parameters.AddWithValue("@BSERIES", billSeries);
+                    command.Parameters.AddWithValue("@BPAGE", billPage);
+                    command.Parameters.AddWithValue("@INUM", instalmentNumber);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
                     {
-                        bill = null;
+                        MessageBox.Show("Register erased with success!");
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
+        public BillsToPay SelectFromDb(int billNumber, int billModel, int billSeries, int billPage, int instalmentNumber)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM BILLSTOPAY WHERE BILLNUMBER = @BNUM AND BILLMODEL = @BMODEL AND BILLSERIES = @BSERIES AND BILLPAGE = @BPAGE " +
+                        "AND INSTALMENTNUMBER = @INUM ; ";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@BNUM", billNumber);
+                        command.Parameters.AddWithValue("BMODEL", billModel);
+                        command.Parameters.AddWithValue("BSERIES", billSeries);
+                        command.Parameters.AddWithValue("@BPAGE", billPage);
+                        command.Parameters.AddWithValue("@INUM", instalmentNumber);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                BillsToPay obj = new BillsToPay()
+                                {
+                                    BillNumber = billNumber,
+                                    BillSeries = billSeries,
+                                    BillModel = billModel,
+                                    BillPage = billPage,
+
+                                    TotalValue = Convert.ToDouble(reader["BillValue"]),
+                                    IsPaid = Convert.ToBoolean(reader["isPaid"]),
+                                    PaidDate = Convert.ToDateTime(reader["paidDate"]),
+                                    DueDate = Convert.ToDateTime(reader["dueDate"]),
+                                    Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
+                                    InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
+                                    PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["payCondition_id"])),
+                                    dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                                    dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                };
+                                obj.PayMethod = obj.PayCondition.BillsInstalments[instalmentNumber].PaymentMethod;
+                                obj.BillInstalment = obj.PayCondition.BillsInstalments[instalmentNumber];
+                                return obj;
+                            }
+                        }
                     }
                 }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-            return bill;
+            return null;
         }
+
         public List<BillsToPay> SelectSupplierFromDb(int supplierId)
         {
-            string sql = "SELECT * FROM BILLSTOPAY WHERE SUPPLIER_ID = " + supplierId + " ;";
-
-            List<BillsToPay> bill = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                try
                 {
-                    if (reader.HasRows)
+                    connection.Open();
+                    string sql = "SELECT * FROM BILLSTOPAY WHERE SUPPLIER_ID = @ID ;";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        bill = new List<BillsToPay>();
-                        foreach (BillsToPay item in reader)
+                        command.Parameters.AddWithValue("@ID", supplierId);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            bill.Add(item);
+                            if (reader.Read())
+                            {
+                                List<BillsToPay> list = new List<BillsToPay>();
+                                foreach (BillsToPay item in reader)
+                                {
+                                    BillsToPay obj = new BillsToPay()
+                                    {
+                                        BillNumber = Convert.ToInt32(reader["billNumber"]),
+                                        BillSeries = Convert.ToInt32(reader["billModel"]),
+                                        BillModel = Convert.ToInt32(reader["billSeries"]),
+                                        BillPage = Convert.ToInt32(reader["billPage"]),
+
+                                        TotalValue = Convert.ToDouble(reader["BillValue"]),
+                                        IsPaid = Convert.ToBoolean(reader["isPaid"]),
+                                        PaidDate = Convert.ToDateTime(reader["paidDate"]),
+                                        DueDate = Convert.ToDateTime(reader["dueDate"]),
+                                        Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
+                                        PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["payCondition_id"])),
+                                        dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                                        dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                    };
+                                    obj.PayMethod = obj.PayCondition.BillsInstalments[obj.InstalmentNumber].PaymentMethod;
+                                    obj.BillInstalment = obj.PayCondition.BillsInstalments[obj.InstalmentNumber];
+
+                                    list.Add(obj);
+                                }
+                                return list;
+                            }
                         }
                     }
-                    else
-                    {
-                        bill = null;
-                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-            return bill;
-        }
-        public List<BillsToPay> SelectPurchaseFromDb(int purchaseId)
-        {
-            string sql = "SELECT * FROM BILLSTOPAY WHERE PURCHASE_ID = " + purchaseId+ " ;";
-
-            List<BillsToPay> bill = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                catch (SqlException ex)
                 {
-                    if (reader.HasRows)
-                    {
-                        bill = new List<BillsToPay>();
-                        foreach (BillsToPay item in reader)
-                        {
-                            bill.Add(item);
-                        }
-                    }
-                    else
-                    {
-                        bill = null;
-                    }
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-            return bill;
+            return null;
         }
 
         public List<BillsToPay> SelectAllFromDb()
@@ -346,46 +307,64 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             return bill;
         }
 
-        public List<BillsToPay> SelectisPaidFromDb(int isPaid)
+        public List<BillsToPay> SelectisPaidFromDb(bool isPaid)
         {
-            string sql = "SELECT * FROM BILLSTOPAY WHERE IS_PAID = " + isPaid + " ;";
 
-            List<BillsToPay> bill = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                try
                 {
-                    if (reader.HasRows)
+                    connection.Open();
+                    string sql = "SELECT * FROM BILLSTOPAY WHERE IS_PAID = @ISPAID ;";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        bill = new List<BillsToPay>();
-                        foreach (BillsToPay item in reader)
+                        command.Parameters.AddWithValue("@ISPAID", isPaid);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            bill.Add(item);
+                            if (reader.Read())
+                            {
+                                List<BillsToPay> list = new List<BillsToPay>();
+                                foreach (BillsToPay item in reader)
+                                {
+                                    BillsToPay obj = new BillsToPay()
+                                    {
+                                        BillNumber = Convert.ToInt32(reader["billNumber"]),
+                                        BillSeries = Convert.ToInt32(reader["billModel"]),
+                                        BillModel = Convert.ToInt32(reader["billSeries"]),
+                                        BillPage = Convert.ToInt32(reader["billPage"]),
+
+                                        TotalValue = Convert.ToDouble(reader["BillValue"]),
+                                        IsPaid = Convert.ToBoolean(reader["isPaid"]),
+                                        PaidDate = Convert.ToDateTime(reader["paidDate"]),
+                                        DueDate = Convert.ToDateTime(reader["dueDate"]),
+                                        Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
+                                        PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["payCondition_id"])),
+                                        dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                                        dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                    };
+                                    obj.PayMethod = obj.PayCondition.BillsInstalments[obj.InstalmentNumber].PaymentMethod;
+                                    obj.BillInstalment = obj.PayCondition.BillsInstalments[obj.InstalmentNumber];
+
+                                    list.Add(obj);
+                                }
+                                return list;
+                            }
                         }
                     }
-                    else
-                    {
-                        bill = null;
-                    }
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
                 }
             }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-            return bill;
+            return null;
         }
 
-        public DataTable SelectDataSourceFromDB() //Busca no banco um SqlDataAdapter e joga em um obj DataTable e devolve para COntroller para popular DGV
+        public DataTable SelectDataSourceFromDB()
         {
             string sql = "SELECT * FROM BILLSTOPAY ;";
             SqlConnection con = new SqlConnection(connectionString);

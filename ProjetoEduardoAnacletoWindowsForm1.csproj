@@ -264,16 +264,16 @@
       <DependentUpon>Frm_Create_Master.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\Clients.cs" />
-    <Compile Include="Next\OSItems.cs" />
-    <Compile Include="Next\PurchaseItems.cs" />
-    <Compile Include="Next\PurchaseItems_Controller.cs" />
-    <Compile Include="Next\PurchaseItems_DAO.cs" />
+    <Compile Include="Models\OSItems.cs" />
+    <Compile Include="Models\PurchaseItems.cs" />
+    <Compile Include="Controllers\PurchaseItems_Controller.cs" />
+    <Compile Include="DAO\PurchaseItems_DAO.cs" />
     <Compile Include="Next\Purchases.cs" />
     <Compile Include="Next\Purchases_Controller.cs" />
     <Compile Include="Next\Purchases_DAO.cs" />
-    <Compile Include="Next\SaleItems_DAO.cs" />
-    <Compile Include="Next\Sales_DAO.cs" />
-    <Compile Include="Next\ServiceOrders_DAO.cs" />
+    <Compile Include="DAO\SaleItems_DAO.cs" />
+    <Compile Include="DAO\Sales_DAO.cs" />
+    <Compile Include="DAO\ServiceOrders_DAO.cs" />
     <Compile Include="Controllers\BillsInstalments_Controller.cs" />
     <Compile Include="Next\BillsToPay_Controller.cs" />
     <Compile Include="Next\BillsToReceive_Controller.cs" />
@@ -291,7 +291,7 @@
     <Compile Include="Controllers\Services_Controller.cs" />
     <Compile Include="Controllers\States_Controller.cs" />
     <Compile Include="Controllers\Suppliers_Controller.cs" />
-    <Compile Include="Next\BillsInstalments_DAO.cs" />
+    <Compile Include="DAO\BillsInstalments_DAO.cs" />
     <Compile Include="Next\BillsToPay_DAO.cs" />
     <Compile Include="DAO\Brands_DAO.cs" />
     <Compile Include="DAO\Cities_DAO.cs" />
@@ -300,7 +300,6 @@
     <Compile Include="DAO\Master_DAO.cs" />
     <Compile Include="DAO\PaymentConditions_DAO.cs" />
     <Compile Include="DAO\PaymentMethods_DAO.cs" />
-    <Compile Include="Next\People_DAO.cs" />
     <Compile Include="DAO\ProductGroups_DAO.cs" />
     <Compile Include="DAO\Products_DAO.cs" />
     <Compile Include="DAO\Services_DAO.cs" />
@@ -374,8 +373,8 @@
     <Compile Include="Models\ProductGroups.cs" />
     <Compile Include="Models\Products.cs" />
     <Compile Include="Models\PaymentConditions.cs" />
-    <Compile Include="Next\SaleItems.cs" />
-    <Compile Include="Next\Sales.cs" />
+    <Compile Include="Models\SaleItems.cs" />
+    <Compile Include="Models\Sales.cs" />
     <Compile Include="Models\ServiceOrders.cs" />
     <Compile Include="Models\Services.cs" />
     <Compile Include="Models\States.cs" />

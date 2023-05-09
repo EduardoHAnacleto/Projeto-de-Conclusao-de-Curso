@@ -29,17 +29,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _serviceOrdersDAO.SelectAllFromDb();
         }
-        public List<ServiceOrders> FindItemId(int id)
+        public ServiceOrders FindItemId(int id)
         {
             return _serviceOrdersDAO.SelectFromDb(id);
         }
         public List<ServiceOrders> FindClientId(int id)
         {
             return _serviceOrdersDAO.SelectClientFromDb(id);
-        }
-        public List<ServiceOrders> FindClientName(string name)
-        {
-            return _serviceOrdersDAO.SelectClientFromDb(name);
         }
         public List<ServiceOrders> FindServiceId(int id)
         {
@@ -51,8 +47,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         }
         public List<ServiceOrders> FindDate(DateTime date)
         {
-            string dateString = date.ToString();
-            return _serviceOrdersDAO.SelectDateTimeFromDb(dateString);
+            return _serviceOrdersDAO.SelectDateTimeFromDb(date);
         }
         public new void DeleteItem(int id)
         {

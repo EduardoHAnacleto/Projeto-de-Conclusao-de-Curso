@@ -405,6 +405,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             //}
             return billToReceive;
         }
+
         public List<BillsToReceive> SelectAllFromDb()
         {
             string sql = "SELECT * FROM SALEITEMS ;";

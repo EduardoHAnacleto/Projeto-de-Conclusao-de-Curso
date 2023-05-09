@@ -33,6 +33,8 @@
             this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemDiscountPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_Salesman = new System.Windows.Forms.GroupBox();
@@ -86,6 +88,11 @@
             this.medt_date = new System.Windows.Forms.MaskedTextBox();
             this.lbl_date = new System.Windows.Forms.Label();
             this.gbox_paymentCondition = new System.Windows.Forms.GroupBox();
+            this.DGV_Instalments = new System.Windows.Forms.DataGridView();
+            this.InstalmentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InstalmentDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InstalmentPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InstalmentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_payConditionInstalments = new System.Windows.Forms.Label();
             this.lbl_payConditionDiscount = new System.Windows.Forms.Label();
             this.lbl_payConditionFine = new System.Windows.Forms.Label();
@@ -99,11 +106,6 @@
             this.edt_payCondition = new System.Windows.Forms.TextBox();
             this.edt_payConditionId = new System.Windows.Forms.NumericUpDown();
             this.lbl_payConditionID = new System.Windows.Forms.Label();
-            this.DGV_Instalments = new System.Windows.Forms.DataGridView();
-            this.InstalmentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InstalmentDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InstalmentPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InstalmentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -123,12 +125,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_productId)).BeginInit();
             this.gbox_date.SuspendLayout();
             this.gbox_paymentCondition.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionQnt)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionDiscount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
             this.SuspendLayout();
             // 
             // DGV_SaleProducts
@@ -140,6 +142,8 @@
             this.NameProduct,
             this.ProductCost,
             this.QuantityProduct,
+            this.ItemDiscountCash,
+            this.ItemDiscountPerc,
             this.UnValueProduct,
             this.ProductTotalValue});
             this.DGV_SaleProducts.Location = new System.Drawing.Point(12, 260);
@@ -147,7 +151,7 @@
             this.DGV_SaleProducts.Name = "DGV_SaleProducts";
             this.DGV_SaleProducts.ReadOnly = true;
             this.DGV_SaleProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_SaleProducts.Size = new System.Drawing.Size(745, 221);
+            this.DGV_SaleProducts.Size = new System.Drawing.Size(983, 221);
             this.DGV_SaleProducts.TabIndex = 5;
             this.DGV_SaleProducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_SaleProducts_RowsRemoved);
             // 
@@ -178,6 +182,20 @@
             this.QuantityProduct.Name = "QuantityProduct";
             this.QuantityProduct.ReadOnly = true;
             this.QuantityProduct.Width = 50;
+            // 
+            // ItemDiscountCash
+            // 
+            this.ItemDiscountCash.HeaderText = "Discount Cash";
+            this.ItemDiscountCash.Name = "ItemDiscountCash";
+            this.ItemDiscountCash.ReadOnly = true;
+            this.ItemDiscountCash.Width = 55;
+            // 
+            // ItemDiscountPerc
+            // 
+            this.ItemDiscountPerc.HeaderText = "Discount %";
+            this.ItemDiscountPerc.Name = "ItemDiscountPerc";
+            this.ItemDiscountPerc.ReadOnly = true;
+            this.ItemDiscountPerc.Width = 55;
             // 
             // UnValueProduct
             // 
@@ -331,7 +349,7 @@
             // lbl_productName
             // 
             this.lbl_productName.AutoSize = true;
-            this.lbl_productName.Location = new System.Drawing.Point(8, 74);
+            this.lbl_productName.Location = new System.Drawing.Point(8, 61);
             this.lbl_productName.Name = "lbl_productName";
             this.lbl_productName.Size = new System.Drawing.Size(44, 13);
             this.lbl_productName.TabIndex = 9;
@@ -339,7 +357,7 @@
             // 
             // edt_productName
             // 
-            this.edt_productName.Location = new System.Drawing.Point(11, 90);
+            this.edt_productName.Location = new System.Drawing.Point(11, 77);
             this.edt_productName.MaxLength = 50;
             this.edt_productName.Name = "edt_productName";
             this.edt_productName.Size = new System.Drawing.Size(282, 20);
@@ -556,7 +574,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 116);
+            this.label1.Location = new System.Drawing.Point(8, 106);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 13);
             this.label1.TabIndex = 18;
@@ -564,7 +582,7 @@
             // 
             // btn_FindProduct
             // 
-            this.btn_FindProduct.Location = new System.Drawing.Point(299, 90);
+            this.btn_FindProduct.Location = new System.Drawing.Point(299, 77);
             this.btn_FindProduct.Name = "btn_FindProduct";
             this.btn_FindProduct.Size = new System.Drawing.Size(58, 20);
             this.btn_FindProduct.TabIndex = 19;
@@ -574,7 +592,7 @@
             // 
             // btn_AddProduct
             // 
-            this.btn_AddProduct.Location = new System.Drawing.Point(189, 130);
+            this.btn_AddProduct.Location = new System.Drawing.Point(189, 120);
             this.btn_AddProduct.Name = "btn_AddProduct";
             this.btn_AddProduct.Size = new System.Drawing.Size(75, 20);
             this.btn_AddProduct.TabIndex = 20;
@@ -585,7 +603,7 @@
             // lbl_UNPrice
             // 
             this.lbl_UNPrice.AutoSize = true;
-            this.lbl_UNPrice.Location = new System.Drawing.Point(58, 117);
+            this.lbl_UNPrice.Location = new System.Drawing.Point(58, 107);
             this.lbl_UNPrice.Name = "lbl_UNPrice";
             this.lbl_UNPrice.Size = new System.Drawing.Size(47, 13);
             this.lbl_UNPrice.TabIndex = 21;
@@ -594,7 +612,7 @@
             // lbl_TotalCost
             // 
             this.lbl_TotalCost.AutoSize = true;
-            this.lbl_TotalCost.Location = new System.Drawing.Point(119, 116);
+            this.lbl_TotalCost.Location = new System.Drawing.Point(119, 106);
             this.lbl_TotalCost.Name = "lbl_TotalCost";
             this.lbl_TotalCost.Size = new System.Drawing.Size(55, 13);
             this.lbl_TotalCost.TabIndex = 24;
@@ -618,7 +636,7 @@
             this.gbox_Product.Controls.Add(this.label1);
             this.gbox_Product.Location = new System.Drawing.Point(12, 104);
             this.gbox_Product.Name = "gbox_Product";
-            this.gbox_Product.Size = new System.Drawing.Size(376, 155);
+            this.gbox_Product.Size = new System.Drawing.Size(376, 150);
             this.gbox_Product.TabIndex = 25;
             this.gbox_Product.TabStop = false;
             this.gbox_Product.Text = "Product";
@@ -638,7 +656,7 @@
             // 
             // edt_amount
             // 
-            this.edt_amount.Location = new System.Drawing.Point(11, 130);
+            this.edt_amount.Location = new System.Drawing.Point(11, 120);
             this.edt_amount.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -658,7 +676,7 @@
             // 
             this.edt_UNCost.DecimalPlaces = 2;
             this.edt_UNCost.Enabled = false;
-            this.edt_UNCost.Location = new System.Drawing.Point(61, 130);
+            this.edt_UNCost.Location = new System.Drawing.Point(61, 120);
             this.edt_UNCost.Maximum = new decimal(new int[] {
             1410065407,
             2,
@@ -672,7 +690,7 @@
             // 
             this.edt_totalPValue.DecimalPlaces = 2;
             this.edt_totalPValue.Enabled = false;
-            this.edt_totalPValue.Location = new System.Drawing.Point(122, 130);
+            this.edt_totalPValue.Location = new System.Drawing.Point(122, 120);
             this.edt_totalPValue.Maximum = new decimal(new int[] {
             1410065407,
             2,
@@ -769,6 +787,52 @@
             this.gbox_paymentCondition.TabIndex = 27;
             this.gbox_paymentCondition.TabStop = false;
             this.gbox_paymentCondition.Text = "Payment Condition";
+            // 
+            // DGV_Instalments
+            // 
+            this.DGV_Instalments.AllowUserToAddRows = false;
+            this.DGV_Instalments.AllowUserToDeleteRows = false;
+            this.DGV_Instalments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_Instalments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.InstalmentNumber,
+            this.InstalmentDays,
+            this.InstalmentPercentage,
+            this.InstalmentMethod});
+            this.DGV_Instalments.Enabled = false;
+            this.DGV_Instalments.Location = new System.Drawing.Point(400, 8);
+            this.DGV_Instalments.MultiSelect = false;
+            this.DGV_Instalments.Name = "DGV_Instalments";
+            this.DGV_Instalments.ReadOnly = true;
+            this.DGV_Instalments.Size = new System.Drawing.Size(381, 150);
+            this.DGV_Instalments.TabIndex = 13;
+            // 
+            // InstalmentNumber
+            // 
+            this.InstalmentNumber.HeaderText = "Num";
+            this.InstalmentNumber.Name = "InstalmentNumber";
+            this.InstalmentNumber.ReadOnly = true;
+            this.InstalmentNumber.Width = 45;
+            // 
+            // InstalmentDays
+            // 
+            this.InstalmentDays.HeaderText = "Days";
+            this.InstalmentDays.Name = "InstalmentDays";
+            this.InstalmentDays.ReadOnly = true;
+            this.InstalmentDays.Width = 45;
+            // 
+            // InstalmentPercentage
+            // 
+            this.InstalmentPercentage.HeaderText = "%";
+            this.InstalmentPercentage.Name = "InstalmentPercentage";
+            this.InstalmentPercentage.ReadOnly = true;
+            this.InstalmentPercentage.Width = 45;
+            // 
+            // InstalmentMethod
+            // 
+            this.InstalmentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.InstalmentMethod.HeaderText = "Method";
+            this.InstalmentMethod.Name = "InstalmentMethod";
+            this.InstalmentMethod.ReadOnly = true;
             // 
             // lbl_payConditionInstalments
             // 
@@ -900,52 +964,6 @@
             this.lbl_payConditionID.TabIndex = 0;
             this.lbl_payConditionID.Text = "ID";
             // 
-            // DGV_Instalments
-            // 
-            this.DGV_Instalments.AllowUserToAddRows = false;
-            this.DGV_Instalments.AllowUserToDeleteRows = false;
-            this.DGV_Instalments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_Instalments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.InstalmentNumber,
-            this.InstalmentDays,
-            this.InstalmentPercentage,
-            this.InstalmentMethod});
-            this.DGV_Instalments.Enabled = false;
-            this.DGV_Instalments.Location = new System.Drawing.Point(400, 8);
-            this.DGV_Instalments.MultiSelect = false;
-            this.DGV_Instalments.Name = "DGV_Instalments";
-            this.DGV_Instalments.ReadOnly = true;
-            this.DGV_Instalments.Size = new System.Drawing.Size(381, 150);
-            this.DGV_Instalments.TabIndex = 13;
-            // 
-            // InstalmentNumber
-            // 
-            this.InstalmentNumber.HeaderText = "Num";
-            this.InstalmentNumber.Name = "InstalmentNumber";
-            this.InstalmentNumber.ReadOnly = true;
-            this.InstalmentNumber.Width = 45;
-            // 
-            // InstalmentDays
-            // 
-            this.InstalmentDays.HeaderText = "Days";
-            this.InstalmentDays.Name = "InstalmentDays";
-            this.InstalmentDays.ReadOnly = true;
-            this.InstalmentDays.Width = 45;
-            // 
-            // InstalmentPercentage
-            // 
-            this.InstalmentPercentage.HeaderText = "%";
-            this.InstalmentPercentage.Name = "InstalmentPercentage";
-            this.InstalmentPercentage.ReadOnly = true;
-            this.InstalmentPercentage.Width = 45;
-            // 
-            // InstalmentMethod
-            // 
-            this.InstalmentMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.InstalmentMethod.HeaderText = "Method";
-            this.InstalmentMethod.Name = "InstalmentMethod";
-            this.InstalmentMethod.ReadOnly = true;
-            // 
             // Frm_Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -988,12 +1006,12 @@
             this.gbox_date.PerformLayout();
             this.gbox_paymentCondition.ResumeLayout(false);
             this.gbox_paymentCondition.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionQnt)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionDiscount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1062,12 +1080,6 @@
         private System.Windows.Forms.Label lbl_payConditionDiscount;
         private System.Windows.Forms.Label lbl_payConditionFine;
         private System.Windows.Forms.Label lbl_payConditionFees;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UnValueProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductTotalValue;
         private System.Windows.Forms.Label lbl_CancelDate;
         private System.Windows.Forms.MaskedTextBox medt_CancelDate;
         private System.Windows.Forms.DataGridView DGV_Instalments;
@@ -1075,5 +1087,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentPercentage;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentMethod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn QuantityProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemDiscountCash;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ItemDiscountPerc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UnValueProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductTotalValue;
     }
 }

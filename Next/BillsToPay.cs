@@ -11,19 +11,27 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
     {
         public BillsToPay()
         {
-            Suppliers suppliers = new Suppliers();
-            PaymentMethods paymentMethod = new PaymentMethods();
+            Suppliers Supplier = new Suppliers();
+            PaymentConditions PayCondition = new PaymentConditions();
+            BillsInstalments BillInstalment = new BillsInstalments();
+            PaymentMethods PayMethods = new PaymentMethods();
         }
 
-        public int billNumber { get; set; }
-        public string billSeries { get; set; }
-        public string billModel { get; set; }
-        public int billInstalmentNumber { get; set; }
-        public DateTime dueDate { get; set; }
-        public double totalValue { get; set; }
-        public int isPaid { get; set; }
-        public Suppliers supplier { get; set; }
-        public PaymentMethods paymentMethod { get; set; }
+        public int BillNumber { get; set; }
+        public int BillSeries { get; set; }
+        public int BillModel { get; set; }
+        public int BillPage { get; set; }
+        public double TotalValue { get; set; }
+        public int InstalmentNumber { get; set; }
+
+        public DateTime DueDate { get; set; }
+        public bool IsPaid { get; set; }
+        public DateTime? PaidDate { get; set; }
+
+        public Suppliers Supplier { get; set; }
+        public PaymentMethods PayMethod { get; set; }
+        public PaymentConditions PayCondition { get; set; }
+        public BillsInstalments BillInstalment { get; set; }
 
     }
 }
