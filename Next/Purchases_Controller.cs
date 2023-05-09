@@ -43,6 +43,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             string emission = emissionDate.ToString();
             return _purchasesDAO.SelectEmissionDateFromDb(emission);
         }
+        public Purchases FindItemId(int id)
+        {
+            return _purchasesDAO.SelectFromDb(id);
+        }
         public List<Purchases> FindTotalCost(double totalCost)
         {
             decimal cost = (decimal)totalCost;

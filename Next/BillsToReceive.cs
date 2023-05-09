@@ -12,13 +12,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public BillsToReceive()
         {
             Clients Client = new Clients();
-            PaymentConditions Condition = new PaymentConditions();
-            BillsInstalments BillInstalment = new BillsInstalments();
+            PaymentConditions PayCondition = new PaymentConditions();
+            Sales Sale = new Sales();
         }
 
         public bool IsPaid { get; set; }
         public Clients Client { get; set; }
-        public PaymentConditions Condition { get; set; }    
+        public Sales Sale { get; set; }
+        public PaymentConditions PayCondition { get; set; }    
         public int InstalmentNumber { get; set; }
         public int InstalmentsQtd { get; set; }
         public DateTime EmissionDate { get; set; }

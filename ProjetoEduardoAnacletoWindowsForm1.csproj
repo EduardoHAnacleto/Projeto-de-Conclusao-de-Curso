@@ -112,6 +112,7 @@
     <Compile Include="Forms_Find\Frm_Find_Suppliers.Designer.cs">
       <DependentUpon>Frm_Find_Suppliers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Next\BillsToReceive_DAO.cs" />
     <Compile Include="Next\Frm_Create_BillsToPay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -127,7 +128,6 @@
     <Compile Include="Controllers\Clients_Controller.cs" />
     <Compile Include="Controllers\Countries_Controller.cs" />
     <Compile Include="Controllers\Products_Controller.cs" />
-    <Compile Include="Next\BillsToReceive_DAO.cs" />
     <Compile Include="Controllers\PhoneClassifications_Controller.cs" />
     <Compile Include="DAO\Clients_DAO.cs" />
     <Compile Include="DAO\PhoneClassifications_DAO.cs" />
@@ -275,7 +275,7 @@
     <Compile Include="DAO\Sales_DAO.cs" />
     <Compile Include="DAO\ServiceOrders_DAO.cs" />
     <Compile Include="Controllers\BillsInstalments_Controller.cs" />
-    <Compile Include="Next\BillsToPay_Controller.cs" />
+    <Compile Include="Controllers\BillsToPay_Controller.cs" />
     <Compile Include="Next\BillsToReceive_Controller.cs" />
     <Compile Include="Controllers\Brands_Controller.cs" />
     <Compile Include="Controllers\Cities_Controller.cs" />
@@ -292,7 +292,7 @@
     <Compile Include="Controllers\States_Controller.cs" />
     <Compile Include="Controllers\Suppliers_Controller.cs" />
     <Compile Include="DAO\BillsInstalments_DAO.cs" />
-    <Compile Include="Next\BillsToPay_DAO.cs" />
+    <Compile Include="DAO\BillsToPay_DAO.cs" />
     <Compile Include="DAO\Brands_DAO.cs" />
     <Compile Include="DAO\Cities_DAO.cs" />
     <Compile Include="DAO\Countries_DAO.cs" />
@@ -360,7 +360,7 @@
       <DependentUpon>MasterDetails_Sales.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\BillsInstalments.cs" />
-    <Compile Include="Next\BillsToPay.cs" />
+    <Compile Include="Models\BillsToPay.cs" />
     <Compile Include="Next\BillsToReceive.cs" />
     <Compile Include="Models\Brands.cs" />
     <Compile Include="Models\Cities.cs" />

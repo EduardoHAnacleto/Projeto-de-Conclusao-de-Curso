@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms.VisualStyles;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
 {
@@ -28,9 +29,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToPaysDAO.SelectAllFromDb();
         }
-        public BillsToPay FindItemId(int numDanfe, int tipoDanfe, int serieDanfe, int pagDanfe, int numParc)
+        public BillsToPay FindItemId(int billNum, int billType, int billSeries, int billPage, int instalmentNumber)
         {
-            return _billToPaysDAO.SelectFromDb(numDanfe, tipoDanfe, serieDanfe, pagDanfe, numParc);
+            return _billToPaysDAO.SelectFromDb( billNum, billType, billSeries, billPage, instalmentNumber);
         }
         public List<BillsToPay> FindSupplierId(int supplierId)
         {
@@ -40,9 +41,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToPaysDAO.SelectisPaidFromDb(isPaid);
         }
-        public void DeleteItem(int numDanfe, int tipoDanfe, int serieDanfe, int pagDanfe, int numParc)
+        public void DeleteItem(int billNum, int billType, int billSeries, int billPage, int instalmentNumber)
         {
-            _billToPaysDAO.DeleteFromDb(numDanfe, tipoDanfe, serieDanfe, pagDanfe, numParc);
+            _billToPaysDAO.DeleteFromDb(billNum, billType, billSeries, billPage, instalmentNumber);
         }
         public void UpdateItem(BillsToPay billToPay)
         {

@@ -13,8 +13,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         {
             Suppliers Supplier = new Suppliers();
             PaymentConditions PayCondition = new PaymentConditions();
-            BillsInstalments BillInstalment = new BillsInstalments();
-            PaymentMethods PayMethods = new PaymentMethods();
+            Purchases Purchase = new Purchases();
         }
 
         public int BillNumber { get; set; }
@@ -23,15 +22,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public int BillPage { get; set; }
         public double TotalValue { get; set; }
         public int InstalmentNumber { get; set; }
+        public int InstalmentsQtd { get; set; }
 
+        public DateTime EmissionDate { get; set; }
         public DateTime DueDate { get; set; }
         public bool IsPaid { get; set; }
         public DateTime? PaidDate { get; set; }
 
+        public Purchases Purchase { get; set; }
         public Suppliers Supplier { get; set; }
-        public PaymentMethods PayMethod { get; set; }
         public PaymentConditions PayCondition { get; set; }
-        public BillsInstalments BillInstalment { get; set; }
 
     }
 }

@@ -205,7 +205,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             return status;
         }
 
-        public List<Purchases> SelectFromDb(int id)
+        public Purchases SelectFromDb(int id)
         {
             string sql = "SELECT * FROM PURCHASES WHERE ID_PURCHASE = " + id + " ;";
 
@@ -241,7 +241,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             {
                 con.Close();
             }
-            return purchase;
+            return null;
         }
 
         public List<Purchases> SelectStatusFromDb(int id)
