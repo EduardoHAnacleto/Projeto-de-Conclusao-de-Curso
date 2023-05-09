@@ -51,9 +51,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToReceivesDAO.SelectIsPaidFromDb(isPaid);
         }
-        public void DeleteItem(int saleId, int InstalmentQtd)
+        public void DeleteItem(int saleId, int InstalmentNum)
         {
-            _billToReceivesDAO.DeleteFromDb(saleId, InstalmentQtd);
+            _billToReceivesDAO.DeleteFromDb(saleId, InstalmentNum);
         }
         public void UpdateItem(BillsToReceive billToReceive)
         {

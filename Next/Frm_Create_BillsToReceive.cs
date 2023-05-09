@@ -30,7 +30,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             //datePicker_due.Format = DateTimePickerFormat.Custom;
         }
 
-        public BillsToReceive getBillToReceive()  //Cria um OBJ a partir dos campos
+        public BillsToReceive GetBillToReceive()  //Cria um OBJ a partir dos campos
         {
             BillsToReceive bill = new BillsToReceive();
             bill.Client.id = Convert.ToInt32(edt_clientId.Text);
@@ -66,7 +66,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             try
             {
-                billToReceive_Controller.SaveItem(getBillToReceive());
+                billToReceive_Controller.SaveItem(GetBillToReceive());
             }
             catch (Exception ex)
             {
@@ -78,7 +78,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             try
             {
-                billToReceive_Controller.UpdateItem(getBillToReceive());
+                billToReceive_Controller.UpdateItem(GetBillToReceive());
             }
             catch (Exception ex)
             {
@@ -90,7 +90,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             try
             {
-                billToReceive_Controller.DeleteItem(getBillToReceive().id);
+                var obj = GetBillToReceive();
+                billToReceive_Controller.DeleteItem(obj.Sale.id, obj.InstalmentNumber);
             }
             catch (Exception ex)
             {

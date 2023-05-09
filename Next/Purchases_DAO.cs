@@ -7,12 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using System.Configuration;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 {
     public class Purchases_DAO
     {
-        private string connectionString = string.Empty;
+        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+        private readonly PaymentConditions_Controller _paymentConditionsController = new PaymentConditions_Controller();
+        private readonly Suppliers_Controller _suppliersController = new Suppliers_Controller();
+        private readonly PurchaseItems_Controller _purchaseItemsController = new PurchaseItems_Controller();
+        private readonly BillsToPay_Controller _billsToPayController = new BillsToPay_Controller();
+        private readonly Users_Controller _userController = new Users_Controller();
+
 
         public int NewId()
         {
@@ -39,207 +48,191 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 int id = Convert.ToInt32(newId) + 1;
                 return id;
             }
-            return 1;
+            return 2;
         }
 
-        public bool SaveToDb(Purchases purchase)
+        public bool SaveToDb(Purchases obj)
         {
-            //bool status = false;
-            //string sql = "INSERT INTO PURCHASES ( DANFE_NUM, DANFE_TIPO, DANFE_SERIE, DANFE_PAG, SUPPLIER_ID, PAYCONDITION_ID, PURCHASE_STATUS," +
-            //    " EMISSION_DATE, ARRIVAL_DATE, FREIGHT_COST, PURCHASE_TOTAL_VALUE, PURCHASE_TOTAL_COST, PURCHASE_COST_EXPENSES," +
-            //    " PURCHASE_DISCOUNT, PURCHASE_INSURANCE,  DATE_CREATION, DATE_LAST_UPDATE) "
-            //             + " VALUES ("
-            //             + +purchase.billToPay.numDanfe
-            //             + ", "
-            //             + +purchase.billToPay.tipoDanfe
-            //             + ", "
-            //             + +purchase.billToPay.tipoDanfe
-            //             + ", "
-            //             + +purchase.billToPay.pagDanfe
-            //             + ", "
-            //             + +purchase.supplier.id
-            //             + " , "
-            //             + +purchase.payCondition.id
-            //             + " , "
-            //             + +purchase.id
-            //             + " , "
-            //             + +purchase.status
-            //             + ", '"
-            //             + purchase.emissionDate.ToString()
-            //             + "', '"
-            //             + purchase.arrivalDate.ToString()
-            //             + ", "
-            //             + +purchase.freight_Cost
-            //             + ", "
-            //             + +purchase.total_PurchaseValue
-            //             + ", "
-            //             + +purchase.expenses
-            //             + ", "
-            //             + +purchase.discount
-            //             + ", "
-            //             + +purchase.insurance
-            //             + ", '"
-            //             + purchase.dateOfCreation.ToString()
-            //             + "', '"
-            //             + purchase.dateOfLastUpdate.ToString()
-            //             + "' );";
+            bool status = false;
 
-            //SqlConnection con = new SqlConnection(connectionString);
-            //SqlCommand cmd = new SqlCommand(sql, con);
-            //cmd.CommandType = CommandType.Text;
-            //con.Open();
-            //try
-            //{
-            //    int i = cmd.ExecuteNonQuery();
-            //    if (i > 0)
-            //    {
-            //        MessageBox.Show("Register added with success!");
-            //        status = true;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Error : " + ex.Message);
-            //    return status;
-            //}
-            //finally
-            //{
-            //    con.Close();
-            //}
-            //return status;
-            return true;
+            string sql = "INSERT INTO PURCHASES ( PURCHASESTATUS, EMISSIONDATE, ARRIVALDATE, FREIGHTCOST, PURCHASE_TOTALCOST, " +
+                "PURCHASE_TOTALVALUE, PURCHASE_EXTRAEXPENSES, PURCHASE_DISCOUNTCASH, PURCHASE_DISCOUNTPERC, PURCHASE_INSURANCECOST, PAYCONDITION_ID," +
+                "SUPPLIER_ID, USER_ID, DATE_CREATION, DATE_LAST_UPDATE ) "
+                         + " VALUES (@STATUS, @EMDATE, @ARRIVALDATE, @FREIGHT, @TOTALCOST, @TOTALVALUE, @EXPENSES, @DISCCASH, @DISCPERC," +
+                         " @INSURANCE, @CONDID, @SUPPLIERID, @USERID, @DC, @DU);";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@STATUS", obj.Status);
+                    command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
+                    command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
+                    command.Parameters.AddWithValue("@FREIGHT", (decimal)obj.Freight_Cost);
+                    command.Parameters.AddWithValue("@TOTALCOST", (decimal)obj.Total_Cost);
+                    command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.Total_PurchaseValue);
+                    command.Parameters.AddWithValue("@EXPENSES", (decimal)obj.ExtraExpenses);
+                    command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.DiscountCash);
+                    command.Parameters.AddWithValue("@DISCPERC", (decimal)obj.DiscountPerc);
+                    command.Parameters.AddWithValue("@INSURANCE", (decimal)obj.InsuranceCost);
+                    command.Parameters.AddWithValue("@CONDID", obj.PayCondition.id);
+                    command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                    command.Parameters.AddWithValue("@USERID", obj.User.id);
+                    command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
+                    command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    connection.Close();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Register added with success!");
+                        status = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
         }
 
-        public bool EditFromDB(Purchases purchase)
+        public bool EditFromDB(Purchases obj)
         {
-            //bool status = false;
-            //string sql = "UPDATE PURCHASES SET SUPPLIER_ID = "
-            //             + purchase.supplier.id
-            //             + " , PAYCONDITION_ID = "
-            //             + purchase.payCondition.id
-            //             + " , DANFE_NUM = "
-            //             + purchase.billToPay.numDanfe
-            //             + " , DANFE_TIPO = "
-            //             + purchase.billToPay.tipoDanfe
-            //             + " , DANFE_SERIE = "
-            //             + purchase.billToPay.serieDanfe
-            //             + " , DANFE_PAG = "
-            //             + purchase.billToPay.pagDanfe
-            //             + " , PURCHASE_STATUS = "
-            //             + purchase.status
-            //             + " , FREIGHT_COST = "
-            //             + purchase.freight_Cost
-            //             + " , PURCHASE_TOTAL_VALUE = "
-            //             + purchase.total_PurchaseValue
-            //             + " , PURCHASE_TOTAL_COST = "
-            //             + purchase.total_Cost
-            //             + " , PURCHASE_COST_EXPENSES = "
-            //             + purchase.expenses
-            //             + " , PURCHASE_DISCOUNT = "
-            //             + purchase.discount
-            //             + " , PURCHASE_INSURANCE = "
-            //             + purchase.insurance
-            //             + " , ARRIVAL_DATE = '"
-            //             + purchase.arrivalDate.ToString()
-            //             + "' , EMISSION_DATE = '"
-            //             + purchase.emissionDate.ToString()
-            //             + "' , DATE_LAST_UPDATE = '"
-            //             + purchase.dateOfLastUpdate.ToString()
-            //             + "' WHERE ID_PURCHASE = "
-            //             + purchase.id
-            //             + " ;";
+            bool status = false;
 
-            //SqlConnection con = new SqlConnection(connectionString);
-            //SqlCommand cmd = new SqlCommand(sql, con);
-            //cmd.CommandType = CommandType.Text;
-            //con.Open();
-            //try
-            //{
-            //    int i = cmd.ExecuteNonQuery();
-            //    if (i > 0)
-            //    {
-            //        MessageBox.Show("Register altered with success!");
-            //        status = true;
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    MessageBox.Show("Error : " + ex.Message);
-            //    return status;
-            //}
-            //finally
-            //{
-            //    con.Close();
-            //}
-            //return status;
-            return true;
+            string sql = "UPDATE PURCHASES SET PURCHASESTATUS = @STATUS, EMISSIONDATE = @EMDATE, ARRIVALDATE = @ARRIVALDATE, FREIGHTCOST = @FREIGHT," +
+                " PURCHASE_TOTALCOST = @TOTALCOST, PURCHASE_TOTALVALUE = @TOTALVALUE, PURCHASE_EXTRAEXPENSES = @EXPENSES, PURCHASE_DISCOUNTCASH = @DISCCASH," +
+                " PURCHASE_DISCOUNTPERC = @DISCPERC, PURCHASE_INSURANCECOST = @INSURANCE, PAYCONDITION_ID = @CONDID, SUPPLIER_ID = @SUPPLIERID," +
+                " USER_ID = @USERID, DATE_LAST_UPDATE = @USERID " +
+                " WHERE ID_PURCHASE = @ID; ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", obj.id);
+                    command.Parameters.AddWithValue("@STATUS", obj.Status);
+                    command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
+                    command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
+                    command.Parameters.AddWithValue("@FREIGHT", (decimal)obj.Freight_Cost);
+                    command.Parameters.AddWithValue("@TOTALCOST", (decimal)obj.Total_Cost);
+                    command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.Total_PurchaseValue);
+                    command.Parameters.AddWithValue("@EXPENSES", (decimal)obj.ExtraExpenses);
+                    command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.DiscountCash);
+                    command.Parameters.AddWithValue("@DISCPERC", (decimal)obj.DiscountPerc);
+                    command.Parameters.AddWithValue("@INSURANCE", (decimal)obj.InsuranceCost);
+                    command.Parameters.AddWithValue("@CONDID", obj.PayCondition.id);
+                    command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                    command.Parameters.AddWithValue("@USERID", obj.User.id);
+                    command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Register altered with success!");
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
         }
 
         public bool DeleteFromDb(int id)
         {
             bool status = false;
-            string sql = "DELETE FROM PURCHASES WHERE ID_PURCHASE = " + id + " ;";
-
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            con.Open();
-            try
+            string sql = "DELETE FROM PURCHASES WHERE PURCHASE_ID = @ID ;";
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                int i = cmd.ExecuteNonQuery();
-                if (i > 0)
+                try
                 {
-                    MessageBox.Show("Register erased with success!");
-                    status = true;
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", id);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Register erased with success!");
+                        status = true;
+                    }
+
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
                 return status;
             }
-            finally
-            {
-                con.Close();
-            }
-            return status;
         }
 
         public Purchases SelectFromDb(int id)
         {
-            string sql = "SELECT * FROM PURCHASES WHERE ID_PURCHASE = " + id + " ;";
-
-            List<Purchases> purchase = null;
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
-                con.Open();
-                SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                try
                 {
-                    if (reader.HasRows)
+                    connection.Open();
+                    string sql = "SELECT * FROM PURCHASES WHERE PURCHASE_ID = @ID ; ";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        purchase = new List<Purchases>();
-                        foreach (Purchases item in reader)
+                        command.Parameters.AddWithValue("@ID", id);
+                        using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            purchase.Add(item);
+                            if (reader.Read())
+                            {
+                                Purchases obj = new Purchases()
+                                {
+                                    id = Convert.ToInt32(reader["id_purchase"]),
+                                    Status = Convert.ToInt32(reader["purchaseStatus"]),
+                                    EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
+                                    ArrivalDate = Convert.ToDateTime(reader["arrivalDate"]),
+                                    Freight_Cost = Convert.ToDouble(reader["freightCost"]),
+                                    Total_PurchaseValue = Convert.ToDouble(reader["purchase_totalValue"]),
+                                    Total_Cost = Convert.ToDouble(reader["purchase_TotalCost"]),
+                                    ExtraExpenses = Convert.ToDouble(reader["purchase_ExtraExpenses"]),
+                                    DiscountCash = Convert.ToDouble(reader["purchase_DiscountCash"]),
+                                    DiscountPerc = Convert.ToDouble(reader["purchase_DiscountPerc"]),
+                                    InsuranceCost = Convert.ToDouble(reader["purchase_InsuranceCost"]),
+                                    User = _userController.FindItemId(Convert.ToInt32(reader["user_id"])),
+                                    PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["paycondition_id"])),
+                                    PurchasedItems = _purchaseItemsController.FindItemId(Convert.ToInt32(reader["id_purchase"])),
+                                    Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
+                                    BillToPay = _billsToPayController.FindPurchaseid(Convert.ToInt32(reader["id_purchase"])),
+                                };
+                                return obj;
+                            }
                         }
                     }
-                    else
-                    {
-                        purchase = null;
-                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
             return null;
         }

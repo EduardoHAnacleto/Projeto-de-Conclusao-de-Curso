@@ -114,17 +114,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
-        public bool DeleteFromDb(int saleId, int InstalmentQtd)
+        public bool DeleteFromDb(int saleId, int InstalmentNum)
         {
             bool status = false;
-            string sql = "DELETE FROM BILLSTORECEIVE WHERE SALE_ID = @SALEID AND INSTALMENTNUMBER = @IQTD ;";
+            string sql = "DELETE FROM BILLSTORECEIVE WHERE SALE_ID = @SALEID AND INSTALMENTNUMBER = @INUM ;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@SALEID", saleId);
-                    command.Parameters.AddWithValue("@IQTD", InstalmentQtd);
+                    command.Parameters.AddWithValue("@INUM", InstalmentNum);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     if (i > 0)

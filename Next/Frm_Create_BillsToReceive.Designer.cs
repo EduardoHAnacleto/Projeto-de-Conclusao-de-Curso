@@ -115,9 +115,9 @@
             this.check_Paid.AutoSize = true;
             this.check_Paid.Location = new System.Drawing.Point(6, 37);
             this.check_Paid.Name = "check_Paid";
-            this.check_Paid.Size = new System.Drawing.Size(62, 17);
+            this.check_Paid.Size = new System.Drawing.Size(47, 17);
             this.check_Paid.TabIndex = 12;
-            this.check_Paid.Text = "Paid off";
+            this.check_Paid.Text = "Paid";
             this.check_Paid.UseVisualStyleBackColor = true;
             // 
             // gbox_isPaid

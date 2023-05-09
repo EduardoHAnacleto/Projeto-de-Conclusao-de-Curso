@@ -30,6 +30,7 @@
         {
             this.cbox_payMethod = new System.Windows.Forms.ComboBox();
             this.gbox_danfe = new System.Windows.Forms.GroupBox();
+            this.edt_tipoDanfe = new System.Windows.Forms.NumericUpDown();
             this.edt_serieDanfe = new System.Windows.Forms.NumericUpDown();
             this.edt_numDanfe = new System.Windows.Forms.NumericUpDown();
             this.edt_pagDanfe = new System.Windows.Forms.NumericUpDown();
@@ -55,9 +56,11 @@
             this.lbl_paymentMethod = new System.Windows.Forms.Label();
             this.gbox_billInfo = new System.Windows.Forms.GroupBox();
             this.edt_instalmentNumber = new System.Windows.Forms.NumericUpDown();
-            this.edt_tipoDanfe = new System.Windows.Forms.NumericUpDown();
+            this.lbl_paidDate = new System.Windows.Forms.Label();
+            this.datePicker_paid = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_danfe.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_tipoDanfe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_serieDanfe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_numDanfe)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_pagDanfe)).BeginInit();
@@ -67,7 +70,6 @@
             this.gbox_isPaid.SuspendLayout();
             this.gbox_billInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentNumber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_tipoDanfe)).BeginInit();
             this.SuspendLayout();
             // 
             // edt_id
@@ -98,6 +100,18 @@
             this.gbox_danfe.TabIndex = 32;
             this.gbox_danfe.TabStop = false;
             this.gbox_danfe.Text = "DANFe";
+            // 
+            // edt_tipoDanfe
+            // 
+            this.edt_tipoDanfe.Location = new System.Drawing.Point(90, 39);
+            this.edt_tipoDanfe.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.edt_tipoDanfe.Name = "edt_tipoDanfe";
+            this.edt_tipoDanfe.Size = new System.Drawing.Size(65, 20);
+            this.edt_tipoDanfe.TabIndex = 37;
             // 
             // edt_serieDanfe
             // 
@@ -252,11 +266,13 @@
             // 
             // gbox_billDates
             // 
+            this.gbox_billDates.Controls.Add(this.datePicker_paid);
+            this.gbox_billDates.Controls.Add(this.lbl_paidDate);
             this.gbox_billDates.Controls.Add(this.lbl_DueDate);
             this.gbox_billDates.Controls.Add(this.datePicker_due);
             this.gbox_billDates.Location = new System.Drawing.Point(305, 86);
             this.gbox_billDates.Name = "gbox_billDates";
-            this.gbox_billDates.Size = new System.Drawing.Size(107, 72);
+            this.gbox_billDates.Size = new System.Drawing.Size(107, 135);
             this.gbox_billDates.TabIndex = 27;
             this.gbox_billDates.TabStop = false;
             this.gbox_billDates.Text = "Movement Date";
@@ -305,9 +321,9 @@
             this.check_Paid.AutoSize = true;
             this.check_Paid.Location = new System.Drawing.Point(6, 37);
             this.check_Paid.Name = "check_Paid";
-            this.check_Paid.Size = new System.Drawing.Size(62, 17);
+            this.check_Paid.Size = new System.Drawing.Size(47, 17);
             this.check_Paid.TabIndex = 12;
-            this.check_Paid.Text = "Paid off";
+            this.check_Paid.Text = "Paid";
             this.check_Paid.UseVisualStyleBackColor = true;
             this.check_Paid.CheckedChanged += new System.EventHandler(this.check_Paid_CheckedChanged);
             // 
@@ -355,17 +371,22 @@
             this.edt_instalmentNumber.Size = new System.Drawing.Size(52, 20);
             this.edt_instalmentNumber.TabIndex = 35;
             // 
-            // edt_tipoDanfe
+            // lbl_paidDate
             // 
-            this.edt_tipoDanfe.Location = new System.Drawing.Point(90, 39);
-            this.edt_tipoDanfe.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.edt_tipoDanfe.Name = "edt_tipoDanfe";
-            this.edt_tipoDanfe.Size = new System.Drawing.Size(65, 20);
-            this.edt_tipoDanfe.TabIndex = 37;
+            this.lbl_paidDate.AutoSize = true;
+            this.lbl_paidDate.Location = new System.Drawing.Point(6, 78);
+            this.lbl_paidDate.Name = "lbl_paidDate";
+            this.lbl_paidDate.Size = new System.Drawing.Size(54, 13);
+            this.lbl_paidDate.TabIndex = 4;
+            this.lbl_paidDate.Text = "Paid Date";
+            // 
+            // datePicker_paid
+            // 
+            this.datePicker_paid.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.datePicker_paid.Location = new System.Drawing.Point(6, 98);
+            this.datePicker_paid.Name = "datePicker_paid";
+            this.datePicker_paid.Size = new System.Drawing.Size(96, 20);
+            this.datePicker_paid.TabIndex = 5;
             // 
             // Frm_Create_BillsToPay
             // 
@@ -392,6 +413,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             this.gbox_danfe.ResumeLayout(false);
             this.gbox_danfe.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_tipoDanfe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_serieDanfe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_numDanfe)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_pagDanfe)).EndInit();
@@ -405,7 +427,6 @@
             this.gbox_billInfo.ResumeLayout(false);
             this.gbox_billInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentNumber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_tipoDanfe)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -441,5 +462,7 @@
         private System.Windows.Forms.NumericUpDown edt_serieDanfe;
         private System.Windows.Forms.Button btn_SearchSupplier;
         private System.Windows.Forms.NumericUpDown edt_tipoDanfe;
+        private System.Windows.Forms.DateTimePicker datePicker_paid;
+        private System.Windows.Forms.Label lbl_paidDate;
     }
 }

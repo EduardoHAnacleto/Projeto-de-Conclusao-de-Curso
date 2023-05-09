@@ -37,6 +37,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToPaysDAO.SelectSupplierFromDb(supplierId);
         }
+        public List<BillsToPay> FindPurchaseid(int purchaseId)
+        {
+            return _billToPaysDAO.SelectPurchaseFromDb(purchaseId);
+        }
         public List<BillsToPay> FindIsPaid(bool isPaid)
         {
             return _billToPaysDAO.SelectisPaidFromDb(isPaid);

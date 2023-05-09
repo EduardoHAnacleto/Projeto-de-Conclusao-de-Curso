@@ -161,6 +161,61 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
         }
 
+        public List<BillsToPay> SelectPurchaseFromDb(int purchaseId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM BILLSTOPAY WHERE PURCHASE_ID = @ID ;";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@ID", purchaseId);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                List<BillsToPay> list = new List<BillsToPay>();
+                                foreach (BillsToPay item in reader)
+                                {
+                                    BillsToPay obj = new BillsToPay()
+                                    {
+                                        BillNumber = Convert.ToInt32(reader["billNumber"]),
+                                        BillSeries = Convert.ToInt32(reader["billModel"]),
+                                        BillModel = Convert.ToInt32(reader["billSeries"]),
+                                        BillPage = Convert.ToInt32(reader["billPage"]),
+
+                                        TotalValue = Convert.ToDouble(reader["BillValue"]),
+                                        IsPaid = Convert.ToBoolean(reader["isPaid"]),
+                                        EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
+                                        PaidDate = Convert.ToDateTime(reader["paidDate"]),
+                                        DueDate = Convert.ToDateTime(reader["dueDate"]),
+                                        InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
+                                        Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
+                                        PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["payCondition_id"])),
+                                        Purchase = _purchasesController.FindItemId(Convert.ToInt32(reader["purchase_id"])),
+                                        dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                                        dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                    };
+                                    list.Add(obj);
+                                }
+                                return list;
+                            }
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return null;
+        }
 
         public BillsToPay SelectFromDb(int billNumber, int billModel, int billSeries, int billPage, int instalmentNumber)
         {
