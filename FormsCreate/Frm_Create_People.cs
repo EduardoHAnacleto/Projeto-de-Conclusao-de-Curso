@@ -173,7 +173,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 cbox_phone1.Items.Add(text);
                 cbox_phone2.Items.Add(text);
                 cbox_phone3.Items.Add(text);
-            }
+            }           
             cbox_phone1.Items.Remove("NULL");
             cbox_phone1.Items.Remove("NULO");
         }
@@ -212,26 +212,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         public override void UnlockCamps()
         {
             edt_age.Enabled = true;
-            //edt_city.Enabled = true;
-            //edt_complement.Enabled = true;
-            //edt_countryAcronym.Enabled = true;
-            //edt_district.Enabled = true;
             edt_email.Enabled = true;
-            //edt_homeType.Enabled = true;
-            //edt_houseNumber.Enabled = true;
             edt_Name.Enabled = true;
-            //edt_street.Enabled = true;
             medt_dob.Enabled = true;
             medt_regNumber.Enabled = true;
-            //medt_phone1.Enabled = true;
-            //medt_phone2.Enabled = true;
-            //medt_phone3.Enabled = true;
-            //cbox_phone1.Enabled = true;
-            //cbox_phone2.Enabled = true;
-            //cbox_phone3.Enabled = true;
-            //medt_regNumber.Enabled = true;
-            //btn_findCity.Enabled = true;
-            //medt_zipCode.Enabled = true;
             gbox_address.Enabled = true;
             gbox_phones.Enabled = true;
             gbox_gender.Enabled = true;
@@ -270,25 +254,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         public override void LockCamps()
         {
             edt_age.Enabled = false;
-            //edt_city.Enabled = false;
-            //edt_complement.Enabled = false;
-            //edt_countryAcronym.Enabled = false;
-            //edt_district.Enabled = false;
+
             edt_email.Enabled = false;
-            //edt_homeType.Enabled = false;
-            //edt_houseNumber.Enabled = false;
             edt_Name.Enabled = false;
-            //edt_street.Enabled = false;
             medt_dob.Enabled = false;
-            //medt_phone1.Enabled = false;
-            //medt_phone2.Enabled = false;
-            //medt_phone3.Enabled = false;
-            //cbox_phone1.Enabled = false;
-            //cbox_phone2.Enabled = false;
-            //cbox_phone3.Enabled = false;
             medt_regNumber.Enabled = false;
-            //btn_findCity.Enabled = false;
-            //medt_zipCode.Enabled = false;
             gbox_address.Enabled = false;
             gbox_phones.Enabled = false;
             gbox_gender.Enabled = false;

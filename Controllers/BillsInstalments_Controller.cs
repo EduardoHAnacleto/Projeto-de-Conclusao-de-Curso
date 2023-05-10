@@ -20,10 +20,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
 
         }
 
-        public void SaveItem(BillsInstalments billInstalment)
+        public bool SaveItem(BillsInstalments billInstalment)
         {
             _billInstalment = billInstalment;
-            _billInstalmentsDAO.SaveToDb(_billInstalment);
+            bool status = _billInstalmentsDAO.SaveToDb(_billInstalment);
+            return status;
         }
         public List<BillsInstalments> LoadItems()
         {
@@ -36,7 +37,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         }
         public List<BillsInstalments> FindInstalments(int paymentConditionId)
         {
-            return _billInstalmentsDAO.SelectInstalmentsFromDb(paymentConditionId);
+            return _billInstalmentsDAO.SelectDTByCondIdFromDB(paymentConditionId);
+            //return _billInstalmentsDAO.SelectInstalmentsFromDb(paymentConditionId);
         }
         public void DeleteItem(int instalmentNumber, int paymentConditionId, int paymentMethodId)
         {

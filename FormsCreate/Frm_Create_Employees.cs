@@ -160,9 +160,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 medt_startDate.Focus();
                 return false;
             }
-            else if (medt_startDate.Value < medt_endDate.Value)
+            else if (medt_startDate.Value > medt_endDate.Value && rbtn_dismissed.Checked == true)
             {
-                string message = "Admission date must be lower than end date.";
+                string message = "Admission date must be lower than leave date.";
                 string caption = "Invalid Camp.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
@@ -181,11 +181,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 rbtn_dismissed.Checked = false;
                 rbtn_active.Checked = true;
                 Status_Checked();
+
             }
             else if (employee.jobStatus == 0)
             {
                 rbtn_active.Checked = false;
                 rbtn_dismissed.Checked = true;
+                medt_endDate.Value = employee.endDate.Value;
                 Status_Checked();
             }
 

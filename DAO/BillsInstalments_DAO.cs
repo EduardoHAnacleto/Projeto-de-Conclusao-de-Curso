@@ -33,7 +33,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@INSTALNUMBER", obj.InstalmentNumber);
                     command.Parameters.AddWithValue("@METHODID", obj.PaymentMethod.id);
                     command.Parameters.AddWithValue("@DAYS", obj.TotalDays);
-                    command.Parameters.AddWithValue("@VALUEPERC", obj.ValuePercentage);
+                    command.Parameters.AddWithValue("@VALUEPERC", (decimal) obj.ValuePercentage);
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
@@ -73,7 +73,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@ID", obj.id);
                     command.Parameters.AddWithValue("@PAYID", obj.PaymentMethod.id);
                     command.Parameters.AddWithValue("@DAYS", obj.TotalDays);
-                    command.Parameters.AddWithValue("@VALUEPERC", obj.ValuePercentage);
+                    command.Parameters.AddWithValue("@VALUEPERC", (decimal)obj.ValuePercentage);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
@@ -230,8 +230,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         {
                             id = Convert.ToInt32(reader["PAYCONDITION_ID"]),
                             InstalmentNumber = Convert.ToInt32(reader["INSTALMENT_NUMBER"]),
-                            TotalDays = Convert.ToInt32(reader["DAYS_COUNT"]),
-                            PaymentMethod = _PMController.FindItemId(Convert.ToInt32(reader["METHOD_ID"])),
+                            TotalDays = Convert.ToInt32(reader["total_days"]),
+                            PaymentMethod = _PMController.FindItemId(Convert.ToInt32(reader["PAYMETHOD_ID"])),
                             ValuePercentage = Convert.ToDouble(reader["VALUE_PERCENTAGE"]),
                             dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                             dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
@@ -258,6 +258,50 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
 
             }
+        }
+
+        public List<BillsInstalments> SelectDTByCondIdFromDB(int payConditionId)
+        {
+            string sql = "SELECT * FROM BILLSINSTALMENTS WHERE PAYCONDITION_ID = " + payConditionId + ";";
+            List<BillsInstalments> list = new List<BillsInstalments>();
+            PaymentMethods_Controller _PMController = new PaymentMethods_Controller();
+            SqlConnection con = new SqlConnection(connectionString);
+            SqlCommand cmd = new SqlCommand(sql, con);
+            cmd.CommandType = CommandType.Text;
+            DataTable dt = new DataTable();
+            try
+            {
+                con.Open();
+                SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(sql, connectionString);
+                sqlDataAdapter.Fill(dt);
+
+                if (dt.Rows.Count > 0)
+                {
+                    foreach (DataRow dr in dt.Rows)
+                    {
+                        BillsInstalments item = new BillsInstalments()
+                        {
+                            id = Convert.ToInt32(dr["PAYCONDITION_ID"]),
+                            InstalmentNumber = Convert.ToInt32(dr["INSTALMENT_NUMBER"]),
+                            TotalDays = Convert.ToInt32(dr["total_days"]),
+                            PaymentMethod = _PMController.FindItemId(Convert.ToInt32(dr["PAYMETHOD_ID"])),
+                            ValuePercentage = Convert.ToDouble(dr["VALUE_PERCENTAGE"]),
+                            dateOfCreation = Convert.ToDateTime(dr["date_creation"]),
+                            dateOfLastUpdate = Convert.ToDateTime(dr["date_last_update"])
+                        };
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error : " + ex.Message);
+            }
+            finally
+            {
+                con.Close();
+            }
+            return list;
         }
 
         public DataTable SelectDataSourceFromDB() 

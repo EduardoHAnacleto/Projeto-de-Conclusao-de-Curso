@@ -78,11 +78,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         {
                             if (instalment != null)
                             {
-                                _billsInstalmentsController.SaveItem(instalment);
+                                status = _billsInstalmentsController.SaveItem(instalment);
+                                if (!status)
+                                {
+                                    MessageBox.Show("Ocorreu algum erro.");
+                                    break;
+                                }
                             }
                         }
-                        MessageBox.Show("Register added with success!");
-                        status = true;
+                        if (status)
+                        {
+                            MessageBox.Show("Register added with success!");
+                        }
                     }
                 }
                 catch (Exception ex)
