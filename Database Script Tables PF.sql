@@ -227,10 +227,6 @@ create table BILLSINSTALMENTS(
 		primary key (serviceOrder_id,numberInstalment)
     );
 
-
-
-
-
     create table SALES(
         id_sale int identity(2,1) primary key,
         payConditionId int not null references PaymentConditions(id_paycondition),
@@ -605,15 +601,15 @@ create table BILLSINSTALMENTS(
 
 
 	    create table OSITEMS(
-        ID_OSITEM int identity(2,1) primary key,
-		OS_ID int REFERENCES Sales(id_sale),
+		OS_ID int not null REFERENCES Sales(id_sale),
         PRODUCT_ID int not null references Products(id_product),
         QUANTITY int not null,
         SALE_VALUE decimal not null,
         DISCOUNT decimal not null,
         TOTAL_VALUE decimal not null,
         DATE_CREATION date not null,
-        DATE_LAST_UPDATE date not null
+        DATE_LAST_UPDATE date not null,
+        primary key (OS_ID, PRODUCT_ID)
     );
 
     create table SALEITEMS(
@@ -661,6 +657,7 @@ create table BILLSINSTALMENTS(
         isPaid int not null,
         paidDate date,
         BillValue decimal(10,2) not null,
+        user_id int not null references USERS(id_user),
         payCondition_id int not null references PaymentConditions(id_paycondition),
         supplier_id int not null references Suppliers(id_supplier),
         purchase_id int not null references PURCHASES(id_purchase),

@@ -5,6 +5,7 @@ using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.FormsCreate;
 using ProjetoEduardoAnacletoWindowsForm1.InheritForms;
 using ProjetoEduardoAnacletoWindowsForm1.MasterDetails;
+using ProjetoEduardoAnacletoWindowsForm1.Next;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
 using System;
 using System.Collections.Generic;

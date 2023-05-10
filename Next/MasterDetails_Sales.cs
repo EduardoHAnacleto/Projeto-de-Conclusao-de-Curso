@@ -22,5 +22,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
         {
 
         }
+
+        private void btn_SearchPayCond_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

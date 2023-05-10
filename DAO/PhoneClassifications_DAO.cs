@@ -15,8 +15,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 {
     public class PhoneClassifications_DAO : Master_DAO //Ok
     {
-        private string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
-        //private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         public override int NewId()
         {

@@ -16,7 +16,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
     public class BillsToPay_DAO //TO DO
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private readonly BillsInstalments_Controller _billsInstalmentsController = new BillsInstalments_Controller();
         private readonly PaymentConditions_Controller _paymentConditionsController = new PaymentConditions_Controller();
         private readonly PaymentMethods_Controller _paymentMethodsController = new PaymentMethods_Controller();

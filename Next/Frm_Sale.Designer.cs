@@ -106,6 +106,7 @@
             this.edt_payCondition = new System.Windows.Forms.TextBox();
             this.edt_payConditionId = new System.Windows.Forms.NumericUpDown();
             this.lbl_payConditionID = new System.Windows.Forms.Label();
+            this.lbl_requiredCamps = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -222,7 +223,7 @@
             this.gbox_Salesman.Size = new System.Drawing.Size(282, 100);
             this.gbox_Salesman.TabIndex = 7;
             this.gbox_Salesman.TabStop = false;
-            this.gbox_Salesman.Text = "Salesman";
+            this.gbox_Salesman.Text = "* Salesman";
             // 
             // edt_userId
             // 
@@ -276,7 +277,7 @@
             this.gbox_client.Size = new System.Drawing.Size(386, 100);
             this.gbox_client.TabIndex = 8;
             this.gbox_client.TabStop = false;
-            this.gbox_client.Text = "Client";
+            this.gbox_client.Text = "* Client";
             // 
             // medt_registrationNumber
             // 
@@ -786,7 +787,7 @@
             this.gbox_paymentCondition.Size = new System.Drawing.Size(787, 166);
             this.gbox_paymentCondition.TabIndex = 27;
             this.gbox_paymentCondition.TabStop = false;
-            this.gbox_paymentCondition.Text = "Payment Condition";
+            this.gbox_paymentCondition.Text = "* Payment Condition";
             // 
             // DGV_Instalments
             // 
@@ -964,11 +965,21 @@
             this.lbl_payConditionID.TabIndex = 0;
             this.lbl_payConditionID.Text = "ID";
             // 
+            // lbl_requiredCamps
+            // 
+            this.lbl_requiredCamps.AutoSize = true;
+            this.lbl_requiredCamps.Location = new System.Drawing.Point(12, 495);
+            this.lbl_requiredCamps.Name = "lbl_requiredCamps";
+            this.lbl_requiredCamps.Size = new System.Drawing.Size(108, 13);
+            this.lbl_requiredCamps.TabIndex = 28;
+            this.lbl_requiredCamps.Text = "* Camps are required.";
+            // 
             // Frm_Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1013, 657);
+            this.Controls.Add(this.lbl_requiredCamps);
             this.Controls.Add(this.gbox_paymentCondition);
             this.Controls.Add(this.gbox_date);
             this.Controls.Add(this.gbox_Product);
@@ -978,7 +989,7 @@
             this.Controls.Add(this.gbox_Salesman);
             this.Controls.Add(this.DGV_SaleProducts);
             this.Name = "Frm_Sale";
-            this.Text = "Vendas";
+            this.Text = "Sales";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Frm_Sale_KeyPress);
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).EndInit();
             this.gbox_Salesman.ResumeLayout(false);
@@ -1013,6 +1024,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1095,5 +1107,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemDiscountPerc;
         private System.Windows.Forms.DataGridViewTextBoxColumn UnValueProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductTotalValue;
+        private System.Windows.Forms.Label lbl_requiredCamps;
     }
 }

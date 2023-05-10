@@ -92,6 +92,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         }
                     }
                 }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error : " + ex.Message);
@@ -141,6 +148,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         //}
                     }
 
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
                 catch (Exception ex)
                 {

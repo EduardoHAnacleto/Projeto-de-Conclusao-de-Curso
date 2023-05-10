@@ -1,4 +1,5 @@
-﻿using ProjetoEduardoAnacletoWindowsForm1.Models;
+﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using ProjetoEduardoAnacletoWindowsForm1.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -7,22 +8,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using NUnit.Framework;
-using ProjetoEduardoAnacletoWindowsForm1.Controllers;
-using System.Configuration;
 
-namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
+namespace ProjetoEduardoAnacletoWindowsForm1.Next
 {
-    public class PurchaseItems_DAO
+    public class OSItems_DAO
     {
-        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private string connectionString = string.Empty;
         private readonly Products_Controller _prodController = new Products_Controller();
 
-        public bool SaveToDb(PurchaseItems obj)
+        public bool SaveToDb(OSItems obj)
         {
             bool status = false;
 
-            string sql = "INSERT INTO PURCHASEITEMS ( ID_PURCHASE, PRODUCT_ID, QUANTITY, ITEM_VALUE, ITEM_COST, DISCOUNT_CASH, DISCOUNT_PERC," +
+            string sql = "INSERT INTO OSITEMS ( OS_ID, PRODUCT_ID, QUANTITY, ITEM_VALUE, ITEM_COST, DISCOUNT_CASH, DISCOUNT_PERC," +
                 "TOTAL_VALUE , DATE_CREATION, DATE_LAST_UPDATE ) "
                          + " VALUES (@ID, @PRODVALUE, @PRODCOST, @TOTALVALUE, @DISCCASH, @DISCPERC, @QTD, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -30,7 +28,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@ID", obj.PurchaseId);
+                    command.Parameters.AddWithValue("@ID", obj.OSId);
                     command.Parameters.AddWithValue("@PRODVALUE", (decimal)obj.ProductValue);
                     command.Parameters.AddWithValue("@PRODCOST", (decimal)obj.ProductCost);
                     command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.TotalValue);
@@ -48,6 +46,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         status = true;
                     }
                 }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error : " + ex.Message);
@@ -61,9 +66,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
         }
 
-        public List<PurchaseItems> SelectFromDb(int id)
+        public List<OSItems> SelectFromDb(int id)
         {
-            string sql = "SELECT * FROM PURCHASEITEMS WHERE PURCHASE_ID = @ID ;";
+            string sql = "SELECT * FROM OSITEMS WHERE OS_ID = @ID ;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -76,13 +81,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 {
                     if (reader.HasRows)
                     {
-                        List<PurchaseItems> list = new List<PurchaseItems>();
-                        foreach (PurchaseItems item in reader)
+                        List<OSItems> list = new List<OSItems>();
+                        foreach (OSItems item in reader)
                         {
-                            PurchaseItems obj = new PurchaseItems 
+                            OSItems obj = new OSItems
                             {
-                                id = Convert.ToInt32(reader["id_purchase"]),
-                                PurchaseId = Convert.ToInt32(reader["id_purchase"]),
+                                id = Convert.ToInt32(reader["OS_ID"]),
+                                OSId = Convert.ToInt32(reader["id_sale"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 ProductValue = Convert.ToDouble(reader["item_value"]),
@@ -110,9 +115,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             return null;
         }
 
-        public List<PurchaseItems> SelectProductIdFromDb(int id)
+        public List<OSItems> SelectProductIdFromDb(int id)
         {
-            string sql = "SELECT * FROM PURCHASEITEMS WHERE PRODUCT_ID = @ID ;";
+            string sql = "SELECT * FROM OSITEMS WHERE PRODUCT_ID = @ID ;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -125,13 +130,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 {
                     if (reader.HasRows)
                     {
-                        List<PurchaseItems> list = new List<PurchaseItems>();
-                        foreach (PurchaseItems item in reader)
+                        List<OSItems> list = new List<OSItems>();
+                        foreach (OSItems item in reader)
                         {
-                            PurchaseItems obj = new PurchaseItems
+                            OSItems obj = new OSItems
                             {
-                                id = Convert.ToInt32(reader["id_purchase"]),
-                                PurchaseId = Convert.ToInt32(reader["id_purchase"]),
+                                id = Convert.ToInt32(reader["OS_ID"]),
+                                OSId = Convert.ToInt32(reader["OS_ID"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 ProductValue = Convert.ToDouble(reader["item_value"]),
@@ -159,9 +164,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             return null;
         }
 
-        public List<PurchaseItems> SelectTotalValueFromDb(decimal minValue)
+        public List<OSItems> SelectTotalValueFromDb(decimal minValue)
         {
-            string sql = "SELECT * FROM PURCHASEITEMS WHERE TOTAL_VALUE >= @MINVALUE ;";
+            string sql = "SELECT * FROM OSITEMS WHERE TOTAL_VALUE >= @MINVALUE ;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -174,13 +179,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 {
                     if (reader.HasRows)
                     {
-                        List<PurchaseItems> list = new List<PurchaseItems>();
-                        foreach (PurchaseItems item in reader)
+                        List<OSItems> list = new List<OSItems>();
+                        foreach (OSItems item in reader)
                         {
-                            PurchaseItems obj = new PurchaseItems
+                            OSItems obj = new OSItems
                             {
-                                id = Convert.ToInt32(reader["id_purchase"]),
-                                PurchaseId = Convert.ToInt32(reader["id_purchase"]),
+                                id = Convert.ToInt32(reader["OS_ID"]),
+                                OSId = Convert.ToInt32(reader["OS_ID"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 ProductValue = Convert.ToDouble(reader["item_value"]),
@@ -208,9 +213,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             return null;
         }
 
-        public List<PurchaseItems> SelectPurchaseIdFromDb(int id)
+        public List<OSItems> SelectSaleIdFromDb(int id)
         {
-            string sql = "SELECT * FROM PURCHASEITEMS WHERE ID_PURCHASE = @ID ;";
+            string sql = "SELECT * FROM OSITEMS WHERE OS_ID = @ID ;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -223,13 +228,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 {
                     if (reader.HasRows)
                     {
-                        List<PurchaseItems> list = new List<PurchaseItems>();
-                        foreach (PurchaseItems item in reader)
+                        List<OSItems> list = new List<OSItems>();
+                        foreach (OSItems item in reader)
                         {
-                            PurchaseItems obj = new PurchaseItems
+                            OSItems obj = new OSItems
                             {
-                                id = Convert.ToInt32(reader["id_purchase"]),
-                                PurchaseId = Convert.ToInt32(reader["id_purchase"]),
+                                id = Convert.ToInt32(reader["OS_ID"]),
+                                OSId = Convert.ToInt32(reader["OS_ID"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 ProductValue = Convert.ToDouble(reader["item_value"]),
@@ -257,10 +262,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             return null;
         }
 
-        public List<PurchaseItems> SelectAllFromDb()
+        public List<OSItems> SelectAllFromDb()
         {
-            string sql = "SELECT * FROM PURCHASEITEMS ;";
-            List<PurchaseItems> purchaseItems = null;
+            string sql = "SELECT * FROM OSITEMS ;";
+            List<OSItems> saleItems = null;
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -272,15 +277,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 {
                     if (reader.HasRows)
                     {
-                        purchaseItems = new List<PurchaseItems>();
-                        foreach (PurchaseItems item in reader)
+                        saleItems = new List<OSItems>();
+                        foreach (OSItems item in reader)
                         {
-                            purchaseItems.Add(item);
+                            saleItems.Add(item);
                         }
                     }
                     else
                     {
-                        purchaseItems = null;
+                        saleItems = null;
                     }
                 }
             }
@@ -292,13 +297,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             {
                 con.Close();
             }
-            return purchaseItems;
+            return saleItems;
         }
 
         public bool DeleteFromDb(int id)
         {
             bool status = false;
-            string sql = "DELETE FROM SALES WHERE ID_PURCHASEITEMS = @ID ;";
+            string sql = "DELETE FROM OSITEMS WHERE OS_ID = @ID ;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -329,7 +334,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         public DataTable SelectDataSourceFromDB() //Busca no banco um SqlDataAdapter e joga em um obj DataTable e devolve para COntroller para popular DGV
         {
-            string sql = "SELECT * FROM PURCHASEITEMS ;";
+            string sql = "SELECT * FROM SALEITEMS ;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -352,4 +357,3 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         }
     }
 }
-

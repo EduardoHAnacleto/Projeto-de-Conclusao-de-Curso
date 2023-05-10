@@ -15,7 +15,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 {
     public class BillsToReceive_DAO
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private readonly BillsInstalments_Controller _billsInstalmentsController = new BillsInstalments_Controller();
         private readonly PaymentConditions_Controller _paymentConditionsController = new PaymentConditions_Controller();
         private readonly Clients_Controller _clientsController = new Clients_Controller();

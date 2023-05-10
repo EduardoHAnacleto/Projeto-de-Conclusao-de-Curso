@@ -14,8 +14,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
     public class Countries_DAO : Master_DAO
     {
-        //private string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
-        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         public override int NewId()
         {

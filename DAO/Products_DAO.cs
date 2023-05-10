@@ -16,8 +16,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
     public class Products_DAO : Master_DAO //Ok
     {
-        //private string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
-        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         public override int NewId()
         {
@@ -76,6 +75,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     }
 
                 }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error : " + ex.Message);
@@ -118,6 +124,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         status = true;
                     }
 
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
                 catch (Exception ex)
                 {

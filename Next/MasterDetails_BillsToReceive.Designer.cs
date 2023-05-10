@@ -59,12 +59,25 @@
             this.lbl_saleNumber = new System.Windows.Forms.Label();
             this.edt_saleNumber = new System.Windows.Forms.NumericUpDown();
             this.btn_exit = new System.Windows.Forms.Button();
+            this.gbox_clientFilters = new System.Windows.Forms.GroupBox();
+            this.rbtn_Natural = new System.Windows.Forms.RadioButton();
+            this.rbtn_LegalClients = new System.Windows.Forms.RadioButton();
+            this.btn_ClearClientFilters = new System.Windows.Forms.Button();
+            this.gbox_SaleFilters = new System.Windows.Forms.GroupBox();
+            this.btn_ClearSaleFilters = new System.Windows.Forms.Button();
+            this.lbl_payCondition = new System.Windows.Forms.Label();
+            this.btn_SearchPayCond = new System.Windows.Forms.Button();
+            this.edt_payCondition = new System.Windows.Forms.TextBox();
+            this.rbtn_PaidStatus = new System.Windows.Forms.RadioButton();
+            this.rbtn_ActiveStatus = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).BeginInit();
             this.gbox_client.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_BillsToReceive)).BeginInit();
             this.gbox_billsToReceive.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_saleNumber)).BeginInit();
+            this.gbox_clientFilters.SuspendLayout();
+            this.gbox_SaleFilters.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGV_Clients
@@ -368,16 +381,134 @@
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
+            // gbox_clientFilters
+            // 
+            this.gbox_clientFilters.Controls.Add(this.rbtn_Natural);
+            this.gbox_clientFilters.Controls.Add(this.rbtn_LegalClients);
+            this.gbox_clientFilters.Controls.Add(this.btn_ClearClientFilters);
+            this.gbox_clientFilters.Location = new System.Drawing.Point(758, 40);
+            this.gbox_clientFilters.Name = "gbox_clientFilters";
+            this.gbox_clientFilters.Size = new System.Drawing.Size(136, 74);
+            this.gbox_clientFilters.TabIndex = 13;
+            this.gbox_clientFilters.TabStop = false;
+            this.gbox_clientFilters.Text = "Client Filters";
+            // 
+            // rbtn_Natural
+            // 
+            this.rbtn_Natural.AutoSize = true;
+            this.rbtn_Natural.Location = new System.Drawing.Point(6, 45);
+            this.rbtn_Natural.Name = "rbtn_Natural";
+            this.rbtn_Natural.Size = new System.Drawing.Size(59, 17);
+            this.rbtn_Natural.TabIndex = 9;
+            this.rbtn_Natural.TabStop = true;
+            this.rbtn_Natural.Text = "Natural";
+            this.rbtn_Natural.UseVisualStyleBackColor = true;
+            // 
+            // rbtn_LegalClients
+            // 
+            this.rbtn_LegalClients.AutoSize = true;
+            this.rbtn_LegalClients.Location = new System.Drawing.Point(6, 22);
+            this.rbtn_LegalClients.Name = "rbtn_LegalClients";
+            this.rbtn_LegalClients.Size = new System.Drawing.Size(51, 17);
+            this.rbtn_LegalClients.TabIndex = 8;
+            this.rbtn_LegalClients.TabStop = true;
+            this.rbtn_LegalClients.Text = "Legal";
+            this.rbtn_LegalClients.UseVisualStyleBackColor = true;
+            // 
+            // btn_ClearClientFilters
+            // 
+            this.btn_ClearClientFilters.Location = new System.Drawing.Point(73, 39);
+            this.btn_ClearClientFilters.Name = "btn_ClearClientFilters";
+            this.btn_ClearClientFilters.Size = new System.Drawing.Size(57, 23);
+            this.btn_ClearClientFilters.TabIndex = 7;
+            this.btn_ClearClientFilters.Text = "Reset";
+            this.btn_ClearClientFilters.UseVisualStyleBackColor = true;
+            // 
+            // gbox_SaleFilters
+            // 
+            this.gbox_SaleFilters.Controls.Add(this.btn_ClearSaleFilters);
+            this.gbox_SaleFilters.Controls.Add(this.lbl_payCondition);
+            this.gbox_SaleFilters.Controls.Add(this.btn_SearchPayCond);
+            this.gbox_SaleFilters.Controls.Add(this.edt_payCondition);
+            this.gbox_SaleFilters.Controls.Add(this.rbtn_PaidStatus);
+            this.gbox_SaleFilters.Controls.Add(this.rbtn_ActiveStatus);
+            this.gbox_SaleFilters.Location = new System.Drawing.Point(900, 25);
+            this.gbox_SaleFilters.Name = "gbox_SaleFilters";
+            this.gbox_SaleFilters.Size = new System.Drawing.Size(262, 140);
+            this.gbox_SaleFilters.TabIndex = 14;
+            this.gbox_SaleFilters.TabStop = false;
+            this.gbox_SaleFilters.Text = "Bills To Receive Filters";
+            // 
+            // btn_ClearSaleFilters
+            // 
+            this.btn_ClearSaleFilters.Location = new System.Drawing.Point(196, 16);
+            this.btn_ClearSaleFilters.Name = "btn_ClearSaleFilters";
+            this.btn_ClearSaleFilters.Size = new System.Drawing.Size(57, 23);
+            this.btn_ClearSaleFilters.TabIndex = 6;
+            this.btn_ClearSaleFilters.Text = "Reset";
+            this.btn_ClearSaleFilters.UseVisualStyleBackColor = true;
+            // 
+            // lbl_payCondition
+            // 
+            this.lbl_payCondition.AutoSize = true;
+            this.lbl_payCondition.Location = new System.Drawing.Point(6, 98);
+            this.lbl_payCondition.Name = "lbl_payCondition";
+            this.lbl_payCondition.Size = new System.Drawing.Size(95, 13);
+            this.lbl_payCondition.TabIndex = 5;
+            this.lbl_payCondition.Text = "Payment Condition";
+            // 
+            // btn_SearchPayCond
+            // 
+            this.btn_SearchPayCond.Location = new System.Drawing.Point(196, 114);
+            this.btn_SearchPayCond.Name = "btn_SearchPayCond";
+            this.btn_SearchPayCond.Size = new System.Drawing.Size(57, 20);
+            this.btn_SearchPayCond.TabIndex = 4;
+            this.btn_SearchPayCond.Text = "Search";
+            this.btn_SearchPayCond.UseVisualStyleBackColor = true;
+            // 
+            // edt_payCondition
+            // 
+            this.edt_payCondition.Enabled = false;
+            this.edt_payCondition.Location = new System.Drawing.Point(6, 114);
+            this.edt_payCondition.MaxLength = 50;
+            this.edt_payCondition.Name = "edt_payCondition";
+            this.edt_payCondition.Size = new System.Drawing.Size(184, 20);
+            this.edt_payCondition.TabIndex = 3;
+            // 
+            // rbtn_PaidStatus
+            // 
+            this.rbtn_PaidStatus.AutoSize = true;
+            this.rbtn_PaidStatus.Location = new System.Drawing.Point(6, 45);
+            this.rbtn_PaidStatus.Name = "rbtn_PaidStatus";
+            this.rbtn_PaidStatus.Size = new System.Drawing.Size(46, 17);
+            this.rbtn_PaidStatus.TabIndex = 2;
+            this.rbtn_PaidStatus.TabStop = true;
+            this.rbtn_PaidStatus.Text = "Paid";
+            this.rbtn_PaidStatus.UseVisualStyleBackColor = true;
+            // 
+            // rbtn_ActiveStatus
+            // 
+            this.rbtn_ActiveStatus.AutoSize = true;
+            this.rbtn_ActiveStatus.Location = new System.Drawing.Point(6, 22);
+            this.rbtn_ActiveStatus.Name = "rbtn_ActiveStatus";
+            this.rbtn_ActiveStatus.Size = new System.Drawing.Size(55, 17);
+            this.rbtn_ActiveStatus.TabIndex = 1;
+            this.rbtn_ActiveStatus.TabStop = true;
+            this.rbtn_ActiveStatus.Text = "Active";
+            this.rbtn_ActiveStatus.UseVisualStyleBackColor = true;
+            // 
             // MasterDetails_BillsToReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1165, 640);
+            this.Controls.Add(this.gbox_SaleFilters);
+            this.Controls.Add(this.gbox_clientFilters);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.gbox_billsToReceive);
             this.Controls.Add(this.gbox_client);
             this.Name = "MasterDetails_BillsToReceive";
-            this.Text = "Bills to Receive";
+            this.Text = "Clients - Bills to Receive";
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).EndInit();
             this.gbox_client.ResumeLayout(false);
             this.gbox_client.PerformLayout();
@@ -386,6 +517,10 @@
             this.gbox_billsToReceive.ResumeLayout(false);
             this.gbox_billsToReceive.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_saleNumber)).EndInit();
+            this.gbox_clientFilters.ResumeLayout(false);
+            this.gbox_clientFilters.PerformLayout();
+            this.gbox_SaleFilters.ResumeLayout(false);
+            this.gbox_SaleFilters.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -423,5 +558,16 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeClient;
         private System.Windows.Forms.Button btn_ClearDateSort;
         private System.Windows.Forms.Button btn_resetClients;
+        private System.Windows.Forms.GroupBox gbox_clientFilters;
+        private System.Windows.Forms.RadioButton rbtn_Natural;
+        private System.Windows.Forms.RadioButton rbtn_LegalClients;
+        private System.Windows.Forms.Button btn_ClearClientFilters;
+        private System.Windows.Forms.GroupBox gbox_SaleFilters;
+        private System.Windows.Forms.Button btn_ClearSaleFilters;
+        private System.Windows.Forms.Label lbl_payCondition;
+        private System.Windows.Forms.Button btn_SearchPayCond;
+        private System.Windows.Forms.TextBox edt_payCondition;
+        private System.Windows.Forms.RadioButton rbtn_PaidStatus;
+        private System.Windows.Forms.RadioButton rbtn_ActiveStatus;
     }
 }

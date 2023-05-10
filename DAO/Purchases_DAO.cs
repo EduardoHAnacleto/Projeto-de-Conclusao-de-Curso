@@ -14,7 +14,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 {
     public class Purchases_DAO
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         private readonly PaymentConditions_Controller _paymentConditionsController = new PaymentConditions_Controller();
         private readonly Suppliers_Controller _suppliersController = new Suppliers_Controller();

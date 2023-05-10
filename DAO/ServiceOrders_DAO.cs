@@ -15,8 +15,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 {
     public class ServiceOrders_DAO
     {
-        //private string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
-        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         private readonly Users_Controller _usersController = new Users_Controller();
         private readonly Clients_Controller _clientsController = new Clients_Controller();

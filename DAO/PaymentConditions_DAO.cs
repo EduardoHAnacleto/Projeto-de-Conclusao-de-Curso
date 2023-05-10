@@ -18,8 +18,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
     public class PaymentConditions_DAO :Master_DAO//OK
     {
-        //private string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
-        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         private readonly BillsInstalments_Controller _billsInstalmentsController = new BillsInstalments_Controller();
 

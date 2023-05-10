@@ -8,12 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Configuration;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.Next
 {
     public class SaleItems_DAO
     {
-        private string connectionString = string.Empty;
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private readonly Products_Controller _prodController = new Products_Controller();
 
         public bool SaveToDb(SaleItems obj)
@@ -44,6 +45,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     {
                         MessageBox.Show("Register added with success!");
                         status = true;
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+                    {
+                        Console.WriteLine(ex.Message);
                     }
                 }
                 catch (Exception ex)
@@ -296,7 +304,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public bool DeleteFromDb(int id)
         {
             bool status = false;
-            string sql = "DELETE FROM SALES WHERE ID_SALEITEMS = @ID ;";
+            string sql = "DELETE FROM SALEITEMS WHERE ID_SALE = @ID ;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try

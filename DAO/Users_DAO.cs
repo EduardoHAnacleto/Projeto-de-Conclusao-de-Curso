@@ -14,7 +14,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
     public class Users_DAO : Master_DAO
     {
-        string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+        private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         public override int NewId()
         {
