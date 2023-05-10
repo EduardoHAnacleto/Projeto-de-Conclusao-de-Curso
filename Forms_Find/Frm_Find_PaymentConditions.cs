@@ -34,11 +34,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
         {
             BillsInstalments_Controller _BIController = new BillsInstalments_Controller();
             PaymentConditions obj = new PaymentConditions();
-            obj = controller.FindItemName(edt_payCond.Text);
-            if (obj == null)
-            {
-                obj = controller.FindItemId(Convert.ToInt32(edt_id.Value));
-            }
+            obj = controller.FindItemId(Convert.ToInt32(edt_id.Value));
             if (obj != null)
             {
                 List<BillsInstalments> list = new List<BillsInstalments>();

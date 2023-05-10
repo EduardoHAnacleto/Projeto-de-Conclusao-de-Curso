@@ -39,9 +39,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         }
 
         private Sales BackupSale = null;
-        private Products product = new Products();
+        private Products product = null;
         private Products_Controller _pController = new Products_Controller();
-        private Sales_Controller _controller = new Sales_Controller();
+        private Sales_Controller _controller = null;
 
         private void lbl_subTotal_Click(object sender, EventArgs e)
         {
@@ -221,13 +221,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             {
                 SearchProduct();
             }
-            if (product == null)
-            {
-                if (Utilities.AskToFind())
-                {
-                    NewFormSearchProduct();
-                }
-            }
         }
 
         public void PopulateProduct(Products prod) //Popula campos do produto
@@ -288,7 +281,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                              + sale.Client.name
                              + Environment.NewLine
                              + "Payment Condition : "
-                             + sale.BillToReceive[0].Condition.conditionName
+                             + sale.BillToReceive[0].PayCondition.conditionName
                              + Environment.NewLine
                              + "Sub-Total : "
                              + edt_subtotal.Value.ToString()
@@ -445,12 +438,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     {
                         if (ConfirmSale(sale))
                         {
+                            _controller = new Sales_Controller();
                             _controller.SaveItem(sale);
                             Populated(false);
                         }
                     }
                     else if (btn_new.Text == "Cancel")
                     {
+                        _controller = new Sales_Controller();
                         _controller.UpdateItem(sale);
                         SetFormToEdit();
                     }
@@ -467,6 +462,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             LockCamps();
             try
             {
+                _controller = new Sales_Controller();
                 _controller.DeleteItem(BackupSale.id);
                 this.ClearCamps();
             }
@@ -537,7 +533,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             int num = 1;
             foreach (BillsInstalments instalment in Condition.BillsInstalments)
             {
-                bill.Condition = Condition;
+                bill.PayCondition = Condition;
                 bill.IsPaid = false;
                 bill.Client = client;
                 bill.dateOfCreation = emissionDate;
@@ -649,11 +645,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public void PopulatePaymentCondition(Sales sale)
         {
-            edt_payCondition.Text = sale.BillToReceive[0].Condition.conditionName;
-            edt_payConditionDiscount.Value = (decimal) sale.BillToReceive[0].Condition.discountPerc ;
-            edt_payConditionFees.Value = (decimal)sale.BillToReceive[0].Condition.paymentFees;
-            edt_payConditionFine.Value = (decimal)sale.BillToReceive[0].Condition.fineValue;
-            edt_payConditionId.Value = (decimal)sale.BillToReceive[0].Condition.id;
+            edt_payCondition.Text = sale.BillToReceive[0].PayCondition.conditionName;
+            edt_payConditionDiscount.Value = (decimal) sale.BillToReceive[0].PayCondition.discountPerc ;
+            edt_payConditionFees.Value = (decimal)sale.BillToReceive[0].PayCondition.paymentFees;
+            edt_payConditionFine.Value = (decimal)sale.BillToReceive[0].PayCondition.fineValue;
+            edt_payConditionId.Value = (decimal)sale.BillToReceive[0].PayCondition.id;
             edt_payConditionQnt.Value = (decimal)sale.BillToReceive[0].InstalmentsQtd;
         }
 

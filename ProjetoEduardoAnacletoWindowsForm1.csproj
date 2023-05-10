@@ -268,9 +268,9 @@
     <Compile Include="Models\PurchaseItems.cs" />
     <Compile Include="Controllers\PurchaseItems_Controller.cs" />
     <Compile Include="DAO\PurchaseItems_DAO.cs" />
-    <Compile Include="Next\Purchases.cs" />
-    <Compile Include="Next\Purchases_Controller.cs" />
-    <Compile Include="Next\Purchases_DAO.cs" />
+    <Compile Include="Models\Purchases.cs" />
+    <Compile Include="Controllers\Purchases_Controller.cs" />
+    <Compile Include="DAO\Purchases_DAO.cs" />
     <Compile Include="DAO\SaleItems_DAO.cs" />
     <Compile Include="DAO\Sales_DAO.cs" />
     <Compile Include="DAO\ServiceOrders_DAO.cs" />

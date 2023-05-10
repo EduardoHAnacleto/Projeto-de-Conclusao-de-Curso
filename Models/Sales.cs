@@ -10,10 +10,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
     {
         public Sales()
         {
-            List<BillsToReceive> BillToReceive = new List<BillsToReceive>();
-            List<SaleItems> SaleItems = new List<SaleItems>();
-            Clients Client = new Clients();
-            Users User = new Users();
+            List<BillsToReceive> BillToReceive; 
+            List<SaleItems> SaleItems; 
+            Clients Client;
+            Users User;
         }
 
         public Users User { get; set; }

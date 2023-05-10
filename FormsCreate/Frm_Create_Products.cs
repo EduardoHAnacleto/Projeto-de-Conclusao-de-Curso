@@ -22,6 +22,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             PopulateProductGroupsComboBox();
             PopulateBrandsComboBox();
             edt_stock.Controls[0].Visible = false;
+            edt_productCost.Controls[0].Visible = false;
         }
 
         private Products_Controller controller = new Products_Controller();
@@ -76,7 +77,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             else if (Convert.ToDecimal(edt_productCost.Text) > Convert.ToDecimal(edt_productSalePrice.Text))
             {
-                string message = "Product cost must be lower than the sell price.";
+                string message = "Sell price must be higher than the product cost.";
                 string caption = "Product price is wrong.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
@@ -325,8 +326,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         
         public void CalculateProfit()
         {
-            var profit = Convert.ToDecimal(edt_productCost.Text) * ((edt_ProfitPerc.Value * 100) + 1);
-            edt_productSalePrice.Text = profit.ToString();
+            var profit = Convert.ToDecimal(edt_productCost.Value) * ((edt_ProfitPerc.Value/100)+1);
+            edt_productSalePrice.Text = profit.ToString("0.##");
         }
 
         private void edt_ProfitPerc_ValueChanged(object sender, EventArgs e)

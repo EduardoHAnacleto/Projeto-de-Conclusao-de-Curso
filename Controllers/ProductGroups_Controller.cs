@@ -56,7 +56,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         return ds;
     }
 
-    public new int BringNewId()
+    public override int BringNewId()
     {
         return _productGroupsDAO.NewId();
      }

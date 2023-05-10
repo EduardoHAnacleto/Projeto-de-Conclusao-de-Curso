@@ -13,8 +13,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
     public class PaymentMethods_DAO :Master_DAO //OK
     {
-
-        //private string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
         string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
         public override int NewId()
@@ -52,7 +50,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "INSERT INTO PAYMENTMETHODS (  PAYMENT_METHOD, DATE_CREATION, DATE_LAST_UPDATE) "
+            string sql = "INSERT INTO PAYMENTMETHODS ( PAYMENT_METHOD, DATE_CREATION, DATE_LAST_UPDATE) "
                          + " VALUES (@NAME, @DC, @DU)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

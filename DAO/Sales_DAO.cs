@@ -205,7 +205,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 obj.id = id;
                                 obj.User = _usersController.FindItemId( Convert.ToInt32(reader["user_id"]));
                                 obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                obj.BillToReceive = _billToReceiveController.FindItemId(id);
+                                obj.BillToReceive = _billToReceiveController.FindSaleId(id);
                                 obj.SaleItems = _saleItemsController.FindSaleId(id);
                                 obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                 obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
@@ -255,7 +255,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.id = Convert.ToInt32(reader["id_sale"]); ;
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(id);
-                                    obj.BillToReceive = _billToReceiveController.FindItemId(Convert.ToInt32(reader["id_sale"]));
+                                    obj.BillToReceive = _billToReceiveController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
@@ -308,7 +308,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.id = Convert.ToInt32(reader["id_sale"]); ;
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                    obj.BillToReceive = _billToReceiveController.FindItemId(Convert.ToInt32(reader["id_sale"]));
+                                    obj.BillToReceive = _billToReceiveController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
@@ -360,7 +360,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.id = Convert.ToInt32(reader["id_sale"]); ;
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                    obj.BillToReceive = _billToReceiveController.FindItemId(Convert.ToInt32(reader["id_sale"]));
+                                    obj.BillToReceive = _billToReceiveController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
@@ -412,7 +412,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.id = Convert.ToInt32(reader["id_sale"]); ;
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                    obj.BillToReceive = _billToReceiveController.FindItemId(Convert.ToInt32(reader["id_sale"]));
+                                    obj.BillToReceive = _billToReceiveController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
@@ -463,7 +463,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.id = Convert.ToInt32(reader["id_sale"]); ;
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                    obj.BillToReceive = _billToReceiveController.FindItemId(Convert.ToInt32(reader["id_sale"]));
+                                    obj.BillToReceive = _billToReceiveController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);

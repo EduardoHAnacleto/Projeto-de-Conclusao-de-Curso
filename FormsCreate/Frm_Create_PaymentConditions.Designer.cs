@@ -34,7 +34,6 @@
             this.edt_daysCount = new System.Windows.Forms.NumericUpDown();
             this.edt_instalmentNumber = new System.Windows.Forms.NumericUpDown();
             this.lbl_valuePercentage = new System.Windows.Forms.Label();
-            this.edt_valuePercentage = new System.Windows.Forms.TextBox();
             this.btn_SearchMethod = new System.Windows.Forms.Button();
             this.lbl_method = new System.Windows.Forms.Label();
             this.lbl_Days = new System.Windows.Forms.Label();
@@ -50,16 +49,21 @@
             this.lbl_paymentFee = new System.Windows.Forms.Label();
             this.lbl_paymentFine = new System.Windows.Forms.Label();
             this.lbl_paymentCondition = new System.Windows.Forms.Label();
-            this.edt_discount = new System.Windows.Forms.TextBox();
-            this.edt_paymentFee = new System.Windows.Forms.TextBox();
-            this.edt_paymentFine = new System.Windows.Forms.TextBox();
             this.edt_paymentCondition = new System.Windows.Forms.TextBox();
+            this.edt_paymentFine = new System.Windows.Forms.NumericUpDown();
+            this.edt_paymentFee = new System.Windows.Forms.NumericUpDown();
+            this.edt_discount = new System.Windows.Forms.NumericUpDown();
+            this.edt_valuePercentage = new System.Windows.Forms.NumericUpDown();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_Instalments.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_daysCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_paymentFine)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_paymentFee)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_discount)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_valuePercentage)).BeginInit();
             this.SuspendLayout();
             // 
             // lbl_LastUpdate
@@ -76,12 +80,12 @@
             // 
             // gbox_Instalments
             // 
+            this.gbox_Instalments.Controls.Add(this.edt_valuePercentage);
             this.gbox_Instalments.Controls.Add(this.lbl_totalPercentage);
             this.gbox_Instalments.Controls.Add(this.edt_totalPercentage);
             this.gbox_Instalments.Controls.Add(this.edt_daysCount);
             this.gbox_Instalments.Controls.Add(this.edt_instalmentNumber);
             this.gbox_Instalments.Controls.Add(this.lbl_valuePercentage);
-            this.gbox_Instalments.Controls.Add(this.edt_valuePercentage);
             this.gbox_Instalments.Controls.Add(this.btn_SearchMethod);
             this.gbox_Instalments.Controls.Add(this.lbl_method);
             this.gbox_Instalments.Controls.Add(this.lbl_Days);
@@ -89,9 +93,9 @@
             this.gbox_Instalments.Controls.Add(this.btn_AddInstalment);
             this.gbox_Instalments.Controls.Add(this.cbox_payMethods);
             this.gbox_Instalments.Location = new System.Drawing.Point(66, 104);
-            this.gbox_Instalments.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbox_Instalments.Margin = new System.Windows.Forms.Padding(2);
             this.gbox_Instalments.Name = "gbox_Instalments";
-            this.gbox_Instalments.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbox_Instalments.Padding = new System.Windows.Forms.Padding(2);
             this.gbox_Instalments.Size = new System.Drawing.Size(488, 62);
             this.gbox_Instalments.TabIndex = 29;
             this.gbox_Instalments.TabStop = false;
@@ -128,6 +132,7 @@
             // 
             // edt_instalmentNumber
             // 
+            this.edt_instalmentNumber.Enabled = false;
             this.edt_instalmentNumber.Location = new System.Drawing.Point(3, 38);
             this.edt_instalmentNumber.Maximum = new decimal(new int[] {
             300,
@@ -152,18 +157,10 @@
             this.lbl_valuePercentage.TabIndex = 25;
             this.lbl_valuePercentage.Text = "Percentage";
             // 
-            // edt_valuePercentage
-            // 
-            this.edt_valuePercentage.Location = new System.Drawing.Point(98, 37);
-            this.edt_valuePercentage.MaxLength = 6;
-            this.edt_valuePercentage.Name = "edt_valuePercentage";
-            this.edt_valuePercentage.Size = new System.Drawing.Size(46, 20);
-            this.edt_valuePercentage.TabIndex = 24;
-            // 
             // btn_SearchMethod
             // 
             this.btn_SearchMethod.Location = new System.Drawing.Point(309, 37);
-            this.btn_SearchMethod.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_SearchMethod.Margin = new System.Windows.Forms.Padding(2);
             this.btn_SearchMethod.Name = "btn_SearchMethod";
             this.btn_SearchMethod.Size = new System.Drawing.Size(50, 21);
             this.btn_SearchMethod.TabIndex = 23;
@@ -204,7 +201,7 @@
             // btn_AddInstalment
             // 
             this.btn_AddInstalment.Location = new System.Drawing.Point(363, 37);
-            this.btn_AddInstalment.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_AddInstalment.Margin = new System.Windows.Forms.Padding(2);
             this.btn_AddInstalment.Name = "btn_AddInstalment";
             this.btn_AddInstalment.Size = new System.Drawing.Size(56, 21);
             this.btn_AddInstalment.TabIndex = 19;
@@ -217,7 +214,7 @@
             this.cbox_payMethods.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbox_payMethods.FormattingEnabled = true;
             this.cbox_payMethods.Location = new System.Drawing.Point(157, 37);
-            this.cbox_payMethods.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbox_payMethods.Margin = new System.Windows.Forms.Padding(2);
             this.cbox_payMethods.Name = "cbox_payMethods";
             this.cbox_payMethods.Size = new System.Drawing.Size(148, 21);
             this.cbox_payMethods.TabIndex = 18;
@@ -232,7 +229,7 @@
             this.InstalmentPercentage,
             this.InstalmentPayMethod});
             this.DGV_Instalments.Location = new System.Drawing.Point(66, 170);
-            this.DGV_Instalments.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.DGV_Instalments.Margin = new System.Windows.Forms.Padding(2);
             this.DGV_Instalments.MultiSelect = false;
             this.DGV_Instalments.Name = "DGV_Instalments";
             this.DGV_Instalments.ReadOnly = true;
@@ -241,6 +238,7 @@
             this.DGV_Instalments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Instalments.Size = new System.Drawing.Size(479, 147);
             this.DGV_Instalments.TabIndex = 28;
+            this.DGV_Instalments.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_Instalments_RowsRemoved);
             this.DGV_Instalments.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.DGV_Instalments_UserDeletedRow);
             // 
             // InstalmentNumber
@@ -311,30 +309,6 @@
             this.lbl_paymentCondition.TabIndex = 24;
             this.lbl_paymentCondition.Text = "*Payment Condition";
             // 
-            // edt_discount
-            // 
-            this.edt_discount.Location = new System.Drawing.Point(176, 66);
-            this.edt_discount.MaxLength = 7;
-            this.edt_discount.Name = "edt_discount";
-            this.edt_discount.Size = new System.Drawing.Size(54, 20);
-            this.edt_discount.TabIndex = 23;
-            // 
-            // edt_paymentFee
-            // 
-            this.edt_paymentFee.Location = new System.Drawing.Point(121, 66);
-            this.edt_paymentFee.MaxLength = 7;
-            this.edt_paymentFee.Name = "edt_paymentFee";
-            this.edt_paymentFee.Size = new System.Drawing.Size(49, 20);
-            this.edt_paymentFee.TabIndex = 22;
-            // 
-            // edt_paymentFine
-            // 
-            this.edt_paymentFine.Location = new System.Drawing.Point(66, 66);
-            this.edt_paymentFine.MaxLength = 7;
-            this.edt_paymentFine.Name = "edt_paymentFine";
-            this.edt_paymentFine.Size = new System.Drawing.Size(49, 20);
-            this.edt_paymentFine.TabIndex = 21;
-            // 
             // edt_paymentCondition
             // 
             this.edt_paymentCondition.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
@@ -344,21 +318,63 @@
             this.edt_paymentCondition.Size = new System.Drawing.Size(312, 20);
             this.edt_paymentCondition.TabIndex = 20;
             // 
+            // edt_paymentFine
+            // 
+            this.edt_paymentFine.DecimalPlaces = 2;
+            this.edt_paymentFine.Location = new System.Drawing.Point(66, 67);
+            this.edt_paymentFine.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.edt_paymentFine.Name = "edt_paymentFine";
+            this.edt_paymentFine.Size = new System.Drawing.Size(49, 20);
+            this.edt_paymentFine.TabIndex = 30;
+            // 
+            // edt_paymentFee
+            // 
+            this.edt_paymentFee.DecimalPlaces = 2;
+            this.edt_paymentFee.Location = new System.Drawing.Point(121, 67);
+            this.edt_paymentFee.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.edt_paymentFee.Name = "edt_paymentFee";
+            this.edt_paymentFee.Size = new System.Drawing.Size(49, 20);
+            this.edt_paymentFee.TabIndex = 31;
+            // 
+            // edt_discount
+            // 
+            this.edt_discount.DecimalPlaces = 2;
+            this.edt_discount.Location = new System.Drawing.Point(176, 67);
+            this.edt_discount.Name = "edt_discount";
+            this.edt_discount.Size = new System.Drawing.Size(61, 20);
+            this.edt_discount.TabIndex = 32;
+            // 
+            // edt_valuePercentage
+            // 
+            this.edt_valuePercentage.DecimalPlaces = 2;
+            this.edt_valuePercentage.Location = new System.Drawing.Point(98, 37);
+            this.edt_valuePercentage.Name = "edt_valuePercentage";
+            this.edt_valuePercentage.Size = new System.Drawing.Size(51, 20);
+            this.edt_valuePercentage.TabIndex = 33;
+            // 
             // Frm_Create_PaymentConditions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(672, 379);
+            this.Controls.Add(this.edt_discount);
+            this.Controls.Add(this.edt_paymentFee);
+            this.Controls.Add(this.edt_paymentFine);
             this.Controls.Add(this.gbox_Instalments);
             this.Controls.Add(this.DGV_Instalments);
             this.Controls.Add(this.lbl_paymentDiscount);
             this.Controls.Add(this.lbl_paymentFee);
             this.Controls.Add(this.lbl_paymentFine);
             this.Controls.Add(this.lbl_paymentCondition);
-            this.Controls.Add(this.edt_discount);
-            this.Controls.Add(this.edt_paymentFee);
-            this.Controls.Add(this.edt_paymentFine);
             this.Controls.Add(this.edt_paymentCondition);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_PaymentConditions";
             this.Text = "Payment Conditions";
             this.Controls.SetChildIndex(this.lbl_id, 0);
@@ -369,15 +385,15 @@
             this.Controls.SetChildIndex(this.btn_Edit, 0);
             this.Controls.SetChildIndex(this.gbox_dates, 0);
             this.Controls.SetChildIndex(this.edt_paymentCondition, 0);
-            this.Controls.SetChildIndex(this.edt_paymentFine, 0);
-            this.Controls.SetChildIndex(this.edt_paymentFee, 0);
-            this.Controls.SetChildIndex(this.edt_discount, 0);
             this.Controls.SetChildIndex(this.lbl_paymentCondition, 0);
             this.Controls.SetChildIndex(this.lbl_paymentFine, 0);
             this.Controls.SetChildIndex(this.lbl_paymentFee, 0);
             this.Controls.SetChildIndex(this.lbl_paymentDiscount, 0);
             this.Controls.SetChildIndex(this.DGV_Instalments, 0);
             this.Controls.SetChildIndex(this.gbox_Instalments, 0);
+            this.Controls.SetChildIndex(this.edt_paymentFine, 0);
+            this.Controls.SetChildIndex(this.edt_paymentFee, 0);
+            this.Controls.SetChildIndex(this.edt_discount, 0);
             this.gbox_dates.ResumeLayout(false);
             this.gbox_dates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
@@ -386,6 +402,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_daysCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_paymentFine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_paymentFee)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_discount)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_valuePercentage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -405,12 +425,8 @@
         private System.Windows.Forms.Label lbl_paymentFee;
         private System.Windows.Forms.Label lbl_paymentFine;
         private System.Windows.Forms.Label lbl_paymentCondition;
-        private System.Windows.Forms.TextBox edt_discount;
-        private System.Windows.Forms.TextBox edt_paymentFee;
-        private System.Windows.Forms.TextBox edt_paymentFine;
         private System.Windows.Forms.TextBox edt_paymentCondition;
         private System.Windows.Forms.Label lbl_valuePercentage;
-        private System.Windows.Forms.TextBox edt_valuePercentage;
         private System.Windows.Forms.NumericUpDown edt_instalmentNumber;
         private System.Windows.Forms.NumericUpDown edt_daysCount;
         private System.Windows.Forms.Label lbl_totalPercentage;
@@ -419,5 +435,9 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn IntalmentDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentPercentage;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentPayMethod;
+        private System.Windows.Forms.NumericUpDown edt_paymentFine;
+        private System.Windows.Forms.NumericUpDown edt_paymentFee;
+        private System.Windows.Forms.NumericUpDown edt_discount;
+        private System.Windows.Forms.NumericUpDown edt_valuePercentage;
     }
 }

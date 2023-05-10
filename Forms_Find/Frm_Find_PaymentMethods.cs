@@ -26,7 +26,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
         public PaymentMethods GetObject()
         {
             PaymentMethods method = new PaymentMethods();
-            if (edt_id.Value <2)
+            if (edt_id.Value <=2)
             {
                 method = controller.FindItemName(edt_paymentMethod.Text);
                 return method;

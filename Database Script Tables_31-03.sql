@@ -58,14 +58,18 @@
         date_creation datetime not null,
         date_last_update datetime not null
     );
+	
+create table BILLSINSTALMENTS(
+    paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition) ON DELETE CASCADE,
+    instalment_number int not null,
+    paymethod_id int not null references PaymentMethods(id_payment_method),
+    total_days int not null,
+    value_percentage decimal(3,2),
+    date_creation datetime not null,
+    date_last_update datetime not null,
+    primary key (paycondition_id, instalment_number)
+);
 
-    create table PAYCONDITIONINSTALMENTS(
-		paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition) ON DELETE CASCADE,
-		instalment_number int not null,
-		days_count int not null,
-        value_percentage decimal(10,2) not null,	
-		method_id int not null references PAYMENTMETHODS(id_payment_method)
-	);
 
     create table PHONECLASSIFICATIONS(
 	    id_phoneClassification int identity(2,1) primary key,
@@ -133,6 +137,16 @@
         date_last_update datetime not null,		
 	);
 
+	    create table USERS(
+        id_user int identity(2,1) primary key,
+        employee_id int FOREIGN KEY references EMPLOYEES(id_employee),
+        userLogin varchar(15) not null,
+		userPassword varchar(15) not null,
+        levelAccess int not null,
+        date_creation datetime not null,
+        date_last_update datetime not null
+    );
+
     create table SUPPLIERS(
         id_supplier int identity(2,1) primary key,
         supplier_registration varchar(14),
@@ -176,42 +190,7 @@
         primary key (id_product, id_supplier)
     );
 
-    create table BILLSTOPAY(
-        billNumber int not null,
-        billModel int not null,
-        billSeries int not null ,
-        billPage int not null,
-		instalmentNumber int not null,
-        instalmentsQtd int not null,
-        dueDate date not null,
-        emissionDate date not null,
-        isPaid boolean not null,
-        paidDate date,
-        BillValue decimal(10,2) not null,
-        payCondition_id int not null references PaymentConditions(id_paycondition),
-        supplier_id int not null references Suppliers(id_supplier),
-        purchase_id int not null references PURCHASES(id_purchase),
-        date_creation datetime not null,
-        date_last_update datetime not null,
-        primary key (billNumber, billModel, billSeries, billPage, instalmentNumber)
-    );
 
-    create table BILLSINSTALMENTS(
-        paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition),
-        instalment_number int not null,
-        paymethod_id int not null references PaymentMethods(id_payment_method),
-        total_days int not null,
-        value_percentage decimal(3,2),
-        date_creation datetime not null,
-        date_last_update datetime not null,
-    );
-
-    create table SOINSTALMENTS(
-        billInstalment_id int not null references BILLSINSTALMENTS(id_billInstalment),
-        serviceOrder_id int not null references SERVICEORDERS(id_serviceOrder),
-        instalment_value decimal not null,
-        pay_status boolean not null
-    );
 
     create table SERVICES(
         id_service int identity(2,1) primary key,
@@ -224,10 +203,10 @@
     create table SERVICEORDERS(
         id_serviceOrder int identity(2,1) primary key,
         so_equipment varchar(50) not null,
-        service_id int references Services(id_service),
-        client_id int references CLIENTS(id_client),
-        user_id int references USERS(user_id),
-        extra_details varchar(255),
+        service_id int not null references Services(id_service),
+        client_id int not null references CLIENTS(id_client),
+        userid int not null references USERS(id_user),
+        extra_details varchar(250),
         so_cost decimal,
         so_value decimal,
         so_completedate datetime,
@@ -238,32 +217,18 @@
         date_last_update datetime not null
     );
 
-    create table OSITEMS(
-        ID_OSITEM int identity(2,1) primary key,
-		OS_ID int REFERENCES Sales(id_sale),
-        PRODUCT_ID int not null references Products(id_product),
-        QUANTITY int not null,
-        SALE_VALUE decimal not null,
-        DISCOUNT decimal not null,
-        TOTAL_VALUE decimal not null,
-        DATE_CREATION date not null,
-        DATE_LAST_UPDATE date not null
+	    create table SOINSTALMENTS(
+        paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition),
+		numberInstalment int,
+        serviceOrder_id int not null references SERVICEORDERS(id_serviceOrder),
+        instalment_value decimal not null,
+        pay_status int not null
+		primary key (serviceOrder_id,numberInstalment)
     );
 
-    create table BILLSTORECEIVE(
-        sale_id int not null references SALES(id_sale),
-        instalmentNumber int not null, 
-        instalmentValue decimal not null,
-        isPaid boolean not null,
-        client_id int not null foreign key references CLIENTS(id_client),
-        paycondition_id int not null foreign key references PAYMENTCONDITIONS(id_paycondition),
-        instalmentsQtd int not null,
-        dueDate date not null,
-        emissionDate date not null,
-        date_creation date not null,
-        date_last_update date not null,
-        primary key(sale_id,instalment_number)
-    );
+
+
+
 
     create table SALES(
         id_sale int identity(2,1) primary key,
@@ -279,6 +244,34 @@
         date_last_update datetime not null,
     );
 
+	    create table BILLSTORECEIVE(
+        sale_id int not null references SALES(id_sale),
+        instalmentNumber int not null, 
+        instalmentValue decimal not null,
+        isPaid int not null,
+        client_id int not null foreign key references CLIENTS(id_client),
+        paycondition_id int not null foreign key references PAYMENTCONDITIONS(id_paycondition),
+        instalmentsQtd int not null,
+        dueDate date not null,
+        emissionDate date not null,
+        date_creation date not null,
+        date_last_update date not null,
+        primary key(sale_id,instalmentNumber)
+    );
+
+
+	    create table OSITEMS(
+        ID_OSITEM int identity(2,1) primary key,
+		OS_ID int REFERENCES Sales(id_sale),
+        PRODUCT_ID int not null references Products(id_product),
+        QUANTITY int not null,
+        SALE_VALUE decimal not null,
+        DISCOUNT decimal not null,
+        TOTAL_VALUE decimal not null,
+        DATE_CREATION date not null,
+        DATE_LAST_UPDATE date not null
+    );
+
     create table SALEITEMS(
 		SALE_ID int REFERENCES Sales(id_sale),
         PRODUCT_ID int not null references Products(id_product),
@@ -291,16 +284,6 @@
         DATE_CREATION date not null,
         DATE_LAST_UPDATE date not null,
         primary key(SALE_ID, PRODUCT_ID)
-    );
-
-    create table USERS(
-        id_user int identity(2,1) primary key,
-        employee_id int FOREIGN KEY references EMPLOYEES(id_employee),
-        userLogin varchar(15) not null,
-		userPassword varchar(15) not null,
-        levelAccess int not null,
-        date_creation datetime not null,
-        date_last_update datetime not null
     );
 
         create table PURCHASES(
@@ -322,6 +305,26 @@
         date_last_update datetime not null,
     );
 
+	    create table BILLSTOPAY(
+        billNumber int not null,
+        billModel int not null,
+        billSeries int not null ,
+        billPage int not null,
+		instalmentNumber int not null,
+        instalmentsQtd int not null,
+        dueDate date not null,
+        emissionDate date not null,
+        isPaid int not null,
+        paidDate date,
+        BillValue decimal(10,2) not null,
+        payCondition_id int not null references PaymentConditions(id_paycondition),
+        supplier_id int not null references Suppliers(id_supplier),
+        purchase_id int not null references PURCHASES(id_purchase),
+        date_creation datetime not null,
+        date_last_update datetime not null,
+        primary key (billNumber, billModel, billSeries, billPage, instalmentNumber)
+    );
+
     	create table PURCHASEITEMS(
         ID_PURCHASE int not null references PURCHASES(ID_PURCHASE),
         PRODUCT_ID int not null references Products(id_product),
@@ -335,3 +338,4 @@
         DATE_LAST_UPDATE date not null,
         primary key (ID_PURCHASE, PRODUCT_ID)
     );
+

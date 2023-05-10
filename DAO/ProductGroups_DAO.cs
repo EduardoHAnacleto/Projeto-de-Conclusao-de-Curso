@@ -19,7 +19,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         public override int NewId()
         {
             var newId = "";
-            string sql = "SELECT MAX(ID_CLIENT) FROM CLIENTS;";
+            string sql = "SELECT MAX(ID_PRODUCT_GROUP) FROM PRODUCTGROUPS;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;

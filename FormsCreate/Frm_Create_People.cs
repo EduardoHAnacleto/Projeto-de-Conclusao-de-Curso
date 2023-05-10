@@ -21,45 +21,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             PopulatePhoneClassificationsComboBox();
         }
 
-       // People_Controller controller = new People_Controller();
-
-        //public Clients getPerson()
-        //{
-        //    Clients person = new Clients();
-        //    person.name = edt_Name.Text;
-        //    person.email = edt_email.Text;
-        //    person.complement = edt_complement.Text;
-        //    person.phoneNumber1 = medt_phone1.Text;
-        //    person.phoneClass1 = TakePhoneClass(cbox_phone1.SelectedItem.ToString());
-        //    person.phoneClass2 = TakePhoneClass(cbox_phone2.SelectedItem.ToString());
-        //    person.phoneClass3 = TakePhoneClass(cbox_phone3.SelectedItem.ToString());
-        //    person.phoneNumber2 = medt_phone2.Text;
-        //    person.phoneNumber3 = medt_phone3.Text;
-        //    person.age = Convert.ToInt32(edt_age.Text);
-        //    person.district = edt_district.Text;
-        //    person.dateOfBirth = Convert.ToDateTime(medt_dob.Text);
-        //    person.registrationNumber = Convert.ToInt32(medt_regNumber.Text);
-        //    person.zipCode = medt_zipCode.Text;
-        //    person.dateOfCreation = DateTime.Now;
-        //    Cities city = this.TakeCity(edt_city.Text);
-        //    person.city = city;
-        //    person.houseNumber = edt_houseNumber.Text;
-
-        //    if (check_female.Checked)
-        //    {
-        //        person.gender = 2;
-        //    }
-        //    else if (check_male.Checked) 
-        //    {
-        //        person.gender = 1;
-        //    }
-        //    else if (check_otherGender.Checked)
-        //    {
-        //        person.gender = 3;
-        //    }
-
-        //    return person;
-        //}
 
         public PhoneClassifications TakePhoneClass(string name)
         {
@@ -213,7 +174,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 cbox_phone2.Items.Add(text);
                 cbox_phone3.Items.Add(text);
             }
-            cbox_phone1.Items.Remove("Nulo");
+            cbox_phone1.Items.Remove("NULL");
+            cbox_phone1.Items.Remove("NULO");
         }
 
         private void btn_findCity_Click(object sender, EventArgs e)
@@ -289,13 +251,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_houseNumber.Text = string.Empty;
             edt_Name.Text = string.Empty;
             edt_street.Text = string.Empty;
-            medt_dob.Text = string.Empty;
+            medt_dob.Value = medt_dob.MinDate;
             medt_phone1.Text = string.Empty;
             medt_phone2.Text = string.Empty;
             medt_phone3.Text = string.Empty;
-            cbox_phone1.SelectedItem = null;
-            cbox_phone2.SelectedItem = null;
-            cbox_phone3.SelectedItem = null;
+            cbox_phone1.SelectedIndex = 1;
+            cbox_phone2.SelectedIndex = 1;
+            cbox_phone3.SelectedIndex = 1;
             medt_regNumber.Text = string.Empty;
             medt_zipCode.Clear();
             check_female.Checked = false;
@@ -341,7 +303,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         private void edt_age_TextChanged(object sender, EventArgs e)
         {
-            medt_dob.Value = Utilities.CalculateDateTimeAge(Convert.ToInt32(edt_age.Text));
+            if (edt_age.Text != string.Empty)
+            {
+                try
+                {
+                    medt_dob.Value = Utilities.CalculateDateTimeAge(Convert.ToInt32(edt_age.Text));
+                }
+                catch { }
+            }
         }
     }
 }

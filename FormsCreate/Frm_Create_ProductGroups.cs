@@ -114,6 +114,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     throw new Exception(ex.Message);
                 }
             }
+            SetNewId();
         }
 
         public override void EditObject() //EditObject
@@ -134,6 +135,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 btn_NewSave.Enabled = false;
                 this.PopulateCamps(auxObj);
             }
+            SetNewId();
         }
 
         public override void DeleteObject() //DeleteObject
@@ -157,6 +159,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 }
             }
             UnlockCamps();
+            SetNewId();
         }
 
     }

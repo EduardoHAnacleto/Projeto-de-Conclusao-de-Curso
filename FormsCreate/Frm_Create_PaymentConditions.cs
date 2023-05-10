@@ -21,9 +21,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             InitializeComponent();
             edt_instalmentNumber.Controls[0].Visible = false;
             edt_daysCount.Controls[0].Visible = false;
+            edt_discount.Controls[0].Visible = false;
+            edt_paymentFee.Controls[0].Visible = false;
+            edt_paymentFine.Controls[0].Visible = false;
+            edt_valuePercentage.Controls[0].Visible = false;
             PopulateComboBox();
             btn_NewSave.Enabled = false;
-           // SetNewId(); //
         }
 
         private PaymentConditions_Controller controller = new PaymentConditions_Controller();
@@ -34,7 +37,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_id.Value = controller.BringNewId();
         }
 
-        public override int BringNewId() // Tras novo ID para o Form
+        public override int BringNewId()
         {
             return controller.BringNewId();
         }
@@ -375,5 +378,25 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             UnlockCamps();
         }
 
+        private void ReOrderInstalmentsNumber()
+        {
+            int num = (int)edt_instalmentNumber.Value;
+            int rowsQtd = DGV_Instalments.Rows.Count;
+            if (num > rowsQtd - 1)
+            {
+                int order = 1;
+                foreach (DataGridViewRow row in DGV_Instalments.Rows)
+                {
+                    row.Cells["InstalmentNumber"].Value = order;
+                    order++;
+                }
+            }
+        }
+
+        private void DGV_Instalments_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
+        {
+            ReOrderInstalmentsNumber();
+
+        }
     }
 }

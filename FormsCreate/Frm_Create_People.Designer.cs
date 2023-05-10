@@ -49,6 +49,7 @@
             this.lbl_zipCode = new System.Windows.Forms.Label();
             this.medt_zipCode = new System.Windows.Forms.MaskedTextBox();
             this.gbox_phones = new System.Windows.Forms.GroupBox();
+            this.lbl_requiredPhone = new System.Windows.Forms.Label();
             this.lbl_email = new System.Windows.Forms.Label();
             this.cbox_phone3 = new System.Windows.Forms.ComboBox();
             this.edt_email = new System.Windows.Forms.TextBox();
@@ -69,7 +70,6 @@
             this.edt_Name = new System.Windows.Forms.TextBox();
             this.lbl_Name = new System.Windows.Forms.Label();
             this.medt_dob = new System.Windows.Forms.DateTimePicker();
-            this.lbl_requiredPhone = new System.Windows.Forms.Label();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_address.SuspendLayout();
@@ -111,9 +111,9 @@
             this.gbox_address.Controls.Add(this.lbl_zipCode);
             this.gbox_address.Controls.Add(this.medt_zipCode);
             this.gbox_address.Location = new System.Drawing.Point(251, 133);
-            this.gbox_address.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbox_address.Margin = new System.Windows.Forms.Padding(2);
             this.gbox_address.Name = "gbox_address";
-            this.gbox_address.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbox_address.Padding = new System.Windows.Forms.Padding(2);
             this.gbox_address.Size = new System.Drawing.Size(401, 214);
             this.gbox_address.TabIndex = 32;
             this.gbox_address.TabStop = false;
@@ -123,6 +123,7 @@
             // 
             this.edt_homeType.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_homeType.Location = new System.Drawing.Point(7, 129);
+            this.edt_homeType.MaxLength = 15;
             this.edt_homeType.Name = "edt_homeType";
             this.edt_homeType.Size = new System.Drawing.Size(82, 20);
             this.edt_homeType.TabIndex = 29;
@@ -150,6 +151,7 @@
             this.edt_city.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_city.Enabled = false;
             this.edt_city.Location = new System.Drawing.Point(95, 130);
+            this.edt_city.MaxLength = 50;
             this.edt_city.Name = "edt_city";
             this.edt_city.Size = new System.Drawing.Size(227, 20);
             this.edt_city.TabIndex = 26;
@@ -187,7 +189,7 @@
             // btn_findCity
             // 
             this.btn_findCity.Location = new System.Drawing.Point(327, 130);
-            this.btn_findCity.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_findCity.Margin = new System.Windows.Forms.Padding(2);
             this.btn_findCity.Name = "btn_findCity";
             this.btn_findCity.Size = new System.Drawing.Size(58, 20);
             this.btn_findCity.TabIndex = 12;
@@ -209,7 +211,8 @@
             // 
             this.edt_complement.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_complement.Location = new System.Drawing.Point(194, 89);
-            this.edt_complement.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_complement.Margin = new System.Windows.Forms.Padding(2);
+            this.edt_complement.MaxLength = 30;
             this.edt_complement.Name = "edt_complement";
             this.edt_complement.Size = new System.Drawing.Size(169, 20);
             this.edt_complement.TabIndex = 9;
@@ -228,7 +231,8 @@
             // 
             this.edt_district.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_district.Location = new System.Drawing.Point(66, 89);
-            this.edt_district.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_district.Margin = new System.Windows.Forms.Padding(2);
+            this.edt_district.MaxLength = 50;
             this.edt_district.Name = "edt_district";
             this.edt_district.Size = new System.Drawing.Size(120, 20);
             this.edt_district.TabIndex = 7;
@@ -247,7 +251,8 @@
             // 
             this.edt_houseNumber.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_houseNumber.Location = new System.Drawing.Point(7, 89);
-            this.edt_houseNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_houseNumber.Margin = new System.Windows.Forms.Padding(2);
+            this.edt_houseNumber.MaxLength = 10;
             this.edt_houseNumber.Name = "edt_houseNumber";
             this.edt_houseNumber.Size = new System.Drawing.Size(44, 20);
             this.edt_houseNumber.TabIndex = 5;
@@ -276,7 +281,8 @@
             // 
             this.edt_street.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_street.Location = new System.Drawing.Point(112, 36);
-            this.edt_street.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_street.Margin = new System.Windows.Forms.Padding(2);
+            this.edt_street.MaxLength = 50;
             this.edt_street.Name = "edt_street";
             this.edt_street.Size = new System.Drawing.Size(252, 20);
             this.edt_street.TabIndex = 2;
@@ -294,7 +300,7 @@
             // medt_zipCode
             // 
             this.medt_zipCode.Location = new System.Drawing.Point(7, 36);
-            this.medt_zipCode.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.medt_zipCode.Margin = new System.Windows.Forms.Padding(2);
             this.medt_zipCode.Mask = "0000000000";
             this.medt_zipCode.Name = "medt_zipCode";
             this.medt_zipCode.Size = new System.Drawing.Size(76, 20);
@@ -313,13 +319,22 @@
             this.gbox_phones.Controls.Add(this.cbox_phone1);
             this.gbox_phones.Controls.Add(this.medt_phone1);
             this.gbox_phones.Location = new System.Drawing.Point(11, 110);
-            this.gbox_phones.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbox_phones.Margin = new System.Windows.Forms.Padding(2);
             this.gbox_phones.Name = "gbox_phones";
-            this.gbox_phones.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbox_phones.Padding = new System.Windows.Forms.Padding(2);
             this.gbox_phones.Size = new System.Drawing.Size(176, 198);
             this.gbox_phones.TabIndex = 31;
             this.gbox_phones.TabStop = false;
             this.gbox_phones.Text = "Contact Information";
+            // 
+            // lbl_requiredPhone
+            // 
+            this.lbl_requiredPhone.AutoSize = true;
+            this.lbl_requiredPhone.Location = new System.Drawing.Point(7, 112);
+            this.lbl_requiredPhone.Name = "lbl_requiredPhone";
+            this.lbl_requiredPhone.Size = new System.Drawing.Size(160, 13);
+            this.lbl_requiredPhone.TabIndex = 24;
+            this.lbl_requiredPhone.Text = "*At least one contact is required.";
             // 
             // lbl_email
             // 
@@ -336,7 +351,7 @@
             this.cbox_phone3.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbox_phone3.FormattingEnabled = true;
             this.cbox_phone3.Location = new System.Drawing.Point(100, 89);
-            this.cbox_phone3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbox_phone3.Margin = new System.Windows.Forms.Padding(2);
             this.cbox_phone3.Name = "cbox_phone3";
             this.cbox_phone3.Size = new System.Drawing.Size(61, 21);
             this.cbox_phone3.TabIndex = 5;
@@ -345,7 +360,7 @@
             // 
             this.edt_email.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_email.Location = new System.Drawing.Point(4, 152);
-            this.edt_email.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_email.Margin = new System.Windows.Forms.Padding(2);
             this.edt_email.MaxLength = 30;
             this.edt_email.Name = "edt_email";
             this.edt_email.Size = new System.Drawing.Size(160, 20);
@@ -356,7 +371,7 @@
             this.cbox_phone2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbox_phone2.FormattingEnabled = true;
             this.cbox_phone2.Location = new System.Drawing.Point(100, 58);
-            this.cbox_phone2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbox_phone2.Margin = new System.Windows.Forms.Padding(2);
             this.cbox_phone2.Name = "cbox_phone2";
             this.cbox_phone2.Size = new System.Drawing.Size(61, 21);
             this.cbox_phone2.TabIndex = 4;
@@ -364,7 +379,7 @@
             // medt_phone3
             // 
             this.medt_phone3.Location = new System.Drawing.Point(4, 90);
-            this.medt_phone3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.medt_phone3.Margin = new System.Windows.Forms.Padding(2);
             this.medt_phone3.Mask = "(000) 00000-0000";
             this.medt_phone3.Name = "medt_phone3";
             this.medt_phone3.Size = new System.Drawing.Size(92, 20);
@@ -373,7 +388,7 @@
             // medt_phone2
             // 
             this.medt_phone2.Location = new System.Drawing.Point(4, 58);
-            this.medt_phone2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.medt_phone2.Margin = new System.Windows.Forms.Padding(2);
             this.medt_phone2.Mask = "(000) 00000-0000";
             this.medt_phone2.Name = "medt_phone2";
             this.medt_phone2.Size = new System.Drawing.Size(92, 20);
@@ -384,7 +399,7 @@
             this.cbox_phone1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbox_phone1.FormattingEnabled = true;
             this.cbox_phone1.Location = new System.Drawing.Point(100, 27);
-            this.cbox_phone1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbox_phone1.Margin = new System.Windows.Forms.Padding(2);
             this.cbox_phone1.Name = "cbox_phone1";
             this.cbox_phone1.Size = new System.Drawing.Size(61, 21);
             this.cbox_phone1.TabIndex = 1;
@@ -392,7 +407,7 @@
             // medt_phone1
             // 
             this.medt_phone1.Location = new System.Drawing.Point(4, 27);
-            this.medt_phone1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.medt_phone1.Margin = new System.Windows.Forms.Padding(2);
             this.medt_phone1.Mask = "(000) 00000-0000";
             this.medt_phone1.Name = "medt_phone1";
             this.medt_phone1.Size = new System.Drawing.Size(92, 20);
@@ -401,7 +416,7 @@
             // medt_regNumber
             // 
             this.medt_regNumber.Location = new System.Drawing.Point(11, 75);
-            this.medt_regNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.medt_regNumber.Margin = new System.Windows.Forms.Padding(2);
             this.medt_regNumber.Mask = "000.000.000-00";
             this.medt_regNumber.Name = "medt_regNumber";
             this.medt_regNumber.Size = new System.Drawing.Size(116, 20);
@@ -441,7 +456,7 @@
             // edt_age
             // 
             this.edt_age.Location = new System.Drawing.Point(217, 75);
-            this.edt_age.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_age.Margin = new System.Windows.Forms.Padding(2);
             this.edt_age.MaxLength = 3;
             this.edt_age.Name = "edt_age";
             this.edt_age.Size = new System.Drawing.Size(31, 20);
@@ -454,9 +469,9 @@
             this.gbox_gender.Controls.Add(this.check_female);
             this.gbox_gender.Controls.Add(this.check_male);
             this.gbox_gender.Location = new System.Drawing.Point(537, 11);
-            this.gbox_gender.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbox_gender.Margin = new System.Windows.Forms.Padding(2);
             this.gbox_gender.Name = "gbox_gender";
-            this.gbox_gender.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.gbox_gender.Padding = new System.Windows.Forms.Padding(2);
             this.gbox_gender.Size = new System.Drawing.Size(124, 58);
             this.gbox_gender.TabIndex = 24;
             this.gbox_gender.TabStop = false;
@@ -466,7 +481,7 @@
             // 
             this.check_otherGender.AutoSize = true;
             this.check_otherGender.Location = new System.Drawing.Point(64, 38);
-            this.check_otherGender.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.check_otherGender.Margin = new System.Windows.Forms.Padding(2);
             this.check_otherGender.Name = "check_otherGender";
             this.check_otherGender.Size = new System.Drawing.Size(51, 17);
             this.check_otherGender.TabIndex = 2;
@@ -479,7 +494,7 @@
             // 
             this.check_female.AutoSize = true;
             this.check_female.Location = new System.Drawing.Point(64, 17);
-            this.check_female.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.check_female.Margin = new System.Windows.Forms.Padding(2);
             this.check_female.Name = "check_female";
             this.check_female.Size = new System.Drawing.Size(59, 17);
             this.check_female.TabIndex = 1;
@@ -492,7 +507,7 @@
             // 
             this.check_male.AutoSize = true;
             this.check_male.Location = new System.Drawing.Point(13, 17);
-            this.check_male.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.check_male.Margin = new System.Windows.Forms.Padding(2);
             this.check_male.Name = "check_male";
             this.check_male.Size = new System.Drawing.Size(48, 17);
             this.check_male.TabIndex = 0;
@@ -505,7 +520,7 @@
             // 
             this.edt_Name.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_Name.Location = new System.Drawing.Point(65, 24);
-            this.edt_Name.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_Name.Margin = new System.Windows.Forms.Padding(2);
             this.edt_Name.MaxLength = 50;
             this.edt_Name.Name = "edt_Name";
             this.edt_Name.Size = new System.Drawing.Size(303, 20);
@@ -533,15 +548,6 @@
             this.medt_dob.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.medt_dob.Leave += new System.EventHandler(this.medt_dob_Leave_1);
             // 
-            // lbl_requiredPhone
-            // 
-            this.lbl_requiredPhone.AutoSize = true;
-            this.lbl_requiredPhone.Location = new System.Drawing.Point(7, 112);
-            this.lbl_requiredPhone.Name = "lbl_requiredPhone";
-            this.lbl_requiredPhone.Size = new System.Drawing.Size(160, 13);
-            this.lbl_requiredPhone.TabIndex = 24;
-            this.lbl_requiredPhone.Text = "*At least one contact is required.";
-            // 
             // Frm_Create_People
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -557,7 +563,7 @@
             this.Controls.Add(this.gbox_gender);
             this.Controls.Add(this.edt_Name);
             this.Controls.Add(this.lbl_Name);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_People";
             this.Text = "Create People";
             this.Controls.SetChildIndex(this.lbl_id, 0);
