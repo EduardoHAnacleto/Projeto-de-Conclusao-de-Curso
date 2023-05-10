@@ -55,7 +55,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@ID", obj.employee.id);
+                    command.Parameters.AddWithValue("@EMPID", obj.employee.id);
                     command.Parameters.AddWithValue("@LOGIN", obj.userLogin);
                     command.Parameters.AddWithValue("@PASSWORD", obj.userPassword);
                     command.Parameters.AddWithValue("@LVLACCESS", obj.AccessLevel);
@@ -65,7 +65,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register altered with success!");
+                        MessageBox.Show("Register added with success!");
                         status = true;
                     }
 

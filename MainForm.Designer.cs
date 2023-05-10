@@ -41,6 +41,7 @@
             this.productGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brandsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.servicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.purchasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.locationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.citiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,14 +49,19 @@
             this.paymentToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.methodsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.conditionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.manageUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formTesteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.financesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billsToPayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billsToReceiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.manageUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.formTesteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.saleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.serviceOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.purchasesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewBillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findBillsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.addNewBillToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.findBillsToPayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newSaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -150,6 +156,11 @@
             resources.ApplyResources(this.servicesToolStripMenuItem, "servicesToolStripMenuItem");
             this.servicesToolStripMenuItem.Click += new System.EventHandler(this.servicesToolStripMenuItem_Click);
             // 
+            // purchasesToolStripMenuItem
+            // 
+            this.purchasesToolStripMenuItem.Name = "purchasesToolStripMenuItem";
+            resources.ApplyResources(this.purchasesToolStripMenuItem, "purchasesToolStripMenuItem");
+            // 
             // locationsToolStripMenuItem
             // 
             this.locationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -197,6 +208,30 @@
             resources.ApplyResources(this.conditionsToolStripMenuItem, "conditionsToolStripMenuItem");
             this.conditionsToolStripMenuItem.Click += new System.EventHandler(this.conditionsToolStripMenuItem_Click);
             // 
+            // financesToolStripMenuItem
+            // 
+            this.financesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.billsToPayToolStripMenuItem,
+            this.billsToReceiveToolStripMenuItem});
+            this.financesToolStripMenuItem.Name = "financesToolStripMenuItem";
+            resources.ApplyResources(this.financesToolStripMenuItem, "financesToolStripMenuItem");
+            // 
+            // billsToPayToolStripMenuItem
+            // 
+            this.billsToPayToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addNewBillToolStripMenuItem1,
+            this.findBillsToPayToolStripMenuItem});
+            this.billsToPayToolStripMenuItem.Name = "billsToPayToolStripMenuItem";
+            resources.ApplyResources(this.billsToPayToolStripMenuItem, "billsToPayToolStripMenuItem");
+            // 
+            // billsToReceiveToolStripMenuItem
+            // 
+            this.billsToReceiveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.addNewBillToolStripMenuItem,
+            this.findBillsToolStripMenuItem});
+            this.billsToReceiveToolStripMenuItem.Name = "billsToReceiveToolStripMenuItem";
+            resources.ApplyResources(this.billsToReceiveToolStripMenuItem, "billsToReceiveToolStripMenuItem");
+            // 
             // manageUserToolStripMenuItem
             // 
             this.manageUserToolStripMenuItem.Name = "manageUserToolStripMenuItem";
@@ -211,37 +246,51 @@
             // 
             // saleToolStripMenuItem
             // 
+            this.saleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.newSaleToolStripMenuItem,
+            this.findSalesToolStripMenuItem});
             this.saleToolStripMenuItem.Name = "saleToolStripMenuItem";
             resources.ApplyResources(this.saleToolStripMenuItem, "saleToolStripMenuItem");
-            this.saleToolStripMenuItem.Click += new System.EventHandler(this.saleToolStripMenuItem_Click);
-            // 
-            // financesToolStripMenuItem
-            // 
-            this.financesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.billsToPayToolStripMenuItem,
-            this.billsToReceiveToolStripMenuItem});
-            this.financesToolStripMenuItem.Name = "financesToolStripMenuItem";
-            resources.ApplyResources(this.financesToolStripMenuItem, "financesToolStripMenuItem");
-            // 
-            // billsToPayToolStripMenuItem
-            // 
-            this.billsToPayToolStripMenuItem.Name = "billsToPayToolStripMenuItem";
-            resources.ApplyResources(this.billsToPayToolStripMenuItem, "billsToPayToolStripMenuItem");
-            // 
-            // billsToReceiveToolStripMenuItem
-            // 
-            this.billsToReceiveToolStripMenuItem.Name = "billsToReceiveToolStripMenuItem";
-            resources.ApplyResources(this.billsToReceiveToolStripMenuItem, "billsToReceiveToolStripMenuItem");
             // 
             // serviceOrderToolStripMenuItem
             // 
             this.serviceOrderToolStripMenuItem.Name = "serviceOrderToolStripMenuItem";
             resources.ApplyResources(this.serviceOrderToolStripMenuItem, "serviceOrderToolStripMenuItem");
             // 
-            // purchasesToolStripMenuItem
+            // addNewBillToolStripMenuItem
             // 
-            this.purchasesToolStripMenuItem.Name = "purchasesToolStripMenuItem";
-            resources.ApplyResources(this.purchasesToolStripMenuItem, "purchasesToolStripMenuItem");
+            this.addNewBillToolStripMenuItem.Name = "addNewBillToolStripMenuItem";
+            resources.ApplyResources(this.addNewBillToolStripMenuItem, "addNewBillToolStripMenuItem");
+            this.addNewBillToolStripMenuItem.Click += new System.EventHandler(this.addNewBillToolStripMenuItem_Click);
+            // 
+            // findBillsToolStripMenuItem
+            // 
+            this.findBillsToolStripMenuItem.Name = "findBillsToolStripMenuItem";
+            resources.ApplyResources(this.findBillsToolStripMenuItem, "findBillsToolStripMenuItem");
+            this.findBillsToolStripMenuItem.Click += new System.EventHandler(this.findBillsToolStripMenuItem_Click);
+            // 
+            // addNewBillToolStripMenuItem1
+            // 
+            this.addNewBillToolStripMenuItem1.Name = "addNewBillToolStripMenuItem1";
+            resources.ApplyResources(this.addNewBillToolStripMenuItem1, "addNewBillToolStripMenuItem1");
+            this.addNewBillToolStripMenuItem1.Click += new System.EventHandler(this.addNewBillToolStripMenuItem1_Click);
+            // 
+            // findBillsToPayToolStripMenuItem
+            // 
+            this.findBillsToPayToolStripMenuItem.Name = "findBillsToPayToolStripMenuItem";
+            resources.ApplyResources(this.findBillsToPayToolStripMenuItem, "findBillsToPayToolStripMenuItem");
+            // 
+            // newSaleToolStripMenuItem
+            // 
+            this.newSaleToolStripMenuItem.Name = "newSaleToolStripMenuItem";
+            resources.ApplyResources(this.newSaleToolStripMenuItem, "newSaleToolStripMenuItem");
+            this.newSaleToolStripMenuItem.Click += new System.EventHandler(this.newSaleToolStripMenuItem_Click);
+            // 
+            // findSalesToolStripMenuItem
+            // 
+            this.findSalesToolStripMenuItem.Name = "findSalesToolStripMenuItem";
+            resources.ApplyResources(this.findSalesToolStripMenuItem, "findSalesToolStripMenuItem");
+            this.findSalesToolStripMenuItem.Click += new System.EventHandler(this.findSalesToolStripMenuItem_Click);
             // 
             // Frm_Main
             // 
@@ -285,6 +334,12 @@
         private System.Windows.Forms.ToolStripMenuItem billsToPayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem billsToReceiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem serviceOrderToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addNewBillToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem findBillsToPayToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem addNewBillToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findBillsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem newSaleToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findSalesToolStripMenuItem;
     }
 }
 

@@ -11,7 +11,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
 {
     public class Clients_Controller : Master_Controller
     {
-        private Clients _client = new Clients();
+        private Clients _client;
         private readonly Clients_DAO _clientDAO = new Clients_DAO();
 
         public Clients_Controller()

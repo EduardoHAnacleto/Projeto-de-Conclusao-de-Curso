@@ -14,7 +14,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
     public class BillsToReceive_Controller
     {
 
-        private BillsToReceive _billToReceive = new BillsToReceive();
+        private BillsToReceive _billToReceive;
         private BillsToReceive_DAO _billToReceivesDAO = new BillsToReceive_DAO();
 
         public BillsToReceive_Controller()

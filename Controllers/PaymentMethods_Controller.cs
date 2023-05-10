@@ -12,7 +12,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
 {
     public class PaymentMethods_Controller : Master_Controller
     {
-        private PaymentMethods _paymentMethod = new PaymentMethods();
+        private PaymentMethods _paymentMethod;
         private PaymentMethods_DAO _paymentMethodDAO = new PaymentMethods_DAO();
 
         public PaymentMethods_Controller()

@@ -12,7 +12,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
     public class PaymentConditions_Controller : Master_Controller
     {
 
-        private PaymentConditions _paymentCondition = new PaymentConditions();
+        private PaymentConditions _paymentCondition;
         private PaymentConditions_DAO _paymentConditionsDAO = new PaymentConditions_DAO();
 
         public PaymentConditions_Controller()

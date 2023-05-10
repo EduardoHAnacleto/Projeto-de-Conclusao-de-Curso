@@ -42,6 +42,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         private Products product = null;
         private Products_Controller _pController = new Products_Controller();
         private Sales_Controller _controller = null;
+        //private BillsInstalments_Controller _billsController = null;
 
         private void lbl_subTotal_Click(object sender, EventArgs e)
         {
@@ -276,12 +277,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public bool ConfirmSale(Sales sale) //To do: Abre form de adicionar condição de pagamento para completar a venda
         {           
+            PaymentConditions_Controller _pCController = new PaymentConditions_Controller();
+            PaymentConditions obj = _pCController.FindItemId(sale.PaymentConditionId);
             string caption = "Confirm sale.";
             string message = "Client : "
                              + sale.Client.name
                              + Environment.NewLine
                              + "Payment Condition : "
-                             + sale.BillToReceive[0].PayCondition.conditionName
+                             + obj.conditionName
                              + Environment.NewLine
                              + "Sub-Total : "
                              + edt_subtotal.Value.ToString()
@@ -482,7 +485,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             sale.Client = this.GetClient(); 
             sale.CancelDate = null;
             sale.TotalValue = (double)edt_total.Value;
-            sale.BillToReceive = this.GetBillToReceive(sale.TotalValue, emissionDate);
+            sale.PaymentConditionId = (int)edt_payConditionId.Value;
             sale.CancelDate = null;
             sale.dateOfCreation = emissionDate;
             sale.dateOfLastUpdate = emissionDate;
@@ -645,12 +648,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public void PopulatePaymentCondition(Sales sale)
         {
-            edt_payCondition.Text = sale.BillToReceive[0].PayCondition.conditionName;
-            edt_payConditionDiscount.Value = (decimal) sale.BillToReceive[0].PayCondition.discountPerc ;
-            edt_payConditionFees.Value = (decimal)sale.BillToReceive[0].PayCondition.paymentFees;
-            edt_payConditionFine.Value = (decimal)sale.BillToReceive[0].PayCondition.fineValue;
-            edt_payConditionId.Value = (decimal)sale.BillToReceive[0].PayCondition.id;
-            edt_payConditionQnt.Value = (decimal)sale.BillToReceive[0].InstalmentsQtd;
+            PaymentConditions_Controller _pCController = new PaymentConditions_Controller();
+            PaymentConditions obj = _pCController.FindItemId(sale.PaymentConditionId);
+            edt_payCondition.Text = obj.conditionName;
+            edt_payConditionDiscount.Value = (decimal)obj.discountPerc;
+            edt_payConditionFees.Value = (decimal) obj.paymentFees;
+            edt_payConditionFine.Value = (decimal) obj.fineValue;
+            edt_payConditionId.Value = (decimal) obj.id;
+            edt_payConditionQnt.Value = (decimal) obj.instalmentQuantity;
         }
 
         public void PopulateUser(Sales sale)

@@ -35,8 +35,11 @@
             this.lbl_Sale = new System.Windows.Forms.Label();
             this.DGV_Sales = new System.Windows.Forms.DataGridView();
             this.btn_Select = new System.Windows.Forms.Button();
+            this.edt_saleId = new System.Windows.Forms.NumericUpDown();
+            this.btn_findSale = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Sales)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_saleId)).BeginInit();
             this.SuspendLayout();
             // 
             // DGV_Clients
@@ -44,7 +47,7 @@
             this.DGV_Clients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Clients.Location = new System.Drawing.Point(12, 36);
             this.DGV_Clients.Name = "DGV_Clients";
-            this.DGV_Clients.Size = new System.Drawing.Size(610, 124);
+            this.DGV_Clients.Size = new System.Drawing.Size(1048, 143);
             this.DGV_Clients.TabIndex = 0;
             // 
             // lbl_client
@@ -76,34 +79,57 @@
             // lbl_Sale
             // 
             this.lbl_Sale.AutoSize = true;
-            this.lbl_Sale.Location = new System.Drawing.Point(9, 177);
+            this.lbl_Sale.Location = new System.Drawing.Point(9, 194);
             this.lbl_Sale.Name = "lbl_Sale";
-            this.lbl_Sale.Size = new System.Drawing.Size(28, 13);
+            this.lbl_Sale.Size = new System.Drawing.Size(34, 13);
             this.lbl_Sale.TabIndex = 5;
-            this.lbl_Sale.Text = "Sale";
+            this.lbl_Sale.Text = "Sale :";
             // 
             // DGV_Sales
             // 
             this.DGV_Sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.DGV_Sales.Location = new System.Drawing.Point(12, 192);
+            this.DGV_Sales.Location = new System.Drawing.Point(12, 217);
             this.DGV_Sales.Name = "DGV_Sales";
-            this.DGV_Sales.Size = new System.Drawing.Size(610, 208);
+            this.DGV_Sales.Size = new System.Drawing.Size(1048, 295);
             this.DGV_Sales.TabIndex = 6;
             // 
             // btn_Select
             // 
-            this.btn_Select.Location = new System.Drawing.Point(547, 411);
+            this.btn_Select.Location = new System.Drawing.Point(985, 518);
             this.btn_Select.Name = "btn_Select";
             this.btn_Select.Size = new System.Drawing.Size(75, 23);
             this.btn_Select.TabIndex = 7;
             this.btn_Select.Text = "&Select";
             this.btn_Select.UseVisualStyleBackColor = true;
             // 
+            // edt_saleId
+            // 
+            this.edt_saleId.Location = new System.Drawing.Point(48, 191);
+            this.edt_saleId.Maximum = new decimal(new int[] {
+            -1530494977,
+            232830,
+            0,
+            0});
+            this.edt_saleId.Name = "edt_saleId";
+            this.edt_saleId.Size = new System.Drawing.Size(91, 20);
+            this.edt_saleId.TabIndex = 8;
+            // 
+            // btn_findSale
+            // 
+            this.btn_findSale.Location = new System.Drawing.Point(145, 189);
+            this.btn_findSale.Name = "btn_findSale";
+            this.btn_findSale.Size = new System.Drawing.Size(75, 23);
+            this.btn_findSale.TabIndex = 9;
+            this.btn_findSale.Text = "&Search";
+            this.btn_findSale.UseVisualStyleBackColor = true;
+            // 
             // MasterDetails_Sales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(670, 446);
+            this.ClientSize = new System.Drawing.Size(1072, 553);
+            this.Controls.Add(this.btn_findSale);
+            this.Controls.Add(this.edt_saleId);
             this.Controls.Add(this.btn_Select);
             this.Controls.Add(this.DGV_Sales);
             this.Controls.Add(this.lbl_Sale);
@@ -115,6 +141,7 @@
             this.Text = "Frm_MasterDetails";
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Sales)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_saleId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -129,5 +156,7 @@
         private System.Windows.Forms.Label lbl_Sale;
         private System.Windows.Forms.DataGridView DGV_Sales;
         private System.Windows.Forms.Button btn_Select;
+        private System.Windows.Forms.NumericUpDown edt_saleId;
+        private System.Windows.Forms.Button btn_findSale;
     }
 }

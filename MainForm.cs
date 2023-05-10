@@ -1,8 +1,10 @@
-﻿using ProjetoEduardoAnacletoWindowsForm1.DAO;
+﻿using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
+using ProjetoEduardoAnacletoWindowsForm1.DAO;
 using ProjetoEduardoAnacletoWindowsForm1.Forms;
 using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.FormsCreate;
 using ProjetoEduardoAnacletoWindowsForm1.InheritForms;
+using ProjetoEduardoAnacletoWindowsForm1.MasterDetails;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
 using System;
 using System.Collections.Generic;
@@ -12,6 +14,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -128,6 +131,38 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         {
             Frm_Sale frmSale = new Frm_Sale();
             frmSale.ShowDialog();
+        }
+
+        private void findBillsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MasterDetails_BillsToReceive frmMDBillsToReceive = new MasterDetails_BillsToReceive();
+            frmMDBillsToReceive.SetClientsDataSourceToDGV();
+            frmMDBillsToReceive.SetBillsToReceiveDataSourceToDGV();
+            frmMDBillsToReceive.ShowDialog();
+        }
+
+        private void addNewBillToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive();
+            frmBillsToReceive.ShowDialog();
+        }
+
+        private void addNewBillToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            Frm_Create_BillsToPay frmBillsToPay = new Frm_Create_BillsToPay();
+            frmBillsToPay.ShowDialog();
+        }
+
+        private void newSaleToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_Sale frmSale = new Frm_Sale();
+            frmSale.ShowDialog();
+        }
+
+        private void findSalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MasterDetails_Sales frmMasterDetailsSales = new MasterDetails_Sales();
+            frmMasterDetailsSales.ShowDialog();
         }
     }
 }

@@ -37,6 +37,7 @@
             this.lbl_clientId = new System.Windows.Forms.Label();
             this.lbl_clientName = new System.Windows.Forms.Label();
             this.gbox_client = new System.Windows.Forms.GroupBox();
+            this.btn_resetClients = new System.Windows.Forms.Button();
             this.edt_clientId = new System.Windows.Forms.NumericUpDown();
             this.btn_searchClient = new System.Windows.Forms.Button();
             this.DGV_BillsToReceive = new System.Windows.Forms.DataGridView();
@@ -50,6 +51,7 @@
             this.DueDateBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_billsToReceive = new System.Windows.Forms.GroupBox();
+            this.btn_ClearDateSort = new System.Windows.Forms.Button();
             this.lbl_dueDate = new System.Windows.Forms.Label();
             this.lbl_emissionDate = new System.Windows.Forms.Label();
             this.dueDate_bills = new System.Windows.Forms.DateTimePicker();
@@ -57,7 +59,6 @@
             this.lbl_saleNumber = new System.Windows.Forms.Label();
             this.edt_saleNumber = new System.Windows.Forms.NumericUpDown();
             this.btn_exit = new System.Windows.Forms.Button();
-            this.btn_ClearDateSort = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).BeginInit();
             this.gbox_client.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).BeginInit();
@@ -83,7 +84,7 @@
             this.DGV_Clients.Name = "DGV_Clients";
             this.DGV_Clients.ReadOnly = true;
             this.DGV_Clients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_Clients.Size = new System.Drawing.Size(626, 143);
+            this.DGV_Clients.Size = new System.Drawing.Size(725, 171);
             this.DGV_Clients.TabIndex = 0;
             this.DGV_Clients.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clients_CellContentDoubleClick);
             // 
@@ -143,6 +144,7 @@
             // 
             // gbox_client
             // 
+            this.gbox_client.Controls.Add(this.btn_resetClients);
             this.gbox_client.Controls.Add(this.edt_clientId);
             this.gbox_client.Controls.Add(this.btn_searchClient);
             this.gbox_client.Controls.Add(this.edt_clientName);
@@ -151,10 +153,20 @@
             this.gbox_client.Controls.Add(this.lbl_clientName);
             this.gbox_client.Location = new System.Drawing.Point(12, 12);
             this.gbox_client.Name = "gbox_client";
-            this.gbox_client.Size = new System.Drawing.Size(658, 208);
+            this.gbox_client.Size = new System.Drawing.Size(740, 233);
             this.gbox_client.TabIndex = 5;
             this.gbox_client.TabStop = false;
             this.gbox_client.Text = "Client";
+            // 
+            // btn_resetClients
+            // 
+            this.btn_resetClients.Location = new System.Drawing.Point(337, 29);
+            this.btn_resetClients.Name = "btn_resetClients";
+            this.btn_resetClients.Size = new System.Drawing.Size(44, 20);
+            this.btn_resetClients.TabIndex = 15;
+            this.btn_resetClients.Text = "Reset";
+            this.btn_resetClients.UseVisualStyleBackColor = true;
+            this.btn_resetClients.Click += new System.EventHandler(this.btn_resetClients_Click);
             // 
             // edt_clientId
             // 
@@ -194,7 +206,7 @@
             this.DGV_BillsToReceive.Name = "DGV_BillsToReceive";
             this.DGV_BillsToReceive.ReadOnly = true;
             this.DGV_BillsToReceive.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_BillsToReceive.Size = new System.Drawing.Size(1077, 251);
+            this.DGV_BillsToReceive.Size = new System.Drawing.Size(1126, 276);
             this.DGV_BillsToReceive.TabIndex = 7;
             // 
             // ClientName
@@ -270,12 +282,22 @@
             this.gbox_billsToReceive.Controls.Add(this.lbl_saleNumber);
             this.gbox_billsToReceive.Controls.Add(this.edt_saleNumber);
             this.gbox_billsToReceive.Controls.Add(this.DGV_BillsToReceive);
-            this.gbox_billsToReceive.Location = new System.Drawing.Point(12, 226);
+            this.gbox_billsToReceive.Location = new System.Drawing.Point(12, 251);
             this.gbox_billsToReceive.Name = "gbox_billsToReceive";
-            this.gbox_billsToReceive.Size = new System.Drawing.Size(1092, 323);
+            this.gbox_billsToReceive.Size = new System.Drawing.Size(1141, 348);
             this.gbox_billsToReceive.TabIndex = 9;
             this.gbox_billsToReceive.TabStop = false;
             this.gbox_billsToReceive.Text = "Bills To Receive";
+            // 
+            // btn_ClearDateSort
+            // 
+            this.btn_ClearDateSort.Location = new System.Drawing.Point(338, 40);
+            this.btn_ClearDateSort.Name = "btn_ClearDateSort";
+            this.btn_ClearDateSort.Size = new System.Drawing.Size(44, 20);
+            this.btn_ClearDateSort.TabIndex = 14;
+            this.btn_ClearDateSort.Text = "Reset";
+            this.btn_ClearDateSort.UseVisualStyleBackColor = true;
+            this.btn_ClearDateSort.Click += new System.EventHandler(this.btn_ClearDateSort_Click);
             // 
             // lbl_dueDate
             // 
@@ -338,28 +360,19 @@
             // 
             // btn_exit
             // 
-            this.btn_exit.Location = new System.Drawing.Point(1029, 555);
+            this.btn_exit.Location = new System.Drawing.Point(1078, 605);
             this.btn_exit.Name = "btn_exit";
             this.btn_exit.Size = new System.Drawing.Size(75, 23);
             this.btn_exit.TabIndex = 10;
             this.btn_exit.Text = "E&xit";
             this.btn_exit.UseVisualStyleBackColor = true;
-            // 
-            // btn_ClearDateSort
-            // 
-            this.btn_ClearDateSort.Location = new System.Drawing.Point(338, 40);
-            this.btn_ClearDateSort.Name = "btn_ClearDateSort";
-            this.btn_ClearDateSort.Size = new System.Drawing.Size(44, 20);
-            this.btn_ClearDateSort.TabIndex = 14;
-            this.btn_ClearDateSort.Text = "Reset";
-            this.btn_ClearDateSort.UseVisualStyleBackColor = true;
-            this.btn_ClearDateSort.Click += new System.EventHandler(this.btn_ClearDateSort_Click);
+            this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
             // MasterDetails_BillsToReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1116, 601);
+            this.ClientSize = new System.Drawing.Size(1165, 640);
             this.Controls.Add(this.btn_exit);
             this.Controls.Add(this.gbox_billsToReceive);
             this.Controls.Add(this.gbox_client);
@@ -409,5 +422,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn RegNumberClient;
         private System.Windows.Forms.DataGridViewTextBoxColumn TypeClient;
         private System.Windows.Forms.Button btn_ClearDateSort;
+        private System.Windows.Forms.Button btn_resetClients;
     }
 }

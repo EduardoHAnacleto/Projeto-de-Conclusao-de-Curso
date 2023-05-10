@@ -10,16 +10,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
     {
         public Sales()
         {
-            List<BillsToReceive> BillToReceive; 
+//            List<BillsToReceive> BillToReceive; 
             List<SaleItems> SaleItems; 
             Clients Client;
             Users User;
         }
 
+        public int PaymentConditionId { get; set; }
         public Users User { get; set; }
         public Clients Client { get; set; }
         public DateTime? CancelDate { get; set; }
-        public List<BillsToReceive> BillToReceive { get; set; }
+        //public List<BillsToReceive> BillToReceive { get; set; }
         public double TotalCost { get; set; }
         public double TotalValue { get; set; }
         public List<SaleItems> SaleItems { get; set; }

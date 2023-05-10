@@ -9,6 +9,7 @@ using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
@@ -24,15 +25,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             InitializeComponent();
             edt_clientId.Controls[0].Visible = false;
             edt_saleNumber.Controls[0].Visible = false;
+            //Thread clientsThread = new Thread(SetClientsDataSourceToDGV);
+           // Thread billsThread = new Thread(SetBillsToReceiveDataSourceToDGV);
+            //clientsThread.Start();
+            //billsThread.Start();
         }
 
-        private Clients_Controller _clientsController = new Clients_Controller();
-        private BillsToReceive_Controller _billsController = new BillsToReceive_Controller();
-        private PaymentConditions_Controller _payConditionsController = new PaymentConditions_Controller();
+        
+        //private BillsToReceive_Controller _billsController = new BillsToReceive_Controller();
+        //private PaymentConditions_Controller _payConditionsController = null;
 
         public void SearchClient() //Procura o cliente baseado nos campos txt e popula esses campos + seleciona a Row da DGV do Cliente
         {
             Clients client = null;
+            var _clientsController = new Clients_Controller();
             try
             {
                 if (!string.IsNullOrWhiteSpace(edt_clientId.Text))
@@ -96,11 +102,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             SelectRowByClient();
         }
 
-
+        
         public void SetBillsToReceiveDataSourceToDGV() //Popula DGV Bills
         {
             DGV_BillsToReceive.Rows.Clear();
-            DataTable dt = this._billsController.PopulateDGV();
+            var billsController = new BillsToReceive_Controller();
+            var _payConditionsController = new PaymentConditions_Controller();
+            var _clientsController = new Clients_Controller();
+            DataTable dt = billsController.PopulateDGV();
             if (dt != null)
             {
                 int i = 0;
@@ -142,8 +151,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         public void SetClientsDataSourceToDGV() //Popula Clients DGV
         {
+            var clientsController = new Clients_Controller();
             DGV_Clients.Rows.Clear();
-            DataTable dt = this._clientsController.PopulateDGV();
+            DataTable dt = clientsController.PopulateDGV();
             if (dt != null)
             {
                 int i = 0;
@@ -219,6 +229,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         private void btn_ClearDateSort_Click(object sender, EventArgs e)
         {
             SetBillsToReceiveDataSourceToDGV();
+        }
+
+        private void btn_resetClients_Click(object sender, EventArgs e)
+        {
+            SetClientsDataSourceToDGV();
+        }
+
+        private void btn_exit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

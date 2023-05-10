@@ -15,6 +15,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
         public MasterDetails_Sales()
         {
             InitializeComponent();
+            edt_saleId.Controls[0].Visible = false;
         }
 
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)

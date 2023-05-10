@@ -233,6 +233,7 @@ create table BILLSINSTALMENTS(
 
     create table SALES(
         id_sale int identity(2,1) primary key,
+        payConditionId int not null references PaymentConditions(id_paycondition),
         CLIENT_ID int not null references CLIENTS(id_client),
         user_id int not null references USERS(id_user),        
         sale_total_cost decimal not null,
