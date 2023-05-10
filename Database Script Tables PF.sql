@@ -54,7 +54,7 @@
         condition_name varchar(30) not null,
         payment_fees decimal(10,2) not null,
         fine_value decimal(10,2) not null,
-        discount_perc decimal(10,2) null,
+        discount_perc decimal(5,2) null,
         instalment_quantity int not null,
         date_creation datetime not null,
         date_last_update datetime not null
@@ -65,7 +65,7 @@ create table BILLSINSTALMENTS(
     instalment_number int not null,
     paymethod_id int not null references PaymentMethods(id_payment_method),
     total_days int not null,
-    value_percentage decimal(3,2),
+    value_percentage decimal(5,2),
     date_creation datetime not null,
     date_last_update datetime not null,
     primary key (paycondition_id, instalment_number)
@@ -675,7 +675,7 @@ create table BILLSINSTALMENTS(
         ITEM_VALUE decimal not null,
         ITEM_COST decimal not null,
         DISCOUNT_CASH decimal not null,
-        DISCOUNT_PERC decimal not null,
+        DISCOUNT_PERC decimal(5,2) not null,
         TOTAL_VALUE decimal not null,
         DATE_CREATION date not null,
         DATE_LAST_UPDATE date not null,

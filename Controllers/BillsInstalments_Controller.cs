@@ -37,8 +37,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         }
         public List<BillsInstalments> FindInstalments(int paymentConditionId)
         {
-            return _billInstalmentsDAO.SelectDTByCondIdFromDB(paymentConditionId);
-            //return _billInstalmentsDAO.SelectInstalmentsFromDb(paymentConditionId);
+            //return _billInstalmentsDAO.SelectDTByCondIdFromDB(paymentConditionId);
+            return _billInstalmentsDAO.SelectInstalmentsFromDb(paymentConditionId);
         }
         public void DeleteItem(int instalmentNumber, int paymentConditionId, int paymentMethodId)
         {
