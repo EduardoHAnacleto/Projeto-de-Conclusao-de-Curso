@@ -70,7 +70,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register altered with success!");
+                        MessageBox.Show("Register added with success!");
                         status = true;
                     }
 

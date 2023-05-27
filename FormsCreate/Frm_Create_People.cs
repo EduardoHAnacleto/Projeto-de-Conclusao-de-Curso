@@ -18,7 +18,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         public Frm_Create_People()
         {
             InitializeComponent();
-            PopulatePhoneClassificationsComboBox();
+            //PopulatePhoneClassificationsComboBox();
         }
 
 

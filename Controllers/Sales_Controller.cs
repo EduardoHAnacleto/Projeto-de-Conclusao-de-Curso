@@ -20,10 +20,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
 
         }
 
-        public void SaveItem(Sales sale)
+        public bool SaveItem(Sales sale)
         {
             _sale = sale;
-            _salesDAO.SaveToDb(_sale);
+            return _salesDAO.SaveToDb(_sale);
         }
         public new List<Sales> LoadItems()
         {
@@ -50,12 +50,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             _salesDAO.DeleteFromDb(id);
         }
-        public void UpdateItem(Sales sale)
+        public bool UpdateItem(Sales sale)
         {
             _sale = sale;
             string format = "yyyy-MM-dd";
             _sale.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
-            _salesDAO.EditFromDB(_sale);
+            return _salesDAO.EditFromDB(_sale);
         }
 
         public DataTable PopulateDGV() //Cria obj DataTable chama a DAO para trazer a conexao da tabela da DB

@@ -111,6 +111,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1
 
         private void formTesteToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            //Botao pra teste de Formularios
 
             //PaymentConditions_DAO dao = new PaymentConditions_DAO();
             //dao.testando();

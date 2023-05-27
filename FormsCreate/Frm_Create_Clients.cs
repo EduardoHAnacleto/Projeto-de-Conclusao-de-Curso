@@ -17,6 +17,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         public Frm_Create_Clients()
         {
             InitializeComponent();
+            base.PopulatePhoneClassificationsComboBox();
         }
 
         private Clients_Controller controller = new Clients_Controller();
@@ -45,7 +46,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 gbox_gender.Enabled = true;
                 medt_regNumber.Mask = "000.000.000-00";
                 medt_dob.Enabled = true;
-                medt_dob.Value= Convert.ToDateTime("01/01/2000");
+                medt_dob.Value = Convert.ToDateTime("01/01/2000");
                 edt_age.Enabled = true;
                 edt_age.Clear();
             }
@@ -73,8 +74,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override bool CheckPeopleCamps()
         {
-
-            //
             if (!base.CheckPeopleCamps())
             {
                 return false;
@@ -137,8 +136,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             return true;          
         }
-
-
 
         public Clients GetObject()
         {

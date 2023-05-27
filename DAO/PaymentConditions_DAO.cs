@@ -80,7 +80,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                 status = _billsInstalmentsController.SaveItem(instalment);
                                 if (!status)
                                 {
-                                    MessageBox.Show("Ocorreu algum erro.");
+                                    MessageBox.Show("An error has occurred.");
                                     break;
                                 }
                             }
@@ -176,7 +176,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                 _billsInstalmentsController.UpdateItem(instalment);
                             }
                         }
-                        MessageBox.Show("Register added with success!");
+                        MessageBox.Show("Register altered with success!");
                         status = true;
                     }
 

@@ -29,14 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_SaleProducts = new System.Windows.Forms.DataGridView();
-            this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemDiscountPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_Salesman = new System.Windows.Forms.GroupBox();
             this.edt_userId = new System.Windows.Forms.NumericUpDown();
             this.edt_userName = new System.Windows.Forms.TextBox();
@@ -71,7 +63,7 @@
             this.lbl_subTotal = new System.Windows.Forms.Label();
             this.lbl_barCode = new System.Windows.Forms.Label();
             this.lbl_productId = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lbl_qntdAmount = new System.Windows.Forms.Label();
             this.btn_FindProduct = new System.Windows.Forms.Button();
             this.btn_AddProduct = new System.Windows.Forms.Button();
             this.lbl_UNPrice = new System.Windows.Forms.Label();
@@ -107,6 +99,26 @@
             this.edt_payConditionId = new System.Windows.Forms.NumericUpDown();
             this.lbl_payConditionID = new System.Windows.Forms.Label();
             this.lbl_requiredCamps = new System.Windows.Forms.Label();
+            this.edt_ProdDiscCash = new System.Windows.Forms.NumericUpDown();
+            this.edt_ProdDiscPerc = new System.Windows.Forms.NumericUpDown();
+            this.edt_ProdUnValue = new System.Windows.Forms.NumericUpDown();
+            this.lbl_ProdDiscCash = new System.Windows.Forms.Label();
+            this.lbl_ProdPercDisc = new System.Windows.Forms.Label();
+            this.lbl_prodUnValue = new System.Windows.Forms.Label();
+            this.DGV_SaleSummary = new System.Windows.Forms.DataGridView();
+            this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleDiscCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleDiscPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemDiscountPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -132,85 +144,36 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscCash)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscPerc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdUnValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleSummary)).BeginInit();
             this.SuspendLayout();
             // 
             // DGV_SaleProducts
             // 
             this.DGV_SaleProducts.AllowUserToAddRows = false;
+            this.DGV_SaleProducts.AllowUserToResizeColumns = false;
+            this.DGV_SaleProducts.AllowUserToResizeRows = false;
             this.DGV_SaleProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_SaleProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdProduct,
             this.NameProduct,
-            this.ProductCost,
             this.QuantityProduct,
+            this.ProductCost,
             this.ItemDiscountCash,
             this.ItemDiscountPerc,
             this.UnValueProduct,
             this.ProductTotalValue});
-            this.DGV_SaleProducts.Location = new System.Drawing.Point(12, 260);
+            this.DGV_SaleProducts.Location = new System.Drawing.Point(15, 225);
             this.DGV_SaleProducts.MultiSelect = false;
             this.DGV_SaleProducts.Name = "DGV_SaleProducts";
-            this.DGV_SaleProducts.ReadOnly = true;
+            this.DGV_SaleProducts.RowHeadersVisible = false;
             this.DGV_SaleProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_SaleProducts.Size = new System.Drawing.Size(983, 221);
+            this.DGV_SaleProducts.Size = new System.Drawing.Size(1116, 221);
             this.DGV_SaleProducts.TabIndex = 5;
+            this.DGV_SaleProducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_SaleProducts_CellValueChanged);
             this.DGV_SaleProducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_SaleProducts_RowsRemoved);
-            // 
-            // IdProduct
-            // 
-            this.IdProduct.HeaderText = "ID";
-            this.IdProduct.Name = "IdProduct";
-            this.IdProduct.ReadOnly = true;
-            this.IdProduct.Width = 45;
-            // 
-            // NameProduct
-            // 
-            this.NameProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameProduct.HeaderText = "Product";
-            this.NameProduct.Name = "NameProduct";
-            this.NameProduct.ReadOnly = true;
-            // 
-            // ProductCost
-            // 
-            this.ProductCost.HeaderText = "Product Cost";
-            this.ProductCost.Name = "ProductCost";
-            this.ProductCost.ReadOnly = true;
-            this.ProductCost.Width = 55;
-            // 
-            // QuantityProduct
-            // 
-            this.QuantityProduct.HeaderText = "Quantity";
-            this.QuantityProduct.Name = "QuantityProduct";
-            this.QuantityProduct.ReadOnly = true;
-            this.QuantityProduct.Width = 50;
-            // 
-            // ItemDiscountCash
-            // 
-            this.ItemDiscountCash.HeaderText = "Discount Cash";
-            this.ItemDiscountCash.Name = "ItemDiscountCash";
-            this.ItemDiscountCash.ReadOnly = true;
-            this.ItemDiscountCash.Width = 55;
-            // 
-            // ItemDiscountPerc
-            // 
-            this.ItemDiscountPerc.HeaderText = "Discount %";
-            this.ItemDiscountPerc.Name = "ItemDiscountPerc";
-            this.ItemDiscountPerc.ReadOnly = true;
-            this.ItemDiscountPerc.Width = 55;
-            // 
-            // UnValueProduct
-            // 
-            this.UnValueProduct.HeaderText = "UN Value";
-            this.UnValueProduct.Name = "UnValueProduct";
-            this.UnValueProduct.ReadOnly = true;
-            this.UnValueProduct.Width = 55;
-            // 
-            // ProductTotalValue
-            // 
-            this.ProductTotalValue.HeaderText = "Total Value";
-            this.ProductTotalValue.Name = "ProductTotalValue";
-            this.ProductTotalValue.ReadOnly = true;
-            this.ProductTotalValue.Width = 75;
             // 
             // gbox_Salesman
             // 
@@ -350,7 +313,7 @@
             // lbl_productName
             // 
             this.lbl_productName.AutoSize = true;
-            this.lbl_productName.Location = new System.Drawing.Point(8, 61);
+            this.lbl_productName.Location = new System.Drawing.Point(45, 25);
             this.lbl_productName.Name = "lbl_productName";
             this.lbl_productName.Size = new System.Drawing.Size(44, 13);
             this.lbl_productName.TabIndex = 9;
@@ -358,10 +321,10 @@
             // 
             // edt_productName
             // 
-            this.edt_productName.Location = new System.Drawing.Point(11, 77);
+            this.edt_productName.Location = new System.Drawing.Point(48, 41);
             this.edt_productName.MaxLength = 50;
             this.edt_productName.Name = "edt_productName";
-            this.edt_productName.Size = new System.Drawing.Size(282, 20);
+            this.edt_productName.Size = new System.Drawing.Size(336, 20);
             this.edt_productName.TabIndex = 10;
             // 
             // gbox_options
@@ -401,7 +364,7 @@
             // lbl_Save
             // 
             this.lbl_Save.AutoSize = true;
-            this.lbl_Save.Location = new System.Drawing.Point(148, 74);
+            this.lbl_Save.Location = new System.Drawing.Point(149, 74);
             this.lbl_Save.Name = "lbl_Save";
             this.lbl_Save.Size = new System.Drawing.Size(32, 13);
             this.lbl_Save.TabIndex = 4;
@@ -457,9 +420,9 @@
             this.gbox_summary.Controls.Add(this.lbl_totalAmount);
             this.gbox_summary.Controls.Add(this.lbl_Discount);
             this.gbox_summary.Controls.Add(this.lbl_subTotal);
-            this.gbox_summary.Location = new System.Drawing.Point(686, 109);
+            this.gbox_summary.Location = new System.Drawing.Point(1007, 12);
             this.gbox_summary.Name = "gbox_summary";
-            this.gbox_summary.Size = new System.Drawing.Size(309, 125);
+            this.gbox_summary.Size = new System.Drawing.Size(176, 135);
             this.gbox_summary.TabIndex = 12;
             this.gbox_summary.TabStop = false;
             this.gbox_summary.Text = "Summary";
@@ -467,7 +430,7 @@
             // edt_discountCash
             // 
             this.edt_discountCash.DecimalPlaces = 2;
-            this.edt_discountCash.Location = new System.Drawing.Point(71, 88);
+            this.edt_discountCash.Location = new System.Drawing.Point(83, 69);
             this.edt_discountCash.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -481,7 +444,7 @@
             // lbl_discountCash
             // 
             this.lbl_discountCash.AutoSize = true;
-            this.lbl_discountCash.Location = new System.Drawing.Point(6, 90);
+            this.lbl_discountCash.Location = new System.Drawing.Point(18, 71);
             this.lbl_discountCash.Name = "lbl_discountCash";
             this.lbl_discountCash.Size = new System.Drawing.Size(64, 13);
             this.lbl_discountCash.TabIndex = 11;
@@ -491,7 +454,7 @@
             // 
             this.edt_total.DecimalPlaces = 2;
             this.edt_total.Enabled = false;
-            this.edt_total.Location = new System.Drawing.Point(222, 88);
+            this.edt_total.Location = new System.Drawing.Point(83, 99);
             this.edt_total.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -504,7 +467,7 @@
             // edt_discountPerc
             // 
             this.edt_discountPerc.DecimalPlaces = 2;
-            this.edt_discountPerc.Location = new System.Drawing.Point(71, 55);
+            this.edt_discountPerc.Location = new System.Drawing.Point(83, 43);
             this.edt_discountPerc.Name = "edt_discountPerc";
             this.edt_discountPerc.Size = new System.Drawing.Size(54, 20);
             this.edt_discountPerc.TabIndex = 9;
@@ -515,7 +478,7 @@
             // 
             this.edt_subtotal.DecimalPlaces = 2;
             this.edt_subtotal.Enabled = false;
-            this.edt_subtotal.Location = new System.Drawing.Point(71, 26);
+            this.edt_subtotal.Location = new System.Drawing.Point(83, 14);
             this.edt_subtotal.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -529,7 +492,7 @@
             // lbl_totalAmount
             // 
             this.lbl_totalAmount.AutoSize = true;
-            this.lbl_totalAmount.Location = new System.Drawing.Point(155, 90);
+            this.lbl_totalAmount.Location = new System.Drawing.Point(21, 102);
             this.lbl_totalAmount.Name = "lbl_totalAmount";
             this.lbl_totalAmount.Size = new System.Drawing.Size(61, 13);
             this.lbl_totalAmount.TabIndex = 2;
@@ -538,7 +501,7 @@
             // lbl_Discount
             // 
             this.lbl_Discount.AutoSize = true;
-            this.lbl_Discount.Location = new System.Drawing.Point(4, 57);
+            this.lbl_Discount.Location = new System.Drawing.Point(16, 45);
             this.lbl_Discount.Name = "lbl_Discount";
             this.lbl_Discount.Size = new System.Drawing.Size(66, 13);
             this.lbl_Discount.TabIndex = 1;
@@ -547,7 +510,7 @@
             // lbl_subTotal
             // 
             this.lbl_subTotal.AutoSize = true;
-            this.lbl_subTotal.Location = new System.Drawing.Point(11, 28);
+            this.lbl_subTotal.Location = new System.Drawing.Point(23, 16);
             this.lbl_subTotal.Name = "lbl_subTotal";
             this.lbl_subTotal.Size = new System.Drawing.Size(59, 13);
             this.lbl_subTotal.TabIndex = 0;
@@ -557,7 +520,7 @@
             // lbl_barCode
             // 
             this.lbl_barCode.AutoSize = true;
-            this.lbl_barCode.Location = new System.Drawing.Point(50, 19);
+            this.lbl_barCode.Location = new System.Drawing.Point(387, 25);
             this.lbl_barCode.Name = "lbl_barCode";
             this.lbl_barCode.Size = new System.Drawing.Size(51, 13);
             this.lbl_barCode.TabIndex = 13;
@@ -566,24 +529,24 @@
             // lbl_productId
             // 
             this.lbl_productId.AutoSize = true;
-            this.lbl_productId.Location = new System.Drawing.Point(8, 19);
+            this.lbl_productId.Location = new System.Drawing.Point(3, 24);
             this.lbl_productId.Name = "lbl_productId";
             this.lbl_productId.Size = new System.Drawing.Size(18, 13);
             this.lbl_productId.TabIndex = 16;
             this.lbl_productId.Text = "ID";
             // 
-            // label1
+            // lbl_qntdAmount
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(8, 106);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(43, 13);
-            this.label1.TabIndex = 18;
-            this.label1.Text = "Amount";
+            this.lbl_qntdAmount.AutoSize = true;
+            this.lbl_qntdAmount.Location = new System.Drawing.Point(688, 12);
+            this.lbl_qntdAmount.Name = "lbl_qntdAmount";
+            this.lbl_qntdAmount.Size = new System.Drawing.Size(46, 26);
+            this.lbl_qntdAmount.TabIndex = 18;
+            this.lbl_qntdAmount.Text = "Quantity\r\nAmount";
             // 
             // btn_FindProduct
             // 
-            this.btn_FindProduct.Location = new System.Drawing.Point(299, 77);
+            this.btn_FindProduct.Location = new System.Drawing.Point(622, 41);
             this.btn_FindProduct.Name = "btn_FindProduct";
             this.btn_FindProduct.Size = new System.Drawing.Size(58, 20);
             this.btn_FindProduct.TabIndex = 19;
@@ -593,9 +556,9 @@
             // 
             // btn_AddProduct
             // 
-            this.btn_AddProduct.Location = new System.Drawing.Point(189, 120);
+            this.btn_AddProduct.Location = new System.Drawing.Point(1117, 41);
             this.btn_AddProduct.Name = "btn_AddProduct";
-            this.btn_AddProduct.Size = new System.Drawing.Size(75, 20);
+            this.btn_AddProduct.Size = new System.Drawing.Size(51, 20);
             this.btn_AddProduct.TabIndex = 20;
             this.btn_AddProduct.Text = "Add";
             this.btn_AddProduct.UseVisualStyleBackColor = true;
@@ -604,7 +567,7 @@
             // lbl_UNPrice
             // 
             this.lbl_UNPrice.AutoSize = true;
-            this.lbl_UNPrice.Location = new System.Drawing.Point(58, 107);
+            this.lbl_UNPrice.Location = new System.Drawing.Point(750, 25);
             this.lbl_UNPrice.Name = "lbl_UNPrice";
             this.lbl_UNPrice.Size = new System.Drawing.Size(47, 13);
             this.lbl_UNPrice.TabIndex = 21;
@@ -613,7 +576,7 @@
             // lbl_TotalCost
             // 
             this.lbl_TotalCost.AutoSize = true;
-            this.lbl_TotalCost.Location = new System.Drawing.Point(119, 106);
+            this.lbl_TotalCost.Location = new System.Drawing.Point(1038, 25);
             this.lbl_TotalCost.Name = "lbl_TotalCost";
             this.lbl_TotalCost.Size = new System.Drawing.Size(55, 13);
             this.lbl_TotalCost.TabIndex = 24;
@@ -621,6 +584,12 @@
             // 
             // gbox_Product
             // 
+            this.gbox_Product.Controls.Add(this.lbl_prodUnValue);
+            this.gbox_Product.Controls.Add(this.lbl_ProdPercDisc);
+            this.gbox_Product.Controls.Add(this.lbl_ProdDiscCash);
+            this.gbox_Product.Controls.Add(this.edt_ProdUnValue);
+            this.gbox_Product.Controls.Add(this.edt_ProdDiscPerc);
+            this.gbox_Product.Controls.Add(this.edt_ProdDiscCash);
             this.gbox_Product.Controls.Add(this.edt_barCode);
             this.gbox_Product.Controls.Add(this.edt_amount);
             this.gbox_Product.Controls.Add(this.edt_UNCost);
@@ -634,30 +603,30 @@
             this.gbox_Product.Controls.Add(this.lbl_UNPrice);
             this.gbox_Product.Controls.Add(this.btn_AddProduct);
             this.gbox_Product.Controls.Add(this.lbl_productId);
-            this.gbox_Product.Controls.Add(this.label1);
-            this.gbox_Product.Location = new System.Drawing.Point(12, 104);
+            this.gbox_Product.Controls.Add(this.lbl_qntdAmount);
+            this.gbox_Product.Location = new System.Drawing.Point(15, 153);
             this.gbox_Product.Name = "gbox_Product";
-            this.gbox_Product.Size = new System.Drawing.Size(376, 150);
+            this.gbox_Product.Size = new System.Drawing.Size(1168, 66);
             this.gbox_Product.TabIndex = 25;
             this.gbox_Product.TabStop = false;
             this.gbox_Product.Text = "Product";
             // 
             // edt_barCode
             // 
-            this.edt_barCode.Location = new System.Drawing.Point(54, 35);
+            this.edt_barCode.Location = new System.Drawing.Point(390, 41);
             this.edt_barCode.Maximum = new decimal(new int[] {
             -559939585,
             902409669,
             54,
             0});
             this.edt_barCode.Name = "edt_barCode";
-            this.edt_barCode.Size = new System.Drawing.Size(258, 20);
+            this.edt_barCode.Size = new System.Drawing.Size(226, 20);
             this.edt_barCode.TabIndex = 29;
             this.edt_barCode.ValueChanged += new System.EventHandler(this.edt_barCode_ValueChanged);
             // 
             // edt_amount
             // 
-            this.edt_amount.Location = new System.Drawing.Point(11, 120);
+            this.edt_amount.Location = new System.Drawing.Point(690, 41);
             this.edt_amount.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -677,7 +646,7 @@
             // 
             this.edt_UNCost.DecimalPlaces = 2;
             this.edt_UNCost.Enabled = false;
-            this.edt_UNCost.Location = new System.Drawing.Point(61, 120);
+            this.edt_UNCost.Location = new System.Drawing.Point(753, 41);
             this.edt_UNCost.Maximum = new decimal(new int[] {
             1410065407,
             2,
@@ -691,19 +660,19 @@
             // 
             this.edt_totalPValue.DecimalPlaces = 2;
             this.edt_totalPValue.Enabled = false;
-            this.edt_totalPValue.Location = new System.Drawing.Point(122, 120);
+            this.edt_totalPValue.Location = new System.Drawing.Point(1041, 41);
             this.edt_totalPValue.Maximum = new decimal(new int[] {
             1410065407,
             2,
             0,
             0});
             this.edt_totalPValue.Name = "edt_totalPValue";
-            this.edt_totalPValue.Size = new System.Drawing.Size(61, 20);
+            this.edt_totalPValue.Size = new System.Drawing.Size(70, 20);
             this.edt_totalPValue.TabIndex = 26;
             // 
             // edt_productId
             // 
-            this.edt_productId.Location = new System.Drawing.Point(11, 35);
+            this.edt_productId.Location = new System.Drawing.Point(6, 40);
             this.edt_productId.Maximum = new decimal(new int[] {
             1410065407,
             2,
@@ -782,7 +751,7 @@
             this.gbox_paymentCondition.Controls.Add(this.edt_payCondition);
             this.gbox_paymentCondition.Controls.Add(this.edt_payConditionId);
             this.gbox_paymentCondition.Controls.Add(this.lbl_payConditionID);
-            this.gbox_paymentCondition.Location = new System.Drawing.Point(214, 487);
+            this.gbox_paymentCondition.Location = new System.Drawing.Point(214, 516);
             this.gbox_paymentCondition.Name = "gbox_paymentCondition";
             this.gbox_paymentCondition.Size = new System.Drawing.Size(787, 166);
             this.gbox_paymentCondition.TabIndex = 27;
@@ -968,17 +937,186 @@
             // lbl_requiredCamps
             // 
             this.lbl_requiredCamps.AutoSize = true;
-            this.lbl_requiredCamps.Location = new System.Drawing.Point(12, 495);
+            this.lbl_requiredCamps.Location = new System.Drawing.Point(12, 566);
             this.lbl_requiredCamps.Name = "lbl_requiredCamps";
             this.lbl_requiredCamps.Size = new System.Drawing.Size(108, 13);
             this.lbl_requiredCamps.TabIndex = 28;
             this.lbl_requiredCamps.Text = "* Camps are required.";
             // 
+            // edt_ProdDiscCash
+            // 
+            this.edt_ProdDiscCash.DecimalPlaces = 2;
+            this.edt_ProdDiscCash.Location = new System.Drawing.Point(823, 41);
+            this.edt_ProdDiscCash.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.edt_ProdDiscCash.Name = "edt_ProdDiscCash";
+            this.edt_ProdDiscCash.Size = new System.Drawing.Size(50, 20);
+            this.edt_ProdDiscCash.TabIndex = 30;
+            // 
+            // edt_ProdDiscPerc
+            // 
+            this.edt_ProdDiscPerc.DecimalPlaces = 2;
+            this.edt_ProdDiscPerc.Location = new System.Drawing.Point(894, 41);
+            this.edt_ProdDiscPerc.Name = "edt_ProdDiscPerc";
+            this.edt_ProdDiscPerc.Size = new System.Drawing.Size(53, 20);
+            this.edt_ProdDiscPerc.TabIndex = 31;
+            // 
+            // edt_ProdUnValue
+            // 
+            this.edt_ProdUnValue.DecimalPlaces = 2;
+            this.edt_ProdUnValue.Enabled = false;
+            this.edt_ProdUnValue.Location = new System.Drawing.Point(967, 41);
+            this.edt_ProdUnValue.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.edt_ProdUnValue.Name = "edt_ProdUnValue";
+            this.edt_ProdUnValue.Size = new System.Drawing.Size(49, 20);
+            this.edt_ProdUnValue.TabIndex = 32;
+            // 
+            // lbl_ProdDiscCash
+            // 
+            this.lbl_ProdDiscCash.AutoSize = true;
+            this.lbl_ProdDiscCash.Location = new System.Drawing.Point(824, 12);
+            this.lbl_ProdDiscCash.Name = "lbl_ProdDiscCash";
+            this.lbl_ProdDiscCash.Size = new System.Drawing.Size(49, 26);
+            this.lbl_ProdDiscCash.TabIndex = 33;
+            this.lbl_ProdDiscCash.Text = "   Cash\r\nDiscount";
+            // 
+            // lbl_ProdPercDisc
+            // 
+            this.lbl_ProdPercDisc.AutoSize = true;
+            this.lbl_ProdPercDisc.Location = new System.Drawing.Point(891, 11);
+            this.lbl_ProdPercDisc.Name = "lbl_ProdPercDisc";
+            this.lbl_ProdPercDisc.Size = new System.Drawing.Size(62, 26);
+            this.lbl_ProdPercDisc.TabIndex = 34;
+            this.lbl_ProdPercDisc.Text = "Percentage\r\n  Discount";
+            // 
+            // lbl_prodUnValue
+            // 
+            this.lbl_prodUnValue.AutoSize = true;
+            this.lbl_prodUnValue.Location = new System.Drawing.Point(973, 12);
+            this.lbl_prodUnValue.Name = "lbl_prodUnValue";
+            this.lbl_prodUnValue.Size = new System.Drawing.Size(34, 26);
+            this.lbl_prodUnValue.TabIndex = 35;
+            this.lbl_prodUnValue.Text = "  UN\r\nValue";
+            // 
+            // DGV_SaleSummary
+            // 
+            this.DGV_SaleSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.DGV_SaleSummary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.SaleId,
+            this.SaleSubTotal,
+            this.SaleDiscCash,
+            this.SaleDiscPerc,
+            this.SaleTotal});
+            this.DGV_SaleSummary.Location = new System.Drawing.Point(660, 452);
+            this.DGV_SaleSummary.MultiSelect = false;
+            this.DGV_SaleSummary.Name = "DGV_SaleSummary";
+            this.DGV_SaleSummary.RowHeadersVisible = false;
+            this.DGV_SaleSummary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.DGV_SaleSummary.Size = new System.Drawing.Size(291, 55);
+            this.DGV_SaleSummary.TabIndex = 29;
+            // 
+            // SaleId
+            // 
+            this.SaleId.HeaderText = "Sale ID";
+            this.SaleId.Name = "SaleId";
+            this.SaleId.ReadOnly = true;
+            this.SaleId.Width = 45;
+            // 
+            // SaleSubTotal
+            // 
+            this.SaleSubTotal.HeaderText = "Sub-Total";
+            this.SaleSubTotal.Name = "SaleSubTotal";
+            this.SaleSubTotal.ReadOnly = true;
+            this.SaleSubTotal.Width = 60;
+            // 
+            // SaleDiscCash
+            // 
+            this.SaleDiscCash.HeaderText = "Cash Discount";
+            this.SaleDiscCash.Name = "SaleDiscCash";
+            this.SaleDiscCash.Width = 60;
+            // 
+            // SaleDiscPerc
+            // 
+            this.SaleDiscPerc.HeaderText = "Percentage Discount";
+            this.SaleDiscPerc.Name = "SaleDiscPerc";
+            this.SaleDiscPerc.Width = 65;
+            // 
+            // SaleTotal
+            // 
+            this.SaleTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SaleTotal.HeaderText = "Total";
+            this.SaleTotal.Name = "SaleTotal";
+            this.SaleTotal.ReadOnly = true;
+            // 
+            // IdProduct
+            // 
+            this.IdProduct.HeaderText = "ID";
+            this.IdProduct.Name = "IdProduct";
+            this.IdProduct.ReadOnly = true;
+            this.IdProduct.Width = 45;
+            // 
+            // NameProduct
+            // 
+            this.NameProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameProduct.HeaderText = "Product";
+            this.NameProduct.Name = "NameProduct";
+            this.NameProduct.ReadOnly = true;
+            // 
+            // QuantityProduct
+            // 
+            this.QuantityProduct.HeaderText = "Quantity";
+            this.QuantityProduct.Name = "QuantityProduct";
+            this.QuantityProduct.ReadOnly = true;
+            this.QuantityProduct.Width = 70;
+            // 
+            // ProductCost
+            // 
+            this.ProductCost.HeaderText = "Product Cost";
+            this.ProductCost.Name = "ProductCost";
+            this.ProductCost.ReadOnly = true;
+            this.ProductCost.Width = 70;
+            // 
+            // ItemDiscountCash
+            // 
+            this.ItemDiscountCash.HeaderText = "Discount Cash";
+            this.ItemDiscountCash.Name = "ItemDiscountCash";
+            this.ItemDiscountCash.ReadOnly = true;
+            this.ItemDiscountCash.Width = 70;
+            // 
+            // ItemDiscountPerc
+            // 
+            this.ItemDiscountPerc.HeaderText = "Discount %";
+            this.ItemDiscountPerc.Name = "ItemDiscountPerc";
+            this.ItemDiscountPerc.ReadOnly = true;
+            this.ItemDiscountPerc.Width = 70;
+            // 
+            // UnValueProduct
+            // 
+            this.UnValueProduct.HeaderText = "UN Value";
+            this.UnValueProduct.Name = "UnValueProduct";
+            this.UnValueProduct.ReadOnly = true;
+            this.UnValueProduct.Width = 70;
+            // 
+            // ProductTotalValue
+            // 
+            this.ProductTotalValue.HeaderText = "Total Value";
+            this.ProductTotalValue.Name = "ProductTotalValue";
+            this.ProductTotalValue.ReadOnly = true;
+            this.ProductTotalValue.Width = 90;
+            // 
             // Frm_Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1013, 657);
+            this.ClientSize = new System.Drawing.Size(1187, 684);
+            this.Controls.Add(this.DGV_SaleSummary);
             this.Controls.Add(this.lbl_requiredCamps);
             this.Controls.Add(this.gbox_paymentCondition);
             this.Controls.Add(this.gbox_date);
@@ -1023,6 +1161,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscCash)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscPerc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdUnValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleSummary)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1055,7 +1197,7 @@
         private System.Windows.Forms.Button btn_new;
         private System.Windows.Forms.Label lbl_barCode;
         private System.Windows.Forms.Label lbl_productId;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lbl_qntdAmount;
         private System.Windows.Forms.Button btn_FindProduct;
         private System.Windows.Forms.Button btn_AddProduct;
         private System.Windows.Forms.Label lbl_UNPrice;
@@ -1099,14 +1241,26 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentPercentage;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentMethod;
+        private System.Windows.Forms.Label lbl_requiredCamps;
+        private System.Windows.Forms.NumericUpDown edt_ProdDiscPerc;
+        private System.Windows.Forms.NumericUpDown edt_ProdDiscCash;
+        private System.Windows.Forms.NumericUpDown edt_ProdUnValue;
+        private System.Windows.Forms.Label lbl_prodUnValue;
+        private System.Windows.Forms.Label lbl_ProdPercDisc;
+        private System.Windows.Forms.Label lbl_ProdDiscCash;
+        private System.Windows.Forms.DataGridView DGV_SaleSummary;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaleId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaleSubTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaleDiscCash;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaleDiscPerc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaleTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn IdProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn NameProduct;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn QuantityProduct;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProductCost;
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemDiscountCash;
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemDiscountPerc;
         private System.Windows.Forms.DataGridViewTextBoxColumn UnValueProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductTotalValue;
-        private System.Windows.Forms.Label lbl_requiredCamps;
     }
 }

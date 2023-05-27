@@ -104,10 +104,10 @@
             // 
             // edt_productSalePrice
             // 
-            this.edt_productSalePrice.Location = new System.Drawing.Point(463, 71);
+            this.edt_productSalePrice.Location = new System.Drawing.Point(507, 67);
             this.edt_productSalePrice.MaxLength = 6;
             this.edt_productSalePrice.Name = "edt_productSalePrice";
-            this.edt_productSalePrice.Size = new System.Drawing.Size(52, 20);
+            this.edt_productSalePrice.Size = new System.Drawing.Size(73, 20);
             this.edt_productSalePrice.TabIndex = 27;
             // 
             // edt_productName
@@ -131,7 +131,7 @@
             // lbl_salePrice
             // 
             this.lbl_salePrice.AutoSize = true;
-            this.lbl_salePrice.Location = new System.Drawing.Point(460, 55);
+            this.lbl_salePrice.Location = new System.Drawing.Point(504, 54);
             this.lbl_salePrice.Name = "lbl_salePrice";
             this.lbl_salePrice.Size = new System.Drawing.Size(59, 13);
             this.lbl_salePrice.TabIndex = 23;
@@ -167,6 +167,7 @@
             // 
             // edt_stock
             // 
+            this.edt_stock.Enabled = false;
             this.edt_stock.Location = new System.Drawing.Point(389, 24);
             this.edt_stock.Margin = new System.Windows.Forms.Padding(2);
             this.edt_stock.Maximum = new decimal(new int[] {
@@ -200,14 +201,14 @@
             // edt_ProfitPerc
             // 
             this.edt_ProfitPerc.DecimalPlaces = 2;
-            this.edt_ProfitPerc.Location = new System.Drawing.Point(390, 71);
+            this.edt_ProfitPerc.Location = new System.Drawing.Point(389, 69);
             this.edt_ProfitPerc.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.edt_ProfitPerc.Name = "edt_ProfitPerc";
-            this.edt_ProfitPerc.Size = new System.Drawing.Size(49, 20);
+            this.edt_ProfitPerc.Size = new System.Drawing.Size(68, 20);
             this.edt_ProfitPerc.TabIndex = 37;
             this.edt_ProfitPerc.ValueChanged += new System.EventHandler(this.edt_ProfitPerc_ValueChanged);
             // 

@@ -36,6 +36,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_payConditionQnt.Controls[0].Visible = false;
             edt_payConditionId.Controls[0].Visible = false;
             edt_productId.Controls[0].Visible = false;
+            edt_UNCost.Controls[0].Visible = false;
+            edt_ProdDiscCash.Controls[0].Visible = false;
+            edt_ProdDiscPerc.Controls[0].Visible = false;
+            edt_ProdUnValue.Controls[0].Visible = false;
+            edt_totalPValue.Controls[0].Visible = false;
         }
 
         private Sales BackupSale = null;
@@ -124,7 +129,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     edt_productName.Text = product.productName;
                     edt_productName.Text = product.productName;
                     edt_barCode.Value = product.BarCode;
-                    edt_UNCost.Value = (decimal)product.salePrice;
+                    edt_UNCost.Value = (decimal)product.productCost;
+                    edt_ProdUnValue.Value = (decimal)product.salePrice;
                 }
             }
             formProducts.Close();
@@ -143,24 +149,57 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 {
                     edt_clientId.Value = client.id;
                     edt_clientName.Text = client.name;
+                    if (client.clientType == 2)
+                    {
+                        medt_registrationNumber.Mask = "00.000.000/0000.00";
+                    }
+                    else
+                    {
+                        medt_registrationNumber.Mask = "000.000.000-00";
+                    }
                     medt_registrationNumber.Text = client.registrationNumber;
                 }
             }
             formClient.Close();
         }
 
+        public bool CheckEqualDGVProduct(int prodId, int amount, decimal discountCash, decimal discountPerc, decimal totalValue)
+        {
+            foreach (DataGridViewRow row in DGV_SaleProducts.Rows)
+            {
+                if ((int)row.Cells[0].Value == prodId)
+                {
+                    if ((decimal)row.Cells["ItemDiscountCash"].Value == discountCash &&
+                        (decimal)row.Cells["ItemDiscountPerc"].Value == discountPerc)
+                    {                      
+                        row.Cells["QuantityProduct"].Value = (int)row.Cells["QuantityProduct"].Value + amount;
+                        row.Cells["ProductTotalValue"].Value = (decimal)row.Cells["ProductTotalValue"].Value + totalValue;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
         public void AddProductToDGV() //Pega obj produto e popula na DGV e chama CalculateSubTotal
         {
             Products product = GetProduct();
             int amount = (int)edt_amount.Value;
-            decimal totalValue = (decimal)product.salePrice * edt_amount.Value;
-            DGV_SaleProducts.Rows.Add(
-                product.id,
-                product.productName,
-                product.productCost,
-                amount,
-                product.salePrice,
-                totalValue);
+            decimal discountCash = edt_ProdDiscCash.Value;
+            decimal discountPerc = edt_ProdDiscPerc.Value;
+            decimal totalValue = edt_totalPValue.Value;
+
+            if (!CheckEqualDGVProduct(product.id, amount, discountCash, discountPerc, totalValue)){
+                DGV_SaleProducts.Rows.Add(
+                    product.id,
+                    product.productName,
+                    amount,
+                    product.productCost,
+                    discountCash,
+                    discountPerc,
+                    product.salePrice,
+                    totalValue);
+            }
 
             CalculateSubTotal();
         }
@@ -228,7 +267,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             edt_productId.Value = prod.id;
             edt_productName.Text = prod.productName;
-            edt_UNCost.Value = (decimal)prod.salePrice;
+            edt_UNCost.Value = (decimal)prod.productCost;
+            edt_ProdUnValue.Value = (decimal)prod.salePrice;
+            CalcTotalProdValue();
         }
 
         private Products SearchItemByName()
@@ -431,6 +472,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public void Save() // Save
         {
+            bool status = true;
             if (CheckCamps())
             {
                 LockCamps();
@@ -442,15 +484,21 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                         if (ConfirmSale(sale))
                         {
                             _controller = new Sales_Controller();
-                            _controller.SaveItem(sale);
-                            Populated(false);
+                            status = _controller.SaveItem(sale);
+                            if (status)
+                            {
+                                Populated(false);
+                            }
                         }
                     }
                     else if (btn_new.Text == "Cancel")
                     {
                         _controller = new Sales_Controller();
-                        _controller.UpdateItem(sale);
-                        SetFormToEdit();
+                        status = _controller.UpdateItem(sale);
+                        if (status)
+                        {
+                            SetFormToEdit();
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -787,9 +835,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             return true;
         }
 
+        public void CalcTotalProdValue()
+        {
+            edt_totalPValue.Value = edt_amount.Value * edt_ProdUnValue.Value;
+        }
+
         private void edt_amount_ValueChanged(object sender, EventArgs e)
         {
-            edt_totalPValue.Value = edt_amount.Value * edt_UNCost.Value;
+            CalcTotalProdValue();
+        }
+
+        private void DGV_SaleProducts_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = e.RowIndex;
+            CalculateSubTotal();
         }
     }
 }

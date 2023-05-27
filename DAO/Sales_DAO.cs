@@ -97,6 +97,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
                     {
                         Console.WriteLine(ex.Message);
+                        return false;
                     }
                 }
                 catch (Exception ex)

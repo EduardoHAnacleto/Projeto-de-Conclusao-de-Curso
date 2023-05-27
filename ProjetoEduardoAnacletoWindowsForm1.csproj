@@ -125,6 +125,12 @@
     <Compile Include="Next\Frm_Create_BillsToReceive.Designer.cs">
       <DependentUpon>Frm_Create_BillsToReceive.cs</DependentUpon>
     </Compile>
+    <Compile Include="Next\Frm_Create_Purchase.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Next\Frm_Create_Purchase.Designer.cs">
+      <DependentUpon>Frm_Create_Purchase.cs</DependentUpon>
+    </Compile>
     <Compile Include="Next\MasterDetails_BillsToReceive.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -407,6 +413,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Next\Frm_Create_BillsToReceive.resx">
       <DependentUpon>Frm_Create_BillsToReceive.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Next\Frm_Create_Purchase.resx">
+      <DependentUpon>Frm_Create_Purchase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Next\MasterDetails_BillsToReceive.resx">
       <DependentUpon>MasterDetails_BillsToReceive.cs</DependentUpon>

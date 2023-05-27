@@ -65,11 +65,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 cbox_ProductGroup.Focus();
                 return false;
             }
-            else if (!Utilities.IsMoreThanZero(Convert.ToInt32(edt_stock.Value), "Stock"))
-            {
-                edt_stock.Focus();
-                return false;
-            }
             else if (!Utilities.HasOnlyDigits((edt_barCode.Text), "Bar Code") || Utilities.HasOnlySpaces(edt_barCode.Text,"Bar Code"))
             {
                 edt_barCode.Focus();
@@ -95,10 +90,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_productSalePrice.Enabled = false;
             cbox_brands.Enabled = false;
             cbox_ProductGroup.Enabled = false;
-            edt_stock.Enabled = false;
+            //edt_stock.Enabled = false;
             btn_SearchBrand.Enabled = false;
             btn_SearchPGroup.Enabled = false;
             edt_barCode.Enabled = false;
+            edt_ProfitPerc.Enabled = false;
         }
 
         public override void UnlockCamps()
@@ -108,10 +104,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_productSalePrice.Enabled = true;
             cbox_brands.Enabled = true;
             cbox_ProductGroup.Enabled = true;
-            edt_stock.Enabled = true;
+            //edt_stock.Enabled = true;
             btn_SearchBrand.Enabled = true;
             btn_SearchPGroup.Enabled = true;
             edt_barCode.Enabled = true;
+            edt_ProfitPerc.Enabled = true;
         }
 
         public override void ClearCamps()
@@ -124,6 +121,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             cbox_ProductGroup.SelectedIndex = 0;
             edt_stock.Value = 0;
             edt_barCode.Clear();
+            edt_ProfitPerc.Value = 0;
         }
 
         public void PopulateCamps(Products product)
@@ -138,6 +136,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             cbox_brands.SelectedItem = product.brand.brandName;
             cbox_ProductGroup.SelectedItem = product.productGroup.productGroup;
             edt_barCode.Text = product.BarCode.ToString();
+            edt_ProfitPerc.Value = (decimal) (product.salePrice / product.productCost) * 100;
         }
 
         public Products GetObject()
@@ -237,13 +236,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             ComboBox comboBox = new ComboBox();
             ProductGroups_Controller pController = new ProductGroups_Controller();
             DataTable dt = pController.PopulateDGV();
-            cbox_ProductGroup.DataSource = dt.DataSet; //???
+            //cbox_ProductGroup.DataSource = dt.DataSet; //???
             //cbox_phone1.
             foreach (DataRow dr in dt.Rows)
             {
                 comboBox.Items.Add(dr.ItemArray[1].ToString());
-                var l = dr.ItemArray[1].ToString();
-                var p = dr.ItemArray[1].ToString();
             }
             foreach (string text in comboBox.Items)
             {
