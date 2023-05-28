@@ -14,6 +14,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
     public class SaleItems_Controller : Master_Controller
     {
         private SaleItems _SaleItems = new SaleItems();
+        private List<SaleItems> _ListSaleItems;
         private SaleItems_DAO _SaleItemsDAO = new SaleItems_DAO();
 
         public SaleItems_Controller()
@@ -21,10 +22,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
 
         }
 
-        public void SaveItem(SaleItems saleItems)
+        public bool SaveItem(SaleItems saleItems)
         {
             _SaleItems = saleItems;
-            _SaleItemsDAO.SaveToDb(_SaleItems);
+            return _SaleItemsDAO.SaveToDb(_SaleItems);
         }
         public new List<SaleItems> LoadItems()
         {
@@ -43,9 +44,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             decimal value = (decimal)minValue;
             return _SaleItemsDAO.SelectTotalValueFromDb(value);
         }
-        public new void DeleteItem(int id)
+        public bool UpdateItem(SaleItems item)
         {
-            _SaleItemsDAO.DeleteFromDb(id);
+            _SaleItems = item;
+            string format = "yyyy-MM-dd";
+            _SaleItems.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
+            return _SaleItemsDAO.EditFromDB(_SaleItems);
+        }
+        public new bool DeleteItem(int id)
+        {
+            return _SaleItemsDAO.DeleteFromDb(id);
         }
         public DataTable PopulateDGV() 
         {

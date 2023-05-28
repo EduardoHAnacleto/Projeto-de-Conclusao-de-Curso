@@ -569,6 +569,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 saleItem.ProductValue = (double)row.Cells["UnValueProduct"].Value;
                 saleItem.TotalValue = (double)row.Cells["ProductTotalValue"].Value;
                 saleItem.ProductCost = (double)row.Cells["ProductCost"].Value;
+                saleItem.ItemDiscountCash = (double)row.Cells["ItemDiscountCash"].Value;
+                saleItem.ItemDiscountPerc = (double)row.Cells["ItemDiscountPerc"].Value;          
+
                 list.Add(saleItem);
             }
             return list;

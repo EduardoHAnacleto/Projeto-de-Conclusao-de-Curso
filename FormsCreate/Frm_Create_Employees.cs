@@ -16,7 +16,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         public Frm_Create_Employees() 
         {
             InitializeComponent();
-            PopulatePhoneClassificationsComboBox();
+            base.PopulatePhoneClassificationsComboBox();
         }
 
         private Employees_Controller controller = new Employees_Controller();

@@ -40,7 +40,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register added with success!");
                         status = true;
                     }
 
@@ -79,7 +78,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        //MessageBox.Show("Register altered with success!");
                         status = true;
                     }
 
@@ -112,7 +110,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register erased with success!");
                         status = true;
                     }
 

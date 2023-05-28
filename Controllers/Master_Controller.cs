@@ -37,10 +37,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             //DeleteItem
         }
-        public virtual void UpdateItem(Object obj)
+        public virtual bool UpdateItem(Object obj)
         {
             _Obj = obj;
-            _DAO.EditFromDB(_Obj);
+            return _DAO.EditFromDB(_Obj);
         }
 
         public virtual int BringNewId()

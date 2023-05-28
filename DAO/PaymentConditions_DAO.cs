@@ -55,7 +55,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             bool status = false;
 
             string sql = "INSERT INTO PAYMENTCONDITIONS ( CONDITION_NAME, PAYMENT_FEES, FINE_VALUE, DISCOUNT_PERC, INSTALMENT_QUANTITY , DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@CONDNAME, @FEES, @FINE, @DISCOUNT, @QNT, @DC, @DU);";
+                         + " VALUES (@CONDNAME, @FEES, @FINE, @DISCOUNT, @QNT, @DC, @DU);" +
+                         " SELECT SCOPE_IDENTITY();";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -69,7 +70,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@DC", cond.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", cond.dateOfLastUpdate);
                     connection.Open();
-                    int i = command.ExecuteNonQuery();
+                    //int i = command.ExecuteNonQuery();
+                    int i = Convert.ToInt32(command.ExecuteScalar());
                     connection.Close();
                     if (i > 0)
                     {
@@ -77,6 +79,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         {
                             if (instalment != null)
                             {
+                                instalment.id = i;
                                 status = _billsInstalmentsController.SaveItem(instalment);
                                 if (!status)
                                 {

@@ -17,7 +17,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         {
             InitializeComponent();
             SetFormForSuppliers();
-            PopulatePhoneClassificationsComboBox();
+            base.PopulatePhoneClassificationsComboBox();
         }
 
         private Suppliers_Controller controller = new Suppliers_Controller();

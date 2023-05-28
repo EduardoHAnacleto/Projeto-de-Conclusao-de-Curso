@@ -60,16 +60,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public bool SaveToDb(Sales sale)
         {
             bool status = false;
-
-            string sql = "INSERT INTO SALES (PAYCONDITIONID, CLIENT_ID, USER_ID, SALE_TOTAL_COST, SALE_TOTAL_VALUE, SALE_DISCOUNT_CASH, SALE_DISCOUNT_PERC," +
+            string sql = "INSERT INTO SALES (CLIENT_ID, USER_ID, SALE_TOTAL_COST, SALE_TOTAL_VALUE, SALE_DISCOUNT_CASH, SALE_DISCOUNT_PERC," +
                 "TOTAL_ITEMS_QUANTITY, SALE_CANCEL_DATE , DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@CONDID, @CLIENTID, @USERID, @SALECOST, @SALEVALUE, @SALEDISCCASH, @SALEDISCPERC, @TOTALQTD, @CANCELDATE, @DC, @DU);";
+                         + " VALUES (@CLIENTID, @USERID, @SALECOST, @SALEVALUE, @SALEDISCCASH, @SALEDISCPERC, @TOTALQTD, @CANCELDATE, @DC, @DU);" +
+                         " SELECT SCOPE_IDENTITY();";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+                SqlTransaction transaction = null;
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@CONDID", sale.PaymentConditionId);
                     command.Parameters.AddWithValue("@CLIENTID", sale.Client.id);
                     command.Parameters.AddWithValue("@USERID", sale.User.id);
                     command.Parameters.AddWithValue("@SALECOST", (decimal)sale.TotalCost);
@@ -80,33 +81,48 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@CANCELDATE", sale.CancelDate);
                     command.Parameters.AddWithValue("@DC", sale.dateOfLastUpdate);
                     command.Parameters.AddWithValue("@DU", sale.dateOfLastUpdate);
-                    connection.Open();
-                    int i = command.ExecuteNonQuery();
-                    connection.Close();
+
+                    transaction = connection.BeginTransaction();
+                    command.Transaction = transaction;
+                    int i = Convert.ToInt32(command.ExecuteScalar());
                     if (i > 0)
                     {
-                        //if (SaveInstalmentsToDb(sale.BillsInstalments, sale.id))
+                        foreach (SaleItems item in sale.SaleItems)
                         {
-                            MessageBox.Show("Register added with success!");
-                            status = true;
+                            if (item != null)
+                            {
+                                item.id = i;
+                                status = _saleItemsController.SaveItem(item);
+                                if (!status)
+                                {
+                                    MessageBox.Show("An error has occurred.");
+                                    transaction.Rollback();
+                                    break;
+                                }
+                            }
                         }
+                        transaction.Commit();
+                        MessageBox.Show("Register added with success!");
+                        return true;
                     }
                 }
                 catch (SqlException ex)
                 {
                     if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
                     {
-                        Console.WriteLine(ex.Message);
+                        transaction?.Rollback();
                         return false;
                     }
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error : " + ex.Message);
+                    transaction?.Rollback();
                     return status;
                 }
                 finally
                 {
+                    transaction?.Dispose();
                     connection.Close();
                 }
                 return status;
@@ -117,7 +133,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "UPDATE SALES SET PAYCONDITIONID = @CONDID CLIENT_ID = @CLIENTID, USER_ID = @USERID, SALE_TOTAL_COST = @SALECOST," +
+            string sql = "UPDATE SALES SET CLIENT_ID = @CLIENTID, USER_ID = @USERID, SALE_TOTAL_COST = @SALECOST," +
                 " SALE_TOTAL_VALUE = @SALEVALUE, SALE_DISCOUNT_CASH = @SALEDISCCASH, SALE_DISCOUNT_PERC = @SALEDISCPERC ," +
                 " TOTAL_ITEMS_QUANTITY = @TOTALQTD, SALE_CANCEL_DATE = @CANCELDATE, DATE_LAST_UPDATE = @DU " +
                 "WHERE ID_SALE = @ID ; ";
@@ -126,7 +142,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@CONDID", sale.PaymentConditionId);
                     command.Parameters.AddWithValue("@CLIENTID", sale.Client.id);
                     command.Parameters.AddWithValue("@USERID", sale.User.id);
                     command.Parameters.AddWithValue("@SALECOST", (decimal)sale.TotalCost);
@@ -142,11 +157,33 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     connection.Close();
                     if (i > 0)
                     {
-                        //if (EditInstalmentsToDb(cond.BillsInstalments, cond.id))
-                        //{
+                        var itemList = _saleItemsController.FindSaleId(sale.id); // Pega a lista de itens já no banco, remove os que foram removidos da lista
+                        List<SaleItems> toBeRemoved = sale.SaleItems.Except(itemList).ToList();
+                        foreach (SaleItems item in sale.SaleItems)
+                        {
+                            if (item != null)
+                            {
+                                status = _saleItemsController.UpdateItem(item);
+                                if (!status)
+                                {
+                                    MessageBox.Show("An error has occurred.");
+                                    break;
+                                }
+                            }
+                        }
+                        foreach (SaleItems item in toBeRemoved)
+                        {
+                            status = _saleItemsController.DeleteItem(item.id);
+                            if (!status)
+                            {
+                                MessageBox.Show("An error has occurred.");
+                                break;
+                            }
+                        }
+                        if (status)
+                        {
                             MessageBox.Show("Register altered with success!");
-                            status = true;
-                        //}
+                        }
                     }
 
                 }
@@ -222,7 +259,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 obj.id = id;
                                 obj.User = _usersController.FindItemId( Convert.ToInt32(reader["user_id"]));
                                 obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                //obj.BillToReceive = _billToReceiveController.FindSaleId(id);
                                 obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
                                 obj.SaleItems = _saleItemsController.FindSaleId(id);
                                 obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);

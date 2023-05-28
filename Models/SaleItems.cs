@@ -13,7 +13,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             Products Product = new Products();
         }
 
-        public int SaleId { get; set; }
         public Products Product { get; set; }
         public int Quantity { get; set; }
         public double ProductValue { get; set; }

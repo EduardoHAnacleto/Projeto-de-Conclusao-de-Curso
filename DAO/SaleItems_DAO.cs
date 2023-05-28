@@ -21,7 +21,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             bool status = false;
 
-            string sql = "INSERT INTO SALEITEMS ( ID_SALE, PRODUCT_ID, QUANTITY, ITEM_VALUE, ITEM_COST, DISCOUNT_CASH, DISCOUNT_PERC," +
+            string sql = "INSERT INTO SALEITEMS ( SALE_ID, PRODUCT_ID, QUANTITY, ITEM_VALUE, ITEM_COST, DISCOUNT_CASH, DISCOUNT_PERC," +
                 "TOTAL_VALUE , DATE_CREATION, DATE_LAST_UPDATE ) "
                          + " VALUES (@ID, @PRODVALUE, @PRODCOST, @TOTALVALUE, @DISCCASH, @DISCPERC, @QTD, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -29,7 +29,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@ID", obj.SaleId);
+                    command.Parameters.AddWithValue("@ID", obj.id);
                     command.Parameters.AddWithValue("@PRODVALUE", (decimal)obj.ProductValue);
                     command.Parameters.AddWithValue("@PRODCOST", (decimal)obj.ProductCost);
                     command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.TotalValue);
@@ -67,6 +67,47 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
+        public bool EditFromDB(SaleItems obj)
+        {
+            bool status = false;
+
+            string sql = "UPDATE SALEITEMS SET PRODUCT_ID = @PRODID, QUANTITY = @QTD, ITEM_VALUE = @ITEMVALUE, ITEM_COST = @ITEMCOST, " +
+                " DISCOUNT_CASH = @DISCCASH, DISCOUNT_PERC = @DISCPERC, TOTAL_VALUE = @TOTAL, DATE_LAST_UPDATE = @DU " +
+                "WHERE SALE_ID = @ID ; ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@PRODID", obj.id);
+                    command.Parameters.AddWithValue("@QTD", obj.Quantity);
+                    command.Parameters.AddWithValue("@ITEMVALUE", (decimal)obj.ProductValue);
+                    command.Parameters.AddWithValue("@ITEMCOST", (decimal)obj.ProductCost);
+                    command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.ItemDiscountCash);
+                    command.Parameters.AddWithValue("@DISCPERC", (decimal)obj.ItemDiscountPerc);
+                    command.Parameters.AddWithValue("@TOTAL", (decimal)obj.TotalValue);
+                    command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
         public List<SaleItems> SelectFromDb(int id)
         {
             string sql = "SELECT * FROM SALEITEMS WHERE SALE_ID = @ID ;";
@@ -87,8 +128,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         {
                             SaleItems obj = new SaleItems
                             {
-                                id = Convert.ToInt32(reader["id_sale"]),
-                                SaleId = Convert.ToInt32(reader["id_sale"]),
+                                id = Convert.ToInt32(reader["sale_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 ProductValue = Convert.ToDouble(reader["item_value"]),
@@ -136,8 +176,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         {
                             SaleItems obj = new SaleItems
                             {
-                                id = Convert.ToInt32(reader["id_sale"]),
-                                SaleId = Convert.ToInt32(reader["id_sale"]),
+                                id = Convert.ToInt32(reader["sale_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 ProductValue = Convert.ToDouble(reader["item_value"]),
@@ -185,8 +224,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         {
                             SaleItems obj = new SaleItems
                             {
-                                id = Convert.ToInt32(reader["id_sale"]),
-                                SaleId = Convert.ToInt32(reader["id_sale"]),
+                                id = Convert.ToInt32(reader["sale_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 ProductValue = Convert.ToDouble(reader["item_value"]),
@@ -234,8 +272,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         {
                             SaleItems obj = new SaleItems
                             {
-                                id = Convert.ToInt32(reader["id_sale"]),
-                                SaleId = Convert.ToInt32(reader["id_sale"]),
+                                id = Convert.ToInt32(reader["sale_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 ProductValue = Convert.ToDouble(reader["item_value"]),
@@ -304,7 +341,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public bool DeleteFromDb(int id)
         {
             bool status = false;
-            string sql = "DELETE FROM SALEITEMS WHERE ID_SALE = @ID ;";
+            string sql = "DELETE FROM SALEITEMS WHERE SALE_ID = @ID ;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
