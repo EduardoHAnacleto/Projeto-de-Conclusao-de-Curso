@@ -63,13 +63,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 
             string sql = "UPDATE BILLSINSTALMENTS SET PAYMETHOD_ID = @PAYID, TOTAL_DAYS = @DAYS, VALUE_PERCENTAGE = @VALUEPERC, " +
                 " DATE_LAST_UPDATE = @DU " +
-                "WHERE PAYCONDITION_ID = @ID ; ";
+                "WHERE PAYCONDITION_ID = @ID AND INSTALMENT_NUMBER = @INUM; ";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", obj.id);
+                    command.Parameters.AddWithValue("@INUM", obj.InstalmentNumber);
                     command.Parameters.AddWithValue("@PAYID", obj.PaymentMethod.id);
                     command.Parameters.AddWithValue("@DAYS", obj.TotalDays);
                     command.Parameters.AddWithValue("@VALUEPERC", (decimal)obj.ValuePercentage);
@@ -99,13 +100,46 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "DELETE FROM BILLINSTALMENTS WHERE PAYCONDITION_ID = @ID ; ";
+            string sql = "DELETE FROM BILLSINSTALMENTS WHERE PAYCONDITION_ID = @ID ; ";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", id);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
+        public bool DeleteFromDb(int id, int iNumber)
+        {
+            bool status = false;
+
+            string sql = "DELETE FROM BILLSINSTALMENTS WHERE PAYCONDITION_ID = @ID AND INSTALMENT_NUMBER = @INUM ; ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("@INUM", iNumber);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     if (i > 0)

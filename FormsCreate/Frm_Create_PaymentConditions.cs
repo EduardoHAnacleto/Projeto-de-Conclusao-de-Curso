@@ -147,8 +147,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 edt_daysCount.Focus();
                 return false;
             }
-            else if (!Utilities.IsDouble(edt_valuePercentage.Text, "Value Percentage"))
+            else if (edt_valuePercentage.Value <= 0)
             {
+                string message = "Value percentage must be higher than 0.";
+                string caption = "Required camp is invalid.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
                 edt_valuePercentage.Focus();
                 return false;
             }
@@ -162,12 +167,29 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public void AddInstalment()
         {
-            if (CheckInstalmentCamps())
+            
+            if (CheckInstalmentCamps() && ValidateMaxPercentage() )
             {
-                AddToDGV();
-                edt_instalmentNumber.Value++;
+                if (SurpassMaxPercentage())
+                {
+                    edt_valuePercentage.Value = 100 - Convert.ToDecimal(edt_totalPercentage.Text);
+                }
+                int i = DGV_Instalments.Rows.Count + 1;
+                AddToDGV(i);
+                edt_instalmentNumber.Value = i+1;
+                CalculateMaxPercentage();
             }
-            CalculateMaxPercentage();
+
+        }
+
+        private bool ValidateMaxPercentage()
+        {
+            return (Convert.ToDecimal(edt_totalPercentage.Text) < 100);
+        }
+
+        private bool SurpassMaxPercentage()
+        {
+            return (Convert.ToDecimal(edt_totalPercentage.Text) + edt_valuePercentage.Value) > 100;
         }
 
         private void btn_AddInstalment_Click(object sender, EventArgs e)
@@ -175,10 +197,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             AddInstalment();
         }
 
-        public void AddToDGV()
+        public void AddToDGV(int rowsCount)
         {
             DGV_Instalments.Rows.Add(
-                edt_instalmentNumber.Value,
+                rowsCount,
                 edt_daysCount.Value,
                 edt_valuePercentage.Value,
                 cbox_payMethods.SelectedItem.ToString());
@@ -224,10 +246,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public void EventRowDeleted()
         {
-            if (edt_instalmentNumber.Value > 1)
+            //if (edt_instalmentNumber.Value > 1)
+            //{
+            //    edt_instalmentNumber.Value--;
+            //}
+            int i = 1;
+            foreach (DataGridViewRow row in DGV_Instalments.Rows)
             {
-                edt_instalmentNumber.Value--;
+                row.Cells["InstalmentNumber"].Value = i;
+                i++;
             }
+            edt_instalmentNumber.Value = i;
             CalculateMaxPercentage();
         }
 
@@ -258,11 +287,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             {
                 btn_NewSave.Enabled = false;
                 btn_AddInstalment.Enabled = true;
+                edt_daysCount.Enabled = true;
+                edt_valuePercentage.Enabled = true;
+                cbox_payMethods.Enabled = true;
+                btn_SearchMethod.Enabled = true;
             }
             else if (aux == 100)
             {
                 btn_NewSave.Enabled = true;
                 btn_AddInstalment.Enabled = false;
+                edt_daysCount.Enabled = false;
+                cbox_payMethods.Enabled = false;
+                edt_valuePercentage.Enabled = false;
+                btn_SearchMethod.Enabled = false;
             }
             edt_totalPercentage.Text = aux.ToString();
         }
@@ -387,24 +424,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             UnlockCamps();
         }
 
-        private void ReOrderInstalmentsNumber()
-        {
-            int num = (int)edt_instalmentNumber.Value;
-            int rowsQtd = DGV_Instalments.Rows.Count;
-            if (num > rowsQtd - 1)
-            {
-                int order = 1;
-                foreach (DataGridViewRow row in DGV_Instalments.Rows)
-                {
-                    row.Cells["InstalmentNumber"].Value = order;
-                    order++;
-                }
-            }
-        }
+
 
         private void DGV_Instalments_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            ReOrderInstalmentsNumber();
 
         }
     }

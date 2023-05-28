@@ -172,15 +172,34 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     connection.Close();
                     if (i > 0)
                     {
-                        foreach (BillsInstalments instalment in cond.BillsInstalments)
+                        var toBeRemoved = _billsInstalmentsController.FindInstalments(cond.id);
+                        if (!cond.BillsInstalments.Equals(toBeRemoved) && toBeRemoved.Count > 0)
                         {
-                            if (instalment != null)
+                            foreach (BillsInstalments item in toBeRemoved)
                             {
-                                _billsInstalmentsController.UpdateItem(instalment);
+                                if (item != null)
+                                {
+                                    status = _billsInstalmentsController.DeleteItem(item.id, item.InstalmentNumber);
+                                }
+                            }
+                            foreach (BillsInstalments item in cond.BillsInstalments)
+                            {
+                                if (item != null)
+                                {
+                                    item.id = cond.id;
+                                    status = _billsInstalmentsController.SaveItem(item);
+                                    if (!status)
+                                    {
+                                        MessageBox.Show("An error has occurred.");
+                                        break;
+                                    }
+                                }
                             }
                         }
-                        MessageBox.Show("Register altered with success!");
-                        status = true;
+                        if (status)
+                        {
+                            MessageBox.Show("Register altered with success!");
+                        }
                     }
 
                 }
