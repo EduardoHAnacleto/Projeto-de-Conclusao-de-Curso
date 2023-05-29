@@ -17,8 +17,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public Frm_Create_BillsToReceive()
         {
             InitializeComponent();
-            datePicker_emission.Text = DateTime.Now.ToString();
-            datePicker_due.MinDate = DateTime.Now;
             edt_clientId.Controls[0].Visible = false;
             edt_instalmentId.Controls[0].Visible = false;
             edt_saleNumber.Controls[0].Visible = false;
@@ -26,7 +24,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             PopulateComboBox();
         }
 
+        private readonly BillsToReceive_Controller _controller = new BillsToReceive_Controller();
         private readonly Clients_Controller _cController = new Clients_Controller();
+        private readonly Sales_Controller _salesController = new Sales_Controller();
+        private readonly PaymentMethods_Controller _payMethodController = new PaymentMethods_Controller();
+        private BillsToReceive _auxObj;
 
         public BillsToReceive GetBillToReceive()  //Cria um OBJ a partir dos campos
         {
@@ -38,6 +40,153 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             bill.dateOfCreation = DateTime.Now;
             bill.dateOfLastUpdate = DateTime.Now;
             return bill;
+        }
+
+        public BillsToReceive GetObject()
+        {
+            var obj = new BillsToReceive();
+            obj.Client = _cController.FindItemId(Convert.ToInt32(edt_clientId.Value));
+            obj.Sale = _salesController.FindItemId(Convert.ToInt32(edt_saleNumber.Value));
+            obj.PaymentMethod = _payMethodController.FindItemName(cbox_paymentMethod.SelectedItem.ToString());
+            obj.InstalmentNumber = (int)edt_instalmentId.Value;
+            obj.InstalmentValue = (double)edt_instalmentValue.Value;
+            obj.EmissionDate = datePicker_emission.Value;
+            obj.DueDate = datePicker_due.Value;
+            obj.InstalmentsQtd = DGV_Instalments.Rows.Count;
+            obj.dateOfCreation = Convert.ToDateTime(lbl_CreationDate.Text);
+            if (check_Active.Checked)
+            {
+                obj.PaidDate = null;
+                obj.IsPaid = false;
+            }
+            else
+            {
+                obj.IsPaid = true;
+                obj.PaidDate = datePicker_PaidDate.Value;
+            }
+            return obj;
+        }
+
+        public void PopulateCamps(BillsToReceive obj)
+        {
+            if (obj.dateOfLastUpdate != null)
+            {
+                lbl_LastUpdate.Text = obj.dateOfLastUpdate.ToShortTimeString();
+                lbl_LastUpdate.Visible = true;
+            }
+        }
+
+        public override void LockCamps()
+        {
+            gbox_client.Enabled = false;
+            gbox_billDates.Enabled = false;
+            gbox_billInstalment.Enabled = false;
+            DGV_Instalments.Enabled = false;
+            gbox_isPaid.Enabled = false;
+            edt_saleNumber.Enabled = false;
+            cbox_paymentMethod.Enabled = false;
+        }
+
+        public override void UnlockCamps()
+        {
+            gbox_client.Enabled = true;
+            gbox_billDates.Enabled = true;
+            gbox_billInstalment.Enabled = true;
+            DGV_Instalments.Enabled = true;
+            gbox_isPaid.Enabled = true;
+            edt_saleNumber.Enabled = true;
+            cbox_paymentMethod.Enabled = true;
+        }
+
+        public override void ClearCamps()
+        {
+            edt_clientId.Value = 0;
+            edt_clientName.Text = string.Empty;
+            edt_instalmentId.Value = 0;
+            edt_instalmentValue.Value = 0;
+            edt_saleNumber.Value = 0;
+            cbox_paymentMethod.SelectedIndex = 0;
+            datePicker_due.Value = datePicker_due.MinDate;
+            datePicker_emission.Value = datePicker_emission.MinDate;
+            datePicker_PaidDate.Value = datePicker_PaidDate.MinDate;
+            check_Active.Checked = false;
+            check_Paid.Checked = false;
+            DGV_Instalments.Rows.Clear();
+            lbl_CreationDate.Text = DateTime.Now.ToShortDateString();
+            lbl_LastUpdate.Visible = false;
+        }
+
+        public override void Save()
+        {
+            if (CheckCamps())
+            {
+                LockCamps();
+                try
+                {
+                    if (btn_Edit.Text == "E&dit")
+                    {
+                        _controller.SaveItem(this.GetObject());
+                        ClearCamps();
+                        Populated(false);
+                    }
+                    else if (btn_Edit.Text == "Cancel")
+                    {
+                        _controller.UpdateItem(GetObject());
+                        btn_Edit.Text = "E&dit";
+                        btn_NewSave.Enabled = false;
+                        btn_SelectDelete.Enabled = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
+        public override void EditObject() //EditObject
+        {
+            if (btn_Edit.Text == "E&dit")
+            {
+                UnlockCamps();
+                btn_Edit.Text = "Cancel";
+                btn_NewSave.Enabled = true;
+                btn_SelectDelete.Enabled = true;
+                _auxObj = GetObject();
+            }
+            else if (btn_Edit.Text == "Cancel")
+            {
+                btn_Edit.Text = "E&dit";
+                LockCamps();
+                btn_SelectDelete.Enabled = false;
+                btn_NewSave.Enabled = false;
+                this.PopulateCamps(_auxObj);
+            }
+        }
+
+        public override void DeleteObject() //DeleteObject
+        {
+            if (CheckCamps())
+            {
+                LockCamps();
+                try
+                {
+                    int saleId = (int)edt_saleNumber.Value;
+                    int iNum = (int)edt_instalmentId.Value;
+                    _controller.DeleteItem(saleId, iNum);
+                    this.ClearCamps();
+                    this.edt_id.Value = this.BringNewId();
+                    btn_SelectDelete.Enabled = false;
+                    btn_Edit.Enabled = false;
+                    btn_Edit.Text = "E&dit";
+                    Populated(false);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+            UnlockCamps();
         }
 
         public void PopulateComboBox()

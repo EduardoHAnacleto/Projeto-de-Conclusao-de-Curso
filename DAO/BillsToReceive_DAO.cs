@@ -17,7 +17,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private readonly BillsInstalments_Controller _billsInstalmentsController = new BillsInstalments_Controller();
-        private readonly PaymentConditions_Controller _paymentConditionsController = new PaymentConditions_Controller();
+        private readonly PaymentMethods_Controller _paymentMethodsController = new PaymentMethods_Controller();
         private readonly Clients_Controller _clientsController = new Clients_Controller();
         private readonly Sales_Controller _salesController = new Sales_Controller();
 
@@ -25,9 +25,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             bool status = false;
 
-            string sql = "INSERT INTO BILLSTOPAY ( SALE_ID, INSTALMENTVALUE, ISPAID, CLIENT_ID, PAYCONDITION_ID, INSTALMENTNUMBER, " +
+            string sql = "INSERT INTO BILLSTOPAY ( SALE_ID, INSTALMENTVALUE, ISPAID, CLIENT_ID, PAYMETHOD_ID, INSTALMENTNUMBER, " +
                 "INSTALMENTSQTD, DUEDATE, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@SALEID, @IVALUE, @ISPAID, @CLIENTID, @CONDID, @INUM, @IQTD, @DUEDATE, @EMDATE, @DC, @DU);";
+                         + " VALUES (@SALEID, @IVALUE, @ISPAID, @CLIENTID, @METHODID, @INUM, @IQTD, @DUEDATE, @EMDATE, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -36,7 +36,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     command.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
                     command.Parameters.AddWithValue("@CLIENTID", obj.Client.id);
                     command.Parameters.AddWithValue("@SALEID", obj.Sale.id);
-                    command.Parameters.AddWithValue("@CONDID", obj.PayCondition.id);
+                    command.Parameters.AddWithValue("@METHODID", obj.PaymentMethod.id);
                     command.Parameters.AddWithValue("@INUM", obj.InstalmentNumber);
                     command.Parameters.AddWithValue("@IQTD", obj.InstalmentsQtd);
                     command.Parameters.AddWithValue("@IVALUE", obj.InstalmentValue);
@@ -72,7 +72,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             bool status = false;
 
             string sql = "UPDATE BILLSTORECEIVE SET INSTALMENTVALUE = @IVALUE, ISPAID = @ISPAID, CLIENT_ID = @CLIENTID," +
-                " PAYCONDITION_ID = @CONDID, INSTALMENTSQTD = @IQTD, DUEDATE = @DUEDATE, EMISSIONDATE = @EMDATE, DATE_LAST_UPDATE = @DU " +
+                " PAYMETHOD_ID = @METHODID, INSTALMENTSQTD = @IQTD, DUEDATE = @DUEDATE, EMISSIONDATE = @EMDATE, DATE_LAST_UPDATE = @DU " +
                 "WHERE SALEID = @SALEID AND INSTALMENTNUMBER = @INUM; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -83,7 +83,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     command.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
                     command.Parameters.AddWithValue("@CLIENTID", obj.Client.id);
                     command.Parameters.AddWithValue("@SALEID", obj.Sale.id);
-                    command.Parameters.AddWithValue("@CONDID", obj.PayCondition.id);
+                    command.Parameters.AddWithValue("@METHODID", obj.PaymentMethod.id);
                     command.Parameters.AddWithValue("@INUM", obj.InstalmentNumber);
                     command.Parameters.AddWithValue("@IQTD", obj.InstalmentsQtd);
                     command.Parameters.AddWithValue("@IVALUE", obj.InstalmentValue);
@@ -174,7 +174,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                     InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                     InstalmentValue = Convert.ToDouble(reader["instalmentValue"]),
-                                    PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["paycondition_id"])),
+                                    PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                     InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
@@ -225,7 +225,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                         InstalmentValue = Convert.ToDouble(reader["instalmentValue"]),
-                                        PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["paycondition_id"])),
+                                        PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
@@ -278,7 +278,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                         InstalmentValue = Convert.ToDouble(reader["instalmentValue"]),
-                                        PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["paycondition_id"])),
+                                        PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
@@ -369,7 +369,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                         InstalmentValue = Convert.ToDouble(reader["instalmentValue"]),
-                                        PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["paycondition_id"])),
+                                        PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
@@ -422,7 +422,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                         InstalmentValue = Convert.ToDouble(reader["instalmentValue"]),
-                                        PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["paycondition_id"])),
+                                        PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),

@@ -18,7 +18,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
         private readonly BillsInstalments_Controller _billsInstalmentsController = new BillsInstalments_Controller();
-        private readonly PaymentConditions_Controller _paymentConditionsController = new PaymentConditions_Controller();
+        //private readonly PaymentConditions_Controller _paymentConditionsController = new PaymentConditions_Controller();
         private readonly PaymentMethods_Controller _paymentMethodsController = new PaymentMethods_Controller();
         private readonly Suppliers_Controller _suppliersController = new Suppliers_Controller();
         private readonly Purchases_Controller _purchasesController = new Purchases_Controller();
@@ -28,8 +28,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             bool status = false;
 
             string sql = "INSERT INTO BILLSTOPAY ( BILLNUMBER, BILLSERIES, BILLMODEL, BILLPAGE, INSTALMENTNUMBER, DUEDATE, ISPAID, PAIDDATE," +
-                "BILLVALUE, PAYCONDITION_ID, SUPPLIER_ID, PURCHASE_ID, INSTALMENTSQTD, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@BNUMBER, @BSERIES, @BMODEL, @BPAGE, @INUMBER, @DUEDATE, @ISPAID, @PDATE, @BVALUE, @CONDID, " +
+                "BILLVALUE, PAYMETHOD_ID, SUPPLIER_ID, PURCHASE_ID, INSTALMENTSQTD, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
+                         + " VALUES (@BNUMBER, @BSERIES, @BMODEL, @BPAGE, @INUMBER, @DUEDATE, @ISPAID, @PDATE, @BVALUE, @METHODID, " +
                          " @SUPPLIERID, @PURCHASEID, @QTD, @EMISSIONDATE, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -47,7 +47,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
                     command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
                     command.Parameters.AddWithValue("@BVALUE", (decimal)obj.TotalValue);
-                    command.Parameters.AddWithValue("@CONDID", obj.PayCondition.id);
+                    command.Parameters.AddWithValue("@METHODID", obj.PaymentMethod.id);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@PURCHASEID", obj.Purchase.id);
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
@@ -78,7 +78,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "UPDATE BILLSTOPAY SET DUEDATE = @DDATE, ISPAID = @IPAID, PAIDDATE = @PDATE, BILLVALUE = @BVALUE, PAYCONDITION_ID = @CONDID, " +
+            string sql = "UPDATE BILLSTOPAY SET DUEDATE = @DDATE, ISPAID = @IPAID, PAIDDATE = @PDATE, BILLVALUE = @BVALUE, PAYMETHOD_ID = @METHODID, " +
                 " SUPPLIER_ID = @SUPPLIERID, PURCHASE_ID = @PURCHASEID, INSTALMENTSQTD = @QTD, EMISSIONDATE = @EMISSIONDATE, DATE_LAST_UPDATE = @DU " +
                 "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND BILLPAGE = @BPAGE AND INSTALMENTNUMBER = @INUMBER ; ";
 
@@ -91,7 +91,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@IPAID", obj.IsPaid);
                     command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
                     command.Parameters.AddWithValue("@BVALUE", obj.TotalValue);
-                    command.Parameters.AddWithValue("@CONDID", obj.PayCondition.id);
+                    command.Parameters.AddWithValue("@METHODID", obj.PaymentMethod.id);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@BNUMBER", obj.BillNumber);
                     command.Parameters.AddWithValue("@EMISSIONDATE", obj.EmissionDate);
@@ -193,7 +193,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
-                                        PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["payCondition_id"])),
+                                        PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         Purchase = _purchasesController.FindItemId(Convert.ToInt32(reader["purchase_id"])),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
@@ -252,7 +252,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                     InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                     InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
-                                    PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["payCondition_id"])),
+                                    PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                     Purchase = _purchasesController.FindItemId(Convert.ToInt32(reader["purchase_id"])),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
@@ -306,7 +306,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
-                                        PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["payCondition_id"])),
+                                        PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         Purchase = _purchasesController.FindItemId(Convert.ToInt32(reader["purchase_id"])),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
@@ -401,7 +401,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
-                                        PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["payCondition_id"])),
+                                        PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         Purchase = _purchasesController.FindItemId(Convert.ToInt32(reader["purchase_id"])),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),

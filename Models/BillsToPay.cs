@@ -12,7 +12,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public BillsToPay()
         {
             Suppliers Supplier = new Suppliers();
-            PaymentConditions PayCondition = new PaymentConditions();
+            PaymentMethods PaymentMethod = new PaymentMethods();
             Purchases Purchase = new Purchases();
         }
 
@@ -31,7 +31,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
 
         public Purchases Purchase { get; set; }
         public Suppliers Supplier { get; set; }
-        public PaymentConditions PayCondition { get; set; }
+        public PaymentMethods PaymentMethod { get; set; }
 
     }
 }

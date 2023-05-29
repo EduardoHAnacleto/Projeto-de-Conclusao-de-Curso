@@ -54,7 +54,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.InheritForms
 
                 this.UnlockCamps();
                 this.ClearCamps();
-                edt_id.Value = this.BringNewId();
+                try
+                {
+                    edt_id.Value = this.BringNewId();
+                }
+                catch (Exception e)
+                {
+
+                }
             }
         }
 

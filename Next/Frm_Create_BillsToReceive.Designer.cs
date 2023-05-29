@@ -58,6 +58,8 @@
             this.lbl_PaymentForm = new System.Windows.Forms.Label();
             this.lbl_saleId = new System.Windows.Forms.Label();
             this.edt_saleNumber = new System.Windows.Forms.NumericUpDown();
+            this.lbl_paidDate = new System.Windows.Forms.Label();
+            this.datePicker_PaidDate = new System.Windows.Forms.DateTimePicker();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
@@ -148,7 +150,7 @@
             // edt_instalmentValue
             // 
             this.edt_instalmentValue.DecimalPlaces = 2;
-            this.edt_instalmentValue.Location = new System.Drawing.Point(48, 35);
+            this.edt_instalmentValue.Location = new System.Drawing.Point(59, 34);
             this.edt_instalmentValue.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -167,7 +169,7 @@
             // 
             // btn_AddInstalments
             // 
-            this.btn_AddInstalments.Location = new System.Drawing.Point(120, 35);
+            this.btn_AddInstalments.Location = new System.Drawing.Point(131, 35);
             this.btn_AddInstalments.Name = "btn_AddInstalments";
             this.btn_AddInstalments.Size = new System.Drawing.Size(93, 20);
             this.btn_AddInstalments.TabIndex = 25;
@@ -179,14 +181,14 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(3, 19);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(18, 13);
+            this.label1.Size = new System.Drawing.Size(44, 13);
             this.label1.TabIndex = 23;
-            this.label1.Text = "ID";
+            this.label1.Text = "Number";
             // 
             // lbl_instalment
             // 
             this.lbl_instalment.AutoSize = true;
-            this.lbl_instalment.Location = new System.Drawing.Point(45, 19);
+            this.lbl_instalment.Location = new System.Drawing.Point(56, 19);
             this.lbl_instalment.Name = "lbl_instalment";
             this.lbl_instalment.Size = new System.Drawing.Size(85, 13);
             this.lbl_instalment.TabIndex = 15;
@@ -259,13 +261,15 @@
             // 
             // gbox_billDates
             // 
+            this.gbox_billDates.Controls.Add(this.lbl_paidDate);
+            this.gbox_billDates.Controls.Add(this.datePicker_PaidDate);
             this.gbox_billDates.Controls.Add(this.lbl_DueDate);
             this.gbox_billDates.Controls.Add(this.lbl_EmissionDate);
             this.gbox_billDates.Controls.Add(this.datePicker_due);
             this.gbox_billDates.Controls.Add(this.datePicker_emission);
             this.gbox_billDates.Location = new System.Drawing.Point(487, 153);
             this.gbox_billDates.Name = "gbox_billDates";
-            this.gbox_billDates.Size = new System.Drawing.Size(107, 136);
+            this.gbox_billDates.Size = new System.Drawing.Size(107, 158);
             this.gbox_billDates.TabIndex = 28;
             this.gbox_billDates.TabStop = false;
             this.gbox_billDates.Text = "* Movement Date";
@@ -273,7 +277,7 @@
             // lbl_DueDate
             // 
             this.lbl_DueDate.AutoSize = true;
-            this.lbl_DueDate.Location = new System.Drawing.Point(3, 90);
+            this.lbl_DueDate.Location = new System.Drawing.Point(3, 64);
             this.lbl_DueDate.Name = "lbl_DueDate";
             this.lbl_DueDate.Size = new System.Drawing.Size(53, 13);
             this.lbl_DueDate.TabIndex = 3;
@@ -282,7 +286,7 @@
             // lbl_EmissionDate
             // 
             this.lbl_EmissionDate.AutoSize = true;
-            this.lbl_EmissionDate.Location = new System.Drawing.Point(3, 33);
+            this.lbl_EmissionDate.Location = new System.Drawing.Point(2, 22);
             this.lbl_EmissionDate.Name = "lbl_EmissionDate";
             this.lbl_EmissionDate.Size = new System.Drawing.Size(74, 13);
             this.lbl_EmissionDate.TabIndex = 2;
@@ -291,7 +295,7 @@
             // datePicker_due
             // 
             this.datePicker_due.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.datePicker_due.Location = new System.Drawing.Point(6, 106);
+            this.datePicker_due.Location = new System.Drawing.Point(6, 80);
             this.datePicker_due.Name = "datePicker_due";
             this.datePicker_due.Size = new System.Drawing.Size(96, 20);
             this.datePicker_due.TabIndex = 1;
@@ -299,7 +303,7 @@
             // datePicker_emission
             // 
             this.datePicker_emission.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.datePicker_emission.Location = new System.Drawing.Point(6, 49);
+            this.datePicker_emission.Location = new System.Drawing.Point(5, 38);
             this.datePicker_emission.MinDate = new System.DateTime(2000, 1, 5, 0, 0, 0, 0);
             this.datePicker_emission.Name = "datePicker_emission";
             this.datePicker_emission.Size = new System.Drawing.Size(96, 20);
@@ -368,6 +372,27 @@
             this.edt_saleNumber.Name = "edt_saleNumber";
             this.edt_saleNumber.Size = new System.Drawing.Size(65, 20);
             this.edt_saleNumber.TabIndex = 34;
+            // 
+            // lbl_paidDate
+            // 
+            this.lbl_paidDate.AutoSize = true;
+            this.lbl_paidDate.Location = new System.Drawing.Point(2, 107);
+            this.lbl_paidDate.Name = "lbl_paidDate";
+            this.lbl_paidDate.Size = new System.Drawing.Size(54, 13);
+            this.lbl_paidDate.TabIndex = 5;
+            this.lbl_paidDate.Text = "Paid Date";
+            this.lbl_paidDate.Visible = false;
+            // 
+            // datePicker_PaidDate
+            // 
+            this.datePicker_PaidDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.datePicker_PaidDate.Location = new System.Drawing.Point(5, 123);
+            this.datePicker_PaidDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.datePicker_PaidDate.Name = "datePicker_PaidDate";
+            this.datePicker_PaidDate.Size = new System.Drawing.Size(96, 20);
+            this.datePicker_PaidDate.TabIndex = 4;
+            this.datePicker_PaidDate.Value = new System.DateTime(2000, 1, 1, 5, 17, 0, 0);
+            this.datePicker_PaidDate.Visible = false;
             // 
             // Frm_Create_BillsToReceive
             // 
@@ -453,5 +478,7 @@
         private System.Windows.Forms.Label lbl_saleId;
         private System.Windows.Forms.NumericUpDown edt_instalmentValue;
         private System.Windows.Forms.NumericUpDown edt_saleNumber;
+        private System.Windows.Forms.Label lbl_paidDate;
+        private System.Windows.Forms.DateTimePicker datePicker_PaidDate;
     }
 }

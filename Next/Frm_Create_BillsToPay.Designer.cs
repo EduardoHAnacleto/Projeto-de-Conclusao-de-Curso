@@ -74,6 +74,14 @@
             this.gbox_isPaid.SuspendLayout();
             this.SuspendLayout();
             // 
+            // lbl_id
+            // 
+            this.lbl_id.Visible = false;
+            // 
+            // edt_id
+            // 
+            this.edt_id.Visible = false;
+            // 
             // gbox_billInfo
             // 
             this.gbox_billInfo.Controls.Add(this.edt_totalValue);
@@ -272,9 +280,11 @@
             this.btn_SearchSupplier.TabIndex = 37;
             this.btn_SearchSupplier.Text = "&Search";
             this.btn_SearchSupplier.UseVisualStyleBackColor = true;
+            this.btn_SearchSupplier.Click += new System.EventHandler(this.btn_SearchSupplier_Click);
             // 
             // edt_supplierId
             // 
+            this.edt_supplierId.Enabled = false;
             this.edt_supplierId.Location = new System.Drawing.Point(6, 38);
             this.edt_supplierId.Maximum = new decimal(new int[] {
             99999,
@@ -355,6 +365,7 @@
             // 
             this.datePicker_due.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.datePicker_due.Location = new System.Drawing.Point(6, 41);
+            this.datePicker_due.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.datePicker_due.Name = "datePicker_due";
             this.datePicker_due.Size = new System.Drawing.Size(96, 20);
             this.datePicker_due.TabIndex = 1;
