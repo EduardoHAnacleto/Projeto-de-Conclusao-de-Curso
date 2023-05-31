@@ -37,7 +37,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             bill.InstalmentValue = Convert.ToDouble(edt_instalmentValue.Value);
             bill.EmissionDate = Convert.ToDateTime(datePicker_emission.Text);
             bill.DueDate = Convert.ToDateTime(datePicker_due.Text);
-            bill.dateOfCreation = DateTime.Now;
             bill.dateOfLastUpdate = DateTime.Now;
             return bill;
         }
@@ -53,7 +52,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.EmissionDate = datePicker_emission.Value;
             obj.DueDate = datePicker_due.Value;
             obj.InstalmentsQtd = DGV_Instalments.Rows.Count;
-            obj.dateOfCreation = Convert.ToDateTime(lbl_CreationDate.Text);
+
             if (check_Active.Checked)
             {
                 obj.PaidDate = null;
@@ -73,6 +72,28 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 lbl_LastUpdate.Text = obj.dateOfLastUpdate.ToShortTimeString();
                 lbl_LastUpdate.Visible = true;
+            }
+            lbl_Sign_creationDate.Text = obj.dateOfCreation.ToShortTimeString();
+            edt_clientId.Value = obj.Client.id;
+            edt_clientName.Text = obj.Client.name;
+            edt_instalmentId.Value = obj.InstalmentNumber;
+            edt_instalmentValue.Value = (decimal)obj.InstalmentValue;
+            edt_saleNumber.Value = obj.Sale.id;
+            cbox_paymentMethod.SelectedItem = obj.PaymentMethod.paymentMethod;
+            datePicker_emission.Value = obj.EmissionDate;
+            datePicker_due.Value = obj.DueDate;
+            if (obj.IsPaid)
+            {
+                datePicker_PaidDate.Value = (DateTime)obj.PaidDate;
+                check_Active.Checked = false;
+                check_Paid.Checked = true;
+            }
+            else
+            {
+                check_Active.Checked = true;
+                check_Paid.Checked = false;
+                lbl_paidDate.Visible = false;
+                datePicker_PaidDate.Visible = false;
             }
         }
 

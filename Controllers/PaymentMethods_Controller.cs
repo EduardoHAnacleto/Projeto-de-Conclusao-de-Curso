@@ -23,6 +23,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(PaymentMethods paymentMethod)
         {
             _paymentMethod = paymentMethod;
+            _paymentMethod.dateOfCreation = DateTime.Now;
+            _paymentMethod.dateOfLastUpdate = _paymentMethod.dateOfCreation;
             _paymentMethodDAO.SaveToDb(_paymentMethod);
         }
         public new List<PaymentMethods> LoadItems()

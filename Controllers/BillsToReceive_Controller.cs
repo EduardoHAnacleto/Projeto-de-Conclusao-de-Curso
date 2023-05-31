@@ -25,15 +25,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(BillsToReceive billToReceive)
         {
             _billToReceive = billToReceive;
+            _billToReceive.dateOfCreation = DateTime.Now;
+            _billToReceive.dateOfLastUpdate = _billToReceive.dateOfCreation;
             _billToReceivesDAO.SaveToDb(_billToReceive);
         }
         public List<BillsToReceive> LoadItems()
         {
             return _billToReceivesDAO.SelectAllFromDb();
         }
-        public BillsToReceive FindItemId(int saleId, int InstalmentQtd) 
+        public BillsToReceive FindItemId(int saleId, int instalmentNum) 
         {
-            return _billToReceivesDAO.SelectFromDb(saleId, InstalmentQtd);
+            return _billToReceivesDAO.SelectFromDb(saleId, instalmentNum);
         }
         public List<BillsToReceive> FindClientId(int id) 
         {

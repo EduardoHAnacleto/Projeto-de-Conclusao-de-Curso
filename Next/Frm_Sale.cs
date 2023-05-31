@@ -464,10 +464,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         private void edt_barCode_ValueChanged(object sender, EventArgs e)
         {
-            if (edt_barCode.Value > 1)
-            {
-                PopulateProduct(_pController.FindItemBarCode((long)edt_barCode.Value));
-            }
+
         }
 
         public void Save() // Save
@@ -535,8 +532,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             sale.TotalValue = (double)edt_total.Value;
             sale.PaymentConditionId = (int)edt_payConditionId.Value;
             sale.CancelDate = null;
-            sale.dateOfCreation = emissionDate;
-            sale.dateOfLastUpdate = emissionDate;
 
             sale.SaleItems = this.GetSaleItems(idSale);
             sale.TotalCost = this.GetTotalCost(sale.SaleItems);
@@ -587,7 +582,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             int num = 1;
             foreach (BillsInstalments instalment in Condition.BillsInstalments)
             {
-                bill.PayCondition = Condition;
+                bill.PaymentMethod = instalment.PaymentMethod;
                 bill.IsPaid = false;
                 bill.Client = client;
                 bill.dateOfCreation = emissionDate;
@@ -838,6 +833,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             return true;
         }
 
+        public void ClearProductCamps()
+        {
+            edt_productId.Value = 0;
+            edt_productName.Text = string.Empty;
+            edt_barCode.Value = 0;
+            edt_amount.Value = 1;
+            edt_UNCost.Value = 0;
+            edt_ProdDiscCash.Value = 0;
+            edt_ProdDiscPerc.Value = 0;
+            edt_ProdUnValue.Value = 0;
+            edt_totalPValue.Value = 0;
+        }
+
         public void CalcTotalProdValue()
         {
             edt_totalPValue.Value = edt_amount.Value * edt_ProdUnValue.Value;
@@ -852,6 +860,58 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             var row = e.RowIndex;
             CalculateSubTotal();
+        }
+
+        public void AutoAddOneProduct()
+        {
+            try
+            {
+                Products prod = _pController.FindItemId(Convert.ToInt32(edt_productId.Value));
+                if (prod != null)
+                {
+                    int amount = 1;
+                    decimal discountCash = 0;
+                    decimal discountPerc = 0;
+                    decimal totalValue = (decimal)prod.salePrice;
+
+                    if (!CheckEqualDGVProduct(product.id, amount, discountCash, discountPerc, totalValue))
+                    {
+                        DGV_SaleProducts.Rows.Add(
+                            prod.id,
+                            prod.productName,
+                            amount,
+                            prod.productCost,
+                            discountCash,
+                            discountPerc,
+                            prod.salePrice,
+                            totalValue);
+                    }
+                    ClearProductCamps();
+                }
+            }          
+            catch (Exception)
+            {
+
+            }
+        }
+
+        private void edt_barCode_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Utilities.EnterSearch(e)){
+                if (edt_barCode.Value > 1)
+                {
+                    try
+                    {
+                        PopulateProduct(_pController.FindItemBarCode((long)edt_barCode.Value));
+                        AutoAddOneProduct();
+                        
+                    }
+                    catch (Exception)
+                    {
+                        
+                    }
+                }
+            }
         }
     }
 }

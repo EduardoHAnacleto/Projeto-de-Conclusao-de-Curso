@@ -36,8 +36,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             PaymentMethods method = new PaymentMethods();
             method.id = Convert.ToInt32(edt_id.Value);
             method.paymentMethod = edt_paymentMethod.Text;
-            method.dateOfCreation = DateTime.Now;
-            method.dateOfLastUpdate = DateTime.Now;
             return method;
         }
 

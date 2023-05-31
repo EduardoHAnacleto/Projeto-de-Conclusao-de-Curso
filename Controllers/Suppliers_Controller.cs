@@ -6,6 +6,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.AxHost;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
 {
@@ -28,6 +29,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(Suppliers supplier)
         {
             _supplier = supplier;
+            _supplier.dateOfCreation = DateTime.Now;
+            _supplier.dateOfLastUpdate = _supplier.dateOfCreation;
             _suppliersDAO.SaveToDb(_supplier);
         }
         public new List<Suppliers> LoadItems()

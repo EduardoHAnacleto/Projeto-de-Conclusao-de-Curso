@@ -61,8 +61,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             PhoneClassifications phoneClassification = new PhoneClassifications();
             phoneClassification.id = Convert.ToInt32(edt_id.Value);
             phoneClassification.phoneClass = edt_phoneClassification.Text;
-            phoneClassification.dateOfCreation = DateTime.Now;
-            phoneClassification.dateOfLastUpdate = DateTime.Now;
+
             return phoneClassification;
         }
 

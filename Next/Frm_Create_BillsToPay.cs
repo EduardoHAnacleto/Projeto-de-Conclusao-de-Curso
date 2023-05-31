@@ -116,7 +116,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.BillModel = (int)edt_BillModel.Value;
             obj.BillSeries = (int)edt_BillSeries.Value;
             obj.BillPage = (int)edt_BillPage.Value;
-            obj.dateOfCreation = Convert.ToDateTime(lbl_CreationDate.Text);
+
             obj.InstalmentNumber = (int)edt_instalmentNumber.Value;
             obj.TotalValue = (double)edt_totalValue.Value;
             obj.DueDate = datePicker_due.Value;

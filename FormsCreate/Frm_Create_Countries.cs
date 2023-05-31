@@ -66,8 +66,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             country.countryAcronym = edt_acronym.Text;
             country.countryPhonePrefix = edt_phonePrefix.Text;
             country.countryCurrency = edt_currency.Text;
-            country.dateOfCreation = DateTime.Now;
-            country.dateOfLastUpdate = DateTime.Now;
             return country;
         }
 

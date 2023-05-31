@@ -15,7 +15,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
 {
     public partial class Frm_Find_People : ProjetoEduardoAnacletoWindowsForm1.InheritForms.Frm_Find_Master
     {
-        private People_Controller controller = new People_Controller();
+        //private People_Controller controller = new People_Controller();
 
         public Frm_Find_People()
         {

@@ -41,8 +41,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             city.id = Convert.ToInt32(edt_id.Value);
             city.cityName = edt_cityName.Text;
             city.cityPhonePrefix = edt_phonePrefix.Text;
-            city.dateOfCreation = DateTime.Now;
-            city.dateOfLastUpdate = DateTime.Now;
             States state = this.TakeState(Convert.ToInt32(edt_stateId.Text));
             city.state = state;
             return city;

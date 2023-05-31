@@ -22,6 +22,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(Brands brand)
         {
             _Obj = brand;
+            _Obj.dateOfCreation = DateTime.Now;
+            _Obj.dateOfLastUpdate = _Obj.dateOfCreation;
             _DAO.SaveToDb(_Obj);
         }
         public new List<Brands> LoadItems()

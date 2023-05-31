@@ -29,6 +29,14 @@
         private void InitializeComponent()
         {
             this.DGV_SaleProducts = new System.Windows.Forms.DataGridView();
+            this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ItemDiscountPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_Salesman = new System.Windows.Forms.GroupBox();
             this.edt_userId = new System.Windows.Forms.NumericUpDown();
             this.edt_userName = new System.Windows.Forms.TextBox();
@@ -69,6 +77,12 @@
             this.lbl_UNPrice = new System.Windows.Forms.Label();
             this.lbl_TotalCost = new System.Windows.Forms.Label();
             this.gbox_Product = new System.Windows.Forms.GroupBox();
+            this.lbl_prodUnValue = new System.Windows.Forms.Label();
+            this.lbl_ProdPercDisc = new System.Windows.Forms.Label();
+            this.lbl_ProdDiscCash = new System.Windows.Forms.Label();
+            this.edt_ProdUnValue = new System.Windows.Forms.NumericUpDown();
+            this.edt_ProdDiscPerc = new System.Windows.Forms.NumericUpDown();
+            this.edt_ProdDiscCash = new System.Windows.Forms.NumericUpDown();
             this.edt_barCode = new System.Windows.Forms.NumericUpDown();
             this.edt_amount = new System.Windows.Forms.NumericUpDown();
             this.edt_UNCost = new System.Windows.Forms.NumericUpDown();
@@ -99,26 +113,12 @@
             this.edt_payConditionId = new System.Windows.Forms.NumericUpDown();
             this.lbl_payConditionID = new System.Windows.Forms.Label();
             this.lbl_requiredCamps = new System.Windows.Forms.Label();
-            this.edt_ProdDiscCash = new System.Windows.Forms.NumericUpDown();
-            this.edt_ProdDiscPerc = new System.Windows.Forms.NumericUpDown();
-            this.edt_ProdUnValue = new System.Windows.Forms.NumericUpDown();
-            this.lbl_ProdDiscCash = new System.Windows.Forms.Label();
-            this.lbl_ProdPercDisc = new System.Windows.Forms.Label();
-            this.lbl_prodUnValue = new System.Windows.Forms.Label();
             this.DGV_SaleSummary = new System.Windows.Forms.DataGridView();
             this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleDiscCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleDiscPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ItemDiscountPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -131,6 +131,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_discountPerc)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_subtotal)).BeginInit();
             this.gbox_Product.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdUnValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscPerc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscCash)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_barCode)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_amount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_UNCost)).BeginInit();
@@ -144,9 +147,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscCash)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscPerc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdUnValue)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleSummary)).BeginInit();
             this.SuspendLayout();
             // 
@@ -174,6 +174,62 @@
             this.DGV_SaleProducts.TabIndex = 5;
             this.DGV_SaleProducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_SaleProducts_CellValueChanged);
             this.DGV_SaleProducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_SaleProducts_RowsRemoved);
+            // 
+            // IdProduct
+            // 
+            this.IdProduct.HeaderText = "ID";
+            this.IdProduct.Name = "IdProduct";
+            this.IdProduct.ReadOnly = true;
+            this.IdProduct.Width = 45;
+            // 
+            // NameProduct
+            // 
+            this.NameProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameProduct.HeaderText = "Product";
+            this.NameProduct.Name = "NameProduct";
+            this.NameProduct.ReadOnly = true;
+            // 
+            // QuantityProduct
+            // 
+            this.QuantityProduct.HeaderText = "Quantity";
+            this.QuantityProduct.Name = "QuantityProduct";
+            this.QuantityProduct.ReadOnly = true;
+            this.QuantityProduct.Width = 70;
+            // 
+            // ProductCost
+            // 
+            this.ProductCost.HeaderText = "Product Cost";
+            this.ProductCost.Name = "ProductCost";
+            this.ProductCost.ReadOnly = true;
+            this.ProductCost.Width = 70;
+            // 
+            // ItemDiscountCash
+            // 
+            this.ItemDiscountCash.HeaderText = "Discount Cash";
+            this.ItemDiscountCash.Name = "ItemDiscountCash";
+            this.ItemDiscountCash.ReadOnly = true;
+            this.ItemDiscountCash.Width = 70;
+            // 
+            // ItemDiscountPerc
+            // 
+            this.ItemDiscountPerc.HeaderText = "Discount %";
+            this.ItemDiscountPerc.Name = "ItemDiscountPerc";
+            this.ItemDiscountPerc.ReadOnly = true;
+            this.ItemDiscountPerc.Width = 70;
+            // 
+            // UnValueProduct
+            // 
+            this.UnValueProduct.HeaderText = "UN Value";
+            this.UnValueProduct.Name = "UnValueProduct";
+            this.UnValueProduct.ReadOnly = true;
+            this.UnValueProduct.Width = 70;
+            // 
+            // ProductTotalValue
+            // 
+            this.ProductTotalValue.HeaderText = "Total Value";
+            this.ProductTotalValue.Name = "ProductTotalValue";
+            this.ProductTotalValue.ReadOnly = true;
+            this.ProductTotalValue.Width = 90;
             // 
             // gbox_Salesman
             // 
@@ -325,7 +381,7 @@
             this.edt_productName.MaxLength = 50;
             this.edt_productName.Name = "edt_productName";
             this.edt_productName.Size = new System.Drawing.Size(336, 20);
-            this.edt_productName.TabIndex = 10;
+            this.edt_productName.TabIndex = 1;
             // 
             // gbox_options
             // 
@@ -549,7 +605,7 @@
             this.btn_FindProduct.Location = new System.Drawing.Point(622, 41);
             this.btn_FindProduct.Name = "btn_FindProduct";
             this.btn_FindProduct.Size = new System.Drawing.Size(58, 20);
-            this.btn_FindProduct.TabIndex = 19;
+            this.btn_FindProduct.TabIndex = 3;
             this.btn_FindProduct.Text = "Find";
             this.btn_FindProduct.UseVisualStyleBackColor = true;
             this.btn_FindProduct.Click += new System.EventHandler(this.btn_FindProduct_Click);
@@ -559,7 +615,7 @@
             this.btn_AddProduct.Location = new System.Drawing.Point(1117, 41);
             this.btn_AddProduct.Name = "btn_AddProduct";
             this.btn_AddProduct.Size = new System.Drawing.Size(51, 20);
-            this.btn_AddProduct.TabIndex = 20;
+            this.btn_AddProduct.TabIndex = 7;
             this.btn_AddProduct.Text = "Add";
             this.btn_AddProduct.UseVisualStyleBackColor = true;
             this.btn_AddProduct.Click += new System.EventHandler(this.btn_AddProduct_Click);
@@ -611,6 +667,68 @@
             this.gbox_Product.TabStop = false;
             this.gbox_Product.Text = "Product";
             // 
+            // lbl_prodUnValue
+            // 
+            this.lbl_prodUnValue.AutoSize = true;
+            this.lbl_prodUnValue.Location = new System.Drawing.Point(973, 12);
+            this.lbl_prodUnValue.Name = "lbl_prodUnValue";
+            this.lbl_prodUnValue.Size = new System.Drawing.Size(34, 26);
+            this.lbl_prodUnValue.TabIndex = 35;
+            this.lbl_prodUnValue.Text = "  UN\r\nValue";
+            // 
+            // lbl_ProdPercDisc
+            // 
+            this.lbl_ProdPercDisc.AutoSize = true;
+            this.lbl_ProdPercDisc.Location = new System.Drawing.Point(891, 11);
+            this.lbl_ProdPercDisc.Name = "lbl_ProdPercDisc";
+            this.lbl_ProdPercDisc.Size = new System.Drawing.Size(62, 26);
+            this.lbl_ProdPercDisc.TabIndex = 34;
+            this.lbl_ProdPercDisc.Text = "Percentage\r\n  Discount";
+            // 
+            // lbl_ProdDiscCash
+            // 
+            this.lbl_ProdDiscCash.AutoSize = true;
+            this.lbl_ProdDiscCash.Location = new System.Drawing.Point(824, 12);
+            this.lbl_ProdDiscCash.Name = "lbl_ProdDiscCash";
+            this.lbl_ProdDiscCash.Size = new System.Drawing.Size(49, 26);
+            this.lbl_ProdDiscCash.TabIndex = 33;
+            this.lbl_ProdDiscCash.Text = "   Cash\r\nDiscount";
+            // 
+            // edt_ProdUnValue
+            // 
+            this.edt_ProdUnValue.DecimalPlaces = 2;
+            this.edt_ProdUnValue.Enabled = false;
+            this.edt_ProdUnValue.Location = new System.Drawing.Point(967, 41);
+            this.edt_ProdUnValue.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.edt_ProdUnValue.Name = "edt_ProdUnValue";
+            this.edt_ProdUnValue.Size = new System.Drawing.Size(49, 20);
+            this.edt_ProdUnValue.TabIndex = 32;
+            // 
+            // edt_ProdDiscPerc
+            // 
+            this.edt_ProdDiscPerc.DecimalPlaces = 2;
+            this.edt_ProdDiscPerc.Location = new System.Drawing.Point(894, 41);
+            this.edt_ProdDiscPerc.Name = "edt_ProdDiscPerc";
+            this.edt_ProdDiscPerc.Size = new System.Drawing.Size(53, 20);
+            this.edt_ProdDiscPerc.TabIndex = 6;
+            // 
+            // edt_ProdDiscCash
+            // 
+            this.edt_ProdDiscCash.DecimalPlaces = 2;
+            this.edt_ProdDiscCash.Location = new System.Drawing.Point(823, 41);
+            this.edt_ProdDiscCash.Maximum = new decimal(new int[] {
+            99999,
+            0,
+            0,
+            0});
+            this.edt_ProdDiscCash.Name = "edt_ProdDiscCash";
+            this.edt_ProdDiscCash.Size = new System.Drawing.Size(50, 20);
+            this.edt_ProdDiscCash.TabIndex = 5;
+            // 
             // edt_barCode
             // 
             this.edt_barCode.Location = new System.Drawing.Point(390, 41);
@@ -621,8 +739,9 @@
             0});
             this.edt_barCode.Name = "edt_barCode";
             this.edt_barCode.Size = new System.Drawing.Size(226, 20);
-            this.edt_barCode.TabIndex = 29;
+            this.edt_barCode.TabIndex = 2;
             this.edt_barCode.ValueChanged += new System.EventHandler(this.edt_barCode_ValueChanged);
+            this.edt_barCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_barCode_KeyPress);
             // 
             // edt_amount
             // 
@@ -634,7 +753,7 @@
             0});
             this.edt_amount.Name = "edt_amount";
             this.edt_amount.Size = new System.Drawing.Size(44, 20);
-            this.edt_amount.TabIndex = 28;
+            this.edt_amount.TabIndex = 4;
             this.edt_amount.Value = new decimal(new int[] {
             1,
             0,
@@ -654,7 +773,7 @@
             0});
             this.edt_UNCost.Name = "edt_UNCost";
             this.edt_UNCost.Size = new System.Drawing.Size(55, 20);
-            this.edt_UNCost.TabIndex = 27;
+            this.edt_UNCost.TabIndex = 5;
             // 
             // edt_totalPValue
             // 
@@ -943,68 +1062,6 @@
             this.lbl_requiredCamps.TabIndex = 28;
             this.lbl_requiredCamps.Text = "* Camps are required.";
             // 
-            // edt_ProdDiscCash
-            // 
-            this.edt_ProdDiscCash.DecimalPlaces = 2;
-            this.edt_ProdDiscCash.Location = new System.Drawing.Point(823, 41);
-            this.edt_ProdDiscCash.Maximum = new decimal(new int[] {
-            99999,
-            0,
-            0,
-            0});
-            this.edt_ProdDiscCash.Name = "edt_ProdDiscCash";
-            this.edt_ProdDiscCash.Size = new System.Drawing.Size(50, 20);
-            this.edt_ProdDiscCash.TabIndex = 30;
-            // 
-            // edt_ProdDiscPerc
-            // 
-            this.edt_ProdDiscPerc.DecimalPlaces = 2;
-            this.edt_ProdDiscPerc.Location = new System.Drawing.Point(894, 41);
-            this.edt_ProdDiscPerc.Name = "edt_ProdDiscPerc";
-            this.edt_ProdDiscPerc.Size = new System.Drawing.Size(53, 20);
-            this.edt_ProdDiscPerc.TabIndex = 31;
-            // 
-            // edt_ProdUnValue
-            // 
-            this.edt_ProdUnValue.DecimalPlaces = 2;
-            this.edt_ProdUnValue.Enabled = false;
-            this.edt_ProdUnValue.Location = new System.Drawing.Point(967, 41);
-            this.edt_ProdUnValue.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.edt_ProdUnValue.Name = "edt_ProdUnValue";
-            this.edt_ProdUnValue.Size = new System.Drawing.Size(49, 20);
-            this.edt_ProdUnValue.TabIndex = 32;
-            // 
-            // lbl_ProdDiscCash
-            // 
-            this.lbl_ProdDiscCash.AutoSize = true;
-            this.lbl_ProdDiscCash.Location = new System.Drawing.Point(824, 12);
-            this.lbl_ProdDiscCash.Name = "lbl_ProdDiscCash";
-            this.lbl_ProdDiscCash.Size = new System.Drawing.Size(49, 26);
-            this.lbl_ProdDiscCash.TabIndex = 33;
-            this.lbl_ProdDiscCash.Text = "   Cash\r\nDiscount";
-            // 
-            // lbl_ProdPercDisc
-            // 
-            this.lbl_ProdPercDisc.AutoSize = true;
-            this.lbl_ProdPercDisc.Location = new System.Drawing.Point(891, 11);
-            this.lbl_ProdPercDisc.Name = "lbl_ProdPercDisc";
-            this.lbl_ProdPercDisc.Size = new System.Drawing.Size(62, 26);
-            this.lbl_ProdPercDisc.TabIndex = 34;
-            this.lbl_ProdPercDisc.Text = "Percentage\r\n  Discount";
-            // 
-            // lbl_prodUnValue
-            // 
-            this.lbl_prodUnValue.AutoSize = true;
-            this.lbl_prodUnValue.Location = new System.Drawing.Point(973, 12);
-            this.lbl_prodUnValue.Name = "lbl_prodUnValue";
-            this.lbl_prodUnValue.Size = new System.Drawing.Size(34, 26);
-            this.lbl_prodUnValue.TabIndex = 35;
-            this.lbl_prodUnValue.Text = "  UN\r\nValue";
-            // 
             // DGV_SaleSummary
             // 
             this.DGV_SaleSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -1055,62 +1112,6 @@
             this.SaleTotal.Name = "SaleTotal";
             this.SaleTotal.ReadOnly = true;
             // 
-            // IdProduct
-            // 
-            this.IdProduct.HeaderText = "ID";
-            this.IdProduct.Name = "IdProduct";
-            this.IdProduct.ReadOnly = true;
-            this.IdProduct.Width = 45;
-            // 
-            // NameProduct
-            // 
-            this.NameProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameProduct.HeaderText = "Product";
-            this.NameProduct.Name = "NameProduct";
-            this.NameProduct.ReadOnly = true;
-            // 
-            // QuantityProduct
-            // 
-            this.QuantityProduct.HeaderText = "Quantity";
-            this.QuantityProduct.Name = "QuantityProduct";
-            this.QuantityProduct.ReadOnly = true;
-            this.QuantityProduct.Width = 70;
-            // 
-            // ProductCost
-            // 
-            this.ProductCost.HeaderText = "Product Cost";
-            this.ProductCost.Name = "ProductCost";
-            this.ProductCost.ReadOnly = true;
-            this.ProductCost.Width = 70;
-            // 
-            // ItemDiscountCash
-            // 
-            this.ItemDiscountCash.HeaderText = "Discount Cash";
-            this.ItemDiscountCash.Name = "ItemDiscountCash";
-            this.ItemDiscountCash.ReadOnly = true;
-            this.ItemDiscountCash.Width = 70;
-            // 
-            // ItemDiscountPerc
-            // 
-            this.ItemDiscountPerc.HeaderText = "Discount %";
-            this.ItemDiscountPerc.Name = "ItemDiscountPerc";
-            this.ItemDiscountPerc.ReadOnly = true;
-            this.ItemDiscountPerc.Width = 70;
-            // 
-            // UnValueProduct
-            // 
-            this.UnValueProduct.HeaderText = "UN Value";
-            this.UnValueProduct.Name = "UnValueProduct";
-            this.UnValueProduct.ReadOnly = true;
-            this.UnValueProduct.Width = 70;
-            // 
-            // ProductTotalValue
-            // 
-            this.ProductTotalValue.HeaderText = "Total Value";
-            this.ProductTotalValue.Name = "ProductTotalValue";
-            this.ProductTotalValue.ReadOnly = true;
-            this.ProductTotalValue.Width = 90;
-            // 
             // Frm_Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1146,6 +1147,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_subtotal)).EndInit();
             this.gbox_Product.ResumeLayout(false);
             this.gbox_Product.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdUnValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscPerc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscCash)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_barCode)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_amount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_UNCost)).EndInit();
@@ -1161,9 +1165,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscCash)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdDiscPerc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_ProdUnValue)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleSummary)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -23,6 +23,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(ServiceOrders serviceOrder)
         {
             _serviceOrder = serviceOrder;
+            _serviceOrder.dateOfCreation = DateTime.Now;
+            _serviceOrder.dateOfLastUpdate = _serviceOrder.dateOfCreation;
             _serviceOrdersDAO.SaveToDb(_serviceOrder);
         }
         public new List<ServiceOrders> LoadItems()

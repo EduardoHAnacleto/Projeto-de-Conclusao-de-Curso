@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProjetoEduardoAnacletoWindowsForm1.Models;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public void SaveItem(PurchaseItems purchaseItems)
         {
             _purchaseItems = purchaseItems;
+            _purchaseItems.dateOfCreation = DateTime.Now;
+            _purchaseItems.dateOfLastUpdate = _purchaseItems.dateOfCreation;
             _purchaseItemsDAO.SaveToDb(_purchaseItems);
         }
         public List<PurchaseItems> LoadItems()

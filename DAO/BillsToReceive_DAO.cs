@@ -147,7 +147,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
-        public BillsToReceive SelectFromDb(int saleId, int InstalmentQtd)
+        public BillsToReceive SelectFromDb(int saleId, int instalmentNum)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -158,7 +158,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@SALEID", saleId);
-                        command.Parameters.AddWithValue("@IQTD", InstalmentQtd);
+                        command.Parameters.AddWithValue("@IQTD", instalmentNum);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())

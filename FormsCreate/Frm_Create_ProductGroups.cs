@@ -66,8 +66,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             pGroup.id = Convert.ToInt32(edt_id.Value);
             pGroup.productGroup = edt_productGroupName.Text;
             pGroup.description = edt_groupDescription.Text;
-            pGroup.dateOfCreation = DateTime.Now;
-            pGroup.dateOfLastUpdate = DateTime.Now;
+
             return pGroup;
         }
 

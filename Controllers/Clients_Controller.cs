@@ -27,6 +27,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(Clients client)
         {
             _client = client;
+            _client.dateOfCreation = DateTime.Now;
+            _client.dateOfLastUpdate = _client.dateOfCreation;
             _client = SetPhoneClassToNull(_client);
             _clientDAO.SaveToDb(_client);
         }

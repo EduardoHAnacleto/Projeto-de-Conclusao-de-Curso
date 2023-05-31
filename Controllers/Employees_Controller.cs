@@ -28,6 +28,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(Employees employee)
         {
             _employee = employee;
+            _employee.dateOfCreation = DateTime.Now;
+            _employee.dateOfLastUpdate = _employee.dateOfCreation;
             _employeeDAO.SaveToDb(_employee);
         }
         public new List<Employees> LoadItems()

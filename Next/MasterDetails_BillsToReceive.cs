@@ -1,5 +1,7 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using ProjetoEduardoAnacletoWindowsForm1.FormsCreate;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
+using ProjetoEduardoAnacletoWindowsForm1.Next;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
 using System;
 using System.Collections.Generic;
@@ -32,8 +34,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         }
 
         
-        //private BillsToReceive_Controller _billsController = new BillsToReceive_Controller();
+        private BillsToReceive_Controller _billsController = new BillsToReceive_Controller();
         //private PaymentConditions_Controller _payConditionsController = null;
+        private Clients_Controller _clientsController = new Clients_Controller();
 
         public void SearchClient() //Procura o cliente baseado nos campos txt e popula esses campos + seleciona a Row da DGV do Cliente
         {
@@ -99,10 +102,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         private void DGV_Clients_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
-            SelectRowByClient();
+            var row = DGV_Clients.SelectedRows[0];
+            NewClientsForm(Convert.ToInt32(row.Cells["IdClient"].Value));
         }
 
-        
+        private void NewClientsForm(int clientId)
+        {
+            var formClients = new Frm_Create_Clients();
+            var obj = _clientsController.FindItemId(clientId);
+            formClients.PopulateCamps(obj);
+            formClients.Populated(true);
+            formClients.ShowDialog();
+            SetClientsDataSourceToDGV();
+        }
+
         public void SetBillsToReceiveDataSourceToDGV() //Popula DGV Bills
         {
             DGV_BillsToReceive.Rows.Clear();
@@ -200,21 +213,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         private void SortDGVByDate()
         {
-            DateTime standardDate = new DateTime(2000, 01, 01);
-            DateTime emissionDate, dueDate;
-            emissionDate = Convert.ToDateTime(emissionDate_bills.Value);
-            dueDate = Convert.ToDateTime(emissionDate_bills.Value);
+            DateTime emissionDate = Convert.ToDateTime(emissionDate_bills.Value);
+            DateTime dueDate = Convert.ToDateTime(emissionDate_bills.Value);
 
             foreach (DataGridViewRow row in DGV_BillsToReceive.Rows)
             {
-                var emission = Convert.ToDateTime(row.Cells["EmissionDateBillsReceive"].Value);
-                var due = Convert.ToDateTime(row.Cells["DueDateBillsReceive"].Value);
+                var dgvEmission = Convert.ToDateTime(row.Cells["EmissionDateBillsReceive"].Value);
+                var dgvDue = Convert.ToDateTime(row.Cells["DueDateBillsReceive"].Value);
 
-                if (emission < emissionDate)
+                if (dgvEmission < emissionDate)
                 {
                     row.Dispose();
                 }
-                else if (dueDate != standardDate && due > dueDate )
+                if (dueDate != dueDate_bills.MinDate &&
+                    dgvDue > dueDate )
                 {
                     row.Dispose();
                 }
@@ -239,6 +251,113 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         private void btn_exit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void rbtn_LegalClients_CheckedChanged(object sender, EventArgs e)
+        {
+            SortByClientType("LEGAL");
+        }
+
+        private void SortByClientType(string sortString)
+        {
+            if (DGV_Clients.Rows.Count <= 0)
+            {
+                SetClientsDataSourceToDGV();
+                foreach (DataGridViewRow row in DGV_Clients.Rows)
+                {
+                    if (row.Cells["TypeClient"].Value.ToString() != sortString)
+                    {
+                        row.Dispose();
+                    }
+                }
+            }
+        }
+
+        private void rbtn_Natural_CheckedChanged(object sender, EventArgs e)
+        {
+            SortByClientType("NATURAL");
+        }
+
+        private void btn_ClearClientFilters_Click(object sender, EventArgs e)
+        {
+            ResetDGVClients();
+        }
+
+        private void ResetDGVClients()
+        {
+            SetClientsDataSourceToDGV();
+        }
+
+        private void rbtn_ActiveStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            SortByBillStatus("ACTIVE");
+        }
+
+        private void SortByBillStatus(string sortString)
+        {
+            if (DGV_BillsToReceive.Rows.Count <= 0)
+            {
+                SetBillsToReceiveDataSourceToDGV();
+                foreach (DataGridViewRow row in DGV_BillsToReceive.Rows)
+                {
+                    if (row.Cells["StatusBillsReceive"].Value.ToString() != sortString)
+                    {
+                        row.Dispose();
+                    }
+                }
+            }
+        }
+
+        private void rbtn_PaidStatus_CheckedChanged(object sender, EventArgs e)
+        {
+            SortByBillStatus("PAID");
+        }
+
+        private void btn_ClearSaleFilters_Click(object sender, EventArgs e)
+        {
+            SetClientsDataSourceToDGV();
+        }
+
+        private void edt_saleNumber_ValueChanged(object sender, EventArgs e)
+        {
+            SortBySaleId(Convert.ToInt32(edt_saleNumber.Value));
+        }
+
+        private void SortBySaleId(int id)
+        {
+            if (DGV_BillsToReceive.Rows.Count <= 0)
+            {
+                SetBillsToReceiveDataSourceToDGV();
+                foreach (DataGridViewRow row in DGV_BillsToReceive.Rows)
+                {
+                    if (Convert.ToInt32(row.Cells["SaleNumberBillReceive"].Value) != id)
+                    {
+                        row.Dispose();
+                    }
+                }
+            }
+        }
+
+        private void DGV_BillsToReceive_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            var row = DGV_BillsToReceive.SelectedRows[0];
+            NewBillToReceiveForm(Convert.ToInt32(row.Cells["SaleNumberBillReceive"].Value),
+                Convert.ToInt32(row.Cells["InstalmentNumber"].Value));
+        }
+
+        private void NewBillToReceiveForm(int saleId, int instalmentNumber)
+        {
+            var formBillsToReceive = new Frm_Create_BillsToReceive();
+            var obj = _billsController.FindItemId(saleId, instalmentNumber);
+            formBillsToReceive.PopulateCamps(obj);
+            formBillsToReceive.Populated(true);
+            formBillsToReceive.ShowDialog();
+            SetBillsToReceiveDataSourceToDGV();
+        }
+
+        private void DGV_Clients_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            SelectRowByClient();
         }
     }
 }

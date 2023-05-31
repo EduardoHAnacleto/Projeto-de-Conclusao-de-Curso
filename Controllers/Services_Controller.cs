@@ -22,6 +22,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(Services paymentMethod)
         {
             _service = paymentMethod;
+            _service.dateOfCreation = DateTime.Now;
+            _service.dateOfLastUpdate = _service.dateOfCreation;
             _ServiceDAO.SaveToDb(_service);
         }
         public new List<Services> LoadItems()

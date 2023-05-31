@@ -39,8 +39,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             state.id = Convert.ToInt32(edt_id.Value);
             state.stateName = edt_stateName.Text;
             state.fedUnit = edt_FU.Text;
-            state.dateOfCreation = DateTime.Now;
-            state.dateOfLastUpdate = DateTime.Now;
             Countries country = this.TakeCountry(Convert.ToInt32(edt_countryId.Text));
             state.country = country;
             return state;

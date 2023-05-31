@@ -218,11 +218,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             conditions.fineValue = Convert.ToDouble(edt_paymentFine.Value);
             conditions.paymentFees = Convert.ToDouble(edt_paymentFee.Value);
             conditions.discountPerc = Convert.ToDouble(edt_discount.Value);
-            if (conditions.dateOfCreation == DateTime.MinValue)
-            {
-                conditions.dateOfCreation = time;
-            }
-            conditions.dateOfLastUpdate = DateTime.Now;
             foreach (DataGridViewRow row in DGV_Instalments.Rows)
             {
                 bill = new BillsInstalments();

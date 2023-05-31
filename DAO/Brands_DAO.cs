@@ -49,7 +49,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "INSERT INTO BRANDS ( BRAND_NAME, DATE_CREATION, DATE_LAST_UPDATE) VALUES (@NAME, @DC, @DU)";
+            string sql = "INSERT INTO BRANDS ( BRAND_NAME, DATE_CREATION, DATE_LAST_UPDATE) VALUES (@NAME, @DC, @DU);";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

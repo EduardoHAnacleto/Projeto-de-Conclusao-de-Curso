@@ -24,6 +24,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
     public void SaveItem(ProductGroups productGroup)
     {
         _productGroup = productGroup;
+        _productGroup.dateOfCreation = DateTime.Now;
+        _productGroup.dateOfLastUpdate = _productGroup.dateOfCreation;
         _productGroupsDAO.SaveToDb(_productGroup);
     }
     public new List<ProductGroups> LoadItems()

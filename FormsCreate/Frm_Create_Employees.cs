@@ -77,8 +77,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 employee.streetName = edt_street.Text;
                 employee.homeType = edt_homeType.Text;
                 employee.complement = edt_complement.Text;
-                employee.dateOfCreation = Convert.ToDateTime(lbl_CreationDate.Text);
-                employee.dateOfLastUpdate = DateTime.Now;
                 Cities city = TakeCity(edt_city.Text);
                 employee.city = city;
                 employee.houseNumber = edt_houseNumber.Text;

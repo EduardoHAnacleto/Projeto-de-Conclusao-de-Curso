@@ -86,8 +86,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             user.id = Convert.ToInt32(edt_id.Value);
             user.userLogin = edt_userLogin.Text;
             user.userPassword = medt_userPassword.Text;
-            user.dateOfCreation = DateTime.Now;
-            user.dateOfLastUpdate = DateTime.Now;
             Employees employee = this.TakeEmployee(Convert.ToInt32(edt_idEmployee.Text));
             user.employee = employee ;
             return user;

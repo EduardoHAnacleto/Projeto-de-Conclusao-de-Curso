@@ -24,6 +24,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(Users person)
         {
             _Obj = person;
+            _Obj.dateOfCreation = DateTime.Now;
+            _Obj.dateOfLastUpdate = _Obj.dateOfCreation;
             _DAO.SaveToDb(_Obj);
         }
         public Users FindItemId(int id)

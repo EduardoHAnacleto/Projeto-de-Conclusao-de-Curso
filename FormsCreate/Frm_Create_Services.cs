@@ -71,8 +71,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             service.id = Convert.ToInt32(edt_id.Value);
             service.descriptionService = edt_serviceDescription.Text;
             service.serviceValue = Convert.ToDouble(edt_serviceValue.Text);
-            service.dateOfCreation = DateTime.Now;
-            service.dateOfLastUpdate = DateTime.Now;
             return service;
         }
 

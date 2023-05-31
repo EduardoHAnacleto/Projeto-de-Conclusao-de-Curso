@@ -21,6 +21,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public void SaveItem(OSItems saleItems)
         {
             _OSItems = saleItems;
+            _OSItems.dateOfCreation = DateTime.Now;
+            _OSItems.dateOfLastUpdate = _OSItems.dateOfCreation;
             _OSItemsDAO.SaveToDb(_OSItems);
         }
         public List<OSItems> LoadItems()

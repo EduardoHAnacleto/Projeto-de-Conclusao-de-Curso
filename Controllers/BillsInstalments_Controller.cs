@@ -24,8 +24,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public bool SaveItem(BillsInstalments billInstalment)
         {
             _billInstalment = billInstalment;
-            bool status = _billInstalmentsDAO.SaveToDb(_billInstalment);
-            return status;
+            _billInstalment.dateOfCreation = DateTime.Now;
+            _billInstalment.dateOfLastUpdate = _billInstalment.dateOfCreation;
+            return _billInstalmentsDAO.SaveToDb(_billInstalment);
         }
         public List<BillsInstalments> LoadItems()
         {

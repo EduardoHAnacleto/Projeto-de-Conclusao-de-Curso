@@ -181,8 +181,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 client.streetName = edt_street.Text;
                 client.homeType = edt_homeType.Text;
                 client.complement = edt_complement.Text;
-                client.dateOfCreation = Convert.ToDateTime(lbl_CreationDate.Text);
-                client.dateOfLastUpdate = DateTime.Now ;
                 Cities city = TakeCity(edt_city.Text);
                 client.city = city;
                 client.houseNumber = edt_houseNumber.Text;

@@ -147,8 +147,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             product.productCost = Convert.ToDouble(edt_productCost.Text);
             product.salePrice = Convert.ToDouble(edt_productSalePrice.Text);
             product.stock = Convert.ToInt32(edt_stock.Value);
-            product.dateOfCreation = DateTime.Now;
-            product.dateOfLastUpdate = DateTime.Now;
             product.BarCode = Convert.ToInt64(edt_barCode.Text);
 
             ProductGroups pGroups = this.TakePGroup(cbox_ProductGroup.SelectedItem.ToString());

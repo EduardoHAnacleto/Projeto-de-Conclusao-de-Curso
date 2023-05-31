@@ -92,8 +92,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 supplier.streetName = edt_street.Text;
                 supplier.homeType = edt_homeType.Text;
                 supplier.complement = edt_complement.Text;
-                supplier.dateOfCreation = Convert.ToDateTime(lbl_CreationDate.Text);
-                supplier.dateOfLastUpdate = DateTime.Now;
                 Cities city = TakeCity(edt_city.Text);
                 supplier.city = city;
                 supplier.houseNumber = edt_houseNumber.Text;

@@ -1,5 +1,6 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.DAO;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
+using ProjetoEduardoAnacletoWindowsForm1.Next;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,6 +24,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(PaymentConditions paymentCondition)
         {
             _paymentCondition = paymentCondition;
+            _paymentCondition.dateOfCreation = DateTime.Now;
+            _paymentCondition.dateOfLastUpdate = _paymentCondition.dateOfCreation;
             _paymentConditionsDAO.SaveToDb(_paymentCondition);
         }
         public new List<PaymentConditions> LoadItems()

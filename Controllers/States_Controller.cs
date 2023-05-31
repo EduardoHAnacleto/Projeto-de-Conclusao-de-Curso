@@ -24,6 +24,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(States state)
         {
             _state = state;
+            _state.dateOfCreation = DateTime.Now;
+            _state.dateOfLastUpdate = _state.dateOfCreation;
             _DAO.SaveToDb(_state);
         }
         public new List<States> LoadItems()

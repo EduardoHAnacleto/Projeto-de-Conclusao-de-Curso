@@ -22,6 +22,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(Cities city)
         {
             _city = city;
+            _city.dateOfCreation = DateTime.Now;
+            _city.dateOfLastUpdate = _city.dateOfCreation;
             _DAO.SaveToDb(_city);
         }
         public List<Cities> LoadItems()

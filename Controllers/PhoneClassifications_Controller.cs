@@ -22,6 +22,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public void SaveItem(PhoneClassifications phoneClass)
         {
             _phoneClass = phoneClass;
+            _phoneClass.dateOfCreation = DateTime.Now;
+            _phoneClass.dateOfLastUpdate = _phoneClass.dateOfCreation;
             _phoneClassDAO.SaveToDb(_phoneClass);
         }
         //public List<PhoneClassifications> LoadItems()

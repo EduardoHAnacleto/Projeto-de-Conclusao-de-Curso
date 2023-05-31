@@ -57,8 +57,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             Brands brand = new Brands();
             brand.id = Convert.ToInt32(edt_id.Value);
             brand.brandName = edt_BrandName.Text;
-            brand.dateOfCreation = DateTime.Now;
-            brand.dateOfLastUpdate = DateTime.Now;
             return brand;
         }
 

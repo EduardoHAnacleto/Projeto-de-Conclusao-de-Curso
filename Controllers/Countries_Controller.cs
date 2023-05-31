@@ -22,6 +22,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public void SaveItem(Countries country)
         {
             _country = country;
+            _country.dateOfCreation = DateTime.Now;
+            _country.dateOfLastUpdate = _country.dateOfCreation;
             _countriesDAO.SaveToDb(_country);
         }
         public new List<Countries> LoadItems()

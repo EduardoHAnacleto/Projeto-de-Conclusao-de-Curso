@@ -25,6 +25,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public bool SaveItem(SaleItems saleItems)
         {
             _SaleItems = saleItems;
+            _SaleItems.dateOfCreation = DateTime.Now;
+            _SaleItems.dateOfLastUpdate = _SaleItems.dateOfCreation;
             return _SaleItemsDAO.SaveToDb(_SaleItems);
         }
         public new List<SaleItems> LoadItems()
