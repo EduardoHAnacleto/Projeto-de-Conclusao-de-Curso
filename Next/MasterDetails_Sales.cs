@@ -27,5 +27,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
         {
 
         }
+
+        private void btn_ClearClientFilters_Click(object sender, EventArgs e)
+        {
+            
+        }
     }
 }

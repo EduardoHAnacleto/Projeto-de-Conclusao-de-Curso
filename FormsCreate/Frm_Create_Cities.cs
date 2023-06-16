@@ -147,10 +147,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             formState.ShowDialog();
             if (!formState.ActiveControl.ContainsFocus)
             {
-                States state = new States();
-                state = formState.GetObject();
-                edt_state.Text = state.stateName;
-                edt_stateId.Text = state.id.ToString();
+                    States state = new States();
+                    state = formState.GetObject();
+                    if (state != null)
+                {
+                    edt_state.Text = state.stateName;
+                    edt_stateId.Text = state.id.ToString();
+                }
+
+                
+
             }
             formState.Close();
         }
