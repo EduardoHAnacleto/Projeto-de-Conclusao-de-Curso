@@ -16,7 +16,7 @@ using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
-    public class PaymentConditions_DAO :Master_DAO//OK
+    public class PaymentConditions_DAO : Master_DAO//OK
     {
         private string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
 
@@ -47,6 +47,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 int id = Convert.ToInt32(newId) + 1;
                 return id;
             }
+
             return 2;
         }
 
@@ -56,7 +57,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 
             string sql = "INSERT INTO PAYMENTCONDITIONS ( CONDITION_NAME, PAYMENT_FEES, FINE_VALUE, DISCOUNT_PERC, INSTALMENT_QUANTITY , DATE_CREATION, DATE_LAST_UPDATE ) "
                          + " VALUES (@CONDNAME, @FEES, @FINE, @DISCOUNT, @QNT, @DC, @DU);" +
-                         " SELECT SCOPE_IDENTITY();";
+                         " SELECT SCOPE_IDENTITY() ;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -71,7 +72,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@DU", cond.dateOfLastUpdate);
                     connection.Open();
                     //int i = command.ExecuteNonQuery();
-                    int i = Convert.ToInt32(command.ExecuteScalar());
+                    var x = Convert.ToDecimal(command.ExecuteScalar());
+                    int i = Convert.ToInt32(x);
                     connection.Close();
                     if (i > 0)
                     {
@@ -147,7 +149,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         //        return status;
         //    }
         //}
-        
+
         public bool EditFromDB(PaymentConditions cond)
         {
             bool status = false;
@@ -175,26 +177,39 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         var toBeRemoved = _billsInstalmentsController.FindInstalments(cond.id);
                         if (!cond.BillsInstalments.Equals(toBeRemoved) && toBeRemoved.Count > 0)
                         {
-                            foreach (BillsInstalments item in toBeRemoved)
+                            status = _billsInstalmentsController.DeleteItem(cond.id);
+                            if (!status)
                             {
-                                if (item != null)
-                                {
-                                    status = _billsInstalmentsController.DeleteItem(item.id, item.InstalmentNumber);
-                                }
+                                throw new SystemException("An error has ocurred in database when reordering instalments.");
                             }
                             foreach (BillsInstalments item in cond.BillsInstalments)
                             {
-                                if (item != null)
+                                status = _billsInstalmentsController.SaveItem(item);
+                                if (!status)
                                 {
-                                    item.id = cond.id;
-                                    status = _billsInstalmentsController.SaveItem(item);
-                                    if (!status)
-                                    {
-                                        MessageBox.Show("An error has occurred.");
-                                        break;
-                                    }
+                                    throw new SystemException("An error has ocurred in database when updating instalments.");
                                 }
                             }
+                            //foreach (BillsInstalments item in toBeRemoved)
+                            //{
+                            //    if (item != null)
+                            //    {
+                            //        status = _billsInstalmentsController.DeleteItem(item.id, item.InstalmentNumber);
+                            //    }
+                            //}
+                            //foreach (BillsInstalments item in cond.BillsInstalments)
+                            //{
+                            //    if (item != null)
+                            //    {
+                            //        item.id = cond.id;
+                            //        status = _billsInstalmentsController.SaveItem(item);
+                            //        if (!status)
+                            //        {
+                            //            MessageBox.Show("An error has occurred.");
+                            //            break;
+                            //        }
+                            //    }
+                            //}
                         }
                         if (status)
                         {
@@ -205,7 +220,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : "+ ex.Message);
+                    MessageBox.Show("Error : " + ex.Message);
                     return false;
                 }
                 finally
@@ -272,7 +287,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     fineValue = Convert.ToDouble(reader["fine_value"]),
                                     discountPerc = Convert.ToDouble(reader["discount_perc"]),
                                     instalmentQuantity = Convert.ToInt32(reader["instalment_quantity"]),
-                                    BillsInstalments = _billsInstalmentsController.FindInstalments( Convert.ToInt32(reader["id_paycondition"])),
+                                    BillsInstalments = _billsInstalmentsController.FindInstalments(Convert.ToInt32(reader["id_paycondition"])),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                                 };

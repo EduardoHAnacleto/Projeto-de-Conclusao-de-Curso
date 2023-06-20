@@ -131,9 +131,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
 
         private void dateTime_DateFilter_ValueChanged(object sender, EventArgs e)
         {
-            if (dateTime_DateFilter.Value != dateTime_DateFilter.MinDate)
+            if (dateTime_DateFilter.Value <= dateTime_DateFilter.MinDate)
             {
-
+                foreach (DataGridViewRow row in DGV_Sales.Rows)
+                {
+                    if (Convert.ToDateTime(row.Cells["SaleDate"].Value) < dateTime_DateFilter.Value)
+                    {
+                        row.Dispose();
+                    }
+                }
             }
         }
 
@@ -342,6 +348,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 }
             }
             FilterSaleByFoundClient();
+        }
+
+        private void dateTime_MaxDateFilter_ValueChanged(object sender, EventArgs e)
+        {
+            if (dateTime_MaxDateFilter.Value != dateTime_MaxDateFilter.MinDate)
+            {
+                foreach (DataGridViewRow row in DGV_Sales.Rows)
+                {
+                    if (Convert.ToDateTime(row.Cells["SaleDate"].Value) > dateTime_MaxDateFilter.Value)
+                    {
+                        row.Dispose();
+                    }
+                }
+            }
         }
     }
 }

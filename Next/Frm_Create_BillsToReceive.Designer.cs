@@ -48,6 +48,8 @@
             this.lbl_clientName = new System.Windows.Forms.Label();
             this.lbl_clientId = new System.Windows.Forms.Label();
             this.gbox_billDates = new System.Windows.Forms.GroupBox();
+            this.lbl_paidDate = new System.Windows.Forms.Label();
+            this.datePicker_PaidDate = new System.Windows.Forms.DateTimePicker();
             this.lbl_DueDate = new System.Windows.Forms.Label();
             this.lbl_EmissionDate = new System.Windows.Forms.Label();
             this.datePicker_due = new System.Windows.Forms.DateTimePicker();
@@ -58,8 +60,6 @@
             this.lbl_PaymentForm = new System.Windows.Forms.Label();
             this.lbl_saleId = new System.Windows.Forms.Label();
             this.edt_saleNumber = new System.Windows.Forms.NumericUpDown();
-            this.lbl_paidDate = new System.Windows.Forms.Label();
-            this.datePicker_PaidDate = new System.Windows.Forms.DateTimePicker();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
@@ -274,6 +274,27 @@
             this.gbox_billDates.TabStop = false;
             this.gbox_billDates.Text = "* Movement Date";
             // 
+            // lbl_paidDate
+            // 
+            this.lbl_paidDate.AutoSize = true;
+            this.lbl_paidDate.Location = new System.Drawing.Point(2, 107);
+            this.lbl_paidDate.Name = "lbl_paidDate";
+            this.lbl_paidDate.Size = new System.Drawing.Size(54, 13);
+            this.lbl_paidDate.TabIndex = 5;
+            this.lbl_paidDate.Text = "Paid Date";
+            this.lbl_paidDate.Visible = false;
+            // 
+            // datePicker_PaidDate
+            // 
+            this.datePicker_PaidDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.datePicker_PaidDate.Location = new System.Drawing.Point(5, 123);
+            this.datePicker_PaidDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.datePicker_PaidDate.Name = "datePicker_PaidDate";
+            this.datePicker_PaidDate.Size = new System.Drawing.Size(96, 20);
+            this.datePicker_PaidDate.TabIndex = 4;
+            this.datePicker_PaidDate.Value = new System.DateTime(2000, 1, 1, 5, 17, 0, 0);
+            this.datePicker_PaidDate.Visible = false;
+            // 
             // lbl_DueDate
             // 
             this.lbl_DueDate.AutoSize = true;
@@ -373,27 +394,6 @@
             this.edt_saleNumber.Size = new System.Drawing.Size(65, 20);
             this.edt_saleNumber.TabIndex = 34;
             // 
-            // lbl_paidDate
-            // 
-            this.lbl_paidDate.AutoSize = true;
-            this.lbl_paidDate.Location = new System.Drawing.Point(2, 107);
-            this.lbl_paidDate.Name = "lbl_paidDate";
-            this.lbl_paidDate.Size = new System.Drawing.Size(54, 13);
-            this.lbl_paidDate.TabIndex = 5;
-            this.lbl_paidDate.Text = "Paid Date";
-            this.lbl_paidDate.Visible = false;
-            // 
-            // datePicker_PaidDate
-            // 
-            this.datePicker_PaidDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.datePicker_PaidDate.Location = new System.Drawing.Point(5, 123);
-            this.datePicker_PaidDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.datePicker_PaidDate.Name = "datePicker_PaidDate";
-            this.datePicker_PaidDate.Size = new System.Drawing.Size(96, 20);
-            this.datePicker_PaidDate.TabIndex = 4;
-            this.datePicker_PaidDate.Value = new System.DateTime(2000, 1, 1, 5, 17, 0, 0);
-            this.datePicker_PaidDate.Visible = false;
-            // 
             // Frm_Create_BillsToReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -447,8 +447,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView DGV_Instalments;
         private System.Windows.Forms.DataGridViewTextBoxColumn Instalment_Number;
         private System.Windows.Forms.DataGridViewTextBoxColumn Total_Days;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value_Percentage;
@@ -480,5 +478,6 @@
         private System.Windows.Forms.NumericUpDown edt_saleNumber;
         private System.Windows.Forms.Label lbl_paidDate;
         private System.Windows.Forms.DateTimePicker datePicker_PaidDate;
+        private System.Windows.Forms.DataGridView DGV_Instalments;
     }
 }

@@ -128,7 +128,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
         }
 
-        public bool DeleteFromDb(int id, int iNumber)
+        public bool DeleteFromDb(int iNumber, int id)
         {
             bool status = false;
 
@@ -147,6 +147,37 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         status = true;
                     }
 
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
+        public bool DeleteToUpdateFromDb(int id)
+        {
+            bool status = false;
+
+            string sql = "DELETE FROM BILLSINSTALMENTS WHERE PAYCONDITION_ID = @ID; ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", id);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        status = true;
+                    }
                 }
                 catch (Exception ex)
                 {

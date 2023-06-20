@@ -80,6 +80,8 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Authorization\Authentication.cs" />
+    <Compile Include="Authorization\IAuthentication.cs" />
     <Compile Include="Controllers\Users_Controller.cs" />
     <Compile Include="DAO\Users_DAO.cs" />
     <Compile Include="FormsCreate\Frm_Create_Services.cs">
@@ -124,12 +126,6 @@
     </Compile>
     <Compile Include="Next\Frm_Create_BillsToReceive.Designer.cs">
       <DependentUpon>Frm_Create_BillsToReceive.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Next\Frm_Create_Purchase.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Next\Frm_Create_Purchase.Designer.cs">
-      <DependentUpon>Frm_Create_Purchase.cs</DependentUpon>
     </Compile>
     <Compile Include="Next\MasterDetails_BillsToReceive.cs">
       <SubType>Form</SubType>
@@ -413,9 +409,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Next\Frm_Create_BillsToReceive.resx">
       <DependentUpon>Frm_Create_BillsToReceive.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Next\Frm_Create_Purchase.resx">
-      <DependentUpon>Frm_Create_Purchase.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Next\MasterDetails_BillsToReceive.resx">
       <DependentUpon>MasterDetails_BillsToReceive.cs</DependentUpon>

@@ -44,5 +44,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             _Obj.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
             _DAO.EditFromDB(_Obj);
         }
+
+        public Users LogUser(string login,string secret)
+        {
+            return _DAO.LogUser(login, secret);
+        }
     }
 }

@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using System.Xml.Linq;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
@@ -207,6 +208,50 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@LOGIN", name);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                Employees_Controller _EController = new Employees_Controller();
+                                Users obj = new Users
+                                {
+                                    id = Convert.ToInt32(reader["id_user"]),
+                                    userLogin = Convert.ToString(reader["userLogin"]),
+                                    userPassword = Convert.ToString(reader["userPassword"]),
+                                    AccessLevel = Convert.ToInt32(reader["levelAccess"]),
+                                    employee = _EController.FindItemId(Convert.ToInt32(reader["employee_id"])),
+                                    dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                                    dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
+                                };
+                                return obj;
+                            }
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return null;
+        }
+
+        public Users LogUser(string login, string secret)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM USERS WHERE USERLOGIN = @LOGIN AND USERPASSWORD = @SECRET";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@LOGIN", login);
+                        command.Parameters.AddWithValue("@SECRET", secret);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
