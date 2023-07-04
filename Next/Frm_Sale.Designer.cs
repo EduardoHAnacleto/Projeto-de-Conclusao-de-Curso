@@ -118,6 +118,10 @@
             this.SaleDiscCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleDiscPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_DeleteItem = new System.Windows.Forms.Button();
+            this.btnTeste = new System.Windows.Forms.Button();
+            this.btnEditTeste = new System.Windows.Forms.Button();
+            this.btn_CancelSale = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -174,6 +178,7 @@
             this.DGV_SaleProducts.TabIndex = 5;
             this.DGV_SaleProducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_SaleProducts_CellValueChanged);
             this.DGV_SaleProducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_SaleProducts_RowsRemoved);
+            this.DGV_SaleProducts.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.DGV_SaleProducts_UserDeletedRow);
             // 
             // IdProduct
             // 
@@ -254,6 +259,7 @@
             // 
             // edt_userId
             // 
+            this.edt_userId.Enabled = false;
             this.edt_userId.Location = new System.Drawing.Point(9, 32);
             this.edt_userId.Maximum = new decimal(new int[] {
             99999,
@@ -266,6 +272,7 @@
             // 
             // edt_userName
             // 
+            this.edt_userName.Enabled = false;
             this.edt_userName.Location = new System.Drawing.Point(9, 74);
             this.edt_userName.MaxLength = 30;
             this.edt_userName.Name = "edt_userName";
@@ -393,6 +400,7 @@
             // 
             // gbox_options
             // 
+            this.gbox_options.Controls.Add(this.btn_CancelSale);
             this.gbox_options.Controls.Add(this.lbl_findClient);
             this.gbox_options.Controls.Add(this.lbl_new);
             this.gbox_options.Controls.Add(this.lbl_Save);
@@ -410,7 +418,7 @@
             // lbl_findClient
             // 
             this.lbl_findClient.AutoSize = true;
-            this.lbl_findClient.Location = new System.Drawing.Point(73, 74);
+            this.lbl_findClient.Location = new System.Drawing.Point(63, 73);
             this.lbl_findClient.Name = "lbl_findClient";
             this.lbl_findClient.Size = new System.Drawing.Size(66, 13);
             this.lbl_findClient.TabIndex = 6;
@@ -419,7 +427,7 @@
             // lbl_new
             // 
             this.lbl_new.AutoSize = true;
-            this.lbl_new.Location = new System.Drawing.Point(28, 74);
+            this.lbl_new.Location = new System.Drawing.Point(18, 73);
             this.lbl_new.Name = "lbl_new";
             this.lbl_new.Size = new System.Drawing.Size(29, 13);
             this.lbl_new.TabIndex = 5;
@@ -428,7 +436,7 @@
             // lbl_Save
             // 
             this.lbl_Save.AutoSize = true;
-            this.lbl_Save.Location = new System.Drawing.Point(149, 74);
+            this.lbl_Save.Location = new System.Drawing.Point(139, 73);
             this.lbl_Save.Name = "lbl_Save";
             this.lbl_Save.Size = new System.Drawing.Size(32, 13);
             this.lbl_Save.TabIndex = 4;
@@ -436,7 +444,7 @@
             // 
             // btn_Close
             // 
-            this.btn_Close.Location = new System.Drawing.Point(202, 20);
+            this.btn_Close.Location = new System.Drawing.Point(192, 19);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(57, 51);
             this.btn_Close.TabIndex = 3;
@@ -446,7 +454,7 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(139, 20);
+            this.btn_Save.Location = new System.Drawing.Point(129, 19);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(57, 51);
             this.btn_Save.TabIndex = 2;
@@ -456,7 +464,7 @@
             // 
             // btn_FindClient
             // 
-            this.btn_FindClient.Location = new System.Drawing.Point(76, 20);
+            this.btn_FindClient.Location = new System.Drawing.Point(66, 19);
             this.btn_FindClient.Name = "btn_FindClient";
             this.btn_FindClient.Size = new System.Drawing.Size(57, 51);
             this.btn_FindClient.TabIndex = 1;
@@ -466,7 +474,7 @@
             // 
             // btn_new
             // 
-            this.btn_new.Location = new System.Drawing.Point(13, 20);
+            this.btn_new.Location = new System.Drawing.Point(3, 19);
             this.btn_new.Name = "btn_new";
             this.btn_new.Size = new System.Drawing.Size(57, 51);
             this.btn_new.TabIndex = 0;
@@ -579,7 +587,6 @@
             this.lbl_subTotal.Size = new System.Drawing.Size(59, 13);
             this.lbl_subTotal.TabIndex = 0;
             this.lbl_subTotal.Text = "Sub-Total :";
-            this.lbl_subTotal.Click += new System.EventHandler(this.lbl_subTotal_Click);
             // 
             // lbl_barCode
             // 
@@ -642,9 +649,9 @@
             this.lbl_TotalCost.AutoSize = true;
             this.lbl_TotalCost.Location = new System.Drawing.Point(1038, 25);
             this.lbl_TotalCost.Name = "lbl_TotalCost";
-            this.lbl_TotalCost.Size = new System.Drawing.Size(55, 13);
+            this.lbl_TotalCost.Size = new System.Drawing.Size(61, 13);
             this.lbl_TotalCost.TabIndex = 24;
-            this.lbl_TotalCost.Text = "Total Cost";
+            this.lbl_TotalCost.Text = "Total Value";
             // 
             // gbox_Product
             // 
@@ -1078,18 +1085,23 @@
             // 
             // DGV_SaleSummary
             // 
+            this.DGV_SaleSummary.AllowUserToDeleteRows = false;
+            this.DGV_SaleSummary.AllowUserToResizeColumns = false;
+            this.DGV_SaleSummary.AllowUserToResizeRows = false;
             this.DGV_SaleSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_SaleSummary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SaleSubTotal,
             this.SaleDiscCash,
             this.SaleDiscPerc,
             this.SaleTotal});
+            this.DGV_SaleSummary.Enabled = false;
             this.DGV_SaleSummary.Location = new System.Drawing.Point(660, 452);
             this.DGV_SaleSummary.MultiSelect = false;
             this.DGV_SaleSummary.Name = "DGV_SaleSummary";
+            this.DGV_SaleSummary.ReadOnly = true;
             this.DGV_SaleSummary.RowHeadersVisible = false;
             this.DGV_SaleSummary.RowHeadersWidth = 51;
-            this.DGV_SaleSummary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect;
+            this.DGV_SaleSummary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_SaleSummary.Size = new System.Drawing.Size(317, 55);
             this.DGV_SaleSummary.TabIndex = 29;
             // 
@@ -1099,21 +1111,23 @@
             this.SaleSubTotal.MinimumWidth = 6;
             this.SaleSubTotal.Name = "SaleSubTotal";
             this.SaleSubTotal.ReadOnly = true;
-            this.SaleSubTotal.Width = 80;
+            this.SaleSubTotal.Width = 70;
             // 
             // SaleDiscCash
             // 
             this.SaleDiscCash.HeaderText = "Cash Discount";
             this.SaleDiscCash.MinimumWidth = 6;
             this.SaleDiscCash.Name = "SaleDiscCash";
-            this.SaleDiscCash.Width = 95;
+            this.SaleDiscCash.ReadOnly = true;
+            this.SaleDiscCash.Width = 70;
             // 
             // SaleDiscPerc
             // 
             this.SaleDiscPerc.HeaderText = "Percentage Discount";
             this.SaleDiscPerc.MinimumWidth = 6;
             this.SaleDiscPerc.Name = "SaleDiscPerc";
-            this.SaleDiscPerc.Width = 95;
+            this.SaleDiscPerc.ReadOnly = true;
+            this.SaleDiscPerc.Width = 70;
             // 
             // SaleTotal
             // 
@@ -1123,11 +1137,54 @@
             this.SaleTotal.Name = "SaleTotal";
             this.SaleTotal.ReadOnly = true;
             // 
+            // btn_DeleteItem
+            // 
+            this.btn_DeleteItem.Location = new System.Drawing.Point(1056, 452);
+            this.btn_DeleteItem.Name = "btn_DeleteItem";
+            this.btn_DeleteItem.Size = new System.Drawing.Size(75, 23);
+            this.btn_DeleteItem.TabIndex = 30;
+            this.btn_DeleteItem.Text = "Delete Item";
+            this.btn_DeleteItem.UseVisualStyleBackColor = true;
+            this.btn_DeleteItem.Click += new System.EventHandler(this.btn_DeleteItem_Click);
+            // 
+            // btnTeste
+            // 
+            this.btnTeste.Location = new System.Drawing.Point(414, 471);
+            this.btnTeste.Name = "btnTeste";
+            this.btnTeste.Size = new System.Drawing.Size(75, 23);
+            this.btnTeste.TabIndex = 31;
+            this.btnTeste.Text = "Teste";
+            this.btnTeste.UseVisualStyleBackColor = true;
+            this.btnTeste.Click += new System.EventHandler(this.btnTeste_Click);
+            // 
+            // btnEditTeste
+            // 
+            this.btnEditTeste.Location = new System.Drawing.Point(495, 471);
+            this.btnEditTeste.Name = "btnEditTeste";
+            this.btnEditTeste.Size = new System.Drawing.Size(75, 23);
+            this.btnEditTeste.TabIndex = 32;
+            this.btnEditTeste.Text = "TesteEdit";
+            this.btnEditTeste.UseVisualStyleBackColor = true;
+            this.btnEditTeste.Click += new System.EventHandler(this.btnEditTeste_Click);
+            // 
+            // btn_CancelSale
+            // 
+            this.btn_CancelSale.Location = new System.Drawing.Point(252, 20);
+            this.btn_CancelSale.Name = "btn_CancelSale";
+            this.btn_CancelSale.Size = new System.Drawing.Size(57, 48);
+            this.btn_CancelSale.TabIndex = 7;
+            this.btn_CancelSale.Text = "Cancel\r\n Sale";
+            this.btn_CancelSale.UseVisualStyleBackColor = true;
+            this.btn_CancelSale.Visible = false;
+            // 
             // Frm_Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 684);
+            this.Controls.Add(this.btnEditTeste);
+            this.Controls.Add(this.btnTeste);
+            this.Controls.Add(this.btn_DeleteItem);
             this.Controls.Add(this.DGV_SaleSummary);
             this.Controls.Add(this.lbl_requiredCamps);
             this.Controls.Add(this.gbox_paymentCondition);
@@ -1269,9 +1326,13 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ItemDiscountPerc;
         private System.Windows.Forms.DataGridViewTextBoxColumn UnValueProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductTotalValue;
+        private System.Windows.Forms.Button btn_DeleteItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleSubTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleDiscCash;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleDiscPerc;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleTotal;
+        private System.Windows.Forms.Button btnTeste;
+        private System.Windows.Forms.Button btnEditTeste;
+        private System.Windows.Forms.Button btn_CancelSale;
     }
 }

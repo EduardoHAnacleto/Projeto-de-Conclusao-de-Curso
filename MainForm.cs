@@ -5,6 +5,7 @@ using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.FormsCreate;
 using ProjetoEduardoAnacletoWindowsForm1.InheritForms;
 using ProjetoEduardoAnacletoWindowsForm1.MasterDetails;
+using ProjetoEduardoAnacletoWindowsForm1.Models;
 using ProjetoEduardoAnacletoWindowsForm1.Next;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
 using System;
@@ -128,12 +129,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1
             frmFindServices.ShowDialog();
         }
 
-        private void saleToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Frm_Sale frmSale = new Frm_Sale();
-            frmSale.ShowDialog();
-        }
-
         private void findBillsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MasterDetails_BillsToReceive frmMDBillsToReceive = new MasterDetails_BillsToReceive();
@@ -156,7 +151,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1
 
         private void newSaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Frm_Sale frmSale = new Frm_Sale();
+            Users user = new Users();
+            user.id = 55;
+            user.name = "teste";
+            Frm_Sale frmSale = new Frm_Sale(user);
             frmSale.ShowDialog();
         }
 
@@ -165,6 +163,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1
             MasterDetails_Sales frmMasterDetailsSales = new MasterDetails_Sales();
             frmMasterDetailsSales.ShowDialog();
         }
+
     }
 }
 

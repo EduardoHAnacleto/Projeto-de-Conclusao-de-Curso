@@ -18,7 +18,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             InitializeComponent();
             this.SetDataSourceToDGV();
         }
-
+        
+        Users user = null;
         private Brands_Controller controller = new Brands_Controller();
 
         //public Brands GetObject()  //Ok - Cria um OBJ a partir dos campos

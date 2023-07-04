@@ -68,6 +68,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         if (row.Cells["NameClient"].Value != null && row.Cells["NameClient"].Value.ToString() == client.name)
                         {
                             row.Selected = true;
+                            
                             break;
                         }
                     }

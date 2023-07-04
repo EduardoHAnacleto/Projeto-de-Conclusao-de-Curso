@@ -318,7 +318,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 {
                     return null;
                 }
-
             }
         }
 

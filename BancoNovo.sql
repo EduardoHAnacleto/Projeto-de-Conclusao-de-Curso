@@ -239,7 +239,7 @@ create table BILLSINSTALMENTS(
         sale_DISCOUNT_CASH decimal not null,
         sale_DISCOUNT_PERC decimal not null,
         total_Items_Quantity int not null,      
-        sale_cancel_date datetime,
+        sale_cancel_date datetime DEFAULT NULL,
         date_creation datetime not null,
         date_last_update datetime not null,
     );

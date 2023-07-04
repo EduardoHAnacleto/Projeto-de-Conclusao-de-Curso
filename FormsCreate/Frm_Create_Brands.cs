@@ -14,8 +14,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             InitializeComponent();
         }
 
-        Brands_Controller controller = new Brands_Controller();
-        Brands auxObj = null;
+        private Brands_Controller controller = new Brands_Controller();
+        private Brands auxObj = null;
+        private Users User = null;
+
+        private void SetUser(Users user)
+        {
+            User = user;
+        }
+
 
         public override void SetNewId()
         {

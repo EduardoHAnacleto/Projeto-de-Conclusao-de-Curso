@@ -23,13 +23,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
             string sql = "INSERT INTO SALEITEMS ( SALE_ID, PRODUCT_ID, QUANTITY, ITEM_VALUE, ITEM_COST, DISCOUNT_CASH, DISCOUNT_PERC," +
                 "TOTAL_VALUE , DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@ID, @PRODVALUE, @PRODCOST, @TOTALVALUE, @DISCCASH, @DISCPERC, @QTD, @DC, @DU);";
+                         + " VALUES (@ID, @PRODID, @QTD, @PRODVALUE, @PRODCOST, @DISCCASH, @DISCPERC, @TOTALVALUE, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", obj.id);
+                    command.Parameters.AddWithValue("@PRODID", obj.Product.id);
                     command.Parameters.AddWithValue("@PRODVALUE", (decimal)obj.ProductValue);
                     command.Parameters.AddWithValue("@PRODCOST", (decimal)obj.ProductCost);
                     command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.TotalValue);
@@ -40,10 +41,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
-                    connection.Close();
+
                     if (i > 0)
                     {
-                        MessageBox.Show("Register added with success!");
                         status = true;
                     }
                 }
@@ -252,9 +252,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             return null;
         }
 
-        public List<SaleItems> SelectSaleIdFromDb(int id)
+        public List<SaleItems> SelectSaleIdFromDb2(int id)
         {
-            string sql = "SELECT * FROM SALEITEMS WHERE ID_SALE = @ID ;";
+            string sql = "SELECT * FROM SALEITEMS WHERE SALE_ID = @ID ;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -272,15 +272,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         {
                             SaleItems obj = new SaleItems
                             {
-                                id = Convert.ToInt32(reader["sale_id"]),
-                                Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
-                                Quantity = Convert.ToInt32(reader["quantity"]),
-                                ProductValue = Convert.ToDouble(reader["item_value"]),
-                                ProductCost = Convert.ToDouble(reader["item_cost"]),
-                                TotalValue = Convert.ToDouble(reader["total_value"]),
+                                id = id,
+                                Product          = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
+                                Quantity         = Convert.ToInt32(reader["quantity"]),
+                                ProductValue     = Convert.ToDouble(reader["item_value"]),
+                                ProductCost      = Convert.ToDouble(reader["item_cost"]),
+                                TotalValue       = Convert.ToDouble(reader["total_value"]),
                                 ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
                                 ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
-                                dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                                dateOfCreation   = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
                             list.Add(obj);
@@ -298,6 +298,57 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 con.Close();
             }
             return null;
+        }
+
+        public List<SaleItems> SelectSaleIdFromDb(int id)
+        {
+            string sql = "SELECT * FROM SALEITEMS WHERE SALE_ID = @ID ;";
+            List<SaleItems> list = new List<SaleItems>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", id);
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        SaleItems obj = new SaleItems
+                        {
+                            id = id,
+                            Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
+                            Quantity = Convert.ToInt32(reader["quantity"]),
+                            ProductValue = Convert.ToDouble(reader["item_value"]),
+                            ProductCost = Convert.ToDouble(reader["item_cost"]),
+                            TotalValue = Convert.ToDouble(reader["total_value"]),
+                            ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
+                            ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
+                            dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                            dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
+                        };
+                        list.Add(obj);
+                    }
+                    reader.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                if (list.Count > 0)
+                {
+                    return list;
+                }
+                else
+                {
+                    return null;
+                }
+            }
         }
 
         public List<SaleItems> SelectAllFromDb()

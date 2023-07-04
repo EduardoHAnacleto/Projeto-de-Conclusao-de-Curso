@@ -72,8 +72,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@DU", cond.dateOfLastUpdate);
                     connection.Open();
                     //int i = command.ExecuteNonQuery();
-                    var x = Convert.ToDecimal(command.ExecuteScalar());
-                    int i = Convert.ToInt32(x);
+                    var i = Convert.ToInt32(command.ExecuteScalar());
                     connection.Close();
                     if (i > 0)
                     {

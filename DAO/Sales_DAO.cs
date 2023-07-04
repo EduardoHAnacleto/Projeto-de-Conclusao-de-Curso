@@ -12,6 +12,7 @@ using ProjetoEduardoAnacletoWindowsForm1.DAO;
 using System.Configuration;
 using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using NUnit.Framework;
+using System.Transactions;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 {
@@ -57,12 +58,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             return 2;
         }
 
-        public bool SaveToDb(Sales sale)
+        public bool SaveToDb2(Sales sale)
         {
             bool status = false;
             string sql = "INSERT INTO SALES (CLIENT_ID, USER_ID, SALE_TOTAL_COST, SALE_TOTAL_VALUE, SALE_DISCOUNT_CASH, SALE_DISCOUNT_PERC," +
-                "TOTAL_ITEMS_QUANTITY, SALE_CANCEL_DATE , DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@CLIENTID, @USERID, @SALECOST, @SALEVALUE, @SALEDISCCASH, @SALEDISCPERC, @TOTALQTD, @CANCELDATE, @DC, @DU);" +
+                "TOTAL_ITEMS_QUANTITY, DATE_CREATION, DATE_LAST_UPDATE ) "
+                         + " VALUES (@CLIENTID, @USERID, @SALECOST, @SALEVALUE, @SALEDISCCASH, @SALEDISCPERC, @TOTALQTD, @DC, @DU);" +
                          " SELECT SCOPE_IDENTITY();";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -78,7 +79,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@SALEDISCCASH", (decimal)sale.SaleDiscountCash);
                     command.Parameters.AddWithValue("@SALEDISCPERC", (decimal)sale.SaleDiscountPerc);
                     command.Parameters.AddWithValue("@TOTALQTD", sale.TotalItemsQuantity);
-                    command.Parameters.AddWithValue("@CANCELDATE", sale.CancelDate);
                     command.Parameters.AddWithValue("@DC", sale.dateOfLastUpdate);
                     command.Parameters.AddWithValue("@DU", sale.dateOfLastUpdate);
 
@@ -122,7 +122,73 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 }
                 finally
                 {
-                    transaction?.Dispose();
+                    //transaction?.Dispose();
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
+        public bool SaveToDb(Sales sale)
+        {
+            bool status = false;
+
+            string sql = "INSERT INTO SALES (CLIENT_ID, USER_ID, SALE_TOTAL_COST, SALE_TOTAL_VALUE, SALE_DISCOUNT_CASH, SALE_DISCOUNT_PERC," +
+                "TOTAL_ITEMS_QUANTITY, DATE_CREATION, DATE_LAST_UPDATE ) "
+                         + " VALUES (@CLIENTID, @USERID, @SALECOST, @SALEVALUE, @SALEDISCCASH, @SALEDISCPERC, @TOTALQTD, @DC, @DU);";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@CLIENTID", sale.Client.id);
+                    command.Parameters.AddWithValue("@USERID", sale.User.id);
+                    command.Parameters.AddWithValue("@SALECOST", (decimal)sale.TotalCost);
+                    command.Parameters.AddWithValue("@SALEVALUE", (decimal)sale.TotalValue);
+                    command.Parameters.AddWithValue("@SALEDISCCASH", (decimal)sale.SaleDiscountCash);
+                    command.Parameters.AddWithValue("@SALEDISCPERC", (decimal)sale.SaleDiscountPerc);
+                    command.Parameters.AddWithValue("@TOTALQTD", sale.TotalItemsQuantity);
+                    command.Parameters.AddWithValue("@DC", sale.dateOfLastUpdate);
+                    command.Parameters.AddWithValue("@DU", sale.dateOfLastUpdate);
+                    connection.Open();
+                    //int i = command.ExecuteNonQuery();
+                    var i = command.ExecuteNonQuery();
+                    connection.Close();
+                    if (i > 0)
+                    {
+                        foreach (SaleItems item in sale.SaleItems)
+                        {
+                            if (item != null)
+                            {
+                                status = _saleItemsController.SaveItem(item);
+                                if (!status)
+                                {
+                                    MessageBox.Show("An error has occurred.");
+                                    break;
+                                }
+                            }
+                        }
+                        if (status)
+                        {
+                            MessageBox.Show("Register added with success!");
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+                    {
+                        MessageBox.Show("Error : " + ex.Message);
+                        return false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
                     connection.Close();
                 }
                 return status;
@@ -132,11 +198,22 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public bool EditFromDB(Sales sale)
         {
             bool status = false;
+            string sql;
+            if (sale.CancelDate == null)
+            {
+                sql = "UPDATE SALES SET CLIENT_ID = @CLIENTID, USER_ID = @USERID, SALE_TOTAL_COST = @SALECOST," +
+                    " SALE_TOTAL_VALUE = @SALEVALUE, SALE_DISCOUNT_CASH = @SALEDISCCASH, SALE_DISCOUNT_PERC = @SALEDISCPERC ," +
+                    " TOTAL_ITEMS_QUANTITY = @TOTALQTD, DATE_LAST_UPDATE = @DU " +
+                    "WHERE ID_SALE = @ID ; ";
+            }
+            else
+            {
+                sql = "UPDATE SALES SET CLIENT_ID = @CLIENTID, USER_ID = @USERID, SALE_TOTAL_COST = @SALECOST," +
+                    " SALE_TOTAL_VALUE = @SALEVALUE, SALE_DISCOUNT_CASH = @SALEDISCCASH, SALE_DISCOUNT_PERC = @SALEDISCPERC ," +
+                    " TOTAL_ITEMS_QUANTITY = @TOTALQTD, SALE_CANCEL_DATE = @CANCELDATE, DATE_LAST_UPDATE = @DU " +
+                    "WHERE ID_SALE = @ID ; ";
+            }
 
-            string sql = "UPDATE SALES SET CLIENT_ID = @CLIENTID, USER_ID = @USERID, SALE_TOTAL_COST = @SALECOST," +
-                " SALE_TOTAL_VALUE = @SALEVALUE, SALE_DISCOUNT_CASH = @SALEDISCCASH, SALE_DISCOUNT_PERC = @SALEDISCPERC ," +
-                " TOTAL_ITEMS_QUANTITY = @TOTALQTD, SALE_CANCEL_DATE = @CANCELDATE, DATE_LAST_UPDATE = @DU " +
-                "WHERE ID_SALE = @ID ; ";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -259,16 +336,26 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 obj.id = id;
                                 obj.User = _usersController.FindItemId( Convert.ToInt32(reader["user_id"]));
                                 obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
+                               // obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
                                 obj.SaleItems = _saleItemsController.FindSaleId(id);
                                 obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                 obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
                                 obj.SaleDiscountCash = Convert.ToDouble(reader["sale_discount_cash"]);
                                 obj.SaleDiscountPerc = Convert.ToDouble(reader["sale_discount_perc"]);
                                 obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
-                                obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                               // obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
                                 obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
                                 obj.dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]);
+
+                                if (reader["sale_cancel_date"].ToString() != string.Empty)
+                                {
+                                    DateTime date = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    obj.CancelDate = date;
+                                }
+                                else
+                                {
+                                    obj.CancelDate = null;
+                                }
                                 return obj;
                             }
                         }

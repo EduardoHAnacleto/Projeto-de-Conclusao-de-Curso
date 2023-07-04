@@ -32,6 +32,21 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Authorization
             return false;
         }
 
+        public void WriteUserLogin()
+        {
+            //escreve no log o horario de login
+        }
+
+        public void WriteUserLogout()
+        {
+            //escreve no log o horario de loggout
+        }
+
+        public Users GetLoggedUser()
+        {
+            return User;
+        }
+
         public bool LogUser (string login, string secret)
         {
             try
