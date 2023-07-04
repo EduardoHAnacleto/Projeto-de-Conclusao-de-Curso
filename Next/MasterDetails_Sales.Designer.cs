@@ -46,6 +46,9 @@
             this.edt_UserId = new System.Windows.Forms.NumericUpDown();
             this.btn_SearchUser = new System.Windows.Forms.Button();
             this.gbox_SaleFilters = new System.Windows.Forms.GroupBox();
+            this.lbl_maxDate = new System.Windows.Forms.Label();
+            this.dateTime_MaxDateFilter = new System.Windows.Forms.DateTimePicker();
+            this.lbl_minDate = new System.Windows.Forms.Label();
             this.btn_ClearSaleFilters = new System.Windows.Forms.Button();
             this.lbl_payCondition = new System.Windows.Forms.Label();
             this.btn_SearchPayCond = new System.Windows.Forms.Button();
@@ -61,13 +64,10 @@
             this.btn_Close = new System.Windows.Forms.Button();
             this.lbl_ClientId = new System.Windows.Forms.Label();
             this.edt_clientId = new System.Windows.Forms.NumericUpDown();
-            this.lbl_minDate = new System.Windows.Forms.Label();
-            this.dateTime_MaxDateFilter = new System.Windows.Forms.DateTimePicker();
-            this.lbl_maxDate = new System.Windows.Forms.Label();
-            this.SaleUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SalePayCond = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -85,6 +85,7 @@
             // 
             // DGV_Clients
             // 
+            this.DGV_Clients.AllowUserToResizeRows = false;
             this.DGV_Clients.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Clients.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClientId,
@@ -92,9 +93,12 @@
             this.ClientRegNumber,
             this.ClientType});
             this.DGV_Clients.Location = new System.Drawing.Point(12, 36);
+            this.DGV_Clients.MultiSelect = false;
             this.DGV_Clients.Name = "DGV_Clients";
+            this.DGV_Clients.ReadOnly = true;
             this.DGV_Clients.RowHeadersVisible = false;
             this.DGV_Clients.RowHeadersWidth = 51;
+            this.DGV_Clients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Clients.Size = new System.Drawing.Size(637, 168);
             this.DGV_Clients.TabIndex = 0;
             // 
@@ -169,21 +173,25 @@
             // 
             // DGV_Sales
             // 
+            this.DGV_Sales.AllowUserToResizeRows = false;
             this.DGV_Sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Sales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.SaleUserId,
             this.SaleId,
+            this.SaleUserId,
+            this.SaleClientId,
             this.SaleClientName,
-            this.SaleSubTotal,
             this.SaleTotalValue,
             this.SalePayCond,
             this.SaleProdQtd,
             this.SaleDate,
             this.SaleStatus});
             this.DGV_Sales.Location = new System.Drawing.Point(6, 78);
+            this.DGV_Sales.MultiSelect = false;
             this.DGV_Sales.Name = "DGV_Sales";
+            this.DGV_Sales.ReadOnly = true;
             this.DGV_Sales.RowHeadersVisible = false;
             this.DGV_Sales.RowHeadersWidth = 51;
+            this.DGV_Sales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Sales.Size = new System.Drawing.Size(1049, 295);
             this.DGV_Sales.TabIndex = 6;
             // 
@@ -195,6 +203,7 @@
             this.btn_SelectSale.TabIndex = 7;
             this.btn_SelectSale.Text = "Select &Sale";
             this.btn_SelectSale.UseVisualStyleBackColor = true;
+            this.btn_SelectSale.Click += new System.EventHandler(this.btn_SelectSale_Click);
             // 
             // edt_saleId
             // 
@@ -247,7 +256,7 @@
             // edt_UserId
             // 
             this.edt_UserId.Location = new System.Drawing.Point(53, 54);
-            this.edt_UserId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_UserId.Margin = new System.Windows.Forms.Padding(2);
             this.edt_UserId.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -285,6 +294,35 @@
             this.gbox_SaleFilters.TabIndex = 11;
             this.gbox_SaleFilters.TabStop = false;
             this.gbox_SaleFilters.Text = "Sale Filters";
+            // 
+            // lbl_maxDate
+            // 
+            this.lbl_maxDate.AutoSize = true;
+            this.lbl_maxDate.Location = new System.Drawing.Point(6, 60);
+            this.lbl_maxDate.Name = "lbl_maxDate";
+            this.lbl_maxDate.Size = new System.Drawing.Size(56, 13);
+            this.lbl_maxDate.TabIndex = 9;
+            this.lbl_maxDate.Text = "Max. Date";
+            // 
+            // dateTime_MaxDateFilter
+            // 
+            this.dateTime_MaxDateFilter.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTime_MaxDateFilter.Location = new System.Drawing.Point(6, 75);
+            this.dateTime_MaxDateFilter.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTime_MaxDateFilter.Name = "dateTime_MaxDateFilter";
+            this.dateTime_MaxDateFilter.Size = new System.Drawing.Size(95, 20);
+            this.dateTime_MaxDateFilter.TabIndex = 8;
+            this.dateTime_MaxDateFilter.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTime_MaxDateFilter.ValueChanged += new System.EventHandler(this.dateTime_MaxDateFilter_ValueChanged);
+            // 
+            // lbl_minDate
+            // 
+            this.lbl_minDate.AutoSize = true;
+            this.lbl_minDate.Location = new System.Drawing.Point(6, 16);
+            this.lbl_minDate.Name = "lbl_minDate";
+            this.lbl_minDate.Size = new System.Drawing.Size(53, 13);
+            this.lbl_minDate.TabIndex = 7;
+            this.lbl_minDate.Text = "Min. Date";
             // 
             // btn_ClearSaleFilters
             // 
@@ -409,16 +447,16 @@
             // 
             this.btn_SelectClient.Location = new System.Drawing.Point(655, 181);
             this.btn_SelectClient.Name = "btn_SelectClient";
-            this.btn_SelectClient.Size = new System.Drawing.Size(75, 23);
+            this.btn_SelectClient.Size = new System.Drawing.Size(83, 23);
             this.btn_SelectClient.TabIndex = 13;
-            this.btn_SelectClient.Text = "Select &Client";
+            this.btn_SelectClient.Text = "Filter by Client";
             this.btn_SelectClient.UseVisualStyleBackColor = true;
             this.btn_SelectClient.Click += new System.EventHandler(this.btn_SelectClient_Click);
             // 
             // btn_Close
             // 
             this.btn_Close.Location = new System.Drawing.Point(984, 595);
-            this.btn_Close.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_Close.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(74, 23);
             this.btn_Close.TabIndex = 14;
@@ -439,7 +477,7 @@
             // edt_clientId
             // 
             this.edt_clientId.Location = new System.Drawing.Point(56, 11);
-            this.edt_clientId.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_clientId.Margin = new System.Windows.Forms.Padding(2);
             this.edt_clientId.Maximum = new decimal(new int[] {
             9999,
             0,
@@ -449,34 +487,12 @@
             this.edt_clientId.Size = new System.Drawing.Size(60, 20);
             this.edt_clientId.TabIndex = 16;
             // 
-            // lbl_minDate
+            // SaleId
             // 
-            this.lbl_minDate.AutoSize = true;
-            this.lbl_minDate.Location = new System.Drawing.Point(6, 16);
-            this.lbl_minDate.Name = "lbl_minDate";
-            this.lbl_minDate.Size = new System.Drawing.Size(53, 13);
-            this.lbl_minDate.TabIndex = 7;
-            this.lbl_minDate.Text = "Min. Date";
-            // 
-            // dateTime_MaxDateFilter
-            // 
-            this.dateTime_MaxDateFilter.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTime_MaxDateFilter.Location = new System.Drawing.Point(6, 75);
-            this.dateTime_MaxDateFilter.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateTime_MaxDateFilter.Name = "dateTime_MaxDateFilter";
-            this.dateTime_MaxDateFilter.Size = new System.Drawing.Size(95, 20);
-            this.dateTime_MaxDateFilter.TabIndex = 8;
-            this.dateTime_MaxDateFilter.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateTime_MaxDateFilter.ValueChanged += new System.EventHandler(this.dateTime_MaxDateFilter_ValueChanged);
-            // 
-            // lbl_maxDate
-            // 
-            this.lbl_maxDate.AutoSize = true;
-            this.lbl_maxDate.Location = new System.Drawing.Point(6, 60);
-            this.lbl_maxDate.Name = "lbl_maxDate";
-            this.lbl_maxDate.Size = new System.Drawing.Size(56, 13);
-            this.lbl_maxDate.TabIndex = 9;
-            this.lbl_maxDate.Text = "Max. Date";
+            this.SaleId.HeaderText = "Sale ID";
+            this.SaleId.Name = "SaleId";
+            this.SaleId.ReadOnly = true;
+            this.SaleId.Width = 50;
             // 
             // SaleUserId
             // 
@@ -484,15 +500,15 @@
             this.SaleUserId.MinimumWidth = 6;
             this.SaleUserId.Name = "SaleUserId";
             this.SaleUserId.ReadOnly = true;
-            this.SaleUserId.Width = 60;
+            this.SaleUserId.Width = 50;
             // 
-            // SaleId
+            // SaleClientId
             // 
-            this.SaleId.HeaderText = "Client ID";
-            this.SaleId.MinimumWidth = 6;
-            this.SaleId.Name = "SaleId";
-            this.SaleId.ReadOnly = true;
-            this.SaleId.Width = 45;
+            this.SaleClientId.HeaderText = "Client ID";
+            this.SaleClientId.MinimumWidth = 6;
+            this.SaleClientId.Name = "SaleClientId";
+            this.SaleClientId.ReadOnly = true;
+            this.SaleClientId.Width = 45;
             // 
             // SaleClientName
             // 
@@ -501,14 +517,6 @@
             this.SaleClientName.MinimumWidth = 6;
             this.SaleClientName.Name = "SaleClientName";
             this.SaleClientName.ReadOnly = true;
-            // 
-            // SaleSubTotal
-            // 
-            this.SaleSubTotal.HeaderText = "Sub-Total";
-            this.SaleSubTotal.MinimumWidth = 6;
-            this.SaleSubTotal.Name = "SaleSubTotal";
-            this.SaleSubTotal.ReadOnly = true;
-            this.SaleSubTotal.Width = 65;
             // 
             // SaleTotalValue
             // 
@@ -524,7 +532,7 @@
             this.SalePayCond.MinimumWidth = 6;
             this.SalePayCond.Name = "SalePayCond";
             this.SalePayCond.ReadOnly = true;
-            this.SalePayCond.Width = 125;
+            this.SalePayCond.Width = 130;
             // 
             // SaleProdQtd
             // 
@@ -540,7 +548,7 @@
             this.SaleDate.MinimumWidth = 6;
             this.SaleDate.Name = "SaleDate";
             this.SaleDate.ReadOnly = true;
-            this.SaleDate.Width = 70;
+            this.SaleDate.Width = 120;
             // 
             // SaleStatus
             // 
@@ -548,7 +556,7 @@
             this.SaleStatus.MinimumWidth = 6;
             this.SaleStatus.Name = "SaleStatus";
             this.SaleStatus.ReadOnly = true;
-            this.SaleStatus.Width = 65;
+            this.SaleStatus.Width = 70;
             // 
             // MasterDetails_Sales
             // 
@@ -623,10 +631,10 @@
         private System.Windows.Forms.Label lbl_maxDate;
         private System.Windows.Forms.DateTimePicker dateTime_MaxDateFilter;
         private System.Windows.Forms.Label lbl_minDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SaleUserId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaleUserId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaleClientId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleClientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SaleSubTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleTotalValue;
         private System.Windows.Forms.DataGridViewTextBoxColumn SalePayCond;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleProdQtd;

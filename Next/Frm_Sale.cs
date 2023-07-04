@@ -45,12 +45,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             SetUser(user);
         }
 
+        public Sales Sale { get; private set; }
         private Sales BackupSale = null;
         private Products product = null;
         private Products_Controller _pController = new Products_Controller();
         private Sales_Controller _controller = new Sales_Controller();
         //private BillsInstalments_Controller _billsController = null;
 
+        private void SetSale(Sales sale)
+        {
+            Sale = sale;
+        }
 
         private void SetUser(Users user)
         {
@@ -93,7 +98,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
             else if (btn_new.Text == "&Edit")
             {
-                BackupSale = this.GetObject();
+                BackupSale = Sale;
                 BackupSale.dateOfCreation = Convert.ToDateTime(medt_date.Text);
                 UnlockCamps();
                 btn_CancelSale.Visible = true;
@@ -332,6 +337,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_UNCost.Value = (decimal)prod.productCost;
             edt_ProdUnValue.Value = (decimal)prod.salePrice;
             CalcTotalProdValue();
+            UpdateDGVSummary();
         }
 
         private Products SearchItemByName()
@@ -564,7 +570,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     {
                         if (ConfirmSale(sale))
                         {
-                            _controller = new Sales_Controller();
                             status = _controller.SaveItem(sale);
                             if (status)
                             {
@@ -574,7 +579,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     }
                     else if (btn_new.Text == "Cancel")
                     {
-                        _controller = new Sales_Controller();
                         status = _controller.UpdateItem(sale);
                         if (status)
                         {
@@ -594,7 +598,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             LockCamps();
             try
             {
-                _controller = new Sales_Controller();
                 _controller.DeleteItem(BackupSale.id);
                 this.ClearCamps();
             }
@@ -894,15 +897,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 Utilities.Msgbox(message, caption, buttons, icon);
                 return false;
             }
-            else if (edt_payConditionId.Value <= 1)
-            {
-                string message = "Payment Condition must be selected.";
-                string caption = "Payment Condition not selected.";
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                MessageBoxIcon icon = MessageBoxIcon.Error;
-                Utilities.Msgbox(message, caption, buttons, icon);
-                return false;
-            }
+            //else if (edt_payConditionId.Value <= 1)
+            //{
+            //    string message = "Payment Condition must be selected.";
+            //    string caption = "Payment Condition not selected.";
+            //    MessageBoxButtons buttons = MessageBoxButtons.OK;
+            //    MessageBoxIcon icon = MessageBoxIcon.Error;
+            //    Utilities.Msgbox(message, caption, buttons, icon);
+            //    return false;
+            //}
             else if (edt_subtotal.Value < 0)
             {
                 string message = "Sub-Total must be 0 or higher.";

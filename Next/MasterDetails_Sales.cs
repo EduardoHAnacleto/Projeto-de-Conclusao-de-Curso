@@ -1,4 +1,5 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using ProjetoEduardoAnacletoWindowsForm1.Forms;
 using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
@@ -24,9 +25,93 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
             edt_UserId.Controls[0].Visible = false;
         }
 
-        Sales_Controller SalesController = new Sales_Controller();
-        Users_Controller UsersController = new Users_Controller();
-        Clients_Controller ClientsController = new Clients_Controller();
+        private Users User { get; set; }
+        private Sales_Controller SalesController = new Sales_Controller();
+        private Users_Controller UsersController = new Users_Controller();
+        private Clients_Controller ClientsController = new Clients_Controller();
+        private PaymentConditions_Controller PayCondController = new PaymentConditions_Controller();
+
+        public void SetClientsDataSourceToDGV() //Popula Clients DGV
+        {
+            DGV_Clients.Rows.Clear();
+            DataTable dt = ClientsController.PopulateDGV();
+            if (dt != null)
+            {
+                //int i = 0;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (dr != null)
+                    {
+                        DGV_Clients.Rows.Add(
+                            dr["id_client"].ToString(),
+                            dr["client_name"].ToString(),
+                            dr["client_registration"].ToString(),
+                            dr["client_type"].ToString()
+                            );
+                        //DGV_Clients.Rows[i].Cells["ClientId"].Value = dr["id_client"].ToString();
+                        //DGV_Clients.Rows[i].Cells["ClientName"].Value = dr["client_name"].ToString();
+                        //DGV_Clients.Rows[i].Cells["ClientRegNumber"].Value = dr["client_registration"].ToString();
+                        //DGV_Clients.Rows[i].Cells["ClientType"].Value = dr["client_type"].ToString();
+                    }
+                    //i++;
+                }
+            }
+            UpdateDGVClientsColumnItem();
+        }
+
+        private void UpdateDGVClientsColumnItem() // Formata Type dos clientes para Natural e Legal
+        {
+            foreach (DataGridViewRow dr in DGV_Clients.Rows)
+            {
+                if (dr.Cells[0].Value != null)
+                {
+                    if (dr.Cells["ClientType"].Value.ToString() == "1")
+                    {
+                        dr.Cells["ClientType"].Value = "NATURAL";
+                    }
+                    else
+                        if (dr.Cells["ClientType"].Value.ToString() == "2")
+                    {
+                        dr.Cells["ClientType"].Value = "LEGAL";
+                    }
+
+                }
+            }
+        }
+
+        public void SetSalesDataSourceToDGV() //Popula Clients DGV
+        {
+            DGV_Sales.Rows.Clear();
+            DataTable dt = SalesController.PopulateDGV();
+            if (dt != null)
+            {
+                int i = 0;
+                foreach (DataRow dr in dt.Rows)
+                {
+                    if (dr != null)
+                    {
+                        decimal totalValue = (decimal)dr["sale_total_value"];
+                        string saleStatus = "ACTIVE";
+                        if (dr["sale_cancel_date"].ToString() != string.Empty)
+                        {
+                            saleStatus = "CANCELLED";
+                        }
+                        DGV_Sales.Rows.Add();
+                        DGV_Sales.Rows[i].Cells["SaleId"].Value = dr["id_sale"].ToString();
+                        //DGV_Sales.Rows[i].Cells["SaleUserId"].Value = dr["user_id"].ToString();
+                        DGV_Sales.Rows[i].Cells["SaleClientId"].Value = dr["client_id"].ToString();
+                        DGV_Sales.Rows[i].Cells["SaleClientName"].Value = ClientsController.FindItemId(Convert.ToInt32(dr["client_id"])).name;
+                        //DGV_Sales.Rows[i].Cells["SaleSubTotal"].Value = dr["SaleSubTotal"].ToString();
+                        DGV_Sales.Rows[i].Cells["SaleTotalValue"].Value = totalValue.ToString("0.00");
+                        //DGV_Sales.Rows[i].Cells["SalePayCond"].Value = PayCondController.FindItemId(Convert.ToInt32(dr["SalePayCond"])).conditionName;
+                        DGV_Sales.Rows[i].Cells["SaleProdQtd"].Value = dr["total_Items_Quantity"].ToString();
+                        DGV_Sales.Rows[i].Cells["SaleDate"].Value = dr["date_creation"].ToString();
+                        DGV_Sales.Rows[i].Cells["SaleStatus"].Value = saleStatus;
+                    }
+                    i++;
+                }
+            }
+        }
 
         private void dataGridView3_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -54,7 +139,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
             if (edt_payCondition.Text.Length > 0)
             {
                 edt_payCondition.Enabled = false;
-                PopulateDGVSales();
+                SetSalesDataSourceToDGV();
                 foreach (DataGridViewRow item in DGV_Sales.Rows)
                 {
                     if (item.Cells["SalePayCond"].Value.ToString() != cond)
@@ -68,7 +153,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
 
         private void btn_ClearClientFilters_Click(object sender, EventArgs e)
         {
-            PopulateDGVClients();
+            SetClientsDataSourceToDGV();
         }
 
         private void btn_Close_Click(object sender, EventArgs e)
@@ -76,26 +161,26 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
             Close();
         }
 
-        private void PopulateDGVSales()
-        {
-            DGV_Sales.Rows.Clear();
-            DGV_Sales.DataSource = SalesController.PopulateDGV();
-            SaleStatusToString();
-        }
+        //private void PopulateDGVSales()
+        //{
+        //    DGV_Sales.Rows.Clear();
+        //    DGV_Sales.DataSource = SalesController.PopulateDGV();
+        //    SaleStatusToString();
+        //}
 
-        private void PopulateDGVClients()
-        {
-            DGV_Clients.Rows.Clear();
-            DGV_Clients.DataSource = ClientsController.PopulateDGV();
-            ClientTypeToString();
-        }
+        //private void PopulateDGVClients()
+        //{
+        //    DGV_Clients.Rows.Clear();
+        //    DGV_Clients.DataSource = ClientsController.PopulateDGV();
+        //    ClientTypeToString();
+        //}
 
         private void btn_findSale_Click(object sender, EventArgs e)
         {
             DataGridViewRow row;
             if (edt_saleId.Value > 0)
             {
-                PopulateDGVSales();
+                SetSalesDataSourceToDGV();
                 foreach (DataGridViewRow item in DGV_Sales.Rows)
                 {
                     if (Convert.ToInt32(item.Cells["SaleId"].Value) == Convert.ToInt32(edt_saleId.Value))
@@ -113,7 +198,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
         {
             if (Convert.ToInt32(edt_UserId.Value) > 0)
             {
-                PopulateDGVSales();
+                SetSalesDataSourceToDGV();
                 foreach (DataGridViewRow item in DGV_Sales.Rows)
                 {
                     if (Convert.ToInt32(item.Cells["SaleUserId"].Value) != Convert.ToInt32(edt_UserId.Value))
@@ -126,7 +211,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
 
         private void btn_ClearSaleFilters_Click(object sender, EventArgs e)
         {
-            PopulateDGVSales();
+            SetSalesDataSourceToDGV();
         }
 
         private void dateTime_DateFilter_ValueChanged(object sender, EventArgs e)
@@ -271,7 +356,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 {
                     foreach (DataGridViewRow row in DGV_Clients.Rows)
                     {
-                        if (Convert.ToInt32(row.Cells["ClientId"].Value) == Convert.ToInt32(edt_clientId.Value))
+                        if (Convert.ToInt32(row.Cells["SaleClientId"].Value) == Convert.ToInt32(edt_clientId.Value))
                         {
                             row.Selected = true;
                             return true;
@@ -361,6 +446,25 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                         row.Dispose();
                     }
                 }
+            }
+        }
+
+        private void btn_SelectSale_Click(object sender, EventArgs e)
+        {
+            SelectSale();
+        }
+
+        private void SelectSale()
+        {
+            if (DGV_Sales.SelectedRows != null)
+            {
+                Sales sale = SalesController.FindItemId(Convert.ToInt32(DGV_Sales.SelectedRows[0].Cells["SaleId"].Value));
+                Users user = UsersController.FindItemId(sale.User.id);
+                Frm_Sale frmSale = new Frm_Sale(user);
+                frmSale.PopulateCamps(sale);
+                frmSale.SetFormToEdit();
+                frmSale.ShowDialog();
+                SetSalesDataSourceToDGV();
             }
         }
     }
