@@ -133,6 +133,7 @@
             // 
             // cbox_payMethod
             // 
+            this.cbox_payMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbox_payMethod.FormattingEnabled = true;
             this.cbox_payMethod.Location = new System.Drawing.Point(6, 91);
             this.cbox_payMethod.Name = "cbox_payMethod";

@@ -326,7 +326,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             if (supplier != null)
             {
-                PopulateSupplier(supplier);
+                PopulateSupplier(supplier);              
             }
         }
 

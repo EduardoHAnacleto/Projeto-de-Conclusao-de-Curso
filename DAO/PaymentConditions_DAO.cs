@@ -51,13 +51,25 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             return 2;
         }
 
+        private int GetLastId()
+        {
+            string sql = "SELECT IDENT_CURRENT ('PAYMENTCONDITIONS');";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sql, connection);
+                connection.Open();
+                int i = Convert.ToInt32(command.ExecuteScalar());
+                connection.Close();
+                return i;
+            }
+        }
+
         public bool SaveToDb(PaymentConditions cond)
         {
             bool status = false;
 
             string sql = "INSERT INTO PAYMENTCONDITIONS ( CONDITION_NAME, PAYMENT_FEES, FINE_VALUE, DISCOUNT_PERC, INSTALMENT_QUANTITY , DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@CONDNAME, @FEES, @FINE, @DISCOUNT, @QNT, @DC, @DU);" +
-                         " SELECT SCOPE_IDENTITY() ;";
+                         + " VALUES (@CONDNAME, @FEES, @FINE, @DISCOUNT, @QNT, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -72,15 +84,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@DU", cond.dateOfLastUpdate);
                     connection.Open();
                     //int i = command.ExecuteNonQuery();
-                    var i = Convert.ToInt32(command.ExecuteScalar());
+                    var i = Convert.ToInt32(command.ExecuteNonQuery());
                     connection.Close();
+                    int id = GetLastId();
                     if (i > 0)
                     {
                         foreach (BillsInstalments instalment in cond.BillsInstalments)
                         {
                             if (instalment != null)
                             {
-                                instalment.id = i;
+                                instalment.id = id;
                                 status = _billsInstalmentsController.SaveItem(instalment);
                                 if (!status)
                                 {

@@ -21,7 +21,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         //private readonly PaymentConditions_Controller _paymentConditionsController = new PaymentConditions_Controller();
         private readonly PaymentMethods_Controller _paymentMethodsController = new PaymentMethods_Controller();
         private readonly Suppliers_Controller _suppliersController = new Suppliers_Controller();
-        private readonly Purchases_Controller _purchasesController = new Purchases_Controller();
+        //private readonly Purchases_Controller _purchasesController = new Purchases_Controller();
 
         public bool SaveToDb(BillsToPay obj)
         {
@@ -194,7 +194,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
-                                        Purchase = _purchasesController.FindItemId(Convert.ToInt32(reader["purchase_id"])),
+                                        PurchaseId = Convert.ToInt32(reader["purchase_id"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                     };
@@ -253,7 +253,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                     InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                     PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
-                                    Purchase = _purchasesController.FindItemId(Convert.ToInt32(reader["purchase_id"])),
+                                    PurchaseId = Convert.ToInt32(reader["purchase_id"]),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                 };
@@ -307,7 +307,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
-                                        Purchase = _purchasesController.FindItemId(Convert.ToInt32(reader["purchase_id"])),
+                                        PurchaseId = Convert.ToInt32(reader["purchase_id"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                     };
@@ -402,7 +402,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
-                                        Purchase = _purchasesController.FindItemId(Convert.ToInt32(reader["purchase_id"])),
+                                        PurchaseId = Convert.ToInt32(reader["purchase_id"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                     };

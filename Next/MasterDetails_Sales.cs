@@ -121,6 +121,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
         private void btn_SearchPayCond_Click(object sender, EventArgs e)
         {
             var frmPaymentConditions = new Frm_Find_PaymentConditions();
+            frmPaymentConditions.hasFather = true;
             frmPaymentConditions.ShowDialog();
             if (!frmPaymentConditions.ActiveControl.ContainsFocus)
             {
@@ -235,7 +236,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 rbtn_CancelledStatus.Checked = false;
                 foreach (DataGridViewRow row in DGV_Sales.Rows)
                 {
-                    if (row.Cells["Status"].ToString() != "ACTIVE")
+                    if (row.Cells["SaleStatus"].ToString() != "ACTIVE")
                     {
                         row.Dispose();
                     }
@@ -250,7 +251,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 rbtn_ActiveStatus.Checked = false;
                 foreach (DataGridViewRow row in DGV_Sales.Rows)
                 {
-                    if (row.Cells["Status"].ToString() != "FALSE")
+                    if (row.Cells["SaleStatus"].ToString() != "CANCELLED")
                     {
                         row.Dispose();
                     }

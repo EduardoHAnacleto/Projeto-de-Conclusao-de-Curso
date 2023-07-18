@@ -196,8 +196,10 @@
             // 
             // cbox_paymentMethod
             // 
+            this.cbox_paymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbox_paymentMethod.FormattingEnabled = true;
             this.cbox_paymentMethod.Location = new System.Drawing.Point(339, 113);
+            this.cbox_paymentMethod.MaxDropDownItems = 20;
             this.cbox_paymentMethod.Name = "cbox_paymentMethod";
             this.cbox_paymentMethod.Size = new System.Drawing.Size(106, 21);
             this.cbox_paymentMethod.TabIndex = 31;

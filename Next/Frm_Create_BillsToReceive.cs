@@ -223,6 +223,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 cbox_paymentMethod.Items.Add(text);
             }
+            cbox_paymentMethod.SelectedIndex = 0;
         }
 
         public override bool CheckCamps() //Validacao de campos
@@ -266,6 +267,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 check_Active.Checked = false;
             }
+            datePicker_PaidDate.Value = DateTime.Now;
+            datePicker_PaidDate.Visible = true;
         }
 
         private void check_Active_CheckedChanged(object sender, EventArgs e)
@@ -274,6 +277,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 check_Paid.Checked = false;
             }
+            datePicker_PaidDate.Visible = false;
         }
 
         public void SearchClient() // Abre Form para encontrar e levar Cliente
