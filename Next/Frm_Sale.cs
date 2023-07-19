@@ -46,10 +46,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         }
 
         public Sales Sale { get; private set; }
-        private Sales BackupSale = null;
+        private Sales BackupSale = new Sales();
         private Products product = null;
         private Products_Controller _pController = new Products_Controller();
         private Sales_Controller _controller = new Sales_Controller();
+        private BillsToReceive_Controller _BTRController = new BillsToReceive_Controller();
         //private BillsInstalments_Controller _billsController = null;
 
         private void SetSale(Sales sale)
@@ -573,7 +574,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                             status = _controller.SaveItem(sale);
                             if (status)
                             {
-                                Populated(false);
+                                List<BillsToReceive> billsToReceiveList = new List<BillsToReceive>();
+                                billsToReceiveList = BillsToReceive.MakeBills(sale);
+                                foreach (BillsToReceive bill in billsToReceiveList)
+                                {
+                                    status = _BTRController.SaveItem(bill);
+                                    if (!status)
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (status)
+                                {
+                                    Populated(false);
+                                }
                             }
                         }
                     }
@@ -1087,7 +1101,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             sale.TotalValue = 4036;
             sale.TotalCost = 1500.9 + 1500.9 + 8 + 8 + 8;
             sale.TotalItemsQuantity = 5;
-            bool status = _controller.SaveItem(sale);
+            PopulateCamps(sale);
+            //bool status = _controller.SaveItem(sale);
             //MessageBox.Show(status.ToString());
         }
 

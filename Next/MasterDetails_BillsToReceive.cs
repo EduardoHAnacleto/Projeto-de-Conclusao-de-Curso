@@ -154,11 +154,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             {
                 if (row != null)
                 {
-                    if (Convert.ToBoolean(row.Cells["StatusBillsReceive"].Value) == true)
+                    if (Convert.ToInt32(row.Cells["StatusBillsReceive"].Value) == 1)
                     {
                         row.Cells["StatusBillsReceive"].Value = "PAID";
                     }
-                    else row.Cells["StatusBillsReceive"].Value = "ACTIVE";
+                    else if (Convert.ToInt32(row.Cells["StatusBillsReceive"].Value) == 0) {
+                        row.Cells["StatusBillsReceive"].Value = "ACTIVE";
+                    }
+                    else
+                    {
+                        row.Cells["StatusBillsReceive"].Value = "ON HOLD";
+                    }
                 }
             }
         }
@@ -261,14 +267,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         private void SortByClientType(string sortString)
         {
-            if (DGV_Clients.Rows.Count <= 0)
+            SetClientsDataSourceToDGV();
+            if (DGV_Clients.Rows.Count > 0)
             {
-                SetClientsDataSourceToDGV();
                 foreach (DataGridViewRow row in DGV_Clients.Rows)
                 {
                     if (row.Cells["TypeClient"].Value.ToString() != sortString)
                     {
-                        row.Dispose();
+                        DGV_Clients.Rows.Remove(row);
                     }
                 }
             }
@@ -296,14 +302,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         private void SortByBillStatus(string sortString)
         {
-            if (DGV_BillsToReceive.Rows.Count <= 0)
+            SetBillsToReceiveDataSourceToDGV();
+            if (DGV_BillsToReceive.Rows.Count > 0)
             {
-                SetBillsToReceiveDataSourceToDGV();
                 foreach (DataGridViewRow row in DGV_BillsToReceive.Rows)
                 {
                     if (row.Cells["StatusBillsReceive"].Value.ToString() != sortString)
                     {
-                        row.Dispose();
+                        DGV_BillsToReceive.Rows.Remove(row);
                     }
                 }
             }
@@ -359,6 +365,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         private void DGV_Clients_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             SelectRowByClient();
+        }
+
+        private void rbtn_onHold_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtn_onHold.Checked)
+            {
+                rbtn_ActiveStatus.Checked = false;
+                rbtn_PaidStatus.Checked = false;
+                SortByBillStatus("ON HOLD");
+            }
         }
     }
 }

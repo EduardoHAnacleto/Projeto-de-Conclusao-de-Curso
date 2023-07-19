@@ -1,4 +1,5 @@
-﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+﻿using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
+using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.FormsCreate;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
@@ -30,6 +31,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private BillsToPay _auxObj;
         private BillsToPay_Controller _controller = new BillsToPay_Controller();
         private readonly Suppliers_Controller _supplierController = new Suppliers_Controller();
+        private readonly PaymentMethods_Controller _pMController = new PaymentMethods_Controller();
 
         public override bool CheckCamps()   //Valida Campos
         {
@@ -51,7 +53,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 Utilities.Msgbox(message, caption, buttons, icon);
                 return false;
             }
-            else if (!Utilities.IsNotSelected(cbox_payMethod.SelectedItem, "Payment Method"))
+            else if (Utilities.IsNotSelected(cbox_payMethod.SelectedItem, "Payment Method"))
             {
                 cbox_payMethod.Focus();
                 return false;
@@ -116,6 +118,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.BillModel = (int)edt_BillModel.Value;
             obj.BillSeries = (int)edt_BillSeries.Value;
             obj.BillPage = (int)edt_BillPage.Value;
+            obj.PaymentMethod = _pMController.FindItemName(cbox_payMethod.SelectedItem.ToString());
 
             obj.InstalmentNumber = (int)edt_instalmentNumber.Value;
             obj.TotalValue = (double)edt_totalValue.Value;
@@ -123,15 +126,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (check_Paid.Checked)
             {
                 obj.PaidDate = datePicker_paid.Value;
-                obj.IsPaid = true;
+                obj.IsPaid = 1;
+            }
+            else if (check_Active.Checked) 
+            {
+                obj.IsPaid = 0;
+                obj.PaidDate = null;
             }
             else
             {
-                obj.IsPaid = false;
+                obj.IsPaid = 2;
                 obj.PaidDate = null;
             }
             return obj;
-
         }
 
         public override void LockCamps()
@@ -154,6 +161,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_billInfo.Enabled = true;
             check_Active.Enabled = true;
             check_Paid.Enabled = true;
+
         }
 
         public override void ClearCamps()
@@ -203,6 +211,26 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
+        public override void Populated(bool populated)
+        {
+            if (populated)
+            {
+                this.LockCamps();
+                btn_SelectDelete.Enabled = false;
+                btn_Edit.Enabled = true;
+                btn_NewSave.Enabled = false;
+            }
+            else if (!populated)
+            {
+                btn_SelectDelete.Enabled = false;
+                //btn_Edit.Enabled = false;
+                btn_NewSave.Enabled = true;
+
+                this.UnlockCamps();
+                this.ClearCamps();
+            }
+        }
+
         public override void EditObject() //EditObject
         {
             if (btn_Edit.Text == "E&dit")
@@ -243,11 +271,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 datePicker_paid.Value = (DateTime)bill.PaidDate;
             }
-            if (bill.IsPaid)
+            if (bill.IsPaid == 1)
             {
                 check_Paid.Checked = true;
+                check_Active.Checked = false;
+                check_onHold.Checked = false;
             }
-            else { check_Paid.Checked = false;}
+            else if (bill.IsPaid == 0)
+            {
+                check_Active.Checked = true;
+                check_Paid.Checked = false;
+                check_onHold.Checked = false;
+            }
+            else if (bill.IsPaid == 2)
+            {
+                check_onHold.Checked = true;
+                check_Active.Checked = false;
+                check_Paid.Checked = false;
+            }
         }
 
         public override void DeleteObject() //DeleteObject
@@ -285,6 +326,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (check_Active.Checked)
             {
                 check_Paid.Checked = false;
+                check_onHold.Checked = false;
+                lbl_paidDate.Visible = false;
+                datePicker_paid.Visible = false;
             }
         }
 
@@ -292,7 +336,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (check_Paid.Checked)
             {
+                check_onHold.Checked = false;
                 check_Active.Checked = false;
+                lbl_paidDate.Visible = true;
+                datePicker_paid.Visible = true;
             }
         }
 
@@ -305,7 +352,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public void SearchSupplier()
         {
             Suppliers supplier = new Suppliers();
-            if (edt_supplierId.Value > 0)
+            if (edt_supplierName.Text == string.Empty)
+            {
+                Frm_Find_Suppliers formSupplier = new Frm_Find_Suppliers();
+                formSupplier.hasFather = true;
+                formSupplier.ShowDialog();
+                if (!formSupplier.ActiveControl.ContainsFocus)
+                {
+                    supplier = formSupplier.GetObject();
+                }
+                formSupplier.Close();
+            }
+            else if (edt_supplierId.Value > 0)
             {
                 supplier = _supplierController.FindItemId(Convert.ToInt32(edt_supplierId.Value));      
             }
@@ -333,6 +391,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void btn_SearchSupplier_Click(object sender, EventArgs e)
         {
             SearchSupplier();
+        }
+
+        private void check_onHold_CheckedChanged(object sender, EventArgs e)
+        {
+            if (check_onHold.Checked)
+            {
+                check_Paid.Checked = false;
+                check_Active.Checked = false;
+                lbl_paidDate.Visible = false;
+                datePicker_paid.Visible = false;
+            }
         }
     }
 }

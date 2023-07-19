@@ -26,13 +26,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
 
         public DateTime EmissionDate { get; set; }
         public DateTime DueDate { get; set; }
-        public bool IsPaid { get; set; }
+        public int IsPaid { get; set; }
         public DateTime? PaidDate { get; set; }
 
-        public int PurchaseId { get; set; }
+        //public int PurchaseId { get; set; }
         public Purchases Purchase { get; set; }
         public Suppliers Supplier { get; set; }
         public PaymentMethods PaymentMethod { get; set; }
+
 
     }
 }

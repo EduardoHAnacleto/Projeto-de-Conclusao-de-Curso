@@ -218,7 +218,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["paycondition_id"])),
                                     PurchasedItems = _purchaseItemsController.FindItemId(Convert.ToInt32(reader["id_purchase"])),
                                     Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
-                                    BillToPay = _billsToPayController.FindPurchaseid(Convert.ToInt32(reader["id_purchase"])),
                                 };
                                 return obj;
                             }

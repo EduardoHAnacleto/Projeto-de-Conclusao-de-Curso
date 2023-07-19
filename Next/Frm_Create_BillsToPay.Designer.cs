@@ -58,6 +58,7 @@
             this.gbox_isPaid = new System.Windows.Forms.GroupBox();
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.check_Paid = new System.Windows.Forms.CheckBox();
+            this.check_onHold = new System.Windows.Forms.CheckBox();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_billInfo.SuspendLayout();
@@ -92,7 +93,7 @@
             this.gbox_billInfo.Controls.Add(this.lbl_totalValue);
             this.gbox_billInfo.Location = new System.Drawing.Point(13, 160);
             this.gbox_billInfo.Name = "gbox_billInfo";
-            this.gbox_billInfo.Size = new System.Drawing.Size(220, 128);
+            this.gbox_billInfo.Size = new System.Drawing.Size(193, 128);
             this.gbox_billInfo.TabIndex = 40;
             this.gbox_billInfo.TabStop = false;
             this.gbox_billInfo.Text = "* Bill Information";
@@ -343,6 +344,7 @@
             this.datePicker_paid.Name = "datePicker_paid";
             this.datePicker_paid.Size = new System.Drawing.Size(96, 20);
             this.datePicker_paid.TabIndex = 5;
+            this.datePicker_paid.Visible = false;
             // 
             // lbl_paidDate
             // 
@@ -352,6 +354,7 @@
             this.lbl_paidDate.Size = new System.Drawing.Size(54, 13);
             this.lbl_paidDate.TabIndex = 4;
             this.lbl_paidDate.Text = "Paid Date";
+            this.lbl_paidDate.Visible = false;
             // 
             // lbl_DueDate
             // 
@@ -373,11 +376,12 @@
             // 
             // gbox_isPaid
             // 
+            this.gbox_isPaid.Controls.Add(this.check_onHold);
             this.gbox_isPaid.Controls.Add(this.check_Active);
             this.gbox_isPaid.Controls.Add(this.check_Paid);
             this.gbox_isPaid.Location = new System.Drawing.Point(497, 8);
             this.gbox_isPaid.Name = "gbox_isPaid";
-            this.gbox_isPaid.Size = new System.Drawing.Size(69, 59);
+            this.gbox_isPaid.Size = new System.Drawing.Size(125, 59);
             this.gbox_isPaid.TabIndex = 36;
             this.gbox_isPaid.TabStop = false;
             this.gbox_isPaid.Text = "* Status";
@@ -385,6 +389,8 @@
             // check_Active
             // 
             this.check_Active.AutoSize = true;
+            this.check_Active.Checked = true;
+            this.check_Active.CheckState = System.Windows.Forms.CheckState.Checked;
             this.check_Active.Location = new System.Drawing.Point(6, 14);
             this.check_Active.Name = "check_Active";
             this.check_Active.Size = new System.Drawing.Size(56, 17);
@@ -404,6 +410,17 @@
             this.check_Paid.UseVisualStyleBackColor = true;
             this.check_Paid.CheckedChanged += new System.EventHandler(this.check_Paid_CheckedChanged);
             // 
+            // check_onHold
+            // 
+            this.check_onHold.AutoSize = true;
+            this.check_onHold.Location = new System.Drawing.Point(59, 37);
+            this.check_onHold.Name = "check_onHold";
+            this.check_onHold.Size = new System.Drawing.Size(65, 17);
+            this.check_onHold.TabIndex = 13;
+            this.check_onHold.Text = "On Hold";
+            this.check_onHold.UseVisualStyleBackColor = true;
+            this.check_onHold.CheckedChanged += new System.EventHandler(this.check_onHold_CheckedChanged);
+            // 
             // Frm_Create_BillsToPay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -414,6 +431,7 @@
             this.Controls.Add(this.gbox_billDates);
             this.Controls.Add(this.gbox_isPaid);
             this.Name = "Frm_Create_BillsToPay";
+            this.Text = "Create Bills To Pay";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);
@@ -483,5 +501,6 @@
         private System.Windows.Forms.GroupBox gbox_isPaid;
         private System.Windows.Forms.CheckBox check_Active;
         private System.Windows.Forms.CheckBox check_Paid;
+        private System.Windows.Forms.CheckBox check_onHold;
     }
 }

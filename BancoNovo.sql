@@ -314,12 +314,11 @@ create table BILLSINSTALMENTS(
         instalmentsQtd int not null,
         dueDate date not null,
         emissionDate date not null,
-        isPaid boolean not null,
+        isPaid int not null,
         paidDate date,
         BillValue decimal(10,2) not null,
         payMethod_id int not null references PaymentMethods(id_payment_method),
         supplier_id int not null references Suppliers(id_supplier),
-        purchase_id int not null references PURCHASES(id_purchase),
         date_creation datetime not null,
         date_last_update datetime not null,
         primary key (billNumber, billModel, billSeries, billPage, instalmentNumber)

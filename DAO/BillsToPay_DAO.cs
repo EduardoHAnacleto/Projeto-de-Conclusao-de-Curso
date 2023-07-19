@@ -23,6 +23,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         private readonly Suppliers_Controller _suppliersController = new Suppliers_Controller();
         //private readonly Purchases_Controller _purchasesController = new Purchases_Controller();
 
+
         public bool SaveToDb(BillsToPay obj)
         {
             bool status = false;
@@ -187,14 +188,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         BillPage = Convert.ToInt32(reader["billPage"]),
 
                                         TotalValue = Convert.ToDouble(reader["BillValue"]),
-                                        IsPaid = Convert.ToBoolean(reader["isPaid"]),
+                                        IsPaid = Convert.ToInt32(reader["isPaid"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         PaidDate = Convert.ToDateTime(reader["paidDate"]),
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
-                                        PurchaseId = Convert.ToInt32(reader["purchase_id"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                     };
@@ -245,7 +245,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     BillPage = billPage,
 
                                     TotalValue = Convert.ToDouble(reader["BillValue"]),
-                                    IsPaid = Convert.ToBoolean(reader["isPaid"]),
+                                    IsPaid = Convert.ToInt32(reader["isPaid"]),
                                     PaidDate = Convert.ToDateTime(reader["paidDate"]),
                                     DueDate = Convert.ToDateTime(reader["dueDate"]),
                                     EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
@@ -253,7 +253,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                     InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                     PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
-                                    PurchaseId = Convert.ToInt32(reader["purchase_id"]),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                 };
@@ -300,14 +299,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         BillPage = Convert.ToInt32(reader["billPage"]),
 
                                         TotalValue = Convert.ToDouble(reader["BillValue"]),
-                                        IsPaid = Convert.ToBoolean(reader["isPaid"]),
+                                        IsPaid = Convert.ToInt32(reader["isPaid"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         PaidDate = Convert.ToDateTime(reader["paidDate"]),
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
-                                        PurchaseId = Convert.ToInt32(reader["purchase_id"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                     };
@@ -396,13 +394,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 
                                         TotalValue = Convert.ToDouble(reader["BillValue"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
-                                        IsPaid = Convert.ToBoolean(reader["isPaid"]),
+                                        IsPaid = Convert.ToInt32(reader["isPaid"]),
                                         PaidDate = Convert.ToDateTime(reader["paidDate"]),
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
-                                        PurchaseId = Convert.ToInt32(reader["purchase_id"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                     };

@@ -22,12 +22,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
 
         }
 
-        public void SaveItem(BillsToReceive billToReceive)
+        public bool SaveItem(BillsToReceive billToReceive)
         {
             _billToReceive = billToReceive;
             _billToReceive.dateOfCreation = DateTime.Now;
             _billToReceive.dateOfLastUpdate = _billToReceive.dateOfCreation;
-            _billToReceivesDAO.SaveToDb(_billToReceive);
+            return _billToReceivesDAO.SaveToDb(_billToReceive);
         }
         public List<BillsToReceive> LoadItems()
         {

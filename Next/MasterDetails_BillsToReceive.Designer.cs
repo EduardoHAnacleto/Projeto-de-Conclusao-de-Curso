@@ -67,6 +67,7 @@
             this.btn_ClearSaleFilters = new System.Windows.Forms.Button();
             this.rbtn_PaidStatus = new System.Windows.Forms.RadioButton();
             this.rbtn_ActiveStatus = new System.Windows.Forms.RadioButton();
+            this.rbtn_onHold = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).BeginInit();
             this.gbox_client.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).BeginInit();
@@ -449,19 +450,20 @@
             // 
             // gbox_SaleFilters
             // 
+            this.gbox_SaleFilters.Controls.Add(this.rbtn_onHold);
             this.gbox_SaleFilters.Controls.Add(this.btn_ClearSaleFilters);
             this.gbox_SaleFilters.Controls.Add(this.rbtn_PaidStatus);
             this.gbox_SaleFilters.Controls.Add(this.rbtn_ActiveStatus);
             this.gbox_SaleFilters.Location = new System.Drawing.Point(758, 177);
             this.gbox_SaleFilters.Name = "gbox_SaleFilters";
-            this.gbox_SaleFilters.Size = new System.Drawing.Size(183, 68);
+            this.gbox_SaleFilters.Size = new System.Drawing.Size(214, 68);
             this.gbox_SaleFilters.TabIndex = 14;
             this.gbox_SaleFilters.TabStop = false;
             this.gbox_SaleFilters.Text = "Bills To Receive Filters";
             // 
             // btn_ClearSaleFilters
             // 
-            this.btn_ClearSaleFilters.Location = new System.Drawing.Point(119, 16);
+            this.btn_ClearSaleFilters.Location = new System.Drawing.Point(151, 16);
             this.btn_ClearSaleFilters.Name = "btn_ClearSaleFilters";
             this.btn_ClearSaleFilters.Size = new System.Drawing.Size(57, 23);
             this.btn_ClearSaleFilters.TabIndex = 6;
@@ -492,6 +494,18 @@
             this.rbtn_ActiveStatus.Text = "Active";
             this.rbtn_ActiveStatus.UseVisualStyleBackColor = true;
             this.rbtn_ActiveStatus.CheckedChanged += new System.EventHandler(this.rbtn_ActiveStatus_CheckedChanged);
+            // 
+            // rbtn_onHold
+            // 
+            this.rbtn_onHold.AutoSize = true;
+            this.rbtn_onHold.Location = new System.Drawing.Point(67, 45);
+            this.rbtn_onHold.Name = "rbtn_onHold";
+            this.rbtn_onHold.Size = new System.Drawing.Size(64, 17);
+            this.rbtn_onHold.TabIndex = 7;
+            this.rbtn_onHold.TabStop = true;
+            this.rbtn_onHold.Text = "On Hold";
+            this.rbtn_onHold.UseVisualStyleBackColor = true;
+            this.rbtn_onHold.CheckedChanged += new System.EventHandler(this.rbtn_onHold_CheckedChanged);
             // 
             // MasterDetails_BillsToReceive
             // 
@@ -562,5 +576,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EmissionDateBillsReceive;
         private System.Windows.Forms.DataGridViewTextBoxColumn DueDateBillsReceive;
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusBillsReceive;
+        private System.Windows.Forms.RadioButton rbtn_onHold;
     }
 }
