@@ -56,9 +56,9 @@
             this.lbl_DueDate = new System.Windows.Forms.Label();
             this.datePicker_due = new System.Windows.Forms.DateTimePicker();
             this.gbox_isPaid = new System.Windows.Forms.GroupBox();
+            this.check_onHold = new System.Windows.Forms.CheckBox();
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.check_Paid = new System.Windows.Forms.CheckBox();
-            this.check_onHold = new System.Windows.Forms.CheckBox();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_billInfo.SuspendLayout();
@@ -174,7 +174,7 @@
             this.gbox_danfe.Size = new System.Drawing.Size(274, 72);
             this.gbox_danfe.TabIndex = 39;
             this.gbox_danfe.TabStop = false;
-            this.gbox_danfe.Text = "* Bill Information";
+            this.gbox_danfe.Text = "* Bill Identification";
             // 
             // edt_BillModel
             // 
@@ -386,6 +386,17 @@
             this.gbox_isPaid.TabStop = false;
             this.gbox_isPaid.Text = "* Status";
             // 
+            // check_onHold
+            // 
+            this.check_onHold.AutoSize = true;
+            this.check_onHold.Location = new System.Drawing.Point(59, 37);
+            this.check_onHold.Name = "check_onHold";
+            this.check_onHold.Size = new System.Drawing.Size(65, 17);
+            this.check_onHold.TabIndex = 13;
+            this.check_onHold.Text = "On Hold";
+            this.check_onHold.UseVisualStyleBackColor = true;
+            this.check_onHold.CheckedChanged += new System.EventHandler(this.check_onHold_CheckedChanged);
+            // 
             // check_Active
             // 
             this.check_Active.AutoSize = true;
@@ -410,17 +421,6 @@
             this.check_Paid.UseVisualStyleBackColor = true;
             this.check_Paid.CheckedChanged += new System.EventHandler(this.check_Paid_CheckedChanged);
             // 
-            // check_onHold
-            // 
-            this.check_onHold.AutoSize = true;
-            this.check_onHold.Location = new System.Drawing.Point(59, 37);
-            this.check_onHold.Name = "check_onHold";
-            this.check_onHold.Size = new System.Drawing.Size(65, 17);
-            this.check_onHold.TabIndex = 13;
-            this.check_onHold.Text = "On Hold";
-            this.check_onHold.UseVisualStyleBackColor = true;
-            this.check_onHold.CheckedChanged += new System.EventHandler(this.check_onHold_CheckedChanged);
-            // 
             // Frm_Create_BillsToPay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -432,6 +432,11 @@
             this.Controls.Add(this.gbox_isPaid);
             this.Name = "Frm_Create_BillsToPay";
             this.Text = "Create Bills To Pay";
+            this.Controls.SetChildIndex(this.gbox_isPaid, 0);
+            this.Controls.SetChildIndex(this.gbox_billDates, 0);
+            this.Controls.SetChildIndex(this.gbox_supplier, 0);
+            this.Controls.SetChildIndex(this.gbox_danfe, 0);
+            this.Controls.SetChildIndex(this.gbox_billInfo, 0);
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);
@@ -439,11 +444,6 @@
             this.Controls.SetChildIndex(this.btn_Edit, 0);
             this.Controls.SetChildIndex(this.gbox_dates, 0);
             this.Controls.SetChildIndex(this.edt_id, 0);
-            this.Controls.SetChildIndex(this.gbox_isPaid, 0);
-            this.Controls.SetChildIndex(this.gbox_billDates, 0);
-            this.Controls.SetChildIndex(this.gbox_supplier, 0);
-            this.Controls.SetChildIndex(this.gbox_danfe, 0);
-            this.Controls.SetChildIndex(this.gbox_billInfo, 0);
             this.gbox_dates.ResumeLayout(false);
             this.gbox_dates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();

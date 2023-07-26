@@ -168,6 +168,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             formBrand.Populated(true);
             formBrand.PopulateCamps(GetObject());
             formBrand.ShowDialog();
+            SetDataSourceToDGV();
         }
 
         public override void SetDataSourceToDGV() //Cria DataTable, chama Controller para trazer o DataTable e colocar na DGV como DataSource, linka db com DGV

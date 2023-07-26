@@ -25,6 +25,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_BillNum.Controls[0].Visible = false;
             edt_BillSeries.Controls[0].Visible = false;
             edt_totalValue.Controls[0].Visible = false;
+            edt_BillModel.Controls[0].Visible = false;
             PopulateComboBox();
         }
 
@@ -32,6 +33,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private BillsToPay_Controller _controller = new BillsToPay_Controller();
         private readonly Suppliers_Controller _supplierController = new Suppliers_Controller();
         private readonly PaymentMethods_Controller _pMController = new PaymentMethods_Controller();
+
 
         public override bool CheckCamps()   //Valida Campos
         {
@@ -119,10 +121,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.BillSeries = (int)edt_BillSeries.Value;
             obj.BillPage = (int)edt_BillPage.Value;
             obj.PaymentMethod = _pMController.FindItemName(cbox_payMethod.SelectedItem.ToString());
-
+            obj.Purchase = new Purchases();
+            obj.Purchase.id = 0;
             obj.InstalmentNumber = (int)edt_instalmentNumber.Value;
             obj.TotalValue = (double)edt_totalValue.Value;
             obj.DueDate = datePicker_due.Value;
+            obj.EmissionDate = DateTime.Now;
             if (check_Paid.Checked)
             {
                 obj.PaidDate = datePicker_paid.Value;
@@ -157,7 +161,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_supplier.Enabled = true;
             gbox_isPaid.Enabled = true;
             gbox_dates.Enabled = true;
-            gbox_danfe.Enabled = true;
+            //gbox_danfe.Enabled = true;
             gbox_billInfo.Enabled = true;
             check_Active.Enabled = true;
             check_Paid.Enabled = true;
@@ -180,6 +184,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             check_Active.Checked = false;
             check_Paid.Checked = false;
             lbl_CreationDate.Text = DateTime.Now.ToShortDateString();
+            cbox_payMethod.SelectedIndex = 0;
             lbl_LastUpdate.Visible = false;
         }
 
@@ -262,6 +267,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             cbox_payMethod.SelectedItem = bill.PaymentMethod.paymentMethod;
             datePicker_due.Value = bill.DueDate;
             lbl_CreationDate.Text = bill.dateOfCreation.ToShortTimeString();
+            edt_supplierId.Value = bill.Supplier.id;
+            edt_supplierName.Text = bill.Supplier.name;
             if (bill.dateOfLastUpdate != null)
             {
                 lbl_LastUpdate.Text = bill.dateOfLastUpdate.ToShortTimeString();

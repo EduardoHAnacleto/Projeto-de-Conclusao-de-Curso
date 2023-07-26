@@ -145,7 +145,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1
 
         private void addNewBillToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Frm_Create_BillsToPay frmBillsToPay = new Frm_Create_BillsToPay();
+            Frm_Find_BillsToPay frmBillsToPay = new Frm_Find_BillsToPay();
             frmBillsToPay.ShowDialog();
         }
 

@@ -143,7 +143,7 @@
     <value>Phone Classifications</value>
   </data>
   <data name="peopleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="peopleToolStripMenuItem.Text" xml:space="preserve">
     <value>People</value>
@@ -179,7 +179,7 @@
     <value>Purchases</value>
   </data>
   <data name="productsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="productsToolStripMenuItem.Text" xml:space="preserve">
     <value>Products</value>
@@ -203,7 +203,7 @@
     <value>Countries</value>
   </data>
   <data name="locationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="locationsToolStripMenuItem.Text" xml:space="preserve">
     <value>Locations</value>
@@ -221,25 +221,25 @@
     <value>Conditions</value>
   </data>
   <data name="paymentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="paymentToolStripMenuItem.Text" xml:space="preserve">
     <value>Payment</value>
   </data>
   <data name="addNewBillToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="addNewBillToolStripMenuItem1.Text" xml:space="preserve">
     <value>Add New Bill</value>
   </data>
   <data name="findBillsToPayToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>158, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="findBillsToPayToolStripMenuItem.Text" xml:space="preserve">
     <value>Find Bills To Pay</value>
   </data>
   <data name="billsToPayToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="billsToPayToolStripMenuItem.Text" xml:space="preserve">
     <value>Bills To Pay</value>
@@ -257,13 +257,13 @@
     <value>Find Bills To Receive</value>
   </data>
   <data name="billsToReceiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>153, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="billsToReceiveToolStripMenuItem.Text" xml:space="preserve">
     <value>Bills To Receive</value>
   </data>
   <data name="financesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>125, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="financesToolStripMenuItem.Text" xml:space="preserve">
     <value>Finances</value>

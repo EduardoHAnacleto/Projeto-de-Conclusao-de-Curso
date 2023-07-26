@@ -59,7 +59,7 @@
         date_last_update datetime not null
     );
 	
-create table BILLSINSTALMENTS(
+    create table BILLSINSTALMENTS(
     paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition) ON DELETE CASCADE,
     instalment_number int not null,
     paymethod_id int not null references PaymentMethods(id_payment_method),
@@ -68,7 +68,7 @@ create table BILLSINSTALMENTS(
     date_creation datetime not null,
     date_last_update datetime not null,
     primary key (paycondition_id, instalment_number)
-);
+    );
 
 
     create table PHONECLASSIFICATIONS(
@@ -311,7 +311,6 @@ create table BILLSINSTALMENTS(
         billSeries int not null ,
         billPage int not null,
 		instalmentNumber int not null,
-        instalmentsQtd int not null,
         dueDate date not null,
         emissionDate date not null,
         isPaid int not null,
@@ -322,7 +321,19 @@ create table BILLSINSTALMENTS(
         date_creation datetime not null,
         date_last_update datetime not null,
         primary key (billNumber, billModel, billSeries, billPage, instalmentNumber)
-    );
+        );
+
+        CREATE TABLE PURCHASEBILLS (
+        purchase_id int not null references PURCHASES(id_purchase),
+        billNumber int not null,
+        billModel int not null,
+        billSeries int not null,
+        billPage int not null,
+        instalmentNumber int not null,
+        PRIMARY KEY (purchase_id, billNumber, billModel, billSeries, billPage, instalmentNumber),
+        FOREIGN KEY (billNumber, billModel, billSeries, billPage, instalmentNumber)
+        REFERENCES BILLSTOPAY (billNumber, billModel, billSeries, billPage, instalmentNumber)
+        );
 
     	create table PURCHASEITEMS(
         ID_PURCHASE int not null references PURCHASES(ID_PURCHASE),
