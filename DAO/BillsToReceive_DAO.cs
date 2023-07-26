@@ -25,9 +25,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             bool status = false;
 
-            string sql = "INSERT INTO BILLSTOPAY ( SALE_ID, INSTALMENTVALUE, ISPAID, CLIENT_ID, PAYMETHOD_ID, INSTALMENTNUMBER, " +
-                "INSTALMENTSQTD, DUEDATE, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@SALEID, @IVALUE, @ISPAID, @CLIENTID, @METHODID, @INUM, @IQTD, @DUEDATE, @EMDATE, @DC, @DU);";
+            string sql = "INSERT INTO BILLSTORECEIVE ( SALE_ID, INSTALMENTVALUE, ISPAID, CLIENT_ID, PAYMETHOD_ID, INSTALMENTNUMBER, " +
+                "INSTALMENTSQTD, DUEDATE, EMISSIONDATE, PAIDDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
+                         + " VALUES (@SALEID, @IVALUE, @ISPAID, @CLIENTID, @METHODID, @INUM, @IQTD, @DUEDATE, @EMDATE, @PDATE, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -42,7 +42,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     command.Parameters.AddWithValue("@IVALUE", obj.InstalmentValue);
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
                     command.Parameters.AddWithValue("@DUEDATE", obj.DueDate);
-                    command.Parameters.AddWithValue("@PAIDDATE", obj.PaidDate);
+                    if (obj.PaidDate.HasValue)
+                    {
+                        command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@PDATE", DBNull.Value);
+                    }
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
@@ -72,7 +79,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             bool status = false;
 
             string sql = "UPDATE BILLSTORECEIVE SET INSTALMENTVALUE = @IVALUE, ISPAID = @ISPAID, CLIENT_ID = @CLIENTID," +
-                " PAYMETHOD_ID = @METHODID, INSTALMENTSQTD = @IQTD, DUEDATE = @DUEDATE, EMISSIONDATE = @EMDATE, DATE_LAST_UPDATE = @DU " +
+                " PAYMETHOD_ID = @METHODID, INSTALMENTSQTD = @IQTD, DUEDATE = @DUEDATE, EMISSIONDATE = @EMDATE, PAIDDATE = @PDATE , DATE_LAST_UPDATE = @DU " +
                 "WHERE SALEID = @SALEID AND INSTALMENTNUMBER = @INUM; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -89,7 +96,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     command.Parameters.AddWithValue("@IVALUE", obj.InstalmentValue);
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
                     command.Parameters.AddWithValue("@DUEDATE", obj.DueDate);
-                    command.Parameters.AddWithValue("@PAIDDATE", obj.PaidDate);
+                    if (obj.PaidDate.HasValue)
+                    {
+                        command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@PDATE", DBNull.Value);
+                    }
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
@@ -163,13 +177,22 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         {
                             if (reader.Read())
                             {
+                                DateTime? paidDate;
+                                if (reader["paidDate"] == DBNull.Value)
+                                {
+                                    paidDate = null;
+                                }
+                                else
+                                {
+                                    paidDate = Convert.ToDateTime(reader["paidDate"].ToString());
+                                }
                                 BillsToReceive obj = new BillsToReceive()
                                 {
                                     id = Convert.ToInt32(reader["sale_id"]),
                                     Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
                                     Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
                                     IsPaid = Convert.ToBoolean(reader["isPaid"]),
-                                    PaidDate = Convert.ToDateTime(reader["paidDate"]),
+                                    PaidDate = paidDate,
                                     DueDate = Convert.ToDateTime(reader["dueDate"]),
                                     EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                     InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),

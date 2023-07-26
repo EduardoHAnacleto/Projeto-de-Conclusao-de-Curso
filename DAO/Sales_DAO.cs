@@ -661,5 +661,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             return dt;
         }
+
+        internal int GetLastId()
+        {
+            string sql = "SELECT IDENT_CURRENT ('SALES');";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sql, connection);
+                connection.Open();
+                int i = Convert.ToInt32(command.ExecuteScalar());
+                connection.Close();
+                return i;
+            }
+        }
     }
 }

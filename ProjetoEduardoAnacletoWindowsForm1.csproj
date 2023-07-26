@@ -355,10 +355,10 @@
     <Compile Include="InheritForms\Frm_Find_Master.Designer.cs">
       <DependentUpon>Frm_Find_Master.cs</DependentUpon>
     </Compile>
-    <Compile Include="InheritForms\Frm_UserControl_Login.cs">
+    <Compile Include="Authorization\Frm_UserControl_Login.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="InheritForms\Frm_UserControl_Login.Designer.cs">
+    <Compile Include="Authorization\Frm_UserControl_Login.Designer.cs">
       <DependentUpon>Frm_UserControl_Login.cs</DependentUpon>
     </Compile>
     <Compile Include="Next\MasterDetails_Sales.cs">
@@ -509,7 +509,7 @@
     <EmbeddedResource Include="InheritForms\Frm_Find_Master.resx">
       <DependentUpon>Frm_Find_Master.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="InheritForms\Frm_UserControl_Login.resx">
+    <EmbeddedResource Include="Authorization\Frm_UserControl_Login.resx">
       <DependentUpon>Frm_UserControl_Login.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Next\MasterDetails_Sales.resx">

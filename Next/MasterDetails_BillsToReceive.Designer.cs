@@ -41,15 +41,6 @@
             this.edt_clientId = new System.Windows.Forms.NumericUpDown();
             this.btn_searchClient = new System.Windows.Forms.Button();
             this.DGV_BillsToReceive = new System.Windows.Forms.DataGridView();
-            this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleNumberBillReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PayConditionBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InstalmentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TotalValueBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.EmissionDateBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DueDateBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.StatusBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_billsToReceive = new System.Windows.Forms.GroupBox();
             this.btn_ClearDateSort = new System.Windows.Forms.Button();
             this.lbl_dueDate = new System.Windows.Forms.Label();
@@ -64,10 +55,18 @@
             this.rbtn_LegalClients = new System.Windows.Forms.RadioButton();
             this.btn_ClearClientFilters = new System.Windows.Forms.Button();
             this.gbox_SaleFilters = new System.Windows.Forms.GroupBox();
+            this.rbtn_onHold = new System.Windows.Forms.RadioButton();
             this.btn_ClearSaleFilters = new System.Windows.Forms.Button();
             this.rbtn_PaidStatus = new System.Windows.Forms.RadioButton();
             this.rbtn_ActiveStatus = new System.Windows.Forms.RadioButton();
-            this.rbtn_onHold = new System.Windows.Forms.RadioButton();
+            this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleNumberBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PaymentMethodBillsToReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InstalmentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TotalValueBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.EmissionDateBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DueDateBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.StatusBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).BeginInit();
             this.gbox_client.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).BeginInit();
@@ -212,11 +211,10 @@
             this.DGV_BillsToReceive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_BillsToReceive.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ClientName,
-            this.SaleNumberBillReceive,
-            this.PayConditionBillsReceive,
+            this.SaleNumberBillsReceive,
+            this.PaymentMethodBillsToReceive,
             this.InstalmentNumber,
             this.TotalValueBillsReceive,
-            this.PaymentMethod,
             this.EmissionDateBillsReceive,
             this.DueDateBillsReceive,
             this.StatusBillsReceive});
@@ -230,78 +228,6 @@
             this.DGV_BillsToReceive.Size = new System.Drawing.Size(1126, 276);
             this.DGV_BillsToReceive.TabIndex = 7;
             this.DGV_BillsToReceive.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_BillsToReceive_CellContentDoubleClick);
-            // 
-            // ClientName
-            // 
-            this.ClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ClientName.HeaderText = "Client";
-            this.ClientName.MinimumWidth = 6;
-            this.ClientName.Name = "ClientName";
-            this.ClientName.ReadOnly = true;
-            // 
-            // SaleNumberBillReceive
-            // 
-            this.SaleNumberBillReceive.HeaderText = "Sale ID";
-            this.SaleNumberBillReceive.MinimumWidth = 6;
-            this.SaleNumberBillReceive.Name = "SaleNumberBillReceive";
-            this.SaleNumberBillReceive.ReadOnly = true;
-            this.SaleNumberBillReceive.Width = 55;
-            // 
-            // PayConditionBillsReceive
-            // 
-            this.PayConditionBillsReceive.HeaderText = "Payment Condition";
-            this.PayConditionBillsReceive.MinimumWidth = 6;
-            this.PayConditionBillsReceive.Name = "PayConditionBillsReceive";
-            this.PayConditionBillsReceive.ReadOnly = true;
-            this.PayConditionBillsReceive.Width = 150;
-            // 
-            // InstalmentNumber
-            // 
-            this.InstalmentNumber.HeaderText = "Instalment Number";
-            this.InstalmentNumber.MinimumWidth = 6;
-            this.InstalmentNumber.Name = "InstalmentNumber";
-            this.InstalmentNumber.ReadOnly = true;
-            this.InstalmentNumber.Width = 75;
-            // 
-            // TotalValueBillsReceive
-            // 
-            this.TotalValueBillsReceive.HeaderText = "Instalment Value";
-            this.TotalValueBillsReceive.MinimumWidth = 6;
-            this.TotalValueBillsReceive.Name = "TotalValueBillsReceive";
-            this.TotalValueBillsReceive.ReadOnly = true;
-            this.TotalValueBillsReceive.Width = 80;
-            // 
-            // PaymentMethod
-            // 
-            this.PaymentMethod.HeaderText = "Payment Method";
-            this.PaymentMethod.MinimumWidth = 6;
-            this.PaymentMethod.Name = "PaymentMethod";
-            this.PaymentMethod.ReadOnly = true;
-            this.PaymentMethod.Width = 150;
-            // 
-            // EmissionDateBillsReceive
-            // 
-            this.EmissionDateBillsReceive.HeaderText = "Emission Date";
-            this.EmissionDateBillsReceive.MinimumWidth = 6;
-            this.EmissionDateBillsReceive.Name = "EmissionDateBillsReceive";
-            this.EmissionDateBillsReceive.ReadOnly = true;
-            this.EmissionDateBillsReceive.Width = 90;
-            // 
-            // DueDateBillsReceive
-            // 
-            this.DueDateBillsReceive.HeaderText = "Due Date";
-            this.DueDateBillsReceive.MinimumWidth = 6;
-            this.DueDateBillsReceive.Name = "DueDateBillsReceive";
-            this.DueDateBillsReceive.ReadOnly = true;
-            this.DueDateBillsReceive.Width = 90;
-            // 
-            // StatusBillsReceive
-            // 
-            this.StatusBillsReceive.HeaderText = "Status";
-            this.StatusBillsReceive.MinimumWidth = 6;
-            this.StatusBillsReceive.Name = "StatusBillsReceive";
-            this.StatusBillsReceive.ReadOnly = true;
-            this.StatusBillsReceive.Width = 75;
             // 
             // gbox_billsToReceive
             // 
@@ -461,6 +387,18 @@
             this.gbox_SaleFilters.TabStop = false;
             this.gbox_SaleFilters.Text = "Bills To Receive Filters";
             // 
+            // rbtn_onHold
+            // 
+            this.rbtn_onHold.AutoSize = true;
+            this.rbtn_onHold.Location = new System.Drawing.Point(67, 45);
+            this.rbtn_onHold.Name = "rbtn_onHold";
+            this.rbtn_onHold.Size = new System.Drawing.Size(64, 17);
+            this.rbtn_onHold.TabIndex = 7;
+            this.rbtn_onHold.TabStop = true;
+            this.rbtn_onHold.Text = "On Hold";
+            this.rbtn_onHold.UseVisualStyleBackColor = true;
+            this.rbtn_onHold.CheckedChanged += new System.EventHandler(this.rbtn_onHold_CheckedChanged);
+            // 
             // btn_ClearSaleFilters
             // 
             this.btn_ClearSaleFilters.Location = new System.Drawing.Point(151, 16);
@@ -495,17 +433,66 @@
             this.rbtn_ActiveStatus.UseVisualStyleBackColor = true;
             this.rbtn_ActiveStatus.CheckedChanged += new System.EventHandler(this.rbtn_ActiveStatus_CheckedChanged);
             // 
-            // rbtn_onHold
+            // ClientName
             // 
-            this.rbtn_onHold.AutoSize = true;
-            this.rbtn_onHold.Location = new System.Drawing.Point(67, 45);
-            this.rbtn_onHold.Name = "rbtn_onHold";
-            this.rbtn_onHold.Size = new System.Drawing.Size(64, 17);
-            this.rbtn_onHold.TabIndex = 7;
-            this.rbtn_onHold.TabStop = true;
-            this.rbtn_onHold.Text = "On Hold";
-            this.rbtn_onHold.UseVisualStyleBackColor = true;
-            this.rbtn_onHold.CheckedChanged += new System.EventHandler(this.rbtn_onHold_CheckedChanged);
+            this.ClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ClientName.HeaderText = "Client";
+            this.ClientName.MinimumWidth = 6;
+            this.ClientName.Name = "ClientName";
+            this.ClientName.ReadOnly = true;
+            // 
+            // SaleNumberBillsReceive
+            // 
+            this.SaleNumberBillsReceive.HeaderText = "Sale ID";
+            this.SaleNumberBillsReceive.MinimumWidth = 6;
+            this.SaleNumberBillsReceive.Name = "SaleNumberBillsReceive";
+            this.SaleNumberBillsReceive.ReadOnly = true;
+            this.SaleNumberBillsReceive.Width = 55;
+            // 
+            // PaymentMethodBillsToReceive
+            // 
+            this.PaymentMethodBillsToReceive.HeaderText = "Payment Method";
+            this.PaymentMethodBillsToReceive.MinimumWidth = 6;
+            this.PaymentMethodBillsToReceive.Name = "PaymentMethodBillsToReceive";
+            this.PaymentMethodBillsToReceive.ReadOnly = true;
+            this.PaymentMethodBillsToReceive.Width = 200;
+            // 
+            // InstalmentNumber
+            // 
+            this.InstalmentNumber.HeaderText = "Instalment Number";
+            this.InstalmentNumber.MinimumWidth = 6;
+            this.InstalmentNumber.Name = "InstalmentNumber";
+            this.InstalmentNumber.ReadOnly = true;
+            this.InstalmentNumber.Width = 75;
+            // 
+            // TotalValueBillsReceive
+            // 
+            this.TotalValueBillsReceive.HeaderText = "Instalment Value";
+            this.TotalValueBillsReceive.MinimumWidth = 6;
+            this.TotalValueBillsReceive.Name = "TotalValueBillsReceive";
+            this.TotalValueBillsReceive.ReadOnly = true;
+            this.TotalValueBillsReceive.Width = 80;
+            // 
+            // EmissionDateBillsReceive
+            // 
+            this.EmissionDateBillsReceive.HeaderText = "Emission Date";
+            this.EmissionDateBillsReceive.MinimumWidth = 6;
+            this.EmissionDateBillsReceive.Name = "EmissionDateBillsReceive";
+            this.EmissionDateBillsReceive.ReadOnly = true;
+            // 
+            // DueDateBillsReceive
+            // 
+            this.DueDateBillsReceive.HeaderText = "Due Date";
+            this.DueDateBillsReceive.MinimumWidth = 6;
+            this.DueDateBillsReceive.Name = "DueDateBillsReceive";
+            this.DueDateBillsReceive.ReadOnly = true;
+            // 
+            // StatusBillsReceive
+            // 
+            this.StatusBillsReceive.HeaderText = "Status";
+            this.StatusBillsReceive.MinimumWidth = 6;
+            this.StatusBillsReceive.Name = "StatusBillsReceive";
+            this.StatusBillsReceive.ReadOnly = true;
             // 
             // MasterDetails_BillsToReceive
             // 
@@ -567,15 +554,14 @@
         private System.Windows.Forms.Button btn_ClearSaleFilters;
         private System.Windows.Forms.RadioButton rbtn_PaidStatus;
         private System.Windows.Forms.RadioButton rbtn_ActiveStatus;
+        private System.Windows.Forms.RadioButton rbtn_onHold;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SaleNumberBillReceive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PayConditionBillsReceive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SaleNumberBillsReceive;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentMethodBillsToReceive;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn TotalValueBillsReceive;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentMethod;
         private System.Windows.Forms.DataGridViewTextBoxColumn EmissionDateBillsReceive;
         private System.Windows.Forms.DataGridViewTextBoxColumn DueDateBillsReceive;
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusBillsReceive;
-        private System.Windows.Forms.RadioButton rbtn_onHold;
     }
 }

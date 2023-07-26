@@ -95,6 +95,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 lbl_paidDate.Visible = false;
                 datePicker_PaidDate.Visible = false;
             }
+            PopulateDGV(obj);
+        }
+
+        public void PopulateDGV(BillsToReceive obj)
+        {
+            if (obj != null)
+            {
+                string dueDate;
+                if (obj.DueDate != null)
+                {
+                    dueDate = obj.DueDate.ToShortTimeString();
+                }
+                else
+                {
+                    dueDate = "";
+                }
+                DGV_Instalments.Rows.Add(obj.InstalmentNumber, obj.DueDate.ToString(), obj.InstalmentValue, obj.PaymentMethod.paymentMethod);
+            }
         }
 
         public override void LockCamps()

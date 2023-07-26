@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_Instalments = new System.Windows.Forms.DataGridView();
-            this.Instalment_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Total_Days = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value_Percentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentMethod_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Payment_Condition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_billInstalment = new System.Windows.Forms.GroupBox();
             this.edt_instalmentValue = new System.Windows.Forms.NumericUpDown();
             this.edt_instalmentId = new System.Windows.Forms.NumericUpDown();
@@ -60,6 +55,10 @@
             this.lbl_PaymentForm = new System.Windows.Forms.Label();
             this.lbl_saleId = new System.Windows.Forms.Label();
             this.edt_saleNumber = new System.Windows.Forms.NumericUpDown();
+            this.Instalment_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PaymentMethod_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
@@ -79,59 +78,18 @@
             this.DGV_Instalments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Instalments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Instalment_Number,
-            this.Total_Days,
-            this.Value_Percentage,
-            this.PaymentMethod_Name,
-            this.Payment_Condition});
+            this.DueDate,
+            this.Value,
+            this.PaymentMethod_Name});
             this.DGV_Instalments.Location = new System.Drawing.Point(13, 153);
             this.DGV_Instalments.MultiSelect = false;
             this.DGV_Instalments.Name = "DGV_Instalments";
             this.DGV_Instalments.ReadOnly = true;
+            this.DGV_Instalments.RowHeadersVisible = false;
             this.DGV_Instalments.RowHeadersWidth = 51;
             this.DGV_Instalments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Instalments.Size = new System.Drawing.Size(471, 167);
             this.DGV_Instalments.TabIndex = 33;
-            // 
-            // Instalment_Number
-            // 
-            this.Instalment_Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Instalment_Number.HeaderText = "Instalment";
-            this.Instalment_Number.MinimumWidth = 6;
-            this.Instalment_Number.Name = "Instalment_Number";
-            this.Instalment_Number.ReadOnly = true;
-            this.Instalment_Number.Width = 60;
-            // 
-            // Total_Days
-            // 
-            this.Total_Days.HeaderText = "Total Days";
-            this.Total_Days.MinimumWidth = 6;
-            this.Total_Days.Name = "Total_Days";
-            this.Total_Days.ReadOnly = true;
-            this.Total_Days.Width = 35;
-            // 
-            // Value_Percentage
-            // 
-            this.Value_Percentage.HeaderText = "Percentage Value";
-            this.Value_Percentage.MinimumWidth = 6;
-            this.Value_Percentage.Name = "Value_Percentage";
-            this.Value_Percentage.ReadOnly = true;
-            this.Value_Percentage.Width = 65;
-            // 
-            // PaymentMethod_Name
-            // 
-            this.PaymentMethod_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PaymentMethod_Name.HeaderText = "Payment Method";
-            this.PaymentMethod_Name.MinimumWidth = 6;
-            this.PaymentMethod_Name.Name = "PaymentMethod_Name";
-            this.PaymentMethod_Name.ReadOnly = true;
-            // 
-            // Payment_Condition
-            // 
-            this.Payment_Condition.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Payment_Condition.HeaderText = "Condition";
-            this.Payment_Condition.MinimumWidth = 6;
-            this.Payment_Condition.Name = "Payment_Condition";
-            this.Payment_Condition.ReadOnly = true;
             // 
             // gbox_billInstalment
             // 
@@ -396,6 +354,38 @@
             this.edt_saleNumber.Size = new System.Drawing.Size(65, 20);
             this.edt_saleNumber.TabIndex = 34;
             // 
+            // Instalment_Number
+            // 
+            this.Instalment_Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Instalment_Number.HeaderText = "Instalment";
+            this.Instalment_Number.MinimumWidth = 6;
+            this.Instalment_Number.Name = "Instalment_Number";
+            this.Instalment_Number.ReadOnly = true;
+            this.Instalment_Number.Width = 60;
+            // 
+            // DueDate
+            // 
+            this.DueDate.HeaderText = "Due Date";
+            this.DueDate.MinimumWidth = 6;
+            this.DueDate.Name = "DueDate";
+            this.DueDate.ReadOnly = true;
+            // 
+            // Value
+            // 
+            this.Value.HeaderText = "Value";
+            this.Value.MinimumWidth = 6;
+            this.Value.Name = "Value";
+            this.Value.ReadOnly = true;
+            this.Value.Width = 65;
+            // 
+            // PaymentMethod_Name
+            // 
+            this.PaymentMethod_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PaymentMethod_Name.HeaderText = "Payment Method";
+            this.PaymentMethod_Name.MinimumWidth = 6;
+            this.PaymentMethod_Name.Name = "PaymentMethod_Name";
+            this.PaymentMethod_Name.ReadOnly = true;
+            // 
             // Frm_Create_BillsToReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -449,11 +439,6 @@
         }
 
         #endregion
-        private System.Windows.Forms.DataGridViewTextBoxColumn Instalment_Number;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Total_Days;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Value_Percentage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentMethod_Name;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Payment_Condition;
         private System.Windows.Forms.GroupBox gbox_billInstalment;
         private System.Windows.Forms.NumericUpDown edt_instalmentId;
         private System.Windows.Forms.Button btn_AddInstalments;
@@ -481,5 +466,9 @@
         private System.Windows.Forms.Label lbl_paidDate;
         private System.Windows.Forms.DateTimePicker datePicker_PaidDate;
         private System.Windows.Forms.DataGridView DGV_Instalments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Instalment_Number;
+        private System.Windows.Forms.DataGridViewTextBoxColumn DueDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Value;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PaymentMethod_Name;
     }
 }

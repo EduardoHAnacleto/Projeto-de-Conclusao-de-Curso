@@ -121,25 +121,33 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             DGV_BillsToReceive.Rows.Clear();
             var billsController = new BillsToReceive_Controller();
-            var _payConditionsController = new PaymentConditions_Controller();
+            var _payMethodsController = new PaymentMethods_Controller();
             var _clientsController = new Clients_Controller();
             DataTable dt = billsController.PopulateDGV();
             if (dt != null)
             {
                 int i = 0;
+                string dueDate;
                 foreach (DataRow dr in dt.Rows)
                 {
                     if (dr[0] != null)
                     {
                         DGV_BillsToReceive.Rows.Add();
                         DGV_BillsToReceive.Rows[i].Cells["ClientName"].Value = _clientsController.FindItemId(Convert.ToInt32(dr["client_id"])).name;
-                        DGV_BillsToReceive.Rows[i].Cells["SaleNumberBillReceive"].Value = dr["sale_id"].ToString();
-                        DGV_BillsToReceive.Rows[i].Cells["PayConditionBillsReceive"].Value = _payConditionsController.FindItemId(Convert.ToInt32(dr["paycondition_id"])).conditionName;
+                        DGV_BillsToReceive.Rows[i].Cells["SaleNumberBillsReceive"].Value = dr["sale_id"].ToString();
+                        DGV_BillsToReceive.Rows[i].Cells["PaymentMethodBillsToReceive"].Value = _payMethodsController.FindItemId(Convert.ToInt32(dr["paymethod_id"])).paymentMethod;
                         DGV_BillsToReceive.Rows[i].Cells["InstalmentNumber"].Value = dr["instalmentNumber"].ToString();
                         DGV_BillsToReceive.Rows[i].Cells["TotalValueBillsReceive"].Value = dr["instalmentValue"].ToString();
-                        DGV_BillsToReceive.Rows[i].Cells["PaymentMethod"].Value = _payConditionsController.FindItemId(Convert.ToInt32(dr["paycondition_id"])).BillsInstalments[Convert.ToInt32(dr["instalmentNumber"])].PaymentMethod.paymentMethod;
-                        DGV_BillsToReceive.Rows[i].Cells["EmissionDateBillsReceive"].Value = dr["emissionDate"].ToString();
-                        DGV_BillsToReceive.Rows[i].Cells["DueDateBillsReceive"].Value = null;
+                        DGV_BillsToReceive.Rows[i].Cells["EmissionDateBillsReceive"].Value = Convert.ToDateTime(dr["emissionDate"].ToString()).ToShortDateString();
+                        if (dr["dueDate"].ToString() != null) 
+                        {
+                            dueDate = Convert.ToDateTime(dr["dueDate"].ToString()).ToShortDateString();
+                        }
+                        else
+                        {
+                            dueDate = "";
+                        }
+                        DGV_BillsToReceive.Rows[i].Cells["DueDateBillsReceive"].Value = dueDate;
                         DGV_BillsToReceive.Rows[i].Cells["StatusBillsReceive"].Value = dr["isPaid"].ToString();
                     }
                     i++;
@@ -184,7 +192,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         DGV_Clients.Rows.Add();
                         DGV_Clients.Rows[i].Cells["IdClient"].Value = dr["id_client"].ToString();
                         DGV_Clients.Rows[i].Cells["NameClient"].Value = dr["client_name"].ToString();
-                        DGV_Clients.Rows[i].Cells["RegNumberClient"].Value = dr["client_name"].ToString();
+                        DGV_Clients.Rows[i].Cells["RegNumberClient"].Value = dr["client_registration"].ToString();
                         DGV_Clients.Rows[i].Cells["TypeClient"].Value = dr["client_type"].ToString();
                     }
                     i++;
@@ -348,7 +356,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         private void DGV_BillsToReceive_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             var row = DGV_BillsToReceive.SelectedRows[0];
-            NewBillToReceiveForm(Convert.ToInt32(row.Cells["SaleNumberBillReceive"].Value),
+            NewBillToReceiveForm(Convert.ToInt32(row.Cells["SaleNumberBillsReceive"].Value),
                 Convert.ToInt32(row.Cells["InstalmentNumber"].Value));
         }
 

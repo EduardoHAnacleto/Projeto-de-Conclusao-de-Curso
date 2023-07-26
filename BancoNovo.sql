@@ -244,11 +244,12 @@
         date_last_update datetime not null,
     );
 
-	    create table BILLSTORECEIVE(
+		    create table BILLSTORECEIVE(
         sale_id int not null references SALES(id_sale),
         instalmentNumber int not null, 
         instalmentValue decimal not null,
         isPaid int not null,
+        paidDate datetime,
         client_id int not null foreign key references CLIENTS(id_client),
         payMethod_id int not null foreign key references PAYMENTMETHODS(id_payment_method),
         instalmentsQtd int not null,
@@ -256,7 +257,8 @@
         emissionDate date not null,
         date_creation date not null,
         date_last_update date not null,
-        primary key(sale_id,instalmentNumber)
+        primary key(sale_id,instalmentNumber),
+		foreign key(sale_id) references SALES(id_sale)
     );
 
 

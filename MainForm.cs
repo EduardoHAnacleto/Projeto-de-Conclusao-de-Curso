@@ -152,7 +152,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         private void newSaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
-            user.id = 55;
+            user.id = 2;
             user.name = "teste";
             Frm_Sale frmSale = new Frm_Sale(user);
             frmSale.ShowDialog();

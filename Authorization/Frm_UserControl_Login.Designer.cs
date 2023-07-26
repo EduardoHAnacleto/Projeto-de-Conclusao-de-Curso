@@ -30,8 +30,8 @@
         {
             this.lbl_User = new System.Windows.Forms.Label();
             this.lbl_Password = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.maskedTextBox1 = new System.Windows.Forms.MaskedTextBox();
+            this.edt_login = new System.Windows.Forms.TextBox();
+            this.edt_secret = new System.Windows.Forms.MaskedTextBox();
             this.btn_Enter = new System.Windows.Forms.Button();
             this.btn_Cancel = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -55,20 +55,20 @@
             this.lbl_Password.TabIndex = 1;
             this.lbl_Password.Text = "Password :";
             // 
-            // textBox1
+            // edt_login
             // 
-            this.textBox1.Location = new System.Drawing.Point(85, 99);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(200, 20);
-            this.textBox1.TabIndex = 2;
+            this.edt_login.Location = new System.Drawing.Point(85, 99);
+            this.edt_login.Name = "edt_login";
+            this.edt_login.Size = new System.Drawing.Size(200, 20);
+            this.edt_login.TabIndex = 2;
             // 
-            // maskedTextBox1
+            // edt_secret
             // 
-            this.maskedTextBox1.Location = new System.Drawing.Point(85, 125);
-            this.maskedTextBox1.Mask = "************";
-            this.maskedTextBox1.Name = "maskedTextBox1";
-            this.maskedTextBox1.Size = new System.Drawing.Size(200, 20);
-            this.maskedTextBox1.TabIndex = 3;
+            this.edt_secret.Location = new System.Drawing.Point(85, 125);
+            this.edt_secret.Mask = "************";
+            this.edt_secret.Name = "edt_secret";
+            this.edt_secret.Size = new System.Drawing.Size(200, 20);
+            this.edt_secret.TabIndex = 3;
             // 
             // btn_Enter
             // 
@@ -107,8 +107,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.btn_Cancel);
             this.Controls.Add(this.btn_Enter);
-            this.Controls.Add(this.maskedTextBox1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.edt_secret);
+            this.Controls.Add(this.edt_login);
             this.Controls.Add(this.lbl_Password);
             this.Controls.Add(this.lbl_User);
             this.Name = "Frm_UserControl_Login";
@@ -122,8 +122,8 @@
 
         private System.Windows.Forms.Label lbl_User;
         private System.Windows.Forms.Label lbl_Password;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.MaskedTextBox maskedTextBox1;
+        private System.Windows.Forms.TextBox edt_login;
+        private System.Windows.Forms.MaskedTextBox edt_secret;
         private System.Windows.Forms.Button btn_Enter;
         private System.Windows.Forms.Button btn_Cancel;
         private System.Windows.Forms.Label label1;

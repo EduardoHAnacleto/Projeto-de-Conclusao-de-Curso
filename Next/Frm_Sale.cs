@@ -574,8 +574,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                             status = _controller.SaveItem(sale);
                             if (status)
                             {
+                                int saleId = _controller.GetLastId();
                                 List<BillsToReceive> billsToReceiveList = new List<BillsToReceive>();
-                                billsToReceiveList = BillsToReceive.MakeBills(sale);
+                                billsToReceiveList = BillsToReceive.MakeBills(sale,saleId);
                                 foreach (BillsToReceive bill in billsToReceiveList)
                                 {
                                     status = _BTRController.SaveItem(bill);
@@ -859,6 +860,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_payConditionId.Value = 0;
             medt_date.Text = DateTime.Now.ToString();
             DGV_SaleProducts.Rows.Clear();
+            DGV_Instalments.Rows.Clear();
         }
 
         private void UnlockCamps()

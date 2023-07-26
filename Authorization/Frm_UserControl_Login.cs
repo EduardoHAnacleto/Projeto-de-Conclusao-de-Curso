@@ -1,4 +1,7 @@
-﻿using System;
+﻿using ProjetoEduardoAnacletoWindowsForm1.Authorization;
+using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using ProjetoEduardoAnacletoWindowsForm1.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,8 +18,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.InheritForms
         public Frm_UserControl_Login()
         {
             InitializeComponent();
+
         }
 
+        private Authentication _Authentication = new Authentication();
+        private Users _User = new Users();
         private void label1_Click(object sender, EventArgs e)
         {
 
@@ -24,7 +30,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.InheritForms
 
         private void btn_Enter_Click(object sender, EventArgs e)
         {
-            //Test Access
+            try
+            {
+                if (_Authentication.LogUser(edt_login.Text, edt_secret.Text))
+                {
+                    this.Hide();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
