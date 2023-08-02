@@ -166,6 +166,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1
             frmMasterDetailsSales.ShowDialog();
         }
 
+        private void purchasesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases();
+            frmCreatePurchases.ShowDialog();
+        }
     }
 }
 

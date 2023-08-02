@@ -60,7 +60,6 @@
             this.saleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newSaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.findSalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.serviceOrderToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -149,6 +148,7 @@
             // 
             this.purchasesToolStripMenuItem.Name = "purchasesToolStripMenuItem";
             resources.ApplyResources(this.purchasesToolStripMenuItem, "purchasesToolStripMenuItem");
+            this.purchasesToolStripMenuItem.Click += new System.EventHandler(this.purchasesToolStripMenuItem_Click);
             // 
             // locationsToolStripMenuItem
             // 
@@ -276,19 +276,13 @@
             resources.ApplyResources(this.findSalesToolStripMenuItem, "findSalesToolStripMenuItem");
             this.findSalesToolStripMenuItem.Click += new System.EventHandler(this.findSalesToolStripMenuItem_Click);
             // 
-            // serviceOrderToolStripMenuItem
-            // 
-            this.serviceOrderToolStripMenuItem.Name = "serviceOrderToolStripMenuItem";
-            resources.ApplyResources(this.serviceOrderToolStripMenuItem, "serviceOrderToolStripMenuItem");
-            // 
             // menuStrip2
             // 
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.consultsToolStripMenuItem,
             this.manageUserToolStripMenuItem,
             this.formTesteToolStripMenuItem,
-            this.saleToolStripMenuItem,
-            this.serviceOrderToolStripMenuItem});
+            this.saleToolStripMenuItem});
             resources.ApplyResources(this.menuStrip2, "menuStrip2");
             this.menuStrip2.Name = "menuStrip2";
             // 
@@ -339,7 +333,6 @@
         private System.Windows.Forms.ToolStripMenuItem saleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newSaleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem findSalesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem serviceOrderToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip2;
     }
 }
