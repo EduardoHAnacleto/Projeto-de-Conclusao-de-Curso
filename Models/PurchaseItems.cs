@@ -17,11 +17,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public int PurchaseId { get; set; }
         public Products Product { get; set; }
         public int Quantity { get; set; }
-        public double ProductValue { get; set; }
-        public double TotalValue { get; set; }
-        public double ProductCost { get; set; }
-        public double ItemDiscountCash { get; set; }
-        public double ItemDiscountPerc { get; set; }
+        public double NewBaseUnCost { get; set; }
+        public double TotalBaseCost { get; set; }
+        public double PurchasePercentage { get; set; }
+        public double NewUnCost { get; set; }
+        public double WeightedCostAverage { get; set; }
 
 
     }

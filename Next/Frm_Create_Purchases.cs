@@ -1,4 +1,5 @@
-﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+﻿using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
+using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
 using System;
@@ -24,10 +25,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_prodUnCost.Controls[0].Visible = false;
             edt_transportFee.Controls[0].Visible = false;
             edt_userId.Controls[0].Visible = false;
+            edt_extraExpenses.Controls[0].Visible = false;
+            edt_insurance.Controls[0].Visible = false;
+            edt_supplierId.Controls[0].Visible = false;
             medt_date.Text = DateTime.Now.ToString();
         }
 
         private readonly Products_Controller _pController = new Products_Controller();
+        private readonly Purchases_Controller _controller = new Purchases_Controller();
+        private readonly PurchaseItems_Controller _pIController = new PurchaseItems_Controller();
+        private Purchases BackupPurchase = null;
 
         public void NewFormSearchProduct() //Abre form para encontrar e levar PRODUTO
         {
@@ -153,6 +160,224 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 AddProductToDGV();
             }
+        }
+
+        private void btn_Save_Click(object sender, EventArgs e)
+        {
+            Save();
+        }
+
+        public void Save() // Save
+        {
+            bool status = true;
+            if (CheckCamps())
+            {
+                LockCamps();
+                Purchases purchase = this.GetObject();
+                try
+                {
+                    if (btn_new.Text == "F5")
+                    {
+                            status = _controller.SaveItem(purchase);
+                            if (status)
+                            {
+                                int purchId = _controller.GetLastId();
+                                foreach (PurchaseItems item in purchase.PurchasedItems)
+                                {
+                                    item.id = purchId;
+                                    status = _pIController.SaveItem(item);
+                                    if (!status)
+                                    {
+                                        break;
+                                    }
+                                }
+                                if (status)
+                                {
+                                    Populated(false);
+                                }
+                            }
+                    }
+                    else if (btn_new.Text == "Cancel")
+                    {
+                        status = _controller.UpdateItem(purchase);
+                        if (status)
+                        {
+                            SetFormToEdit();
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception(ex.Message);
+                }
+            }
+        }
+
+        private void SetFormToEdit()
+        {
+            var edit = "&Edit";
+            var del = "Delete";
+            btn_new.Text = edit;
+            lbl_new.Text = edit;
+            btn_new.Enabled = true;
+            btn_Save.Enabled = false;
+            btn_FindClient.Enabled = false;
+            btn_FindClient.Text = del;
+            lbl_findClient.Text = del;
+        }
+
+        public virtual void Populated(bool populated)
+        {
+            if (populated)
+            {
+                this.LockCamps();
+                this.SetFormToEdit();
+            }
+            else if (!populated)
+            {
+                this.UnlockCamps();
+                this.ClearCamps();
+            }
+        }
+
+        private Purchases GetObject()
+        {
+            Purchases obj = new Purchases();
+            obj.id = _controller.BringNewId();
+            obj.User = new Users();
+            obj.Supplier.id = Convert.ToInt32(edt_supplierId.Value);
+            obj.Freight_Cost = Convert.ToDouble(edt_transportFee.Value);
+            obj.PurchasedItems = GetDGVList(obj.id);
+            obj.EmissionDate = Convert.ToDateTime(medt_date.Text);
+            obj.ExtraExpenses = Convert.ToDouble(edt_extraExpenses.Value);
+            obj.InsuranceCost = Convert.ToDouble(edt_insurance.Value);
+            if (cbox_status.SelectedItem.ToString() == "COMPLETED")
+            {
+                obj.ArrivalDate = dateTime_ArrivalDate.Value;
+                obj.Status = 3;
+            }
+            else if (cbox_status.SelectedItem.ToString() == "ACTIVE")
+            {
+                obj.ArrivalDate = dateTime_ArrivalDate.Value;
+                obj.Status = 0;
+            }
+            else if (cbox_status.SelectedItem.ToString() == "PAID")
+            {
+                obj.ArrivalDate = dateTime_ArrivalDate.Value;
+                obj.Status = 1;
+            }
+            else if (cbox_status.SelectedItem.ToString() == "CANCELLED")
+            {
+                obj.ArrivalDate = dateTime_ArrivalDate.Value;
+                obj.Status = 2;
+            }
+            return obj;
+        }
+
+        public List<PurchaseItems> GetDGVList(int purchaseId)
+        {
+            var list = new List<PurchaseItems>();
+            foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
+            {
+                PurchaseItems item = new PurchaseItems();
+                item.id = purchaseId;
+                item.Product = _pController.FindItemId(Convert.ToInt32(row.Cells["ProdId"].Value));
+                item.Quantity = Convert.ToInt32(row.Cells["ProdQtd"].Value);
+                item.NewBaseUnCost = Convert.ToDecimal(row.Cells["ProdNewBaseUnCost"].Value);
+                item.TotalBaseCost = item.Quantity * item.NewBaseUnCost;
+                item.PurchasePercentage = Convert.ToDecimal(row.Cells["ProdPurchPerc"].Value);
+                item.WeightedCostAverage = Convert.ToDecimal(row.Cells["ProdWeightedAvg"].Value);
+                list.Add(item);
+            }
+
+            return list;
+        }
+
+        private void LockCamps()
+        {
+            gbox_date.Enabled = false;
+            gbox_options.Enabled = false;
+            gbox_User.Enabled = false;
+            gbox_products.Enabled = false;
+        }
+
+        private void UnlockCamps()
+        {
+            gbox_date.Enabled = true;
+            gbox_options.Enabled = true;
+            gbox_User.Enabled = true;
+            gbox_products.Enabled = true;
+        }
+
+        private void ClearCamps()
+        {
+            edt_prodBarCode.Value = 0;
+            edt_prodId.Value = 0;
+            edt_prodQtd.Value = 0;
+            edt_prodUnCost.Value = 0;
+            edt_transportFee.Value = 0;
+            medt_date.Text = DateTime.Now.ToString();
+            medt_CancelDate.Text = string.Empty;
+            edt_productName.Text = string.Empty;
+        }
+
+        public void PopulateCamps(Purchases purchase)
+        {
+            Populated(true);
+            SetFormToEdit();
+            PopulateDGV(purchase);
+        }
+
+        public void PopulateDGV(Purchases purchase)
+        {
+            foreach (PurchaseItems item in purchase.PurchasedItems)
+            {
+                DGV_PurchasesProducts.Rows.Add(
+                    item.id
+                    );
+            }
+        }
+
+        private bool CheckCamps()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DeleteObject()
+        {
+            LockCamps();
+            try
+            {
+                _controller.DeleteItem(BackupPurchase.id);
+                this.ClearCamps();
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        private void btn_findSupplier_Click(object sender, EventArgs e)
+        {
+            NewFormSearchSupplier();
+        }
+
+        public void NewFormSearchSupplier() //Abre form para encontrar e levar PRODUTO
+        {
+            Frm_Find_Suppliers formSuppliers = new Frm_Find_Suppliers();
+            formSuppliers.hasFather = true;
+            formSuppliers.ShowDialog();
+            if (!formSuppliers.ActiveControl.ContainsFocus)
+            {
+                Suppliers supplier = new Suppliers();
+                supplier = formSuppliers.GetObject();
+                if (supplier != null)
+                {
+                    edt_supplierId.Value = supplier.id;
+                    edt_supplierName.Text = supplier.name;
+                }
+            }
+            formSuppliers.Close();
         }
     }
 }

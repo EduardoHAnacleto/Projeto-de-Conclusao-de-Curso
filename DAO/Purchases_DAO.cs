@@ -22,6 +22,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         private readonly BillsToPay_Controller _billsToPayController = new BillsToPay_Controller();
         private readonly Users_Controller _userController = new Users_Controller();
 
+        internal int GetLastId()
+        {
+            string sql = "SELECT IDENT_CURRENT ('PURCHASES');";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sql, connection);
+                connection.Open();
+                int i = Convert.ToInt32(command.ExecuteScalar());
+                connection.Close();
+                return i;
+            }
+        }
 
         public int NewId()
         {

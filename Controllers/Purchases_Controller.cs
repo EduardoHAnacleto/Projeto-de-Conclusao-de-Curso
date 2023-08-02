@@ -20,12 +20,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         }
 
-        public void SaveItem(Purchases purchase)
+        public bool SaveItem(Purchases purchase)
         {
             _purchase = purchase;
             _purchase.dateOfCreation = DateTime.Now;
             _purchase.dateOfLastUpdate = _purchase.dateOfCreation;
-            _purchasesDAO.SaveToDb(_purchase);
+            return _purchasesDAO.SaveToDb(_purchase);
         }
         public List<Purchases> LoadItems()
         {
@@ -66,12 +66,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             _purchasesDAO.DeleteFromDb(idBillToPay);
         }
-        public void UpdateItem(Purchases purchase)
+        public bool UpdateItem(Purchases purchase)
         {
             _purchase = purchase;
             string format = "yyyy-MM-dd";
             _purchase.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
-            _purchasesDAO.EditFromDB(_purchase);
+            return _purchasesDAO.EditFromDB(_purchase);
         }
 
         public DataTable PopulateDGV() //Cria obj DataTable chama a DAO para trazer a conexao da tabela da DB
@@ -79,6 +79,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             DataTable ds = new DataTable();
             ds = _purchasesDAO.SelectDataSourceFromDB();
             return ds;
+        }
+
+        public int BringNewId()
+        {
+            return _purchasesDAO.NewId();
+        }
+
+        public int GetLastId()
+        {
+            return _purchasesDAO.GetLastId();
         }
     }
 }
