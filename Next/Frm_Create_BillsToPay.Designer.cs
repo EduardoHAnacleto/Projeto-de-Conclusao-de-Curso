@@ -56,10 +56,10 @@
             this.lbl_DueDate = new System.Windows.Forms.Label();
             this.datePicker_due = new System.Windows.Forms.DateTimePicker();
             this.gbox_isPaid = new System.Windows.Forms.GroupBox();
+            this.check_Completed = new System.Windows.Forms.CheckBox();
             this.check_onHold = new System.Windows.Forms.CheckBox();
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.check_Paid = new System.Windows.Forms.CheckBox();
-            this.check_Completed = new System.Windows.Forms.CheckBox();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_billInfo.SuspendLayout();
@@ -388,6 +388,16 @@
             this.gbox_isPaid.TabStop = false;
             this.gbox_isPaid.Text = "* Status";
             // 
+            // check_Completed
+            // 
+            this.check_Completed.AutoSize = true;
+            this.check_Completed.Location = new System.Drawing.Point(59, 14);
+            this.check_Completed.Name = "check_Completed";
+            this.check_Completed.Size = new System.Drawing.Size(76, 17);
+            this.check_Completed.TabIndex = 14;
+            this.check_Completed.Text = "Completed";
+            this.check_Completed.UseVisualStyleBackColor = true;
+            // 
             // check_onHold
             // 
             this.check_onHold.AutoSize = true;
@@ -422,16 +432,6 @@
             this.check_Paid.Text = "Paid";
             this.check_Paid.UseVisualStyleBackColor = true;
             this.check_Paid.CheckedChanged += new System.EventHandler(this.check_Paid_CheckedChanged);
-            // 
-            // check_Completed
-            // 
-            this.check_Completed.AutoSize = true;
-            this.check_Completed.Location = new System.Drawing.Point(59, 14);
-            this.check_Completed.Name = "check_Completed";
-            this.check_Completed.Size = new System.Drawing.Size(76, 17);
-            this.check_Completed.TabIndex = 14;
-            this.check_Completed.Text = "Completed";
-            this.check_Completed.UseVisualStyleBackColor = true;
             // 
             // Frm_Create_BillsToPay
             // 

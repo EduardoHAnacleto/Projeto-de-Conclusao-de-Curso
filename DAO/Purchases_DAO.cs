@@ -68,10 +68,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             bool status = false;
 
             string sql = "INSERT INTO PURCHASES ( PURCHASESTATUS, EMISSIONDATE, ARRIVALDATE, FREIGHTCOST, PURCHASE_TOTALCOST, " +
-                "PURCHASE_TOTALVALUE, PURCHASE_EXTRAEXPENSES, PURCHASE_DISCOUNTCASH, PURCHASE_DISCOUNTPERC, PURCHASE_INSURANCECOST, PAYCONDITION_ID," +
+                "PURCHASE_TOTALVALUE, PURCHASE_EXTRAEXPENSES, PURCHASE_DISCOUNTCASH, PURCHASE_DISCOUNTPERC, PURCHASE_INSURANCECOST," +
                 "SUPPLIER_ID, USER_ID, DATE_CREATION, DATE_LAST_UPDATE ) "
                          + " VALUES (@STATUS, @EMDATE, @ARRIVALDATE, @FREIGHT, @TOTALCOST, @TOTALVALUE, @EXPENSES, @DISCCASH, @DISCPERC," +
-                         " @INSURANCE, @CONDID, @SUPPLIERID, @USERID, @DC, @DU);";
+                         " @INSURANCE, @SUPPLIERID, @USERID, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -87,7 +87,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.DiscountCash);
                     command.Parameters.AddWithValue("@DISCPERC", (decimal)obj.DiscountPerc);
                     command.Parameters.AddWithValue("@INSURANCE", (decimal)obj.InsuranceCost);
-                    command.Parameters.AddWithValue("@CONDID", obj.PayCondition.id);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@USERID", obj.User.id);
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
@@ -120,7 +119,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
             string sql = "UPDATE PURCHASES SET PURCHASESTATUS = @STATUS, EMISSIONDATE = @EMDATE, ARRIVALDATE = @ARRIVALDATE, FREIGHTCOST = @FREIGHT," +
                 " PURCHASE_TOTALCOST = @TOTALCOST, PURCHASE_TOTALVALUE = @TOTALVALUE, PURCHASE_EXTRAEXPENSES = @EXPENSES, PURCHASE_DISCOUNTCASH = @DISCCASH," +
-                " PURCHASE_DISCOUNTPERC = @DISCPERC, PURCHASE_INSURANCECOST = @INSURANCE, PAYCONDITION_ID = @CONDID, SUPPLIER_ID = @SUPPLIERID," +
+                " PURCHASE_DISCOUNTPERC = @DISCPERC, PURCHASE_INSURANCECOST = @INSURANCE, SUPPLIER_ID = @SUPPLIERID," +
                 " USER_ID = @USERID, DATE_LAST_UPDATE = @USERID " +
                 " WHERE ID_PURCHASE = @ID; ";
 
@@ -140,7 +139,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.DiscountCash);
                     command.Parameters.AddWithValue("@DISCPERC", (decimal)obj.DiscountPerc);
                     command.Parameters.AddWithValue("@INSURANCE", (decimal)obj.InsuranceCost);
-                    command.Parameters.AddWithValue("@CONDID", obj.PayCondition.id);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@USERID", obj.User.id);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
@@ -227,7 +225,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     DiscountPerc = Convert.ToDouble(reader["purchase_DiscountPerc"]),
                                     InsuranceCost = Convert.ToDouble(reader["purchase_InsuranceCost"]),
                                     User = _userController.FindItemId(Convert.ToInt32(reader["user_id"])),
-                                    PayCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["paycondition_id"])),
                                     PurchasedItems = _purchaseItemsController.FindItemId(Convert.ToInt32(reader["id_purchase"])),
                                     Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                 };
@@ -541,6 +538,45 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 con.Close();
             }
             return dt;
+        }
+
+        public bool ConnectPurchaseBill(BillsToPay bill, Purchases purchase)
+        {
+            bool status = false;
+
+            string sql = "INSERT INTO PURCHASEBILLS ( PURCHASE_ID, BILLNUMBER, BILLMODEL, BILLSERIES, BILLPAGE, INSTALMENTNUMBER ) "
+                         + " VALUES (@PURCHID, @BNUMBER, @BMODEL, @BSERIES, @BPAGE, @BINSTALNUM);";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@PURCHID", purchase.id);
+                    command.Parameters.AddWithValue("@BNUMBER", bill.BillNumber);
+                    command.Parameters.AddWithValue("@BMODEL", bill.BillModel);
+                    command.Parameters.AddWithValue("@BSERIES", bill.BillSeries);
+                    command.Parameters.AddWithValue("@BPAGE", bill.BillPage);
+                    command.Parameters.AddWithValue("@BINSTALNUM", bill.InstalmentNumber);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    connection.Close();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Register added with success!");
+                        status = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
         }
     }
 }

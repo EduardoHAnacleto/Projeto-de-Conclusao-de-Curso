@@ -64,13 +64,12 @@
             this.medt_date = new System.Windows.Forms.MaskedTextBox();
             this.lbl_date = new System.Windows.Forms.Label();
             this.gbox_options = new System.Windows.Forms.GroupBox();
-            this.btn_CancelSale = new System.Windows.Forms.Button();
-            this.lbl_findClient = new System.Windows.Forms.Label();
+            this.lbl_findsupplier = new System.Windows.Forms.Label();
             this.lbl_new = new System.Windows.Forms.Label();
             this.lbl_Save = new System.Windows.Forms.Label();
             this.btn_Close = new System.Windows.Forms.Button();
             this.btn_Save = new System.Windows.Forms.Button();
-            this.btn_FindClient = new System.Windows.Forms.Button();
+            this.btn_FindSup = new System.Windows.Forms.Button();
             this.btn_new = new System.Windows.Forms.Button();
             this.edt_transportFee = new System.Windows.Forms.NumericUpDown();
             this.lbl_transportFee = new System.Windows.Forms.Label();
@@ -464,39 +463,28 @@
             // 
             // gbox_options
             // 
-            this.gbox_options.Controls.Add(this.btn_CancelSale);
-            this.gbox_options.Controls.Add(this.lbl_findClient);
+            this.gbox_options.Controls.Add(this.lbl_findsupplier);
             this.gbox_options.Controls.Add(this.lbl_new);
             this.gbox_options.Controls.Add(this.lbl_Save);
             this.gbox_options.Controls.Add(this.btn_Close);
             this.gbox_options.Controls.Add(this.btn_Save);
-            this.gbox_options.Controls.Add(this.btn_FindClient);
+            this.gbox_options.Controls.Add(this.btn_FindSup);
             this.gbox_options.Controls.Add(this.btn_new);
-            this.gbox_options.Location = new System.Drawing.Point(832, 12);
+            this.gbox_options.Location = new System.Drawing.Point(874, 12);
             this.gbox_options.Name = "gbox_options";
-            this.gbox_options.Size = new System.Drawing.Size(309, 100);
+            this.gbox_options.Size = new System.Drawing.Size(267, 100);
             this.gbox_options.TabIndex = 31;
             this.gbox_options.TabStop = false;
             this.gbox_options.Text = "Options";
             // 
-            // btn_CancelSale
+            // lbl_findsupplier
             // 
-            this.btn_CancelSale.Location = new System.Drawing.Point(252, 20);
-            this.btn_CancelSale.Name = "btn_CancelSale";
-            this.btn_CancelSale.Size = new System.Drawing.Size(57, 48);
-            this.btn_CancelSale.TabIndex = 7;
-            this.btn_CancelSale.Text = "Cancel\r\n Sale";
-            this.btn_CancelSale.UseVisualStyleBackColor = true;
-            this.btn_CancelSale.Visible = false;
-            // 
-            // lbl_findClient
-            // 
-            this.lbl_findClient.AutoSize = true;
-            this.lbl_findClient.Location = new System.Drawing.Point(63, 73);
-            this.lbl_findClient.Name = "lbl_findClient";
-            this.lbl_findClient.Size = new System.Drawing.Size(66, 13);
-            this.lbl_findClient.TabIndex = 6;
-            this.lbl_findClient.Text = "Select Client";
+            this.lbl_findsupplier.AutoSize = true;
+            this.lbl_findsupplier.Location = new System.Drawing.Point(55, 73);
+            this.lbl_findsupplier.Name = "lbl_findsupplier";
+            this.lbl_findsupplier.Size = new System.Drawing.Size(78, 13);
+            this.lbl_findsupplier.TabIndex = 6;
+            this.lbl_findsupplier.Text = "Select Supplier";
             // 
             // lbl_new
             // 
@@ -535,14 +523,15 @@
             this.btn_Save.UseVisualStyleBackColor = true;
             this.btn_Save.Click += new System.EventHandler(this.btn_Save_Click);
             // 
-            // btn_FindClient
+            // btn_FindSup
             // 
-            this.btn_FindClient.Location = new System.Drawing.Point(66, 19);
-            this.btn_FindClient.Name = "btn_FindClient";
-            this.btn_FindClient.Size = new System.Drawing.Size(57, 51);
-            this.btn_FindClient.TabIndex = 1;
-            this.btn_FindClient.Text = "F7";
-            this.btn_FindClient.UseVisualStyleBackColor = true;
+            this.btn_FindSup.Location = new System.Drawing.Point(66, 19);
+            this.btn_FindSup.Name = "btn_FindSup";
+            this.btn_FindSup.Size = new System.Drawing.Size(57, 51);
+            this.btn_FindSup.TabIndex = 1;
+            this.btn_FindSup.Text = "F7";
+            this.btn_FindSup.UseVisualStyleBackColor = true;
+            this.btn_FindSup.Click += new System.EventHandler(this.btn_FindSup_Click);
             // 
             // btn_new
             // 
@@ -552,6 +541,7 @@
             this.btn_new.TabIndex = 0;
             this.btn_new.Text = "F5";
             this.btn_new.UseVisualStyleBackColor = true;
+            this.btn_new.Click += new System.EventHandler(this.btn_new_Click);
             // 
             // edt_transportFee
             // 
@@ -680,9 +670,9 @@
             // 
             // btn_findSupplier
             // 
-            this.btn_findSupplier.Location = new System.Drawing.Point(302, 32);
+            this.btn_findSupplier.Location = new System.Drawing.Point(302, 35);
             this.btn_findSupplier.Name = "btn_findSupplier";
-            this.btn_findSupplier.Size = new System.Drawing.Size(51, 24);
+            this.btn_findSupplier.Size = new System.Drawing.Size(51, 21);
             this.btn_findSupplier.TabIndex = 43;
             this.btn_findSupplier.Text = "Find";
             this.btn_findSupplier.UseVisualStyleBackColor = true;
@@ -826,13 +816,12 @@
         private System.Windows.Forms.Button btn_FindProduct;
         private System.Windows.Forms.Button btn_AddProduct;
         private System.Windows.Forms.GroupBox gbox_options;
-        private System.Windows.Forms.Button btn_CancelSale;
-        private System.Windows.Forms.Label lbl_findClient;
+        private System.Windows.Forms.Label lbl_findsupplier;
         private System.Windows.Forms.Label lbl_new;
         private System.Windows.Forms.Label lbl_Save;
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.Button btn_Save;
-        private System.Windows.Forms.Button btn_FindClient;
+        private System.Windows.Forms.Button btn_FindSup;
         private System.Windows.Forms.Button btn_new;
         private System.Windows.Forms.NumericUpDown edt_transportFee;
         private System.Windows.Forms.Label lbl_transportFee;

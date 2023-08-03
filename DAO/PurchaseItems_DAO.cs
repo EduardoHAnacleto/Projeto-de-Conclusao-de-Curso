@@ -23,7 +23,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             bool status = false;
 
             string sql = "INSERT INTO PURCHASEITEMS ( ID_PURCHASE, PRODUCT_ID, QUANTITY, PRODUCT_COST, TOTAL_COST, PURCHASE_PERCENTAGE," +
-                "WEIGHTEDAVG , DATE_CREATION, DATE_LAST_UPDATE ) "
+                "WEIGHTED_AVG , DATE_CREATION, DATE_LAST_UPDATE ) "
                          + " VALUES (@ID, @PRODID, @QTD, @PRODCOST, @TOTALVALUE, @PURCHPERC, @WEIGHTEDAVG, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

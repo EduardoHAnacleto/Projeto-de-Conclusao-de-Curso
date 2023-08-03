@@ -18,7 +18,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 {
     public partial class Frm_Create_Purchases : Form
     {
-        public Frm_Create_Purchases()
+        public Frm_Create_Purchases(Users user)
         {
             InitializeComponent();
             edt_prodBarCode.Controls[0].Visible = false;
@@ -32,8 +32,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_supplierId.Controls[0].Visible = false;
             medt_date.Text = DateTime.Now.ToString();
             cbox_status.SelectedIndex = 0;
+            User = user;
         }
 
+        private readonly Users User;
         private readonly Products_Controller _pController = new Products_Controller();
         private readonly Purchases_Controller _controller = new Purchases_Controller();
         private readonly PurchaseItems_Controller _pIController = new PurchaseItems_Controller();
@@ -181,8 +183,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 {
                     if (btn_new.Text == "F5")
                     {
-                        status = AddBillsToPay(purchase);
-                        if (status)
+                        var bill = AddBillsToPay(purchase);
+                        if (bill != null)
                         {
                             status = _controller.SaveItem(purchase);
                             if (status)
@@ -190,7 +192,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 int purchId = _controller.GetLastId();
                                 foreach (PurchaseItems item in purchase.PurchasedItems)
                                 {
-                                    item.id = purchId;
+                                    item.PurchaseId = purchId;
                                     status = _pIController.SaveItem(item);
                                     if (!status)
                                     {
@@ -199,7 +201,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 }
                                 if (status)
                                 {
-                                    Populated(false);
+                                    if (ConnectPurchaseBill(bill, purchase))
+                                    {
+                                        Populated(false);
+                                    }
                                 }
                             }
                         }
@@ -221,7 +226,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
-        private bool AddBillsToPay(Purchases purchase)
+        private bool ConnectPurchaseBill(List<BillsToPay> billList, Purchases purchase)
+        {
+            bool status = false;
+            foreach (BillsToPay bill in billList)
+            {
+                status = _controller.ConnectPurchaseBill(bill, purchase);
+            }
+            return status;
+        }
+
+        private List<BillsToPay> AddBillsToPay(Purchases purchase)
         {
             Frm_Create_BillsToPay FrmBillsToPay = new Frm_Create_BillsToPay();
             FrmBillsToPay.PopulateFromPurchase(purchase);
@@ -231,11 +246,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 if (FrmBillsToPay.HasSaved)
                 {
-                    return true;
+                    return FrmBillsToPay._auxObjList;
+                }
+                else
+                {
+                    string message = "At least one bill must be submitted.";
+                    string caption = "Bill not submitted.";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    Utilities.Msgbox(message, caption, buttons, icon);
                 }
             }
-
-            return false; 
+            return null; 
         }
 
 
@@ -247,9 +269,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             lbl_new.Text = edit;
             btn_new.Enabled = true;
             btn_Save.Enabled = false;
-            btn_FindClient.Enabled = false;
-            btn_FindClient.Text = del;
-            lbl_findClient.Text = del;
+            btn_FindSup.Enabled = false;
+            btn_FindSup.Text = del;
+            lbl_findsupplier.Text = del;
         }
 
         public virtual void Populated(bool populated)
@@ -271,7 +293,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             Purchases obj = new Purchases();
             Suppliers_Controller _sController = new Suppliers_Controller();
             obj.id = _controller.BringNewId();
-            obj.User = new Users();
+            obj.User = User;
             obj.Supplier = _sController.FindItemId( Convert.ToInt32(edt_supplierId.Value));
             obj.Freight_Cost = Convert.ToDouble(edt_transportFee.Value);
             obj.PurchasedItems = GetDGVList(obj.id);
@@ -340,7 +362,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             edt_prodBarCode.Value = 0;
             edt_prodId.Value = 0;
-            edt_prodQtd.Value = 0;
+            edt_prodQtd.Value = 1;
             edt_prodUnCost.Value = 0;
             edt_transportFee.Value = 0;
             medt_date.Text = DateTime.Now.ToString();
@@ -432,6 +454,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
             }
             formSuppliers.Close();
+        }
+
+        private void btn_new_Click(object sender, EventArgs e)
+        {
+            ClearCamps();
+        }
+
+        private void btn_FindSup_Click(object sender, EventArgs e)
+        {
+            NewFormSearchSupplier();
         }
     }
 }

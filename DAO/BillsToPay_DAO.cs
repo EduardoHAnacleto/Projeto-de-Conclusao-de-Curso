@@ -29,9 +29,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             bool status = false;
 
             string sql = "INSERT INTO BILLSTOPAY ( BILLNUMBER, BILLSERIES, BILLMODEL, BILLPAGE, INSTALMENTNUMBER, DUEDATE, ISPAID, PAIDDATE," +
-                "BILLVALUE, PAYMETHOD_ID, SUPPLIER_ID, INSTALMENTSQTD, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
+                "BILLVALUE, PAYMETHOD_ID, SUPPLIER_ID, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
                          + " VALUES (@BNUMBER, @BSERIES, @BMODEL, @BPAGE, @INUMBER, @DUEDATE, @ISPAID, @PDATE, @BVALUE, @METHODID, " +
-                         " @SUPPLIERID, @QTD, @EMISSIONDATE, @DC, @DU);";
+                         " @SUPPLIERID, @EMISSIONDATE, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -44,7 +44,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@INUMBER", obj.InstalmentNumber);
                     command.Parameters.AddWithValue("@DUEDATE", obj.DueDate);
                     command.Parameters.AddWithValue("@EMISSIONDATE", obj.EmissionDate);
-                    command.Parameters.AddWithValue("@QTD", obj.InstalmentsQtd);
                     command.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
                     if (obj.PaidDate.HasValue)
                     {
@@ -468,5 +467,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             return dt;
         }
+
+
     }
 }

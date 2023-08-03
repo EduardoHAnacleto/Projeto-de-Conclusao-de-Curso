@@ -349,4 +349,3 @@
         DATE_LAST_UPDATE date not null,
         primary key (ID_PURCHASE, PRODUCT_ID)
     );
-

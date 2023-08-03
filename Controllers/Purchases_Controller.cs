@@ -90,5 +90,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             return _purchasesDAO.GetLastId();
         }
+
+        public bool ConnectPurchaseBill(BillsToPay bill, Purchases purchase)
+        {
+            return _purchasesDAO.ConnectPurchaseBill(bill, purchase);
+        }
     }
 }

@@ -89,7 +89,7 @@
             this.Controls.Add(this.edt_serviceDescription);
             this.Controls.Add(this.lbl_serviceValue);
             this.Controls.Add(this.lbl_serviceDescription);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_Services";
             this.Text = "Create Services";
             this.Controls.SetChildIndex(this.lbl_id, 0);

@@ -23,16 +23,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public double InsuranceCost { get; set; }
 
         public Users User { get; set; }
-        public PaymentConditions PayCondition { get; set; }
         public List<PurchaseItems> PurchasedItems { get; set; }
         public Suppliers Supplier { get; set; }
         //public List<BillsToPay> BillToPay { get; set; }
 
         public Purchases()
         {
-            PaymentConditions PayConditon = new PaymentConditions();
             Suppliers Supplier = new Suppliers();
-            //List<BillsToPay> BillToPay = new List<BillsToPay>();
             List<PurchaseItems> PurchasedItems = new List<PurchaseItems>();
             Users User = new Users();
         }

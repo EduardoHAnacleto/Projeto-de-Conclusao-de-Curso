@@ -31,6 +31,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public bool FromPurchase = false;
         public bool HasSaved = false;
+        public List<BillsToPay> _auxObjList;
         private BillsToPay _auxObj;
         private BillsToPay_Controller _controller = new BillsToPay_Controller();
         private readonly Suppliers_Controller _supplierController = new Suppliers_Controller();
@@ -203,6 +204,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         if (FromPurchase)
                         {
                             HasSaved = true;
+                            _auxObjList.Add(this.GetObject());
                         }
                         ClearCamps();
                         Populated(false);
@@ -423,6 +425,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_totalValue.Value = Convert.ToDecimal(purchase.Total_PurchaseValue);
             check_Active.Checked = true;
         }
+
 
         private void btn_SearchSupplier_Click(object sender, EventArgs e)
         {

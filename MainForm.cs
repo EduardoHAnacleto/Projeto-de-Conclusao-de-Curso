@@ -168,7 +168,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1
 
         private void purchasesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases();
+            Users user = new Users();
+            user.id = 2;
+            user.name = "teste";
+            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases(user);
             frmCreatePurchases.ShowDialog();
         }
     }
