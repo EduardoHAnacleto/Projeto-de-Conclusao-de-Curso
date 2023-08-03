@@ -89,8 +89,8 @@
             this.edt_supplierName = new System.Windows.Forms.TextBox();
             this.gbox_supplier = new System.Windows.Forms.GroupBox();
             this.gbox_info = new System.Windows.Forms.GroupBox();
-            this.dateTime_ArrivalDate = new System.Windows.Forms.DateTimePicker();
             this.lbl_arrivalDate = new System.Windows.Forms.Label();
+            this.dateTime_ArrivalDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).BeginInit();
             this.gbox_products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodUnCost)).BeginInit();
@@ -737,15 +737,6 @@
             this.gbox_info.TabStop = false;
             this.gbox_info.Text = "Purchase Information";
             // 
-            // dateTime_ArrivalDate
-            // 
-            this.dateTime_ArrivalDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTime_ArrivalDate.Location = new System.Drawing.Point(13, 87);
-            this.dateTime_ArrivalDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateTime_ArrivalDate.Name = "dateTime_ArrivalDate";
-            this.dateTime_ArrivalDate.Size = new System.Drawing.Size(92, 20);
-            this.dateTime_ArrivalDate.TabIndex = 43;
-            // 
             // lbl_arrivalDate
             // 
             this.lbl_arrivalDate.AutoSize = true;
@@ -754,6 +745,15 @@
             this.lbl_arrivalDate.Size = new System.Drawing.Size(74, 13);
             this.lbl_arrivalDate.TabIndex = 44;
             this.lbl_arrivalDate.Text = "Date of Arrival";
+            // 
+            // dateTime_ArrivalDate
+            // 
+            this.dateTime_ArrivalDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTime_ArrivalDate.Location = new System.Drawing.Point(13, 87);
+            this.dateTime_ArrivalDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTime_ArrivalDate.Name = "dateTime_ArrivalDate";
+            this.dateTime_ArrivalDate.Size = new System.Drawing.Size(92, 20);
+            this.dateTime_ArrivalDate.TabIndex = 43;
             // 
             // Frm_Create_Purchases
             // 

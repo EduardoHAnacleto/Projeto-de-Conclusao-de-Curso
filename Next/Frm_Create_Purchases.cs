@@ -2,10 +2,12 @@
 using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
+using ProjetoEduardoAnacletoWindowsForm1.Utility;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.DirectoryServices.ActiveDirectory;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -29,6 +31,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_insurance.Controls[0].Visible = false;
             edt_supplierId.Controls[0].Visible = false;
             medt_date.Text = DateTime.Now.ToString();
+            cbox_status.SelectedIndex = 0;
         }
 
         private readonly Products_Controller _pController = new Products_Controller();
@@ -178,6 +181,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 {
                     if (btn_new.Text == "F5")
                     {
+                        status = AddBillsToPay(purchase);
+                        if (status)
+                        {
                             status = _controller.SaveItem(purchase);
                             if (status)
                             {
@@ -196,6 +202,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     Populated(false);
                                 }
                             }
+                        }
+                        UnlockCamps();
                     }
                     else if (btn_new.Text == "Cancel")
                     {
@@ -212,6 +220,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
             }
         }
+
+        private bool AddBillsToPay(Purchases purchase)
+        {
+            Frm_Create_BillsToPay FrmBillsToPay = new Frm_Create_BillsToPay();
+            FrmBillsToPay.PopulateFromPurchase(purchase);
+            FrmBillsToPay.FromPurchase = true;
+            FrmBillsToPay.ShowDialog();
+            if (!FrmBillsToPay.ActiveControl.ContainsFocus)
+            {
+                if (FrmBillsToPay.HasSaved)
+                {
+                    return true;
+                }
+            }
+
+            return false; 
+        }
+
 
         private void SetFormToEdit()
         {
@@ -243,9 +269,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private Purchases GetObject()
         {
             Purchases obj = new Purchases();
+            Suppliers_Controller _sController = new Suppliers_Controller();
             obj.id = _controller.BringNewId();
             obj.User = new Users();
-            obj.Supplier.id = Convert.ToInt32(edt_supplierId.Value);
+            obj.Supplier = _sController.FindItemId( Convert.ToInt32(edt_supplierId.Value));
             obj.Freight_Cost = Convert.ToDouble(edt_transportFee.Value);
             obj.PurchasedItems = GetDGVList(obj.id);
             obj.EmissionDate = Convert.ToDateTime(medt_date.Text);
@@ -333,14 +360,41 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             foreach (PurchaseItems item in purchase.PurchasedItems)
             {
                 DGV_PurchasesProducts.Rows.Add(
-                    item.id
+                    item.id,
+                    item.Product.productName,
+                    item.Quantity,
+                    item.NewBaseUnCost,
+                    item.NewBaseUnCost,
+                    item.Product.salePrice,
+                    item.Product.stock,
+                    item.PurchasePercentage,
+                    item.WeightedCostAverage,
+                    item.Product.salePrice
                     );
             }
         }
 
         private bool CheckCamps()
         {
-            throw new NotImplementedException();
+            if (DGV_PurchasesProducts.Rows.Count < 1)
+            {
+                string message = "Purchase must contain at least 1 item.";
+                string caption = "Purchase items is empty.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            else if (edt_supplierId.Value <= 0)
+            {
+                string message = "Purchase must contain supplier.";
+                string caption = "Supplier is not selected.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            return true;
         }
 
         public void DeleteObject()

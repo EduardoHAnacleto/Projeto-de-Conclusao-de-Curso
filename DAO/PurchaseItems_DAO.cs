@@ -22,21 +22,21 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "INSERT INTO PURCHASEITEMS ( ID_PURCHASE, PRODUCT_ID, QUANTITY, ITEM_VALUE, ITEM_COST, DISCOUNT_CASH, DISCOUNT_PERC," +
-                "TOTAL_VALUE , DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@ID, @PRODVALUE, @PRODCOST, @TOTALVALUE, @DISCCASH, @DISCPERC, @QTD, @DC, @DU);";
+            string sql = "INSERT INTO PURCHASEITEMS ( ID_PURCHASE, PRODUCT_ID, QUANTITY, PRODUCT_COST, TOTAL_COST, PURCHASE_PERCENTAGE," +
+                "WEIGHTEDAVG , DATE_CREATION, DATE_LAST_UPDATE ) "
+                         + " VALUES (@ID, @PRODID, @QTD, @PRODCOST, @TOTALVALUE, @PURCHPERC, @WEIGHTEDAVG, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", obj.PurchaseId);
-                    command.Parameters.AddWithValue("@PRODVALUE", (decimal)obj.ProductValue);
-                    command.Parameters.AddWithValue("@PRODCOST", (decimal)obj.ProductCost);
-                    command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.TotalValue);
-                    command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.ItemDiscountCash);
-                    command.Parameters.AddWithValue("@DISCPERC", (decimal)obj.ItemDiscountPerc);
+                    command.Parameters.AddWithValue("@PRODID", obj.Product.id);
                     command.Parameters.AddWithValue("@QTD", obj.Quantity);
+                    command.Parameters.AddWithValue("@PRODCOST", (decimal)obj.NewBaseUnCost);
+                    command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.TotalBaseCost);
+                    command.Parameters.AddWithValue("@PURCHPERC", (decimal)obj.PurchasePercentage);
+                    command.Parameters.AddWithValue("@WEIGHTEDAVG", (decimal)obj.WeightedCostAverage);
                     command.Parameters.AddWithValue("@DC", obj.dateOfLastUpdate);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
@@ -85,11 +85,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 PurchaseId = Convert.ToInt32(reader["id_purchase"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
-                                ProductValue = Convert.ToDouble(reader["item_value"]),
-                                ProductCost = Convert.ToDouble(reader["item_cost"]),
-                                TotalValue = Convert.ToDouble(reader["total_value"]),
-                                ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
-                                ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
+                                NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
+                                TotalBaseCost = Convert.ToDecimal(reader["total_cost"]),
+                                PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
+                                WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -134,11 +133,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 PurchaseId = Convert.ToInt32(reader["id_purchase"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
-                                ProductValue = Convert.ToDouble(reader["item_value"]),
-                                ProductCost = Convert.ToDouble(reader["item_cost"]),
-                                TotalValue = Convert.ToDouble(reader["total_value"]),
-                                ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
-                                ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
+                                NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
+                                TotalBaseCost = Convert.ToDecimal(reader["total_cost"]),
+                                PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
+                                WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -183,11 +181,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 PurchaseId = Convert.ToInt32(reader["id_purchase"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
-                                ProductValue = Convert.ToDouble(reader["item_value"]),
-                                ProductCost = Convert.ToDouble(reader["item_cost"]),
-                                TotalValue = Convert.ToDouble(reader["total_value"]),
-                                ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
-                                ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
+                                NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
+                                TotalBaseCost = Convert.ToDecimal(reader["total_cost"]),
+                                PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
+                                WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -232,11 +229,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 PurchaseId = Convert.ToInt32(reader["id_purchase"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
-                                ProductValue = Convert.ToDouble(reader["item_value"]),
-                                ProductCost = Convert.ToDouble(reader["item_cost"]),
-                                TotalValue = Convert.ToDouble(reader["total_value"]),
-                                ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
-                                ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
+                                NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
+                                TotalBaseCost = Convert.ToDecimal(reader["total_cost"]),
+                                PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
+                                WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };

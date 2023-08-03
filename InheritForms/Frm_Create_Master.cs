@@ -87,7 +87,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.InheritForms
             //
         }
 
-        public void Exit()  //Exit
+        public virtual void Exit()  //Exit
         {
             this.Close();
         }

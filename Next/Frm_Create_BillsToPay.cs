@@ -29,6 +29,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             PopulateComboBox();
         }
 
+        public bool FromPurchase = false;
+        public bool HasSaved = false;
         private BillsToPay _auxObj;
         private BillsToPay_Controller _controller = new BillsToPay_Controller();
         private readonly Suppliers_Controller _supplierController = new Suppliers_Controller();
@@ -196,8 +198,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 try
                 {
                     if (btn_Edit.Text == "E&dit")
-                    {                    
+                    {   
                         _controller.SaveItem(this.GetObject());
+                        if (FromPurchase)
+                        {
+                            HasSaved = true;
+                        }
                         ClearCamps();
                         Populated(false);
                     }
@@ -350,6 +356,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
+        public override void Exit()
+        {
+            if (FromPurchase)
+            {
+                this.Hide();
+            }
+            else
+            {
+                base.Exit();
+            }
+        }
+
         public void PopulateSupplier(Suppliers supplier)
         {
             edt_supplierId.Value = supplier.id;
@@ -393,6 +411,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 PopulateSupplier(supplier);              
             }
+        }
+
+        public void PopulateFromPurchase(Purchases purchase)
+        {
+            edt_supplierId.Value = purchase.Supplier.id;
+            edt_supplierName.Text = purchase.Supplier.name;
+            gbox_supplier.Enabled = false;
+            btn_Edit.Enabled = false;
+            btn_SelectDelete.Enabled = false;
+            edt_totalValue.Value = Convert.ToDecimal(purchase.Total_PurchaseValue);
+            check_Active.Checked = true;
         }
 
         private void btn_SearchSupplier_Click(object sender, EventArgs e)

@@ -59,6 +59,7 @@
             this.check_onHold = new System.Windows.Forms.CheckBox();
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.check_Paid = new System.Windows.Forms.CheckBox();
+            this.check_Completed = new System.Windows.Forms.CheckBox();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_billInfo.SuspendLayout();
@@ -376,12 +377,13 @@
             // 
             // gbox_isPaid
             // 
+            this.gbox_isPaid.Controls.Add(this.check_Completed);
             this.gbox_isPaid.Controls.Add(this.check_onHold);
             this.gbox_isPaid.Controls.Add(this.check_Active);
             this.gbox_isPaid.Controls.Add(this.check_Paid);
             this.gbox_isPaid.Location = new System.Drawing.Point(497, 8);
             this.gbox_isPaid.Name = "gbox_isPaid";
-            this.gbox_isPaid.Size = new System.Drawing.Size(125, 59);
+            this.gbox_isPaid.Size = new System.Drawing.Size(141, 59);
             this.gbox_isPaid.TabIndex = 36;
             this.gbox_isPaid.TabStop = false;
             this.gbox_isPaid.Text = "* Status";
@@ -420,6 +422,16 @@
             this.check_Paid.Text = "Paid";
             this.check_Paid.UseVisualStyleBackColor = true;
             this.check_Paid.CheckedChanged += new System.EventHandler(this.check_Paid_CheckedChanged);
+            // 
+            // check_Completed
+            // 
+            this.check_Completed.AutoSize = true;
+            this.check_Completed.Location = new System.Drawing.Point(59, 14);
+            this.check_Completed.Name = "check_Completed";
+            this.check_Completed.Size = new System.Drawing.Size(76, 17);
+            this.check_Completed.TabIndex = 14;
+            this.check_Completed.Text = "Completed";
+            this.check_Completed.UseVisualStyleBackColor = true;
             // 
             // Frm_Create_BillsToPay
             // 
@@ -502,5 +514,6 @@
         private System.Windows.Forms.CheckBox check_Active;
         private System.Windows.Forms.CheckBox check_Paid;
         private System.Windows.Forms.CheckBox check_onHold;
+        private System.Windows.Forms.CheckBox check_Completed;
     }
 }
