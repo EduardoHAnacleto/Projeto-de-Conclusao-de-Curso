@@ -300,7 +300,9 @@
         purchase_DiscountCash decimal,
         purchase_DiscountPerc decimal,
         purchase_InsuranceCost decimal,
-        paycondition_id int not null references PaymentConditions(id_paycondition),
+        cancelledDate date,
+        paidDate date,
+
         supplier_id int not null references SUPPLIERS(id_supplier),
         user_id int not null references USERS (id_user),
         date_creation datetime not null,

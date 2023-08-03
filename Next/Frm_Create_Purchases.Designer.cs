@@ -81,8 +81,6 @@
             this.edt_extraExpenses = new System.Windows.Forms.NumericUpDown();
             this.edt_insurance = new System.Windows.Forms.NumericUpDown();
             this.lbl_insurance = new System.Windows.Forms.Label();
-            this.gbox_status = new System.Windows.Forms.GroupBox();
-            this.cbox_status = new System.Windows.Forms.ComboBox();
             this.btn_findSupplier = new System.Windows.Forms.Button();
             this.lbl_supplierName = new System.Windows.Forms.Label();
             this.edt_supplierName = new System.Windows.Forms.TextBox();
@@ -90,6 +88,14 @@
             this.gbox_info = new System.Windows.Forms.GroupBox();
             this.lbl_arrivalDate = new System.Windows.Forms.Label();
             this.dateTime_ArrivalDate = new System.Windows.Forms.DateTimePicker();
+            this.gbox_purchStatus = new System.Windows.Forms.GroupBox();
+            this.rbtn_Active = new System.Windows.Forms.RadioButton();
+            this.rbtn_Paid = new System.Windows.Forms.RadioButton();
+            this.rbtn_OnHold = new System.Windows.Forms.RadioButton();
+            this.rbtn_Cancelled = new System.Windows.Forms.RadioButton();
+            this.rbtn_Completed = new System.Windows.Forms.RadioButton();
+            this.lbl_paidDate = new System.Windows.Forms.Label();
+            this.dateTime_PaidDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).BeginInit();
             this.gbox_products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodUnCost)).BeginInit();
@@ -104,9 +110,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_supplierId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_extraExpenses)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_insurance)).BeginInit();
-            this.gbox_status.SuspendLayout();
             this.gbox_supplier.SuspendLayout();
             this.gbox_info.SuspendLayout();
+            this.gbox_purchStatus.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGV_PurchasesProducts
@@ -644,30 +650,6 @@
             this.lbl_insurance.TabIndex = 41;
             this.lbl_insurance.Text = "Insurance";
             // 
-            // gbox_status
-            // 
-            this.gbox_status.Controls.Add(this.cbox_status);
-            this.gbox_status.Location = new System.Drawing.Point(673, 12);
-            this.gbox_status.Name = "gbox_status";
-            this.gbox_status.Size = new System.Drawing.Size(153, 79);
-            this.gbox_status.TabIndex = 42;
-            this.gbox_status.TabStop = false;
-            this.gbox_status.Text = "Status";
-            // 
-            // cbox_status
-            // 
-            this.cbox_status.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbox_status.FormattingEnabled = true;
-            this.cbox_status.Items.AddRange(new object[] {
-            "ACTIVE",
-            "PAID",
-            "CANCELLED",
-            "COMPLETED"});
-            this.cbox_status.Location = new System.Drawing.Point(6, 29);
-            this.cbox_status.Name = "cbox_status";
-            this.cbox_status.Size = new System.Drawing.Size(121, 21);
-            this.cbox_status.TabIndex = 0;
-            // 
             // btn_findSupplier
             // 
             this.btn_findSupplier.Location = new System.Drawing.Point(302, 35);
@@ -710,6 +692,8 @@
             // 
             // gbox_info
             // 
+            this.gbox_info.Controls.Add(this.dateTime_PaidDate);
+            this.gbox_info.Controls.Add(this.lbl_paidDate);
             this.gbox_info.Controls.Add(this.lbl_arrivalDate);
             this.gbox_info.Controls.Add(this.dateTime_ArrivalDate);
             this.gbox_info.Controls.Add(this.dateTime_EstArrivalDate);
@@ -735,6 +719,7 @@
             this.lbl_arrivalDate.Size = new System.Drawing.Size(74, 13);
             this.lbl_arrivalDate.TabIndex = 44;
             this.lbl_arrivalDate.Text = "Date of Arrival";
+            this.lbl_arrivalDate.Visible = false;
             // 
             // dateTime_ArrivalDate
             // 
@@ -744,15 +729,113 @@
             this.dateTime_ArrivalDate.Name = "dateTime_ArrivalDate";
             this.dateTime_ArrivalDate.Size = new System.Drawing.Size(92, 20);
             this.dateTime_ArrivalDate.TabIndex = 43;
+            this.dateTime_ArrivalDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTime_ArrivalDate.Visible = false;
+            // 
+            // gbox_purchStatus
+            // 
+            this.gbox_purchStatus.Controls.Add(this.rbtn_Completed);
+            this.gbox_purchStatus.Controls.Add(this.rbtn_Cancelled);
+            this.gbox_purchStatus.Controls.Add(this.rbtn_OnHold);
+            this.gbox_purchStatus.Controls.Add(this.rbtn_Paid);
+            this.gbox_purchStatus.Controls.Add(this.rbtn_Active);
+            this.gbox_purchStatus.Location = new System.Drawing.Point(955, 122);
+            this.gbox_purchStatus.Name = "gbox_purchStatus";
+            this.gbox_purchStatus.Size = new System.Drawing.Size(186, 84);
+            this.gbox_purchStatus.TabIndex = 48;
+            this.gbox_purchStatus.TabStop = false;
+            this.gbox_purchStatus.Text = "Purchase Status";
+            // 
+            // rbtn_Active
+            // 
+            this.rbtn_Active.AutoSize = true;
+            this.rbtn_Active.Checked = true;
+            this.rbtn_Active.Location = new System.Drawing.Point(6, 19);
+            this.rbtn_Active.Name = "rbtn_Active";
+            this.rbtn_Active.Size = new System.Drawing.Size(55, 17);
+            this.rbtn_Active.TabIndex = 0;
+            this.rbtn_Active.TabStop = true;
+            this.rbtn_Active.Text = "Active";
+            this.rbtn_Active.UseVisualStyleBackColor = true;
+            this.rbtn_Active.CheckedChanged += new System.EventHandler(this.rbtn_Active_CheckedChanged);
+            // 
+            // rbtn_Paid
+            // 
+            this.rbtn_Paid.AutoSize = true;
+            this.rbtn_Paid.Location = new System.Drawing.Point(6, 38);
+            this.rbtn_Paid.Name = "rbtn_Paid";
+            this.rbtn_Paid.Size = new System.Drawing.Size(46, 17);
+            this.rbtn_Paid.TabIndex = 1;
+            this.rbtn_Paid.TabStop = true;
+            this.rbtn_Paid.Text = "Paid";
+            this.rbtn_Paid.UseVisualStyleBackColor = true;
+            this.rbtn_Paid.CheckedChanged += new System.EventHandler(this.rbtn_Paid_CheckedChanged);
+            // 
+            // rbtn_OnHold
+            // 
+            this.rbtn_OnHold.AutoSize = true;
+            this.rbtn_OnHold.Location = new System.Drawing.Point(101, 19);
+            this.rbtn_OnHold.Name = "rbtn_OnHold";
+            this.rbtn_OnHold.Size = new System.Drawing.Size(64, 17);
+            this.rbtn_OnHold.TabIndex = 2;
+            this.rbtn_OnHold.TabStop = true;
+            this.rbtn_OnHold.Text = "On Hold";
+            this.rbtn_OnHold.UseVisualStyleBackColor = true;
+            this.rbtn_OnHold.CheckedChanged += new System.EventHandler(this.rbtn_OnHold_CheckedChanged);
+            // 
+            // rbtn_Cancelled
+            // 
+            this.rbtn_Cancelled.AutoSize = true;
+            this.rbtn_Cancelled.Location = new System.Drawing.Point(101, 38);
+            this.rbtn_Cancelled.Name = "rbtn_Cancelled";
+            this.rbtn_Cancelled.Size = new System.Drawing.Size(72, 17);
+            this.rbtn_Cancelled.TabIndex = 3;
+            this.rbtn_Cancelled.TabStop = true;
+            this.rbtn_Cancelled.Text = "Cancelled";
+            this.rbtn_Cancelled.UseVisualStyleBackColor = true;
+            this.rbtn_Cancelled.CheckedChanged += new System.EventHandler(this.rbtn_Cancelled_CheckedChanged);
+            // 
+            // rbtn_Completed
+            // 
+            this.rbtn_Completed.AutoSize = true;
+            this.rbtn_Completed.Location = new System.Drawing.Point(6, 58);
+            this.rbtn_Completed.Name = "rbtn_Completed";
+            this.rbtn_Completed.Size = new System.Drawing.Size(75, 17);
+            this.rbtn_Completed.TabIndex = 4;
+            this.rbtn_Completed.TabStop = true;
+            this.rbtn_Completed.Text = "Completed";
+            this.rbtn_Completed.UseVisualStyleBackColor = true;
+            this.rbtn_Completed.CheckedChanged += new System.EventHandler(this.rbtn_Completed_CheckedChanged);
+            // 
+            // lbl_paidDate
+            // 
+            this.lbl_paidDate.AutoSize = true;
+            this.lbl_paidDate.Location = new System.Drawing.Point(121, 71);
+            this.lbl_paidDate.Name = "lbl_paidDate";
+            this.lbl_paidDate.Size = new System.Drawing.Size(54, 13);
+            this.lbl_paidDate.TabIndex = 45;
+            this.lbl_paidDate.Text = "Paid Date";
+            this.lbl_paidDate.Visible = false;
+            // 
+            // dateTime_PaidDate
+            // 
+            this.dateTime_PaidDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTime_PaidDate.Location = new System.Drawing.Point(124, 87);
+            this.dateTime_PaidDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTime_PaidDate.Name = "dateTime_PaidDate";
+            this.dateTime_PaidDate.Size = new System.Drawing.Size(96, 20);
+            this.dateTime_PaidDate.TabIndex = 46;
+            this.dateTime_PaidDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTime_PaidDate.Visible = false;
             // 
             // Frm_Create_Purchases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1153, 656);
+            this.Controls.Add(this.gbox_purchStatus);
             this.Controls.Add(this.gbox_info);
             this.Controls.Add(this.gbox_supplier);
-            this.Controls.Add(this.gbox_status);
             this.Controls.Add(this.gbox_options);
             this.Controls.Add(this.lbl_requiredCamps);
             this.Controls.Add(this.gbox_date);
@@ -778,11 +861,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_supplierId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_extraExpenses)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_insurance)).EndInit();
-            this.gbox_status.ResumeLayout(false);
             this.gbox_supplier.ResumeLayout(false);
             this.gbox_supplier.PerformLayout();
             this.gbox_info.ResumeLayout(false);
             this.gbox_info.PerformLayout();
+            this.gbox_purchStatus.ResumeLayout(false);
+            this.gbox_purchStatus.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -843,8 +927,6 @@
         private System.Windows.Forms.NumericUpDown edt_extraExpenses;
         private System.Windows.Forms.NumericUpDown edt_insurance;
         private System.Windows.Forms.Label lbl_insurance;
-        private System.Windows.Forms.GroupBox gbox_status;
-        private System.Windows.Forms.ComboBox cbox_status;
         private System.Windows.Forms.Button btn_findSupplier;
         private System.Windows.Forms.Label lbl_supplierName;
         private System.Windows.Forms.TextBox edt_supplierName;
@@ -852,5 +934,13 @@
         private System.Windows.Forms.GroupBox gbox_info;
         private System.Windows.Forms.Label lbl_arrivalDate;
         private System.Windows.Forms.DateTimePicker dateTime_ArrivalDate;
+        private System.Windows.Forms.GroupBox gbox_purchStatus;
+        private System.Windows.Forms.RadioButton rbtn_Completed;
+        private System.Windows.Forms.RadioButton rbtn_Cancelled;
+        private System.Windows.Forms.RadioButton rbtn_OnHold;
+        private System.Windows.Forms.RadioButton rbtn_Paid;
+        private System.Windows.Forms.RadioButton rbtn_Active;
+        private System.Windows.Forms.DateTimePicker dateTime_PaidDate;
+        private System.Windows.Forms.Label lbl_paidDate;
     }
 }

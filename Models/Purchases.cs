@@ -13,6 +13,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public int Status { get; set; }
         public DateTime EmissionDate { get; set; }
         public DateTime? ArrivalDate { get; set; }
+        public DateTime EstArrivalDate { get; set; }
+        public DateTime? CancelledDate { get; set; }
+        public DateTime? PaidDate { get; set; }
 
         public double Freight_Cost { get; set; }
         public double Total_PurchaseValue { get; set; }
@@ -25,6 +28,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public Users User { get; set; }
         public List<PurchaseItems> PurchasedItems { get; set; }
         public Suppliers Supplier { get; set; }
+
+
         //public List<BillsToPay> BillToPay { get; set; }
 
         public Purchases()

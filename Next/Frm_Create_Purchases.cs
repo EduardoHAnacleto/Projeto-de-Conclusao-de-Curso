@@ -31,7 +31,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_insurance.Controls[0].Visible = false;
             edt_supplierId.Controls[0].Visible = false;
             medt_date.Text = DateTime.Now.ToString();
-            cbox_status.SelectedIndex = 0;
             User = user;
         }
 
@@ -300,25 +299,29 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.EmissionDate = Convert.ToDateTime(medt_date.Text);
             obj.ExtraExpenses = Convert.ToDouble(edt_extraExpenses.Value);
             obj.InsuranceCost = Convert.ToDouble(edt_insurance.Value);
-            if (cbox_status.SelectedItem.ToString() == "COMPLETED")
+            obj.CancelledDate = null;
+            obj.PaidDate = null;
+            if (rbtn_Completed.Checked)
             {
                 obj.ArrivalDate = dateTime_ArrivalDate.Value;
                 obj.Status = 3;
             }
-            else if (cbox_status.SelectedItem.ToString() == "ACTIVE")
+            else if (rbtn_Active.Checked)
             {
-                obj.ArrivalDate = dateTime_ArrivalDate.Value;
+                obj.ArrivalDate = null;
                 obj.Status = 0;
             }
-            else if (cbox_status.SelectedItem.ToString() == "PAID")
+            else if (rbtn_Paid.Checked)
             {
-                obj.ArrivalDate = dateTime_ArrivalDate.Value;
+                obj.ArrivalDate = null;
                 obj.Status = 1;
+                obj.PaidDate = dateTime_PaidDate.Value;
             }
-            else if (cbox_status.SelectedItem.ToString() == "CANCELLED")
+            else if (rbtn_Cancelled.Checked)
             {
-                obj.ArrivalDate = dateTime_ArrivalDate.Value;
+                obj.ArrivalDate = null;
                 obj.Status = 2;
+                obj.CancelledDate = Convert.ToDateTime(medt_CancelDate.Text);
             }
             return obj;
         }
@@ -375,6 +378,48 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             Populated(true);
             SetFormToEdit();
             PopulateDGV(purchase);
+            PopulateSupplier(purchase.Supplier);
+            PopulateStatusInfo(purchase);
+        }
+
+        private void PopulateStatusInfo(Purchases purchase)
+        {
+            dateTime_EstArrivalDate.Text = purchase.EstArrivalDate.ToShortDateString();
+            edt_transportFee.Value = (decimal)purchase.Freight_Cost;
+            edt_extraExpenses.Value = (decimal)purchase.ExtraExpenses;
+            edt_insurance.Value = (decimal)purchase.InsuranceCost;
+            if (purchase.Status == 3)
+            {
+                rbtn_Completed.Checked = true;
+                lbl_arrivalDate.Visible = true;
+                dateTime_ArrivalDate.Text = purchase.ToString();
+                dateTime_ArrivalDate.Visible = true;
+            }
+            else if (purchase.Status == 0)
+            {
+                rbtn_Active.Checked = true;                
+            }
+            else if (purchase.Status == 1)
+            {
+                rbtn_Paid.Checked = true;
+                lbl_paidDate.Visible = true;
+                dateTime_PaidDate.Visible = true;
+                dateTime_PaidDate.Value = Convert.ToDateTime(purchase.PaidDate);
+            }
+            else if (purchase.Status == 2)
+            {
+                rbtn_Cancelled.Checked = true;
+                medt_CancelDate.Visible = true;
+                lbl_CancelDate.Visible = true;
+                medt_CancelDate.Text = purchase.CancelledDate.ToString();
+            }
+            medt_CancelDate.Text = purchase.dateOfCreation.ToString();
+        }
+
+        private void PopulateSupplier(Suppliers supplier)
+        {
+            edt_supplierId.Value = supplier.id;
+            edt_supplierName.Text = supplier.name;
         }
 
         public void PopulateDGV(Purchases purchase)
@@ -411,6 +456,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 string message = "Purchase must contain supplier.";
                 string caption = "Supplier is not selected.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            else if (rbtn_Completed.Checked && dateTime_ArrivalDate.Value <= dateTime_ArrivalDate.MinDate) 
+            {
+                string message = "Arrival date must be selected.";
+                string caption = "Arival date is not selected.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -464,6 +518,102 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void btn_FindSup_Click(object sender, EventArgs e)
         {
             NewFormSearchSupplier();
+        }
+
+        private void rbtn_Active_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtn_Active.Checked)
+            {
+                rbtn_Cancelled.Checked = false;
+                rbtn_OnHold.Checked = false;
+                rbtn_Completed.Checked = false;
+                rbtn_Paid.Checked = false;
+                dateTime_ArrivalDate.Visible = false;
+                lbl_arrivalDate.Visible = false;
+                lbl_CancelDate.Visible = false;
+                medt_CancelDate.Visible = false;
+                medt_CancelDate.Text = string.Empty;
+                lbl_paidDate.Visible = false;
+                dateTime_PaidDate.Visible = false;
+                dateTime_PaidDate.Value = dateTime_PaidDate.MinDate;
+            }
+        }
+
+        private void rbtn_Paid_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtn_Paid.Checked)
+            {
+                rbtn_Cancelled.Checked = false;
+                rbtn_OnHold.Checked = false;
+                rbtn_Completed.Checked = false;
+                rbtn_Active.Checked = false;
+                dateTime_ArrivalDate.Visible = false;
+                lbl_arrivalDate.Visible = false;
+                lbl_CancelDate.Visible = false;
+                medt_CancelDate.Visible = false;
+                medt_CancelDate.Text = string.Empty;
+                lbl_paidDate.Visible = true;
+                dateTime_PaidDate.Visible = true;
+                dateTime_PaidDate.Value = DateTime.Now;
+            }
+        }
+
+        private void rbtn_Completed_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtn_Completed.Checked)
+            {
+                rbtn_Cancelled.Checked = false;
+                rbtn_OnHold.Checked = false;
+                rbtn_Active.Checked = false;
+                rbtn_Paid.Checked = false;
+                dateTime_ArrivalDate.Visible = true;
+                lbl_arrivalDate.Visible = true;
+                lbl_CancelDate.Visible = false;
+                medt_CancelDate.Visible = false;
+                medt_CancelDate.Text = string.Empty;
+                lbl_paidDate.Visible = false;
+                dateTime_PaidDate.Visible = false;
+                dateTime_PaidDate.Value = dateTime_PaidDate.MinDate;
+            }
+        }
+
+        private void rbtn_OnHold_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtn_OnHold.Checked)
+            {
+                rbtn_Cancelled.Checked = false;
+                rbtn_Active.Checked = false;
+                rbtn_Completed.Checked = false;
+                rbtn_Paid.Checked = false;
+                dateTime_ArrivalDate.Visible = false;
+                lbl_arrivalDate.Visible = false;
+
+                lbl_CancelDate.Visible = false;
+                medt_CancelDate.Visible = false;
+                medt_CancelDate.Text = string.Empty;
+                lbl_paidDate.Visible = false;
+                dateTime_PaidDate.Visible = false;
+                dateTime_PaidDate.Value = dateTime_PaidDate.MinDate;
+            }
+        }
+
+        private void rbtn_Cancelled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbtn_Cancelled.Checked)
+            {
+                rbtn_Active.Checked = false;
+                rbtn_OnHold.Checked = false;
+                rbtn_Completed.Checked = false;
+                rbtn_Paid.Checked = false;
+                dateTime_ArrivalDate.Visible = false;
+                lbl_arrivalDate.Visible = false;
+                lbl_CancelDate.Visible = true;
+                medt_CancelDate.Visible = true;
+                medt_CancelDate.Text = DateTime.Now.ToString();
+                lbl_paidDate.Visible = false;
+                dateTime_PaidDate.Visible = false;
+                dateTime_PaidDate.Value = dateTime_PaidDate.MinDate;
+            }
         }
     }
 }

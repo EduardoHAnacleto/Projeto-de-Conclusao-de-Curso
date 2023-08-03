@@ -129,9 +129,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 if (payConditions != null)
                 {
                     edt_payCondition.Text = payConditions.conditionName;
+                    FilterByPaymentCondition(payConditions.conditionName);
                 }
                 frmPaymentConditions.Close();
-                FilterByPaymentCondition(payConditions.conditionName);
             }
         }
 
