@@ -21,12 +21,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
 
         }
 
-        public void SaveItem(BillsToPay billToPay)
+        public bool SaveItem(BillsToPay billToPay)
         {
             _billToPay = billToPay;
             _billToPay.dateOfCreation = DateTime.Now;
             _billToPay.dateOfLastUpdate = _billToPay.dateOfCreation;
-            _billToPaysDAO.SaveToDb(_billToPay);
+            return _billToPaysDAO.SaveToDb(_billToPay);
         }
         public List<BillsToPay> LoadItems()
         {

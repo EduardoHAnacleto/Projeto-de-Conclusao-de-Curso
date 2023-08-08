@@ -29,16 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_PurchasesProducts = new System.Windows.Forms.DataGridView();
-            this.ProdId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdNewBaseUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentSalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdPurchPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdWeightedAvg = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdNewSalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_products = new System.Windows.Forms.GroupBox();
             this.btn_AddProduct = new System.Windows.Forms.Button();
             this.btn_FindProduct = new System.Windows.Forms.Button();
@@ -75,8 +65,6 @@
             this.lbl_transportFee = new System.Windows.Forms.Label();
             this.edt_supplierId = new System.Windows.Forms.NumericUpDown();
             this.lbl_supplierId = new System.Windows.Forms.Label();
-            this.dateTime_EstArrivalDate = new System.Windows.Forms.DateTimePicker();
-            this.lbl_EstArrivalDate = new System.Windows.Forms.Label();
             this.lbl_extraExpenses = new System.Windows.Forms.Label();
             this.edt_extraExpenses = new System.Windows.Forms.NumericUpDown();
             this.edt_insurance = new System.Windows.Forms.NumericUpDown();
@@ -88,14 +76,33 @@
             this.gbox_info = new System.Windows.Forms.GroupBox();
             this.lbl_arrivalDate = new System.Windows.Forms.Label();
             this.dateTime_ArrivalDate = new System.Windows.Forms.DateTimePicker();
-            this.gbox_purchStatus = new System.Windows.Forms.GroupBox();
-            this.rbtn_Active = new System.Windows.Forms.RadioButton();
-            this.rbtn_Paid = new System.Windows.Forms.RadioButton();
-            this.rbtn_OnHold = new System.Windows.Forms.RadioButton();
-            this.rbtn_Cancelled = new System.Windows.Forms.RadioButton();
-            this.rbtn_Completed = new System.Windows.Forms.RadioButton();
-            this.lbl_paidDate = new System.Windows.Forms.Label();
-            this.dateTime_PaidDate = new System.Windows.Forms.DateTimePicker();
+            this.lbl_billModel = new System.Windows.Forms.Label();
+            this.gbox_billInfo = new System.Windows.Forms.GroupBox();
+            this.gbox_payCond = new System.Windows.Forms.GroupBox();
+            this.btn_FindPayCond = new System.Windows.Forms.Button();
+            this.edt_payCondId = new System.Windows.Forms.NumericUpDown();
+            this.edt_payCondName = new System.Windows.Forms.TextBox();
+            this.lbl_payCondId = new System.Windows.Forms.Label();
+            this.lbl_payCondName = new System.Windows.Forms.Label();
+            this.edt_billSeries = new System.Windows.Forms.NumericUpDown();
+            this.edt_billModel = new System.Windows.Forms.NumericUpDown();
+            this.edt_billNumber = new System.Windows.Forms.NumericUpDown();
+            this.lbl_billNumber = new System.Windows.Forms.Label();
+            this.lbl_billSeries = new System.Windows.Forms.Label();
+            this.dateTime_emissionDate = new System.Windows.Forms.DateTimePicker();
+            this.lbl_emissionDate = new System.Windows.Forms.Label();
+            this.edt_prodDiscCash = new System.Windows.Forms.NumericUpDown();
+            this.lbl_prodDiscCash = new System.Windows.Forms.Label();
+            this.ProdId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdNewBaseUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentSalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdPurchPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdWeightedAvg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).BeginInit();
             this.gbox_products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodUnCost)).BeginInit();
@@ -112,7 +119,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_insurance)).BeginInit();
             this.gbox_supplier.SuspendLayout();
             this.gbox_info.SuspendLayout();
-            this.gbox_purchStatus.SuspendLayout();
+            this.gbox_billInfo.SuspendLayout();
+            this.gbox_payCond.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_payCondId)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_billSeries)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_billModel)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_billNumber)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_prodDiscCash)).BeginInit();
             this.SuspendLayout();
             // 
             // DGV_PurchasesProducts
@@ -124,12 +137,12 @@
             this.ProdName,
             this.ProdQtd,
             this.ProdCurrentUnCost,
+            this.ProdDiscountCash,
             this.ProdNewBaseUnCost,
             this.ProdCurrentSalePrice,
             this.ProdCurrentStock,
             this.ProdPurchPerc,
-            this.ProdWeightedAvg,
-            this.ProdNewSalePrice});
+            this.ProdWeightedAvg});
             this.DGV_PurchasesProducts.Location = new System.Drawing.Point(22, 64);
             this.DGV_PurchasesProducts.MultiSelect = false;
             this.DGV_PurchasesProducts.Name = "DGV_PurchasesProducts";
@@ -138,70 +151,10 @@
             this.DGV_PurchasesProducts.Size = new System.Drawing.Size(1087, 228);
             this.DGV_PurchasesProducts.TabIndex = 0;
             // 
-            // ProdId
-            // 
-            this.ProdId.HeaderText = "ID";
-            this.ProdId.Name = "ProdId";
-            this.ProdId.ReadOnly = true;
-            this.ProdId.Width = 50;
-            // 
-            // ProdName
-            // 
-            this.ProdName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ProdName.HeaderText = "Product";
-            this.ProdName.Name = "ProdName";
-            this.ProdName.ReadOnly = true;
-            // 
-            // ProdQtd
-            // 
-            this.ProdQtd.HeaderText = "Quantity";
-            this.ProdQtd.Name = "ProdQtd";
-            this.ProdQtd.ReadOnly = true;
-            this.ProdQtd.Width = 60;
-            // 
-            // ProdCurrentUnCost
-            // 
-            this.ProdCurrentUnCost.HeaderText = "Current UN Cost";
-            this.ProdCurrentUnCost.Name = "ProdCurrentUnCost";
-            // 
-            // ProdNewBaseUnCost
-            // 
-            this.ProdNewBaseUnCost.HeaderText = "New Base UN Cost";
-            this.ProdNewBaseUnCost.Name = "ProdNewBaseUnCost";
-            // 
-            // ProdCurrentSalePrice
-            // 
-            this.ProdCurrentSalePrice.HeaderText = "Current Sale Price";
-            this.ProdCurrentSalePrice.Name = "ProdCurrentSalePrice";
-            this.ProdCurrentSalePrice.ReadOnly = true;
-            // 
-            // ProdCurrentStock
-            // 
-            this.ProdCurrentStock.HeaderText = "Current Stock";
-            this.ProdCurrentStock.Name = "ProdCurrentStock";
-            this.ProdCurrentStock.ReadOnly = true;
-            this.ProdCurrentStock.Width = 60;
-            // 
-            // ProdPurchPerc
-            // 
-            this.ProdPurchPerc.HeaderText = "Purchase Percentage";
-            this.ProdPurchPerc.Name = "ProdPurchPerc";
-            this.ProdPurchPerc.ReadOnly = true;
-            // 
-            // ProdWeightedAvg
-            // 
-            this.ProdWeightedAvg.HeaderText = "Weighted Cost Average";
-            this.ProdWeightedAvg.Name = "ProdWeightedAvg";
-            this.ProdWeightedAvg.ReadOnly = true;
-            // 
-            // ProdNewSalePrice
-            // 
-            this.ProdNewSalePrice.HeaderText = "New Sale Price";
-            this.ProdNewSalePrice.Name = "ProdNewSalePrice";
-            this.ProdNewSalePrice.ReadOnly = true;
-            // 
             // gbox_products
             // 
+            this.gbox_products.Controls.Add(this.lbl_prodDiscCash);
+            this.gbox_products.Controls.Add(this.edt_prodDiscCash);
             this.gbox_products.Controls.Add(this.btn_AddProduct);
             this.gbox_products.Controls.Add(this.btn_FindProduct);
             this.gbox_products.Controls.Add(this.lbl_prodUnCost);
@@ -215,7 +168,7 @@
             this.gbox_products.Controls.Add(this.lbl_prodId);
             this.gbox_products.Controls.Add(this.edt_prodId);
             this.gbox_products.Controls.Add(this.DGV_PurchasesProducts);
-            this.gbox_products.Location = new System.Drawing.Point(12, 216);
+            this.gbox_products.Location = new System.Drawing.Point(12, 264);
             this.gbox_products.Name = "gbox_products";
             this.gbox_products.Size = new System.Drawing.Size(1129, 298);
             this.gbox_products.TabIndex = 1;
@@ -224,7 +177,7 @@
             // 
             // btn_AddProduct
             // 
-            this.btn_AddProduct.Location = new System.Drawing.Point(823, 36);
+            this.btn_AddProduct.Location = new System.Drawing.Point(1058, 35);
             this.btn_AddProduct.Name = "btn_AddProduct";
             this.btn_AddProduct.Size = new System.Drawing.Size(51, 20);
             this.btn_AddProduct.TabIndex = 12;
@@ -245,7 +198,7 @@
             // lbl_prodUnCost
             // 
             this.lbl_prodUnCost.AutoSize = true;
-            this.lbl_prodUnCost.Location = new System.Drawing.Point(762, 22);
+            this.lbl_prodUnCost.Location = new System.Drawing.Point(759, 22);
             this.lbl_prodUnCost.Name = "lbl_prodUnCost";
             this.lbl_prodUnCost.Size = new System.Drawing.Size(47, 13);
             this.lbl_prodUnCost.TabIndex = 10;
@@ -254,7 +207,7 @@
             // lbl_prodqtd
             // 
             this.lbl_prodqtd.AutoSize = true;
-            this.lbl_prodqtd.Location = new System.Drawing.Point(699, 22);
+            this.lbl_prodqtd.Location = new System.Drawing.Point(690, 22);
             this.lbl_prodqtd.Name = "lbl_prodqtd";
             this.lbl_prodqtd.Size = new System.Drawing.Size(46, 13);
             this.lbl_prodqtd.TabIndex = 9;
@@ -422,7 +375,7 @@
             this.gbox_date.Controls.Add(this.lbl_date);
             this.gbox_date.Location = new System.Drawing.Point(12, 581);
             this.gbox_date.Name = "gbox_date";
-            this.gbox_date.Size = new System.Drawing.Size(196, 63);
+            this.gbox_date.Size = new System.Drawing.Size(201, 63);
             this.gbox_date.TabIndex = 29;
             this.gbox_date.TabStop = false;
             this.gbox_date.Text = "Date";
@@ -432,15 +385,15 @@
             this.lbl_CancelDate.AutoSize = true;
             this.lbl_CancelDate.Location = new System.Drawing.Point(11, 45);
             this.lbl_CancelDate.Name = "lbl_CancelDate";
-            this.lbl_CancelDate.Size = new System.Drawing.Size(60, 13);
+            this.lbl_CancelDate.Size = new System.Drawing.Size(77, 13);
             this.lbl_CancelDate.TabIndex = 3;
-            this.lbl_CancelDate.Text = "Cancelled :";
+            this.lbl_CancelDate.Text = "Last Updated :";
             this.lbl_CancelDate.Visible = false;
             // 
             // medt_CancelDate
             // 
             this.medt_CancelDate.Enabled = false;
-            this.medt_CancelDate.Location = new System.Drawing.Point(71, 42);
+            this.medt_CancelDate.Location = new System.Drawing.Point(88, 42);
             this.medt_CancelDate.Mask = "00/00/0000 90:00";
             this.medt_CancelDate.Name = "medt_CancelDate";
             this.medt_CancelDate.Size = new System.Drawing.Size(100, 20);
@@ -451,7 +404,7 @@
             // medt_date
             // 
             this.medt_date.Enabled = false;
-            this.medt_date.Location = new System.Drawing.Point(71, 16);
+            this.medt_date.Location = new System.Drawing.Point(88, 16);
             this.medt_date.Mask = "00/00/0000 90:00";
             this.medt_date.Name = "medt_date";
             this.medt_date.Size = new System.Drawing.Size(100, 20);
@@ -461,11 +414,11 @@
             // lbl_date
             // 
             this.lbl_date.AutoSize = true;
-            this.lbl_date.Location = new System.Drawing.Point(11, 19);
+            this.lbl_date.Location = new System.Drawing.Point(32, 19);
             this.lbl_date.Name = "lbl_date";
-            this.lbl_date.Size = new System.Drawing.Size(54, 13);
+            this.lbl_date.Size = new System.Drawing.Size(50, 13);
             this.lbl_date.TabIndex = 0;
-            this.lbl_date.Text = "Emission :";
+            this.lbl_date.Text = "Created :";
             // 
             // gbox_options
             // 
@@ -518,6 +471,7 @@
             this.btn_Close.TabIndex = 3;
             this.btn_Close.Text = "Close";
             this.btn_Close.UseVisualStyleBackColor = true;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // btn_Save
             // 
@@ -560,7 +514,7 @@
             // lbl_transportFee
             // 
             this.lbl_transportFee.AutoSize = true;
-            this.lbl_transportFee.Location = new System.Drawing.Point(131, 25);
+            this.lbl_transportFee.Location = new System.Drawing.Point(121, 25);
             this.lbl_transportFee.Name = "lbl_transportFee";
             this.lbl_transportFee.Size = new System.Drawing.Size(73, 13);
             this.lbl_transportFee.TabIndex = 33;
@@ -587,24 +541,6 @@
             this.lbl_supplierId.Size = new System.Drawing.Size(18, 13);
             this.lbl_supplierId.TabIndex = 35;
             this.lbl_supplierId.Text = "ID";
-            // 
-            // dateTime_EstArrivalDate
-            // 
-            this.dateTime_EstArrivalDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTime_EstArrivalDate.Location = new System.Drawing.Point(13, 41);
-            this.dateTime_EstArrivalDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateTime_EstArrivalDate.Name = "dateTime_EstArrivalDate";
-            this.dateTime_EstArrivalDate.Size = new System.Drawing.Size(92, 20);
-            this.dateTime_EstArrivalDate.TabIndex = 36;
-            // 
-            // lbl_EstArrivalDate
-            // 
-            this.lbl_EstArrivalDate.AutoSize = true;
-            this.lbl_EstArrivalDate.Location = new System.Drawing.Point(10, 25);
-            this.lbl_EstArrivalDate.Name = "lbl_EstArrivalDate";
-            this.lbl_EstArrivalDate.Size = new System.Drawing.Size(95, 13);
-            this.lbl_EstArrivalDate.TabIndex = 37;
-            this.lbl_EstArrivalDate.Text = "Est. Date of Arrival";
             // 
             // lbl_extraExpenses
             // 
@@ -692,21 +628,19 @@
             // 
             // gbox_info
             // 
-            this.gbox_info.Controls.Add(this.dateTime_PaidDate);
-            this.gbox_info.Controls.Add(this.lbl_paidDate);
+            this.gbox_info.Controls.Add(this.lbl_emissionDate);
+            this.gbox_info.Controls.Add(this.dateTime_emissionDate);
             this.gbox_info.Controls.Add(this.lbl_arrivalDate);
             this.gbox_info.Controls.Add(this.dateTime_ArrivalDate);
-            this.gbox_info.Controls.Add(this.dateTime_EstArrivalDate);
             this.gbox_info.Controls.Add(this.edt_transportFee);
             this.gbox_info.Controls.Add(this.lbl_transportFee);
             this.gbox_info.Controls.Add(this.lbl_insurance);
-            this.gbox_info.Controls.Add(this.lbl_EstArrivalDate);
             this.gbox_info.Controls.Add(this.edt_insurance);
             this.gbox_info.Controls.Add(this.lbl_extraExpenses);
             this.gbox_info.Controls.Add(this.edt_extraExpenses);
-            this.gbox_info.Location = new System.Drawing.Point(300, 97);
+            this.gbox_info.Location = new System.Drawing.Point(320, 123);
             this.gbox_info.Name = "gbox_info";
-            this.gbox_info.Size = new System.Drawing.Size(523, 113);
+            this.gbox_info.Size = new System.Drawing.Size(472, 139);
             this.gbox_info.TabIndex = 47;
             this.gbox_info.TabStop = false;
             this.gbox_info.Text = "Purchase Information";
@@ -714,126 +648,274 @@
             // lbl_arrivalDate
             // 
             this.lbl_arrivalDate.AutoSize = true;
-            this.lbl_arrivalDate.Location = new System.Drawing.Point(10, 71);
+            this.lbl_arrivalDate.Location = new System.Drawing.Point(6, 25);
             this.lbl_arrivalDate.Name = "lbl_arrivalDate";
             this.lbl_arrivalDate.Size = new System.Drawing.Size(74, 13);
             this.lbl_arrivalDate.TabIndex = 44;
             this.lbl_arrivalDate.Text = "Date of Arrival";
-            this.lbl_arrivalDate.Visible = false;
             // 
             // dateTime_ArrivalDate
             // 
             this.dateTime_ArrivalDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTime_ArrivalDate.Location = new System.Drawing.Point(13, 87);
+            this.dateTime_ArrivalDate.Location = new System.Drawing.Point(9, 41);
             this.dateTime_ArrivalDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.dateTime_ArrivalDate.Name = "dateTime_ArrivalDate";
-            this.dateTime_ArrivalDate.Size = new System.Drawing.Size(92, 20);
+            this.dateTime_ArrivalDate.Size = new System.Drawing.Size(95, 20);
             this.dateTime_ArrivalDate.TabIndex = 43;
             this.dateTime_ArrivalDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateTime_ArrivalDate.Visible = false;
             // 
-            // gbox_purchStatus
+            // lbl_billModel
             // 
-            this.gbox_purchStatus.Controls.Add(this.rbtn_Completed);
-            this.gbox_purchStatus.Controls.Add(this.rbtn_Cancelled);
-            this.gbox_purchStatus.Controls.Add(this.rbtn_OnHold);
-            this.gbox_purchStatus.Controls.Add(this.rbtn_Paid);
-            this.gbox_purchStatus.Controls.Add(this.rbtn_Active);
-            this.gbox_purchStatus.Location = new System.Drawing.Point(955, 122);
-            this.gbox_purchStatus.Name = "gbox_purchStatus";
-            this.gbox_purchStatus.Size = new System.Drawing.Size(186, 84);
-            this.gbox_purchStatus.TabIndex = 48;
-            this.gbox_purchStatus.TabStop = false;
-            this.gbox_purchStatus.Text = "Purchase Status";
+            this.lbl_billModel.AutoSize = true;
+            this.lbl_billModel.Location = new System.Drawing.Point(74, 24);
+            this.lbl_billModel.Name = "lbl_billModel";
+            this.lbl_billModel.Size = new System.Drawing.Size(36, 13);
+            this.lbl_billModel.TabIndex = 47;
+            this.lbl_billModel.Text = "Model";
             // 
-            // rbtn_Active
+            // gbox_billInfo
             // 
-            this.rbtn_Active.AutoSize = true;
-            this.rbtn_Active.Checked = true;
-            this.rbtn_Active.Location = new System.Drawing.Point(6, 19);
-            this.rbtn_Active.Name = "rbtn_Active";
-            this.rbtn_Active.Size = new System.Drawing.Size(55, 17);
-            this.rbtn_Active.TabIndex = 0;
-            this.rbtn_Active.TabStop = true;
-            this.rbtn_Active.Text = "Active";
-            this.rbtn_Active.UseVisualStyleBackColor = true;
-            this.rbtn_Active.CheckedChanged += new System.EventHandler(this.rbtn_Active_CheckedChanged);
+            this.gbox_billInfo.Controls.Add(this.gbox_payCond);
+            this.gbox_billInfo.Controls.Add(this.edt_billSeries);
+            this.gbox_billInfo.Controls.Add(this.edt_billModel);
+            this.gbox_billInfo.Controls.Add(this.edt_billNumber);
+            this.gbox_billInfo.Controls.Add(this.lbl_billNumber);
+            this.gbox_billInfo.Controls.Add(this.lbl_billSeries);
+            this.gbox_billInfo.Controls.Add(this.lbl_billModel);
+            this.gbox_billInfo.Location = new System.Drawing.Point(12, 122);
+            this.gbox_billInfo.Name = "gbox_billInfo";
+            this.gbox_billInfo.Size = new System.Drawing.Size(302, 140);
+            this.gbox_billInfo.TabIndex = 49;
+            this.gbox_billInfo.TabStop = false;
+            this.gbox_billInfo.Text = "Bill Information";
             // 
-            // rbtn_Paid
+            // gbox_payCond
             // 
-            this.rbtn_Paid.AutoSize = true;
-            this.rbtn_Paid.Location = new System.Drawing.Point(6, 38);
-            this.rbtn_Paid.Name = "rbtn_Paid";
-            this.rbtn_Paid.Size = new System.Drawing.Size(46, 17);
-            this.rbtn_Paid.TabIndex = 1;
-            this.rbtn_Paid.TabStop = true;
-            this.rbtn_Paid.Text = "Paid";
-            this.rbtn_Paid.UseVisualStyleBackColor = true;
-            this.rbtn_Paid.CheckedChanged += new System.EventHandler(this.rbtn_Paid_CheckedChanged);
+            this.gbox_payCond.Controls.Add(this.btn_FindPayCond);
+            this.gbox_payCond.Controls.Add(this.edt_payCondId);
+            this.gbox_payCond.Controls.Add(this.edt_payCondName);
+            this.gbox_payCond.Controls.Add(this.lbl_payCondId);
+            this.gbox_payCond.Controls.Add(this.lbl_payCondName);
+            this.gbox_payCond.Location = new System.Drawing.Point(3, 65);
+            this.gbox_payCond.Name = "gbox_payCond";
+            this.gbox_payCond.Size = new System.Drawing.Size(293, 69);
+            this.gbox_payCond.TabIndex = 50;
+            this.gbox_payCond.TabStop = false;
+            this.gbox_payCond.Text = "Payment Conditon";
             // 
-            // rbtn_OnHold
+            // btn_FindPayCond
             // 
-            this.rbtn_OnHold.AutoSize = true;
-            this.rbtn_OnHold.Location = new System.Drawing.Point(101, 19);
-            this.rbtn_OnHold.Name = "rbtn_OnHold";
-            this.rbtn_OnHold.Size = new System.Drawing.Size(64, 17);
-            this.rbtn_OnHold.TabIndex = 2;
-            this.rbtn_OnHold.TabStop = true;
-            this.rbtn_OnHold.Text = "On Hold";
-            this.rbtn_OnHold.UseVisualStyleBackColor = true;
-            this.rbtn_OnHold.CheckedChanged += new System.EventHandler(this.rbtn_OnHold_CheckedChanged);
+            this.btn_FindPayCond.Location = new System.Drawing.Point(235, 31);
+            this.btn_FindPayCond.Name = "btn_FindPayCond";
+            this.btn_FindPayCond.Size = new System.Drawing.Size(52, 23);
+            this.btn_FindPayCond.TabIndex = 57;
+            this.btn_FindPayCond.Text = "Find";
+            this.btn_FindPayCond.UseVisualStyleBackColor = true;
+            this.btn_FindPayCond.Click += new System.EventHandler(this.btn_FindPayCond_Click);
             // 
-            // rbtn_Cancelled
+            // edt_payCondId
             // 
-            this.rbtn_Cancelled.AutoSize = true;
-            this.rbtn_Cancelled.Location = new System.Drawing.Point(101, 38);
-            this.rbtn_Cancelled.Name = "rbtn_Cancelled";
-            this.rbtn_Cancelled.Size = new System.Drawing.Size(72, 17);
-            this.rbtn_Cancelled.TabIndex = 3;
-            this.rbtn_Cancelled.TabStop = true;
-            this.rbtn_Cancelled.Text = "Cancelled";
-            this.rbtn_Cancelled.UseVisualStyleBackColor = true;
-            this.rbtn_Cancelled.CheckedChanged += new System.EventHandler(this.rbtn_Cancelled_CheckedChanged);
+            this.edt_payCondId.Enabled = false;
+            this.edt_payCondId.Location = new System.Drawing.Point(6, 33);
+            this.edt_payCondId.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.edt_payCondId.Name = "edt_payCondId";
+            this.edt_payCondId.Size = new System.Drawing.Size(39, 20);
+            this.edt_payCondId.TabIndex = 55;
             // 
-            // rbtn_Completed
+            // edt_payCondName
             // 
-            this.rbtn_Completed.AutoSize = true;
-            this.rbtn_Completed.Location = new System.Drawing.Point(6, 58);
-            this.rbtn_Completed.Name = "rbtn_Completed";
-            this.rbtn_Completed.Size = new System.Drawing.Size(75, 17);
-            this.rbtn_Completed.TabIndex = 4;
-            this.rbtn_Completed.TabStop = true;
-            this.rbtn_Completed.Text = "Completed";
-            this.rbtn_Completed.UseVisualStyleBackColor = true;
-            this.rbtn_Completed.CheckedChanged += new System.EventHandler(this.rbtn_Completed_CheckedChanged);
+            this.edt_payCondName.Enabled = false;
+            this.edt_payCondName.Location = new System.Drawing.Point(51, 33);
+            this.edt_payCondName.Name = "edt_payCondName";
+            this.edt_payCondName.Size = new System.Drawing.Size(178, 20);
+            this.edt_payCondName.TabIndex = 56;
             // 
-            // lbl_paidDate
+            // lbl_payCondId
             // 
-            this.lbl_paidDate.AutoSize = true;
-            this.lbl_paidDate.Location = new System.Drawing.Point(121, 71);
-            this.lbl_paidDate.Name = "lbl_paidDate";
-            this.lbl_paidDate.Size = new System.Drawing.Size(54, 13);
-            this.lbl_paidDate.TabIndex = 45;
-            this.lbl_paidDate.Text = "Paid Date";
-            this.lbl_paidDate.Visible = false;
+            this.lbl_payCondId.AutoSize = true;
+            this.lbl_payCondId.Location = new System.Drawing.Point(4, 17);
+            this.lbl_payCondId.Name = "lbl_payCondId";
+            this.lbl_payCondId.Size = new System.Drawing.Size(18, 13);
+            this.lbl_payCondId.TabIndex = 53;
+            this.lbl_payCondId.Text = "ID";
             // 
-            // dateTime_PaidDate
+            // lbl_payCondName
             // 
-            this.dateTime_PaidDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTime_PaidDate.Location = new System.Drawing.Point(124, 87);
-            this.dateTime_PaidDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateTime_PaidDate.Name = "dateTime_PaidDate";
-            this.dateTime_PaidDate.Size = new System.Drawing.Size(96, 20);
-            this.dateTime_PaidDate.TabIndex = 46;
-            this.dateTime_PaidDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateTime_PaidDate.Visible = false;
+            this.lbl_payCondName.AutoSize = true;
+            this.lbl_payCondName.Location = new System.Drawing.Point(48, 18);
+            this.lbl_payCondName.Name = "lbl_payCondName";
+            this.lbl_payCondName.Size = new System.Drawing.Size(51, 13);
+            this.lbl_payCondName.TabIndex = 54;
+            this.lbl_payCondName.Text = "Condition";
+            // 
+            // edt_billSeries
+            // 
+            this.edt_billSeries.Location = new System.Drawing.Point(137, 39);
+            this.edt_billSeries.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.edt_billSeries.Name = "edt_billSeries";
+            this.edt_billSeries.Size = new System.Drawing.Size(58, 20);
+            this.edt_billSeries.TabIndex = 52;
+            // 
+            // edt_billModel
+            // 
+            this.edt_billModel.Location = new System.Drawing.Point(74, 39);
+            this.edt_billModel.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.edt_billModel.Name = "edt_billModel";
+            this.edt_billModel.Size = new System.Drawing.Size(58, 20);
+            this.edt_billModel.TabIndex = 51;
+            // 
+            // edt_billNumber
+            // 
+            this.edt_billNumber.Location = new System.Drawing.Point(10, 39);
+            this.edt_billNumber.Maximum = new decimal(new int[] {
+            9999999,
+            0,
+            0,
+            0});
+            this.edt_billNumber.Name = "edt_billNumber";
+            this.edt_billNumber.Size = new System.Drawing.Size(58, 20);
+            this.edt_billNumber.TabIndex = 50;
+            // 
+            // lbl_billNumber
+            // 
+            this.lbl_billNumber.AutoSize = true;
+            this.lbl_billNumber.Location = new System.Drawing.Point(7, 24);
+            this.lbl_billNumber.Name = "lbl_billNumber";
+            this.lbl_billNumber.Size = new System.Drawing.Size(44, 13);
+            this.lbl_billNumber.TabIndex = 49;
+            this.lbl_billNumber.Text = "Number";
+            // 
+            // lbl_billSeries
+            // 
+            this.lbl_billSeries.AutoSize = true;
+            this.lbl_billSeries.Location = new System.Drawing.Point(134, 22);
+            this.lbl_billSeries.Name = "lbl_billSeries";
+            this.lbl_billSeries.Size = new System.Drawing.Size(36, 13);
+            this.lbl_billSeries.TabIndex = 48;
+            this.lbl_billSeries.Text = "Series";
+            // 
+            // dateTime_emissionDate
+            // 
+            this.dateTime_emissionDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTime_emissionDate.Location = new System.Drawing.Point(9, 93);
+            this.dateTime_emissionDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTime_emissionDate.Name = "dateTime_emissionDate";
+            this.dateTime_emissionDate.Size = new System.Drawing.Size(95, 20);
+            this.dateTime_emissionDate.TabIndex = 45;
+            this.dateTime_emissionDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            // 
+            // lbl_emissionDate
+            // 
+            this.lbl_emissionDate.AutoSize = true;
+            this.lbl_emissionDate.Location = new System.Drawing.Point(6, 77);
+            this.lbl_emissionDate.Name = "lbl_emissionDate";
+            this.lbl_emissionDate.Size = new System.Drawing.Size(74, 13);
+            this.lbl_emissionDate.TabIndex = 46;
+            this.lbl_emissionDate.Text = "Emission Date";
+            // 
+            // edt_prodDiscCash
+            // 
+            this.edt_prodDiscCash.DecimalPlaces = 2;
+            this.edt_prodDiscCash.Location = new System.Drawing.Point(824, 37);
+            this.edt_prodDiscCash.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.edt_prodDiscCash.Name = "edt_prodDiscCash";
+            this.edt_prodDiscCash.Size = new System.Drawing.Size(58, 20);
+            this.edt_prodDiscCash.TabIndex = 14;
+            // 
+            // lbl_prodDiscCash
+            // 
+            this.lbl_prodDiscCash.AutoSize = true;
+            this.lbl_prodDiscCash.Location = new System.Drawing.Point(821, 22);
+            this.lbl_prodDiscCash.Name = "lbl_prodDiscCash";
+            this.lbl_prodDiscCash.Size = new System.Drawing.Size(76, 13);
+            this.lbl_prodDiscCash.TabIndex = 15;
+            this.lbl_prodDiscCash.Text = "Cash Discount";
+            // 
+            // ProdId
+            // 
+            this.ProdId.HeaderText = "ID";
+            this.ProdId.Name = "ProdId";
+            this.ProdId.ReadOnly = true;
+            this.ProdId.Width = 50;
+            // 
+            // ProdName
+            // 
+            this.ProdName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ProdName.HeaderText = "Product";
+            this.ProdName.Name = "ProdName";
+            this.ProdName.ReadOnly = true;
+            // 
+            // ProdQtd
+            // 
+            this.ProdQtd.HeaderText = "Quantity";
+            this.ProdQtd.Name = "ProdQtd";
+            this.ProdQtd.ReadOnly = true;
+            this.ProdQtd.Width = 60;
+            // 
+            // ProdCurrentUnCost
+            // 
+            this.ProdCurrentUnCost.HeaderText = "Current UN Cost";
+            this.ProdCurrentUnCost.Name = "ProdCurrentUnCost";
+            // 
+            // ProdDiscountCash
+            // 
+            this.ProdDiscountCash.HeaderText = "Discount";
+            this.ProdDiscountCash.Name = "ProdDiscountCash";
+            this.ProdDiscountCash.ReadOnly = true;
+            this.ProdDiscountCash.Width = 70;
+            // 
+            // ProdNewBaseUnCost
+            // 
+            this.ProdNewBaseUnCost.HeaderText = "New Base UN Cost";
+            this.ProdNewBaseUnCost.Name = "ProdNewBaseUnCost";
+            // 
+            // ProdCurrentSalePrice
+            // 
+            this.ProdCurrentSalePrice.HeaderText = "Current Sale Price";
+            this.ProdCurrentSalePrice.Name = "ProdCurrentSalePrice";
+            this.ProdCurrentSalePrice.ReadOnly = true;
+            // 
+            // ProdCurrentStock
+            // 
+            this.ProdCurrentStock.HeaderText = "Current Stock";
+            this.ProdCurrentStock.Name = "ProdCurrentStock";
+            this.ProdCurrentStock.ReadOnly = true;
+            this.ProdCurrentStock.Width = 60;
+            // 
+            // ProdPurchPerc
+            // 
+            this.ProdPurchPerc.HeaderText = "Purchase Percentage";
+            this.ProdPurchPerc.Name = "ProdPurchPerc";
+            this.ProdPurchPerc.ReadOnly = true;
+            // 
+            // ProdWeightedAvg
+            // 
+            this.ProdWeightedAvg.HeaderText = "Weighted Cost Average";
+            this.ProdWeightedAvg.Name = "ProdWeightedAvg";
+            this.ProdWeightedAvg.ReadOnly = true;
             // 
             // Frm_Create_Purchases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1153, 656);
-            this.Controls.Add(this.gbox_purchStatus);
+            this.Controls.Add(this.gbox_billInfo);
             this.Controls.Add(this.gbox_info);
             this.Controls.Add(this.gbox_supplier);
             this.Controls.Add(this.gbox_options);
@@ -865,8 +947,15 @@
             this.gbox_supplier.PerformLayout();
             this.gbox_info.ResumeLayout(false);
             this.gbox_info.PerformLayout();
-            this.gbox_purchStatus.ResumeLayout(false);
-            this.gbox_purchStatus.PerformLayout();
+            this.gbox_billInfo.ResumeLayout(false);
+            this.gbox_billInfo.PerformLayout();
+            this.gbox_payCond.ResumeLayout(false);
+            this.gbox_payCond.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_payCondId)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_billSeries)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_billModel)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_billNumber)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_prodDiscCash)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -909,20 +998,8 @@
         private System.Windows.Forms.Button btn_new;
         private System.Windows.Forms.NumericUpDown edt_transportFee;
         private System.Windows.Forms.Label lbl_transportFee;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdQtd;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdCurrentUnCost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdNewBaseUnCost;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdCurrentSalePrice;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdCurrentStock;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdPurchPerc;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdWeightedAvg;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ProdNewSalePrice;
         private System.Windows.Forms.NumericUpDown edt_supplierId;
         private System.Windows.Forms.Label lbl_supplierId;
-        private System.Windows.Forms.DateTimePicker dateTime_EstArrivalDate;
-        private System.Windows.Forms.Label lbl_EstArrivalDate;
         private System.Windows.Forms.Label lbl_extraExpenses;
         private System.Windows.Forms.NumericUpDown edt_extraExpenses;
         private System.Windows.Forms.NumericUpDown edt_insurance;
@@ -934,13 +1011,32 @@
         private System.Windows.Forms.GroupBox gbox_info;
         private System.Windows.Forms.Label lbl_arrivalDate;
         private System.Windows.Forms.DateTimePicker dateTime_ArrivalDate;
-        private System.Windows.Forms.GroupBox gbox_purchStatus;
-        private System.Windows.Forms.RadioButton rbtn_Completed;
-        private System.Windows.Forms.RadioButton rbtn_Cancelled;
-        private System.Windows.Forms.RadioButton rbtn_OnHold;
-        private System.Windows.Forms.RadioButton rbtn_Paid;
-        private System.Windows.Forms.RadioButton rbtn_Active;
-        private System.Windows.Forms.DateTimePicker dateTime_PaidDate;
-        private System.Windows.Forms.Label lbl_paidDate;
+        private System.Windows.Forms.Label lbl_billModel;
+        private System.Windows.Forms.GroupBox gbox_billInfo;
+        private System.Windows.Forms.NumericUpDown edt_payCondId;
+        private System.Windows.Forms.Label lbl_payCondName;
+        private System.Windows.Forms.Label lbl_payCondId;
+        private System.Windows.Forms.NumericUpDown edt_billSeries;
+        private System.Windows.Forms.NumericUpDown edt_billModel;
+        private System.Windows.Forms.NumericUpDown edt_billNumber;
+        private System.Windows.Forms.Label lbl_billNumber;
+        private System.Windows.Forms.Label lbl_billSeries;
+        private System.Windows.Forms.GroupBox gbox_payCond;
+        private System.Windows.Forms.Button btn_FindPayCond;
+        private System.Windows.Forms.TextBox edt_payCondName;
+        private System.Windows.Forms.Label lbl_emissionDate;
+        private System.Windows.Forms.DateTimePicker dateTime_emissionDate;
+        private System.Windows.Forms.Label lbl_prodDiscCash;
+        private System.Windows.Forms.NumericUpDown edt_prodDiscCash;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdQtd;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdCurrentUnCost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdDiscountCash;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdNewBaseUnCost;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdCurrentSalePrice;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdCurrentStock;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdPurchPerc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ProdWeightedAvg;
     }
 }

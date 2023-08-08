@@ -31,7 +31,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public bool FromPurchase = false;
         public bool HasSaved = false;
-        public List<BillsToPay> _auxObjList;
+        public List<BillsToPay> _auxObjList = new List<BillsToPay>();
         private BillsToPay _auxObj;
         private BillsToPay_Controller _controller = new BillsToPay_Controller();
         private readonly Suppliers_Controller _supplierController = new Suppliers_Controller();

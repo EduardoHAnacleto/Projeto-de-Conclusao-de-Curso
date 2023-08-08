@@ -30,6 +30,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_extraExpenses.Controls[0].Visible = false;
             edt_insurance.Controls[0].Visible = false;
             edt_supplierId.Controls[0].Visible = false;
+            edt_prodDiscCash.Controls[0].Visible = false;
             medt_date.Text = DateTime.Now.ToString();
             User = user;
         }
@@ -115,9 +116,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     var prodPurchPerc = Convert.ToDecimal( row.Cells["ProdPurchPerc"].Value) /100;
                     var prodNewBaseUnCost = Convert.ToDecimal(row.Cells["ProdNewBaseUnCost"].Value);
                     var prodQtd = Convert.ToInt32(row.Cells["ProdQtd"].Value);
+                    var prodDisc = Convert.ToDecimal(row.Cells["ProdDiscountCash"].Value);
 
                     var percFee = prodPurchPerc * transportFee;
-                    var newUnCost = (percFee/100) + prodNewBaseUnCost;
+                    var newUnCost = (percFee/100) + (prodNewBaseUnCost - prodDisc);
                     var weightedAverage = ((prodCurStock * prodCurCost) + ( prodQtd * newUnCost)) 
                                                     / (prodCurStock + prodQtd);
                     row.Cells["ProdWeightedAvg"].Value = Math.Round(weightedAverage,8);                   
@@ -126,18 +128,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         }
 
-        private void CalculateSetNewSalePrice()
-        {
-            //To do
-        }
-
         public void AddProductToDGV() 
         {
             Products product = GetProduct();
             int amount = (int)edt_prodQtd.Value;
             decimal purchPerc = 0; 
             decimal newUnCost = edt_prodUnCost.Value; 
-            decimal newSalePrice = 0; 
+            decimal discountCash = edt_prodDiscCash.Value;
             if (!FindEqualDGVProduct(product.id))
             {
                 DGV_PurchasesProducts.Rows.Add(
@@ -145,17 +142,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     product.productName,
                     amount,
                     product.productCost,
+                    discountCash,
                     newUnCost,
                     product.salePrice,
                     product.stock,
                     purchPerc,
-                    newUnCost,
-                    newSalePrice
+                    newUnCost
                     );
             }
             CalculateSetDGVPurchasePerc();
             CalculateSetNewUnCost();
-            CalculateSetNewSalePrice();
         }
 
         private void btn_AddProduct_Click(object sender, EventArgs e)
@@ -182,9 +178,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 {
                     if (btn_new.Text == "F5")
                     {
-                        var bill = AddBillsToPay(purchase);
-                        if (bill != null)
+                        var billsToPay = BillsToPay.MakeBills(purchase, purchase.PaymentCondition);
+                        if (billsToPay != null)
                         {
+                            
                             status = _controller.SaveItem(purchase);
                             if (status)
                             {
@@ -200,7 +197,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 }
                                 if (status)
                                 {
-                                    if (ConnectPurchaseBill(bill, purchase))
+                                    var _billsToPayController = new BillsToPay_Controller();
+                                    foreach (BillsToPay bill in billsToPay) 
+                                    {
+                                        status = _billsToPayController.SaveItem(bill);
+                                        if (!status) { break; }
+                                    }
+                                }
+                                if (status)
+                                {
+                                    if (ConnectPurchaseBill(billsToPay, purchase))
                                     {
                                         Populated(false);
                                     }
@@ -233,30 +239,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 status = _controller.ConnectPurchaseBill(bill, purchase);
             }
             return status;
-        }
-
-        private List<BillsToPay> AddBillsToPay(Purchases purchase)
-        {
-            Frm_Create_BillsToPay FrmBillsToPay = new Frm_Create_BillsToPay();
-            FrmBillsToPay.PopulateFromPurchase(purchase);
-            FrmBillsToPay.FromPurchase = true;
-            FrmBillsToPay.ShowDialog();
-            if (!FrmBillsToPay.ActiveControl.ContainsFocus)
-            {
-                if (FrmBillsToPay.HasSaved)
-                {
-                    return FrmBillsToPay._auxObjList;
-                }
-                else
-                {
-                    string message = "At least one bill must be submitted.";
-                    string caption = "Bill not submitted.";
-                    MessageBoxButtons buttons = MessageBoxButtons.OK;
-                    MessageBoxIcon icon = MessageBoxIcon.Error;
-                    Utilities.Msgbox(message, caption, buttons, icon);
-                }
-            }
-            return null; 
         }
 
 
@@ -296,33 +278,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.Supplier = _sController.FindItemId( Convert.ToInt32(edt_supplierId.Value));
             obj.Freight_Cost = Convert.ToDouble(edt_transportFee.Value);
             obj.PurchasedItems = GetDGVList(obj.id);
-            obj.EmissionDate = Convert.ToDateTime(medt_date.Text);
+            obj.EmissionDate = dateTime_emissionDate.Value;
             obj.ExtraExpenses = Convert.ToDouble(edt_extraExpenses.Value);
             obj.InsuranceCost = Convert.ToDouble(edt_insurance.Value);
-            obj.CancelledDate = null;
-            obj.PaidDate = null;
-            if (rbtn_Completed.Checked)
-            {
-                obj.ArrivalDate = dateTime_ArrivalDate.Value;
-                obj.Status = 3;
-            }
-            else if (rbtn_Active.Checked)
-            {
-                obj.ArrivalDate = null;
-                obj.Status = 0;
-            }
-            else if (rbtn_Paid.Checked)
-            {
-                obj.ArrivalDate = null;
-                obj.Status = 1;
-                obj.PaidDate = dateTime_PaidDate.Value;
-            }
-            else if (rbtn_Cancelled.Checked)
-            {
-                obj.ArrivalDate = null;
-                obj.Status = 2;
-                obj.CancelledDate = Convert.ToDateTime(medt_CancelDate.Text);
-            }
+            obj.ArrivalDate = dateTime_ArrivalDate.Value;
+            obj.Status = 0;
+            obj.BillNumber = Convert.ToInt32(edt_billNumber.Value);
+            obj.BillModel = Convert.ToInt32(edt_billModel.Value);
+            obj.BillSeries = Convert.ToInt32(edt_billSeries.Value);
             return obj;
         }
 
@@ -380,40 +343,25 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             PopulateDGV(purchase);
             PopulateSupplier(purchase.Supplier);
             PopulateStatusInfo(purchase);
+            PopulatePaymentInfo(purchase);
+        }
+
+        private void PopulatePaymentInfo(Purchases purchase)
+        {
+            edt_billModel.Value = purchase.BillModel;
+            edt_billNumber.Value = purchase.BillNumber;
+            edt_billSeries.Value = purchase.BillSeries;
+            edt_payCondId.Value = purchase.PaymentCondition.id;
+            edt_payCondName.Text = purchase.PaymentCondition.conditionName;
         }
 
         private void PopulateStatusInfo(Purchases purchase)
         {
-            dateTime_EstArrivalDate.Text = purchase.EstArrivalDate.ToShortDateString();
             edt_transportFee.Value = (decimal)purchase.Freight_Cost;
             edt_extraExpenses.Value = (decimal)purchase.ExtraExpenses;
             edt_insurance.Value = (decimal)purchase.InsuranceCost;
-            if (purchase.Status == 3)
-            {
-                rbtn_Completed.Checked = true;
-                lbl_arrivalDate.Visible = true;
-                dateTime_ArrivalDate.Text = purchase.ToString();
-                dateTime_ArrivalDate.Visible = true;
-            }
-            else if (purchase.Status == 0)
-            {
-                rbtn_Active.Checked = true;                
-            }
-            else if (purchase.Status == 1)
-            {
-                rbtn_Paid.Checked = true;
-                lbl_paidDate.Visible = true;
-                dateTime_PaidDate.Visible = true;
-                dateTime_PaidDate.Value = Convert.ToDateTime(purchase.PaidDate);
-            }
-            else if (purchase.Status == 2)
-            {
-                rbtn_Cancelled.Checked = true;
-                medt_CancelDate.Visible = true;
-                lbl_CancelDate.Visible = true;
-                medt_CancelDate.Text = purchase.CancelledDate.ToString();
-            }
-            medt_CancelDate.Text = purchase.dateOfCreation.ToString();
+            dateTime_ArrivalDate.Text = purchase.ArrivalDate.ToShortDateString();
+            dateTime_emissionDate.Text = purchase.EmissionDate.ToShortDateString();
         }
 
         private void PopulateSupplier(Suppliers supplier)
@@ -461,10 +409,46 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 Utilities.Msgbox(message, caption, buttons, icon);
                 return false;
             }
-            else if (rbtn_Completed.Checked && dateTime_ArrivalDate.Value <= dateTime_ArrivalDate.MinDate) 
+            else if (edt_billModel.Value == 0 | edt_billNumber.Value == 0 | edt_billSeries.Value == 0 | edt_payCondId.Value == 0)
+            {
+                string message = "Payment Information must be inserted.";
+                string caption = "Payment information is invalid.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            else if (dateTime_ArrivalDate.Value == dateTime_ArrivalDate.MinDate)
             {
                 string message = "Arrival date must be selected.";
-                string caption = "Arival date is not selected.";
+                string caption = "Arrival date is invalid.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            else if (dateTime_emissionDate.Value == dateTime_emissionDate.MinDate)
+            {
+                string message = "Emission date must be selected.";
+                string caption = "Emission date is invalid.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            else if (dateTime_emissionDate.Value > DateTime.Today) 
+            {
+                string message = "Emission date must not be higher than today.";
+                string caption = "Emission date is invalid.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            else if (dateTime_ArrivalDate.Value > DateTime.Today | dateTime_ArrivalDate.Value < dateTime_emissionDate.Value)
+            {
+                string message = "Arrival date must be higher than emission date and lower or equal to today.";
+                string caption = "Arival date is invalid.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -520,100 +504,32 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             NewFormSearchSupplier();
         }
 
-        private void rbtn_Active_CheckedChanged(object sender, EventArgs e)
+        private void btn_Close_Click(object sender, EventArgs e)
         {
-            if (rbtn_Active.Checked)
-            {
-                rbtn_Cancelled.Checked = false;
-                rbtn_OnHold.Checked = false;
-                rbtn_Completed.Checked = false;
-                rbtn_Paid.Checked = false;
-                dateTime_ArrivalDate.Visible = false;
-                lbl_arrivalDate.Visible = false;
-                lbl_CancelDate.Visible = false;
-                medt_CancelDate.Visible = false;
-                medt_CancelDate.Text = string.Empty;
-                lbl_paidDate.Visible = false;
-                dateTime_PaidDate.Visible = false;
-                dateTime_PaidDate.Value = dateTime_PaidDate.MinDate;
-            }
+            this.Close();
         }
 
-        private void rbtn_Paid_CheckedChanged(object sender, EventArgs e)
+        private void btn_FindPayCond_Click(object sender, EventArgs e)
         {
-            if (rbtn_Paid.Checked)
-            {
-                rbtn_Cancelled.Checked = false;
-                rbtn_OnHold.Checked = false;
-                rbtn_Completed.Checked = false;
-                rbtn_Active.Checked = false;
-                dateTime_ArrivalDate.Visible = false;
-                lbl_arrivalDate.Visible = false;
-                lbl_CancelDate.Visible = false;
-                medt_CancelDate.Visible = false;
-                medt_CancelDate.Text = string.Empty;
-                lbl_paidDate.Visible = true;
-                dateTime_PaidDate.Visible = true;
-                dateTime_PaidDate.Value = DateTime.Now;
-            }
+            SearchPaymentCondition();
         }
 
-        private void rbtn_Completed_CheckedChanged(object sender, EventArgs e)
+        public void SearchPaymentCondition()
         {
-            if (rbtn_Completed.Checked)
+            Frm_Find_PaymentConditions formPayCondition = new Frm_Find_PaymentConditions();
+            formPayCondition.hasFather = true;
+            formPayCondition.ShowDialog();
+            if (!formPayCondition.ActiveControl.ContainsFocus)
             {
-                rbtn_Cancelled.Checked = false;
-                rbtn_OnHold.Checked = false;
-                rbtn_Active.Checked = false;
-                rbtn_Paid.Checked = false;
-                dateTime_ArrivalDate.Visible = true;
-                lbl_arrivalDate.Visible = true;
-                lbl_CancelDate.Visible = false;
-                medt_CancelDate.Visible = false;
-                medt_CancelDate.Text = string.Empty;
-                lbl_paidDate.Visible = false;
-                dateTime_PaidDate.Visible = false;
-                dateTime_PaidDate.Value = dateTime_PaidDate.MinDate;
+                PaymentConditions payCondition = new PaymentConditions();
+                payCondition = formPayCondition.GetObject();
+                if (payCondition != null)
+                {
+                    edt_payCondName.Text = payCondition.conditionName;
+                    edt_payCondId.Value = (decimal)payCondition.discountPerc;
+                }
             }
-        }
-
-        private void rbtn_OnHold_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbtn_OnHold.Checked)
-            {
-                rbtn_Cancelled.Checked = false;
-                rbtn_Active.Checked = false;
-                rbtn_Completed.Checked = false;
-                rbtn_Paid.Checked = false;
-                dateTime_ArrivalDate.Visible = false;
-                lbl_arrivalDate.Visible = false;
-
-                lbl_CancelDate.Visible = false;
-                medt_CancelDate.Visible = false;
-                medt_CancelDate.Text = string.Empty;
-                lbl_paidDate.Visible = false;
-                dateTime_PaidDate.Visible = false;
-                dateTime_PaidDate.Value = dateTime_PaidDate.MinDate;
-            }
-        }
-
-        private void rbtn_Cancelled_CheckedChanged(object sender, EventArgs e)
-        {
-            if (rbtn_Cancelled.Checked)
-            {
-                rbtn_Active.Checked = false;
-                rbtn_OnHold.Checked = false;
-                rbtn_Completed.Checked = false;
-                rbtn_Paid.Checked = false;
-                dateTime_ArrivalDate.Visible = false;
-                lbl_arrivalDate.Visible = false;
-                lbl_CancelDate.Visible = true;
-                medt_CancelDate.Visible = true;
-                medt_CancelDate.Text = DateTime.Now.ToString();
-                lbl_paidDate.Visible = false;
-                dateTime_PaidDate.Visible = false;
-                dateTime_PaidDate.Value = dateTime_PaidDate.MinDate;
-            }
+            formPayCondition.Close();
         }
     }
 }

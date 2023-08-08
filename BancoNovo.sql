@@ -313,7 +313,7 @@
         billNumber int not null,
         billModel int not null,
         billSeries int not null ,
-        billPage int not null,
+
 		instalmentNumber int not null,
         dueDate date not null,
         emissionDate date not null,
@@ -324,7 +324,7 @@
         supplier_id int not null references Suppliers(id_supplier),
         date_creation datetime not null,
         date_last_update datetime not null,
-        primary key (billNumber, billModel, billSeries, billPage, instalmentNumber)
+        primary key (billNumber, billModel, billSeries, instalmentNumber)
         );
 
         CREATE TABLE PURCHASEBILLS (
@@ -332,11 +332,10 @@
         billNumber int not null,
         billModel int not null,
         billSeries int not null,
-        billPage int not null,
         instalmentNumber int not null,
-        PRIMARY KEY (purchase_id, billNumber, billModel, billSeries, billPage, instalmentNumber),
-        FOREIGN KEY (billNumber, billModel, billSeries, billPage, instalmentNumber)
-        REFERENCES BILLSTOPAY (billNumber, billModel, billSeries, billPage, instalmentNumber)
+        PRIMARY KEY (purchase_id, billNumber, billModel, billSeries, instalmentNumber),
+        FOREIGN KEY (billNumber, billModel, billSeries, instalmentNumber)
+        REFERENCES BILLSTOPAY (billNumber, billModel, billSeries, instalmentNumber)
         );
 
     	create table PURCHASEITEMS(

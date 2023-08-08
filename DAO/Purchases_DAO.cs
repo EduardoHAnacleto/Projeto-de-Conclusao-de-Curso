@@ -79,29 +79,28 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@STATUS", obj.Status);
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
-                    if (obj.Status == 3)
+                    if (obj.Status == 3) // Se Status COMPLETO, adiciona data de recebimento, data de pagamento
                     {
                         command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
                         command.Parameters.AddWithValue("@PAIDDATE", obj.PaidDate);
+                        command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
                     }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@ARRIVALDATE", DBNull.Value);
-                    }
-                    if (obj.Status == 2)
+                    else if (obj.Status == 2) // Se cancelado, adiciona data de cancelamento
                     {
                         command.Parameters.AddWithValue("@CANCELDATE", obj.CancelledDate);
-                    }
-                    else
-                    {
                         command.Parameters.AddWithValue("@ARRIVALDATE", DBNull.Value);
+                        command.Parameters.AddWithValue("@PAIDDATE", DBNull.Value);
                     }
-                    if (obj.Status == 1)
+                    else if (obj.Status == 1) // se pago, adiciona data de pagamento
                     {
                         command.Parameters.AddWithValue("@PAIDDATE", obj.PaidDate);
+                        command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
+                        command.Parameters.AddWithValue("@ARRIVALDATE", DBNull.Value);
                     }
-                    else
+                    else //Se Ativo
                     {
+                        command.Parameters.AddWithValue("@PAIDDATE", DBNull.Value);
+                        command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
                         command.Parameters.AddWithValue("@ARRIVALDATE", DBNull.Value);
                     }
                     command.Parameters.AddWithValue("@FREIGHT", (decimal)obj.Freight_Cost);

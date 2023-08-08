@@ -33,7 +33,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             PaymentConditions_Controller condController = new PaymentConditions_Controller();
             DateTime emDate = DateTime.Now;
             List<BillsToReceive> list = new List<BillsToReceive>();
-            int i = 0;
             PaymentConditions cond = condController.FindItemId(sale.PaymentConditionId);
             int instalmentQtd = cond.BillsInstalments.Count;
 
@@ -42,13 +41,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
                 BillsToReceive bill = new BillsToReceive();
                 bill.InstalmentNumber = instalments.InstalmentNumber;
                 bill.PaidDate = null;
-                bill.IsPaid = false;
-                if (cond.BillsInstalments[i].TotalDays == 0) //Se a parcela tiver dias=0 (for na hora ou a vista), considera pago
-                {
-                    bill.IsPaid = true;
-                    bill.PaidDate = emDate;
-                    i++;
-                }              
+                bill.IsPaid = false;           
                 bill.Client = sale.Client;
                 bill.Sale = sale;
                 bill.Sale.id = saleId;

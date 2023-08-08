@@ -1,9 +1,11 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
+using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.Models
 {
@@ -19,10 +21,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public int BillNumber { get; set; }
         public int BillSeries { get; set; }
         public int BillModel { get; set; }
-        public int BillPage { get; set; }
         public double TotalValue { get; set; }
         public int InstalmentNumber { get; set; }
-        public int InstalmentsQtd { get; set; }
 
         public DateTime EmissionDate { get; set; }
         public DateTime DueDate { get; set; }
@@ -33,6 +33,34 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public Purchases Purchase { get; set; }
         public Suppliers Supplier { get; set; }
         public PaymentMethods PaymentMethod { get; set; }
+
+        public static List<BillsToPay> MakeBills(Purchases purchase, PaymentConditions condition)
+        {
+            List<BillsToPay> list = new List<BillsToPay>();
+            int i = 0;
+            PaymentConditions cond = condition;
+            int instalmentQtd = cond.BillsInstalments.Count;
+
+            foreach (BillsInstalments instalments in cond.BillsInstalments)
+            {
+                BillsToPay bill = new BillsToPay();
+                bill.BillNumber = purchase.BillNumber;
+                bill.BillModel = purchase.BillModel;
+                bill.BillSeries = purchase.BillSeries;
+                bill.InstalmentNumber = instalments.InstalmentNumber;
+                bill.PaidDate = null;
+                bill.IsPaid = 0;
+                bill.Supplier = purchase.Supplier;
+                bill.Purchase = purchase;
+                bill.EmissionDate = purchase.EmissionDate;
+                bill.DueDate = purchase.EmissionDate.AddDays(instalments.TotalDays);
+                bill.TotalValue = (instalments.ValuePercentage / 100) * purchase.Total_Cost;
+                bill.PaymentMethod = instalments.PaymentMethod;
+
+                list.Add(bill);
+            }
+            return list;
+        }
 
 
     }
