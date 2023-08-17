@@ -67,48 +67,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "INSERT INTO PURCHASES ( PURCHASESTATUS, EMISSIONDATE, ARRIVALDATE, FREIGHTCOST, PURCHASE_TOTALCOST, " +
-                "PURCHASE_TOTALVALUE, PURCHASE_EXTRAEXPENSES, PURCHASE_DISCOUNTCASH, PURCHASE_DISCOUNTPERC, PURCHASE_INSURANCECOST," +
-                "SUPPLIER_ID, USER_ID, CANCELLEDDATE, PAIDDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@STATUS, @EMDATE, @ARRIVALDATE, @FREIGHT, @TOTALCOST, @TOTALVALUE, @EXPENSES, @DISCCASH, @DISCPERC," +
-                         " @INSURANCE, @SUPPLIERID, @USERID, @CANCELDATE, @PAIDDATE, @DC, @DU);";
+            string sql = "INSERT INTO PURCHASES ( EMISSIONDATE, ARRIVALDATE, FREIGHTCOST, PURCHASE_TOTALCOST, " +
+                " PURCHASE_EXTRAEXPENSES, PURCHASE_INSURANCECOST, SUPPLIER_ID, USER_ID, DATE_CREATION, DATE_LAST_UPDATE ) "
+                         + " VALUES ( @EMDATE, @ARRIVALDATE, @FREIGHT, @TOTALCOST, @EXPENSES," +
+                         " @INSURANCE, @SUPPLIERID, @USERID, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@STATUS", obj.Status);
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
-                    if (obj.Status == 3) // Se Status COMPLETO, adiciona data de recebimento, data de pagamento
-                    {
-                        command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
-                        command.Parameters.AddWithValue("@PAIDDATE", obj.PaidDate);
-                        command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
-                    }
-                    else if (obj.Status == 2) // Se cancelado, adiciona data de cancelamento
-                    {
-                        command.Parameters.AddWithValue("@CANCELDATE", obj.CancelledDate);
-                        command.Parameters.AddWithValue("@ARRIVALDATE", DBNull.Value);
-                        command.Parameters.AddWithValue("@PAIDDATE", DBNull.Value);
-                    }
-                    else if (obj.Status == 1) // se pago, adiciona data de pagamento
-                    {
-                        command.Parameters.AddWithValue("@PAIDDATE", obj.PaidDate);
-                        command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
-                        command.Parameters.AddWithValue("@ARRIVALDATE", DBNull.Value);
-                    }
-                    else //Se Ativo
-                    {
-                        command.Parameters.AddWithValue("@PAIDDATE", DBNull.Value);
-                        command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
-                        command.Parameters.AddWithValue("@ARRIVALDATE", DBNull.Value);
-                    }
+                    command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
                     command.Parameters.AddWithValue("@FREIGHT", (decimal)obj.Freight_Cost);
                     command.Parameters.AddWithValue("@TOTALCOST", (decimal)obj.Total_Cost);
-                    command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.Total_PurchaseValue);
                     command.Parameters.AddWithValue("@EXPENSES", (decimal)obj.ExtraExpenses);
-                    command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.DiscountCash);
-                    command.Parameters.AddWithValue("@DISCPERC", (decimal)obj.DiscountPerc);
                     command.Parameters.AddWithValue("@INSURANCE", (decimal)obj.InsuranceCost);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@USERID", obj.User.id);
@@ -140,9 +112,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "UPDATE PURCHASES SET PURCHASESTATUS = @STATUS, EMISSIONDATE = @EMDATE, ARRIVALDATE = @ARRIVALDATE, FREIGHTCOST = @FREIGHT," +
-                " PURCHASE_TOTALCOST = @TOTALCOST, PURCHASE_TOTALVALUE = @TOTALVALUE, PURCHASE_EXTRAEXPENSES = @EXPENSES, PURCHASE_DISCOUNTCASH = @DISCCASH," +
-                " PURCHASE_DISCOUNTPERC = @DISCPERC, PURCHASE_INSURANCECOST = @INSURANCE, SUPPLIER_ID = @SUPPLIERID, PAIDDATE = @PAIDDATE, CANCELLEDDATE = @CANCELDATE," +
+            string sql = "UPDATE PURCHASES SET EMISSIONDATE = @EMDATE, ARRIVALDATE = @ARRIVALDATE, FREIGHTCOST = @FREIGHT," +
+                " PURCHASE_TOTALCOST = @TOTALCOST, PURCHASE_EXTRAEXPENSES = @EXPENSES, " +
+                " PURCHASE_INSURANCECOST = @INSURANCE, SUPPLIER_ID = @SUPPLIERID," +
                 " USER_ID = @USERID, DATE_LAST_UPDATE = @USERID " +
                 " WHERE ID_PURCHASE = @ID; ";
 
@@ -151,43 +123,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@ID", obj.id);
                     command.Parameters.AddWithValue("@STATUS", obj.Status);
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
-                    if (obj.Status == 3)
-                    {
-                        command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
-                        command.Parameters.AddWithValue("@PAIDDATE", obj.PaidDate);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@ARRIVALDATE", DBNull.Value);
-                    }
-                    if (obj.Status == 2)
-                    {
-                        command.Parameters.AddWithValue("@CANCELDATE", obj.CancelledDate);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@ARRIVALDATE", DBNull.Value);
-                    }
-                    if (obj.Status == 1)
-                    {
-                        command.Parameters.AddWithValue("@PAIDDATE", obj.PaidDate);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@ARRIVALDATE", DBNull.Value);
-                    }
+                    command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
                     command.Parameters.AddWithValue("@FREIGHT", (decimal)obj.Freight_Cost);
                     command.Parameters.AddWithValue("@TOTALCOST", (decimal)obj.Total_Cost);
-                    command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.Total_PurchaseValue);
                     command.Parameters.AddWithValue("@EXPENSES", (decimal)obj.ExtraExpenses);
-                    command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.DiscountCash);
-                    command.Parameters.AddWithValue("@DISCPERC", (decimal)obj.DiscountPerc);
                     command.Parameters.AddWithValue("@INSURANCE", (decimal)obj.InsuranceCost);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@USERID", obj.User.id);
+                    command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
@@ -263,33 +208,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     id = Convert.ToInt32(reader["id_purchase"]),
                                     Status = Convert.ToInt32(reader["purchaseStatus"]),
                                     EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
-                                    ArrivalDate = null,
-                                    PaidDate = null,
-                                    CancelledDate = null,
+                                    ArrivalDate = Convert.ToDateTime(reader["arrivalDate"]),
                                     Freight_Cost = Convert.ToDouble(reader["freightCost"]),
-                                    Total_PurchaseValue = Convert.ToDouble(reader["purchase_totalValue"]),
                                     Total_Cost = Convert.ToDouble(reader["purchase_TotalCost"]),
                                     ExtraExpenses = Convert.ToDouble(reader["purchase_ExtraExpenses"]),
-                                    DiscountCash = Convert.ToDouble(reader["purchase_DiscountCash"]),
-                                    DiscountPerc = Convert.ToDouble(reader["purchase_DiscountPerc"]),
                                     InsuranceCost = Convert.ToDouble(reader["purchase_InsuranceCost"]),
                                     User = _userController.FindItemId(Convert.ToInt32(reader["user_id"])),
                                     PurchasedItems = _purchaseItemsController.FindItemId(Convert.ToInt32(reader["id_purchase"])),
                                     Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                 };
-                                if (obj.Status == 3)
-                                {
-                                    obj.ArrivalDate = Convert.ToDateTime(reader["arrivalDate"]);
-                                    obj.PaidDate = Convert.ToDateTime(reader["paidDate"]);
-                                }
-                                else if (obj.Status == 1)
-                                {
-                                    obj.PaidDate = Convert.ToDateTime(reader["paidDate"]);
-                                }
-                                else if (obj.Status == 2)
-                                {
-                                    obj.CancelledDate = Convert.ToDateTime(reader["cancelledDate"]);
-                                }
                                 return obj;
                             }
                         }
@@ -606,8 +533,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "INSERT INTO PURCHASEBILLS ( PURCHASE_ID, BILLNUMBER, BILLMODEL, BILLSERIES, BILLPAGE, INSTALMENTNUMBER ) "
-                         + " VALUES (@PURCHID, @BNUMBER, @BMODEL, @BSERIES, @BPAGE, @BINSTALNUM);";
+            string sql = "INSERT INTO PURCHASEBILLS ( PURCHASE_ID, BILLNUMBER, BILLMODEL, BILLSERIES, INSTALMENTNUMBER ) "
+                         + " VALUES (@PURCHID, @BNUMBER, @BMODEL, @BSERIES, @BINSTALNUM);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -617,7 +544,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@BNUMBER", bill.BillNumber);
                     command.Parameters.AddWithValue("@BMODEL", bill.BillModel);
                     command.Parameters.AddWithValue("@BSERIES", bill.BillSeries);
-                    command.Parameters.AddWithValue("@BPAGE", bill.BillPage);
                     command.Parameters.AddWithValue("@BINSTALNUM", bill.InstalmentNumber);
                     connection.Open();
                     int i = command.ExecuteNonQuery();

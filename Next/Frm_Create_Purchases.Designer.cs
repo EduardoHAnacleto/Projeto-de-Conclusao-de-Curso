@@ -29,7 +29,19 @@
         private void InitializeComponent()
         {
             this.DGV_PurchasesProducts = new System.Windows.Forms.DataGridView();
+            this.ProdId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdNewBaseUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentSalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdPurchPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdWeightedAvg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_products = new System.Windows.Forms.GroupBox();
+            this.lbl_prodDiscCash = new System.Windows.Forms.Label();
+            this.edt_prodDiscCash = new System.Windows.Forms.NumericUpDown();
             this.btn_AddProduct = new System.Windows.Forms.Button();
             this.btn_FindProduct = new System.Windows.Forms.Button();
             this.lbl_prodUnCost = new System.Windows.Forms.Label();
@@ -74,6 +86,8 @@
             this.edt_supplierName = new System.Windows.Forms.TextBox();
             this.gbox_supplier = new System.Windows.Forms.GroupBox();
             this.gbox_info = new System.Windows.Forms.GroupBox();
+            this.lbl_emissionDate = new System.Windows.Forms.Label();
+            this.dateTime_emissionDate = new System.Windows.Forms.DateTimePicker();
             this.lbl_arrivalDate = new System.Windows.Forms.Label();
             this.dateTime_ArrivalDate = new System.Windows.Forms.DateTimePicker();
             this.lbl_billModel = new System.Windows.Forms.Label();
@@ -89,22 +103,9 @@
             this.edt_billNumber = new System.Windows.Forms.NumericUpDown();
             this.lbl_billNumber = new System.Windows.Forms.Label();
             this.lbl_billSeries = new System.Windows.Forms.Label();
-            this.dateTime_emissionDate = new System.Windows.Forms.DateTimePicker();
-            this.lbl_emissionDate = new System.Windows.Forms.Label();
-            this.edt_prodDiscCash = new System.Windows.Forms.NumericUpDown();
-            this.lbl_prodDiscCash = new System.Windows.Forms.Label();
-            this.ProdId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdNewBaseUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentSalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdPurchPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdWeightedAvg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).BeginInit();
             this.gbox_products.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_prodDiscCash)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodUnCost)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodQtd)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodBarCode)).BeginInit();
@@ -125,7 +126,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_billSeries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billNumber)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_prodDiscCash)).BeginInit();
             this.SuspendLayout();
             // 
             // DGV_PurchasesProducts
@@ -151,6 +151,69 @@
             this.DGV_PurchasesProducts.Size = new System.Drawing.Size(1087, 228);
             this.DGV_PurchasesProducts.TabIndex = 0;
             // 
+            // ProdId
+            // 
+            this.ProdId.HeaderText = "ID";
+            this.ProdId.Name = "ProdId";
+            this.ProdId.ReadOnly = true;
+            this.ProdId.Width = 50;
+            // 
+            // ProdName
+            // 
+            this.ProdName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ProdName.HeaderText = "Product";
+            this.ProdName.Name = "ProdName";
+            this.ProdName.ReadOnly = true;
+            // 
+            // ProdQtd
+            // 
+            this.ProdQtd.HeaderText = "Quantity";
+            this.ProdQtd.Name = "ProdQtd";
+            this.ProdQtd.ReadOnly = true;
+            this.ProdQtd.Width = 60;
+            // 
+            // ProdCurrentUnCost
+            // 
+            this.ProdCurrentUnCost.HeaderText = "Current UN Cost";
+            this.ProdCurrentUnCost.Name = "ProdCurrentUnCost";
+            // 
+            // ProdDiscountCash
+            // 
+            this.ProdDiscountCash.HeaderText = "Discount";
+            this.ProdDiscountCash.Name = "ProdDiscountCash";
+            this.ProdDiscountCash.ReadOnly = true;
+            this.ProdDiscountCash.Width = 70;
+            // 
+            // ProdNewBaseUnCost
+            // 
+            this.ProdNewBaseUnCost.HeaderText = "New Base UN Cost";
+            this.ProdNewBaseUnCost.Name = "ProdNewBaseUnCost";
+            // 
+            // ProdCurrentSalePrice
+            // 
+            this.ProdCurrentSalePrice.HeaderText = "Current Sale Price";
+            this.ProdCurrentSalePrice.Name = "ProdCurrentSalePrice";
+            this.ProdCurrentSalePrice.ReadOnly = true;
+            // 
+            // ProdCurrentStock
+            // 
+            this.ProdCurrentStock.HeaderText = "Current Stock";
+            this.ProdCurrentStock.Name = "ProdCurrentStock";
+            this.ProdCurrentStock.ReadOnly = true;
+            this.ProdCurrentStock.Width = 60;
+            // 
+            // ProdPurchPerc
+            // 
+            this.ProdPurchPerc.HeaderText = "Purchase Percentage";
+            this.ProdPurchPerc.Name = "ProdPurchPerc";
+            this.ProdPurchPerc.ReadOnly = true;
+            // 
+            // ProdWeightedAvg
+            // 
+            this.ProdWeightedAvg.HeaderText = "Weighted Cost Average";
+            this.ProdWeightedAvg.Name = "ProdWeightedAvg";
+            this.ProdWeightedAvg.ReadOnly = true;
+            // 
             // gbox_products
             // 
             this.gbox_products.Controls.Add(this.lbl_prodDiscCash);
@@ -174,6 +237,28 @@
             this.gbox_products.TabIndex = 1;
             this.gbox_products.TabStop = false;
             this.gbox_products.Text = "Products";
+            // 
+            // lbl_prodDiscCash
+            // 
+            this.lbl_prodDiscCash.AutoSize = true;
+            this.lbl_prodDiscCash.Location = new System.Drawing.Point(821, 22);
+            this.lbl_prodDiscCash.Name = "lbl_prodDiscCash";
+            this.lbl_prodDiscCash.Size = new System.Drawing.Size(76, 13);
+            this.lbl_prodDiscCash.TabIndex = 15;
+            this.lbl_prodDiscCash.Text = "Cash Discount";
+            // 
+            // edt_prodDiscCash
+            // 
+            this.edt_prodDiscCash.DecimalPlaces = 2;
+            this.edt_prodDiscCash.Location = new System.Drawing.Point(824, 37);
+            this.edt_prodDiscCash.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
+            this.edt_prodDiscCash.Name = "edt_prodDiscCash";
+            this.edt_prodDiscCash.Size = new System.Drawing.Size(58, 20);
+            this.edt_prodDiscCash.TabIndex = 14;
             // 
             // btn_AddProduct
             // 
@@ -607,6 +692,7 @@
             // 
             // edt_supplierName
             // 
+            this.edt_supplierName.Enabled = false;
             this.edt_supplierName.Location = new System.Drawing.Point(50, 35);
             this.edt_supplierName.Name = "edt_supplierName";
             this.edt_supplierName.Size = new System.Drawing.Size(245, 20);
@@ -644,6 +730,25 @@
             this.gbox_info.TabIndex = 47;
             this.gbox_info.TabStop = false;
             this.gbox_info.Text = "Purchase Information";
+            // 
+            // lbl_emissionDate
+            // 
+            this.lbl_emissionDate.AutoSize = true;
+            this.lbl_emissionDate.Location = new System.Drawing.Point(6, 77);
+            this.lbl_emissionDate.Name = "lbl_emissionDate";
+            this.lbl_emissionDate.Size = new System.Drawing.Size(74, 13);
+            this.lbl_emissionDate.TabIndex = 46;
+            this.lbl_emissionDate.Text = "Emission Date";
+            // 
+            // dateTime_emissionDate
+            // 
+            this.dateTime_emissionDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTime_emissionDate.Location = new System.Drawing.Point(9, 93);
+            this.dateTime_emissionDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTime_emissionDate.Name = "dateTime_emissionDate";
+            this.dateTime_emissionDate.Size = new System.Drawing.Size(95, 20);
+            this.dateTime_emissionDate.TabIndex = 45;
+            this.dateTime_emissionDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // lbl_arrivalDate
             // 
@@ -806,110 +911,6 @@
             this.lbl_billSeries.TabIndex = 48;
             this.lbl_billSeries.Text = "Series";
             // 
-            // dateTime_emissionDate
-            // 
-            this.dateTime_emissionDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTime_emissionDate.Location = new System.Drawing.Point(9, 93);
-            this.dateTime_emissionDate.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateTime_emissionDate.Name = "dateTime_emissionDate";
-            this.dateTime_emissionDate.Size = new System.Drawing.Size(95, 20);
-            this.dateTime_emissionDate.TabIndex = 45;
-            this.dateTime_emissionDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            // 
-            // lbl_emissionDate
-            // 
-            this.lbl_emissionDate.AutoSize = true;
-            this.lbl_emissionDate.Location = new System.Drawing.Point(6, 77);
-            this.lbl_emissionDate.Name = "lbl_emissionDate";
-            this.lbl_emissionDate.Size = new System.Drawing.Size(74, 13);
-            this.lbl_emissionDate.TabIndex = 46;
-            this.lbl_emissionDate.Text = "Emission Date";
-            // 
-            // edt_prodDiscCash
-            // 
-            this.edt_prodDiscCash.DecimalPlaces = 2;
-            this.edt_prodDiscCash.Location = new System.Drawing.Point(824, 37);
-            this.edt_prodDiscCash.Maximum = new decimal(new int[] {
-            999999,
-            0,
-            0,
-            0});
-            this.edt_prodDiscCash.Name = "edt_prodDiscCash";
-            this.edt_prodDiscCash.Size = new System.Drawing.Size(58, 20);
-            this.edt_prodDiscCash.TabIndex = 14;
-            // 
-            // lbl_prodDiscCash
-            // 
-            this.lbl_prodDiscCash.AutoSize = true;
-            this.lbl_prodDiscCash.Location = new System.Drawing.Point(821, 22);
-            this.lbl_prodDiscCash.Name = "lbl_prodDiscCash";
-            this.lbl_prodDiscCash.Size = new System.Drawing.Size(76, 13);
-            this.lbl_prodDiscCash.TabIndex = 15;
-            this.lbl_prodDiscCash.Text = "Cash Discount";
-            // 
-            // ProdId
-            // 
-            this.ProdId.HeaderText = "ID";
-            this.ProdId.Name = "ProdId";
-            this.ProdId.ReadOnly = true;
-            this.ProdId.Width = 50;
-            // 
-            // ProdName
-            // 
-            this.ProdName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ProdName.HeaderText = "Product";
-            this.ProdName.Name = "ProdName";
-            this.ProdName.ReadOnly = true;
-            // 
-            // ProdQtd
-            // 
-            this.ProdQtd.HeaderText = "Quantity";
-            this.ProdQtd.Name = "ProdQtd";
-            this.ProdQtd.ReadOnly = true;
-            this.ProdQtd.Width = 60;
-            // 
-            // ProdCurrentUnCost
-            // 
-            this.ProdCurrentUnCost.HeaderText = "Current UN Cost";
-            this.ProdCurrentUnCost.Name = "ProdCurrentUnCost";
-            // 
-            // ProdDiscountCash
-            // 
-            this.ProdDiscountCash.HeaderText = "Discount";
-            this.ProdDiscountCash.Name = "ProdDiscountCash";
-            this.ProdDiscountCash.ReadOnly = true;
-            this.ProdDiscountCash.Width = 70;
-            // 
-            // ProdNewBaseUnCost
-            // 
-            this.ProdNewBaseUnCost.HeaderText = "New Base UN Cost";
-            this.ProdNewBaseUnCost.Name = "ProdNewBaseUnCost";
-            // 
-            // ProdCurrentSalePrice
-            // 
-            this.ProdCurrentSalePrice.HeaderText = "Current Sale Price";
-            this.ProdCurrentSalePrice.Name = "ProdCurrentSalePrice";
-            this.ProdCurrentSalePrice.ReadOnly = true;
-            // 
-            // ProdCurrentStock
-            // 
-            this.ProdCurrentStock.HeaderText = "Current Stock";
-            this.ProdCurrentStock.Name = "ProdCurrentStock";
-            this.ProdCurrentStock.ReadOnly = true;
-            this.ProdCurrentStock.Width = 60;
-            // 
-            // ProdPurchPerc
-            // 
-            this.ProdPurchPerc.HeaderText = "Purchase Percentage";
-            this.ProdPurchPerc.Name = "ProdPurchPerc";
-            this.ProdPurchPerc.ReadOnly = true;
-            // 
-            // ProdWeightedAvg
-            // 
-            this.ProdWeightedAvg.HeaderText = "Weighted Cost Average";
-            this.ProdWeightedAvg.Name = "ProdWeightedAvg";
-            this.ProdWeightedAvg.ReadOnly = true;
-            // 
             // Frm_Create_Purchases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -928,6 +929,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).EndInit();
             this.gbox_products.ResumeLayout(false);
             this.gbox_products.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_prodDiscCash)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodUnCost)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodQtd)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodBarCode)).EndInit();
@@ -955,7 +957,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_billSeries)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billNumber)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_prodDiscCash)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

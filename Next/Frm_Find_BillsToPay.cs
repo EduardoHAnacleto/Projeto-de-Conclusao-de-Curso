@@ -19,7 +19,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             InitializeComponent();
             edt_billModel.Controls[0].Visible = false;
             edt_billNumber.Controls[0].Visible = false;
-            edt_billPage.Controls[0].Visible = false;
             edt_billSeries.Controls[0].Visible = false;
             this.SetDataSourceToDGV();
         }
@@ -41,8 +40,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 if ( !(row.Cells["billNumber"].Value.ToString() == edt_billNumber.Value.ToString() ) &&
                     !(row.Cells["billModel"].Value.ToString() == edt_billModel.Value.ToString() ) &&
-                    !(row.Cells["billSeries"].Value.ToString() == edt_billSeries.Value.ToString() ) &&
-                    !(row.Cells["billPage"].Value.ToString() == edt_billPage.Value.ToString() ))
+                    !(row.Cells["billSeries"].Value.ToString() == edt_billSeries.Value.ToString() ) )
                 {
                     DGV_BillsToPay.Rows[row.Index].Selected = true;
                     foundStatus = true;
@@ -59,10 +57,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             int billNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billNumber"].Value);
             int billSeries = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billSeries"].Value);
-            int billPage = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billPage"].Value);
             int billModel = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billModel"].Value);
             int instalmentNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["instalmentNumber"].Value);
-            BillsToPay obj = _controller.FindItemId(billNumber,billModel,billSeries,billPage,instalmentNumber);
+            BillsToPay obj = _controller.FindItemId(billNumber,billModel,billSeries,instalmentNumber);
             return obj;
         }
 
@@ -109,7 +106,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     var billNum = dr["billNumber"].ToString();
                     var billModel = dr["billModel"].ToString();
                     var billSeries = dr["billSeries"].ToString(); 
-                    var billPage = dr["billPage"].ToString();
                     var instalmentNumber = dr["instalmentNumber"].ToString();
                     var dueDate = Convert.ToDateTime(dr["dueDate"].ToString()).ToShortDateString();
                     var isPaid = dr["isPaid"].ToString();
@@ -121,7 +117,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     {
                         isPaid = "PAID";
                     }
-                    DGV_BillsToPay.Rows.Add(supplierId, billNum,billModel,billSeries,billPage,instalmentNumber,dueDate,isPaid);                     
+                    DGV_BillsToPay.Rows.Add(supplierId, billNum,billModel,billSeries,instalmentNumber,dueDate,isPaid);                     
                 }
             }
         }

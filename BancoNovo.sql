@@ -290,12 +290,10 @@
 
         create table PURCHASES(
         id_purchase int identity(2,1) primary key,
-        purchaseStatus int not null,
         emissionDate date not null,
         arrivalDate date,
         freightCost decimal,
         purchase_TotalCost decimal not null,
-        purchase_TotalValue decimal not null,
         purchase_ExtraExpenses decimal,
         purchase_DiscountCash decimal,
         purchase_DiscountPerc decimal,
@@ -313,7 +311,6 @@
         billNumber int not null,
         billModel int not null,
         billSeries int not null ,
-
 		instalmentNumber int not null,
         dueDate date not null,
         emissionDate date not null,
@@ -345,6 +342,7 @@
         PRODUCT_COST decimal not null,
         TOTAL_COST decimal not null,
         PURCHASE_PERCENTAGE decimal not null,
+        DISCOUNT_CASH decimal not null,
         WEIGHTED_AVG decimal not null,
         DATE_CREATION date not null,
         DATE_LAST_UPDATE date not null,

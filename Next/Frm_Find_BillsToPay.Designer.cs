@@ -31,26 +31,22 @@
             this.edt_billNumber = new System.Windows.Forms.NumericUpDown();
             this.edt_billModel = new System.Windows.Forms.NumericUpDown();
             this.edt_billSeries = new System.Windows.Forms.NumericUpDown();
-            this.edt_billPage = new System.Windows.Forms.NumericUpDown();
             this.btn_search = new System.Windows.Forms.Button();
             this.DGV_BillsToPay = new System.Windows.Forms.DataGridView();
+            this.lbl_billNumber = new System.Windows.Forms.Label();
+            this.lbl_billModel = new System.Windows.Forms.Label();
+            this.lbl_billSeries = new System.Windows.Forms.Label();
             this.SupplierId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BillNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.billModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.billSeries = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.billPage = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InstalmentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.lbl_billNumber = new System.Windows.Forms.Label();
-            this.lbl_billModel = new System.Windows.Forms.Label();
-            this.lbl_billSeries = new System.Windows.Forms.Label();
-            this.lbl_billPage = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billSeries)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_billPage)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_BillsToPay)).BeginInit();
             this.SuspendLayout();
             // 
@@ -98,21 +94,9 @@
             this.edt_billSeries.Size = new System.Drawing.Size(75, 20);
             this.edt_billSeries.TabIndex = 9;
             // 
-            // edt_billPage
-            // 
-            this.edt_billPage.Location = new System.Drawing.Point(287, 23);
-            this.edt_billPage.Maximum = new decimal(new int[] {
-            9999999,
-            0,
-            0,
-            0});
-            this.edt_billPage.Name = "edt_billPage";
-            this.edt_billPage.Size = new System.Drawing.Size(76, 20);
-            this.edt_billPage.TabIndex = 10;
-            // 
             // btn_search
             // 
-            this.btn_search.Location = new System.Drawing.Point(369, 23);
+            this.btn_search.Location = new System.Drawing.Point(287, 23);
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(75, 20);
             this.btn_search.TabIndex = 11;
@@ -130,7 +114,6 @@
             this.BillNumber,
             this.billModel,
             this.billSeries,
-            this.billPage,
             this.InstalmentNumber,
             this.dueDate,
             this.isPaid});
@@ -142,6 +125,33 @@
             this.DGV_BillsToPay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_BillsToPay.Size = new System.Drawing.Size(581, 269);
             this.DGV_BillsToPay.TabIndex = 12;
+            // 
+            // lbl_billNumber
+            // 
+            this.lbl_billNumber.AutoSize = true;
+            this.lbl_billNumber.Location = new System.Drawing.Point(54, 7);
+            this.lbl_billNumber.Name = "lbl_billNumber";
+            this.lbl_billNumber.Size = new System.Drawing.Size(60, 13);
+            this.lbl_billNumber.TabIndex = 13;
+            this.lbl_billNumber.Text = "Bill Number";
+            // 
+            // lbl_billModel
+            // 
+            this.lbl_billModel.AutoSize = true;
+            this.lbl_billModel.Location = new System.Drawing.Point(130, 7);
+            this.lbl_billModel.Name = "lbl_billModel";
+            this.lbl_billModel.Size = new System.Drawing.Size(52, 13);
+            this.lbl_billModel.TabIndex = 14;
+            this.lbl_billModel.Text = "Bill Model";
+            // 
+            // lbl_billSeries
+            // 
+            this.lbl_billSeries.AutoSize = true;
+            this.lbl_billSeries.Location = new System.Drawing.Point(203, 7);
+            this.lbl_billSeries.Name = "lbl_billSeries";
+            this.lbl_billSeries.Size = new System.Drawing.Size(52, 13);
+            this.lbl_billSeries.TabIndex = 15;
+            this.lbl_billSeries.Text = "Bill Series";
             // 
             // SupplierId
             // 
@@ -171,13 +181,6 @@
             this.billSeries.ReadOnly = true;
             this.billSeries.Width = 55;
             // 
-            // billPage
-            // 
-            this.billPage.HeaderText = "Page";
-            this.billPage.Name = "billPage";
-            this.billPage.ReadOnly = true;
-            this.billPage.Width = 55;
-            // 
             // InstalmentNumber
             // 
             this.InstalmentNumber.HeaderText = "Instalment Number";
@@ -199,53 +202,15 @@
             this.isPaid.ReadOnly = true;
             this.isPaid.Width = 110;
             // 
-            // lbl_billNumber
-            // 
-            this.lbl_billNumber.AutoSize = true;
-            this.lbl_billNumber.Location = new System.Drawing.Point(54, 7);
-            this.lbl_billNumber.Name = "lbl_billNumber";
-            this.lbl_billNumber.Size = new System.Drawing.Size(60, 13);
-            this.lbl_billNumber.TabIndex = 13;
-            this.lbl_billNumber.Text = "Bill Number";
-            // 
-            // lbl_billModel
-            // 
-            this.lbl_billModel.AutoSize = true;
-            this.lbl_billModel.Location = new System.Drawing.Point(130, 7);
-            this.lbl_billModel.Name = "lbl_billModel";
-            this.lbl_billModel.Size = new System.Drawing.Size(52, 13);
-            this.lbl_billModel.TabIndex = 14;
-            this.lbl_billModel.Text = "Bill Model";
-            // 
-            // lbl_billSeries
-            // 
-            this.lbl_billSeries.AutoSize = true;
-            this.lbl_billSeries.Location = new System.Drawing.Point(203, 7);
-            this.lbl_billSeries.Name = "lbl_billSeries";
-            this.lbl_billSeries.Size = new System.Drawing.Size(52, 13);
-            this.lbl_billSeries.TabIndex = 15;
-            this.lbl_billSeries.Text = "Bill Series";
-            // 
-            // lbl_billPage
-            // 
-            this.lbl_billPage.AutoSize = true;
-            this.lbl_billPage.Location = new System.Drawing.Point(284, 7);
-            this.lbl_billPage.Name = "lbl_billPage";
-            this.lbl_billPage.Size = new System.Drawing.Size(48, 13);
-            this.lbl_billPage.TabIndex = 16;
-            this.lbl_billPage.Text = "Bill Page";
-            // 
             // Frm_Find_BillsToPay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(600, 366);
-            this.Controls.Add(this.lbl_billPage);
             this.Controls.Add(this.lbl_billSeries);
             this.Controls.Add(this.lbl_billModel);
             this.Controls.Add(this.lbl_billNumber);
             this.Controls.Add(this.DGV_BillsToPay);
             this.Controls.Add(this.btn_search);
-            this.Controls.Add(this.edt_billPage);
             this.Controls.Add(this.edt_billSeries);
             this.Controls.Add(this.edt_billModel);
             this.Controls.Add(this.edt_billNumber);
@@ -258,18 +223,15 @@
             this.Controls.SetChildIndex(this.edt_billNumber, 0);
             this.Controls.SetChildIndex(this.edt_billModel, 0);
             this.Controls.SetChildIndex(this.edt_billSeries, 0);
-            this.Controls.SetChildIndex(this.edt_billPage, 0);
             this.Controls.SetChildIndex(this.btn_search, 0);
             this.Controls.SetChildIndex(this.DGV_BillsToPay, 0);
             this.Controls.SetChildIndex(this.lbl_billNumber, 0);
             this.Controls.SetChildIndex(this.lbl_billModel, 0);
             this.Controls.SetChildIndex(this.lbl_billSeries, 0);
-            this.Controls.SetChildIndex(this.lbl_billPage, 0);
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billSeries)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_billPage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_BillsToPay)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -281,20 +243,17 @@
         private System.Windows.Forms.NumericUpDown edt_billNumber;
         private System.Windows.Forms.NumericUpDown edt_billModel;
         private System.Windows.Forms.NumericUpDown edt_billSeries;
-        private System.Windows.Forms.NumericUpDown edt_billPage;
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.DataGridView DGV_BillsToPay;
+        private System.Windows.Forms.Label lbl_billNumber;
+        private System.Windows.Forms.Label lbl_billModel;
+        private System.Windows.Forms.Label lbl_billSeries;
         private System.Windows.Forms.DataGridViewTextBoxColumn SupplierId;
         private System.Windows.Forms.DataGridViewTextBoxColumn BillNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn billModel;
         private System.Windows.Forms.DataGridViewTextBoxColumn billSeries;
-        private System.Windows.Forms.DataGridViewTextBoxColumn billPage;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn dueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn isPaid;
-        private System.Windows.Forms.Label lbl_billNumber;
-        private System.Windows.Forms.Label lbl_billModel;
-        private System.Windows.Forms.Label lbl_billSeries;
-        private System.Windows.Forms.Label lbl_billPage;
     }
 }

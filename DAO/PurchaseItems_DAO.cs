@@ -23,8 +23,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             bool status = false;
 
             string sql = "INSERT INTO PURCHASEITEMS ( ID_PURCHASE, PRODUCT_ID, QUANTITY, PRODUCT_COST, TOTAL_COST, PURCHASE_PERCENTAGE," +
-                "WEIGHTED_AVG , DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@ID, @PRODID, @QTD, @PRODCOST, @TOTALVALUE, @PURCHPERC, @WEIGHTEDAVG, @DC, @DU);";
+                "DISCOUNT_CASH , WEIGHTED_AVG , DATE_CREATION, DATE_LAST_UPDATE ) "
+                         + " VALUES (@ID, @PRODID, @QTD, @PRODCOST, @TOTALVALUE, @PURCHPERC, @DISCOUNT, @WEIGHTEDAVG, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -33,10 +33,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@ID", obj.PurchaseId);
                     command.Parameters.AddWithValue("@PRODID", obj.Product.id);
                     command.Parameters.AddWithValue("@QTD", obj.Quantity);
-                    command.Parameters.AddWithValue("@PRODCOST", (decimal)obj.NewBaseUnCost);
-                    command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.TotalBaseCost);
-                    command.Parameters.AddWithValue("@PURCHPERC", (decimal)obj.PurchasePercentage);
-                    command.Parameters.AddWithValue("@WEIGHTEDAVG", (decimal)obj.WeightedCostAverage);
+                    command.Parameters.AddWithValue("@PRODCOST", obj.NewBaseUnCost);
+                    command.Parameters.AddWithValue("@TOTALVALUE", obj.TotalBaseCost);
+                    command.Parameters.AddWithValue("@PURCHPERC", obj.PurchasePercentage);
+                    command.Parameters.AddWithValue("@WEIGHTEDAVG", obj.WeightedCostAverage);
+                    command.Parameters.AddWithValue("@DISCOUNT", obj.DiscountCash);
                     command.Parameters.AddWithValue("@DC", obj.dateOfLastUpdate);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();

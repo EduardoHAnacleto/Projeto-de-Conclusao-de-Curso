@@ -21,7 +21,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             InitializeComponent();
             edt_instalmentNumber.Controls[0].Visible = false;
             edt_supplierId.Controls[0].Visible = false;
-            edt_BillPage.Controls[0].Visible = false;
             edt_BillNum.Controls[0].Visible = false;
             edt_BillSeries.Controls[0].Visible = false;
             edt_totalValue.Controls[0].Visible = false;
@@ -40,7 +39,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public override bool CheckCamps()   //Valida Campos
         {
-            if (edt_BillModel.Value <= 0 && edt_BillNum.Value <= 0 && edt_BillSeries.Value <= 0 && edt_BillPage.Value <= 0)
+            if (edt_BillModel.Value <= 0 && edt_BillNum.Value <= 0 && edt_BillSeries.Value <= 0)
             {
                 string message = "DANFe camps must be inserted.";
                 string caption = "Invalid camps.";
@@ -122,7 +121,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.BillNumber = (int)edt_BillNum.Value;
             obj.BillModel = (int)edt_BillModel.Value;
             obj.BillSeries = (int)edt_BillSeries.Value;
-            obj.BillPage = (int)edt_BillPage.Value;
             obj.PaymentMethod = _pMController.FindItemName(cbox_payMethod.SelectedItem.ToString());
             obj.Purchase = new Purchases();
             obj.Purchase.id = 0;
@@ -177,7 +175,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_supplierName.Text = string.Empty;
             edt_BillModel.Value = 0;
             edt_BillNum.Value = 0;
-            edt_BillPage.Value = 0;
             edt_BillSeries.Value = 0;
             edt_instalmentNumber.Value = 0;
             edt_totalValue.Value = 0;
@@ -268,7 +265,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             edt_BillModel.Value = bill.BillModel;
             edt_BillNum.Value = bill.BillNumber;
-            edt_BillPage.Value = bill.BillPage;
             edt_BillSeries.Value = bill.BillSeries;
             edt_instalmentNumber.Value = bill.InstalmentNumber;
             edt_totalValue.Value = (decimal)bill.TotalValue;
@@ -316,10 +312,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     int billNum = Convert.ToInt32(edt_BillNum.Value);
                     int billModel = Convert.ToInt32(edt_BillModel.Value);
                     int billSeries = Convert.ToInt32(edt_BillSeries.Value);
-                    int billPage = Convert.ToInt32(edt_BillPage.Value);
                     int instalmentNum = Convert.ToInt32(edt_instalmentNumber.Value);
 
-                    _controller.DeleteItem(billNum, billModel, billSeries, billPage, instalmentNum);
+                    _controller.DeleteItem(billNum, billModel, billSeries, instalmentNum);
                     this.ClearCamps();
                     this.edt_id.Value = this.BringNewId();
                     btn_SelectDelete.Enabled = false;
@@ -344,6 +339,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 check_onHold.Checked = false;
                 lbl_paidDate.Visible = false;
                 datePicker_paid.Visible = false;
+                check_Completed.Checked = false;
             }
         }
 
@@ -353,6 +349,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 check_onHold.Checked = false;
                 check_Active.Checked = false;
+                check_Completed.Checked = false;
                 lbl_paidDate.Visible = true;
                 datePicker_paid.Visible = true;
             }
@@ -422,7 +419,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_supplier.Enabled = false;
             btn_Edit.Enabled = false;
             btn_SelectDelete.Enabled = false;
-            edt_totalValue.Value = Convert.ToDecimal(purchase.Total_PurchaseValue);
             check_Active.Checked = true;
         }
 
@@ -437,9 +433,22 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (check_onHold.Checked)
             {
                 check_Paid.Checked = false;
+                check_Completed.Checked = false;
                 check_Active.Checked = false;
                 lbl_paidDate.Visible = false;
                 datePicker_paid.Visible = false;
+            }
+        }
+
+        private void check_Completed_CheckedChanged(object sender, EventArgs e)
+        {
+            if (check_Completed.Checked)
+            {
+                check_Paid.Checked = false;
+                check_onHold.Checked = false;
+                check_Active.Checked = false;
+                lbl_paidDate.Visible = true;
+                datePicker_paid.Visible = true;
             }
         }
     }

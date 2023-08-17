@@ -39,8 +39,6 @@
             this.edt_BillModel = new System.Windows.Forms.NumericUpDown();
             this.edt_BillSeries = new System.Windows.Forms.NumericUpDown();
             this.edt_BillNum = new System.Windows.Forms.NumericUpDown();
-            this.edt_BillPage = new System.Windows.Forms.NumericUpDown();
-            this.lbl_pagDanfe = new System.Windows.Forms.Label();
             this.lbl_serieDanfe = new System.Windows.Forms.Label();
             this.lbl_tipoDanfe = new System.Windows.Forms.Label();
             this.lbl_numDanfe = new System.Windows.Forms.Label();
@@ -69,7 +67,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_BillModel)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_BillSeries)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_BillNum)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_BillPage)).BeginInit();
             this.gbox_supplier.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_supplierId)).BeginInit();
             this.gbox_billDates.SuspendLayout();
@@ -165,14 +162,12 @@
             this.gbox_danfe.Controls.Add(this.edt_BillModel);
             this.gbox_danfe.Controls.Add(this.edt_BillSeries);
             this.gbox_danfe.Controls.Add(this.edt_BillNum);
-            this.gbox_danfe.Controls.Add(this.edt_BillPage);
-            this.gbox_danfe.Controls.Add(this.lbl_pagDanfe);
             this.gbox_danfe.Controls.Add(this.lbl_serieDanfe);
             this.gbox_danfe.Controls.Add(this.lbl_tipoDanfe);
             this.gbox_danfe.Controls.Add(this.lbl_numDanfe);
             this.gbox_danfe.Location = new System.Drawing.Point(12, 82);
             this.gbox_danfe.Name = "gbox_danfe";
-            this.gbox_danfe.Size = new System.Drawing.Size(274, 72);
+            this.gbox_danfe.Size = new System.Drawing.Size(241, 72);
             this.gbox_danfe.TabIndex = 39;
             this.gbox_danfe.TabStop = false;
             this.gbox_danfe.Text = "* Bill Identification";
@@ -205,34 +200,13 @@
             // 
             this.edt_BillNum.Location = new System.Drawing.Point(11, 39);
             this.edt_BillNum.Maximum = new decimal(new int[] {
-            99999,
+            999999999,
             0,
             0,
             0});
             this.edt_BillNum.Name = "edt_BillNum";
             this.edt_BillNum.Size = new System.Drawing.Size(73, 20);
             this.edt_BillNum.TabIndex = 36;
-            // 
-            // edt_BillPage
-            // 
-            this.edt_BillPage.Location = new System.Drawing.Point(226, 40);
-            this.edt_BillPage.Maximum = new decimal(new int[] {
-            999,
-            0,
-            0,
-            0});
-            this.edt_BillPage.Name = "edt_BillPage";
-            this.edt_BillPage.Size = new System.Drawing.Size(45, 20);
-            this.edt_BillPage.TabIndex = 36;
-            // 
-            // lbl_pagDanfe
-            // 
-            this.lbl_pagDanfe.AutoSize = true;
-            this.lbl_pagDanfe.Location = new System.Drawing.Point(223, 23);
-            this.lbl_pagDanfe.Name = "lbl_pagDanfe";
-            this.lbl_pagDanfe.Size = new System.Drawing.Size(32, 13);
-            this.lbl_pagDanfe.TabIndex = 3;
-            this.lbl_pagDanfe.Text = "Page";
             // 
             // lbl_serieDanfe
             // 
@@ -300,6 +274,7 @@
             // 
             // edt_supplierName
             // 
+            this.edt_supplierName.Enabled = false;
             this.edt_supplierName.Location = new System.Drawing.Point(60, 38);
             this.edt_supplierName.MaxLength = 30;
             this.edt_supplierName.Name = "edt_supplierName";
@@ -397,6 +372,7 @@
             this.check_Completed.TabIndex = 14;
             this.check_Completed.Text = "Completed";
             this.check_Completed.UseVisualStyleBackColor = true;
+            this.check_Completed.CheckedChanged += new System.EventHandler(this.check_Completed_CheckedChanged);
             // 
             // check_onHold
             // 
@@ -468,7 +444,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_BillModel)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_BillSeries)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_BillNum)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_BillPage)).EndInit();
             this.gbox_supplier.ResumeLayout(false);
             this.gbox_supplier.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_supplierId)).EndInit();
@@ -494,8 +469,6 @@
         private System.Windows.Forms.NumericUpDown edt_BillModel;
         private System.Windows.Forms.NumericUpDown edt_BillSeries;
         private System.Windows.Forms.NumericUpDown edt_BillNum;
-        private System.Windows.Forms.NumericUpDown edt_BillPage;
-        private System.Windows.Forms.Label lbl_pagDanfe;
         private System.Windows.Forms.Label lbl_serieDanfe;
         private System.Windows.Forms.Label lbl_tipoDanfe;
         private System.Windows.Forms.Label lbl_numDanfe;

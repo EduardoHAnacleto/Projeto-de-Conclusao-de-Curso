@@ -31,6 +31,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_insurance.Controls[0].Visible = false;
             edt_supplierId.Controls[0].Visible = false;
             edt_prodDiscCash.Controls[0].Visible = false;
+            edt_billModel.Controls[0].Visible = false;
+            edt_billNumber.Controls[0].Visible = false;
+            edt_billSeries.Controls[0].Visible = false;
+            edt_payCondId.Controls[0].Visible = false;
             medt_date.Text = DateTime.Now.ToString();
             User = user;
         }
@@ -135,7 +139,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             decimal purchPerc = 0; 
             decimal newUnCost = edt_prodUnCost.Value; 
             decimal discountCash = edt_prodDiscCash.Value;
-            if (!FindEqualDGVProduct(product.id))
+            bool validated = (discountCash < newUnCost);
+            if (!FindEqualDGVProduct(product.id) && validated)
             {
                 DGV_PurchasesProducts.Rows.Add(
                     product.id,
@@ -150,8 +155,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     newUnCost
                     );
             }
-            CalculateSetDGVPurchasePerc();
-            CalculateSetNewUnCost();
+            if (!validated)
+            {
+                string message = "Product discount can't be higher than it's cost.";
+                string caption = "Discount value is invalid.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                edt_prodDiscCash.Focus();
+            }
+            else
+            {
+                CalculateSetDGVPurchasePerc();
+                CalculateSetNewUnCost();
+            }
         }
 
         private void btn_AddProduct_Click(object sender, EventArgs e)
@@ -273,6 +290,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             Purchases obj = new Purchases();
             Suppliers_Controller _sController = new Suppliers_Controller();
+            PaymentConditions_Controller _pCController = new PaymentConditions_Controller();
+            obj.PaymentCondition = _pCController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
             obj.id = _controller.BringNewId();
             obj.User = User;
             obj.Supplier = _sController.FindItemId( Convert.ToInt32(edt_supplierId.Value));
@@ -286,7 +305,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.BillNumber = Convert.ToInt32(edt_billNumber.Value);
             obj.BillModel = Convert.ToInt32(edt_billModel.Value);
             obj.BillSeries = Convert.ToInt32(edt_billSeries.Value);
+            obj.Total_Cost = this.GetTotalCost(obj.PurchasedItems, obj.ExtraExpenses, obj.InsuranceCost);
             return obj;
+        }
+
+        private double GetTotalCost(List<PurchaseItems> purchasedItems, double extraExpenses, double insuranceCost)
+        {
+            var totalCost = extraExpenses + insuranceCost;
+            decimal itemTotalCost = 0;
+            foreach (var item in purchasedItems)
+            {
+                itemTotalCost = +(item.TotalBaseCost - item.DiscountCash);
+            }
+            return totalCost + Convert.ToDouble(itemTotalCost);
         }
 
         public List<PurchaseItems> GetDGVList(int purchaseId)
@@ -298,6 +329,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 item.id = purchaseId;
                 item.Product = _pController.FindItemId(Convert.ToInt32(row.Cells["ProdId"].Value));
                 item.Quantity = Convert.ToInt32(row.Cells["ProdQtd"].Value);
+                item.DiscountCash = Convert.ToDecimal(row.Cells["ProdDiscountCash"].Value);
                 item.NewBaseUnCost = Convert.ToDecimal(row.Cells["ProdNewBaseUnCost"].Value);
                 item.TotalBaseCost = item.Quantity * item.NewBaseUnCost;
                 item.PurchasePercentage = Convert.ToDecimal(row.Cells["ProdPurchPerc"].Value);
@@ -379,6 +411,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     item.Product.productName,
                     item.Quantity,
                     item.NewBaseUnCost,
+                    item.DiscountCash,
                     item.NewBaseUnCost,
                     item.Product.salePrice,
                     item.Product.stock,
@@ -526,7 +559,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 if (payCondition != null)
                 {
                     edt_payCondName.Text = payCondition.conditionName;
-                    edt_payCondId.Value = (decimal)payCondition.discountPerc;
+                    edt_payCondId.Value = (decimal)payCondition.id;
                 }
             }
             formPayCondition.Close();

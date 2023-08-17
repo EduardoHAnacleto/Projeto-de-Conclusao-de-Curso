@@ -28,9 +28,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "INSERT INTO BILLSTOPAY ( BILLNUMBER, BILLSERIES, BILLMODEL, BILLPAGE, INSTALMENTNUMBER, DUEDATE, ISPAID, PAIDDATE," +
+            string sql = "INSERT INTO BILLSTOPAY ( BILLNUMBER, BILLSERIES, BILLMODEL, INSTALMENTNUMBER, DUEDATE, ISPAID, PAIDDATE," +
                 "BILLVALUE, PAYMETHOD_ID, SUPPLIER_ID, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@BNUMBER, @BSERIES, @BMODEL, @BPAGE, @INUMBER, @DUEDATE, @ISPAID, @PDATE, @BVALUE, @METHODID, " +
+                         + " VALUES (@BNUMBER, @BSERIES, @BMODEL, @INUMBER, @DUEDATE, @ISPAID, @PDATE, @BVALUE, @METHODID, " +
                          " @SUPPLIERID, @EMISSIONDATE, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -40,7 +40,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@BNUMBER", obj.BillNumber);
                     command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
                     command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
-                    command.Parameters.AddWithValue("@BPAGE", obj.BillPage);
                     command.Parameters.AddWithValue("@INUMBER", obj.InstalmentNumber);
                     command.Parameters.AddWithValue("@DUEDATE", obj.DueDate);
                     command.Parameters.AddWithValue("@EMISSIONDATE", obj.EmissionDate);
@@ -86,7 +85,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 
             string sql = "UPDATE BILLSTOPAY SET DUEDATE = @DDATE, ISPAID = @IPAID, PAIDDATE = @PDATE, BILLVALUE = @BVALUE, PAYMETHOD_ID = @METHODID, " +
                 " SUPPLIER_ID = @SUPPLIERID, EMISSIONDATE = @EMISSIONDATE, DATE_LAST_UPDATE = @DU " +
-                "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND BILLPAGE = @BPAGE AND INSTALMENTNUMBER = @INUMBER ; ";
+                "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND INSTALMENTNUMBER = @INUMBER ; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -110,7 +109,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@EMISSIONDATE", obj.EmissionDate);
                     command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
                     command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
-                    command.Parameters.AddWithValue("@BPAGE", obj.BillPage);
                     command.Parameters.AddWithValue("@INUMBER", obj.InstalmentNumber);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
@@ -135,10 +133,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
         }
 
-        public bool DeleteFromDb(int billNumber, int billModel, int billSeries, int billPage, int instalmentNumber)
+        public bool DeleteFromDb(int billNumber, int billModel, int billSeries, int instalmentNumber)
         {
             bool status = false;
-            string sql = "DELETE FROM BILLSTOPAY WHERE BILLNUMBER = @BNUM AND BILLMODEL = @BMODEL AND BILLSERIES = @BSERIES AND BILLPAGE = @BPAGE " +
+            string sql = "DELETE FROM BILLSTOPAY WHERE BILLNUMBER = @BNUM AND BILLMODEL = @BMODEL AND BILLSERIES = @BSERIES " +
                 "AND INSTALMENTNUMBER = @INUM ;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -148,7 +146,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@BNUM", billNumber);
                     command.Parameters.AddWithValue("@BMODEL", billModel);
                     command.Parameters.AddWithValue("@BSERIES", billSeries);
-                    command.Parameters.AddWithValue("@BPAGE", billPage);
                     command.Parameters.AddWithValue("@INUM", instalmentNumber);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
@@ -195,7 +192,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         BillNumber = Convert.ToInt32(reader["billNumber"]),
                                         BillSeries = Convert.ToInt32(reader["billModel"]),
                                         BillModel = Convert.ToInt32(reader["billSeries"]),
-                                        BillPage = Convert.ToInt32(reader["billPage"]),
 
                                         TotalValue = Convert.ToDouble(reader["BillValue"]),
                                         IsPaid = Convert.ToInt32(reader["isPaid"]),
@@ -233,21 +229,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             return null;
         }
 
-        public BillsToPay SelectFromDb(int billNumber, int billModel, int billSeries, int billPage, int instalmentNumber)
+        public BillsToPay SelectFromDb(int billNumber, int billModel, int billSeries, int instalmentNumber)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM BILLSTOPAY WHERE BILLNUMBER = @BNUM AND BILLMODEL = @BMODEL AND BILLSERIES = @BSERIES AND BILLPAGE = @BPAGE " +
+                    string sql = "SELECT * FROM BILLSTOPAY WHERE BILLNUMBER = @BNUM AND BILLMODEL = @BMODEL AND BILLSERIES = @BSERIES " +
                         "AND INSTALMENTNUMBER = @INUM ; ";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@BNUM", billNumber);
                         command.Parameters.AddWithValue("BMODEL", billModel);
                         command.Parameters.AddWithValue("BSERIES", billSeries);
-                        command.Parameters.AddWithValue("@BPAGE", billPage);
                         command.Parameters.AddWithValue("@INUM", instalmentNumber);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -258,7 +253,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     BillNumber = billNumber,
                                     BillSeries = billSeries,
                                     BillModel = billModel,
-                                    BillPage = billPage,
 
                                     TotalValue = Convert.ToDouble(reader["BillValue"]),
                                     IsPaid = Convert.ToInt32(reader["isPaid"]),
@@ -318,14 +312,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         BillNumber = Convert.ToInt32(reader["billNumber"]),
                                         BillSeries = Convert.ToInt32(reader["billModel"]),
                                         BillModel = Convert.ToInt32(reader["billSeries"]),
-                                        BillPage = Convert.ToInt32(reader["billPage"]),
 
                                         TotalValue = Convert.ToDouble(reader["BillValue"]),
                                         IsPaid = Convert.ToInt32(reader["isPaid"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         PaidDate = Convert.ToDateTime(reader["paidDate"]),
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
-                                        InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
@@ -412,14 +404,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         BillNumber = Convert.ToInt32(reader["billNumber"]),
                                         BillSeries = Convert.ToInt32(reader["billModel"]),
                                         BillModel = Convert.ToInt32(reader["billSeries"]),
-                                        BillPage = Convert.ToInt32(reader["billPage"]),
 
                                         TotalValue = Convert.ToDouble(reader["BillValue"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         IsPaid = Convert.ToInt32(reader["isPaid"]),
                                         PaidDate = Convert.ToDateTime(reader["paidDate"]),
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
-                                        InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
