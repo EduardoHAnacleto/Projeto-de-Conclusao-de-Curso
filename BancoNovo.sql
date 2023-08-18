@@ -300,7 +300,6 @@
         purchase_InsuranceCost decimal,
         cancelledDate date,
         paidDate date,
-
         supplier_id int not null references SUPPLIERS(id_supplier),
         user_id int not null references USERS (id_user),
         date_creation datetime not null,
