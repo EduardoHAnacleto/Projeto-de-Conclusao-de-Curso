@@ -231,7 +231,7 @@
 
 
     create table SALES(
-        id_sale int identity(2,1) primary key ON DELETE CASCADE,
+        id_sale int identity(2,1) primary key,
         CLIENT_ID int not null references CLIENTS(id_client),
         user_id int not null references USERS(id_user),        
         sale_total_cost decimal not null,
@@ -329,24 +329,27 @@
         billNumber int not null,
         billModel int not null,
         billSeries int not null,
-        supplier_id int not null references SUPPLIERS(id_supplier),
-        PRIMARY KEY (purchase_id, billNumber, billModel, billSeries, id_supplier),
-        FOREIGN KEY (billNumber, billModel, billSeries)
-        REFERENCES BILLSTOPAY (billNumber, billModel, billSeries)
+        supplier_id int not null,
+		instalmentNumber int not null,
+        PRIMARY KEY (supplier_id, billNumber, billModel, billSeries, instalmentNumber),
+        FOREIGN KEY (billNumber, billModel, billSeries, instalmentNumber, supplier_id)
+        REFERENCES BILLSTOPAY (billNumber, billModel, billSeries, instalmentNumber, supplier_id)
         );
 
     	create table PURCHASEITEMS(
-        billModel int not null references PURCHASES(billModel),
-        billNumber int not null references PURCHASES(billNumber),
-        billSeries int not null references PURCHASES(billSeries),
-        supplier_id int not null references SUPPLIERS(id_supplier),
-        PRODUCT_ID int not null references Products(id_product),
+        billModel int not null,
+        billNumber int not null,
+        billSeries int not null,
+        supplier_id int not null,
+        PRODUCT_ID int not null references PRODUCTS(id_product),
         QUANTITY int not null,
         PRODUCT_COST decimal not null,
         PURCHASE_PERCENTAGE decimal not null,
         DISCOUNT_CASH decimal not null,
-        WEIGHTED_AVG decimal not null,
+        WEIGHTED_AVG decimal(10,4) not null,
         DATE_CREATION date not null,
         DATE_CANCELLED date,
-        primary key (billModel, billNumber, billSeries, supplier_id, PRODUCT_ID)
+        primary key (billModel, billNumber, billSeries, supplier_id, PRODUCT_ID),
+		FOREIGN KEY (billModel, billNumber, billSeries, supplier_id)
+        REFERENCES PURCHASES (billModel, billNumber, billSeries, supplier_id)
     );

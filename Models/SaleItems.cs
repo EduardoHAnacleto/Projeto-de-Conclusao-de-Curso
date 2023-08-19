@@ -19,6 +19,5 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public double TotalValue { get; set; }
         public double ProductCost { get; set; }
         public double ItemDiscountCash { get; set; }
-        public double ItemDiscountPerc { get; set; }
     }
 }

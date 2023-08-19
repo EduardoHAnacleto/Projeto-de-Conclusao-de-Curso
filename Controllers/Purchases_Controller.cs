@@ -45,9 +45,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             string emission = emissionDate.ToString();
             return _purchasesDAO.SelectEmissionDateFromDb(emission);
         }
-        public Purchases FindItemId(int id)
+        public Purchases FindItemId(int bModel, int bNum, int bSeries, int supplierId)
         {
-            return _purchasesDAO.SelectFromDb(id);
+            return _purchasesDAO.SelectFromDb(bModel, bNum, bSeries, supplierId);
         }
         public List<Purchases> FindTotalCost(double totalCost)
         {
@@ -62,9 +62,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             return _purchasesDAO.SelectSupplierFromDb(idSupplier);
         }
-        public void DeleteItem(int idBillToPay)
+        public void DeleteItem(int bModel, int bNum, int bSeries, int supplierId)
         {
-            _purchasesDAO.DeleteFromDb(idBillToPay);
+            _purchasesDAO.DeleteFromDb(bModel, bNum, bSeries, supplierId);
         }
         public bool UpdateItem(Purchases purchase)
         {
@@ -79,16 +79,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             DataTable ds = new DataTable();
             ds = _purchasesDAO.SelectDataSourceFromDB();
             return ds;
-        }
-
-        public int BringNewId()
-        {
-            return _purchasesDAO.NewId();
-        }
-
-        public int GetLastId()
-        {
-            return _purchasesDAO.GetLastId();
         }
 
         public bool ConnectPurchaseBill(BillsToPay bill, Purchases purchase)

@@ -29,9 +29,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             return _purchaseItemsDAO.SelectAllFromDb();
         }
-        public List<PurchaseItems> FindItemId(int id)
+        public List<PurchaseItems> FindItemId(int bModel, int bNum, int bSeries, int supplierId)
         {
-            return _purchaseItemsDAO.SelectFromDb(id);
+            return _purchaseItemsDAO.SelectFromDb(bModel, bNum, bSeries, supplierId);
         }
         public List<PurchaseItems> FindProductId(int id)
         {
@@ -42,13 +42,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             decimal value = (decimal)minValue;
             return _purchaseItemsDAO.SelectTotalValueFromDb(value);
         }
-        public List<PurchaseItems> FindPurchaseId(int id)
+        public List<PurchaseItems> FindPurchaseId(int bModel, int bNum, int bSeries, int supplierId)
         {
-            return _purchaseItemsDAO.SelectPurchaseIdFromDb(id);
+            return _purchaseItemsDAO.SelectPurchaseIdFromDb(bModel, bNum, bSeries, supplierId);
         }
-        public void DeleteItem(int id)
+        public void DeleteItem(int bModel, int bNum, int bSeries, int supplierId)
         {
-            _purchaseItemsDAO.DeleteFromDb(id);
+            _purchaseItemsDAO.DeleteFromDb(bModel, bNum, bSeries, supplierId);
         }
 
         public DataTable PopulateDGV() 

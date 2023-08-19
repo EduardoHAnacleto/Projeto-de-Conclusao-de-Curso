@@ -59,7 +59,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             int billSeries = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billSeries"].Value);
             int billModel = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billModel"].Value);
             int instalmentNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["instalmentNumber"].Value);
-            BillsToPay obj = _controller.FindItemId(billNumber,billModel,billSeries,instalmentNumber);
+            int supplierId = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["supplierId"].Value);
+            BillsToPay obj = _controller.FindItemId(billNumber,billModel,billSeries,instalmentNumber, supplierId);
             return obj;
         }
 

@@ -22,9 +22,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "INSERT INTO PURCHASEITEMS ( BILLMODEL, BILLNUMBER, BILLSERIES, SUPPLIER_ID, PRODUCT_ID, QUANTITY, PRODUCT_COST, TOTAL_COST, PURCHASE_PERCENTAGE," +
-                "DISCOUNT_CASH , WEIGHTED_AVG , DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@ID, @PRODID, @QTD, @PRODCOST, @TOTALVALUE, @PURCHPERC, @DISCOUNT, @WEIGHTEDAVG, @DC, @DU);";
+            string sql = "INSERT INTO PURCHASEITEMS ( BILLMODEL, BILLNUMBER, BILLSERIES, SUPPLIER_ID, PRODUCT_ID, QUANTITY, PRODUCT_COST, PURCHASE_PERCENTAGE," +
+                "DISCOUNT_CASH , WEIGHTED_AVG , DATE_CREATION, DATE_CANCELLED ) "
+                         + " VALUES (@BILLMOD, @BILLNUM, @BILLSER, @SUPPLIERID, @PRODID, @QTD, @PRODCOST, @PURCHPERC, @DISCOUNT, @WEIGHTEDAVG, @DC, @DC);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -40,8 +40,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@PURCHPERC", obj.PurchasePercentage);
                     command.Parameters.AddWithValue("@WEIGHTEDAVG", obj.WeightedCostAverage);
                     command.Parameters.AddWithValue("@DISCOUNT", obj.DiscountCash);
-                    command.Parameters.AddWithValue("@DC", obj.dateOfLastUpdate);
-                    command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+                    command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
+                    if (obj.CancelledDate != null)
+                    {
+                        command.Parameters.AddWithValue("@DU", obj.CancelledDate);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@DU", DBNull.Value);
+                    }
+
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     connection.Close();

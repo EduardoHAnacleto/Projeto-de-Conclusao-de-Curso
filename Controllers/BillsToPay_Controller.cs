@@ -32,9 +32,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToPaysDAO.SelectAllFromDb();
         }
-        public BillsToPay FindItemId(int billNum, int billType, int billSeries, int instalmentNumber)
+        public BillsToPay FindItemId(int billNum, int billType, int billSeries, int instalmentNum, int supplierId)
         {
-            return _billToPaysDAO.SelectFromDb( billNum, billType, billSeries, instalmentNumber);
+            return _billToPaysDAO.SelectFromDb( billNum, billType, billSeries, instalmentNum, supplierId);
         }
         public List<BillsToPay> FindSupplierId(int supplierId)
         {
@@ -48,9 +48,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToPaysDAO.SelectisPaidFromDb(isPaid);
         }
-        public void DeleteItem(int billNum, int billType, int billSeries, int instalmentNumber)
+        public void DeleteItem(int billNum, int billType, int billSeries, int instalmentNum, int supplierId)
         {
-            _billToPaysDAO.DeleteFromDb(billNum, billType, billSeries, instalmentNumber);
+            _billToPaysDAO.DeleteFromDb(billNum, billType, billSeries, instalmentNum, supplierId);
         }
         public void UpdateItem(BillsToPay billToPay)
         {

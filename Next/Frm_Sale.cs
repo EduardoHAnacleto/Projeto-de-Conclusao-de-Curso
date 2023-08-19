@@ -615,7 +615,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 saleItem.TotalValue = Convert.ToDouble(row.Cells["ProductTotalValue"].Value);
                 saleItem.ProductCost = Convert.ToDouble(row.Cells["ProductCost"].Value);
                 saleItem.ItemDiscountCash = Convert.ToDouble(row.Cells["ItemDiscountCash"].Value);
-                saleItem.ItemDiscountPerc = Convert.ToDouble(row.Cells["ItemDiscountPerc"].Value);
 
                 list.Add(saleItem);
             }
@@ -775,7 +774,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     item.Product.productCost,
                     item.Quantity,
                     item.ItemDiscountCash,
-                    item.ItemDiscountPerc,
                     item.ProductValue,
                     totalValue
                     );
@@ -987,7 +985,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             Products prod1 = _pController.FindItemId(prodId);
             testeitems.Product = prod1;
             testeitems.ProductCost = prod1.productCost;
-            testeitems.ItemDiscountPerc = 0;
             testeitems.ItemDiscountCash = 0;
             testeitems.Quantity = qtd;
             testeitems.ProductValue = prod1.salePrice;

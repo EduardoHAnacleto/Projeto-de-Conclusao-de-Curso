@@ -313,8 +313,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     int billModel = Convert.ToInt32(edt_BillModel.Value);
                     int billSeries = Convert.ToInt32(edt_BillSeries.Value);
                     int instalmentNum = Convert.ToInt32(edt_instalmentNumber.Value);
+                    int supplierId = Convert.ToInt32(edt_supplierId.Value);
 
-                    _controller.DeleteItem(billNum, billModel, billSeries, instalmentNum);
+                    _controller.DeleteItem(billNum, billModel, billSeries, instalmentNum, supplierId);
                     this.ClearCamps();
                     this.edt_id.Value = this.BringNewId();
                     btn_SelectDelete.Enabled = false;

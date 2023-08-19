@@ -37,6 +37,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_payCondId.Controls[0].Visible = false;
             medt_date.Text = DateTime.Now.ToString();
             User = user;
+            SetUser(User);
+        }
+
+        private void SetUser(Users user)
+        {
+            edt_userId.Value = user.id;
+            edt_userName.Text = user.name;
         }
 
         private readonly Users User;
@@ -202,7 +209,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                             status = _controller.SaveItem(purchase);
                             if (status)
                             {
-                                int purchId = _controller.GetLastId();
                                 foreach (PurchaseItems item in purchase.PurchasedItems)
                                 {
                                     item.BillNumberId = purchase.BillNumber;
@@ -295,7 +301,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             Suppliers_Controller _sController = new Suppliers_Controller();
             PaymentConditions_Controller _pCController = new PaymentConditions_Controller();
             obj.PaymentCondition = _pCController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
-            obj.id = _controller.BringNewId();
             obj.User = User;
             obj.Supplier = _sController.FindItemId( Convert.ToInt32(edt_supplierId.Value));
             obj.Freight_Cost = Convert.ToDouble(edt_transportFee.Value);
@@ -497,7 +502,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             LockCamps();
             try
             {
-                _controller.DeleteItem(BackupPurchase.id);
+                _controller.DeleteItem(BackupPurchase.BillModel, BackupPurchase.BillNumber, BackupPurchase.BillSeries, BackupPurchase.Supplier.id);
                 this.ClearCamps();
             }
             catch (Exception ex)
