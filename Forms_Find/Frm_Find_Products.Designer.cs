@@ -87,7 +87,7 @@
             this.lbl_ProductName.Name = "lbl_ProductName";
             this.lbl_ProductName.Size = new System.Drawing.Size(44, 13);
             this.lbl_ProductName.TabIndex = 8;
-            this.lbl_ProductName.Text = "Product";
+            this.lbl_ProductName.Text = "Produto";
             // 
             // btn_Search
             // 
@@ -95,7 +95,7 @@
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(75, 20);
             this.btn_Search.TabIndex = 9;
-            this.btn_Search.Text = "&Search";
+            this.btn_Search.Text = "Bu&scar";
             this.btn_Search.UseVisualStyleBackColor = true;
             this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
@@ -110,14 +110,14 @@
             // DGVProductName
             // 
             this.DGVProductName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.DGVProductName.HeaderText = "Product";
+            this.DGVProductName.HeaderText = "Produto";
             this.DGVProductName.MinimumWidth = 6;
             this.DGVProductName.Name = "DGVProductName";
             this.DGVProductName.ReadOnly = true;
             // 
             // DGVProductValue
             // 
-            this.DGVProductValue.HeaderText = "Value";
+            this.DGVProductValue.HeaderText = "Valor";
             this.DGVProductValue.MinimumWidth = 6;
             this.DGVProductValue.Name = "DGVProductValue";
             this.DGVProductValue.ReadOnly = true;
@@ -125,7 +125,7 @@
             // 
             // DGVProductGroup
             // 
-            this.DGVProductGroup.HeaderText = "Group";
+            this.DGVProductGroup.HeaderText = "Grupo";
             this.DGVProductGroup.MinimumWidth = 6;
             this.DGVProductGroup.Name = "DGVProductGroup";
             this.DGVProductGroup.ReadOnly = true;
@@ -133,7 +133,7 @@
             // 
             // DGVProductBrand
             // 
-            this.DGVProductBrand.HeaderText = "Brand";
+            this.DGVProductBrand.HeaderText = "Marca";
             this.DGVProductBrand.MinimumWidth = 6;
             this.DGVProductBrand.Name = "DGVProductBrand";
             this.DGVProductBrand.ReadOnly = true;
@@ -141,7 +141,7 @@
             // 
             // DGVProductStock
             // 
-            this.DGVProductStock.HeaderText = "Stock";
+            this.DGVProductStock.HeaderText = "Estoque";
             this.DGVProductStock.MinimumWidth = 6;
             this.DGVProductStock.Name = "DGVProductStock";
             this.DGVProductStock.ReadOnly = true;
@@ -157,7 +157,7 @@
             this.Controls.Add(this.DGV_Products);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_Products";
-            this.Text = "Find Products";
+            this.Text = "Buscar Produtos";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_New, 0);

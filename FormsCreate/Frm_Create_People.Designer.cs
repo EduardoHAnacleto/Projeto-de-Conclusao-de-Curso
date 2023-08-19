@@ -117,7 +117,7 @@
             this.gbox_address.Size = new System.Drawing.Size(401, 214);
             this.gbox_address.TabIndex = 32;
             this.gbox_address.TabStop = false;
-            this.gbox_address.Text = "Address";
+            this.gbox_address.Text = "Endereço";
             // 
             // edt_homeType
             // 
@@ -162,9 +162,9 @@
             this.lbl_country.Location = new System.Drawing.Point(4, 162);
             this.lbl_country.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_country.Name = "lbl_country";
-            this.lbl_country.Size = new System.Drawing.Size(47, 13);
+            this.lbl_country.Size = new System.Drawing.Size(36, 13);
             this.lbl_country.TabIndex = 25;
-            this.lbl_country.Text = "*Country";
+            this.lbl_country.Text = "* País";
             // 
             // lbl_state
             // 
@@ -172,9 +172,9 @@
             this.lbl_state.Location = new System.Drawing.Point(65, 162);
             this.lbl_state.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_state.Name = "lbl_state";
-            this.lbl_state.Size = new System.Drawing.Size(36, 13);
+            this.lbl_state.Size = new System.Drawing.Size(47, 13);
             this.lbl_state.TabIndex = 15;
-            this.lbl_state.Text = "*State";
+            this.lbl_state.Text = "* Estado";
             // 
             // lbl_homeType
             // 
@@ -182,9 +182,9 @@
             this.lbl_homeType.Location = new System.Drawing.Point(4, 114);
             this.lbl_homeType.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_homeType.Name = "lbl_homeType";
-            this.lbl_homeType.Size = new System.Drawing.Size(62, 13);
+            this.lbl_homeType.Size = new System.Drawing.Size(35, 13);
             this.lbl_homeType.TabIndex = 14;
-            this.lbl_homeType.Text = "*Home type";
+            this.lbl_homeType.Text = "* Tipo";
             // 
             // btn_findCity
             // 
@@ -193,7 +193,7 @@
             this.btn_findCity.Name = "btn_findCity";
             this.btn_findCity.Size = new System.Drawing.Size(58, 20);
             this.btn_findCity.TabIndex = 12;
-            this.btn_findCity.Text = "&Search";
+            this.btn_findCity.Text = "Bu&scar";
             this.btn_findCity.UseVisualStyleBackColor = true;
             this.btn_findCity.Click += new System.EventHandler(this.btn_findCity_Click);
             // 
@@ -203,9 +203,9 @@
             this.lbl_city.Location = new System.Drawing.Point(92, 113);
             this.lbl_city.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_city.Name = "lbl_city";
-            this.lbl_city.Size = new System.Drawing.Size(28, 13);
+            this.lbl_city.Size = new System.Drawing.Size(47, 13);
             this.lbl_city.TabIndex = 11;
-            this.lbl_city.Text = "*City";
+            this.lbl_city.Text = "* Cidade";
             // 
             // edt_complement
             // 
@@ -223,9 +223,9 @@
             this.Complement.Location = new System.Drawing.Point(192, 73);
             this.Complement.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Complement.Name = "Complement";
-            this.Complement.Size = new System.Drawing.Size(65, 13);
+            this.Complement.Size = new System.Drawing.Size(71, 13);
             this.Complement.TabIndex = 8;
-            this.Complement.Text = "Complement";
+            this.Complement.Text = "Complemento";
             // 
             // edt_district
             // 
@@ -243,9 +243,9 @@
             this.lbl_district.Location = new System.Drawing.Point(64, 73);
             this.lbl_district.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_district.Name = "lbl_district";
-            this.lbl_district.Size = new System.Drawing.Size(43, 13);
+            this.lbl_district.Size = new System.Drawing.Size(41, 13);
             this.lbl_district.TabIndex = 6;
-            this.lbl_district.Text = "*District";
+            this.lbl_district.Text = "* Bairro";
             // 
             // edt_houseNumber
             // 
@@ -263,9 +263,9 @@
             this.lbl_houseNumber.Location = new System.Drawing.Point(4, 73);
             this.lbl_houseNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_houseNumber.Name = "lbl_houseNumber";
-            this.lbl_houseNumber.Size = new System.Drawing.Size(48, 13);
+            this.lbl_houseNumber.Size = new System.Drawing.Size(51, 13);
             this.lbl_houseNumber.TabIndex = 4;
-            this.lbl_houseNumber.Text = "*Number";
+            this.lbl_houseNumber.Text = "* Número";
             // 
             // lbl_street
             // 
@@ -275,7 +275,7 @@
             this.lbl_street.Name = "lbl_street";
             this.lbl_street.Size = new System.Drawing.Size(68, 13);
             this.lbl_street.TabIndex = 3;
-            this.lbl_street.Text = "*Street name";
+            this.lbl_street.Text = "* Logradouro";
             // 
             // edt_street
             // 
@@ -293,9 +293,9 @@
             this.lbl_zipCode.Location = new System.Drawing.Point(4, 20);
             this.lbl_zipCode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_zipCode.Name = "lbl_zipCode";
-            this.lbl_zipCode.Size = new System.Drawing.Size(56, 13);
+            this.lbl_zipCode.Size = new System.Drawing.Size(35, 13);
             this.lbl_zipCode.TabIndex = 1;
-            this.lbl_zipCode.Text = "*ZIP Code";
+            this.lbl_zipCode.Text = "* CEP";
             // 
             // medt_zipCode
             // 
@@ -322,19 +322,19 @@
             this.gbox_phones.Margin = new System.Windows.Forms.Padding(2);
             this.gbox_phones.Name = "gbox_phones";
             this.gbox_phones.Padding = new System.Windows.Forms.Padding(2);
-            this.gbox_phones.Size = new System.Drawing.Size(176, 198);
+            this.gbox_phones.Size = new System.Drawing.Size(185, 198);
             this.gbox_phones.TabIndex = 31;
             this.gbox_phones.TabStop = false;
-            this.gbox_phones.Text = "Contact Information";
+            this.gbox_phones.Text = "Informação de Contato";
             // 
             // lbl_requiredPhone
             // 
             this.lbl_requiredPhone.AutoSize = true;
-            this.lbl_requiredPhone.Location = new System.Drawing.Point(7, 112);
+            this.lbl_requiredPhone.Location = new System.Drawing.Point(1, 112);
             this.lbl_requiredPhone.Name = "lbl_requiredPhone";
-            this.lbl_requiredPhone.Size = new System.Drawing.Size(160, 13);
+            this.lbl_requiredPhone.Size = new System.Drawing.Size(181, 13);
             this.lbl_requiredPhone.TabIndex = 24;
-            this.lbl_requiredPhone.Text = "*At least one contact is required.";
+            this.lbl_requiredPhone.Text = "* Ao menos um contato é obrigatório.";
             // 
             // lbl_email
             // 
@@ -429,9 +429,9 @@
             this.lbl_regNumber.Location = new System.Drawing.Point(8, 60);
             this.lbl_regNumber.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_regNumber.Name = "lbl_regNumber";
-            this.lbl_regNumber.Size = new System.Drawing.Size(107, 13);
+            this.lbl_regNumber.Size = new System.Drawing.Size(108, 13);
             this.lbl_regNumber.TabIndex = 29;
-            this.lbl_regNumber.Text = "*Registration Number";
+            this.lbl_regNumber.Text = "* Número de Registro";
             // 
             // lbl_dob
             // 
@@ -439,23 +439,23 @@
             this.lbl_dob.Location = new System.Drawing.Point(126, 60);
             this.lbl_dob.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_dob.Name = "lbl_dob";
-            this.lbl_dob.Size = new System.Drawing.Size(69, 13);
+            this.lbl_dob.Size = new System.Drawing.Size(109, 13);
             this.lbl_dob.TabIndex = 27;
-            this.lbl_dob.Text = "*Date of birth";
+            this.lbl_dob.Text = "* Data de nascimento";
             // 
             // lbl_age
             // 
             this.lbl_age.AutoSize = true;
-            this.lbl_age.Location = new System.Drawing.Point(214, 60);
+            this.lbl_age.Location = new System.Drawing.Point(234, 60);
             this.lbl_age.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_age.Name = "lbl_age";
-            this.lbl_age.Size = new System.Drawing.Size(30, 13);
+            this.lbl_age.Size = new System.Drawing.Size(41, 13);
             this.lbl_age.TabIndex = 26;
-            this.lbl_age.Text = "*Age";
+            this.lbl_age.Text = "* Idade";
             // 
             // edt_age
             // 
-            this.edt_age.Location = new System.Drawing.Point(217, 75);
+            this.edt_age.Location = new System.Drawing.Point(237, 75);
             this.edt_age.Margin = new System.Windows.Forms.Padding(2);
             this.edt_age.MaxLength = 3;
             this.edt_age.Name = "edt_age";
@@ -475,44 +475,44 @@
             this.gbox_gender.Size = new System.Drawing.Size(124, 58);
             this.gbox_gender.TabIndex = 24;
             this.gbox_gender.TabStop = false;
-            this.gbox_gender.Text = "*Gender";
+            this.gbox_gender.Text = "* Gênero";
             // 
             // check_otherGender
             // 
             this.check_otherGender.AutoSize = true;
-            this.check_otherGender.Location = new System.Drawing.Point(64, 38);
+            this.check_otherGender.Location = new System.Drawing.Point(72, 38);
             this.check_otherGender.Margin = new System.Windows.Forms.Padding(2);
             this.check_otherGender.Name = "check_otherGender";
             this.check_otherGender.Size = new System.Drawing.Size(51, 17);
             this.check_otherGender.TabIndex = 2;
             this.check_otherGender.TabStop = true;
-            this.check_otherGender.Text = "Other";
+            this.check_otherGender.Text = "Outro";
             this.check_otherGender.UseVisualStyleBackColor = true;
             this.check_otherGender.CheckedChanged += new System.EventHandler(this.check_otherGender_CheckedChanged);
             // 
             // check_female
             // 
             this.check_female.AutoSize = true;
-            this.check_female.Location = new System.Drawing.Point(64, 17);
+            this.check_female.Location = new System.Drawing.Point(4, 37);
             this.check_female.Margin = new System.Windows.Forms.Padding(2);
             this.check_female.Name = "check_female";
-            this.check_female.Size = new System.Drawing.Size(59, 17);
+            this.check_female.Size = new System.Drawing.Size(67, 17);
             this.check_female.TabIndex = 1;
             this.check_female.TabStop = true;
-            this.check_female.Text = "Female";
+            this.check_female.Text = "Feminino";
             this.check_female.UseVisualStyleBackColor = true;
             this.check_female.CheckedChanged += new System.EventHandler(this.check_female_CheckedChanged);
             // 
             // check_male
             // 
             this.check_male.AutoSize = true;
-            this.check_male.Location = new System.Drawing.Point(13, 17);
+            this.check_male.Location = new System.Drawing.Point(5, 17);
             this.check_male.Margin = new System.Windows.Forms.Padding(2);
             this.check_male.Name = "check_male";
-            this.check_male.Size = new System.Drawing.Size(48, 17);
+            this.check_male.Size = new System.Drawing.Size(73, 17);
             this.check_male.TabIndex = 0;
             this.check_male.TabStop = true;
-            this.check_male.Text = "Male";
+            this.check_male.Text = "Masculino";
             this.check_male.UseVisualStyleBackColor = true;
             this.check_male.CheckedChanged += new System.EventHandler(this.check_male_CheckedChanged);
             // 
@@ -532,9 +532,9 @@
             this.lbl_Name.Location = new System.Drawing.Point(62, 8);
             this.lbl_Name.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_Name.Name = "lbl_Name";
-            this.lbl_Name.Size = new System.Drawing.Size(39, 13);
+            this.lbl_Name.Size = new System.Drawing.Size(42, 13);
             this.lbl_Name.TabIndex = 22;
-            this.lbl_Name.Text = "*Name";
+            this.lbl_Name.Text = "* Nome";
             // 
             // medt_dob
             // 
@@ -565,7 +565,7 @@
             this.Controls.Add(this.lbl_Name);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_People";
-            this.Text = "Create People";
+            this.Text = "Criar Pessoa";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);

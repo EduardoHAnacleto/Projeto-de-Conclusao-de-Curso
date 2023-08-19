@@ -13,6 +13,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public int Status { get; set; }
         public DateTime EmissionDate { get; set; }
         public DateTime ArrivalDate { get; set; }
+        public DateTime? CancelledDate { get; set; }
 
         public double Freight_Cost { get; set; }
         public double Total_Cost { get; set; }

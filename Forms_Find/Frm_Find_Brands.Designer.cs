@@ -57,9 +57,9 @@
             this.lbl_brandName.AutoSize = true;
             this.lbl_brandName.Location = new System.Drawing.Point(47, 7);
             this.lbl_brandName.Name = "lbl_brandName";
-            this.lbl_brandName.Size = new System.Drawing.Size(66, 13);
+            this.lbl_brandName.Size = new System.Drawing.Size(37, 13);
             this.lbl_brandName.TabIndex = 5;
-            this.lbl_brandName.Text = "Brand Name";
+            this.lbl_brandName.Text = "Marca";
             // 
             // btn_Search
             // 
@@ -67,7 +67,7 @@
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(54, 20);
             this.btn_Search.TabIndex = 7;
-            this.btn_Search.Text = "Search";
+            this.btn_Search.Text = "Bu&scar";
             this.btn_Search.UseVisualStyleBackColor = true;
             this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
@@ -102,7 +102,7 @@
             // BrandName
             // 
             this.BrandName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.BrandName.HeaderText = "Brand Name";
+            this.BrandName.HeaderText = "Marca";
             this.BrandName.MinimumWidth = 6;
             this.BrandName.Name = "BrandName";
             this.BrandName.ReadOnly = true;
@@ -117,7 +117,7 @@
             this.Controls.Add(this.edt_BrandName);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_Brands";
-            this.Text = "Find Brands";
+            this.Text = "Buscar Marcas";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.edt_id, 0);

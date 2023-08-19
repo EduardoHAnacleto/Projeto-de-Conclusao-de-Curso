@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_Clients = new System.Windows.Forms.DataGridView();
-            this.ClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientRegNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_client = new System.Windows.Forms.Label();
             this.edt_clientName = new System.Windows.Forms.TextBox();
             this.btn_FindClient = new System.Windows.Forms.Button();
@@ -64,6 +60,10 @@
             this.btn_Close = new System.Windows.Forms.Button();
             this.lbl_ClientId = new System.Windows.Forms.Label();
             this.edt_clientId = new System.Windows.Forms.NumericUpDown();
+            this.ClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientRegNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -102,51 +102,19 @@
             this.DGV_Clients.Size = new System.Drawing.Size(637, 168);
             this.DGV_Clients.TabIndex = 0;
             // 
-            // ClientId
-            // 
-            this.ClientId.HeaderText = "ID";
-            this.ClientId.MinimumWidth = 6;
-            this.ClientId.Name = "ClientId";
-            this.ClientId.ReadOnly = true;
-            this.ClientId.Width = 45;
-            // 
-            // ClientName
-            // 
-            this.ClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ClientName.HeaderText = "Client Name";
-            this.ClientName.MinimumWidth = 6;
-            this.ClientName.Name = "ClientName";
-            this.ClientName.ReadOnly = true;
-            // 
-            // ClientRegNumber
-            // 
-            this.ClientRegNumber.HeaderText = "Registration Number";
-            this.ClientRegNumber.MinimumWidth = 6;
-            this.ClientRegNumber.Name = "ClientRegNumber";
-            this.ClientRegNumber.ReadOnly = true;
-            this.ClientRegNumber.Width = 125;
-            // 
-            // ClientType
-            // 
-            this.ClientType.HeaderText = "Type";
-            this.ClientType.MinimumWidth = 6;
-            this.ClientType.Name = "ClientType";
-            this.ClientType.ReadOnly = true;
-            this.ClientType.Width = 125;
-            // 
             // lbl_client
             // 
             this.lbl_client.AutoSize = true;
-            this.lbl_client.Location = new System.Drawing.Point(125, 14);
+            this.lbl_client.Location = new System.Drawing.Point(111, 14);
             this.lbl_client.Name = "lbl_client";
-            this.lbl_client.Size = new System.Drawing.Size(39, 13);
+            this.lbl_client.Size = new System.Drawing.Size(41, 13);
             this.lbl_client.TabIndex = 1;
-            this.lbl_client.Text = "Client :";
+            this.lbl_client.Text = "Nome :";
             // 
             // edt_clientName
             // 
             this.edt_clientName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_clientName.Location = new System.Drawing.Point(159, 11);
+            this.edt_clientName.Location = new System.Drawing.Point(149, 11);
             this.edt_clientName.MaxLength = 30;
             this.edt_clientName.Name = "edt_clientName";
             this.edt_clientName.Size = new System.Drawing.Size(239, 20);
@@ -154,11 +122,11 @@
             // 
             // btn_FindClient
             // 
-            this.btn_FindClient.Location = new System.Drawing.Point(403, 11);
+            this.btn_FindClient.Location = new System.Drawing.Point(393, 11);
             this.btn_FindClient.Name = "btn_FindClient";
             this.btn_FindClient.Size = new System.Drawing.Size(75, 19);
             this.btn_FindClient.TabIndex = 3;
-            this.btn_FindClient.Text = "&Search";
+            this.btn_FindClient.Text = "Bu&scar";
             this.btn_FindClient.UseVisualStyleBackColor = true;
             this.btn_FindClient.Click += new System.EventHandler(this.btn_FindClient_Click);
             // 
@@ -167,9 +135,9 @@
             this.lbl_SaleId.AutoSize = true;
             this.lbl_SaleId.Location = new System.Drawing.Point(4, 21);
             this.lbl_SaleId.Name = "lbl_SaleId";
-            this.lbl_SaleId.Size = new System.Drawing.Size(48, 13);
+            this.lbl_SaleId.Size = new System.Drawing.Size(58, 13);
             this.lbl_SaleId.TabIndex = 5;
-            this.lbl_SaleId.Text = "Sale ID :";
+            this.lbl_SaleId.Text = "ID Venda :";
             // 
             // DGV_Sales
             // 
@@ -201,13 +169,13 @@
             this.btn_SelectSale.Name = "btn_SelectSale";
             this.btn_SelectSale.Size = new System.Drawing.Size(75, 23);
             this.btn_SelectSale.TabIndex = 7;
-            this.btn_SelectSale.Text = "Select &Sale";
+            this.btn_SelectSale.Text = "S&elecionar Venda";
             this.btn_SelectSale.UseVisualStyleBackColor = true;
             this.btn_SelectSale.Click += new System.EventHandler(this.btn_SelectSale_Click);
             // 
             // edt_saleId
             // 
-            this.edt_saleId.Location = new System.Drawing.Point(53, 19);
+            this.edt_saleId.Location = new System.Drawing.Point(71, 19);
             this.edt_saleId.Maximum = new decimal(new int[] {
             -1530494977,
             232830,
@@ -219,11 +187,11 @@
             // 
             // btn_findSale
             // 
-            this.btn_findSale.Location = new System.Drawing.Point(120, 19);
+            this.btn_findSale.Location = new System.Drawing.Point(138, 19);
             this.btn_findSale.Name = "btn_findSale";
-            this.btn_findSale.Size = new System.Drawing.Size(75, 20);
+            this.btn_findSale.Size = new System.Drawing.Size(92, 20);
             this.btn_findSale.TabIndex = 9;
-            this.btn_findSale.Text = "&Search ID";
+            this.btn_findSale.Text = "&Buscar Venda";
             this.btn_findSale.UseVisualStyleBackColor = true;
             this.btn_findSale.Click += new System.EventHandler(this.btn_findSale_Click);
             // 
@@ -241,7 +209,7 @@
             this.gbox_sale.Size = new System.Drawing.Size(1064, 379);
             this.gbox_sale.TabIndex = 10;
             this.gbox_sale.TabStop = false;
-            this.gbox_sale.Text = "Sale";
+            this.gbox_sale.Text = "Vendas";
             // 
             // lbl_UserId
             // 
@@ -249,13 +217,13 @@
             this.lbl_UserId.Location = new System.Drawing.Point(4, 56);
             this.lbl_UserId.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_UserId.Name = "lbl_UserId";
-            this.lbl_UserId.Size = new System.Drawing.Size(49, 13);
+            this.lbl_UserId.Size = new System.Drawing.Size(63, 13);
             this.lbl_UserId.TabIndex = 14;
-            this.lbl_UserId.Text = "User ID :";
+            this.lbl_UserId.Text = "ID Usuário :";
             // 
             // edt_UserId
             // 
-            this.edt_UserId.Location = new System.Drawing.Point(53, 54);
+            this.edt_UserId.Location = new System.Drawing.Point(71, 54);
             this.edt_UserId.Margin = new System.Windows.Forms.Padding(2);
             this.edt_UserId.Maximum = new decimal(new int[] {
             9999,
@@ -268,11 +236,11 @@
             // 
             // btn_SearchUser
             // 
-            this.btn_SearchUser.Location = new System.Drawing.Point(119, 49);
+            this.btn_SearchUser.Location = new System.Drawing.Point(137, 54);
             this.btn_SearchUser.Name = "btn_SearchUser";
-            this.btn_SearchUser.Size = new System.Drawing.Size(82, 27);
+            this.btn_SearchUser.Size = new System.Drawing.Size(93, 22);
             this.btn_SearchUser.TabIndex = 12;
-            this.btn_SearchUser.Text = "Search User";
+            this.btn_SearchUser.Text = "Buscar Usuário";
             this.btn_SearchUser.UseVisualStyleBackColor = true;
             this.btn_SearchUser.Click += new System.EventHandler(this.btn_SearchUser_Click);
             // 
@@ -293,7 +261,7 @@
             this.gbox_SaleFilters.Size = new System.Drawing.Size(262, 156);
             this.gbox_SaleFilters.TabIndex = 11;
             this.gbox_SaleFilters.TabStop = false;
-            this.gbox_SaleFilters.Text = "Sale Filters";
+            this.gbox_SaleFilters.Text = "Filtro de Vendas";
             // 
             // lbl_maxDate
             // 
@@ -302,7 +270,7 @@
             this.lbl_maxDate.Name = "lbl_maxDate";
             this.lbl_maxDate.Size = new System.Drawing.Size(56, 13);
             this.lbl_maxDate.TabIndex = 9;
-            this.lbl_maxDate.Text = "Max. Date";
+            this.lbl_maxDate.Text = "Max. Data";
             // 
             // dateTime_MaxDateFilter
             // 
@@ -322,7 +290,7 @@
             this.lbl_minDate.Name = "lbl_minDate";
             this.lbl_minDate.Size = new System.Drawing.Size(53, 13);
             this.lbl_minDate.TabIndex = 7;
-            this.lbl_minDate.Text = "Min. Date";
+            this.lbl_minDate.Text = "Min. Data";
             // 
             // btn_ClearSaleFilters
             // 
@@ -330,7 +298,7 @@
             this.btn_ClearSaleFilters.Name = "btn_ClearSaleFilters";
             this.btn_ClearSaleFilters.Size = new System.Drawing.Size(57, 23);
             this.btn_ClearSaleFilters.TabIndex = 6;
-            this.btn_ClearSaleFilters.Text = "Reset";
+            this.btn_ClearSaleFilters.Text = "Limpar";
             this.btn_ClearSaleFilters.UseVisualStyleBackColor = true;
             this.btn_ClearSaleFilters.Click += new System.EventHandler(this.btn_ClearSaleFilters_Click);
             // 
@@ -339,9 +307,9 @@
             this.lbl_payCondition.AutoSize = true;
             this.lbl_payCondition.Location = new System.Drawing.Point(6, 98);
             this.lbl_payCondition.Name = "lbl_payCondition";
-            this.lbl_payCondition.Size = new System.Drawing.Size(95, 13);
+            this.lbl_payCondition.Size = new System.Drawing.Size(124, 13);
             this.lbl_payCondition.TabIndex = 5;
-            this.lbl_payCondition.Text = "Payment Condition";
+            this.lbl_payCondition.Text = "Condição de Pagamento";
             // 
             // btn_SearchPayCond
             // 
@@ -349,7 +317,7 @@
             this.btn_SearchPayCond.Name = "btn_SearchPayCond";
             this.btn_SearchPayCond.Size = new System.Drawing.Size(57, 23);
             this.btn_SearchPayCond.TabIndex = 4;
-            this.btn_SearchPayCond.Text = "Search";
+            this.btn_SearchPayCond.Text = "Buscar";
             this.btn_SearchPayCond.UseVisualStyleBackColor = true;
             this.btn_SearchPayCond.Click += new System.EventHandler(this.btn_SearchPayCond_Click);
             // 
@@ -367,10 +335,10 @@
             this.rbtn_CancelledStatus.AutoSize = true;
             this.rbtn_CancelledStatus.Location = new System.Drawing.Point(184, 88);
             this.rbtn_CancelledStatus.Name = "rbtn_CancelledStatus";
-            this.rbtn_CancelledStatus.Size = new System.Drawing.Size(72, 17);
+            this.rbtn_CancelledStatus.Size = new System.Drawing.Size(76, 17);
             this.rbtn_CancelledStatus.TabIndex = 2;
             this.rbtn_CancelledStatus.TabStop = true;
-            this.rbtn_CancelledStatus.Text = "Cancelled";
+            this.rbtn_CancelledStatus.Text = "Cancelado";
             this.rbtn_CancelledStatus.UseVisualStyleBackColor = true;
             this.rbtn_CancelledStatus.CheckedChanged += new System.EventHandler(this.rbtn_CancelledStatus_CheckedChanged);
             // 
@@ -379,10 +347,10 @@
             this.rbtn_ActiveStatus.AutoSize = true;
             this.rbtn_ActiveStatus.Location = new System.Drawing.Point(184, 65);
             this.rbtn_ActiveStatus.Name = "rbtn_ActiveStatus";
-            this.rbtn_ActiveStatus.Size = new System.Drawing.Size(55, 17);
+            this.rbtn_ActiveStatus.Size = new System.Drawing.Size(49, 17);
             this.rbtn_ActiveStatus.TabIndex = 1;
             this.rbtn_ActiveStatus.TabStop = true;
-            this.rbtn_ActiveStatus.Text = "Active";
+            this.rbtn_ActiveStatus.Text = "Ativo";
             this.rbtn_ActiveStatus.UseVisualStyleBackColor = true;
             this.rbtn_ActiveStatus.CheckedChanged += new System.EventHandler(this.rbtn_ActiveStatus_CheckedChanged);
             // 
@@ -407,17 +375,17 @@
             this.gbox_clientFilters.Size = new System.Drawing.Size(153, 74);
             this.gbox_clientFilters.TabIndex = 12;
             this.gbox_clientFilters.TabStop = false;
-            this.gbox_clientFilters.Text = "Client Filters";
+            this.gbox_clientFilters.Text = "Filtro de Clientes";
             // 
             // rbtn_Natural
             // 
             this.rbtn_Natural.AutoSize = true;
             this.rbtn_Natural.Location = new System.Drawing.Point(6, 45);
             this.rbtn_Natural.Name = "rbtn_Natural";
-            this.rbtn_Natural.Size = new System.Drawing.Size(59, 17);
+            this.rbtn_Natural.Size = new System.Drawing.Size(54, 17);
             this.rbtn_Natural.TabIndex = 9;
             this.rbtn_Natural.TabStop = true;
-            this.rbtn_Natural.Text = "Natural";
+            this.rbtn_Natural.Text = "Físico";
             this.rbtn_Natural.UseVisualStyleBackColor = true;
             this.rbtn_Natural.CheckedChanged += new System.EventHandler(this.rbtn_Natural_CheckedChanged);
             // 
@@ -426,10 +394,10 @@
             this.rbtn_LegalClients.AutoSize = true;
             this.rbtn_LegalClients.Location = new System.Drawing.Point(6, 22);
             this.rbtn_LegalClients.Name = "rbtn_LegalClients";
-            this.rbtn_LegalClients.Size = new System.Drawing.Size(51, 17);
+            this.rbtn_LegalClients.Size = new System.Drawing.Size(63, 17);
             this.rbtn_LegalClients.TabIndex = 8;
             this.rbtn_LegalClients.TabStop = true;
-            this.rbtn_LegalClients.Text = "Legal";
+            this.rbtn_LegalClients.Text = "Jurídico";
             this.rbtn_LegalClients.UseVisualStyleBackColor = true;
             this.rbtn_LegalClients.CheckedChanged += new System.EventHandler(this.rbtn_LegalClients_CheckedChanged);
             // 
@@ -439,7 +407,7 @@
             this.btn_ClearClientFilters.Name = "btn_ClearClientFilters";
             this.btn_ClearClientFilters.Size = new System.Drawing.Size(57, 23);
             this.btn_ClearClientFilters.TabIndex = 7;
-            this.btn_ClearClientFilters.Text = "Reset";
+            this.btn_ClearClientFilters.Text = "Limpar";
             this.btn_ClearClientFilters.UseVisualStyleBackColor = true;
             this.btn_ClearClientFilters.Click += new System.EventHandler(this.btn_ClearClientFilters_Click);
             // 
@@ -447,9 +415,9 @@
             // 
             this.btn_SelectClient.Location = new System.Drawing.Point(655, 181);
             this.btn_SelectClient.Name = "btn_SelectClient";
-            this.btn_SelectClient.Size = new System.Drawing.Size(83, 23);
+            this.btn_SelectClient.Size = new System.Drawing.Size(97, 23);
             this.btn_SelectClient.TabIndex = 13;
-            this.btn_SelectClient.Text = "Filter by Client";
+            this.btn_SelectClient.Text = "Filtrar por Cliente";
             this.btn_SelectClient.UseVisualStyleBackColor = true;
             this.btn_SelectClient.Click += new System.EventHandler(this.btn_SelectClient_Click);
             // 
@@ -460,7 +428,7 @@
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(74, 23);
             this.btn_Close.TabIndex = 14;
-            this.btn_Close.Text = "Close";
+            this.btn_Close.Text = "Sai&r";
             this.btn_Close.UseVisualStyleBackColor = true;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
@@ -470,13 +438,13 @@
             this.lbl_ClientId.Location = new System.Drawing.Point(10, 14);
             this.lbl_ClientId.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_ClientId.Name = "lbl_ClientId";
-            this.lbl_ClientId.Size = new System.Drawing.Size(53, 13);
+            this.lbl_ClientId.Size = new System.Drawing.Size(24, 13);
             this.lbl_ClientId.TabIndex = 15;
-            this.lbl_ClientId.Text = "Client ID :";
+            this.lbl_ClientId.Text = "ID :";
             // 
             // edt_clientId
             // 
-            this.edt_clientId.Location = new System.Drawing.Point(56, 11);
+            this.edt_clientId.Location = new System.Drawing.Point(38, 11);
             this.edt_clientId.Margin = new System.Windows.Forms.Padding(2);
             this.edt_clientId.Maximum = new decimal(new int[] {
             9999,
@@ -487,16 +455,48 @@
             this.edt_clientId.Size = new System.Drawing.Size(60, 20);
             this.edt_clientId.TabIndex = 16;
             // 
+            // ClientId
+            // 
+            this.ClientId.HeaderText = "ID";
+            this.ClientId.MinimumWidth = 6;
+            this.ClientId.Name = "ClientId";
+            this.ClientId.ReadOnly = true;
+            this.ClientId.Width = 45;
+            // 
+            // ClientName
+            // 
+            this.ClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ClientName.HeaderText = "Nome";
+            this.ClientName.MinimumWidth = 6;
+            this.ClientName.Name = "ClientName";
+            this.ClientName.ReadOnly = true;
+            // 
+            // ClientRegNumber
+            // 
+            this.ClientRegNumber.HeaderText = "Registro";
+            this.ClientRegNumber.MinimumWidth = 6;
+            this.ClientRegNumber.Name = "ClientRegNumber";
+            this.ClientRegNumber.ReadOnly = true;
+            this.ClientRegNumber.Width = 125;
+            // 
+            // ClientType
+            // 
+            this.ClientType.HeaderText = "Tipo";
+            this.ClientType.MinimumWidth = 6;
+            this.ClientType.Name = "ClientType";
+            this.ClientType.ReadOnly = true;
+            this.ClientType.Width = 125;
+            // 
             // SaleId
             // 
-            this.SaleId.HeaderText = "Sale ID";
+            this.SaleId.HeaderText = "ID Venda";
             this.SaleId.Name = "SaleId";
             this.SaleId.ReadOnly = true;
             this.SaleId.Width = 50;
             // 
             // SaleUserId
             // 
-            this.SaleUserId.HeaderText = "User ID";
+            this.SaleUserId.HeaderText = "ID Usuário";
             this.SaleUserId.MinimumWidth = 6;
             this.SaleUserId.Name = "SaleUserId";
             this.SaleUserId.ReadOnly = true;
@@ -504,23 +504,23 @@
             // 
             // SaleClientId
             // 
-            this.SaleClientId.HeaderText = "Client ID";
+            this.SaleClientId.HeaderText = "Cliente ID";
             this.SaleClientId.MinimumWidth = 6;
             this.SaleClientId.Name = "SaleClientId";
             this.SaleClientId.ReadOnly = true;
-            this.SaleClientId.Width = 45;
+            this.SaleClientId.Width = 50;
             // 
             // SaleClientName
             // 
             this.SaleClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SaleClientName.HeaderText = "Client Name";
+            this.SaleClientName.HeaderText = "Nome Cliente";
             this.SaleClientName.MinimumWidth = 6;
             this.SaleClientName.Name = "SaleClientName";
             this.SaleClientName.ReadOnly = true;
             // 
             // SaleTotalValue
             // 
-            this.SaleTotalValue.HeaderText = "Total Value";
+            this.SaleTotalValue.HeaderText = "Valor Total";
             this.SaleTotalValue.MinimumWidth = 6;
             this.SaleTotalValue.Name = "SaleTotalValue";
             this.SaleTotalValue.ReadOnly = true;
@@ -528,7 +528,7 @@
             // 
             // SalePayCond
             // 
-            this.SalePayCond.HeaderText = "Payment Condition";
+            this.SalePayCond.HeaderText = "Condição de Pagamento";
             this.SalePayCond.MinimumWidth = 6;
             this.SalePayCond.Name = "SalePayCond";
             this.SalePayCond.ReadOnly = true;
@@ -536,15 +536,15 @@
             // 
             // SaleProdQtd
             // 
-            this.SaleProdQtd.HeaderText = "Product Quantity";
+            this.SaleProdQtd.HeaderText = "Quantidade de Produtos";
             this.SaleProdQtd.MinimumWidth = 6;
             this.SaleProdQtd.Name = "SaleProdQtd";
             this.SaleProdQtd.ReadOnly = true;
-            this.SaleProdQtd.Width = 60;
+            this.SaleProdQtd.Width = 80;
             // 
             // SaleDate
             // 
-            this.SaleDate.HeaderText = "Date";
+            this.SaleDate.HeaderText = "Data";
             this.SaleDate.MinimumWidth = 6;
             this.SaleDate.Name = "SaleDate";
             this.SaleDate.ReadOnly = true;
@@ -576,7 +576,7 @@
             this.Controls.Add(this.lbl_client);
             this.Controls.Add(this.DGV_Clients);
             this.Name = "MasterDetails_Sales";
-            this.Text = "Clients - Sales";
+            this.Text = "Clientes - Vendas";
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Sales)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_saleId)).EndInit();
@@ -604,10 +604,6 @@
         private System.Windows.Forms.Button btn_SelectSale;
         private System.Windows.Forms.NumericUpDown edt_saleId;
         private System.Windows.Forms.Button btn_findSale;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientId;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientRegNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn ClientType;
         private System.Windows.Forms.GroupBox gbox_sale;
         private System.Windows.Forms.Button btn_SearchUser;
         private System.Windows.Forms.GroupBox gbox_SaleFilters;
@@ -631,6 +627,10 @@
         private System.Windows.Forms.Label lbl_maxDate;
         private System.Windows.Forms.DateTimePicker dateTime_MaxDateFilter;
         private System.Windows.Forms.Label lbl_minDate;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientRegNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ClientType;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleUserId;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleClientId;

@@ -21,9 +21,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             bool status = false;
 
-            string sql = "INSERT INTO SALEITEMS ( SALE_ID, PRODUCT_ID, QUANTITY, ITEM_VALUE, ITEM_COST, DISCOUNT_CASH, DISCOUNT_PERC," +
+            string sql = "INSERT INTO SALEITEMS ( SALE_ID, PRODUCT_ID, QUANTITY, ITEM_VALUE, ITEM_COST, DISCOUNT_CASH," +
                 "TOTAL_VALUE , DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@ID, @PRODID, @QTD, @PRODVALUE, @PRODCOST, @DISCCASH, @DISCPERC, @TOTALVALUE, @DC, @DU);";
+                         + " VALUES (@ID, @PRODID, @QTD, @PRODVALUE, @PRODCOST, @DISCCASH, @TOTALVALUE, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -35,7 +35,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     command.Parameters.AddWithValue("@PRODCOST", (decimal)obj.ProductCost);
                     command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.TotalValue);
                     command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.ItemDiscountCash);
-                    command.Parameters.AddWithValue("@DISCPERC", (decimal)obj.ItemDiscountPerc);
                     command.Parameters.AddWithValue("@QTD", obj.Quantity);
                     command.Parameters.AddWithValue("@DC", obj.dateOfLastUpdate);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
@@ -72,7 +71,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             bool status = false;
 
             string sql = "UPDATE SALEITEMS SET PRODUCT_ID = @PRODID, QUANTITY = @QTD, ITEM_VALUE = @ITEMVALUE, ITEM_COST = @ITEMCOST, " +
-                " DISCOUNT_CASH = @DISCCASH, DISCOUNT_PERC = @DISCPERC, TOTAL_VALUE = @TOTAL, DATE_LAST_UPDATE = @DU " +
+                " DISCOUNT_CASH = @DISCCASH, TOTAL_VALUE = @TOTAL, DATE_LAST_UPDATE = @DU " +
                 "WHERE SALE_ID = @ID ; ";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -84,7 +83,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     command.Parameters.AddWithValue("@ITEMVALUE", (decimal)obj.ProductValue);
                     command.Parameters.AddWithValue("@ITEMCOST", (decimal)obj.ProductCost);
                     command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.ItemDiscountCash);
-                    command.Parameters.AddWithValue("@DISCPERC", (decimal)obj.ItemDiscountPerc);
                     command.Parameters.AddWithValue("@TOTAL", (decimal)obj.TotalValue);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
@@ -135,7 +133,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 ProductCost = Convert.ToDouble(reader["item_cost"]),
                                 TotalValue = Convert.ToDouble(reader["total_value"]),
                                 ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
-                                ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -183,7 +180,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 ProductCost = Convert.ToDouble(reader["item_cost"]),
                                 TotalValue = Convert.ToDouble(reader["total_value"]),
                                 ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
-                                ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -231,7 +227,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 ProductCost = Convert.ToDouble(reader["item_cost"]),
                                 TotalValue = Convert.ToDouble(reader["total_value"]),
                                 ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
-                                ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -279,7 +274,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 ProductCost      = Convert.ToDouble(reader["item_cost"]),
                                 TotalValue       = Convert.ToDouble(reader["total_value"]),
                                 ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
-                                ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
                                 dateOfCreation   = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -324,7 +318,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                             ProductCost = Convert.ToDouble(reader["item_cost"]),
                             TotalValue = Convert.ToDouble(reader["total_value"]),
                             ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
-                            ItemDiscountPerc = Convert.ToDouble(reader["discount_perc"]),
                             dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                             dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                         };

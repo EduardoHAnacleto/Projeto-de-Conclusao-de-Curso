@@ -205,7 +205,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 int purchId = _controller.GetLastId();
                                 foreach (PurchaseItems item in purchase.PurchasedItems)
                                 {
-                                    item.PurchaseId = purchId;
+                                    item.BillNumberId = purchase.BillNumber;
+                                    item.BillModelId = purchase.BillModel;
+                                    item.BillSeriesId = purchase.BillSeries;
+                                    item.SupplierId = purchase.Supplier.id;
                                     status = _pIController.SaveItem(item);
                                     if (!status)
                                     {
@@ -315,7 +318,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             decimal itemTotalCost = 0;
             foreach (var item in purchasedItems)
             {
-                itemTotalCost = +(item.TotalBaseCost - item.DiscountCash);
+                itemTotalCost += (item.Quantity * item.NewBaseUnCost) - item.DiscountCash;
             }
             return totalCost + Convert.ToDouble(itemTotalCost);
         }
@@ -331,7 +334,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 item.Quantity = Convert.ToInt32(row.Cells["ProdQtd"].Value);
                 item.DiscountCash = Convert.ToDecimal(row.Cells["ProdDiscountCash"].Value);
                 item.NewBaseUnCost = Convert.ToDecimal(row.Cells["ProdNewBaseUnCost"].Value);
-                item.TotalBaseCost = item.Quantity * item.NewBaseUnCost;
                 item.PurchasePercentage = Convert.ToDecimal(row.Cells["ProdPurchPerc"].Value);
                 item.WeightedCostAverage = Convert.ToDecimal(row.Cells["ProdWeightedAvg"].Value);
                 list.Add(item);

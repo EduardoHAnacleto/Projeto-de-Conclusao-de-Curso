@@ -39,14 +39,13 @@
             // 
             this.edt_Name.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             // 
-            // 
             // Frm_Find_Clients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.Name = "Frm_Find_Clients";
-            this.Text = "Find Clients";
+            this.Text = "Buscar Clientes";
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

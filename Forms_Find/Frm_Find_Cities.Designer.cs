@@ -33,11 +33,11 @@
             this.edt_cityName = new System.Windows.Forms.TextBox();
             this.edt_cityPhonePrefix = new System.Windows.Forms.TextBox();
             this.DGV_Cities = new System.Windows.Forms.DataGridView();
+            this.btn_Search = new System.Windows.Forms.Button();
             this.CityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PhonePrefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdState = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_Search = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Cities)).BeginInit();
             this.SuspendLayout();
@@ -52,18 +52,18 @@
             this.lbl_city.AutoSize = true;
             this.lbl_city.Location = new System.Drawing.Point(46, 7);
             this.lbl_city.Name = "lbl_city";
-            this.lbl_city.Size = new System.Drawing.Size(24, 13);
+            this.lbl_city.Size = new System.Drawing.Size(40, 13);
             this.lbl_city.TabIndex = 4;
-            this.lbl_city.Text = "City";
+            this.lbl_city.Text = "Cidade";
             // 
             // lbl_phonePrefix
             // 
             this.lbl_phonePrefix.AutoSize = true;
             this.lbl_phonePrefix.Location = new System.Drawing.Point(385, 7);
             this.lbl_phonePrefix.Name = "lbl_phonePrefix";
-            this.lbl_phonePrefix.Size = new System.Drawing.Size(67, 13);
+            this.lbl_phonePrefix.Size = new System.Drawing.Size(39, 13);
             this.lbl_phonePrefix.TabIndex = 5;
-            this.lbl_phonePrefix.Text = "Phone Prefix";
+            this.lbl_phonePrefix.Text = "Prefixo";
             // 
             // edt_cityName
             // 
@@ -104,6 +104,15 @@
             this.DGV_Cities.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Cities_CellContentDoubleClick);
             this.DGV_Cities.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DGV_Cities_KeyPress);
             // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(447, 21);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(75, 21);
+            this.btn_Search.TabIndex = 10;
+            this.btn_Search.Text = "Bu&scar";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            // 
             // CityId
             // 
             this.CityId.HeaderText = "ID";
@@ -115,14 +124,14 @@
             // CityName
             // 
             this.CityName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.CityName.HeaderText = "City name";
+            this.CityName.HeaderText = "Cidade";
             this.CityName.MinimumWidth = 6;
             this.CityName.Name = "CityName";
             this.CityName.ReadOnly = true;
             // 
             // PhonePrefix
             // 
-            this.PhonePrefix.HeaderText = "Phone Prefix";
+            this.PhonePrefix.HeaderText = "Prefixo";
             this.PhonePrefix.MinimumWidth = 6;
             this.PhonePrefix.Name = "PhonePrefix";
             this.PhonePrefix.ReadOnly = true;
@@ -130,20 +139,11 @@
             // 
             // IdState
             // 
-            this.IdState.HeaderText = "State";
+            this.IdState.HeaderText = "Estado";
             this.IdState.MinimumWidth = 6;
             this.IdState.Name = "IdState";
             this.IdState.ReadOnly = true;
             this.IdState.Width = 120;
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Location = new System.Drawing.Point(458, 22);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(75, 20);
-            this.btn_Search.TabIndex = 10;
-            this.btn_Search.Text = "Sea&rch";
-            this.btn_Search.UseVisualStyleBackColor = true;
             // 
             // Frm_Find_Cities
             // 
@@ -157,7 +157,7 @@
             this.Controls.Add(this.lbl_city);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_Cities";
-            this.Text = "Find City";
+            this.Text = "Buscar Cidades";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.edt_id, 0);

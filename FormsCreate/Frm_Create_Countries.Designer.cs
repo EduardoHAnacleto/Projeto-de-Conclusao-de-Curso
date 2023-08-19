@@ -93,36 +93,36 @@
             this.lbl_currency.AutoSize = true;
             this.lbl_currency.Location = new System.Drawing.Point(463, 8);
             this.lbl_currency.Name = "lbl_currency";
-            this.lbl_currency.Size = new System.Drawing.Size(53, 13);
+            this.lbl_currency.Size = new System.Drawing.Size(47, 13);
             this.lbl_currency.TabIndex = 18;
-            this.lbl_currency.Text = "*Currency";
+            this.lbl_currency.Text = "* Moeda";
             // 
             // lbl_phonePrefix
             // 
             this.lbl_phonePrefix.AutoSize = true;
             this.lbl_phonePrefix.Location = new System.Drawing.Point(390, 8);
             this.lbl_phonePrefix.Name = "lbl_phonePrefix";
-            this.lbl_phonePrefix.Size = new System.Drawing.Size(71, 13);
+            this.lbl_phonePrefix.Size = new System.Drawing.Size(33, 13);
             this.lbl_phonePrefix.TabIndex = 17;
-            this.lbl_phonePrefix.Text = "*Phone Prefix";
+            this.lbl_phonePrefix.Text = "* DDI";
             // 
             // lbl_countryAcronym
             // 
             this.lbl_countryAcronym.AutoSize = true;
             this.lbl_countryAcronym.Location = new System.Drawing.Point(337, 8);
             this.lbl_countryAcronym.Name = "lbl_countryAcronym";
-            this.lbl_countryAcronym.Size = new System.Drawing.Size(52, 13);
+            this.lbl_countryAcronym.Size = new System.Drawing.Size(37, 13);
             this.lbl_countryAcronym.TabIndex = 16;
-            this.lbl_countryAcronym.Text = "*Acronym";
+            this.lbl_countryAcronym.Text = "* Sigla";
             // 
             // lbl_countryName
             // 
             this.lbl_countryName.AutoSize = true;
             this.lbl_countryName.Location = new System.Drawing.Point(56, 8);
             this.lbl_countryName.Name = "lbl_countryName";
-            this.lbl_countryName.Size = new System.Drawing.Size(47, 13);
+            this.lbl_countryName.Size = new System.Drawing.Size(36, 13);
             this.lbl_countryName.TabIndex = 15;
-            this.lbl_countryName.Text = "*Country";
+            this.lbl_countryName.Text = "* País";
             // 
             // Frm_Create_Countries
             // 
@@ -136,9 +136,9 @@
             this.Controls.Add(this.lbl_phonePrefix);
             this.Controls.Add(this.lbl_countryAcronym);
             this.Controls.Add(this.lbl_countryName);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_Countries";
-            this.Text = "Create Country";
+            this.Text = "Criar País";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);

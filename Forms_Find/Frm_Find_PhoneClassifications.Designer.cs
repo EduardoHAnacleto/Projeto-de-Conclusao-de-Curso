@@ -48,9 +48,9 @@
             this.lbl_phoneClassification.AutoSize = true;
             this.lbl_phoneClassification.Location = new System.Drawing.Point(47, 7);
             this.lbl_phoneClassification.Name = "lbl_phoneClassification";
-            this.lbl_phoneClassification.Size = new System.Drawing.Size(101, 13);
+            this.lbl_phoneClassification.Size = new System.Drawing.Size(125, 13);
             this.lbl_phoneClassification.TabIndex = 18;
-            this.lbl_phoneClassification.Text = "Phone classification";
+            this.lbl_phoneClassification.Text = "Classificação de telefone";
             // 
             // edt_PhoneClassification
             // 
@@ -66,7 +66,7 @@
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(75, 23);
             this.btn_Search.TabIndex = 19;
-            this.btn_Search.Text = "&Search";
+            this.btn_Search.Text = "Bu&scar";
             this.btn_Search.UseVisualStyleBackColor = true;
             this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
@@ -102,7 +102,7 @@
             // PhoneClassification
             // 
             this.PhoneClassification.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PhoneClassification.HeaderText = "Phone Classification";
+            this.PhoneClassification.HeaderText = "Classificação de Telefone";
             this.PhoneClassification.MinimumWidth = 6;
             this.PhoneClassification.Name = "PhoneClassification";
             this.PhoneClassification.ReadOnly = true;
@@ -117,7 +117,7 @@
             this.Controls.Add(this.edt_PhoneClassification);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_PhoneClassifications";
-            this.Text = "Find Phone Classification";
+            this.Text = "Buscar Classificação de Telefones";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_New, 0);

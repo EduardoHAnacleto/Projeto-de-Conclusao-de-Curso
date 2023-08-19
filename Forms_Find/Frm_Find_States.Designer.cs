@@ -33,11 +33,11 @@
             this.edt_stateName = new System.Windows.Forms.TextBox();
             this.edt_FU = new System.Windows.Forms.TextBox();
             this.DGV_States = new System.Windows.Forms.DataGridView();
+            this.btn_Search = new System.Windows.Forms.Button();
             this.ID_STATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.States = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StateFederationUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StateCountryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_Search = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_States)).BeginInit();
             this.SuspendLayout();
@@ -52,18 +52,18 @@
             this.lbl_StateName.AutoSize = true;
             this.lbl_StateName.Location = new System.Drawing.Point(46, 7);
             this.lbl_StateName.Name = "lbl_StateName";
-            this.lbl_StateName.Size = new System.Drawing.Size(32, 13);
+            this.lbl_StateName.Size = new System.Drawing.Size(40, 13);
             this.lbl_StateName.TabIndex = 4;
-            this.lbl_StateName.Text = "State";
+            this.lbl_StateName.Text = "Estado";
             // 
             // lbl_FedUnit
             // 
             this.lbl_FedUnit.AutoSize = true;
-            this.lbl_FedUnit.Location = new System.Drawing.Point(402, 7);
+            this.lbl_FedUnit.Location = new System.Drawing.Point(386, 6);
             this.lbl_FedUnit.Name = "lbl_FedUnit";
-            this.lbl_FedUnit.Size = new System.Drawing.Size(79, 13);
+            this.lbl_FedUnit.Size = new System.Drawing.Size(92, 13);
             this.lbl_FedUnit.TabIndex = 5;
-            this.lbl_FedUnit.Text = "Federation Unit";
+            this.lbl_FedUnit.Text = "UN de Federação";
             // 
             // edt_stateName
             // 
@@ -77,7 +77,7 @@
             // edt_FU
             // 
             this.edt_FU.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_FU.Location = new System.Drawing.Point(405, 23);
+            this.edt_FU.Location = new System.Drawing.Point(389, 22);
             this.edt_FU.Name = "edt_FU";
             this.edt_FU.Size = new System.Drawing.Size(45, 20);
             this.edt_FU.TabIndex = 8;
@@ -103,6 +103,16 @@
             this.DGV_States.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_States_CellContentDoubleClick);
             this.DGV_States.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DGV_States_KeyPress);
             // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(513, 23);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(75, 21);
+            this.btn_Search.TabIndex = 11;
+            this.btn_Search.Text = "Bu&scar";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            // 
             // ID_STATE
             // 
             this.ID_STATE.HeaderText = "ID";
@@ -114,14 +124,14 @@
             // States
             // 
             this.States.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.States.HeaderText = "States name";
+            this.States.HeaderText = "Estado";
             this.States.MinimumWidth = 6;
             this.States.Name = "States";
             this.States.ReadOnly = true;
             // 
             // StateFederationUnit
             // 
-            this.StateFederationUnit.HeaderText = "Federation Unit";
+            this.StateFederationUnit.HeaderText = "Unidade de Federação";
             this.StateFederationUnit.MinimumWidth = 6;
             this.StateFederationUnit.Name = "StateFederationUnit";
             this.StateFederationUnit.ReadOnly = true;
@@ -129,21 +139,11 @@
             // 
             // StateCountryName
             // 
-            this.StateCountryName.HeaderText = "Country";
+            this.StateCountryName.HeaderText = "País";
             this.StateCountryName.MinimumWidth = 6;
             this.StateCountryName.Name = "StateCountryName";
             this.StateCountryName.ReadOnly = true;
             this.StateCountryName.Width = 125;
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Location = new System.Drawing.Point(466, 22);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(75, 21);
-            this.btn_Search.TabIndex = 11;
-            this.btn_Search.Text = "&Search";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
             // Frm_Find_States
             // 
@@ -157,7 +157,7 @@
             this.Controls.Add(this.lbl_StateName);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_States";
-            this.Text = "Find States";
+            this.Text = "Buscar Estados";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_New, 0);
             this.Controls.SetChildIndex(this.btn_Select, 0);

@@ -102,19 +102,19 @@
             // 
             // edt_StateFU
             // 
-            this.edt_StateFU.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_StateFU.Margin = new System.Windows.Forms.Padding(4);
             // 
             // edt_countryAcronym
             // 
-            this.edt_countryAcronym.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_countryAcronym.Margin = new System.Windows.Forms.Padding(4);
             // 
             // edt_city
             // 
-            this.edt_city.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_city.Margin = new System.Windows.Forms.Padding(4);
             // 
             // edt_homeType
             // 
-            this.edt_homeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_homeType.Margin = new System.Windows.Forms.Padding(4);
             // 
             // lbl_endDate
             // 
@@ -122,9 +122,9 @@
             this.lbl_endDate.Location = new System.Drawing.Point(89, 89);
             this.lbl_endDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_endDate.Name = "lbl_endDate";
-            this.lbl_endDate.Size = new System.Drawing.Size(80, 13);
+            this.lbl_endDate.Size = new System.Drawing.Size(79, 13);
             this.lbl_endDate.TabIndex = 44;
-            this.lbl_endDate.Text = "Dismissed Date";
+            this.lbl_endDate.Text = "Data Demissão";
             this.lbl_endDate.Visible = false;
             // 
             // lbl_startDate
@@ -133,9 +133,9 @@
             this.lbl_startDate.Location = new System.Drawing.Point(2, 90);
             this.lbl_startDate.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_startDate.Name = "lbl_startDate";
-            this.lbl_startDate.Size = new System.Drawing.Size(80, 13);
+            this.lbl_startDate.Size = new System.Drawing.Size(78, 13);
             this.lbl_startDate.TabIndex = 43;
-            this.lbl_startDate.Text = "Admission Date";
+            this.lbl_startDate.Text = "Data Admissão";
             // 
             // lbl_weeklyHours
             // 
@@ -143,19 +143,19 @@
             this.lbl_weeklyHours.Location = new System.Drawing.Point(5, 52);
             this.lbl_weeklyHours.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_weeklyHours.Name = "lbl_weeklyHours";
-            this.lbl_weeklyHours.Size = new System.Drawing.Size(74, 13);
+            this.lbl_weeklyHours.Size = new System.Drawing.Size(84, 13);
             this.lbl_weeklyHours.TabIndex = 41;
-            this.lbl_weeklyHours.Text = "Weekly Hours";
+            this.lbl_weeklyHours.Text = "Horas Semanais";
             // 
             // lbl_baseSalary
             // 
             this.lbl_baseSalary.AutoSize = true;
-            this.lbl_baseSalary.Location = new System.Drawing.Point(78, 53);
+            this.lbl_baseSalary.Location = new System.Drawing.Point(89, 52);
             this.lbl_baseSalary.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_baseSalary.Name = "lbl_baseSalary";
-            this.lbl_baseSalary.Size = new System.Drawing.Size(63, 13);
+            this.lbl_baseSalary.Size = new System.Drawing.Size(66, 13);
             this.lbl_baseSalary.TabIndex = 40;
-            this.lbl_baseSalary.Text = "Base Salary";
+            this.lbl_baseSalary.Text = "Salário Base";
             // 
             // lbl_jobRole
             // 
@@ -163,22 +163,22 @@
             this.lbl_jobRole.Location = new System.Drawing.Point(8, 15);
             this.lbl_jobRole.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_jobRole.Name = "lbl_jobRole";
-            this.lbl_jobRole.Size = new System.Drawing.Size(49, 13);
+            this.lbl_jobRole.Size = new System.Drawing.Size(43, 13);
             this.lbl_jobRole.TabIndex = 39;
-            this.lbl_jobRole.Text = "Job Role";
+            this.lbl_jobRole.Text = "Função";
             // 
             // edt_weeklyHours
             // 
             this.edt_weeklyHours.Location = new System.Drawing.Point(5, 67);
-            this.edt_weeklyHours.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_weeklyHours.Margin = new System.Windows.Forms.Padding(2);
             this.edt_weeklyHours.Name = "edt_weeklyHours";
             this.edt_weeklyHours.Size = new System.Drawing.Size(48, 20);
             this.edt_weeklyHours.TabIndex = 35;
             // 
             // edt_baseSalary
             // 
-            this.edt_baseSalary.Location = new System.Drawing.Point(81, 68);
-            this.edt_baseSalary.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_baseSalary.Location = new System.Drawing.Point(92, 67);
+            this.edt_baseSalary.Margin = new System.Windows.Forms.Padding(2);
             this.edt_baseSalary.Name = "edt_baseSalary";
             this.edt_baseSalary.Size = new System.Drawing.Size(60, 20);
             this.edt_baseSalary.TabIndex = 33;
@@ -195,12 +195,12 @@
             this.gbox_jobInfo.Controls.Add(this.lbl_weeklyHours);
             this.gbox_jobInfo.Controls.Add(this.lbl_baseSalary);
             this.gbox_jobInfo.Controls.Add(this.lbl_jobRole);
-            this.gbox_jobInfo.Location = new System.Drawing.Point(364, 8);
+            this.gbox_jobInfo.Location = new System.Drawing.Point(360, 8);
             this.gbox_jobInfo.Name = "gbox_jobInfo";
-            this.gbox_jobInfo.Size = new System.Drawing.Size(172, 130);
+            this.gbox_jobInfo.Size = new System.Drawing.Size(176, 130);
             this.gbox_jobInfo.TabIndex = 45;
             this.gbox_jobInfo.TabStop = false;
-            this.gbox_jobInfo.Text = "*Job Information";
+            this.gbox_jobInfo.Text = "* Informação de Funcionário";
             // 
             // medt_endDate
             // 
@@ -272,9 +272,9 @@
             this.ClientSize = new System.Drawing.Size(672, 379);
             this.Controls.Add(this.gbox_empStatus);
             this.Controls.Add(this.gbox_jobInfo);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Frm_Create_Employees";
-            this.Text = "Create Employees";
+            this.Text = "Criar Funcionários";
             this.Controls.SetChildIndex(this.gbox_jobInfo, 0);
             this.Controls.SetChildIndex(this.gbox_empStatus, 0);
             this.Controls.SetChildIndex(this.lbl_Name, 0);

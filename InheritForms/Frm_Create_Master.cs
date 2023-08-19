@@ -136,8 +136,5 @@ namespace ProjetoEduardoAnacletoWindowsForm1.InheritForms
         {
             Save();
         }
-
-
-
     }
 }

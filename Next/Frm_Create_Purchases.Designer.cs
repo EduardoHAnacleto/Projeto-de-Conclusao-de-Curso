@@ -29,16 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_PurchasesProducts = new System.Windows.Forms.DataGridView();
-            this.ProdId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdNewBaseUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentSalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdPurchPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdWeightedAvg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_products = new System.Windows.Forms.GroupBox();
             this.lbl_prodDiscCash = new System.Windows.Forms.Label();
             this.edt_prodDiscCash = new System.Windows.Forms.NumericUpDown();
@@ -103,6 +93,16 @@
             this.edt_billNumber = new System.Windows.Forms.NumericUpDown();
             this.lbl_billNumber = new System.Windows.Forms.Label();
             this.lbl_billSeries = new System.Windows.Forms.Label();
+            this.ProdId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdNewBaseUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentSalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdPurchPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdWeightedAvg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).BeginInit();
             this.gbox_products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodDiscCash)).BeginInit();
@@ -151,69 +151,6 @@
             this.DGV_PurchasesProducts.Size = new System.Drawing.Size(1087, 228);
             this.DGV_PurchasesProducts.TabIndex = 0;
             // 
-            // ProdId
-            // 
-            this.ProdId.HeaderText = "ID";
-            this.ProdId.Name = "ProdId";
-            this.ProdId.ReadOnly = true;
-            this.ProdId.Width = 50;
-            // 
-            // ProdName
-            // 
-            this.ProdName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ProdName.HeaderText = "Product";
-            this.ProdName.Name = "ProdName";
-            this.ProdName.ReadOnly = true;
-            // 
-            // ProdQtd
-            // 
-            this.ProdQtd.HeaderText = "Quantity";
-            this.ProdQtd.Name = "ProdQtd";
-            this.ProdQtd.ReadOnly = true;
-            this.ProdQtd.Width = 60;
-            // 
-            // ProdCurrentUnCost
-            // 
-            this.ProdCurrentUnCost.HeaderText = "Current UN Cost";
-            this.ProdCurrentUnCost.Name = "ProdCurrentUnCost";
-            // 
-            // ProdDiscountCash
-            // 
-            this.ProdDiscountCash.HeaderText = "Discount";
-            this.ProdDiscountCash.Name = "ProdDiscountCash";
-            this.ProdDiscountCash.ReadOnly = true;
-            this.ProdDiscountCash.Width = 70;
-            // 
-            // ProdNewBaseUnCost
-            // 
-            this.ProdNewBaseUnCost.HeaderText = "New Base UN Cost";
-            this.ProdNewBaseUnCost.Name = "ProdNewBaseUnCost";
-            // 
-            // ProdCurrentSalePrice
-            // 
-            this.ProdCurrentSalePrice.HeaderText = "Current Sale Price";
-            this.ProdCurrentSalePrice.Name = "ProdCurrentSalePrice";
-            this.ProdCurrentSalePrice.ReadOnly = true;
-            // 
-            // ProdCurrentStock
-            // 
-            this.ProdCurrentStock.HeaderText = "Current Stock";
-            this.ProdCurrentStock.Name = "ProdCurrentStock";
-            this.ProdCurrentStock.ReadOnly = true;
-            this.ProdCurrentStock.Width = 60;
-            // 
-            // ProdPurchPerc
-            // 
-            this.ProdPurchPerc.HeaderText = "Purchase Percentage";
-            this.ProdPurchPerc.Name = "ProdPurchPerc";
-            this.ProdPurchPerc.ReadOnly = true;
-            // 
-            // ProdWeightedAvg
-            // 
-            this.ProdWeightedAvg.HeaderText = "Weighted Cost Average";
-            this.ProdWeightedAvg.Name = "ProdWeightedAvg";
-            this.ProdWeightedAvg.ReadOnly = true;
-            // 
             // gbox_products
             // 
             this.gbox_products.Controls.Add(this.lbl_prodDiscCash);
@@ -236,16 +173,16 @@
             this.gbox_products.Size = new System.Drawing.Size(1129, 298);
             this.gbox_products.TabIndex = 1;
             this.gbox_products.TabStop = false;
-            this.gbox_products.Text = "Products";
+            this.gbox_products.Text = "Produtos";
             // 
             // lbl_prodDiscCash
             // 
             this.lbl_prodDiscCash.AutoSize = true;
             this.lbl_prodDiscCash.Location = new System.Drawing.Point(821, 22);
             this.lbl_prodDiscCash.Name = "lbl_prodDiscCash";
-            this.lbl_prodDiscCash.Size = new System.Drawing.Size(76, 13);
+            this.lbl_prodDiscCash.Size = new System.Drawing.Size(62, 13);
             this.lbl_prodDiscCash.TabIndex = 15;
-            this.lbl_prodDiscCash.Text = "Cash Discount";
+            this.lbl_prodDiscCash.Text = "Desconto $";
             // 
             // edt_prodDiscCash
             // 
@@ -262,11 +199,11 @@
             // 
             // btn_AddProduct
             // 
-            this.btn_AddProduct.Location = new System.Drawing.Point(1058, 35);
+            this.btn_AddProduct.Location = new System.Drawing.Point(1046, 35);
             this.btn_AddProduct.Name = "btn_AddProduct";
-            this.btn_AddProduct.Size = new System.Drawing.Size(51, 20);
+            this.btn_AddProduct.Size = new System.Drawing.Size(65, 20);
             this.btn_AddProduct.TabIndex = 12;
-            this.btn_AddProduct.Text = "Add";
+            this.btn_AddProduct.Text = "Adicionar";
             this.btn_AddProduct.UseVisualStyleBackColor = true;
             this.btn_AddProduct.Click += new System.EventHandler(this.btn_AddProduct_Click);
             // 
@@ -276,7 +213,7 @@
             this.btn_FindProduct.Name = "btn_FindProduct";
             this.btn_FindProduct.Size = new System.Drawing.Size(58, 20);
             this.btn_FindProduct.TabIndex = 11;
-            this.btn_FindProduct.Text = "Find";
+            this.btn_FindProduct.Text = "Bu&scar";
             this.btn_FindProduct.UseVisualStyleBackColor = true;
             this.btn_FindProduct.Click += new System.EventHandler(this.btn_FindProduct_Click);
             // 
@@ -285,27 +222,27 @@
             this.lbl_prodUnCost.AutoSize = true;
             this.lbl_prodUnCost.Location = new System.Drawing.Point(759, 22);
             this.lbl_prodUnCost.Name = "lbl_prodUnCost";
-            this.lbl_prodUnCost.Size = new System.Drawing.Size(47, 13);
+            this.lbl_prodUnCost.Size = new System.Drawing.Size(53, 13);
             this.lbl_prodUnCost.TabIndex = 10;
-            this.lbl_prodUnCost.Text = "UN Cost";
+            this.lbl_prodUnCost.Text = "Custo UN";
             // 
             // lbl_prodqtd
             // 
             this.lbl_prodqtd.AutoSize = true;
             this.lbl_prodqtd.Location = new System.Drawing.Point(690, 22);
             this.lbl_prodqtd.Name = "lbl_prodqtd";
-            this.lbl_prodqtd.Size = new System.Drawing.Size(46, 13);
+            this.lbl_prodqtd.Size = new System.Drawing.Size(62, 13);
             this.lbl_prodqtd.TabIndex = 9;
-            this.lbl_prodqtd.Text = "Quantity";
+            this.lbl_prodqtd.Text = "Quantidade";
             // 
             // lbl_prodBarCode
             // 
             this.lbl_prodBarCode.AutoSize = true;
             this.lbl_prodBarCode.Location = new System.Drawing.Point(418, 22);
             this.lbl_prodBarCode.Name = "lbl_prodBarCode";
-            this.lbl_prodBarCode.Size = new System.Drawing.Size(51, 13);
+            this.lbl_prodBarCode.Size = new System.Drawing.Size(88, 13);
             this.lbl_prodBarCode.TabIndex = 8;
-            this.lbl_prodBarCode.Text = "Bar Code";
+            this.lbl_prodBarCode.Text = "Código de Barras";
             // 
             // lbl_productName
             // 
@@ -314,7 +251,7 @@
             this.lbl_productName.Name = "lbl_productName";
             this.lbl_productName.Size = new System.Drawing.Size(44, 13);
             this.lbl_productName.TabIndex = 7;
-            this.lbl_productName.Text = "Product";
+            this.lbl_productName.Text = "Produto";
             // 
             // edt_prodUnCost
             // 
@@ -401,7 +338,7 @@
             this.gbox_User.Size = new System.Drawing.Size(282, 100);
             this.gbox_User.TabIndex = 8;
             this.gbox_User.TabStop = false;
-            this.gbox_User.Text = "* User";
+            this.gbox_User.Text = "* Usuário";
             // 
             // edt_userId
             // 
@@ -430,9 +367,9 @@
             this.lbl_userSalesman.AutoSize = true;
             this.lbl_userSalesman.Location = new System.Drawing.Point(6, 55);
             this.lbl_userSalesman.Name = "lbl_userSalesman";
-            this.lbl_userSalesman.Size = new System.Drawing.Size(29, 13);
+            this.lbl_userSalesman.Size = new System.Drawing.Size(43, 13);
             this.lbl_userSalesman.TabIndex = 1;
-            this.lbl_userSalesman.Text = "User";
+            this.lbl_userSalesman.Text = "Usuário";
             // 
             // lbl_userId
             // 
@@ -448,9 +385,9 @@
             this.lbl_requiredCamps.AutoSize = true;
             this.lbl_requiredCamps.Location = new System.Drawing.Point(12, 565);
             this.lbl_requiredCamps.Name = "lbl_requiredCamps";
-            this.lbl_requiredCamps.Size = new System.Drawing.Size(108, 13);
+            this.lbl_requiredCamps.Size = new System.Drawing.Size(114, 13);
             this.lbl_requiredCamps.TabIndex = 30;
-            this.lbl_requiredCamps.Text = "* Camps are required.";
+            this.lbl_requiredCamps.Text = "* Campos Obrigatórios.";
             // 
             // gbox_date
             // 
@@ -463,22 +400,22 @@
             this.gbox_date.Size = new System.Drawing.Size(201, 63);
             this.gbox_date.TabIndex = 29;
             this.gbox_date.TabStop = false;
-            this.gbox_date.Text = "Date";
+            this.gbox_date.Text = "Datas";
             // 
             // lbl_CancelDate
             // 
             this.lbl_CancelDate.AutoSize = true;
             this.lbl_CancelDate.Location = new System.Drawing.Point(11, 45);
             this.lbl_CancelDate.Name = "lbl_CancelDate";
-            this.lbl_CancelDate.Size = new System.Drawing.Size(77, 13);
+            this.lbl_CancelDate.Size = new System.Drawing.Size(84, 13);
             this.lbl_CancelDate.TabIndex = 3;
-            this.lbl_CancelDate.Text = "Last Updated :";
+            this.lbl_CancelDate.Text = "Último Alterado :";
             this.lbl_CancelDate.Visible = false;
             // 
             // medt_CancelDate
             // 
             this.medt_CancelDate.Enabled = false;
-            this.medt_CancelDate.Location = new System.Drawing.Point(88, 42);
+            this.medt_CancelDate.Location = new System.Drawing.Point(95, 42);
             this.medt_CancelDate.Mask = "00/00/0000 90:00";
             this.medt_CancelDate.Name = "medt_CancelDate";
             this.medt_CancelDate.Size = new System.Drawing.Size(100, 20);
@@ -489,7 +426,7 @@
             // medt_date
             // 
             this.medt_date.Enabled = false;
-            this.medt_date.Location = new System.Drawing.Point(88, 16);
+            this.medt_date.Location = new System.Drawing.Point(54, 16);
             this.medt_date.Mask = "00/00/0000 90:00";
             this.medt_date.Name = "medt_date";
             this.medt_date.Size = new System.Drawing.Size(100, 20);
@@ -499,11 +436,11 @@
             // lbl_date
             // 
             this.lbl_date.AutoSize = true;
-            this.lbl_date.Location = new System.Drawing.Point(32, 19);
+            this.lbl_date.Location = new System.Drawing.Point(12, 23);
             this.lbl_date.Name = "lbl_date";
-            this.lbl_date.Size = new System.Drawing.Size(50, 13);
+            this.lbl_date.Size = new System.Drawing.Size(43, 13);
             this.lbl_date.TabIndex = 0;
-            this.lbl_date.Text = "Created :";
+            this.lbl_date.Text = "Criado :";
             // 
             // gbox_options
             // 
@@ -519,34 +456,34 @@
             this.gbox_options.Size = new System.Drawing.Size(267, 100);
             this.gbox_options.TabIndex = 31;
             this.gbox_options.TabStop = false;
-            this.gbox_options.Text = "Options";
+            this.gbox_options.Text = "Atalhos";
             // 
             // lbl_findsupplier
             // 
             this.lbl_findsupplier.AutoSize = true;
-            this.lbl_findsupplier.Location = new System.Drawing.Point(55, 73);
+            this.lbl_findsupplier.Location = new System.Drawing.Point(63, 74);
             this.lbl_findsupplier.Name = "lbl_findsupplier";
-            this.lbl_findsupplier.Size = new System.Drawing.Size(78, 13);
+            this.lbl_findsupplier.Size = new System.Drawing.Size(61, 13);
             this.lbl_findsupplier.TabIndex = 6;
-            this.lbl_findsupplier.Text = "Select Supplier";
+            this.lbl_findsupplier.Text = "Fornecedor";
             // 
             // lbl_new
             // 
             this.lbl_new.AutoSize = true;
             this.lbl_new.Location = new System.Drawing.Point(18, 73);
             this.lbl_new.Name = "lbl_new";
-            this.lbl_new.Size = new System.Drawing.Size(29, 13);
+            this.lbl_new.Size = new System.Drawing.Size(33, 13);
             this.lbl_new.TabIndex = 5;
-            this.lbl_new.Text = "New";
+            this.lbl_new.Text = "Novo";
             // 
             // lbl_Save
             // 
             this.lbl_Save.AutoSize = true;
             this.lbl_Save.Location = new System.Drawing.Point(139, 73);
             this.lbl_Save.Name = "lbl_Save";
-            this.lbl_Save.Size = new System.Drawing.Size(32, 13);
+            this.lbl_Save.Size = new System.Drawing.Size(37, 13);
             this.lbl_Save.TabIndex = 4;
-            this.lbl_Save.Text = "Save";
+            this.lbl_Save.Text = "Salvar";
             // 
             // btn_Close
             // 
@@ -554,7 +491,7 @@
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(57, 51);
             this.btn_Close.TabIndex = 3;
-            this.btn_Close.Text = "Close";
+            this.btn_Close.Text = "Sair";
             this.btn_Close.UseVisualStyleBackColor = true;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
@@ -601,9 +538,9 @@
             this.lbl_transportFee.AutoSize = true;
             this.lbl_transportFee.Location = new System.Drawing.Point(121, 25);
             this.lbl_transportFee.Name = "lbl_transportFee";
-            this.lbl_transportFee.Size = new System.Drawing.Size(73, 13);
+            this.lbl_transportFee.Size = new System.Drawing.Size(31, 13);
             this.lbl_transportFee.TabIndex = 33;
-            this.lbl_transportFee.Text = "Transport Fee";
+            this.lbl_transportFee.Text = "Frete";
             // 
             // edt_supplierId
             // 
@@ -632,9 +569,9 @@
             this.lbl_extraExpenses.AutoSize = true;
             this.lbl_extraExpenses.Location = new System.Drawing.Point(257, 25);
             this.lbl_extraExpenses.Name = "lbl_extraExpenses";
-            this.lbl_extraExpenses.Size = new System.Drawing.Size(80, 13);
+            this.lbl_extraExpenses.Size = new System.Drawing.Size(91, 13);
             this.lbl_extraExpenses.TabIndex = 38;
-            this.lbl_extraExpenses.Text = "Extra Expenses";
+            this.lbl_extraExpenses.Text = "Gastos Adicionais";
             // 
             // edt_extraExpenses
             // 
@@ -667,9 +604,9 @@
             this.lbl_insurance.AutoSize = true;
             this.lbl_insurance.Location = new System.Drawing.Point(349, 25);
             this.lbl_insurance.Name = "lbl_insurance";
-            this.lbl_insurance.Size = new System.Drawing.Size(54, 13);
+            this.lbl_insurance.Size = new System.Drawing.Size(41, 13);
             this.lbl_insurance.TabIndex = 41;
-            this.lbl_insurance.Text = "Insurance";
+            this.lbl_insurance.Text = "Seguro";
             // 
             // btn_findSupplier
             // 
@@ -677,7 +614,7 @@
             this.btn_findSupplier.Name = "btn_findSupplier";
             this.btn_findSupplier.Size = new System.Drawing.Size(51, 21);
             this.btn_findSupplier.TabIndex = 43;
-            this.btn_findSupplier.Text = "Find";
+            this.btn_findSupplier.Text = "Bu&scar";
             this.btn_findSupplier.UseVisualStyleBackColor = true;
             this.btn_findSupplier.Click += new System.EventHandler(this.btn_findSupplier_Click);
             // 
@@ -688,7 +625,7 @@
             this.lbl_supplierName.Name = "lbl_supplierName";
             this.lbl_supplierName.Size = new System.Drawing.Size(35, 13);
             this.lbl_supplierName.TabIndex = 44;
-            this.lbl_supplierName.Text = "Name";
+            this.lbl_supplierName.Text = "Nome";
             // 
             // edt_supplierName
             // 
@@ -710,7 +647,7 @@
             this.gbox_supplier.Size = new System.Drawing.Size(359, 79);
             this.gbox_supplier.TabIndex = 46;
             this.gbox_supplier.TabStop = false;
-            this.gbox_supplier.Text = "Supplier";
+            this.gbox_supplier.Text = "* Fornecedor";
             // 
             // gbox_info
             // 
@@ -729,16 +666,16 @@
             this.gbox_info.Size = new System.Drawing.Size(472, 139);
             this.gbox_info.TabIndex = 47;
             this.gbox_info.TabStop = false;
-            this.gbox_info.Text = "Purchase Information";
+            this.gbox_info.Text = "Informações da Compra";
             // 
             // lbl_emissionDate
             // 
             this.lbl_emissionDate.AutoSize = true;
             this.lbl_emissionDate.Location = new System.Drawing.Point(6, 77);
             this.lbl_emissionDate.Name = "lbl_emissionDate";
-            this.lbl_emissionDate.Size = new System.Drawing.Size(74, 13);
+            this.lbl_emissionDate.Size = new System.Drawing.Size(87, 13);
             this.lbl_emissionDate.TabIndex = 46;
-            this.lbl_emissionDate.Text = "Emission Date";
+            this.lbl_emissionDate.Text = "Data de Emissão";
             // 
             // dateTime_emissionDate
             // 
@@ -755,9 +692,9 @@
             this.lbl_arrivalDate.AutoSize = true;
             this.lbl_arrivalDate.Location = new System.Drawing.Point(6, 25);
             this.lbl_arrivalDate.Name = "lbl_arrivalDate";
-            this.lbl_arrivalDate.Size = new System.Drawing.Size(74, 13);
+            this.lbl_arrivalDate.Size = new System.Drawing.Size(85, 13);
             this.lbl_arrivalDate.TabIndex = 44;
-            this.lbl_arrivalDate.Text = "Date of Arrival";
+            this.lbl_arrivalDate.Text = "Data de Entrada";
             // 
             // dateTime_ArrivalDate
             // 
@@ -774,9 +711,9 @@
             this.lbl_billModel.AutoSize = true;
             this.lbl_billModel.Location = new System.Drawing.Point(74, 24);
             this.lbl_billModel.Name = "lbl_billModel";
-            this.lbl_billModel.Size = new System.Drawing.Size(36, 13);
+            this.lbl_billModel.Size = new System.Drawing.Size(42, 13);
             this.lbl_billModel.TabIndex = 47;
-            this.lbl_billModel.Text = "Model";
+            this.lbl_billModel.Text = "Modelo";
             // 
             // gbox_billInfo
             // 
@@ -792,7 +729,7 @@
             this.gbox_billInfo.Size = new System.Drawing.Size(302, 140);
             this.gbox_billInfo.TabIndex = 49;
             this.gbox_billInfo.TabStop = false;
-            this.gbox_billInfo.Text = "Bill Information";
+            this.gbox_billInfo.Text = "Informação da NFe";
             // 
             // gbox_payCond
             // 
@@ -806,7 +743,7 @@
             this.gbox_payCond.Size = new System.Drawing.Size(293, 69);
             this.gbox_payCond.TabIndex = 50;
             this.gbox_payCond.TabStop = false;
-            this.gbox_payCond.Text = "Payment Conditon";
+            this.gbox_payCond.Text = "Condição de Pagamento";
             // 
             // btn_FindPayCond
             // 
@@ -814,7 +751,7 @@
             this.btn_FindPayCond.Name = "btn_FindPayCond";
             this.btn_FindPayCond.Size = new System.Drawing.Size(52, 23);
             this.btn_FindPayCond.TabIndex = 57;
-            this.btn_FindPayCond.Text = "Find";
+            this.btn_FindPayCond.Text = "Bu&scar";
             this.btn_FindPayCond.UseVisualStyleBackColor = true;
             this.btn_FindPayCond.Click += new System.EventHandler(this.btn_FindPayCond_Click);
             // 
@@ -853,9 +790,9 @@
             this.lbl_payCondName.AutoSize = true;
             this.lbl_payCondName.Location = new System.Drawing.Point(48, 18);
             this.lbl_payCondName.Name = "lbl_payCondName";
-            this.lbl_payCondName.Size = new System.Drawing.Size(51, 13);
+            this.lbl_payCondName.Size = new System.Drawing.Size(52, 13);
             this.lbl_payCondName.TabIndex = 54;
-            this.lbl_payCondName.Text = "Condition";
+            this.lbl_payCondName.Text = "Condição";
             // 
             // edt_billSeries
             // 
@@ -900,16 +837,79 @@
             this.lbl_billNumber.Name = "lbl_billNumber";
             this.lbl_billNumber.Size = new System.Drawing.Size(44, 13);
             this.lbl_billNumber.TabIndex = 49;
-            this.lbl_billNumber.Text = "Number";
+            this.lbl_billNumber.Text = "Número";
             // 
             // lbl_billSeries
             // 
             this.lbl_billSeries.AutoSize = true;
             this.lbl_billSeries.Location = new System.Drawing.Point(134, 22);
             this.lbl_billSeries.Name = "lbl_billSeries";
-            this.lbl_billSeries.Size = new System.Drawing.Size(36, 13);
+            this.lbl_billSeries.Size = new System.Drawing.Size(31, 13);
             this.lbl_billSeries.TabIndex = 48;
-            this.lbl_billSeries.Text = "Series";
+            this.lbl_billSeries.Text = "Série";
+            // 
+            // ProdId
+            // 
+            this.ProdId.HeaderText = "ID";
+            this.ProdId.Name = "ProdId";
+            this.ProdId.ReadOnly = true;
+            this.ProdId.Width = 50;
+            // 
+            // ProdName
+            // 
+            this.ProdName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ProdName.HeaderText = "Produto";
+            this.ProdName.Name = "ProdName";
+            this.ProdName.ReadOnly = true;
+            // 
+            // ProdQtd
+            // 
+            this.ProdQtd.HeaderText = "Quantidade";
+            this.ProdQtd.Name = "ProdQtd";
+            this.ProdQtd.ReadOnly = true;
+            this.ProdQtd.Width = 65;
+            // 
+            // ProdCurrentUnCost
+            // 
+            this.ProdCurrentUnCost.HeaderText = "Custo Unitário Atual";
+            this.ProdCurrentUnCost.Name = "ProdCurrentUnCost";
+            // 
+            // ProdDiscountCash
+            // 
+            this.ProdDiscountCash.HeaderText = "Desconto";
+            this.ProdDiscountCash.Name = "ProdDiscountCash";
+            this.ProdDiscountCash.ReadOnly = true;
+            this.ProdDiscountCash.Width = 70;
+            // 
+            // ProdNewBaseUnCost
+            // 
+            this.ProdNewBaseUnCost.HeaderText = "Custo Unitário Sugerido";
+            this.ProdNewBaseUnCost.Name = "ProdNewBaseUnCost";
+            // 
+            // ProdCurrentSalePrice
+            // 
+            this.ProdCurrentSalePrice.HeaderText = "Preço de Venda Atual";
+            this.ProdCurrentSalePrice.Name = "ProdCurrentSalePrice";
+            this.ProdCurrentSalePrice.ReadOnly = true;
+            // 
+            // ProdCurrentStock
+            // 
+            this.ProdCurrentStock.HeaderText = "Estoque Atual";
+            this.ProdCurrentStock.Name = "ProdCurrentStock";
+            this.ProdCurrentStock.ReadOnly = true;
+            this.ProdCurrentStock.Width = 60;
+            // 
+            // ProdPurchPerc
+            // 
+            this.ProdPurchPerc.HeaderText = "Porcentagem da Compra";
+            this.ProdPurchPerc.Name = "ProdPurchPerc";
+            this.ProdPurchPerc.ReadOnly = true;
+            // 
+            // ProdWeightedAvg
+            // 
+            this.ProdWeightedAvg.HeaderText = "Média Ponderada";
+            this.ProdWeightedAvg.Name = "ProdWeightedAvg";
+            this.ProdWeightedAvg.ReadOnly = true;
             // 
             // Frm_Create_Purchases
             // 
@@ -925,7 +925,7 @@
             this.Controls.Add(this.gbox_User);
             this.Controls.Add(this.gbox_products);
             this.Name = "Frm_Create_Purchases";
-            this.Text = "Frm_Create_Purchases";
+            this.Text = "Compras";
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).EndInit();
             this.gbox_products.ResumeLayout(false);
             this.gbox_products.PerformLayout();

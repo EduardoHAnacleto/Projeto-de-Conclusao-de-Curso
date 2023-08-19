@@ -145,8 +145,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@USERID", sale.User.id);
                     command.Parameters.AddWithValue("@SALECOST", (decimal)sale.TotalCost);
                     command.Parameters.AddWithValue("@SALEVALUE", (decimal)sale.TotalValue);
-                    command.Parameters.AddWithValue("@SALEDISCCASH", (decimal)sale.SaleDiscountCash);
-                    command.Parameters.AddWithValue("@SALEDISCPERC", (decimal)sale.SaleDiscountPerc);
                     command.Parameters.AddWithValue("@TOTALQTD", sale.TotalItemsQuantity);
                     command.Parameters.AddWithValue("@DC", sale.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", sale.dateOfLastUpdate);
@@ -223,8 +221,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@USERID", sale.User.id);
                     command.Parameters.AddWithValue("@SALECOST", (decimal)sale.TotalCost);
                     command.Parameters.AddWithValue("@SALEVALUE", (decimal)sale.TotalValue);
-                    command.Parameters.AddWithValue("@SALEDISCCASH", (decimal)sale.SaleDiscountCash);
-                    command.Parameters.AddWithValue("@SALEDISCPERC", (decimal)sale.SaleDiscountPerc);
                     command.Parameters.AddWithValue("@TOTALQTD", sale.TotalItemsQuantity);
                     command.Parameters.AddWithValue("@CANCELDATE", sale.CancelDate);
                     command.Parameters.AddWithValue("@DC", sale.dateOfCreation);
@@ -340,8 +336,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 obj.SaleItems = _saleItemsController.FindSaleId(id);
                                 obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                 obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
-                                obj.SaleDiscountCash = Convert.ToDouble(reader["sale_discount_cash"]);
-                                obj.SaleDiscountPerc = Convert.ToDouble(reader["sale_discount_perc"]);
                                 obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                // obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
                                 obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
@@ -401,8 +395,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
-                                    obj.SaleDiscountCash = Convert.ToDouble(reader["sale_discount_cash"]);
-                                    obj.SaleDiscountPerc = Convert.ToDouble(reader["sale_discount_perc"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                     obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
                                     obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
@@ -455,8 +447,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
-                                    obj.SaleDiscountCash = Convert.ToDouble(reader["sale_discount_cash"]);
-                                    obj.SaleDiscountPerc = Convert.ToDouble(reader["sale_discount_perc"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                     obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
                                     obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
@@ -508,8 +498,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
                                     obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
-                                    obj.SaleDiscountCash = Convert.ToDouble(reader["sale_discount_cash"]);
-                                    obj.SaleDiscountPerc = Convert.ToDouble(reader["sale_discount_perc"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                     obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
                                     obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
@@ -560,9 +548,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
-                                    obj.SaleDiscountCash = Convert.ToDouble(reader["sale_discount_cash"]);
                                     obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
-                                    obj.SaleDiscountPerc = Convert.ToDouble(reader["sale_discount_perc"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                     obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
                                     obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
@@ -612,8 +598,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
-                                    obj.SaleDiscountCash = Convert.ToDouble(reader["sale_discount_cash"]);
-                                    obj.SaleDiscountPerc = Convert.ToDouble(reader["sale_discount_perc"]);
                                     obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                     obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);

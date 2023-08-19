@@ -36,7 +36,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.Name = "Frm_Find_Suppliers";
-            this.Text = "Find Suppliers";
+            this.Text = "Buscar Fornecedores";
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

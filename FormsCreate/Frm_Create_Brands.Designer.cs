@@ -53,9 +53,9 @@
             this.lbl_brandName.AutoSize = true;
             this.lbl_brandName.Location = new System.Drawing.Point(61, 8);
             this.lbl_brandName.Name = "lbl_brandName";
-            this.lbl_brandName.Size = new System.Drawing.Size(70, 13);
+            this.lbl_brandName.Size = new System.Drawing.Size(44, 13);
             this.lbl_brandName.TabIndex = 16;
-            this.lbl_brandName.Text = "*Brand Name";
+            this.lbl_brandName.Text = "* Marca";
             // 
             // edt_BrandName
             // 
@@ -72,9 +72,9 @@
             this.ClientSize = new System.Drawing.Size(672, 379);
             this.Controls.Add(this.lbl_brandName);
             this.Controls.Add(this.edt_BrandName);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_Brands";
-            this.Text = "Create Brand";
+            this.Text = "Criar Marca";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);

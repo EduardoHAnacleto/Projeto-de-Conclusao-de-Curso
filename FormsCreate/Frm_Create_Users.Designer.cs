@@ -57,7 +57,7 @@
             this.lbl_empName.Name = "lbl_empName";
             this.lbl_empName.Size = new System.Drawing.Size(35, 13);
             this.lbl_empName.TabIndex = 15;
-            this.lbl_empName.Text = "Name";
+            this.lbl_empName.Text = "Nome";
             // 
             // edt_employeeName
             // 
@@ -73,7 +73,7 @@
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(63, 21);
             this.btn_Search.TabIndex = 17;
-            this.btn_Search.Text = "&Search";
+            this.btn_Search.Text = "Bu&scar";
             this.btn_Search.UseVisualStyleBackColor = true;
             this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
@@ -111,27 +111,27 @@
             this.lbl_userPassword.AutoSize = true;
             this.lbl_userPassword.Location = new System.Drawing.Point(7, 72);
             this.lbl_userPassword.Name = "lbl_userPassword";
-            this.lbl_userPassword.Size = new System.Drawing.Size(53, 13);
+            this.lbl_userPassword.Size = new System.Drawing.Size(38, 13);
             this.lbl_userPassword.TabIndex = 21;
-            this.lbl_userPassword.Text = "Password";
+            this.lbl_userPassword.Text = "Senha";
             // 
             // lbl_levelAccess
             // 
             this.lbl_levelAccess.AutoSize = true;
             this.lbl_levelAccess.Location = new System.Drawing.Point(182, 17);
             this.lbl_levelAccess.Name = "lbl_levelAccess";
-            this.lbl_levelAccess.Size = new System.Drawing.Size(71, 13);
+            this.lbl_levelAccess.Size = new System.Drawing.Size(86, 13);
             this.lbl_levelAccess.TabIndex = 23;
-            this.lbl_levelAccess.Text = "Level Access";
+            this.lbl_levelAccess.Text = "Nível de Acesso";
             // 
             // lbl_repeatPassword
             // 
             this.lbl_repeatPassword.AutoSize = true;
             this.lbl_repeatPassword.Location = new System.Drawing.Point(7, 121);
             this.lbl_repeatPassword.Name = "lbl_repeatPassword";
-            this.lbl_repeatPassword.Size = new System.Drawing.Size(91, 13);
+            this.lbl_repeatPassword.Size = new System.Drawing.Size(79, 13);
             this.lbl_repeatPassword.TabIndex = 25;
-            this.lbl_repeatPassword.Text = "Repeat Password";
+            this.lbl_repeatPassword.Text = "Repita a senha";
             // 
             // medt_userPassword
             // 
@@ -159,10 +159,10 @@
             this.gbox_user.Controls.Add(this.lbl_levelAccess);
             this.gbox_user.Location = new System.Drawing.Point(41, 117);
             this.gbox_user.Name = "gbox_user";
-            this.gbox_user.Size = new System.Drawing.Size(260, 175);
+            this.gbox_user.Size = new System.Drawing.Size(273, 175);
             this.gbox_user.TabIndex = 28;
             this.gbox_user.TabStop = false;
-            this.gbox_user.Text = "*User Information";
+            this.gbox_user.Text = "* Informação do usuário";
             // 
             // gbox_employee
             // 
@@ -176,7 +176,7 @@
             this.gbox_employee.Size = new System.Drawing.Size(321, 103);
             this.gbox_employee.TabIndex = 29;
             this.gbox_employee.TabStop = false;
-            this.gbox_employee.Text = "*Employee";
+            this.gbox_employee.Text = "* Funcionário";
             // 
             // lbl_empId
             // 

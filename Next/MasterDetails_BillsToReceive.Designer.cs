@@ -29,10 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_Clients = new System.Windows.Forms.DataGridView();
-            this.IdClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.RegNumberClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TypeClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.edt_clientName = new System.Windows.Forms.TextBox();
             this.lbl_clientId = new System.Windows.Forms.Label();
             this.lbl_clientName = new System.Windows.Forms.Label();
@@ -59,6 +55,10 @@
             this.btn_ClearSaleFilters = new System.Windows.Forms.Button();
             this.rbtn_PaidStatus = new System.Windows.Forms.RadioButton();
             this.rbtn_ActiveStatus = new System.Windows.Forms.RadioButton();
+            this.IdClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RegNumberClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TypeClient = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleNumberBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentMethodBillsToReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,38 +101,6 @@
             this.DGV_Clients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clients_CellContentClick);
             this.DGV_Clients.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clients_CellContentDoubleClick);
             // 
-            // IdClient
-            // 
-            this.IdClient.HeaderText = "ID";
-            this.IdClient.MinimumWidth = 6;
-            this.IdClient.Name = "IdClient";
-            this.IdClient.ReadOnly = true;
-            this.IdClient.Width = 55;
-            // 
-            // NameClient
-            // 
-            this.NameClient.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameClient.HeaderText = "Client";
-            this.NameClient.MinimumWidth = 6;
-            this.NameClient.Name = "NameClient";
-            this.NameClient.ReadOnly = true;
-            // 
-            // RegNumberClient
-            // 
-            this.RegNumberClient.HeaderText = "Registration Number";
-            this.RegNumberClient.MinimumWidth = 6;
-            this.RegNumberClient.Name = "RegNumberClient";
-            this.RegNumberClient.ReadOnly = true;
-            this.RegNumberClient.Width = 125;
-            // 
-            // TypeClient
-            // 
-            this.TypeClient.HeaderText = "Type";
-            this.TypeClient.MinimumWidth = 6;
-            this.TypeClient.Name = "TypeClient";
-            this.TypeClient.ReadOnly = true;
-            this.TypeClient.Width = 80;
-            // 
             // edt_clientName
             // 
             this.edt_clientName.Location = new System.Drawing.Point(56, 29);
@@ -158,7 +126,7 @@
             this.lbl_clientName.Name = "lbl_clientName";
             this.lbl_clientName.Size = new System.Drawing.Size(35, 13);
             this.lbl_clientName.TabIndex = 4;
-            this.lbl_clientName.Text = "Name";
+            this.lbl_clientName.Text = "Nome";
             // 
             // gbox_client
             // 
@@ -174,15 +142,15 @@
             this.gbox_client.Size = new System.Drawing.Size(740, 233);
             this.gbox_client.TabIndex = 5;
             this.gbox_client.TabStop = false;
-            this.gbox_client.Text = "Client";
+            this.gbox_client.Text = "Clientes";
             // 
             // btn_resetClients
             // 
             this.btn_resetClients.Location = new System.Drawing.Point(337, 29);
             this.btn_resetClients.Name = "btn_resetClients";
-            this.btn_resetClients.Size = new System.Drawing.Size(44, 20);
+            this.btn_resetClients.Size = new System.Drawing.Size(56, 21);
             this.btn_resetClients.TabIndex = 15;
-            this.btn_resetClients.Text = "Reset";
+            this.btn_resetClients.Text = "Limpar";
             this.btn_resetClients.UseVisualStyleBackColor = true;
             this.btn_resetClients.Click += new System.EventHandler(this.btn_resetClients_Click);
             // 
@@ -199,7 +167,7 @@
             this.btn_searchClient.Name = "btn_searchClient";
             this.btn_searchClient.Size = new System.Drawing.Size(75, 21);
             this.btn_searchClient.TabIndex = 5;
-            this.btn_searchClient.Text = "Search";
+            this.btn_searchClient.Text = "Bu&scar";
             this.btn_searchClient.UseVisualStyleBackColor = true;
             this.btn_searchClient.Click += new System.EventHandler(this.btn_searchClient_Click);
             // 
@@ -244,7 +212,7 @@
             this.gbox_billsToReceive.Size = new System.Drawing.Size(1141, 348);
             this.gbox_billsToReceive.TabIndex = 9;
             this.gbox_billsToReceive.TabStop = false;
-            this.gbox_billsToReceive.Text = "Bills To Receive";
+            this.gbox_billsToReceive.Text = "Contas à Receber";
             // 
             // btn_ClearDateSort
             // 
@@ -252,7 +220,7 @@
             this.btn_ClearDateSort.Name = "btn_ClearDateSort";
             this.btn_ClearDateSort.Size = new System.Drawing.Size(44, 20);
             this.btn_ClearDateSort.TabIndex = 14;
-            this.btn_ClearDateSort.Text = "Reset";
+            this.btn_ClearDateSort.Text = "Limpar";
             this.btn_ClearDateSort.UseVisualStyleBackColor = true;
             this.btn_ClearDateSort.Click += new System.EventHandler(this.btn_ClearDateSort_Click);
             // 
@@ -261,18 +229,18 @@
             this.lbl_dueDate.AutoSize = true;
             this.lbl_dueDate.Location = new System.Drawing.Point(230, 24);
             this.lbl_dueDate.Name = "lbl_dueDate";
-            this.lbl_dueDate.Size = new System.Drawing.Size(53, 13);
+            this.lbl_dueDate.Size = new System.Drawing.Size(104, 13);
             this.lbl_dueDate.TabIndex = 13;
-            this.lbl_dueDate.Text = "Due Date";
+            this.lbl_dueDate.Text = "Data de Vencimento";
             // 
             // lbl_emissionDate
             // 
             this.lbl_emissionDate.AutoSize = true;
             this.lbl_emissionDate.Location = new System.Drawing.Point(128, 24);
             this.lbl_emissionDate.Name = "lbl_emissionDate";
-            this.lbl_emissionDate.Size = new System.Drawing.Size(74, 13);
+            this.lbl_emissionDate.Size = new System.Drawing.Size(87, 13);
             this.lbl_emissionDate.TabIndex = 12;
-            this.lbl_emissionDate.Text = "Emission Date";
+            this.lbl_emissionDate.Text = "Data de Emissão";
             // 
             // dueDate_bills
             // 
@@ -301,9 +269,9 @@
             this.lbl_saleNumber.AutoSize = true;
             this.lbl_saleNumber.Location = new System.Drawing.Point(6, 24);
             this.lbl_saleNumber.Name = "lbl_saleNumber";
-            this.lbl_saleNumber.Size = new System.Drawing.Size(68, 13);
+            this.lbl_saleNumber.Size = new System.Drawing.Size(67, 13);
             this.lbl_saleNumber.TabIndex = 9;
-            this.lbl_saleNumber.Text = "Sale Number";
+            this.lbl_saleNumber.Text = "ID da Venda";
             // 
             // edt_saleNumber
             // 
@@ -338,17 +306,17 @@
             this.gbox_clientFilters.Size = new System.Drawing.Size(136, 74);
             this.gbox_clientFilters.TabIndex = 13;
             this.gbox_clientFilters.TabStop = false;
-            this.gbox_clientFilters.Text = "Client Filters";
+            this.gbox_clientFilters.Text = "Filtro de Clientes";
             // 
             // rbtn_Natural
             // 
             this.rbtn_Natural.AutoSize = true;
             this.rbtn_Natural.Location = new System.Drawing.Point(6, 45);
             this.rbtn_Natural.Name = "rbtn_Natural";
-            this.rbtn_Natural.Size = new System.Drawing.Size(59, 17);
+            this.rbtn_Natural.Size = new System.Drawing.Size(54, 17);
             this.rbtn_Natural.TabIndex = 9;
             this.rbtn_Natural.TabStop = true;
-            this.rbtn_Natural.Text = "Natural";
+            this.rbtn_Natural.Text = "Físico";
             this.rbtn_Natural.UseVisualStyleBackColor = true;
             this.rbtn_Natural.CheckedChanged += new System.EventHandler(this.rbtn_Natural_CheckedChanged);
             // 
@@ -357,10 +325,10 @@
             this.rbtn_LegalClients.AutoSize = true;
             this.rbtn_LegalClients.Location = new System.Drawing.Point(6, 22);
             this.rbtn_LegalClients.Name = "rbtn_LegalClients";
-            this.rbtn_LegalClients.Size = new System.Drawing.Size(51, 17);
+            this.rbtn_LegalClients.Size = new System.Drawing.Size(63, 17);
             this.rbtn_LegalClients.TabIndex = 8;
             this.rbtn_LegalClients.TabStop = true;
-            this.rbtn_LegalClients.Text = "Legal";
+            this.rbtn_LegalClients.Text = "Jurídico";
             this.rbtn_LegalClients.UseVisualStyleBackColor = true;
             this.rbtn_LegalClients.CheckedChanged += new System.EventHandler(this.rbtn_LegalClients_CheckedChanged);
             // 
@@ -370,7 +338,7 @@
             this.btn_ClearClientFilters.Name = "btn_ClearClientFilters";
             this.btn_ClearClientFilters.Size = new System.Drawing.Size(57, 23);
             this.btn_ClearClientFilters.TabIndex = 7;
-            this.btn_ClearClientFilters.Text = "Reset";
+            this.btn_ClearClientFilters.Text = "Limpar";
             this.btn_ClearClientFilters.UseVisualStyleBackColor = true;
             this.btn_ClearClientFilters.Click += new System.EventHandler(this.btn_ClearClientFilters_Click);
             // 
@@ -385,17 +353,17 @@
             this.gbox_SaleFilters.Size = new System.Drawing.Size(214, 68);
             this.gbox_SaleFilters.TabIndex = 14;
             this.gbox_SaleFilters.TabStop = false;
-            this.gbox_SaleFilters.Text = "Bills To Receive Filters";
+            this.gbox_SaleFilters.Text = "Filtro de Contas à Receber";
             // 
             // rbtn_onHold
             // 
             this.rbtn_onHold.AutoSize = true;
             this.rbtn_onHold.Location = new System.Drawing.Point(67, 45);
             this.rbtn_onHold.Name = "rbtn_onHold";
-            this.rbtn_onHold.Size = new System.Drawing.Size(64, 17);
+            this.rbtn_onHold.Size = new System.Drawing.Size(76, 17);
             this.rbtn_onHold.TabIndex = 7;
             this.rbtn_onHold.TabStop = true;
-            this.rbtn_onHold.Text = "On Hold";
+            this.rbtn_onHold.Text = "Em Espera";
             this.rbtn_onHold.UseVisualStyleBackColor = true;
             this.rbtn_onHold.CheckedChanged += new System.EventHandler(this.rbtn_onHold_CheckedChanged);
             // 
@@ -405,7 +373,7 @@
             this.btn_ClearSaleFilters.Name = "btn_ClearSaleFilters";
             this.btn_ClearSaleFilters.Size = new System.Drawing.Size(57, 23);
             this.btn_ClearSaleFilters.TabIndex = 6;
-            this.btn_ClearSaleFilters.Text = "Reset";
+            this.btn_ClearSaleFilters.Text = "Limpar";
             this.btn_ClearSaleFilters.UseVisualStyleBackColor = true;
             this.btn_ClearSaleFilters.Click += new System.EventHandler(this.btn_ClearSaleFilters_Click);
             // 
@@ -414,10 +382,10 @@
             this.rbtn_PaidStatus.AutoSize = true;
             this.rbtn_PaidStatus.Location = new System.Drawing.Point(6, 45);
             this.rbtn_PaidStatus.Name = "rbtn_PaidStatus";
-            this.rbtn_PaidStatus.Size = new System.Drawing.Size(46, 17);
+            this.rbtn_PaidStatus.Size = new System.Drawing.Size(50, 17);
             this.rbtn_PaidStatus.TabIndex = 2;
             this.rbtn_PaidStatus.TabStop = true;
-            this.rbtn_PaidStatus.Text = "Paid";
+            this.rbtn_PaidStatus.Text = "Pago";
             this.rbtn_PaidStatus.UseVisualStyleBackColor = true;
             this.rbtn_PaidStatus.CheckedChanged += new System.EventHandler(this.rbtn_PaidStatus_CheckedChanged);
             // 
@@ -426,24 +394,56 @@
             this.rbtn_ActiveStatus.AutoSize = true;
             this.rbtn_ActiveStatus.Location = new System.Drawing.Point(6, 22);
             this.rbtn_ActiveStatus.Name = "rbtn_ActiveStatus";
-            this.rbtn_ActiveStatus.Size = new System.Drawing.Size(55, 17);
+            this.rbtn_ActiveStatus.Size = new System.Drawing.Size(49, 17);
             this.rbtn_ActiveStatus.TabIndex = 1;
             this.rbtn_ActiveStatus.TabStop = true;
-            this.rbtn_ActiveStatus.Text = "Active";
+            this.rbtn_ActiveStatus.Text = "Ativo";
             this.rbtn_ActiveStatus.UseVisualStyleBackColor = true;
             this.rbtn_ActiveStatus.CheckedChanged += new System.EventHandler(this.rbtn_ActiveStatus_CheckedChanged);
+            // 
+            // IdClient
+            // 
+            this.IdClient.HeaderText = "ID";
+            this.IdClient.MinimumWidth = 6;
+            this.IdClient.Name = "IdClient";
+            this.IdClient.ReadOnly = true;
+            this.IdClient.Width = 55;
+            // 
+            // NameClient
+            // 
+            this.NameClient.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameClient.HeaderText = "Cliente";
+            this.NameClient.MinimumWidth = 6;
+            this.NameClient.Name = "NameClient";
+            this.NameClient.ReadOnly = true;
+            // 
+            // RegNumberClient
+            // 
+            this.RegNumberClient.HeaderText = "Registro";
+            this.RegNumberClient.MinimumWidth = 6;
+            this.RegNumberClient.Name = "RegNumberClient";
+            this.RegNumberClient.ReadOnly = true;
+            this.RegNumberClient.Width = 125;
+            // 
+            // TypeClient
+            // 
+            this.TypeClient.HeaderText = "Tipo";
+            this.TypeClient.MinimumWidth = 6;
+            this.TypeClient.Name = "TypeClient";
+            this.TypeClient.ReadOnly = true;
+            this.TypeClient.Width = 80;
             // 
             // ClientName
             // 
             this.ClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ClientName.HeaderText = "Client";
+            this.ClientName.HeaderText = "Cliente";
             this.ClientName.MinimumWidth = 6;
             this.ClientName.Name = "ClientName";
             this.ClientName.ReadOnly = true;
             // 
             // SaleNumberBillsReceive
             // 
-            this.SaleNumberBillsReceive.HeaderText = "Sale ID";
+            this.SaleNumberBillsReceive.HeaderText = "ID Venda";
             this.SaleNumberBillsReceive.MinimumWidth = 6;
             this.SaleNumberBillsReceive.Name = "SaleNumberBillsReceive";
             this.SaleNumberBillsReceive.ReadOnly = true;
@@ -451,7 +451,7 @@
             // 
             // PaymentMethodBillsToReceive
             // 
-            this.PaymentMethodBillsToReceive.HeaderText = "Payment Method";
+            this.PaymentMethodBillsToReceive.HeaderText = "Método de Pagamento";
             this.PaymentMethodBillsToReceive.MinimumWidth = 6;
             this.PaymentMethodBillsToReceive.Name = "PaymentMethodBillsToReceive";
             this.PaymentMethodBillsToReceive.ReadOnly = true;
@@ -459,7 +459,7 @@
             // 
             // InstalmentNumber
             // 
-            this.InstalmentNumber.HeaderText = "Instalment Number";
+            this.InstalmentNumber.HeaderText = "Nº Parcela";
             this.InstalmentNumber.MinimumWidth = 6;
             this.InstalmentNumber.Name = "InstalmentNumber";
             this.InstalmentNumber.ReadOnly = true;
@@ -467,7 +467,7 @@
             // 
             // TotalValueBillsReceive
             // 
-            this.TotalValueBillsReceive.HeaderText = "Instalment Value";
+            this.TotalValueBillsReceive.HeaderText = "Valor da Parcela";
             this.TotalValueBillsReceive.MinimumWidth = 6;
             this.TotalValueBillsReceive.Name = "TotalValueBillsReceive";
             this.TotalValueBillsReceive.ReadOnly = true;
@@ -475,14 +475,14 @@
             // 
             // EmissionDateBillsReceive
             // 
-            this.EmissionDateBillsReceive.HeaderText = "Emission Date";
+            this.EmissionDateBillsReceive.HeaderText = "Data de Emissão";
             this.EmissionDateBillsReceive.MinimumWidth = 6;
             this.EmissionDateBillsReceive.Name = "EmissionDateBillsReceive";
             this.EmissionDateBillsReceive.ReadOnly = true;
             // 
             // DueDateBillsReceive
             // 
-            this.DueDateBillsReceive.HeaderText = "Due Date";
+            this.DueDateBillsReceive.HeaderText = "Data de Vencimento";
             this.DueDateBillsReceive.MinimumWidth = 6;
             this.DueDateBillsReceive.Name = "DueDateBillsReceive";
             this.DueDateBillsReceive.ReadOnly = true;
@@ -505,7 +505,7 @@
             this.Controls.Add(this.gbox_billsToReceive);
             this.Controls.Add(this.gbox_client);
             this.Name = "MasterDetails_BillsToReceive";
-            this.Text = "Clients - Bills to Receive";
+            this.Text = "Clientes - Contas à Receber";
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).EndInit();
             this.gbox_client.ResumeLayout(false);
             this.gbox_client.PerformLayout();
@@ -540,10 +540,6 @@
         private System.Windows.Forms.Label lbl_emissionDate;
         private System.Windows.Forms.DateTimePicker dueDate_bills;
         private System.Windows.Forms.DateTimePicker emissionDate_bills;
-        private System.Windows.Forms.DataGridViewTextBoxColumn IdClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn NameClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn RegNumberClient;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TypeClient;
         private System.Windows.Forms.Button btn_ClearDateSort;
         private System.Windows.Forms.Button btn_resetClients;
         private System.Windows.Forms.GroupBox gbox_clientFilters;
@@ -555,6 +551,10 @@
         private System.Windows.Forms.RadioButton rbtn_PaidStatus;
         private System.Windows.Forms.RadioButton rbtn_ActiveStatus;
         private System.Windows.Forms.RadioButton rbtn_onHold;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IdClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NameClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RegNumberClient;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TypeClient;
         private System.Windows.Forms.DataGridViewTextBoxColumn ClientName;
         private System.Windows.Forms.DataGridViewTextBoxColumn SaleNumberBillsReceive;
         private System.Windows.Forms.DataGridViewTextBoxColumn PaymentMethodBillsToReceive;

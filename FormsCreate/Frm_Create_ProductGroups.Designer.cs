@@ -71,18 +71,18 @@
             this.lbl_description.AutoSize = true;
             this.lbl_description.Location = new System.Drawing.Point(53, 57);
             this.lbl_description.Name = "lbl_description";
-            this.lbl_description.Size = new System.Drawing.Size(60, 13);
+            this.lbl_description.Size = new System.Drawing.Size(55, 13);
             this.lbl_description.TabIndex = 16;
-            this.lbl_description.Text = "Description";
+            this.lbl_description.Text = "Descrição";
             // 
             // lbl_productGroup
             // 
             this.lbl_productGroup.AutoSize = true;
             this.lbl_productGroup.Location = new System.Drawing.Point(53, 8);
             this.lbl_productGroup.Name = "lbl_productGroup";
-            this.lbl_productGroup.Size = new System.Drawing.Size(109, 13);
+            this.lbl_productGroup.Size = new System.Drawing.Size(43, 13);
             this.lbl_productGroup.TabIndex = 15;
-            this.lbl_productGroup.Text = "*Product Group name";
+            this.lbl_productGroup.Text = "* Grupo";
             // 
             // Frm_Create_ProductGroups
             // 
@@ -92,9 +92,9 @@
             this.Controls.Add(this.edt_productGroupName);
             this.Controls.Add(this.lbl_description);
             this.Controls.Add(this.lbl_productGroup);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_ProductGroups";
-            this.Text = "Create Product Groups";
+            this.Text = "Criar Grupo de Produto";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);

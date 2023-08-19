@@ -53,9 +53,9 @@
             this.lbl_serviceDescription.AutoSize = true;
             this.lbl_serviceDescription.Location = new System.Drawing.Point(61, 8);
             this.lbl_serviceDescription.Name = "lbl_serviceDescription";
-            this.lbl_serviceDescription.Size = new System.Drawing.Size(101, 13);
+            this.lbl_serviceDescription.Size = new System.Drawing.Size(50, 13);
             this.lbl_serviceDescription.TabIndex = 16;
-            this.lbl_serviceDescription.Text = "*Service description";
+            this.lbl_serviceDescription.Text = "* Serviço";
             // 
             // lbl_serviceValue
             // 
@@ -64,7 +64,7 @@
             this.lbl_serviceValue.Name = "lbl_serviceValue";
             this.lbl_serviceValue.Size = new System.Drawing.Size(38, 13);
             this.lbl_serviceValue.TabIndex = 17;
-            this.lbl_serviceValue.Text = "*Value";
+            this.lbl_serviceValue.Text = "* Valor";
             // 
             // edt_serviceDescription
             // 
@@ -91,7 +91,7 @@
             this.Controls.Add(this.lbl_serviceDescription);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_Services";
-            this.Text = "Create Services";
+            this.Text = "Criar Serviço";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);

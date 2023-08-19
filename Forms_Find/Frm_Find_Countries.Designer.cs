@@ -61,36 +61,36 @@
             this.lbl_countryName.AutoSize = true;
             this.lbl_countryName.Location = new System.Drawing.Point(47, 7);
             this.lbl_countryName.Name = "lbl_countryName";
-            this.lbl_countryName.Size = new System.Drawing.Size(43, 13);
+            this.lbl_countryName.Size = new System.Drawing.Size(29, 13);
             this.lbl_countryName.TabIndex = 4;
-            this.lbl_countryName.Text = "Country";
+            this.lbl_countryName.Text = "País";
             // 
             // lbl_countryAcronym
             // 
             this.lbl_countryAcronym.AutoSize = true;
             this.lbl_countryAcronym.Location = new System.Drawing.Point(349, 7);
             this.lbl_countryAcronym.Name = "lbl_countryAcronym";
-            this.lbl_countryAcronym.Size = new System.Drawing.Size(48, 13);
+            this.lbl_countryAcronym.Size = new System.Drawing.Size(30, 13);
             this.lbl_countryAcronym.TabIndex = 5;
-            this.lbl_countryAcronym.Text = "Acronym";
+            this.lbl_countryAcronym.Text = "Sigla";
             // 
             // lbl_phonePrefix
             // 
             this.lbl_phonePrefix.AutoSize = true;
             this.lbl_phonePrefix.Location = new System.Drawing.Point(402, 7);
             this.lbl_phonePrefix.Name = "lbl_phonePrefix";
-            this.lbl_phonePrefix.Size = new System.Drawing.Size(67, 13);
+            this.lbl_phonePrefix.Size = new System.Drawing.Size(26, 13);
             this.lbl_phonePrefix.TabIndex = 6;
-            this.lbl_phonePrefix.Text = "Phone Prefix";
+            this.lbl_phonePrefix.Text = "DDI";
             // 
             // lbl_currency
             // 
             this.lbl_currency.AutoSize = true;
-            this.lbl_currency.Location = new System.Drawing.Point(471, 7);
+            this.lbl_currency.Location = new System.Drawing.Point(454, 6);
             this.lbl_currency.Name = "lbl_currency";
-            this.lbl_currency.Size = new System.Drawing.Size(49, 13);
+            this.lbl_currency.Size = new System.Drawing.Size(40, 13);
             this.lbl_currency.TabIndex = 7;
-            this.lbl_currency.Text = "Currency";
+            this.lbl_currency.Text = "Moeda";
             // 
             // edt_countryName
             // 
@@ -123,7 +123,7 @@
             // 
             this.edt_currency.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_currency.Enabled = false;
-            this.edt_currency.Location = new System.Drawing.Point(473, 23);
+            this.edt_currency.Location = new System.Drawing.Point(456, 22);
             this.edt_currency.Name = "edt_currency";
             this.edt_currency.Size = new System.Drawing.Size(46, 20);
             this.edt_currency.TabIndex = 11;
@@ -162,14 +162,14 @@
             // NameCountry
             // 
             this.NameCountry.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameCountry.HeaderText = "Country name";
+            this.NameCountry.HeaderText = "País";
             this.NameCountry.MinimumWidth = 6;
             this.NameCountry.Name = "NameCountry";
             this.NameCountry.ReadOnly = true;
             // 
             // AcronymCountry
             // 
-            this.AcronymCountry.HeaderText = "Acronym";
+            this.AcronymCountry.HeaderText = "Sigla";
             this.AcronymCountry.MinimumWidth = 6;
             this.AcronymCountry.Name = "AcronymCountry";
             this.AcronymCountry.ReadOnly = true;
@@ -177,7 +177,7 @@
             // 
             // PhonePrefixCountry
             // 
-            this.PhonePrefixCountry.HeaderText = "Phone Prefix";
+            this.PhonePrefixCountry.HeaderText = "DDI";
             this.PhonePrefixCountry.MinimumWidth = 6;
             this.PhonePrefixCountry.Name = "PhonePrefixCountry";
             this.PhonePrefixCountry.ReadOnly = true;
@@ -185,7 +185,7 @@
             // 
             // CurrencyCountry
             // 
-            this.CurrencyCountry.HeaderText = "Currency";
+            this.CurrencyCountry.HeaderText = "Moeda";
             this.CurrencyCountry.MinimumWidth = 6;
             this.CurrencyCountry.Name = "CurrencyCountry";
             this.CurrencyCountry.ReadOnly = true;
@@ -193,11 +193,11 @@
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(525, 22);
+            this.btn_Search.Location = new System.Drawing.Point(508, 21);
             this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(66, 20);
+            this.btn_Search.Size = new System.Drawing.Size(66, 21);
             this.btn_Search.TabIndex = 13;
-            this.btn_Search.Text = "Search";
+            this.btn_Search.Text = "Bu&scar";
             this.btn_Search.UseVisualStyleBackColor = true;
             this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
@@ -217,7 +217,7 @@
             this.Controls.Add(this.lbl_countryName);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_Countries";
-            this.Text = "Find Countries";
+            this.Text = "Buscar Países";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.edt_id, 0);

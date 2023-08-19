@@ -22,7 +22,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "INSERT INTO PURCHASEITEMS ( ID_PURCHASE, PRODUCT_ID, QUANTITY, PRODUCT_COST, TOTAL_COST, PURCHASE_PERCENTAGE," +
+            string sql = "INSERT INTO PURCHASEITEMS ( BILLMODEL, BILLNUMBER, BILLSERIES, SUPPLIER_ID, PRODUCT_ID, QUANTITY, PRODUCT_COST, TOTAL_COST, PURCHASE_PERCENTAGE," +
                 "DISCOUNT_CASH , WEIGHTED_AVG , DATE_CREATION, DATE_LAST_UPDATE ) "
                          + " VALUES (@ID, @PRODID, @QTD, @PRODCOST, @TOTALVALUE, @PURCHPERC, @DISCOUNT, @WEIGHTEDAVG, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -30,11 +30,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@ID", obj.PurchaseId);
+                    command.Parameters.AddWithValue("@BILLNUM", obj.BillNumberId);
+                    command.Parameters.AddWithValue("@BILLMOD", obj.BillModelId);
+                    command.Parameters.AddWithValue("@BILLSER", obj.BillSeriesId);
+                    command.Parameters.AddWithValue("@SUPPLIERID", obj.SupplierId);
                     command.Parameters.AddWithValue("@PRODID", obj.Product.id);
                     command.Parameters.AddWithValue("@QTD", obj.Quantity);
                     command.Parameters.AddWithValue("@PRODCOST", obj.NewBaseUnCost);
-                    command.Parameters.AddWithValue("@TOTALVALUE", obj.TotalBaseCost);
                     command.Parameters.AddWithValue("@PURCHPERC", obj.PurchasePercentage);
                     command.Parameters.AddWithValue("@WEIGHTEDAVG", obj.WeightedCostAverage);
                     command.Parameters.AddWithValue("@DISCOUNT", obj.DiscountCash);
@@ -62,16 +64,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
         }
 
-        public List<PurchaseItems> SelectFromDb(int id)
+        public List<PurchaseItems> SelectFromDb(int bModel, int bNum, int bSeries, int supplierId)
         {
-            string sql = "SELECT * FROM PURCHASEITEMS WHERE PURCHASE_ID = @ID ;";
+            string sql = "SELECT * FROM PURCHASEITEMS WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM, BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID ;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
             try
             {
                 con.Open();
-                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.Parameters.AddWithValue("@BMODEL", bModel);
+                cmd.Parameters.AddWithValue("@BNUM", bNum);
+                cmd.Parameters.AddWithValue("@BSERIES", bSeries);
+                cmd.Parameters.AddWithValue("@SUPPLIERID", supplierId);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -82,12 +87,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         {
                             PurchaseItems obj = new PurchaseItems 
                             {
-                                id = Convert.ToInt32(reader["id_purchase"]),
-                                PurchaseId = Convert.ToInt32(reader["id_purchase"]),
+                                BillNumberId = Convert.ToInt32(reader["billModel"]),
+                                BillModelId = Convert.ToInt32(reader["billNumber"]),
+                                BillSeriesId = Convert.ToInt32(reader["billSeries"]),
+                                SupplierId = Convert.ToInt32(reader["supplier_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
-                                TotalBaseCost = Convert.ToDecimal(reader["total_cost"]),
                                 PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
                                 WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
@@ -130,12 +136,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         {
                             PurchaseItems obj = new PurchaseItems
                             {
-                                id = Convert.ToInt32(reader["id_purchase"]),
-                                PurchaseId = Convert.ToInt32(reader["id_purchase"]),
+                                BillNumberId = Convert.ToInt32(reader["billModel"]),
+                                BillModelId = Convert.ToInt32(reader["billNumber"]),
+                                BillSeriesId = Convert.ToInt32(reader["billSeries"]),
+                                SupplierId = Convert.ToInt32(reader["supplier_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
-                                TotalBaseCost = Convert.ToDecimal(reader["total_cost"]),
                                 PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
                                 WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
@@ -178,12 +185,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         {
                             PurchaseItems obj = new PurchaseItems
                             {
-                                id = Convert.ToInt32(reader["id_purchase"]),
-                                PurchaseId = Convert.ToInt32(reader["id_purchase"]),
+                                BillNumberId = Convert.ToInt32(reader["billModel"]),
+                                BillModelId = Convert.ToInt32(reader["billNumber"]),
+                                BillSeriesId = Convert.ToInt32(reader["billSeries"]),
+                                SupplierId = Convert.ToInt32(reader["supplier_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
-                                TotalBaseCost = Convert.ToDecimal(reader["total_cost"]),
                                 PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
                                 WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
@@ -206,16 +214,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             return null;
         }
 
-        public List<PurchaseItems> SelectPurchaseIdFromDb(int id)
+        public List<PurchaseItems> SelectPurchaseIdFromDb(int bModel, int bNum, int bSeries, int supplierId)
         {
-            string sql = "SELECT * FROM PURCHASEITEMS WHERE ID_PURCHASE = @ID ;";
+            string sql = "SELECT * FROM PURCHASEITEMS WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM, BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID ;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
             try
             {
                 con.Open();
-                cmd.Parameters.AddWithValue("@ID", id);
+                cmd.Parameters.AddWithValue("@BMODEL", bModel);
+                cmd.Parameters.AddWithValue("@BNUM", bNum);
+                cmd.Parameters.AddWithValue("@BSERIES", bSeries);
+                cmd.Parameters.AddWithValue("@SUPPLIERID", supplierId);
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())
                 {
@@ -226,12 +237,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         {
                             PurchaseItems obj = new PurchaseItems
                             {
-                                id = Convert.ToInt32(reader["id_purchase"]),
-                                PurchaseId = Convert.ToInt32(reader["id_purchase"]),
+                                BillNumberId = Convert.ToInt32(reader["billModel"]),
+                                BillModelId = Convert.ToInt32(reader["billNumber"]),
+                                BillSeriesId = Convert.ToInt32(reader["billSeries"]),
+                                SupplierId = Convert.ToInt32(reader["supplier_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
                                 NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
-                                TotalBaseCost = Convert.ToDecimal(reader["total_cost"]),
                                 PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
                                 WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
@@ -292,16 +304,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             return purchaseItems;
         }
 
-        public bool DeleteFromDb(int id)
+        public bool DeleteFromDb(int bModel, int bNum, int bSeries, int supplierId)
         {
             bool status = false;
-            string sql = "DELETE FROM SALES WHERE ID_PURCHASEITEMS = @ID ;";
+            string sql = "DELETE FROM PURCHASEITEMS WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM, BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID ;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("@BMODEL", bModel);
+                    command.Parameters.AddWithValue("@BNUM", bNum);
+                    command.Parameters.AddWithValue("@BSERIES", bSeries);
+                    command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     if (i > 0)

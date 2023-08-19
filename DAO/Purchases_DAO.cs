@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using System.Configuration;
+using System.Drawing.Drawing2D;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 {
@@ -22,52 +23,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         private readonly BillsToPay_Controller _billsToPayController = new BillsToPay_Controller();
         private readonly Users_Controller _userController = new Users_Controller();
 
-        internal int GetLastId()
-        {
-            string sql = "SELECT IDENT_CURRENT ('PURCHASES');";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                SqlCommand command = new SqlCommand(sql, connection);
-                connection.Open();
-                int i = Convert.ToInt32(command.ExecuteScalar());
-                connection.Close();
-                return i;
-            }
-        }
-
-        public int NewId()
-        {
-            var newId = "";
-            string sql = "SELECT MAX(ID_PURCHASE) FROM PURCHASES;";
-            SqlConnection con = new SqlConnection(connectionString);
-            SqlCommand cmd = new SqlCommand(sql, con);
-            cmd.CommandType = CommandType.Text;
-            try
-            {
-                con.Open();
-                newId = cmd.ExecuteScalar().ToString();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error : " + ex.Message);
-            }
-            finally
-            {
-                con.Close();
-            }
-            if (newId != "")
-            {
-                int id = Convert.ToInt32(newId) + 1;
-                return id;
-            }
-            return 2;
-        }
-
         public bool SaveToDb(Purchases obj)
         {
             bool status = false;
 
-            string sql = "INSERT INTO PURCHASES ( EMISSIONDATE, ARRIVALDATE, FREIGHTCOST, PURCHASE_TOTALCOST, " +
+            string sql = "INSERT INTO PURCHASES (BMODEL, BNUM, BSERIES, SUPPLIERID, EMISSIONDATE, ARRIVALDATE, FREIGHTCOST, PURCHASE_TOTALCOST, " +
                 " PURCHASE_EXTRAEXPENSES, PURCHASE_INSURANCECOST, SUPPLIER_ID, USER_ID, DATE_CREATION, DATE_LAST_UPDATE ) "
                          + " VALUES ( @EMDATE, @ARRIVALDATE, @FREIGHT, @TOTALCOST, @EXPENSES," +
                          " @INSURANCE, @SUPPLIERID, @USERID, @DC, @DU);";
@@ -76,6 +36,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                    command.Parameters.AddWithValue("@BNUM", obj.BillNumber);
+                    command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                    command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
                     command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
                     command.Parameters.AddWithValue("@FREIGHT", (decimal)obj.Freight_Cost);
@@ -114,15 +78,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
             string sql = "UPDATE PURCHASES SET EMISSIONDATE = @EMDATE, ARRIVALDATE = @ARRIVALDATE, FREIGHTCOST = @FREIGHT," +
                 " PURCHASE_TOTALCOST = @TOTALCOST, PURCHASE_EXTRAEXPENSES = @EXPENSES, " +
-                " PURCHASE_INSURANCECOST = @INSURANCE, SUPPLIER_ID = @SUPPLIERID," +
+                " PURCHASE_INSURANCECOST = @INSURANCE," +
                 " USER_ID = @USERID, DATE_LAST_UPDATE = @USERID " +
-                " WHERE ID_PURCHASE = @ID; ";
+                " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                    command.Parameters.AddWithValue("@BNUM", obj.BillNumber);
+                    command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                    command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@STATUS", obj.Status);
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
                     command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
@@ -130,7 +98,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@TOTALCOST", (decimal)obj.Total_Cost);
                     command.Parameters.AddWithValue("@EXPENSES", (decimal)obj.ExtraExpenses);
                     command.Parameters.AddWithValue("@INSURANCE", (decimal)obj.InsuranceCost);
-                    command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@USERID", obj.User.id);
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
@@ -156,16 +123,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
         }
 
-        public bool DeleteFromDb(int id)
+        public bool DeleteFromDb(int billModel, int billNumber, int billSeries, int supplierId)
         {
             bool status = false;
-            string sql = "DELETE FROM PURCHASES WHERE PURCHASE_ID = @ID ;";
+            string sql = "DELETE FROM PURCHASES WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID ;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("@BMODEL", billModel);
+                    command.Parameters.AddWithValue("@BNUM", billNumber);
+                    command.Parameters.AddWithValue("@BSERIES", billSeries);
+                    command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
@@ -188,17 +158,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
         }
 
-        public Purchases SelectFromDb(int id)
+        public Purchases SelectFromDb(int billModel, int billNumber, int billSeries, int supplierId)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM PURCHASES WHERE PURCHASE_ID = @ID ; ";
+                    string sql = "SELECT * FROM PURCHASES WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID ; ";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@ID", id);
+                        command.Parameters.AddWithValue("@BMODEL", billModel);
+                        command.Parameters.AddWithValue("@BNUM", billNumber);
+                        command.Parameters.AddWithValue("@BSERIES", billSeries);
+                        command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())
@@ -533,18 +506,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "INSERT INTO PURCHASEBILLS ( PURCHASE_ID, BILLNUMBER, BILLMODEL, BILLSERIES, INSTALMENTNUMBER ) "
-                         + " VALUES (@PURCHID, @BNUMBER, @BMODEL, @BSERIES, @BINSTALNUM);";
+            string sql = "INSERT INTO PURCHASEBILLS (BILLNUMBER, BILLMODEL, BILLSERIES, SUPPLIER_ID ) "
+                         + " VALUES (@PURCHID, @BNUMBER, @BMODEL, @BSERIES, @SUPPLIERID);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@PURCHID", purchase.id);
                     command.Parameters.AddWithValue("@BNUMBER", bill.BillNumber);
                     command.Parameters.AddWithValue("@BMODEL", bill.BillModel);
                     command.Parameters.AddWithValue("@BSERIES", bill.BillSeries);
-                    command.Parameters.AddWithValue("@BINSTALNUM", bill.InstalmentNumber);
+                    command.Parameters.AddWithValue("@SUPPLIERID", bill.Supplier.id);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     connection.Close();

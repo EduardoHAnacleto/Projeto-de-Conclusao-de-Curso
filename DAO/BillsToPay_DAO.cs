@@ -84,8 +84,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             bool status = false;
 
             string sql = "UPDATE BILLSTOPAY SET DUEDATE = @DDATE, ISPAID = @IPAID, PAIDDATE = @PDATE, BILLVALUE = @BVALUE, PAYMETHOD_ID = @METHODID, " +
-                " SUPPLIER_ID = @SUPPLIERID, EMISSIONDATE = @EMISSIONDATE, DATE_LAST_UPDATE = @DU " +
-                "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND INSTALMENTNUMBER = @INUMBER ; ";
+                " EMISSIONDATE = @EMISSIONDATE, DATE_LAST_UPDATE = @DU " +
+                "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND INSTALMENTNUMBER = @INUMBER AND SUPPLIER_ID = @SUPPLIERID; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -133,11 +133,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
         }
 
-        public bool DeleteFromDb(int billNumber, int billModel, int billSeries, int instalmentNumber)
+        public bool DeleteFromDb(int billNumber, int billModel, int billSeries, int instalmentNumber, int supplierId)
         {
             bool status = false;
             string sql = "DELETE FROM BILLSTOPAY WHERE BILLNUMBER = @BNUM AND BILLMODEL = @BMODEL AND BILLSERIES = @BSERIES " +
-                "AND INSTALMENTNUMBER = @INUM ;";
+                "AND INSTALMENTNUMBER = @INUM AND SUPPLIER_ID = @SUPPLIERID ;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -147,6 +147,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@BMODEL", billModel);
                     command.Parameters.AddWithValue("@BSERIES", billSeries);
                     command.Parameters.AddWithValue("@INUM", instalmentNumber);
+                    command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
@@ -229,7 +230,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             return null;
         }
 
-        public BillsToPay SelectFromDb(int billNumber, int billModel, int billSeries, int instalmentNumber)
+        public BillsToPay SelectFromDb(int billNumber, int billModel, int billSeries, int instalmentNumber, int supplierId)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -237,13 +238,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 {
                     connection.Open();
                     string sql = "SELECT * FROM BILLSTOPAY WHERE BILLNUMBER = @BNUM AND BILLMODEL = @BMODEL AND BILLSERIES = @BSERIES " +
-                        "AND INSTALMENTNUMBER = @INUM ; ";
+                        "AND INSTALMENTNUMBER = @INUM AND SUPPLIER_ID = @SUPPLIERID ; ";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@BNUM", billNumber);
                         command.Parameters.AddWithValue("BMODEL", billModel);
                         command.Parameters.AddWithValue("BSERIES", billSeries);
                         command.Parameters.AddWithValue("@INUM", instalmentNumber);
+                        command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())

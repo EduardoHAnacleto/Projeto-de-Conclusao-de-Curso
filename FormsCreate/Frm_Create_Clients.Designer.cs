@@ -89,19 +89,19 @@
             // 
             // edt_StateFU
             // 
-            this.edt_StateFU.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_StateFU.Margin = new System.Windows.Forms.Padding(4);
             // 
             // edt_countryAcronym
             // 
-            this.edt_countryAcronym.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_countryAcronym.Margin = new System.Windows.Forms.Padding(4);
             // 
             // edt_city
             // 
-            this.edt_city.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_city.Margin = new System.Windows.Forms.Padding(4);
             // 
             // edt_homeType
             // 
-            this.edt_homeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_homeType.Margin = new System.Windows.Forms.Padding(4);
             // 
             // medt_dob
             // 
@@ -116,9 +116,9 @@
             this.check_LegalClient.AutoSize = true;
             this.check_LegalClient.Location = new System.Drawing.Point(6, 43);
             this.check_LegalClient.Name = "check_LegalClient";
-            this.check_LegalClient.Size = new System.Drawing.Size(52, 17);
+            this.check_LegalClient.Size = new System.Drawing.Size(64, 17);
             this.check_LegalClient.TabIndex = 35;
-            this.check_LegalClient.Text = "Legal";
+            this.check_LegalClient.Text = "Jurídico";
             this.check_LegalClient.UseVisualStyleBackColor = true;
             this.check_LegalClient.CheckedChanged += new System.EventHandler(this.check_LegalClient_CheckedChanged);
             // 
@@ -127,9 +127,9 @@
             this.check_NaturalClient.AutoSize = true;
             this.check_NaturalClient.Location = new System.Drawing.Point(6, 19);
             this.check_NaturalClient.Name = "check_NaturalClient";
-            this.check_NaturalClient.Size = new System.Drawing.Size(60, 17);
+            this.check_NaturalClient.Size = new System.Drawing.Size(55, 17);
             this.check_NaturalClient.TabIndex = 34;
-            this.check_NaturalClient.Text = "Natural";
+            this.check_NaturalClient.Text = "Físico";
             this.check_NaturalClient.UseVisualStyleBackColor = true;
             this.check_NaturalClient.CheckedChanged += new System.EventHandler(this.check_NaturalClient_CheckedChanged);
             // 
@@ -142,16 +142,16 @@
             this.gbox_clientType.Size = new System.Drawing.Size(114, 65);
             this.gbox_clientType.TabIndex = 36;
             this.gbox_clientType.TabStop = false;
-            this.gbox_clientType.Text = "*Client Type";
+            this.gbox_clientType.Text = "* Tipo de Cliente";
             // 
             // Frm_Create_Clients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(672, 379);
             this.Controls.Add(this.gbox_clientType);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Frm_Create_Clients";
-            this.Text = "Create Clients";
+            this.Text = "Criar Clientes";
             this.Controls.SetChildIndex(this.gbox_clientType, 0);
             this.Controls.SetChildIndex(this.gbox_gender, 0);
             this.Controls.SetChildIndex(this.lbl_Name, 0);

@@ -94,7 +94,7 @@
             this.gbox_billInfo.Size = new System.Drawing.Size(193, 128);
             this.gbox_billInfo.TabIndex = 40;
             this.gbox_billInfo.TabStop = false;
-            this.gbox_billInfo.Text = "* Bill Information";
+            this.gbox_billInfo.Text = "* Informação da Parcela";
             // 
             // edt_totalValue
             // 
@@ -126,9 +126,9 @@
             this.lbl_paymentMethod.AutoSize = true;
             this.lbl_paymentMethod.Location = new System.Drawing.Point(3, 75);
             this.lbl_paymentMethod.Name = "lbl_paymentMethod";
-            this.lbl_paymentMethod.Size = new System.Drawing.Size(87, 13);
+            this.lbl_paymentMethod.Size = new System.Drawing.Size(115, 13);
             this.lbl_paymentMethod.TabIndex = 34;
-            this.lbl_paymentMethod.Text = "Payment Method";
+            this.lbl_paymentMethod.Text = "Método de Pagamento";
             // 
             // cbox_payMethod
             // 
@@ -144,18 +144,18 @@
             this.lbl_instalmentNumber.AutoSize = true;
             this.lbl_instalmentNumber.Location = new System.Drawing.Point(3, 20);
             this.lbl_instalmentNumber.Name = "lbl_instalmentNumber";
-            this.lbl_instalmentNumber.Size = new System.Drawing.Size(95, 13);
+            this.lbl_instalmentNumber.Size = new System.Drawing.Size(98, 13);
             this.lbl_instalmentNumber.TabIndex = 29;
-            this.lbl_instalmentNumber.Text = "Instalment Number";
+            this.lbl_instalmentNumber.Text = "Número da Parcela";
             // 
             // lbl_totalValue
             // 
             this.lbl_totalValue.AutoSize = true;
             this.lbl_totalValue.Location = new System.Drawing.Point(107, 21);
             this.lbl_totalValue.Name = "lbl_totalValue";
-            this.lbl_totalValue.Size = new System.Drawing.Size(61, 13);
+            this.lbl_totalValue.Size = new System.Drawing.Size(58, 13);
             this.lbl_totalValue.TabIndex = 28;
-            this.lbl_totalValue.Text = "Total Value";
+            this.lbl_totalValue.Text = "Valor Total";
             // 
             // gbox_danfe
             // 
@@ -170,7 +170,7 @@
             this.gbox_danfe.Size = new System.Drawing.Size(241, 72);
             this.gbox_danfe.TabIndex = 39;
             this.gbox_danfe.TabStop = false;
-            this.gbox_danfe.Text = "* Bill Identification";
+            this.gbox_danfe.Text = "* Informações NFe";
             // 
             // edt_BillModel
             // 
@@ -213,18 +213,18 @@
             this.lbl_serieDanfe.AutoSize = true;
             this.lbl_serieDanfe.Location = new System.Drawing.Point(158, 23);
             this.lbl_serieDanfe.Name = "lbl_serieDanfe";
-            this.lbl_serieDanfe.Size = new System.Drawing.Size(36, 13);
+            this.lbl_serieDanfe.Size = new System.Drawing.Size(31, 13);
             this.lbl_serieDanfe.TabIndex = 2;
-            this.lbl_serieDanfe.Text = "Series";
+            this.lbl_serieDanfe.Text = "Série";
             // 
             // lbl_tipoDanfe
             // 
             this.lbl_tipoDanfe.AutoSize = true;
             this.lbl_tipoDanfe.Location = new System.Drawing.Point(87, 23);
             this.lbl_tipoDanfe.Name = "lbl_tipoDanfe";
-            this.lbl_tipoDanfe.Size = new System.Drawing.Size(36, 13);
+            this.lbl_tipoDanfe.Size = new System.Drawing.Size(42, 13);
             this.lbl_tipoDanfe.TabIndex = 1;
-            this.lbl_tipoDanfe.Text = "Model";
+            this.lbl_tipoDanfe.Text = "Modelo";
             // 
             // lbl_numDanfe
             // 
@@ -233,7 +233,7 @@
             this.lbl_numDanfe.Name = "lbl_numDanfe";
             this.lbl_numDanfe.Size = new System.Drawing.Size(44, 13);
             this.lbl_numDanfe.TabIndex = 0;
-            this.lbl_numDanfe.Text = "Number";
+            this.lbl_numDanfe.Text = "Número";
             // 
             // gbox_supplier
             // 
@@ -247,7 +247,7 @@
             this.gbox_supplier.Size = new System.Drawing.Size(358, 68);
             this.gbox_supplier.TabIndex = 38;
             this.gbox_supplier.TabStop = false;
-            this.gbox_supplier.Text = "* Supplier";
+            this.gbox_supplier.Text = "* Fornecedor";
             // 
             // btn_SearchSupplier
             // 
@@ -255,7 +255,7 @@
             this.btn_SearchSupplier.Name = "btn_SearchSupplier";
             this.btn_SearchSupplier.Size = new System.Drawing.Size(75, 21);
             this.btn_SearchSupplier.TabIndex = 37;
-            this.btn_SearchSupplier.Text = "&Search";
+            this.btn_SearchSupplier.Text = "Bu&scar";
             this.btn_SearchSupplier.UseVisualStyleBackColor = true;
             this.btn_SearchSupplier.Click += new System.EventHandler(this.btn_SearchSupplier_Click);
             // 
@@ -288,7 +288,7 @@
             this.lbl_supplierName.Name = "lbl_supplierName";
             this.lbl_supplierName.Size = new System.Drawing.Size(35, 13);
             this.lbl_supplierName.TabIndex = 19;
-            this.lbl_supplierName.Text = "Name";
+            this.lbl_supplierName.Text = "Nome";
             // 
             // lbl_supplierId
             // 
@@ -310,7 +310,7 @@
             this.gbox_billDates.Size = new System.Drawing.Size(107, 135);
             this.gbox_billDates.TabIndex = 37;
             this.gbox_billDates.TabStop = false;
-            this.gbox_billDates.Text = "* Movement Date";
+            this.gbox_billDates.Text = "* Data de Movimento";
             // 
             // datePicker_paid
             // 
@@ -325,11 +325,11 @@
             // lbl_paidDate
             // 
             this.lbl_paidDate.AutoSize = true;
-            this.lbl_paidDate.Location = new System.Drawing.Point(6, 78);
+            this.lbl_paidDate.Location = new System.Drawing.Point(3, 82);
             this.lbl_paidDate.Name = "lbl_paidDate";
-            this.lbl_paidDate.Size = new System.Drawing.Size(54, 13);
+            this.lbl_paidDate.Size = new System.Drawing.Size(102, 13);
             this.lbl_paidDate.TabIndex = 4;
-            this.lbl_paidDate.Text = "Paid Date";
+            this.lbl_paidDate.Text = "Data de Pagamento";
             this.lbl_paidDate.Visible = false;
             // 
             // lbl_DueDate
@@ -337,9 +337,9 @@
             this.lbl_DueDate.AutoSize = true;
             this.lbl_DueDate.Location = new System.Drawing.Point(6, 25);
             this.lbl_DueDate.Name = "lbl_DueDate";
-            this.lbl_DueDate.Size = new System.Drawing.Size(53, 13);
+            this.lbl_DueDate.Size = new System.Drawing.Size(104, 13);
             this.lbl_DueDate.TabIndex = 3;
-            this.lbl_DueDate.Text = "Due Date";
+            this.lbl_DueDate.Text = "Data de Vencimento";
             // 
             // datePicker_due
             // 
@@ -368,9 +368,9 @@
             this.check_Completed.AutoSize = true;
             this.check_Completed.Location = new System.Drawing.Point(59, 14);
             this.check_Completed.Name = "check_Completed";
-            this.check_Completed.Size = new System.Drawing.Size(76, 17);
+            this.check_Completed.Size = new System.Drawing.Size(73, 17);
             this.check_Completed.TabIndex = 14;
-            this.check_Completed.Text = "Completed";
+            this.check_Completed.Text = "Finalizado";
             this.check_Completed.UseVisualStyleBackColor = true;
             this.check_Completed.CheckedChanged += new System.EventHandler(this.check_Completed_CheckedChanged);
             // 
@@ -379,9 +379,9 @@
             this.check_onHold.AutoSize = true;
             this.check_onHold.Location = new System.Drawing.Point(59, 37);
             this.check_onHold.Name = "check_onHold";
-            this.check_onHold.Size = new System.Drawing.Size(65, 17);
+            this.check_onHold.Size = new System.Drawing.Size(77, 17);
             this.check_onHold.TabIndex = 13;
-            this.check_onHold.Text = "On Hold";
+            this.check_onHold.Text = "Em Espera";
             this.check_onHold.UseVisualStyleBackColor = true;
             this.check_onHold.CheckedChanged += new System.EventHandler(this.check_onHold_CheckedChanged);
             // 
@@ -392,9 +392,9 @@
             this.check_Active.CheckState = System.Windows.Forms.CheckState.Checked;
             this.check_Active.Location = new System.Drawing.Point(6, 14);
             this.check_Active.Name = "check_Active";
-            this.check_Active.Size = new System.Drawing.Size(56, 17);
+            this.check_Active.Size = new System.Drawing.Size(50, 17);
             this.check_Active.TabIndex = 11;
-            this.check_Active.Text = "Active";
+            this.check_Active.Text = "Ativo";
             this.check_Active.UseVisualStyleBackColor = true;
             this.check_Active.CheckedChanged += new System.EventHandler(this.check_Active_CheckedChanged);
             // 
@@ -403,9 +403,9 @@
             this.check_Paid.AutoSize = true;
             this.check_Paid.Location = new System.Drawing.Point(6, 37);
             this.check_Paid.Name = "check_Paid";
-            this.check_Paid.Size = new System.Drawing.Size(47, 17);
+            this.check_Paid.Size = new System.Drawing.Size(51, 17);
             this.check_Paid.TabIndex = 12;
-            this.check_Paid.Text = "Paid";
+            this.check_Paid.Text = "Pago";
             this.check_Paid.UseVisualStyleBackColor = true;
             this.check_Paid.CheckedChanged += new System.EventHandler(this.check_Paid_CheckedChanged);
             // 
@@ -419,7 +419,7 @@
             this.Controls.Add(this.gbox_billDates);
             this.Controls.Add(this.gbox_isPaid);
             this.Name = "Frm_Create_BillsToPay";
-            this.Text = "Create Bills To Pay";
+            this.Text = "Criar Conta à Pagar";
             this.Controls.SetChildIndex(this.gbox_isPaid, 0);
             this.Controls.SetChildIndex(this.gbox_billDates, 0);
             this.Controls.SetChildIndex(this.gbox_supplier, 0);

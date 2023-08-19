@@ -27,9 +27,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_clientId.Controls[0].Visible = false;
             edt_UNCost.Controls[0].Visible = false;
             edt_amount.Controls[0].Visible = false;
-            edt_subtotal.Controls[0].Visible = false;
-            edt_discountPerc.Controls[0].Visible = false;
-            edt_discountCash.Controls[0].Visible = false;
             edt_barCode.Controls[0].Visible = false;
             edt_payConditionDiscount.Controls[0].Visible = false;
             edt_payConditionFees.Controls[0].Visible = false;
@@ -39,7 +36,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_productId.Controls[0].Visible = false;
             edt_UNCost.Controls[0].Visible = false;
             edt_ProdDiscCash.Controls[0].Visible = false;
-            edt_ProdDiscPerc.Controls[0].Visible = false;
             edt_ProdUnValue.Controls[0].Visible = false;
             edt_totalPValue.Controls[0].Visible = false;
             SetUser(user);
@@ -77,8 +73,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_totalPValue.Value = 0;
             edt_amount.Value = 1;
 
-            edt_subtotal.Value = 0;
-            edt_discountPerc.Value = 0;
             edt_totalPValue.Value = 0;
 
             edt_payCondition.Text = string.Empty;
@@ -172,14 +166,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             formClient.Close();
         }
 
-        public bool CheckEqualDGVProduct(int prodId, int amount, decimal discountCash, decimal discountPerc, decimal totalValue)
+        public bool CheckEqualDGVProduct(int prodId, int amount, decimal discountCash, decimal totalValue)
         {
             foreach (DataGridViewRow row in DGV_SaleProducts.Rows)
             {
                 if ((int)row.Cells[0].Value == prodId)
                 {
-                    if ((decimal)row.Cells["ItemDiscountCash"].Value == discountCash &&
-                        (decimal)row.Cells["ItemDiscountPerc"].Value == discountPerc)
+                    if ((decimal)row.Cells["ItemDiscountCash"].Value == discountCash)
                     {
                         row.Cells["QuantityProduct"].Value = (int)row.Cells["QuantityProduct"].Value + amount;
                         row.Cells["ProductTotalValue"].Value = (decimal)row.Cells["ProductTotalValue"].Value + totalValue;
@@ -195,10 +188,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             Products product = GetProduct();
             int amount = (int)edt_amount.Value;
             decimal discountCash = (decimal)edt_ProdDiscCash.Value;
-            decimal discountPerc = (decimal)edt_ProdDiscPerc.Value;
             decimal totalValue = (decimal)edt_totalPValue.Value;
 
-            if (!CheckEqualDGVProduct(product.id, amount, discountCash, discountPerc, totalValue))
+            if (!CheckEqualDGVProduct(product.id, amount, discountCash, totalValue))
             {
                 DGV_SaleProducts.Rows.Add(
                     product.id,
@@ -206,7 +198,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     amount,
                     product.productCost,
                     discountCash,
-                    discountPerc,
                     product.salePrice,
                     totalValue);
             }
@@ -214,7 +205,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             CalculateSubTotal();
         }
 
-        public void UpdateDGVSummary()
+        public void UpdateDGVSummary(decimal subtotal, decimal total)
         {
             if (DGV_SaleSummary.Rows.Count == 0)
             {
@@ -222,10 +213,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
             if (DGV_SaleSummary.Rows.Count == 1)
             {
-                DGV_SaleSummary.Rows[0].Cells["SaleSubTotal"].Value = edt_subtotal.Value;
-                DGV_SaleSummary.Rows[0].Cells["SaleDiscCash"].Value = edt_discountCash.Value;
-                DGV_SaleSummary.Rows[0].Cells["SaleDiscPerc"].Value = edt_discountPerc.Value;
-                DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value = edt_total.Value;
+                DGV_SaleSummary.Rows[0].Cells["SaleSubTotal"].Value = subtotal;
+                DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value = total;
             }
 
         }
@@ -233,29 +222,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         public void CalculateSubTotal() //Percorre a DGV, calculando o valor total de cada item, adicionando no Sub-Total
         {
             decimal subtotal = 0;
+            decimal total = 0;
             if (DGV_SaleProducts.Rows.Count > 0)
             {
                 foreach (DataGridViewRow row in DGV_SaleProducts.Rows)
                 {
                     subtotal += Convert.ToDecimal(row.Cells["ProductTotalValue"].Value);
+                    total -= Convert.ToDecimal(row.Cells["ProductDiscoutCash"].Value);
                 }
-                edt_subtotal.Value = subtotal;
-                UpdateDGVSummary();
+                DGV_SaleSummary.Rows[0].Cells["SaleSubTotal"].Value = subtotal;
+                UpdateDGVSummary(subtotal, total);
             }
             else
             {
-                ClearSummary();
+                UpdateDGVSummary(subtotal,total);
             }
         }
 
-        private void ClearSummary()
-        {
-            edt_subtotal.Value = 0;
-            edt_discountCash.Value = 0;
-            edt_discountPerc.Value = 0;
-            edt_total.Value = 0;
-            UpdateDGVSummary();
-        }
+
 
         public bool CheckProductCamps() //Checa se os campos do produto estão vazios
         {
@@ -338,7 +322,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_UNCost.Value = (decimal)prod.productCost;
             edt_ProdUnValue.Value = (decimal)prod.salePrice;
             CalcTotalProdValue();
-            UpdateDGVSummary();
+            CalculateSubTotal();
         }
 
         private Products SearchItemByName()
@@ -377,14 +361,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
         }
 
-        public void CalculateFinalPrice() //Calcula valor total com desconto % e $
-        {
-            decimal value = 0;
-            value = edt_subtotal.Value - (edt_discountCash.Value);
-            value = value - (value * (edt_discountPerc.Value / 100));
-            edt_total.Value = value;
-        }
-
         public bool ConfirmSale(Sales sale) //To do: Abre form de adicionar condição de pagamento para completar a venda
         {
             PaymentConditions_Controller _pCController = new PaymentConditions_Controller();
@@ -397,16 +373,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                              + obj.conditionName
                              + Environment.NewLine
                              + "Sub-Total : "
-                             + edt_subtotal.Value.ToString()
-                             + Environment.NewLine
-                             + "Discount % : "
-                             + sale.SaleDiscountPerc.ToString()
-                             + Environment.NewLine
-                             + "Discount $ : "
-                             + sale.SaleDiscountCash.ToString()
+                             + DGV_SaleSummary.Rows[0].Cells["SaleSubTotal"].Value.ToString()
                              + Environment.NewLine
                              + "Final Sale Cost : "
-                             + edt_total.Value.ToString()
+                             + DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value.ToString()
                              + Environment.NewLine
                              + "Do you confirm the sale?";
 
@@ -523,21 +493,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             HotkeyPressed(e);
         }
 
-        private void edt_subtotal_ValueChanged(object sender, EventArgs e)
-        {
-            CalculateFinalPrice();
-        }
-
-        private void edt_discountPerc_ValueChanged(object sender, EventArgs e)
-        {
-            CalculateFinalPrice();
-        }
-
-        private void edt_discountCash_ValueChanged(object sender, EventArgs e)
-        {
-            CalculateFinalPrice();
-        }
-
         private void DGV_SaleProducts_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
             CalculateSubTotal();
@@ -546,11 +501,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         private void btn_SearchPayCondition_Click(object sender, EventArgs e)
         {
             SearchPaymentCondition();
-        }
-
-        private void edt_discountPerc_Leave(object sender, EventArgs e)
-        {
-            CalculateFinalPrice();
         }
 
         private void edt_barCode_ValueChanged(object sender, EventArgs e)
@@ -631,14 +581,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             sale.User = this.GetUser();
             sale.Client = this.GetClient();
             sale.CancelDate = null;
-            sale.TotalValue = (double)edt_total.Value;
+            sale.TotalValue = (double)DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value;
             sale.PaymentConditionId = (int)edt_payConditionId.Value;
             sale.CancelDate = null;
 
             sale.SaleItems = this.GetSaleItems(idSale);
             sale.TotalCost = this.GetTotalCost(sale.SaleItems);
-            sale.SaleDiscountPerc = (double)edt_discountPerc.Value;
-            sale.SaleDiscountCash = (double)edt_discountCash.Value;
             sale.TotalItemsQuantity = DGV_SaleProducts.Rows.Count;
 
             return sale;
@@ -762,10 +710,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             SetFormToEdit();
             PopulateUser(sale);
             PopulateClient(sale);
-         //   PopulatePaymentCondition(sale);
+            PopulatePaymentCondition(sale);
             PopulateDGV(sale);
-            PopulateSummary(sale);
             PopulateDate(sale);
+            CalculateSubTotal();
         }
 
         public void PopulateDate(Sales sale)
@@ -777,14 +725,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 lbl_CancelDate.Visible = true;
                 medt_CancelDate.Text = sale.CancelDate.ToString();
             }
-        }
-
-        public void PopulateSummary(Sales sale)
-        {
-            edt_discountPerc.Value = (decimal)sale.SaleDiscountPerc;
-            edt_discountCash.Value = (decimal)sale.SaleDiscountCash;
-            edt_total.Value = (decimal)sale.TotalValue;
-            edt_subtotal.Value = (decimal)(sale.TotalValue + (sale.SaleDiscountCash) + (sale.SaleDiscountPerc * sale.TotalValue));
         }
 
         public void PopulateClient(Sales sale)
@@ -846,8 +786,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             edt_amount.Value = 0;
             edt_barCode.Value = 0;
-            edt_discountCash.Value = 0;
-            edt_discountPerc.Value = 0;
             edt_productId.Value = 0;
             edt_productName.Text = string.Empty;
             edt_UNCost.Value = 0;
@@ -867,8 +805,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             edt_amount.Enabled = true;
             edt_barCode.Enabled = true;
-            edt_discountCash.Enabled = true;
-            edt_discountPerc.Enabled = true;
             edt_productId.Enabled = true;
             edt_productName.Enabled = true;
             edt_UNCost.Enabled = true;
@@ -886,8 +822,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             edt_amount.Enabled = false;
             edt_barCode.Enabled = false;
-            edt_discountCash.Enabled = false;
-            edt_discountPerc.Enabled = false;
             edt_productId.Enabled = false;
             edt_productName.Enabled = false;
             edt_UNCost.Enabled = false;
@@ -913,24 +847,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 Utilities.Msgbox(message, caption, buttons, icon);
                 return false;
             }
-            //else if (edt_payConditionId.Value <= 1)
-            //{
-            //    string message = "Payment Condition must be selected.";
-            //    string caption = "Payment Condition not selected.";
-            //    MessageBoxButtons buttons = MessageBoxButtons.OK;
-            //    MessageBoxIcon icon = MessageBoxIcon.Error;
-            //    Utilities.Msgbox(message, caption, buttons, icon);
-            //    return false;
-            //}
-            else if (edt_subtotal.Value < 0)
+            else if (edt_payConditionId.Value <= 1)
             {
-                string message = "Sub-Total must be 0 or higher.";
-                string caption = "Sub-Total is not valid.";
+                string message = "Payment Condition must be selected.";
+                string caption = "Payment Condition not selected.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
                 return false;
             }
+            //else if (edt_subtotal.Value < 0)
+            //{
+            //    string message = "Sub-Total must be 0 or higher.";
+            //    string caption = "Sub-Total is not valid.";
+            //    MessageBoxButtons buttons = MessageBoxButtons.OK;
+            //    MessageBoxIcon icon = MessageBoxIcon.Error;
+            //    Utilities.Msgbox(message, caption, buttons, icon);
+            //    return false;
+            //}
             if (edt_clientId.Value <= 1)
             {
                 PaymentConditions_Controller pCController = new PaymentConditions_Controller();
@@ -956,7 +890,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_amount.Value = 1;
             edt_UNCost.Value = 0;
             edt_ProdDiscCash.Value = 0;
-            edt_ProdDiscPerc.Value = 0;
             edt_ProdUnValue.Value = 0;
             edt_totalPValue.Value = 0;
         }
@@ -993,7 +926,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     decimal discountPerc = 0;
                     decimal totalValue = (decimal)prod.salePrice;
 
-                    if (!CheckEqualDGVProduct(product.id, amount, discountCash, discountPerc, totalValue))
+                    if (!CheckEqualDGVProduct(product.id, amount, discountCash, totalValue))
                     {
                         DGV_SaleProducts.Rows.Add(
                             prod.id,
@@ -1001,7 +934,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                             amount,
                             prod.productCost,
                             discountCash,
-                            discountPerc,
                             prod.salePrice,
                             totalValue);
                     }
@@ -1098,8 +1030,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             sale.CancelDate = DateTime.Now;
             sale.User = user;
 
-            sale.SaleDiscountCash = 0;
-            sale.SaleDiscountPerc = 0;
             sale.TotalValue = 4036;
             sale.TotalCost = 1500.9 + 1500.9 + 8 + 8 + 8;
             sale.TotalItemsQuantity = 5;

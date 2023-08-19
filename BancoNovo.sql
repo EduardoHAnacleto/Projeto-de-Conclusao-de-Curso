@@ -241,7 +241,6 @@
         total_Items_Quantity int not null,      
         sale_cancel_date datetime DEFAULT NULL,
         date_creation datetime not null,
-        date_last_update datetime not null,
     );
 
 		    create table BILLSTORECEIVE(
@@ -289,7 +288,9 @@
     );
 
         create table PURCHASES(
-        id_purchase int identity(2,1) primary key,
+        billModel int not null,
+        billNumber int not null,
+        billSeries int not null,
         emissionDate date not null,
         arrivalDate date,
         freightCost decimal,
@@ -300,11 +301,11 @@
         purchase_InsuranceCost decimal,
         cancelledDate date,
         paidDate date,
-
         supplier_id int not null references SUPPLIERS(id_supplier),
         user_id int not null references USERS (id_user),
         date_creation datetime not null,
         date_last_update datetime not null,
+        primary key(billModel, billNumber, billSeries, supplier_id)
     );
 
 	    create table BILLSTOPAY(
@@ -321,30 +322,31 @@
         supplier_id int not null references Suppliers(id_supplier),
         date_creation datetime not null,
         date_last_update datetime not null,
-        primary key (billNumber, billModel, billSeries, instalmentNumber)
+        primary key (billNumber, billModel, billSeries, instalmentNumber, supplier_id)
         );
 
         CREATE TABLE PURCHASEBILLS (
-        purchase_id int not null references PURCHASES(id_purchase),
         billNumber int not null,
         billModel int not null,
         billSeries int not null,
-        instalmentNumber int not null,
-        PRIMARY KEY (purchase_id, billNumber, billModel, billSeries, instalmentNumber),
-        FOREIGN KEY (billNumber, billModel, billSeries, instalmentNumber)
-        REFERENCES BILLSTOPAY (billNumber, billModel, billSeries, instalmentNumber)
+        supplier_id int not null references SUPPLIERS(id_supplier),
+        PRIMARY KEY (purchase_id, billNumber, billModel, billSeries, id_supplier),
+        FOREIGN KEY (billNumber, billModel, billSeries)
+        REFERENCES BILLSTOPAY (billNumber, billModel, billSeries)
         );
 
     	create table PURCHASEITEMS(
-        ID_PURCHASE int not null references PURCHASES(ID_PURCHASE),
+        billModel int not null references PURCHASES(billModel),
+        billNumber int not null references PURCHASES(billNumber),
+        billSeries int not null references PURCHASES(billSeries),
+        supplier_id int not null references SUPPLIERS(id_supplier),
         PRODUCT_ID int not null references Products(id_product),
         QUANTITY int not null,
         PRODUCT_COST decimal not null,
-        TOTAL_COST decimal not null,
         PURCHASE_PERCENTAGE decimal not null,
         DISCOUNT_CASH decimal not null,
         WEIGHTED_AVG decimal not null,
         DATE_CREATION date not null,
-        DATE_LAST_UPDATE date not null,
-        primary key (ID_PURCHASE, PRODUCT_ID)
+        DATE_CANCELLED date,
+        primary key (billModel, billNumber, billSeries, supplier_id, PRODUCT_ID)
     );

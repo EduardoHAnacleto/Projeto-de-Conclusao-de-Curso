@@ -31,9 +31,9 @@
             this.lbl_PaymentMethod = new System.Windows.Forms.Label();
             this.edt_paymentMethod = new System.Windows.Forms.TextBox();
             this.DGV_PayMethods = new System.Windows.Forms.DataGridView();
+            this.btn_Search = new System.Windows.Forms.Button();
             this.IDPayMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Payment_Method = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_Search = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PayMethods)).BeginInit();
             this.SuspendLayout();
@@ -48,9 +48,9 @@
             this.lbl_PaymentMethod.AutoSize = true;
             this.lbl_PaymentMethod.Location = new System.Drawing.Point(47, 7);
             this.lbl_PaymentMethod.Name = "lbl_PaymentMethod";
-            this.lbl_PaymentMethod.Size = new System.Drawing.Size(87, 13);
+            this.lbl_PaymentMethod.Size = new System.Drawing.Size(115, 13);
             this.lbl_PaymentMethod.TabIndex = 18;
-            this.lbl_PaymentMethod.Text = "Payment Method";
+            this.lbl_PaymentMethod.Text = "Método de Pagamento";
             // 
             // edt_paymentMethod
             // 
@@ -81,6 +81,16 @@
             this.DGV_PayMethods.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayMethods_CellContentClick);
             this.DGV_PayMethods.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayMethods_CellContentDoubleClick);
             // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(320, 23);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(75, 20);
+            this.btn_Search.TabIndex = 20;
+            this.btn_Search.Text = "Bu&scar";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            // 
             // IDPayMethod
             // 
             this.IDPayMethod.HeaderText = "ID";
@@ -92,20 +102,10 @@
             // Payment_Method
             // 
             this.Payment_Method.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.Payment_Method.HeaderText = "Payment Method";
+            this.Payment_Method.HeaderText = "Método de Pagamento";
             this.Payment_Method.MinimumWidth = 6;
             this.Payment_Method.Name = "Payment_Method";
             this.Payment_Method.ReadOnly = true;
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Location = new System.Drawing.Point(320, 23);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(75, 20);
-            this.btn_Search.TabIndex = 20;
-            this.btn_Search.Text = "&Search";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
             // Frm_Find_PaymentMethods
             // 
@@ -117,7 +117,7 @@
             this.Controls.Add(this.edt_paymentMethod);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Frm_Find_PaymentMethods";
-            this.Text = "Find Payment Method";
+            this.Text = "Buscar Métodos de Pagamento";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_New, 0);

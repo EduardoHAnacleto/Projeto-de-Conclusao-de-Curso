@@ -51,9 +51,9 @@
             this.lbl_phoneClassification.AutoSize = true;
             this.lbl_phoneClassification.Location = new System.Drawing.Point(54, 10);
             this.lbl_phoneClassification.Name = "lbl_phoneClassification";
-            this.lbl_phoneClassification.Size = new System.Drawing.Size(105, 13);
+            this.lbl_phoneClassification.Size = new System.Drawing.Size(136, 13);
             this.lbl_phoneClassification.TabIndex = 16;
-            this.lbl_phoneClassification.Text = "*Phone classification";
+            this.lbl_phoneClassification.Text = "* Classificação de Telefone";
             // 
             // edt_phoneClassification
             // 
@@ -70,9 +70,9 @@
             this.ClientSize = new System.Drawing.Size(672, 379);
             this.Controls.Add(this.lbl_phoneClassification);
             this.Controls.Add(this.edt_phoneClassification);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_PhoneClassifications";
-            this.Text = "Create Phone Classification";
+            this.Text = "Criar Classificação de Telefone";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);

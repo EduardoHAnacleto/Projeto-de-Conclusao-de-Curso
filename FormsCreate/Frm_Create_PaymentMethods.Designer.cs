@@ -51,9 +51,9 @@
             this.lbl_PaymentMethod.AutoSize = true;
             this.lbl_PaymentMethod.Location = new System.Drawing.Point(56, 8);
             this.lbl_PaymentMethod.Name = "lbl_PaymentMethod";
-            this.lbl_PaymentMethod.Size = new System.Drawing.Size(91, 13);
+            this.lbl_PaymentMethod.Size = new System.Drawing.Size(122, 13);
             this.lbl_PaymentMethod.TabIndex = 16;
-            this.lbl_PaymentMethod.Text = "*Payment Method";
+            this.lbl_PaymentMethod.Text = "* Método de Pagamento";
             // 
             // edt_paymentMethod
             // 
@@ -70,9 +70,9 @@
             this.ClientSize = new System.Drawing.Size(672, 379);
             this.Controls.Add(this.lbl_PaymentMethod);
             this.Controls.Add(this.edt_paymentMethod);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_PaymentMethods";
-            this.Text = "Create Payment Methods";
+            this.Text = "Criar Método de Pagamento";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);

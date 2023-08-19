@@ -100,7 +100,7 @@
             this.btn_search.Name = "btn_search";
             this.btn_search.Size = new System.Drawing.Size(75, 20);
             this.btn_search.TabIndex = 11;
-            this.btn_search.Text = "&Search";
+            this.btn_search.Text = "Bu&scar";
             this.btn_search.UseVisualStyleBackColor = true;
             this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
             // 
@@ -131,59 +131,59 @@
             this.lbl_billNumber.AutoSize = true;
             this.lbl_billNumber.Location = new System.Drawing.Point(54, 7);
             this.lbl_billNumber.Name = "lbl_billNumber";
-            this.lbl_billNumber.Size = new System.Drawing.Size(60, 13);
+            this.lbl_billNumber.Size = new System.Drawing.Size(44, 13);
             this.lbl_billNumber.TabIndex = 13;
-            this.lbl_billNumber.Text = "Bill Number";
+            this.lbl_billNumber.Text = "Número";
             // 
             // lbl_billModel
             // 
             this.lbl_billModel.AutoSize = true;
             this.lbl_billModel.Location = new System.Drawing.Point(130, 7);
             this.lbl_billModel.Name = "lbl_billModel";
-            this.lbl_billModel.Size = new System.Drawing.Size(52, 13);
+            this.lbl_billModel.Size = new System.Drawing.Size(42, 13);
             this.lbl_billModel.TabIndex = 14;
-            this.lbl_billModel.Text = "Bill Model";
+            this.lbl_billModel.Text = "Modelo";
             // 
             // lbl_billSeries
             // 
             this.lbl_billSeries.AutoSize = true;
             this.lbl_billSeries.Location = new System.Drawing.Point(203, 7);
             this.lbl_billSeries.Name = "lbl_billSeries";
-            this.lbl_billSeries.Size = new System.Drawing.Size(52, 13);
+            this.lbl_billSeries.Size = new System.Drawing.Size(31, 13);
             this.lbl_billSeries.TabIndex = 15;
-            this.lbl_billSeries.Text = "Bill Series";
+            this.lbl_billSeries.Text = "Série";
             // 
             // SupplierId
             // 
-            this.SupplierId.HeaderText = "Supplier ID";
+            this.SupplierId.HeaderText = "ID Fornecedor";
             this.SupplierId.Name = "SupplierId";
             this.SupplierId.ReadOnly = true;
             this.SupplierId.Width = 65;
             // 
             // BillNumber
             // 
-            this.BillNumber.HeaderText = "Number";
+            this.BillNumber.HeaderText = "Número";
             this.BillNumber.Name = "BillNumber";
             this.BillNumber.ReadOnly = true;
             this.BillNumber.Width = 55;
             // 
             // billModel
             // 
-            this.billModel.HeaderText = "Model";
+            this.billModel.HeaderText = "Modelo";
             this.billModel.Name = "billModel";
             this.billModel.ReadOnly = true;
             this.billModel.Width = 55;
             // 
             // billSeries
             // 
-            this.billSeries.HeaderText = "Series";
+            this.billSeries.HeaderText = "Série";
             this.billSeries.Name = "billSeries";
             this.billSeries.ReadOnly = true;
             this.billSeries.Width = 55;
             // 
             // InstalmentNumber
             // 
-            this.InstalmentNumber.HeaderText = "Instalment Number";
+            this.InstalmentNumber.HeaderText = "Nº da Parcela";
             this.InstalmentNumber.Name = "InstalmentNumber";
             this.InstalmentNumber.ReadOnly = true;
             this.InstalmentNumber.Width = 70;
@@ -191,7 +191,7 @@
             // dueDate
             // 
             this.dueDate.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.dueDate.HeaderText = "Due Date";
+            this.dueDate.HeaderText = "Data de Vencimento";
             this.dueDate.Name = "dueDate";
             this.dueDate.ReadOnly = true;
             // 
@@ -215,6 +215,7 @@
             this.Controls.Add(this.edt_billModel);
             this.Controls.Add(this.edt_billNumber);
             this.Name = "Frm_Find_BillsToPay";
+            this.Text = "Buscar Compras à Pagar";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_New, 0);

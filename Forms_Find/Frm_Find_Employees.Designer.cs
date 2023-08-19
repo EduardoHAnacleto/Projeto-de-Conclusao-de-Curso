@@ -51,7 +51,7 @@
             this.ClientSize = new System.Drawing.Size(600, 366);
             this.Margin = new System.Windows.Forms.Padding(4, 2, 4, 2);
             this.Name = "Frm_Find_Employees";
-            this.Text = "Find Employees";
+            this.Text = "Buscar Funcionários";
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();

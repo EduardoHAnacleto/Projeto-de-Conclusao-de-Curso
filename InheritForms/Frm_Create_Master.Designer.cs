@@ -59,7 +59,7 @@
             // lbl_LastUpdate
             // 
             this.lbl_LastUpdate.AutoSize = true;
-            this.lbl_LastUpdate.Location = new System.Drawing.Point(81, 29);
+            this.lbl_LastUpdate.Location = new System.Drawing.Point(99, 29);
             this.lbl_LastUpdate.Name = "lbl_LastUpdate";
             this.lbl_LastUpdate.Size = new System.Drawing.Size(69, 13);
             this.lbl_LastUpdate.TabIndex = 8;
@@ -68,7 +68,7 @@
             // lbl_CreationDate
             // 
             this.lbl_CreationDate.AutoSize = true;
-            this.lbl_CreationDate.Location = new System.Drawing.Point(81, 16);
+            this.lbl_CreationDate.Location = new System.Drawing.Point(99, 16);
             this.lbl_CreationDate.Name = "lbl_CreationDate";
             this.lbl_CreationDate.Size = new System.Drawing.Size(69, 13);
             this.lbl_CreationDate.TabIndex = 2;
@@ -79,18 +79,18 @@
             this.lbl_Sign_LastUpdate.AutoSize = true;
             this.lbl_Sign_LastUpdate.Location = new System.Drawing.Point(6, 29);
             this.lbl_Sign_LastUpdate.Name = "lbl_Sign_LastUpdate";
-            this.lbl_Sign_LastUpdate.Size = new System.Drawing.Size(69, 13);
+            this.lbl_Sign_LastUpdate.Size = new System.Drawing.Size(90, 13);
             this.lbl_Sign_LastUpdate.TabIndex = 1;
-            this.lbl_Sign_LastUpdate.Text = "Last update :";
+            this.lbl_Sign_LastUpdate.Text = "Última Alteração :";
             // 
             // lbl_Sign_creationDate
             // 
             this.lbl_Sign_creationDate.AutoSize = true;
             this.lbl_Sign_creationDate.Location = new System.Drawing.Point(6, 16);
             this.lbl_Sign_creationDate.Name = "lbl_Sign_creationDate";
-            this.lbl_Sign_creationDate.Size = new System.Drawing.Size(76, 13);
+            this.lbl_Sign_creationDate.Size = new System.Drawing.Size(90, 13);
             this.lbl_Sign_creationDate.TabIndex = 0;
-            this.lbl_Sign_creationDate.Text = "Creation date :";
+            this.lbl_Sign_creationDate.Text = "Data de Criação :";
             // 
             // btn_Edit
             // 
@@ -100,7 +100,7 @@
             this.btn_Edit.Name = "btn_Edit";
             this.btn_Edit.Size = new System.Drawing.Size(56, 19);
             this.btn_Edit.TabIndex = 13;
-            this.btn_Edit.Text = "E&dit";
+            this.btn_Edit.Text = "Alt&erar";
             this.btn_Edit.UseVisualStyleBackColor = true;
             this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 
@@ -112,7 +112,7 @@
             this.btn_SelectDelete.Name = "btn_SelectDelete";
             this.btn_SelectDelete.Size = new System.Drawing.Size(56, 19);
             this.btn_SelectDelete.TabIndex = 12;
-            this.btn_SelectDelete.Text = "&Delete";
+            this.btn_SelectDelete.Text = "E&xcluir";
             this.btn_SelectDelete.UseVisualStyleBackColor = true;
             this.btn_SelectDelete.Click += new System.EventHandler(this.btn_SelectDelete_Click);
             // 
@@ -123,7 +123,7 @@
             this.btn_NewSave.Name = "btn_NewSave";
             this.btn_NewSave.Size = new System.Drawing.Size(56, 19);
             this.btn_NewSave.TabIndex = 10;
-            this.btn_NewSave.Text = "&Save";
+            this.btn_NewSave.Text = "&Salvar";
             this.btn_NewSave.UseVisualStyleBackColor = true;
             this.btn_NewSave.Click += new System.EventHandler(this.btn_NewSave_Click);
             // 
@@ -134,7 +134,7 @@
             this.btn_exit.Name = "btn_exit";
             this.btn_exit.Size = new System.Drawing.Size(56, 19);
             this.btn_exit.TabIndex = 9;
-            this.btn_exit.Text = "E&xit";
+            this.btn_exit.Text = "Sai&r";
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
@@ -161,9 +161,9 @@
             this.lbl_requiredSymbol.AutoSize = true;
             this.lbl_requiredSymbol.Location = new System.Drawing.Point(192, 357);
             this.lbl_requiredSymbol.Name = "lbl_requiredSymbol";
-            this.lbl_requiredSymbol.Size = new System.Drawing.Size(108, 13);
+            this.lbl_requiredSymbol.Size = new System.Drawing.Size(112, 13);
             this.lbl_requiredSymbol.TabIndex = 16;
-            this.lbl_requiredSymbol.Text = "* Camps are required.";
+            this.lbl_requiredSymbol.Text = "* Campos obrigatórios.";
             // 
             // Frm_Create_Master
             // 

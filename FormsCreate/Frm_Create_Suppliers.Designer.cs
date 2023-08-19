@@ -89,19 +89,19 @@
             // 
             // edt_StateFU
             // 
-            this.edt_StateFU.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_StateFU.Margin = new System.Windows.Forms.Padding(4);
             // 
             // edt_countryAcronym
             // 
-            this.edt_countryAcronym.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_countryAcronym.Margin = new System.Windows.Forms.Padding(4);
             // 
             // edt_city
             // 
-            this.edt_city.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_city.Margin = new System.Windows.Forms.Padding(4);
             // 
             // edt_homeType
             // 
-            this.edt_homeType.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.edt_homeType.Margin = new System.Windows.Forms.Padding(4);
             // 
             // edt_stateInscription
             // 
@@ -116,9 +116,9 @@
             this.lbl_stateInscription.AutoSize = true;
             this.lbl_stateInscription.Location = new System.Drawing.Point(370, 8);
             this.lbl_stateInscription.Name = "lbl_stateInscription";
-            this.lbl_stateInscription.Size = new System.Drawing.Size(87, 13);
+            this.lbl_stateInscription.Size = new System.Drawing.Size(101, 13);
             this.lbl_stateInscription.TabIndex = 34;
-            this.lbl_stateInscription.Text = "*State Inscription";
+            this.lbl_stateInscription.Text = "* Inscrição Estadual";
             // 
             // edt_socialReason
             // 
@@ -133,9 +133,9 @@
             this.lbl_socialReason.AutoSize = true;
             this.lbl_socialReason.Location = new System.Drawing.Point(238, 59);
             this.lbl_socialReason.Name = "lbl_socialReason";
-            this.lbl_socialReason.Size = new System.Drawing.Size(76, 13);
+            this.lbl_socialReason.Size = new System.Drawing.Size(70, 13);
             this.lbl_socialReason.TabIndex = 36;
-            this.lbl_socialReason.Text = "Social Reason";
+            this.lbl_socialReason.Text = "Razão Social";
             // 
             // Frm_Create_Suppliers
             // 
@@ -145,7 +145,7 @@
             this.Controls.Add(this.edt_socialReason);
             this.Controls.Add(this.lbl_stateInscription);
             this.Controls.Add(this.edt_stateInscription);
-            this.Margin = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Frm_Create_Suppliers";
             this.Text = "Create Supplier";
             this.Controls.SetChildIndex(this.lbl_id, 0);

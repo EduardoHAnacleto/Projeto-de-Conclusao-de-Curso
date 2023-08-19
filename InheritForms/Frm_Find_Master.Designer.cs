@@ -53,7 +53,7 @@
             this.btn_exit.Name = "btn_exit";
             this.btn_exit.Size = new System.Drawing.Size(56, 19);
             this.btn_exit.TabIndex = 4;
-            this.btn_exit.Text = "E&xit";
+            this.btn_exit.Text = "Sai&r";
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
             // 
@@ -64,7 +64,7 @@
             this.btn_New.Name = "btn_New";
             this.btn_New.Size = new System.Drawing.Size(56, 19);
             this.btn_New.TabIndex = 5;
-            this.btn_New.Text = "&New";
+            this.btn_New.Text = "&Novo";
             this.btn_New.UseVisualStyleBackColor = true;
             this.btn_New.Click += new System.EventHandler(this.btn_New_Click);
             // 
@@ -75,7 +75,7 @@
             this.btn_Select.Name = "btn_Select";
             this.btn_Select.Size = new System.Drawing.Size(56, 19);
             this.btn_Select.TabIndex = 3;
-            this.btn_Select.Text = "&Select";
+            this.btn_Select.Text = "&Selecionar";
             this.btn_Select.UseVisualStyleBackColor = true;
             this.btn_Select.Click += new System.EventHandler(this.btn_Select_Click);
             // 
