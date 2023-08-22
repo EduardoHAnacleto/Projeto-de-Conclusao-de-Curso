@@ -380,5 +380,43 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             return dt;
         }
+
+        public bool UpdatePriceNStockDb(int prodId, int stock, decimal prodCost)
+        {
+            bool status = false;
+
+            string sql = "UPDATE PRODUCTS SET STOCK = STOCK + @STOCK, PRODUCT_COST = @PCOST " +
+                "WHERE ID_PRODUCT = @ID ; ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", prodId);
+                    command.Parameters.AddWithValue("@STOCK", stock);
+                    command.Parameters.AddWithValue("@PCOST", prodCost);
+
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Register altered with success!");
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
     }
 }

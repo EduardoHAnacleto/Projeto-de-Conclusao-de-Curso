@@ -896,12 +896,13 @@
             this.DGV_SaleSummary.AllowUserToDeleteRows = false;
             this.DGV_SaleSummary.AllowUserToResizeColumns = false;
             this.DGV_SaleSummary.AllowUserToResizeRows = false;
+            this.DGV_SaleSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_SaleSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_SaleSummary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SaleSubTotal,
             this.SaleTotal});
             this.DGV_SaleSummary.Enabled = false;
-            this.DGV_SaleSummary.Location = new System.Drawing.Point(978, 452);
+            this.DGV_SaleSummary.Location = new System.Drawing.Point(978, 16);
             this.DGV_SaleSummary.MultiSelect = false;
             this.DGV_SaleSummary.Name = "DGV_SaleSummary";
             this.DGV_SaleSummary.ReadOnly = true;

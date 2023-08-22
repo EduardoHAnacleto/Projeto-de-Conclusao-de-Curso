@@ -530,7 +530,7 @@
             this.edt_transportFee.DecimalPlaces = 2;
             this.edt_transportFee.Location = new System.Drawing.Point(124, 41);
             this.edt_transportFee.Name = "edt_transportFee";
-            this.edt_transportFee.Size = new System.Drawing.Size(120, 20);
+            this.edt_transportFee.Size = new System.Drawing.Size(84, 20);
             this.edt_transportFee.TabIndex = 32;
             // 
             // lbl_transportFee
@@ -567,16 +567,16 @@
             // lbl_extraExpenses
             // 
             this.lbl_extraExpenses.AutoSize = true;
-            this.lbl_extraExpenses.Location = new System.Drawing.Point(257, 25);
+            this.lbl_extraExpenses.Location = new System.Drawing.Point(213, 25);
             this.lbl_extraExpenses.Name = "lbl_extraExpenses";
-            this.lbl_extraExpenses.Size = new System.Drawing.Size(91, 13);
+            this.lbl_extraExpenses.Size = new System.Drawing.Size(90, 13);
             this.lbl_extraExpenses.TabIndex = 38;
-            this.lbl_extraExpenses.Text = "Gastos Adicionais";
+            this.lbl_extraExpenses.Text = "Custos Adicionais";
             // 
             // edt_extraExpenses
             // 
             this.edt_extraExpenses.DecimalPlaces = 2;
-            this.edt_extraExpenses.Location = new System.Drawing.Point(260, 41);
+            this.edt_extraExpenses.Location = new System.Drawing.Point(216, 41);
             this.edt_extraExpenses.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -589,7 +589,7 @@
             // edt_insurance
             // 
             this.edt_insurance.DecimalPlaces = 2;
-            this.edt_insurance.Location = new System.Drawing.Point(352, 41);
+            this.edt_insurance.Location = new System.Drawing.Point(308, 41);
             this.edt_insurance.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -602,7 +602,7 @@
             // lbl_insurance
             // 
             this.lbl_insurance.AutoSize = true;
-            this.lbl_insurance.Location = new System.Drawing.Point(349, 25);
+            this.lbl_insurance.Location = new System.Drawing.Point(305, 25);
             this.lbl_insurance.Name = "lbl_insurance";
             this.lbl_insurance.Size = new System.Drawing.Size(41, 13);
             this.lbl_insurance.TabIndex = 41;

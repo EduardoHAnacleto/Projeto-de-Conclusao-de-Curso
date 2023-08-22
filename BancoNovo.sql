@@ -296,8 +296,6 @@
         freightCost decimal,
         purchase_TotalCost decimal not null,
         purchase_ExtraExpenses decimal,
-        purchase_DiscountCash decimal,
-        purchase_DiscountPerc decimal,
         purchase_InsuranceCost decimal,
         cancelledDate date,
         paidDate date,

@@ -216,6 +216,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     item.BillSeriesId = purchase.BillSeries;
                                     item.SupplierId = purchase.Supplier.id;
                                     status = _pIController.SaveItem(item);
+                                    status = _pController.UpdatePriceNStock(item.Product.id, item.Quantity, item.WeightedCostAverage);
                                     if (!status)
                                     {
                                         break;
@@ -233,7 +234,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 if (status)
                                 {
                                     if (ConnectPurchaseBill(billsToPay, purchase))
-                                    {
+                                    {                                      
                                         Populated(false);
                                     }
                                 }

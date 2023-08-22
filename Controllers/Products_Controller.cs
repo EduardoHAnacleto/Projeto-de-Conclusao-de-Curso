@@ -65,7 +65,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _productsDAO.NewId();
         }
-
+        public bool UpdatePriceNStock(int prodId, int stock, decimal prodCost)
+        {
+            return _productsDAO.UpdatePriceNStockDb(prodId, stock, prodCost);
+        }
+        
 
     }
 }
