@@ -51,6 +51,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private readonly Purchases_Controller _controller = new Purchases_Controller();
         private readonly PurchaseItems_Controller _pIController = new PurchaseItems_Controller();
         private Purchases BackupPurchase = null;
+        private bool ValidatedBill = false;
 
         public void NewFormSearchProduct() //Abre form para encontrar e levar PRODUTO
         {
@@ -141,6 +142,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public void AddProductToDGV() 
         {
+            if (!ValidatedBill)
+            {
+                ValidateBill();
+            }
             Products product = GetProduct();
             int amount = (int)edt_prodQtd.Value;
             decimal purchPerc = 0; 
@@ -178,11 +183,42 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
+        private void ValidateBill()
+        {
+            if (!ValidatedBill)
+            {
+                int bNum = (int)edt_billNumber.Value;
+                int bMod = (int)edt_billModel.Value;
+                int bSer = (int)edt_billSeries.Value;
+                int supId = (int)edt_supplierId.Value;
+                if (_controller.FindItemId(bMod, bNum, bSer, supId) != null )
+                {
+                    ValidatedBill = true;
+                }
+            }
+            if (!ValidatedBill)
+            {
+                gbox_billInfo.Enabled = false;
+                gbox_supplier.Enabled = false;
+            }
+            else
+            {
+                string message = "Nota já cadastrada.";
+                string caption = "Nota já cadastrada.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                gbox_billInfo.Focus();
+            }
+
+        }
+
         private void btn_AddProduct_Click(object sender, EventArgs e)
         {
             if (edt_prodId.Value >= 1)
             {
                 AddProductToDGV();
+                SetSummary();
             }
         }
 
@@ -233,10 +269,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 }
                                 if (status)
                                 {
-                                    if (ConnectPurchaseBill(billsToPay, purchase))
-                                    {                                      
-                                        Populated(false);
-                                    }
+                                    Populated(false);
                                 }
                             }
                         }
@@ -256,16 +289,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     throw new Exception(ex.Message);
                 }
             }
-        }
-
-        private bool ConnectPurchaseBill(List<BillsToPay> billList, Purchases purchase)
-        {
-            bool status = false;
-            foreach (BillsToPay bill in billList)
-            {
-                status = _controller.ConnectPurchaseBill(bill, purchase);
-            }
-            return status;
         }
 
 
@@ -568,9 +591,79 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 {
                     edt_payCondName.Text = payCondition.conditionName;
                     edt_payCondId.Value = (decimal)payCondition.id;
+                    SetBillInstalmentsToDGV(payCondition);
                 }
             }
             formPayCondition.Close();
+        }
+
+        public void SetBillInstalmentsToDGV(PaymentConditions payCond) //OK -Cria DataTable, chama Controller para trazer o DataTable e colocar na DGV como DataSource, linka db com DGV
+        {
+            DGV_Instalments.Rows.Clear();
+            decimal totalCost = (decimal)DGV_PurchSummary.Rows[0].Cells["PurchTotal"].Value;
+            foreach (BillsInstalments bill in payCond.BillsInstalments)
+            {
+                DGV_Instalments.Rows.Add(
+                    bill.InstalmentNumber.ToString(),
+                    bill.TotalDays.ToString(),
+                    bill.ValuePercentage.ToString(),
+                    bill.PaymentMethod.paymentMethod,
+                    totalCost/bill.InstalmentNumber
+                    );
+            }
+        }
+
+        private void btn_removeItem_Click(object sender, EventArgs e)
+        {
+            RemoveItem();
+            SetSummary();
+        }
+
+        public void RemoveItem()
+        {
+            if (DGV_PurchasesProducts.Rows.Count > 0)
+            {
+                DGV_PurchasesProducts.Rows.Remove(DGV_PurchasesProducts.SelectedRows[0]);
+            }
+            if (DGV_PurchasesProducts.Rows.Count == 0)
+            {
+                gbox_billInfo.Enabled = true;
+                gbox_supplier.Enabled = true;
+            }
+        }
+
+        private void SetSummary()
+        {
+            DGV_PurchSummary.Rows.Clear();
+            decimal subTotal = 0;
+            decimal total = 0;
+            decimal extra = edt_extraExpenses.Value;
+            decimal insur = edt_insurance.Value;
+            decimal transFee = edt_transportFee.Value;
+            foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
+            {
+                subTotal += Convert.ToDecimal(row.Cells["ProdQtd"].Value) * Convert.ToDecimal(row.Cells["ProdNewBaseUnCost"].Value);
+            }
+            total = subTotal + extra + insur + transFee;
+            DGV_PurchSummary.Rows.Add(
+                subTotal,
+                total
+                );
+        }
+
+        private void edt_transportFee_ValueChanged(object sender, EventArgs e)
+        {
+            SetSummary();
+        }
+
+        private void edt_extraExpenses_ValueChanged(object sender, EventArgs e)
+        {
+            SetSummary();
+        }
+
+        private void edt_insurance_ValueChanged(object sender, EventArgs e)
+        {
+            SetSummary();
         }
     }
 }

@@ -177,8 +177,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                             {
                                 Purchases obj = new Purchases()
                                 {
-                                    id = Convert.ToInt32(reader["id_purchase"]),
-                                    Status = Convert.ToInt32(reader["purchaseStatus"]),
+                                    BillModel = Convert.ToInt32(reader["billModel"]),
+                                    BillNumber = Convert.ToInt32(reader["billNumber"]),
+                                    BillSeries = Convert.ToInt32(reader["billSeries"]),
+                                    CancelledDate = null,
                                     EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                     ArrivalDate = Convert.ToDateTime(reader["arrivalDate"]),
                                     Freight_Cost = Convert.ToDouble(reader["freightCost"]),
@@ -189,6 +191,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     PurchasedItems = _purchaseItemsController.FindItemId(billModel, billNumber, billSeries, supplierId),
                                     Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                 };
+                                if (reader["cancelledDate"].ToString() != string.Empty) {
+                                    obj.CancelledDate = Convert.ToDateTime(reader["cancelledDate"]);
+                                }
                                 return obj;
                             }
                         }
