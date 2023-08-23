@@ -182,6 +182,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             formCountry.Populated(true);
             formCountry.PopulateCamps(GetObject());
             formCountry.ShowDialog();
+            this.SetDataSourceToDGV();
         }
 
         private void DGV_Countries_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)

@@ -128,6 +128,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 }
                 formMethods.Close();
             }
+            PopulateComboBox();
         }
 
         private void btn_SearchMethod_Click(object sender, EventArgs e)

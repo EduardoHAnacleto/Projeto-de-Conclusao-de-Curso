@@ -46,6 +46,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             formClient.Populated(true);
             formClient.LockCamps();
             formClient.ShowDialog();
+            this.SetDataSourceToDGV();
         }
 
         //public override void SetDataSourceToDGV() //Cria DataTable, chama Controller para trazer o DataTable e colocar na DSGV como DataSource, linka db com DGV

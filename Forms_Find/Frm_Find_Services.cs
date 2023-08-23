@@ -65,6 +65,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             formPGroup.Populated(true);
             formPGroup.PopulateCamps(GetObject());
             formPGroup.ShowDialog();
+            this.SetDataSourceToDGV();
         }
 
         public override void NewObject() //Ok -Abrir Novo Form CREATE, quando fechar, atualizará o DGV

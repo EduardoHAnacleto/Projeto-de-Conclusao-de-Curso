@@ -162,7 +162,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             ComboBox comboBox = new ComboBox();
             PhoneClassifications_Controller pController = new PhoneClassifications_Controller();
             DataTable dt = pController.PopulateDGV();
-            cbox_phone1.DataSource = dt.DataSet; //???
+            //cbox_phone1.DataSource = dt.DataSet; //???
             //cbox_phone1.
             foreach (DataRow dr in dt.Rows)
             {

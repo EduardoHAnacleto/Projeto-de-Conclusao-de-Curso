@@ -205,6 +205,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             formPayMethod.Populated(true);
             formPayMethod.PopulateCamps(GetObject());
             formPayMethod.ShowDialog();
+            this.SetDataSourceToDGV();
         }
 
         public override void PopulateFromDGV() //Ok

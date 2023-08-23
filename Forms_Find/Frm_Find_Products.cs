@@ -118,6 +118,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             formProduct.Populated(true);
             formProduct.PopulateCamps(GetObject());
             formProduct.ShowDialog();
+            this.SetDataSourceToDGV();
         }
 
         public override void NewObject()

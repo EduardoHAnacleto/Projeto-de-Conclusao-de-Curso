@@ -174,6 +174,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                     if (Utilities.AskToCreate())
                     {
                         NewObject();
+                        this.SetDataSourceToDGV();
                     }
                 }
             }

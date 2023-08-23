@@ -99,6 +99,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             Frm_Create_ProductGroups formPGroup = new Frm_Create_ProductGroups();
             formPGroup.PopulateCamps(GetObject());
             formPGroup.ShowDialog();
+            this.SetDataSourceToDGV();
         }
 
         public override void NewObject() //Ok -Abrir Novo Form CREATE, quando fechar, atualizará o DGV

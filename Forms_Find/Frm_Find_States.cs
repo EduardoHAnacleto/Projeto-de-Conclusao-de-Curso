@@ -242,6 +242,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             formState.Populated(true);
             formState.PopulateCamps(GetObject());
             formState.ShowDialog();
+            this.SetDataSourceToDGV();
         }
 
         public override void PopulateFromDGV() //Popula os campos baseado na Row Selecionada do DGV
