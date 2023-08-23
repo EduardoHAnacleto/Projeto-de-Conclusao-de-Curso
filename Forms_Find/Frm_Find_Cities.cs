@@ -202,7 +202,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_cityPhonePrefix.Text, "Phone Prefix"))
+            else if (Utilities.HasOnlyLetters(edt_cityPhonePrefix.Text, "Prefixo do telefone"))
             {
                 var obj = SearchItemByName();
                 if (obj != null)
@@ -243,7 +243,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A linha");
             }
         }
     }

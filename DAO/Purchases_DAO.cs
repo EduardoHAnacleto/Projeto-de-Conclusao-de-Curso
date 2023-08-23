@@ -189,7 +189,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     InsuranceCost = Convert.ToDouble(reader["purchase_InsuranceCost"]),
                                     User = _userController.FindItemId(Convert.ToInt32(reader["user_id"])),
                                     PurchasedItems = _purchaseItemsController.FindItemId(billModel, billNumber, billSeries, supplierId),
-                                    Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
+                                    Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"]))
                                 };
                                 if (reader["cancelledDate"].ToString() != string.Empty) {
                                     obj.CancelledDate = Convert.ToDateTime(reader["cancelledDate"]);

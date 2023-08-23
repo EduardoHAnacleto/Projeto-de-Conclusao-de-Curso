@@ -84,7 +84,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A Linha");
             }
         }
 
@@ -137,7 +137,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             }
             else if (!String.IsNullOrWhiteSpace(edt_Name.Text))
             {
-                if (Utilities.HasOnlyLetters(edt_Name.Text, "Employee Name"))
+                if (Utilities.HasOnlyLetters(edt_Name.Text, "Nome do funcionário"))
                 {
                     var obj = SearchItemByName();
                     if (obj != null)
@@ -155,7 +155,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             }
             else if (Utilities.RemoveRegMask(medt_regNumber.Text) != String.Empty)
             {
-                if (Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_regNumber.Text), "Registration Number"))
+                if (Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_regNumber.Text), "Número de Registro"))
                 {
                     var obj = SearchItemByRN();
                     if (obj != null)
@@ -245,12 +245,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                 {
                     if (dr.Cells["InfoPerson"].Value.ToString() == "1")
                     {
-                        dr.Cells["InfoPerson"].Value = "Active";
+                        dr.Cells["InfoPerson"].Value = "ATIVO";
                     }
                     else
                         if (dr.Cells["InfoPerson"].Value.ToString() == "0")
                     {
-                        dr.Cells["InfoPerson"].Value = "Inactive";
+                        dr.Cells["InfoPerson"].Value = "INATIVO";
                     }
 
                 }

@@ -126,33 +126,33 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             if (!check_female.Checked && !check_male.Checked && !check_otherGender.Checked)
             {
-                string message = "Gender is not selected.";
-                string caption = "Required camp is not selected.";
+                string message = "Gênero não selecionado.";
+                string caption = "Campo é requerido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Utilities.Msgbox(message, caption, buttons, icon);
                 gbox_gender.Focus();
                 return false;
             }
-            else if (!Utilities.HasOnlyLetters(edt_jobRole.Text, "Job Role") || Utilities.HasOnlySpaces(edt_jobRole.Text,"Job Role"))
+            else if (!Utilities.HasOnlyLetters(edt_jobRole.Text, "Função") || Utilities.HasOnlySpaces(edt_jobRole.Text,"Função"))
             {
                 edt_jobRole.Focus();
                 return false;
             }
-            else if (!Utilities.HasOnlyDigits(edt_weeklyHours.Text, "Weekly Hours"))
+            else if (!Utilities.HasOnlyDigits(edt_weeklyHours.Text, "Horas Semanais"))
             {
                 edt_weeklyHours.Focus();
                 return false;
             }
-            else if (!Utilities.IsDouble(edt_baseSalary.Text, "Base Salary"))
+            else if (!Utilities.IsDouble(edt_baseSalary.Text, "Salário base"))
             {
                 edt_baseSalary.Focus();
                 return false;
             }
             else if (medt_startDate.Value <= DateTime.MinValue)
             {
-                string message = "Admission date must be selected.";
-                string caption = "Invalid Camp.";
+                string message = "Data de admissão não selecionada.";
+                string caption = "Campo é requerido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -161,8 +161,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             else if (medt_startDate.Value > medt_endDate.Value && rbtn_dismissed.Checked == true)
             {
-                string message = "Admission date must be lower than leave date.";
-                string caption = "Invalid Camp.";
+                string message = "Data de admissão deve ser menor que data de demissão.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -289,16 +289,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 LockCamps();
                 try
                 {
-                    if (btn_Edit.Text == "E&dit")
+                    if (btn_Edit.Text == "&Alterar")
                     {
                         controller.SaveItem(this.GetObject());
                         ClearCamps();
                         Populated(false);
                     }
-                    else if (btn_Edit.Text == "Cancel")
+                    else if (btn_Edit.Text == "Cancelar")
                     {
                         this.controller.UpdateItem(GetObject());
-                        btn_Edit.Text = "E&dit";
+                        btn_Edit.Text = "&Alterar";
                         btn_NewSave.Enabled = false;
                         btn_SelectDelete.Enabled = false;
                     }
@@ -312,17 +312,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override void EditObject() //EditObject
         {
-            if (btn_Edit.Text == "E&dit")
+            if (btn_Edit.Text == "&Alterar")
             {
                 UnlockCamps();
-                btn_Edit.Text = "Cancel";
+                btn_Edit.Text = "Cancelar";
                 btn_NewSave.Enabled = true;
                 btn_SelectDelete.Enabled = true;
                 auxObj = GetObject();
             }
-            else if (btn_Edit.Text == "Cancel")
+            else if (btn_Edit.Text == "Cancelar")
             {
-                btn_Edit.Text = "E&dit";
+                btn_Edit.Text = "&Alterar";
                 LockCamps();
                 btn_SelectDelete.Enabled = false;
                 btn_NewSave.Enabled = false;
@@ -342,7 +342,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     this.edt_id.Value = this.BringNewId();
                     btn_SelectDelete.Enabled = false;
                     btn_Edit.Enabled = false;
-                    btn_Edit.Text = "E&dit";
+                    btn_Edit.Text = "&Alterar";
                     Populated(false);
                 }
                 catch (Exception ex)

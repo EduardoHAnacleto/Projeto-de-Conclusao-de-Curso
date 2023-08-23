@@ -198,7 +198,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                     }
                 }
             }
-            else if (!Utilities.HasOnlySpaces(edt_productName.Text, "Product name"))
+            else if (!Utilities.HasOnlySpaces(edt_productName.Text, "Nome do Produto"))
             {
                 var obj = SearchItemByName();
                 if (obj != null)
@@ -233,7 +233,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A Linha");
             }
         }
 

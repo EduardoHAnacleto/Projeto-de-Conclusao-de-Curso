@@ -93,7 +93,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A Linha");
             }
         }
 
@@ -137,7 +137,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_payCond.Text, "Payment Condition"))
+            else if (Utilities.HasOnlyLetters(edt_payCond.Text, "Condição de Pagamento"))
             {
                 var obj = SearchItemByName();
                 if (obj != null)

@@ -58,7 +58,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A Linha");
             }
         }
 
@@ -79,7 +79,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_stateName.Text, "State name") && !String.IsNullOrWhiteSpace(edt_stateName.Text))
+            else if (Utilities.HasOnlyLetters(edt_stateName.Text, "Nome do Estado") && !String.IsNullOrWhiteSpace(edt_stateName.Text))
             {
                 var obj = SearchItemByName();
                 if (obj != null)
@@ -94,7 +94,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_FU.Text,"Federation Unit"))
+            else if (Utilities.HasOnlyLetters(edt_FU.Text,"Unidade de Federação"))
             {
                 if (!SearchItemByFU())
                 {

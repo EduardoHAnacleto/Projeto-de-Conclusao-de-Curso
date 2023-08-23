@@ -67,12 +67,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 {
                     if (dr.Cells["ClientType"].Value.ToString() == "1")
                     {
-                        dr.Cells["ClientType"].Value = "NATURAL";
+                        dr.Cells["ClientType"].Value = "FÍSICO";
                     }
                     else
                         if (dr.Cells["ClientType"].Value.ToString() == "2")
                     {
-                        dr.Cells["ClientType"].Value = "LEGAL";
+                        dr.Cells["ClientType"].Value = "JURÍDICO";
                     }
 
                 }
@@ -94,7 +94,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                         string saleStatus = "ACTIVE";
                         if (dr["sale_cancel_date"].ToString() != string.Empty)
                         {
-                            saleStatus = "CANCELLED";
+                            saleStatus = "CANCELADO";
                         }
                         DGV_Sales.Rows.Add();
                         DGV_Sales.Rows[i].Cells["SaleId"].Value = dr["id_sale"].ToString();
@@ -236,7 +236,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 rbtn_CancelledStatus.Checked = false;
                 foreach (DataGridViewRow row in DGV_Sales.Rows)
                 {
-                    if (row.Cells["SaleStatus"].ToString() != "ACTIVE")
+                    if (row.Cells["SaleStatus"].ToString() != "ATIVO")
                     {
                         row.Dispose();
                     }
@@ -251,7 +251,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 rbtn_ActiveStatus.Checked = false;
                 foreach (DataGridViewRow row in DGV_Sales.Rows)
                 {
-                    if (row.Cells["SaleStatus"].ToString() != "CANCELLED")
+                    if (row.Cells["SaleStatus"].ToString() != "CANCELADO")
                     {
                         row.Dispose();
                     }
@@ -266,7 +266,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 rbtn_Natural.Checked = false;
                 foreach (DataGridViewRow row in DGV_Clients.Rows)
                 {
-                    if (row.Cells["ClientType"].ToString() != "LEGAL")
+                    if (row.Cells["ClientType"].ToString() != "JURÍDICO")
                     {
                         row.Dispose();
                     }
@@ -281,7 +281,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 rbtn_LegalClients.Checked = false;
                 foreach (DataGridViewRow row in DGV_Clients.Rows)
                 {
-                    if (row.Cells["ClientType"].ToString() != "NATURAL")
+                    if (row.Cells["ClientType"].ToString() != "FÍSICO")
                     {
                         row.Dispose();
                     }
@@ -297,11 +297,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 {
                     if (Convert.ToInt32(row.Cells["ClientType"].Value) == 1)
                     {
-                        row.Cells["ClientType"].Value = "NATURAL";
+                        row.Cells["ClientType"].Value = "FÍSICO";
                     }
                     else
                     {
-                        row.Cells["ClientType"].Value = "LEGAL";
+                        row.Cells["ClientType"].Value = "JURÍDICO";
                     }
                 }
             }
@@ -315,11 +315,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 {
                     if (Convert.ToInt32(row.Cells["SaleStatus"].Value) == 1)
                     {
-                        row.Cells["SaleStatus"].Value = "ACTIVE";
+                        row.Cells["SaleStatus"].Value = "ATIVO";
                     }
                     else
                     {
-                        row.Cells["SaleStatus"].Value = "CANCELLED";
+                        row.Cells["SaleStatus"].Value = "CANCELADO";
                     }
                 }
             }

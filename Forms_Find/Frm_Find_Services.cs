@@ -105,7 +105,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_serviceDescription.Text, "Service Description"))
+            else if (Utilities.HasOnlyLetters(edt_serviceDescription.Text, "Descrição do Serviço"))
             {
                 var obj = SearchItemByName();
                 if (obj != null)
@@ -144,7 +144,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A Linha");
             }
         }
 

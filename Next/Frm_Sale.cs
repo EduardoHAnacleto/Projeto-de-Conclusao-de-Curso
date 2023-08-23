@@ -91,18 +91,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             {
                 NewSale();
             }
-            else if (btn_new.Text == "&Edit")
+            else if (btn_new.Text == "&Alterar")
             {
                 BackupSale = Sale;
                 BackupSale.dateOfCreation = Convert.ToDateTime(medt_date.Text);
                 UnlockCamps();
                 btn_CancelSale.Visible = true;
-                btn_new.Text = "Cancel";
-                lbl_new.Text = "Cancel";
+                btn_new.Text = "Cancelar";
+                lbl_new.Text = "Cancelar";
                 btn_Save.Enabled = true;
                 btn_FindClient.Enabled = true;
             }
-            else if (btn_new.Text == "Cancel")
+            else if (btn_new.Text == "Cancelar")
             {
                 LockCamps();
                 SetFormToEdit();
@@ -365,20 +365,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             PaymentConditions_Controller _pCController = new PaymentConditions_Controller();
             PaymentConditions obj = _pCController.FindItemId(sale.PaymentConditionId);
-            string caption = "Confirm sale.";
-            string message = "Client : "
+            string caption = "Confirme a venda.";
+            string message = "Cliente : "
                              + sale.Client.name
                              + Environment.NewLine
-                             + "Payment Condition : "
+                             + "Condição de pagamento : "
                              + obj.conditionName
                              + Environment.NewLine
                              + "Sub-Total : "
                              + DGV_SaleSummary.Rows[0].Cells["SaleSubTotal"].Value.ToString()
                              + Environment.NewLine
-                             + "Final Sale Cost : "
+                             + "Total : "
                              + DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value.ToString()
                              + Environment.NewLine
-                             + "Do you confirm the sale?";
+                             + "Confirmar a venda?";
 
             MessageBoxIcon icon = MessageBoxIcon.Error;
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
@@ -542,7 +542,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                             }
                         }
                     }
-                    else if (btn_new.Text == "Cancel")
+                    else if (btn_new.Text == "Cancelar")
                     {
                         status = _controller.UpdateItem(sale);
                         if (status)
@@ -692,8 +692,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public void SetFormToEdit()
         {
-            var edit = "&Edit";
-            var del = "Delete";
+            var edit = "&Alterar";
+            var del = "Apagar";
             btn_new.Text = edit;
             lbl_new.Text = edit;
             btn_new.Enabled = true;
@@ -838,8 +838,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
             if (DGV_SaleProducts.Rows.Count == 0)
             {
-                string message = "Sale must contain at least 1 item.";
-                string caption = "Sale items is empty.";
+                string message = "Venda deve possuir ao menos 1 item.";
+                string caption = "Lista de produtos está vazia.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -847,8 +847,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
             else if (edt_payConditionId.Value <= 1)
             {
-                string message = "Payment Condition must be selected.";
-                string caption = "Payment Condition not selected.";
+                string message = "Condição de pagamento deve ser selecionada.";
+                string caption = "Condição de pagamento inválida.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -869,8 +869,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 var payCond = pCController.FindItemId((int)edt_payConditionId.Value);
                 if (payCond.BillsInstalments.Count > 1)
                 {
-                    string message = "Client must be selected.";
-                    string caption = "Client not selected.";
+                    string message = "Cliente deve ser selecionado.";
+                    string caption = "Cliente inválido.";
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     Utilities.Msgbox(message, caption, buttons, icon);

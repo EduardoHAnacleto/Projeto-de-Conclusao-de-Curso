@@ -70,7 +70,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override bool CheckCamps() //Validacao de campos
         {
-            if (!Utilities.HasOnlyLetters(edt_phoneClassification.Text, "Phone Classification name"))
+            if (!Utilities.HasOnlyLetters(edt_phoneClassification.Text, "Nome da classificação de telefone"))
             {
                 edt_phoneClassification.Focus();
                 return false;
@@ -89,16 +89,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 LockCamps();
                 try
                 {
-                    if (btn_Edit.Text == "E&dit")
+                    if (btn_Edit.Text == "&Alterar")
                     {
                         controller.SaveItem(this.GetObject());
                         ClearCamps();
                         Populated(false);
                     }
-                    else if (btn_Edit.Text == "Cancel")
+                    else if (btn_Edit.Text == "Cancelar")
                     {
                         this.controller.UpdateItem(GetObject());
-                        btn_Edit.Text = "E&dit";
+                        btn_Edit.Text = "&Alterar";
                         btn_NewSave.Enabled = false;
                         btn_SelectDelete.Enabled = false;
                     }
@@ -112,17 +112,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override void EditObject() //EditObject
         {
-            if (btn_Edit.Text == "E&dit")
+            if (btn_Edit.Text == "&Alterar")
             {
                 UnlockCamps();
-                btn_Edit.Text = "Cancel";
+                btn_Edit.Text = "Cancelar";
                 btn_NewSave.Enabled = true;
                 btn_SelectDelete.Enabled = true;
                 auxObj = GetObject();
             }
-            else if (btn_Edit.Text == "Cancel")
+            else if (btn_Edit.Text == "Cancelar")
             {
-                btn_Edit.Text = "E&dit";
+                btn_Edit.Text = "&Alterar";
                 LockCamps();
                 btn_SelectDelete.Enabled = false;
                 btn_NewSave.Enabled = false;
@@ -142,7 +142,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     this.edt_id.Value = this.BringNewId();
                     btn_SelectDelete.Enabled = false;
                     btn_Edit.Enabled = false;
-                    btn_Edit.Text = "E&dit";
+                    btn_Edit.Text = "&Alterar";
                     Populated(false);
                 }
                 catch (Exception ex)

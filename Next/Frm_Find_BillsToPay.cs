@@ -49,7 +49,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             if (!foundStatus)
             {
-                MessageBox.Show("Bills not found.");
+                MessageBox.Show("Conta não encontrada.");
             }
         }
 
@@ -82,7 +82,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A Linha");
             }
         }
 
@@ -112,11 +112,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     var isPaid = dr["isPaid"].ToString();
                     if (isPaid == "0")
                     {
-                        isPaid = "ACTIVE";
+                        isPaid = "ATIVO";
                     }
                     else
                     {
-                        isPaid = "PAID";
+                        isPaid = "PAGO";
                     }
                     DGV_BillsToPay.Rows.Add(supplierId, billNum,billModel,billSeries,instalmentNumber,dueDate,isPaid);                     
                 }

@@ -88,23 +88,23 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override bool CheckCamps()
         {
-            if (Utilities.HasSpecialChars(edt_paymentCondition.Text,"Payment Condition") ||
-                Utilities.HasOnlySpaces(edt_paymentCondition.Text, "Payment Condition"))
+            if (Utilities.HasSpecialChars(edt_paymentCondition.Text,"Condição de Pagamento") ||
+                Utilities.HasOnlySpaces(edt_paymentCondition.Text, "Condição de Pagamento"))
             {
                 edt_paymentCondition.Focus();
                 return false;
             }
-            if (!Utilities.IsDouble(edt_paymentFine.Text,"Payment Fine"))
+            if (!Utilities.IsDouble(edt_paymentFine.Text,"Multa"))
             {
                 edt_paymentFine.Focus();
                 return false;
             }
-            if (!Utilities.IsDouble(edt_paymentFee.Text,"Payment Fee"))
+            if (!Utilities.IsDouble(edt_paymentFee.Text,"Taxa"))
             {
                 edt_paymentFee.Focus();
                 return false;
             }
-            if (!Utilities.IsDouble(edt_discount.Text,"Discount"))
+            if (!Utilities.IsDouble(edt_discount.Text,"Desconto"))
             {
                 edt_discount.Focus();
                 return false;
@@ -139,8 +139,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         {
             if (edt_daysCount.Value < 0)
             {
-                string message = "Days camp must be 0 or higher.";
-                string caption = "Required camp is empty.";
+                string message = "Campo dias deve ser maior ou igual à 0.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -149,15 +149,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             else if (edt_valuePercentage.Value <= 0)
             {
-                string message = "Value percentage must be higher than 0.";
-                string caption = "Required camp is invalid.";
+                string message = "Valor do percentual deve ser maior que 0.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Utilities.Msgbox(message, caption, buttons, icon);
                 edt_valuePercentage.Focus();
                 return false;
             }
-            else if (Utilities.IsNotSelected(cbox_payMethods.SelectedItem, "Payment Method" ))
+            else if (Utilities.IsNotSelected(cbox_payMethods.SelectedItem, "Método de Pagamento" ))
             {
                 cbox_payMethods.Focus();
                 return false;
@@ -271,8 +271,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             {
                 btn_AddInstalment.Enabled = false;
                 btn_NewSave.Enabled = false;
-                string message = "Total value percentage must not be higher than 100%. Remove an instalment.";
-                string caption = "Value percentage above limit.";
+                string message = "Percentual do valor total não pode ser maior que 100%, remova uma parcela.";
+                string caption = "Valor percentual maior que o limite.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -354,17 +354,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 LockCamps();
                 try
                 {
-                    if (btn_Edit.Text == "E&dit")
+                    if (btn_Edit.Text == "&Alterar")
                     {
                         controller.SaveItem(this.GetObject());
                         ClearCamps();
                         Populated(false);
                         SetNewId();
                     }
-                    else if (btn_Edit.Text == "Cancel")
+                    else if (btn_Edit.Text == "Cancelar")
                     {
                         this.controller.UpdateItem(this.GetObject());
-                        btn_Edit.Text = "E&dit";
+                        btn_Edit.Text = "&Alterar";
                         btn_NewSave.Enabled = false;
                         btn_SelectDelete.Enabled = false;
                     }
@@ -378,17 +378,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override void EditObject() //EditObject
         {
-            if (btn_Edit.Text == "E&dit")
+            if (btn_Edit.Text == "&Alterar")
             {
                 UnlockCamps();
-                btn_Edit.Text = "Cancel";
+                btn_Edit.Text = "Cancelar";
                 btn_NewSave.Enabled = true;
                 btn_SelectDelete.Enabled = true;
                 auxObj = GetObject();
             }
-            else if (btn_Edit.Text == "Cancel")
+            else if (btn_Edit.Text == "Cancelar")
             {
-                btn_Edit.Text = "E&dit";
+                btn_Edit.Text = "&Alterar";
                 LockCamps();
                 btn_SelectDelete.Enabled = false;
                 btn_NewSave.Enabled = false;
@@ -408,7 +408,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     //SetNewId();
                     btn_SelectDelete.Enabled = false;
                     btn_Edit.Enabled = false;
-                    btn_Edit.Text = "E&dit";
+                    btn_Edit.Text = "&Alterar";
                     Populated(false);
                 }
                 catch (Exception ex)

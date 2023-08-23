@@ -40,82 +40,82 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public virtual bool CheckPeopleCamps()
         {
-            if (!Utilities.HasOnlyLetters(edt_Name.Text, "Name") || Utilities.HasOnlySpaces(edt_Name.Text,"Name"))
+            if (!Utilities.HasOnlyLetters(edt_Name.Text, "Nome") || Utilities.HasOnlySpaces(edt_Name.Text,"Nome"))
             {
                 edt_Name.Focus();
                 return false;
             }
             else if (!Validator.isEmail(edt_email.Text))
             {
-                string message = "Email text camp is invalid or blank.";
-                string caption = "Required camp is invalid.";
+                string message = "Campo E-Mail inválido ou vazio.";
+                string caption = "Campo é requerido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Utilities.Msgbox(message, caption, buttons, icon);
                 edt_email.Focus();
                 return false;
             }
-            else if (!Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_phone1.Text),"Phone Number 1"))
+            else if (!Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_phone1.Text),"Telefone N. 1"))
             {
                 gbox_phones.Focus();
                 return false;
             }
-            else if (!String.IsNullOrWhiteSpace(Utilities.RemoveRegMask(medt_phone2.Text)) && !Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_phone2.Text), "Phone Number 2"))
+            else if (!String.IsNullOrWhiteSpace(Utilities.RemoveRegMask(medt_phone2.Text)) && !Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_phone2.Text), "Telefone N. 2"))
             {
                 gbox_phones.Focus();
                 return false;
             }
-            else if (!String.IsNullOrWhiteSpace(Utilities.RemoveRegMask(medt_phone3.Text)) && !Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_phone3.Text), "Phone Number 3"))
+            else if (!String.IsNullOrWhiteSpace(Utilities.RemoveRegMask(medt_phone3.Text)) && !Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_phone3.Text), "Telefone N. 3"))
             {
                 gbox_phones.Focus();
                 return false;
             }
-            else if (Utilities.IsNotSelected(cbox_phone1.SelectedItem, "Phone Classification 1" ))
+            else if (Utilities.IsNotSelected(cbox_phone1.SelectedItem, "Classificação de Telefone N. 1" ))
             {
                 cbox_phone1.Focus();
                 return false;
             }
             else if (!String.IsNullOrWhiteSpace(Utilities.RemoveRegMask(medt_phone2.Text)) &&
-                Utilities.IsNotSelected(cbox_phone2.SelectedItem,"Phone Classification 2"))
+                Utilities.IsNotSelected(cbox_phone2.SelectedItem, "Classificação de Telefone N. 2"))
             {
                 cbox_phone2.Focus();
                 return false;
             }
             else if (!String.IsNullOrWhiteSpace(Utilities.RemoveRegMask(medt_phone3.Text)) &&
-                Utilities.IsNotSelected(cbox_phone3.SelectedItem, "Phone Classification 3"))
+                Utilities.IsNotSelected(cbox_phone3.SelectedItem, "Classificação de Telefone N. 3"))
             {
                 cbox_phone3.Focus();
                 return false;
             }
-            else if (Utilities.HasOnlySpaces(edt_district.Text, "District"))
+            else if (Utilities.HasOnlySpaces(edt_district.Text, "Bairro"))
             {
                 edt_district.Focus();
                 return false;
             }
-            else if (Utilities.HasOnlySpaces(edt_street.Text,"Street Name"))
+            else if (Utilities.HasOnlySpaces(edt_street.Text,"Logradouro"))
             {
                 edt_street.Focus();
                 return false;
             }
-            else if (Utilities.HasOnlySpaces(edt_houseNumber.Text.Trim(), "House Number")
-                || Utilities.HasSpecialChars(edt_houseNumber.Text, "House Number"))
+            else if (Utilities.HasOnlySpaces(edt_houseNumber.Text.Trim(), "Número da casa")
+                || Utilities.HasSpecialChars(edt_houseNumber.Text, "Número da casa"))
             {
                 edt_houseNumber.Focus();
                 return false;
             }
-            else if (!Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_zipCode.Text), "Zip-Code"))
+            else if (!Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_zipCode.Text), "CEP"))
             {
                 medt_zipCode.Focus();
                 return false;
             }
-            else if (!Utilities.HasOnlyLetters(edt_homeType.Text, "Home Type"))
+            else if (!Utilities.HasOnlyLetters(edt_homeType.Text, "Tipo de construção"))
             {
                 MessageBox.Show(edt_homeType.Text);
                 MessageBox.Show(Utilities.RemoveRegMask(edt_homeType.Text));
                 edt_homeType.Focus();
                 return false;
             }
-            else if (Utilities.HasOnlySpaces(edt_city.Text, "City"))
+            else if (Utilities.HasOnlySpaces(edt_city.Text, "Cidade"))
             {
                 btn_findCity.Focus();
                 return false;

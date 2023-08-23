@@ -136,7 +136,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_Name.Text, "Client Name") && !String.IsNullOrWhiteSpace(edt_Name.Text))
+            else if (Utilities.HasOnlyLetters(edt_Name.Text, "Nome do Cliente") && !String.IsNullOrWhiteSpace(edt_Name.Text))
             {
                 var obj = SearchItemByName();
                 if (obj != null)
@@ -151,9 +151,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                     }
                 }
             }
-            else if (Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_regNumber.Text),"Registration Number")) 
+            else if (Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_regNumber.Text),"Número de Registro")) 
             {
-                var x = Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_regNumber.Text), "Registration Number");
+                var x = Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_regNumber.Text), "Número de Registro");
                 var obj = SearchItemByRN();
                 if (obj != null)
                 {
@@ -227,7 +227,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A linha");
             }
         }
 
@@ -239,12 +239,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                 {
                     if (dr.Cells["InfoPerson"].Value.ToString() == "1")
                     {
-                        dr.Cells["InfoPerson"].Value = "Natural";
+                        dr.Cells["InfoPerson"].Value = "Físico";
                     }
                     else
                         if (dr.Cells["InfoPerson"].Value.ToString() == "2")
                     {
-                        dr.Cells["InfoPerson"].Value = "Legal";
+                        dr.Cells["InfoPerson"].Value = "Jurídico";
                     }
 
                 }

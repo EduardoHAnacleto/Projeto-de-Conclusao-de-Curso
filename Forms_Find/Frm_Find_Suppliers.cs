@@ -51,7 +51,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
         public override void SetDataSourceToDGV() //Cria DataTable, chama Controller para trazer o DataTable e colocar na DSGV como DataSource, linka db com DGV
         {
             DGV_People.Rows.Clear();
-            DGV_People.Columns["InfoPerson"].HeaderText = "Social Reason";
+            DGV_People.Columns["InfoPerson"].HeaderText = "Razão Social";
             DataTable dt = this.controller.PopulateDGV();
             if (dt != null)
             {
@@ -113,7 +113,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_Name.Text, "Supplier Name") && !String.IsNullOrWhiteSpace(edt_Name.Text))
+            else if (Utilities.HasOnlyLetters(edt_Name.Text, "Nome do Fornecedor") && !String.IsNullOrWhiteSpace(edt_Name.Text))
             {
                 var obj = SearchItemByName();
                 if (obj != null)
@@ -128,9 +128,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                     }
                 }
             }
-            else if (Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_regNumber.Text), "Registration Number"))
+            else if (Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_regNumber.Text), "Número de Registro"))
             {
-                var x = Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_regNumber.Text), "Registration Number");
+                var x = Utilities.HasOnlyDigits(Utilities.RemoveRegMask(medt_regNumber.Text), "Número de Registro");
                 var obj = SearchItemByRN();
                 if (obj != null)
                 {
@@ -204,7 +204,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A Linha");
             }
         }
     }

@@ -59,7 +59,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_countryName.Text, "Country name"))
+            else if (Utilities.HasOnlyLetters(edt_countryName.Text, "Nome do País"))
             {
                 var obj = SearchItemByName();
                 if (obj != null)
@@ -74,7 +74,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_acronym.Text, "Acronym"))
+            else if (Utilities.HasOnlyLetters(edt_acronym.Text, "Sigla"))
             {
                 SearchByAcronym();
             }
@@ -220,7 +220,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A Linha");
             }
         }
 

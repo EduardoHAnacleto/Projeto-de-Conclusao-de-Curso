@@ -73,7 +73,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_BrandName.Text, "Brand name"))
+            else if (Utilities.HasOnlyLetters(edt_BrandName.Text, "Marca"))
             {
                 var obj = SearchItemByName();
                 if (obj != null)
@@ -158,7 +158,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A Linha");
             }
         }
 

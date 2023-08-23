@@ -162,7 +162,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                     }
                 }
             }
-            else if (Utilities.HasOnlyLetters(edt_PhoneClassification.Text, "Phone Classification"))
+            else if (Utilities.HasOnlyLetters(edt_PhoneClassification.Text, "Classificação de Telefone"))
             {
                 var obj = SearchItemByName();
                 if (obj != null)
@@ -201,7 +201,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
             }
             else
             {
-                Utilities.IsNotSelected(obj, "The Row");
+                Utilities.IsNotSelected(obj, "A Linha");
             }
         }
 

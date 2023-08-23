@@ -164,14 +164,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 {
                     if (Convert.ToInt32(row.Cells["StatusBillsReceive"].Value) == 1)
                     {
-                        row.Cells["StatusBillsReceive"].Value = "PAID";
+                        row.Cells["StatusBillsReceive"].Value = "PAGO";
                     }
                     else if (Convert.ToInt32(row.Cells["StatusBillsReceive"].Value) == 0) {
-                        row.Cells["StatusBillsReceive"].Value = "ACTIVE";
+                        row.Cells["StatusBillsReceive"].Value = "ATIVO";
                     }
                     else
                     {
-                        row.Cells["StatusBillsReceive"].Value = "ON HOLD";
+                        row.Cells["StatusBillsReceive"].Value = "EM ESPERA";
                     }
                 }
             }
@@ -209,12 +209,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 {
                     if (dr.Cells["TypeClient"].Value.ToString() == "1")
                     {
-                        dr.Cells["TypeClient"].Value = "NATURAL";
+                        dr.Cells["TypeClient"].Value = "FÍSICO";
                     }
                     else
                         if (dr.Cells["TypeClient"].Value.ToString() == "2")
                     {
-                        dr.Cells["TypeClient"].Value = "LEGAL";
+                        dr.Cells["TypeClient"].Value = "JURÍDICO";
                     }
 
                 }
@@ -270,7 +270,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         private void rbtn_LegalClients_CheckedChanged(object sender, EventArgs e)
         {
-            SortByClientType("LEGAL");
+            SortByClientType("JURÍDICO");
         }
 
         private void SortByClientType(string sortString)
@@ -290,7 +290,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         private void rbtn_Natural_CheckedChanged(object sender, EventArgs e)
         {
-            SortByClientType("NATURAL");
+            SortByClientType("FÍSICO");
         }
 
         private void btn_ClearClientFilters_Click(object sender, EventArgs e)
@@ -381,7 +381,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             {
                 rbtn_ActiveStatus.Checked = false;
                 rbtn_PaidStatus.Checked = false;
-                SortByBillStatus("ON HOLD");
+                SortByBillStatus("EM ESPERA");
             }
         }
     }

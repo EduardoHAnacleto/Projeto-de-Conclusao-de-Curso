@@ -36,6 +36,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_billSeries.Controls[0].Visible = false;
             edt_payCondId.Controls[0].Visible = false;
             medt_date.Text = DateTime.Now.ToString();
+            dateTime_ArrivalDate.Text = DateTime.Today.ToString();
+            dateTime_emissionDate.Text = DateTime.Today.ToString();
             User = user;
             SetUser(User);
         }
@@ -146,7 +148,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 ValidateBill();
             }
-            else
+            if (ValidatedBill)
             {
                 Products product = GetProduct();
                 int amount = (int)edt_prodQtd.Value;
@@ -171,8 +173,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
                 if (!validated)
                 {
-                    string message = "Product discount can't be higher than it's cost.";
-                    string caption = "Discount value is invalid.";
+                    string message = "Desconto não pode ser maior que o valor do produto";
+                    string caption = "Valor de desconto inválido.";
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     Utilities.Msgbox(message, caption, buttons, icon);
@@ -186,20 +188,27 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
+        private bool FindBill()
+        {
+            int bNum = (int)edt_billNumber.Value;
+            int bMod = (int)edt_billModel.Value;
+            int bSer = (int)edt_billSeries.Value;
+            int supId = (int)edt_supplierId.Value;
+            if (_controller.FindItemId(bMod, bNum, bSer, supId) != null)
+            {
+                ValidatedBill = true;
+                return true;
+            }
+            else
+            {
+                ValidatedBill = false;
+                return false;
+            }
+        }
+
         private void ValidateBill()
         {
-            if (ValidatedBill)
-            {
-                int bNum = (int)edt_billNumber.Value;
-                int bMod = (int)edt_billModel.Value;
-                int bSer = (int)edt_billSeries.Value;
-                int supId = (int)edt_supplierId.Value;
-                if (_controller.FindItemId(bMod, bNum, bSer, supId) != null )
-                {
-                    ValidatedBill = false;
-                }
-            }
-            if (!ValidatedBill)
+            if (!FindBill())
             {
                 gbox_billInfo.Enabled = false;
                 gbox_supplier.Enabled = false;
@@ -213,7 +222,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 Utilities.Msgbox(message, caption, buttons, icon);
                 gbox_billInfo.Focus();
             }
-
         }
 
         private void btn_AddProduct_Click(object sender, EventArgs e)
@@ -278,7 +286,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         }
                         UnlockCamps();
                     }
-                    else if (btn_new.Text == "Cancel")
+                    else if (btn_new.Text == "Cancelar")
                     {
                         status = _controller.UpdateItem(purchase);
                         if (status)
@@ -297,8 +305,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void SetFormToEdit()
         {
-            var edit = "&Edit";
-            var del = "Delete";
+            var edit = "&Alterar";
+            var del = "Apagar";
             btn_new.Text = edit;
             lbl_new.Text = edit;
             btn_new.Enabled = true;
@@ -380,6 +388,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_options.Enabled = false;
             gbox_User.Enabled = false;
             gbox_products.Enabled = false;
+            gbox_billInfo.Enabled = false;
+            gbox_options.Enabled = false;
         }
 
         private void UnlockCamps()
@@ -388,10 +398,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_options.Enabled = true;
             gbox_User.Enabled = true;
             gbox_products.Enabled = true;
+            gbox_billInfo.Enabled = true;
+            gbox_options.Enabled = true;
         }
 
         private void ClearCamps()
         {
+            edt_billModel.Value = 0;
+            edt_billNumber.Value = 0;
+            edt_billSeries.Value = 0;
+            edt_supplierId.Value = 0;
+            edt_supplierName.Text = string.Empty;
+
+            DGV_Instalments.Rows.Clear();
+            DGV_PurchSummary.Rows.Clear();
+            DGV_PurchasesProducts.Rows.Clear();
+
+            edt_payCondId.Value = 0;
+            edt_payCondName.Text = string.Empty;
             edt_prodBarCode.Value = 0;
             edt_prodId.Value = 0;
             edt_prodQtd.Value = 1;
@@ -460,8 +484,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (DGV_PurchasesProducts.Rows.Count < 1)
             {
-                string message = "Purchase must contain at least 1 item.";
-                string caption = "Purchase items is empty.";
+                string message = "Lista de produtos devem ter ao menos 1 item.";
+                string caption = "Lista de produtos está vazia.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -469,8 +493,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             else if (edt_supplierId.Value <= 0)
             {
-                string message = "Purchase must contain supplier.";
-                string caption = "Supplier is not selected.";
+                string message = "Compra deve possuir um fornecedor.";
+                string caption = "Fornecedor não inserido.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -478,8 +502,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             else if (edt_billModel.Value == 0 | edt_billNumber.Value == 0 | edt_billSeries.Value == 0 | edt_payCondId.Value == 0)
             {
-                string message = "Payment Information must be inserted.";
-                string caption = "Payment information is invalid.";
+                string message = "Condição de pagamento deve ser inserida.";
+                string caption = "Condição de pagamento inválida.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -487,8 +511,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             else if (dateTime_ArrivalDate.Value == dateTime_ArrivalDate.MinDate)
             {
-                string message = "Arrival date must be selected.";
-                string caption = "Arrival date is invalid.";
+                string message = "Data de entrada não foi selecionada.";
+                string caption = "Data de entrada inválida.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -496,8 +520,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             else if (dateTime_emissionDate.Value == dateTime_emissionDate.MinDate)
             {
-                string message = "Emission date must be selected.";
-                string caption = "Emission date is invalid.";
+                string message = "Data de emissão não foi selecionada.";
+                string caption = "Data de emissão inválida.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -505,8 +529,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             else if (dateTime_emissionDate.Value > DateTime.Today) 
             {
-                string message = "Emission date must not be higher than today.";
-                string caption = "Emission date is invalid.";
+                string message = "Data de emissão não pode ser maior que hoje.";
+                string caption = "Data de emissão inválida.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -514,8 +538,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             else if (dateTime_ArrivalDate.Value > DateTime.Today | dateTime_ArrivalDate.Value < dateTime_emissionDate.Value)
             {
-                string message = "Arrival date must be higher than emission date and lower or equal to today.";
-                string caption = "Arival date is invalid.";
+                string message = "Data de entrada deve ser maior ou menor que a Data de Emissão.";
+                string caption = "Data de entrada inválida.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -603,17 +627,31 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public void SetBillInstalmentsToDGV(PaymentConditions payCond) //OK -Cria DataTable, chama Controller para trazer o DataTable e colocar na DGV como DataSource, linka db com DGV
         {
             DGV_Instalments.Rows.Clear();
-            decimal totalCost = (decimal)DGV_PurchSummary.Rows[0].Cells["PurchTotal"].Value;
+            decimal totalCost = GetTotalCost();
             foreach (BillsInstalments bill in payCond.BillsInstalments)
             {
+                decimal instalmentCost = totalCost * (Convert.ToDecimal(bill.ValuePercentage) / 100);
                 DGV_Instalments.Rows.Add(
                     bill.InstalmentNumber.ToString(),
                     bill.TotalDays.ToString(),
                     bill.ValuePercentage.ToString(),
                     bill.PaymentMethod.paymentMethod,
-                    totalCost/bill.InstalmentNumber
+                    instalmentCost
                     );
             }
+        }
+
+        private decimal GetTotalCost()
+        {
+            decimal totalCost = 0;
+            if (DGV_PurchasesProducts.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
+                {
+                    totalCost += Convert.ToDecimal(row.Cells["ProdQtd"].Value) * Convert.ToDecimal(row.Cells["ProdNewBaseUnCost"].Value);
+                }
+            }
+            return totalCost;
         }
 
         private void btn_removeItem_Click(object sender, EventArgs e)
@@ -643,10 +681,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             decimal extra = edt_extraExpenses.Value;
             decimal insur = edt_insurance.Value;
             decimal transFee = edt_transportFee.Value;
-            foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
-            {
-                subTotal += Convert.ToDecimal(row.Cells["ProdQtd"].Value) * Convert.ToDecimal(row.Cells["ProdNewBaseUnCost"].Value);
-            }
+            subTotal += GetTotalCost();
             total = subTotal + extra + insur + transFee;
             DGV_PurchSummary.Rows.Add(
                 subTotal,

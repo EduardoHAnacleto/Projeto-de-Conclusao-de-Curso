@@ -109,6 +109,7 @@
             this.edt_productSalePrice.Name = "edt_productSalePrice";
             this.edt_productSalePrice.Size = new System.Drawing.Size(73, 20);
             this.edt_productSalePrice.TabIndex = 27;
+            this.edt_productSalePrice.Text = "0";
             // 
             // edt_productName
             // 
@@ -224,6 +225,7 @@
             // edt_productCost
             // 
             this.edt_productCost.DecimalPlaces = 2;
+            this.edt_productCost.Enabled = false;
             this.edt_productCost.Location = new System.Drawing.Point(336, 24);
             this.edt_productCost.Maximum = new decimal(new int[] {
             99999999,

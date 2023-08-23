@@ -82,8 +82,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             {
                 if (!check_female.Checked && !check_male.Checked && !check_otherGender.Checked)
                 {
-                    string message = "Gender is not selected.";
-                    string caption = "Required camp is not selected.";
+                    string message = "Gênero não selecionado.";
+                    string caption = "Campo é requerido.";
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
@@ -92,8 +92,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 }
                 else if (String.IsNullOrWhiteSpace(edt_age.Text))
                 {
-                    string message = "Date of Birth is not selected.";
-                    string caption = "Required camp is not selected.";
+                    string message = "Data de nascimento não selecionada.";
+                    string caption = "Campo é requerido.";
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
@@ -102,8 +102,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 }
                 else if (!Validator.IsCpf(Utilities.RemoveRegMask(medt_regNumber.Text)))
                 {
-                    string message = "CPF Registration Number is not valid.";
-                    string caption = "Required camp is not valid.";
+                    string message = "CPF não é valido.";
+                    string caption = "Campo é requerido.";
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
@@ -115,8 +115,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             {
                 if (!Validator.IsCnpj(medt_regNumber.Text))
                 {
-                    string message = "CNPJ Registration Number is not valid.";
-                    string caption = "Required camp is not valid.";
+                    string message = "CNPJ não é válido.";
+                    string caption = "Campo é requerido.";
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
@@ -126,8 +126,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             }
             else if (!check_NaturalClient.Checked && !check_LegalClient.Checked)
             {
-                string message = "Client type is not selected.";
-                string caption = "Required camp is not selected.";
+                string message = "Tipo de Cliente não selecionado.";
+                string caption = "Campo é requerido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -323,16 +323,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 LockCamps();
                 try
                 {
-                    if (btn_Edit.Text == "E&dit")
+                    if (btn_Edit.Text == "&Alterar")
                     {
                         controller.SaveItem(this.GetObject());
                         ClearCamps();
                         Populated(false);
                     }
-                    else if (btn_Edit.Text == "Cancel")
+                    else if (btn_Edit.Text == "Cancelar")
                     {
                         this.controller.UpdateItem(GetObject());
-                        btn_Edit.Text = "E&dit";
+                        btn_Edit.Text = "&Alterar";
                         btn_NewSave.Enabled = false;
                         btn_SelectDelete.Enabled = false;
                     }
@@ -346,17 +346,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override void EditObject() //EditObject
         {
-            if (btn_Edit.Text == "E&dit")
+            if (btn_Edit.Text == "&Alterar")
             {
                 UnlockCamps();
-                btn_Edit.Text = "Cancel";
+                btn_Edit.Text = "Cancelar";
                 btn_NewSave.Enabled = true;
                 btn_SelectDelete.Enabled = true;
                 auxObj = GetObject();
             }
-            else if (btn_Edit.Text == "Cancel")
+            else if (btn_Edit.Text == "Cancelar")
             {
-                btn_Edit.Text = "E&dit";
+                btn_Edit.Text = "&Alterar";
                 LockCamps();
                 btn_SelectDelete.Enabled = false;
                 btn_NewSave.Enabled = false;
@@ -376,7 +376,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     this.edt_id.Value = this.BringNewId();
                     btn_SelectDelete.Enabled = false;
                     btn_Edit.Enabled = false;
-                    btn_Edit.Text = "E&dit";
+                    btn_Edit.Text = "&Alterar";
                     Populated(false);
                 }
                 catch (Exception ex)

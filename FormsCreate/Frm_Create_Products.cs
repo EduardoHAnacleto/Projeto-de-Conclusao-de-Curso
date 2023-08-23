@@ -40,40 +40,35 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override bool CheckCamps()
         {
-            if (Utilities.HasOnlySpaces(edt_productName.Text, "Product name"))
+            if (Utilities.HasOnlySpaces(edt_productName.Text, "Nome do Produto"))
             {
                 edt_productName.Focus();
                 return false;
             }
-            else if (!Utilities.IsDouble(edt_productCost.Text, "Product Cost"))
-            {
-                edt_productCost.Focus();
-                return false;
-            }
-            else if (!Utilities.IsDouble(edt_productSalePrice.Text, "Sale Price"))
+            else if (!Utilities.IsDouble(edt_productSalePrice.Text, "Preço de Venda"))
             {
                 edt_productSalePrice.Focus();
                 return false;
             }
-            else if (Utilities.IsNotSelected(cbox_brands.SelectedItem, "Brand"))
+            else if (Utilities.IsNotSelected(cbox_brands.SelectedItem, "Marca"))
             {
                 cbox_brands.Focus();
                 return false;
             }
-            else if (Utilities.IsNotSelected(cbox_ProductGroup.SelectedItem, "Product Group"))
+            else if (Utilities.IsNotSelected(cbox_ProductGroup.SelectedItem, "Grupo de Produto"))
             {
                 cbox_ProductGroup.Focus();
                 return false;
             }
-            else if (!Utilities.HasOnlyDigits((edt_barCode.Text), "Bar Code") || Utilities.HasOnlySpaces(edt_barCode.Text,"Bar Code"))
+            else if (!Utilities.HasOnlyDigits((edt_barCode.Text), "Código de Barras") || Utilities.HasOnlySpaces(edt_barCode.Text,"Código de Barras"))
             {
                 edt_barCode.Focus();
                 return false;
             }
             else if (Convert.ToDecimal(edt_productCost.Text) > Convert.ToDecimal(edt_productSalePrice.Text))
             {
-                string message = "Sell price must be higher than the product cost.";
-                string caption = "Product price is wrong.";
+                string message = "Valor de venda deve ser maior que o de custo.";
+                string caption = "Campo inválido.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
@@ -255,16 +250,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 LockCamps();
                 try
                 {
-                    if (btn_Edit.Text == "E&dit")
+                    if (btn_Edit.Text == "&Alterar")
                     {
                         controller.SaveItem(this.GetObject());
                         ClearCamps();
                         Populated(false);
                     }
-                    else if (btn_Edit.Text == "Cancel")
+                    else if (btn_Edit.Text == "Cancelar")
                     {
                         this.controller.UpdateItem(GetObject());
-                        btn_Edit.Text = "E&dit";
+                        btn_Edit.Text = "&Alterar";
                         btn_NewSave.Enabled = false;
                         btn_SelectDelete.Enabled = false;
                     }
@@ -278,17 +273,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override void EditObject() //EditObject
         {
-            if (btn_Edit.Text == "E&dit")
+            if (btn_Edit.Text == "&Alterar")
             {
                 UnlockCamps();
-                btn_Edit.Text = "Cancel";
+                btn_Edit.Text = "Cancelar";
                 btn_NewSave.Enabled = true;
                 btn_SelectDelete.Enabled = true;
                 auxObj = GetObject();
             }
-            else if (btn_Edit.Text == "Cancel")
+            else if (btn_Edit.Text == "Cancelar")
             {
-                btn_Edit.Text = "E&dit";
+                btn_Edit.Text = "&Alterar";
                 LockCamps();
                 btn_SelectDelete.Enabled = false;
                 btn_NewSave.Enabled = false;
@@ -308,7 +303,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                     this.edt_id.Value = this.BringNewId();
                     btn_SelectDelete.Enabled = false;
                     btn_Edit.Enabled = false;
-                    btn_Edit.Text = "E&dit";
+                    btn_Edit.Text = "&Alterar";
                     Populated(false);
                 }
                 catch (Exception ex)
