@@ -54,7 +54,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
         {
             if (number <= 0)
             {
-                string message = $"{camp} camp must be more than 0.";
+                string message = $"{camp} campo deve ser maior que 0.";
                 string caption = "Invalid camp.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
@@ -69,8 +69,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             bool status = text.Any(char.IsDigit);
             if (!status)
             {
-                string message = $"{camp} camp must have only letters.";
-                string caption = "Invalid camp.";
+                string message = $"{camp} - campo deve ter apenas caractéres.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Msgbox(message, caption, buttons, icon);
@@ -83,8 +83,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             bool status = !string.IsNullOrWhiteSpace(text) && !System.Text.RegularExpressions.Regex.IsMatch(text, "[^0-9]");
             if (!status)
             {
-                string message = $"{camp} camp must have only numbers.";
-                string caption = "Invalid camp.";
+                string message = $"{camp} - campo deve ter apenas números.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Msgbox(message, caption, buttons, icon);
@@ -97,8 +97,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             bool status = text.Trim().All(c => Char.IsLetter(c) || c == ' ');
             if (!status)
             {
-                string message = $"{camp} camp must have only letters.";
-                string caption = "Invalid camp.";
+                string message = $"{camp} - campo deve ter apenas caractéres.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Msgbox(message, caption, buttons, icon);
@@ -111,8 +111,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             bool status = String.IsNullOrWhiteSpace(text);
             if (status)
             {
-                string message = $"{camp} camp must not be blank.";
-                string caption = "Invalid camp.";
+                string message = $"{camp} - campo é requerido.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Msgbox(message, caption, buttons, icon);
@@ -133,8 +133,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             }
             if (status)
             {
-                string message = $"{camp} must be selected.";
-                string caption = "Item not selected.";
+                string message = $"{camp} deve ser selecionado.";
+                string caption = "Campo é requerido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Msgbox(message, caption, buttons, icon);
@@ -152,8 +152,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             }
             catch
             {
-                string message = $"{camp} must be a decimal number.";
-                string caption = "Invalid camp.";
+                string message = $"{camp} deve ser um número decimal.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Msgbox(message, caption, buttons, icon);
@@ -175,8 +175,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             }
             if (status)
             {
-                string message = $"{camp} camp must not have special characters.";
-                string caption = "Invalid camp.";
+                string message = $"{camp} - campo não pode ter caractéres especiais.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Msgbox(message, caption, buttons, icon);
@@ -190,8 +190,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             if (!status)
             {
                 status = true;
-                string message = $"{camp} camp must not have numbers.";
-                string caption = "Invalid camp.";
+                string message = $"{camp} - campo não deve possuir números.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Msgbox(message, caption, buttons, icon);
@@ -205,8 +205,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             if (!status)
             {
                 status = true;
-                string message = $"{camp} camp must not have letters.";
-                string caption = "Invalid camp.";
+                string message = $"{camp} - campo não deve possuir caractéres.";
+                string caption = "Campo inválido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Msgbox(message, caption, buttons, icon);
@@ -226,8 +226,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
 
         public static void MsgboxCantSearch()
         {
-            string message = "Text camps are empty.";
-            string caption = "Invalid camps.";
+            string message = "Campos de texto vazios.";
+            string caption = "Campos são requeridos.";
             MessageBoxIcon icon = MessageBoxIcon.Error;
             MessageBoxButtons buttons = MessageBoxButtons.OK;
             MessageBox.Show(message, caption, buttons, icon);
@@ -235,8 +235,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
 
         public static bool AskToCreate()
         {
-            string message = "Register not found. Do you want to create a new one?";
-            string caption = "Not found.";
+            string message = "Registro não encontrado. Deseja criar um novo?";
+            string caption = "Não encontrado.";
             MessageBoxIcon icon = MessageBoxIcon.Error;
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
@@ -249,8 +249,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
 
         public static bool AskToFind()
         {
-            string message = "Register not found. Do you want to find it?";
-            string caption = "Not found.";
+            string message = "Registro não encontrado. Deseja encontrá-lo?";
+            string caption = "Não encontrado.";
             MessageBoxIcon icon = MessageBoxIcon.Error;
             MessageBoxButtons buttons = MessageBoxButtons.YesNo;
             DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
