@@ -51,7 +51,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private readonly Purchases_Controller _controller = new Purchases_Controller();
         private readonly PurchaseItems_Controller _pIController = new PurchaseItems_Controller();
         private Purchases BackupPurchase = null;
-        private bool ValidatedBill = false;
+        private bool ValidatedBill = true;
 
         public void NewFormSearchProduct() //Abre form para encontrar e levar PRODUTO
         {
@@ -142,50 +142,53 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public void AddProductToDGV() 
         {
-            if (!ValidatedBill)
+            if (ValidatedBill)
             {
                 ValidateBill();
             }
-            Products product = GetProduct();
-            int amount = (int)edt_prodQtd.Value;
-            decimal purchPerc = 0; 
-            decimal newUnCost = edt_prodUnCost.Value; 
-            decimal discountCash = edt_prodDiscCash.Value;
-            bool validated = (discountCash < newUnCost);
-            if (!FindEqualDGVProduct(product.id) && validated)
-            {
-                DGV_PurchasesProducts.Rows.Add(
-                    product.id,
-                    product.productName,
-                    amount,
-                    product.productCost,
-                    discountCash,
-                    newUnCost,
-                    product.salePrice,
-                    product.stock,
-                    purchPerc,
-                    newUnCost
-                    );
-            }
-            if (!validated)
-            {
-                string message = "Product discount can't be higher than it's cost.";
-                string caption = "Discount value is invalid.";
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                MessageBoxIcon icon = MessageBoxIcon.Error;
-                Utilities.Msgbox(message, caption, buttons, icon);
-                edt_prodDiscCash.Focus();
-            }
             else
             {
-                CalculateSetDGVPurchasePerc();
-                CalculateSetNewUnCost();
+                Products product = GetProduct();
+                int amount = (int)edt_prodQtd.Value;
+                decimal purchPerc = 0;
+                decimal newUnCost = edt_prodUnCost.Value;
+                decimal discountCash = edt_prodDiscCash.Value;
+                bool validated = (discountCash < newUnCost);
+                if (!FindEqualDGVProduct(product.id) && validated)
+                {
+                    DGV_PurchasesProducts.Rows.Add(
+                        product.id,
+                        product.productName,
+                        amount,
+                        product.productCost,
+                        discountCash,
+                        newUnCost,
+                        product.salePrice,
+                        product.stock,
+                        purchPerc,
+                        newUnCost
+                        );
+                }
+                if (!validated)
+                {
+                    string message = "Product discount can't be higher than it's cost.";
+                    string caption = "Discount value is invalid.";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    edt_prodDiscCash.Focus();
+                }
+                else
+                {
+                    CalculateSetDGVPurchasePerc();
+                    CalculateSetNewUnCost();
+                }
             }
         }
 
         private void ValidateBill()
         {
-            if (!ValidatedBill)
+            if (ValidatedBill)
             {
                 int bNum = (int)edt_billNumber.Value;
                 int bMod = (int)edt_billModel.Value;
@@ -193,7 +196,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 int supId = (int)edt_supplierId.Value;
                 if (_controller.FindItemId(bMod, bNum, bSer, supId) != null )
                 {
-                    ValidatedBill = true;
+                    ValidatedBill = false;
                 }
             }
             if (!ValidatedBill)
