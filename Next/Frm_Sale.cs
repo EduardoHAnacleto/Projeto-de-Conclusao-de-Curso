@@ -25,7 +25,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             medt_date.Text = DateTime.Now.ToString();
             edt_userId.Controls[0].Visible = false;
             edt_clientId.Controls[0].Visible = false;
-            edt_UNCost.Controls[0].Visible = false;
             edt_amount.Controls[0].Visible = false;
             edt_barCode.Controls[0].Visible = false;
             edt_payConditionDiscount.Controls[0].Visible = false;
@@ -34,7 +33,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_payConditionQnt.Controls[0].Visible = false;
             edt_payConditionId.Controls[0].Visible = false;
             edt_productId.Controls[0].Visible = false;
-            edt_UNCost.Controls[0].Visible = false;
             edt_ProdDiscCash.Controls[0].Visible = false;
             edt_ProdUnValue.Controls[0].Visible = false;
             edt_totalPValue.Controls[0].Visible = false;
@@ -69,7 +67,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
             edt_productId.Value = 0;
             edt_productName.Text = string.Empty;
-            edt_UNCost.Value = 0;
             edt_totalPValue.Value = 0;
             edt_amount.Value = 1;
 
@@ -131,7 +128,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     edt_productName.Text = product.productName;
                     edt_productName.Text = product.productName;
                     edt_barCode.Value = product.BarCode;
-                    edt_UNCost.Value = (decimal)product.productCost;
                     edt_ProdUnValue.Value = (decimal)product.salePrice;
                     edt_totalPValue.Value = edt_ProdUnValue.Value;
                 }
@@ -196,7 +192,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     product.id,
                     product.productName,
                     amount,
-                    product.productCost,
                     discountCash,
                     product.salePrice,
                     totalValue);
@@ -228,7 +223,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 foreach (DataGridViewRow row in DGV_SaleProducts.Rows)
                 {
                     subtotal += Convert.ToDecimal(row.Cells["ProductTotalValue"].Value);
-                    total -= Convert.ToDecimal(row.Cells["ProductDiscoutCash"].Value);
+                    total += Convert.ToDecimal(row.Cells["ProductTotalValue"].Value) - Convert.ToDecimal(row.Cells["ProductDiscoutCash"].Value);
                 }
                 DGV_SaleSummary.Rows[0].Cells["SaleSubTotal"].Value = subtotal;
                 UpdateDGVSummary(subtotal, total);
@@ -319,7 +314,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             edt_productId.Value = prod.id;
             edt_productName.Text = prod.productName;
-            edt_UNCost.Value = (decimal)prod.productCost;
             edt_ProdUnValue.Value = (decimal)prod.salePrice;
             CalcTotalProdValue();
             CalculateSubTotal();
@@ -581,7 +575,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             sale.User = this.GetUser();
             sale.Client = this.GetClient();
             sale.CancelDate = null;
-            sale.TotalValue = (double)DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value;
+            sale.TotalValue = Convert.ToDouble(DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value);
             sale.PaymentConditionId = (int)edt_payConditionId.Value;
             sale.CancelDate = null;
 
@@ -613,8 +607,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 saleItem.Quantity = Convert.ToInt32(row.Cells["QuantityProduct"].Value);
                 saleItem.ProductValue = Convert.ToDouble(row.Cells["UnValueProduct"].Value);
                 saleItem.TotalValue = Convert.ToDouble(row.Cells["ProductTotalValue"].Value);
-                saleItem.ProductCost = Convert.ToDouble(row.Cells["ProductCost"].Value);
-                saleItem.ItemDiscountCash = Convert.ToDouble(row.Cells["ItemDiscountCash"].Value);
+                saleItem.ProductCost = saleItem.Product.productCost;
+                saleItem.ItemDiscountCash = Convert.ToDouble(row.Cells["ProductDiscoutCash"].Value);
 
                 list.Add(saleItem);
             }
@@ -786,7 +780,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_barCode.Value = 0;
             edt_productId.Value = 0;
             edt_productName.Text = string.Empty;
-            edt_UNCost.Value = 0;
             edt_clientId.Value = 0;
             edt_clientName.Text = string.Empty;
             medt_registrationNumber.Text = string.Empty;
@@ -797,6 +790,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             medt_date.Text = DateTime.Now.ToString();
             DGV_SaleProducts.Rows.Clear();
             DGV_Instalments.Rows.Clear();
+            edt_ProdDiscCash.Value = 0;
         }
 
         private void UnlockCamps()
@@ -805,7 +799,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_barCode.Enabled = true;
             edt_productId.Enabled = true;
             edt_productName.Enabled = true;
-            edt_UNCost.Enabled = true;
             DGV_SaleProducts.Enabled = true;
             btn_FindProduct.Enabled = true;
             btn_AddProduct.Enabled = true;
@@ -813,6 +806,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             btn_SearchPayCondition.Enabled = true;
             btn_new.Enabled = true;
             btn_Save.Enabled = true;
+            edt_ProdDiscCash.Enabled = true;
             btn_Close.Enabled = true;
         }
 
@@ -822,7 +816,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_barCode.Enabled = false;
             edt_productId.Enabled = false;
             edt_productName.Enabled = false;
-            edt_UNCost.Enabled = false;
+            edt_ProdDiscCash.Enabled = false;
             DGV_SaleProducts.Enabled = false;
             btn_FindProduct.Enabled = false;
             btn_AddProduct.Enabled = false;
@@ -845,7 +839,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 Utilities.Msgbox(message, caption, buttons, icon);
                 return false;
             }
-            else if (edt_payConditionId.Value <= 1)
+            else if (edt_payConditionId.Value <= 0)
             {
                 string message = "Condição de pagamento deve ser selecionada.";
                 string caption = "Condição de pagamento inválida.";
@@ -886,7 +880,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_productName.Text = string.Empty;
             edt_barCode.Value = 0;
             edt_amount.Value = 1;
-            edt_UNCost.Value = 0;
             edt_ProdDiscCash.Value = 0;
             edt_ProdUnValue.Value = 0;
             edt_totalPValue.Value = 0;

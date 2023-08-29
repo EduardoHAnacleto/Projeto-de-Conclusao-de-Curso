@@ -26,7 +26,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
 
         public DateTime EmissionDate { get; set; }
         public DateTime DueDate { get; set; }
-        public int IsPaid { get; set; }
+        public int Status { get; set; }
         public DateTime? PaidDate { get; set; }
 
         //public int PurchaseId { get; set; }
@@ -49,7 +49,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
                 bill.BillSeries = purchase.BillSeries;
                 bill.InstalmentNumber = instalments.InstalmentNumber;
                 bill.PaidDate = null;
-                bill.IsPaid = 0;
+                bill.Status = 0;
                 bill.Supplier = purchase.Supplier;
                 bill.Purchase = purchase;
                 bill.EmissionDate = purchase.EmissionDate;

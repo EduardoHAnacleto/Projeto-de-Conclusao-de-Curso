@@ -339,7 +339,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.User = User;
             obj.Supplier = _sController.FindItemId( Convert.ToInt32(edt_supplierId.Value));
             obj.Freight_Cost = Convert.ToDouble(edt_transportFee.Value);
-            obj.PurchasedItems = GetDGVList(obj.id);
+
             obj.EmissionDate = dateTime_emissionDate.Value;
             obj.ExtraExpenses = Convert.ToDouble(edt_extraExpenses.Value);
             obj.InsuranceCost = Convert.ToDouble(edt_insurance.Value);
@@ -348,6 +348,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.BillNumber = Convert.ToInt32(edt_billNumber.Value);
             obj.BillModel = Convert.ToInt32(edt_billModel.Value);
             obj.BillSeries = Convert.ToInt32(edt_billSeries.Value);
+            obj.PurchasedItems = GetDGVList(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
             obj.Total_Cost = this.GetTotalCost(obj.PurchasedItems, obj.ExtraExpenses, obj.InsuranceCost);
             return obj;
         }
@@ -363,13 +364,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             return totalCost + Convert.ToDouble(itemTotalCost);
         }
 
-        public List<PurchaseItems> GetDGVList(int purchaseId)
+        public List<PurchaseItems> GetDGVList(int billNum, int billMod, int bSer, int supId)
         {
             var list = new List<PurchaseItems>();
             foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
             {
                 PurchaseItems item = new PurchaseItems();
-                item.id = purchaseId;
+                item.BillNumberId = billNum;
+                item.BillModelId = billMod;
+                item.BillSeriesId = supId;
+                item.SupplierId = supId;
                 item.Product = _pController.FindItemId(Convert.ToInt32(row.Cells["ProdId"].Value));
                 item.Quantity = Convert.ToInt32(row.Cells["ProdQtd"].Value);
                 item.DiscountCash = Convert.ToDecimal(row.Cells["ProdDiscountCash"].Value);

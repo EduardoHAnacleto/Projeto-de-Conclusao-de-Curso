@@ -109,7 +109,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     var billSeries = dr["billSeries"].ToString(); 
                     var instalmentNumber = dr["instalmentNumber"].ToString();
                     var dueDate = Convert.ToDateTime(dr["dueDate"].ToString()).ToShortDateString();
-                    var isPaid = dr["isPaid"].ToString();
+                    var isPaid = dr["billStatus"].ToString();
                     if (isPaid == "0")
                     {
                         isPaid = "ATIVO";

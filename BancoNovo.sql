@@ -313,7 +313,7 @@
 		instalmentNumber int not null,
         dueDate date not null,
         emissionDate date not null,
-        isPaid int not null,
+        billStatus int not null,
         paidDate date,
         BillValue decimal(10,2) not null,
         payMethod_id int not null references PaymentMethods(id_payment_method),

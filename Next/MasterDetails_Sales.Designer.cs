@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.DGV_Clients = new System.Windows.Forms.DataGridView();
+            this.ClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientRegNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ClientType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_client = new System.Windows.Forms.Label();
             this.edt_clientName = new System.Windows.Forms.TextBox();
             this.btn_FindClient = new System.Windows.Forms.Button();
@@ -60,10 +64,6 @@
             this.btn_Close = new System.Windows.Forms.Button();
             this.lbl_ClientId = new System.Windows.Forms.Label();
             this.edt_clientId = new System.Windows.Forms.NumericUpDown();
-            this.ClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientRegNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ClientType = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -101,6 +101,38 @@
             this.DGV_Clients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Clients.Size = new System.Drawing.Size(637, 168);
             this.DGV_Clients.TabIndex = 0;
+            // 
+            // ClientId
+            // 
+            this.ClientId.HeaderText = "ID";
+            this.ClientId.MinimumWidth = 6;
+            this.ClientId.Name = "ClientId";
+            this.ClientId.ReadOnly = true;
+            this.ClientId.Width = 45;
+            // 
+            // ClientName
+            // 
+            this.ClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ClientName.HeaderText = "Nome";
+            this.ClientName.MinimumWidth = 6;
+            this.ClientName.Name = "ClientName";
+            this.ClientName.ReadOnly = true;
+            // 
+            // ClientRegNumber
+            // 
+            this.ClientRegNumber.HeaderText = "Registro";
+            this.ClientRegNumber.MinimumWidth = 6;
+            this.ClientRegNumber.Name = "ClientRegNumber";
+            this.ClientRegNumber.ReadOnly = true;
+            this.ClientRegNumber.Width = 125;
+            // 
+            // ClientType
+            // 
+            this.ClientType.HeaderText = "Tipo";
+            this.ClientType.MinimumWidth = 6;
+            this.ClientType.Name = "ClientType";
+            this.ClientType.ReadOnly = true;
+            this.ClientType.Width = 125;
             // 
             // lbl_client
             // 
@@ -455,38 +487,6 @@
             this.edt_clientId.Size = new System.Drawing.Size(60, 20);
             this.edt_clientId.TabIndex = 16;
             // 
-            // ClientId
-            // 
-            this.ClientId.HeaderText = "ID";
-            this.ClientId.MinimumWidth = 6;
-            this.ClientId.Name = "ClientId";
-            this.ClientId.ReadOnly = true;
-            this.ClientId.Width = 45;
-            // 
-            // ClientName
-            // 
-            this.ClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ClientName.HeaderText = "Nome";
-            this.ClientName.MinimumWidth = 6;
-            this.ClientName.Name = "ClientName";
-            this.ClientName.ReadOnly = true;
-            // 
-            // ClientRegNumber
-            // 
-            this.ClientRegNumber.HeaderText = "Registro";
-            this.ClientRegNumber.MinimumWidth = 6;
-            this.ClientRegNumber.Name = "ClientRegNumber";
-            this.ClientRegNumber.ReadOnly = true;
-            this.ClientRegNumber.Width = 125;
-            // 
-            // ClientType
-            // 
-            this.ClientType.HeaderText = "Tipo";
-            this.ClientType.MinimumWidth = 6;
-            this.ClientType.Name = "ClientType";
-            this.ClientType.ReadOnly = true;
-            this.ClientType.Width = 125;
-            // 
             // SaleId
             // 
             this.SaleId.HeaderText = "ID Venda";
@@ -513,7 +513,7 @@
             // SaleClientName
             // 
             this.SaleClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SaleClientName.HeaderText = "Nome Cliente";
+            this.SaleClientName.HeaderText = "Cliente";
             this.SaleClientName.MinimumWidth = 6;
             this.SaleClientName.Name = "SaleClientName";
             this.SaleClientName.ReadOnly = true;

@@ -131,16 +131,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (check_Paid.Checked)
             {
                 obj.PaidDate = datePicker_paid.Value;
-                obj.IsPaid = 1;
+                obj.Status = 1;
             }
             else if (check_Active.Checked) 
             {
-                obj.IsPaid = 0;
+                obj.Status = 0;
                 obj.PaidDate = null;
             }
             else
             {
-                obj.IsPaid = 2;
+                obj.Status = 2;
                 obj.PaidDate = null;
             }
             return obj;
@@ -282,19 +282,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 datePicker_paid.Value = (DateTime)bill.PaidDate;
             }
-            if (bill.IsPaid == 1)
+            if (bill.Status == 1)
             {
                 check_Paid.Checked = true;
                 check_Active.Checked = false;
                 check_onHold.Checked = false;
             }
-            else if (bill.IsPaid == 0)
+            else if (bill.Status == 0)
             {
                 check_Active.Checked = true;
                 check_Paid.Checked = false;
                 check_onHold.Checked = false;
             }
-            else if (bill.IsPaid == 2)
+            else if (bill.Status == 2)
             {
                 check_onHold.Checked = true;
                 check_Active.Checked = false;

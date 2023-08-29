@@ -28,9 +28,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "INSERT INTO BILLSTOPAY ( BILLNUMBER, BILLSERIES, BILLMODEL, INSTALMENTNUMBER, DUEDATE, ISPAID, PAIDDATE," +
+            string sql = "INSERT INTO BILLSTOPAY ( BILLNUMBER, BILLSERIES, BILLMODEL, INSTALMENTNUMBER, DUEDATE, billStatus, PAIDDATE," +
                 "BILLVALUE, PAYMETHOD_ID, SUPPLIER_ID, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@BNUMBER, @BSERIES, @BMODEL, @INUMBER, @DUEDATE, @ISPAID, @PDATE, @BVALUE, @METHODID, " +
+                         + " VALUES (@BNUMBER, @BSERIES, @BMODEL, @INUMBER, @DUEDATE, @billStatus, @PDATE, @BVALUE, @METHODID, " +
                          " @SUPPLIERID, @EMISSIONDATE, @DC, @DU);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -43,7 +43,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@INUMBER", obj.InstalmentNumber);
                     command.Parameters.AddWithValue("@DUEDATE", obj.DueDate);
                     command.Parameters.AddWithValue("@EMISSIONDATE", obj.EmissionDate);
-                    command.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
+                    command.Parameters.AddWithValue("@billStatus", obj.Status);
                     if (obj.PaidDate.HasValue)
                     {
                         command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
@@ -83,7 +83,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "UPDATE BILLSTOPAY SET DUEDATE = @DDATE, ISPAID = @IPAID, PAIDDATE = @PDATE, BILLVALUE = @BVALUE, PAYMETHOD_ID = @METHODID, " +
+            string sql = "UPDATE BILLSTOPAY SET DUEDATE = @DDATE, billStatus = @billStatus, PAIDDATE = @PDATE, BILLVALUE = @BVALUE, PAYMETHOD_ID = @METHODID, " +
                 " EMISSIONDATE = @EMISSIONDATE, DATE_LAST_UPDATE = @DU " +
                 "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND INSTALMENTNUMBER = @INUMBER AND SUPPLIER_ID = @SUPPLIERID; ";
 
@@ -93,7 +93,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@DDATE", obj.DueDate);
-                    command.Parameters.AddWithValue("@IPAID", obj.IsPaid);
+                    command.Parameters.AddWithValue("@billStatus", obj.Status);
                     if (obj.PaidDate.HasValue)
                     {
                         command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
@@ -195,7 +195,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         BillModel = Convert.ToInt32(reader["billSeries"]),
 
                                         TotalValue = Convert.ToDouble(reader["BillValue"]),
-                                        IsPaid = Convert.ToInt32(reader["isPaid"]),
+                                        Status = Convert.ToInt32(reader["billStatus"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
@@ -257,7 +257,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     BillModel = billModel,
 
                                     TotalValue = Convert.ToDouble(reader["BillValue"]),
-                                    IsPaid = Convert.ToInt32(reader["isPaid"]),
+                                    Status = Convert.ToInt32(reader["isPaid"]),
                                     DueDate = Convert.ToDateTime(reader["dueDate"]),
                                     EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                     Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
@@ -316,7 +316,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         BillModel = Convert.ToInt32(reader["billSeries"]),
 
                                         TotalValue = Convert.ToDouble(reader["BillValue"]),
-                                        IsPaid = Convert.ToInt32(reader["isPaid"]),
+                                        Status = Convert.ToInt32(reader["billStatus"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         PaidDate = Convert.ToDateTime(reader["paidDate"]),
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
@@ -409,7 +409,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 
                                         TotalValue = Convert.ToDouble(reader["BillValue"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
-                                        IsPaid = Convert.ToInt32(reader["isPaid"]),
+                                        Status = Convert.ToInt32(reader["billStatus"]),
                                         PaidDate = Convert.ToDateTime(reader["paidDate"]),
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
