@@ -103,6 +103,9 @@
             this.DGV_SaleSummary = new System.Windows.Forms.DataGridView();
             this.SaleSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gbox_Status = new System.Windows.Forms.GroupBox();
+            this.check_Active = new System.Windows.Forms.CheckBox();
+            this.check_Cancelled = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -125,6 +128,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleSummary)).BeginInit();
+            this.gbox_Status.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGV_SaleProducts
@@ -143,6 +147,7 @@
             this.DGV_SaleProducts.Location = new System.Drawing.Point(15, 225);
             this.DGV_SaleProducts.MultiSelect = false;
             this.DGV_SaleProducts.Name = "DGV_SaleProducts";
+            this.DGV_SaleProducts.ReadOnly = true;
             this.DGV_SaleProducts.RowHeadersVisible = false;
             this.DGV_SaleProducts.RowHeadersWidth = 51;
             this.DGV_SaleProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
@@ -948,11 +953,48 @@
             this.SaleTotal.Name = "SaleTotal";
             this.SaleTotal.ReadOnly = true;
             // 
+            // gbox_Status
+            // 
+            this.gbox_Status.Controls.Add(this.check_Active);
+            this.gbox_Status.Controls.Add(this.check_Cancelled);
+            this.gbox_Status.Enabled = false;
+            this.gbox_Status.Location = new System.Drawing.Point(620, 12);
+            this.gbox_Status.Name = "gbox_Status";
+            this.gbox_Status.Size = new System.Drawing.Size(83, 59);
+            this.gbox_Status.TabIndex = 30;
+            this.gbox_Status.TabStop = false;
+            this.gbox_Status.Text = "* Status";
+            // 
+            // check_Active
+            // 
+            this.check_Active.AutoSize = true;
+            this.check_Active.Checked = true;
+            this.check_Active.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.check_Active.Location = new System.Drawing.Point(6, 14);
+            this.check_Active.Name = "check_Active";
+            this.check_Active.Size = new System.Drawing.Size(50, 17);
+            this.check_Active.TabIndex = 11;
+            this.check_Active.Text = "Ativo";
+            this.check_Active.UseVisualStyleBackColor = true;
+            this.check_Active.CheckedChanged += new System.EventHandler(this.check_Active_CheckedChanged);
+            // 
+            // check_Cancelled
+            // 
+            this.check_Cancelled.AutoSize = true;
+            this.check_Cancelled.Location = new System.Drawing.Point(6, 37);
+            this.check_Cancelled.Name = "check_Cancelled";
+            this.check_Cancelled.Size = new System.Drawing.Size(77, 17);
+            this.check_Cancelled.TabIndex = 12;
+            this.check_Cancelled.Text = "Cancelado";
+            this.check_Cancelled.UseVisualStyleBackColor = true;
+            this.check_Cancelled.CheckedChanged += new System.EventHandler(this.check_Cancelled_CheckedChanged);
+            // 
             // Frm_Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1187, 684);
+            this.Controls.Add(this.gbox_Status);
             this.Controls.Add(this.DGV_SaleSummary);
             this.Controls.Add(this.gbox_paymentCondition);
             this.Controls.Add(this.gbox_date);
@@ -992,6 +1034,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleSummary)).EndInit();
+            this.gbox_Status.ResumeLayout(false);
+            this.gbox_Status.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1072,5 +1116,8 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductDiscoutCash;
         private System.Windows.Forms.DataGridViewTextBoxColumn UnValueProduct;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductTotalValue;
+        private System.Windows.Forms.GroupBox gbox_Status;
+        private System.Windows.Forms.CheckBox check_Active;
+        private System.Windows.Forms.CheckBox check_Cancelled;
     }
 }

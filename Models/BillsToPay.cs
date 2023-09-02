@@ -16,6 +16,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             Suppliers Supplier = new Suppliers();
             PaymentMethods PaymentMethod = new PaymentMethods();
             Purchases Purchase = new Purchases();
+            PaymentConditions PaymentCondition = new PaymentConditions();
         }
 
         public int BillNumber { get; set; }
@@ -33,6 +34,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public Purchases Purchase { get; set; }
         public Suppliers Supplier { get; set; }
         public PaymentMethods PaymentMethod { get; set; }
+        public PaymentConditions PaymentCondition { get; set; }
 
         public static List<BillsToPay> MakeBills(Purchases purchase, PaymentConditions condition)
         {
@@ -44,6 +46,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             foreach (BillsInstalments instalments in cond.BillsInstalments)
             {
                 BillsToPay bill = new BillsToPay();
+                bill.PaymentCondition = cond;
                 bill.BillNumber = purchase.BillNumber;
                 bill.BillModel = purchase.BillModel;
                 bill.BillSeries = purchase.BillSeries;
@@ -54,7 +57,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
                 bill.Purchase = purchase;
                 bill.EmissionDate = purchase.EmissionDate;
                 bill.DueDate = purchase.EmissionDate.AddDays(instalments.TotalDays);
-                bill.TotalValue = (instalments.ValuePercentage / 100) * purchase.Total_Cost;
+                bill.TotalValue = ((instalments.ValuePercentage / 100) * purchase.Total_Cost) + (cond.paymentFees/ cond.BillsInstalments.Count);
                 bill.PaymentMethod = instalments.PaymentMethod;
 
                 list.Add(bill);

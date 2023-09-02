@@ -65,7 +65,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 edt_barCode.Focus();
                 return false;
             }
-            else if (Convert.ToDecimal(edt_productCost.Text) > Convert.ToDecimal(edt_productSalePrice.Text))
+            else if (Convert.ToDecimal(edt_productCost.Text) >= Convert.ToDecimal(edt_productSalePrice.Text))
             {
                 string message = "Valor de venda deve ser maior que o de custo.";
                 string caption = "Campo inválido.";

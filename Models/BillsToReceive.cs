@@ -15,7 +15,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             Clients Client = new Clients();
             PaymentMethods PaymentMethod = new PaymentMethods();
             Sales Sale = new Sales();
-        }
+            PaymentConditions PaymentCondition = new PaymentConditions();
+    }
 
         public bool IsPaid { get; set; }
         public Clients Client { get; set; }
@@ -27,6 +28,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public DateTime DueDate { get; set; }
         public DateTime? PaidDate { get; set; }
         public double InstalmentValue { get; set; }
+        public PaymentConditions PaymentCondition { get; set; }
 
         public static List<BillsToReceive> MakeBills(Sales sale, int saleId)
         {
@@ -39,6 +41,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             foreach (BillsInstalments instalments in cond.BillsInstalments)
             {
                 BillsToReceive bill = new BillsToReceive();
+                bill.PaymentCondition = cond;
                 bill.InstalmentNumber = instalments.InstalmentNumber;
                 bill.PaidDate = null;
                 bill.IsPaid = false;           
@@ -47,7 +50,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
                 bill.Sale.id = saleId;
                 bill.EmissionDate = emDate;
                 bill.DueDate = emDate.AddDays(instalments.TotalDays);
-                bill.InstalmentValue = (instalments.ValuePercentage/100) * sale.TotalValue;
+                bill.InstalmentValue = ((instalments.ValuePercentage/100) * sale.TotalValue) + (cond.paymentFees / cond.BillsInstalments.Count);
                 bill.PaymentMethod = instalments.PaymentMethod;
                 bill.InstalmentsQtd = instalmentQtd;
 

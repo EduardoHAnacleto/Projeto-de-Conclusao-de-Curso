@@ -367,6 +367,12 @@
     <Compile Include="Authorization\Frm_UserControl_Login.Designer.cs">
       <DependentUpon>Frm_UserControl_Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Next\MasterDetails_SaleProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Next\MasterDetails_SaleProducts.Designer.cs">
+      <DependentUpon>MasterDetails_SaleProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Next\MasterDetails_Sales.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -520,6 +526,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Authorization\Frm_UserControl_Login.resx">
       <DependentUpon>Frm_UserControl_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Next\MasterDetails_SaleProducts.resx">
+      <DependentUpon>MasterDetails_SaleProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Next\MasterDetails_Sales.resx">
       <DependentUpon>MasterDetails_Sales.cs</DependentUpon>

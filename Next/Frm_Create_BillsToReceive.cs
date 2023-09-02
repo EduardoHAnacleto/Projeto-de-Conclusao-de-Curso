@@ -78,6 +78,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_clientName.Text = obj.Client.name;
             edt_instalmentId.Value = obj.InstalmentNumber;
             edt_instalmentValue.Value = (decimal)obj.InstalmentValue;
+
+            if (obj.DueDate.Day > DateTime.Today.Day)
+            {
+                edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue - (obj.InstalmentValue * obj.PaymentCondition.discountPerc / 100));
+            }
+            else
+            {
+                edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue + obj.PaymentCondition.fineValue);
+            }
+
+
             edt_saleNumber.Value = obj.Sale.id;
             cbox_paymentMethod.SelectedItem = obj.PaymentMethod.paymentMethod;
             datePicker_emission.Value = obj.EmissionDate;

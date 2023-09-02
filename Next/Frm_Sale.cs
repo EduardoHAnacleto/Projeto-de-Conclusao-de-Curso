@@ -78,6 +78,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_payConditionFine.Value = 0;
             edt_payConditionId.Value = 0;
             edt_payConditionQnt.Value = 0;
+            gbox_Status.Enabled = false;
 
             DGV_SaleProducts.Rows.Clear();
         }
@@ -91,8 +92,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             else if (btn_new.Text == "&Alterar")
             {
                 BackupSale = Sale;
-                BackupSale.dateOfCreation = Convert.ToDateTime(medt_date.Text);
+               // BackupSale.dateOfCreation = Sale.dateOfCreation;
                 UnlockCamps();
+                gbox_Status.Enabled = true;
                 btn_CancelSale.Visible = true;
                 btn_new.Text = "Cancelar";
                 lbl_new.Text = "Cancelar";
@@ -104,6 +106,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 LockCamps();
                 SetFormToEdit();
                 PopulateCamps(BackupSale);
+                gbox_Status.Enabled = false;
                 btn_CancelSale.Visible = false;
             }
         }
@@ -474,9 +477,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 {
                     DGV_Instalments.Rows.Add();
                     DGV_Instalments.Rows[i].Cells["InstalmentNumber"].Value = item.InstalmentNumber.ToString();
-                    DGV_Instalments.Rows[i].Cells["IntalmentDays"].Value = item.TotalDays.ToString();
+                    DGV_Instalments.Rows[i].Cells["InstalmentDays"].Value = item.TotalDays.ToString();
                     DGV_Instalments.Rows[i].Cells["InstalmentPercentage"].Value = item.ValuePercentage.ToString();
-                    DGV_Instalments.Rows[i].Cells["InstalmentPayMethod"].Value = item.PaymentMethod.paymentMethod.ToString();
+                    DGV_Instalments.Rows[i].Cells["InstalmentMethod"].Value = item.PaymentMethod.paymentMethod.ToString();
                     i++;
                 }
             }
@@ -515,6 +518,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     {
                         if (ConfirmSale(sale))
                         {
+                            sale.dateOfCreation = DateTime.Now;
                             status = _controller.SaveItem(sale);
                             if (status)
                             {
@@ -574,10 +578,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
             sale.User = this.GetUser();
             sale.Client = this.GetClient();
-            sale.CancelDate = null;
             sale.TotalValue = Convert.ToDouble(DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value);
             sale.PaymentConditionId = (int)edt_payConditionId.Value;
-            sale.CancelDate = null;
+            if (check_Active.Checked)
+            {
+                sale.CancelDate = null;
+            }
+            else
+            {
+                sale.CancelDate = DateTime.Today;
+            }
 
             sale.SaleItems = this.GetSaleItems(idSale);
             sale.TotalCost = this.GetTotalCost(sale.SaleItems);
@@ -699,6 +709,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public void PopulateCamps(Sales sale)
         {
+            PaymentConditions_Controller pcController = new PaymentConditions_Controller();
             Populated(true);
             SetFormToEdit();
             PopulateUser(sale);
@@ -706,6 +717,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             PopulatePaymentCondition(sale);
             PopulateDGV(sale);
             PopulateDate(sale);
+            PopulateBillsDGV(pcController.FindItemId(Convert.ToInt32(edt_payConditionId.Value)).BillsInstalments);
             CalculateSubTotal();
         }
 
@@ -765,9 +777,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 DGV_SaleProducts.Rows.Add(
                     item.Product.id,
                     item.Product.productName,
-                    item.Product.productCost,
                     item.Quantity,
                     item.ItemDiscountCash,
+                    item.Product.productCost,
                     item.ProductValue,
                     totalValue
                     );
@@ -791,6 +803,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             DGV_SaleProducts.Rows.Clear();
             DGV_Instalments.Rows.Clear();
             edt_ProdDiscCash.Value = 0;
+            edt_ProdUnValue.Value = 0;
+            edt_totalPValue.Value = 0;
         }
 
         private void UnlockCamps()
@@ -967,74 +981,40 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             if (DGV_SaleProducts.Rows.Count > 0)
             {
-                DGV_SaleProducts.Rows.RemoveAt(DGV_SaleProducts.SelectedRows[0].Index);
-                CalculateSubTotal();
+                string caption = "Deseja apagar o produto da venda?";
+                string message = "Apagar Produto : "
+                                 + Environment.NewLine
+                                 + DGV_SaleProducts.SelectedRows[0].Cells["NameProduct"].Value.ToString()
+                                 + Environment.NewLine
+                                 + " "
+                                 + Environment.NewLine
+                                 + "      Apagar?";
+
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    DGV_SaleProducts.Rows.RemoveAt(DGV_SaleProducts.SelectedRows[0].Index);
+                    CalculateSubTotal();
+                }
             }
         }
-          // TESTES //
-        private SaleItems GetSaleItemsTeste(int prodId, int saleId, int qtd)
+
+        private void check_Active_CheckedChanged(object sender, EventArgs e)
         {
-            SaleItems testeitems = new SaleItems();
-            Products prod1 = _pController.FindItemId(prodId);
-            testeitems.Product = prod1;
-            testeitems.ProductCost = prod1.productCost;
-            testeitems.ItemDiscountCash = 0;
-            testeitems.Quantity = qtd;
-            testeitems.ProductValue = prod1.salePrice;
-            testeitems.id = saleId;
-            testeitems.TotalValue = testeitems.ProductCost * testeitems.Quantity;
-            testeitems.dateOfLastUpdate = DateTime.Now;
-            testeitems.dateOfCreation = DateTime.Now;
-            return testeitems;
+            if (check_Active.Checked)
+            {
+                check_Cancelled.Checked = false;
+            }
         }
 
-        private void btnTeste_Click(object sender, EventArgs e)
+        private void check_Cancelled_CheckedChanged(object sender, EventArgs e)
         {
-            PaymentConditions cond = new PaymentConditions();
-            PaymentConditions_Controller cont = new PaymentConditions_Controller();
-            Users_Controller uController = new Users_Controller();
-            Users user = uController.FindItemId(2);
-            List<SaleItems> listaItems = new List<SaleItems>();
-            Clients_Controller clientC = new Clients_Controller();
-            Clients cli = new Clients();
-            //
-            int saleId = _controller.BringNewId();
-
-            listaItems.Add(GetSaleItemsTeste(2, saleId, 2));
-            listaItems.Add(GetSaleItemsTeste(3, saleId, 3));
-
-            cond = cont.FindItemId(3);
-
-            cli = clientC.FindItemId(2);
-            //
-            Sales sale = new Sales();
-
-            sale.id = saleId;
-            sale.PaymentConditionId = cond.id;
-            sale.User = user;
-            sale.SaleItems = listaItems;
-            sale.Client = cli;
-
-            sale.dateOfCreation = DateTime.Now;
-            sale.dateOfLastUpdate = DateTime.Now;
-            sale.CancelDate = DateTime.Now;
-            sale.User = user;
-
-            sale.TotalValue = 4036;
-            sale.TotalCost = 1500.9 + 1500.9 + 8 + 8 + 8;
-            sale.TotalItemsQuantity = 5;
-            PopulateCamps(sale);
-            //bool status = _controller.SaveItem(sale);
-            //MessageBox.Show(status.ToString());
+            if (check_Cancelled.Checked)
+            {
+                check_Active.Checked = false;
+            }
         }
-
-        private void btnEditTeste_Click(object sender, EventArgs e)
-        {
-            Sales sale = new Sales();
-            sale = _controller.FindItemId(10);
-            PopulateCamps(sale);
-        }
-
-
     }
 }

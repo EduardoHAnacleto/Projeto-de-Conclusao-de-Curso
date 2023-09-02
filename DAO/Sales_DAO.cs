@@ -128,14 +128,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         //        return status;
         //    }
         //}
-
         public bool SaveToDb(Sales sale)
         {
             bool status = false;
 
-            string sql = "INSERT INTO SALES (CLIENT_ID, USER_ID, SALE_TOTAL_COST, SALE_TOTAL_VALUE, SALE_DISCOUNT_CASH, SALE_DISCOUNT_PERC," +
-                "TOTAL_ITEMS_QUANTITY, DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@CLIENTID, @USERID, @SALECOST, @SALEVALUE, @SALEDISCCASH, @SALEDISCPERC, @TOTALQTD, @DC, @DU);";
+            string sql = "INSERT INTO SALES (CLIENT_ID, USER_ID, SALE_TOTAL_COST, SALE_TOTAL_VALUE, " +
+                "TOTAL_ITEMS_QUANTITY, DATE_CREATION, SALE_CANCEL_DATE, paycondition_id ) "
+                         + " VALUES (@CLIENTID, @USERID, @SALECOST, @SALEVALUE, @TOTALQTD, @DC, @CANCELDATE, @PAYCONDID);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -146,8 +145,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@SALECOST", (decimal)sale.TotalCost);
                     command.Parameters.AddWithValue("@SALEVALUE", (decimal)sale.TotalValue);
                     command.Parameters.AddWithValue("@TOTALQTD", sale.TotalItemsQuantity);
+                    command.Parameters.AddWithValue("@PAYCONDID", sale.PaymentConditionId);
                     command.Parameters.AddWithValue("@DC", sale.dateOfCreation);
-                    command.Parameters.AddWithValue("@DU", sale.dateOfLastUpdate);
+                    if (sale.CancelDate == null)
+                    {
+                        command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@CANCELDATE", sale.CancelDate);
+                    }
+
                     connection.Open();
                     //int i = command.ExecuteNonQuery();
                     var i = command.ExecuteNonQuery();
@@ -200,15 +208,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             if (sale.CancelDate == null)
             {
                 sql = "UPDATE SALES SET CLIENT_ID = @CLIENTID, USER_ID = @USERID, SALE_TOTAL_COST = @SALECOST," +
-                    " SALE_TOTAL_VALUE = @SALEVALUE, SALE_DISCOUNT_CASH = @SALEDISCCASH, SALE_DISCOUNT_PERC = @SALEDISCPERC ," +
-                    " TOTAL_ITEMS_QUANTITY = @TOTALQTD, DATE_LAST_UPDATE = @DU " +
+                    " SALE_TOTAL_VALUE = @SALEVALUE," +
+                    " TOTAL_ITEMS_QUANTITY = @TOTALQTD, DATE_LAST_UPDATE = @DU, paycondId = @PAYCONDID " +
                     "WHERE ID_SALE = @ID ; ";
             }
             else
             {
                 sql = "UPDATE SALES SET CLIENT_ID = @CLIENTID, USER_ID = @USERID, SALE_TOTAL_COST = @SALECOST," +
-                    " SALE_TOTAL_VALUE = @SALEVALUE, SALE_DISCOUNT_CASH = @SALEDISCCASH, SALE_DISCOUNT_PERC = @SALEDISCPERC ," +
-                    " TOTAL_ITEMS_QUANTITY = @TOTALQTD, SALE_CANCEL_DATE = @CANCELDATE, DATE_LAST_UPDATE = @DU " +
+                    " SALE_TOTAL_VALUE = @SALEVALUE, " +
+                    " TOTAL_ITEMS_QUANTITY = @TOTALQTD, SALE_CANCEL_DATE = @CANCELDATE, DATE_LAST_UPDATE = @DU, paycondId = @PAYCONDID  " +
                     "WHERE ID_SALE = @ID ; ";
             }
 
@@ -221,10 +229,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@USERID", sale.User.id);
                     command.Parameters.AddWithValue("@SALECOST", (decimal)sale.TotalCost);
                     command.Parameters.AddWithValue("@SALEVALUE", (decimal)sale.TotalValue);
+                    command.Parameters.AddWithValue("@PAYCONDID", sale.PaymentConditionId);
                     command.Parameters.AddWithValue("@TOTALQTD", sale.TotalItemsQuantity);
-                    command.Parameters.AddWithValue("@CANCELDATE", sale.CancelDate);
+                    if (sale.CancelDate != null)
+                    {
+                        command.Parameters.AddWithValue("@CANCELDATE", sale.CancelDate);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
+                    }
+
                     command.Parameters.AddWithValue("@DC", sale.dateOfCreation);
-                    command.Parameters.AddWithValue("@DU", sale.dateOfLastUpdate);
+
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     connection.Close();
@@ -330,21 +347,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 Sales obj = new Sales();
 
                                 obj.id = id;
-                                obj.User = _usersController.FindItemId( Convert.ToInt32(reader["user_id"]));
+                                obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                 obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                               // obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
                                 obj.SaleItems = _saleItemsController.FindSaleId(id);
                                 obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                 obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
+                                obj.PaymentConditionId = Convert.ToInt32(reader["paycondition_id"]);
                                 obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
-                               // obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                // obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
                                 obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
-                                obj.dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]);
 
                                 if (reader["sale_cancel_date"].ToString() != string.Empty)
                                 {
-                                    DateTime date = Convert.ToDateTime(reader["sale_cancel_date"]);
-                                    obj.CancelDate = date;
+                                    obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
                                 }
                                 else
                                 {
@@ -390,13 +405,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.id = Convert.ToInt32(reader["id_sale"]); ;
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(id);
-                                    //obj.BillToReceive = _billToReceiveController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
-                                    obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
+                                    obj.PaymentConditionId = Convert.ToInt32(reader["paycondId"]);
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
-                                    obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    if (reader["sale_cancel_date"].ToString() != string.Empty)
+                                    {
+                                        obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    }
+                                    else
+                                    {
+                                        obj.CancelDate = null;
+                                    }
+
                                     obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
                                     obj.dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]);
                                     list.Add(obj);
@@ -442,13 +464,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.id = Convert.ToInt32(reader["id_sale"]); ;
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                    //obj.BillToReceive = _billToReceiveController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
-                                    obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
+                                    obj.PaymentConditionId = Convert.ToInt32(reader["paycondId"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
-                                    obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+
+                                    if (reader["sale_cancel_date"].ToString() != string.Empty)
+                                    {
+                                        obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    }
+                                    else
+                                    {
+                                        obj.CancelDate = null;
+                                    }
                                     obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
                                     obj.dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]);
                                     list.Add(obj);
@@ -493,13 +522,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.id = Convert.ToInt32(reader["id_sale"]); ;
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                    //obj.BillToReceive = _billToReceiveController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
-                                    obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
+                                    obj.PaymentConditionId = Convert.ToInt32(reader["paycondId"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
-                                    obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    if (reader["sale_cancel_date"].ToString() != string.Empty)
+                                    {
+                                        obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    }
+                                    else
+                                    {
+                                        obj.CancelDate = null;
+                                    }
                                     obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
                                     obj.dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]);
                                     list.Add(obj);
@@ -544,13 +579,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.id = Convert.ToInt32(reader["id_sale"]); ;
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                    //obj.BillToReceive = _billToReceiveController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
-                                    obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
+                                    obj.PaymentConditionId = Convert.ToInt32(reader["paycondId"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
-                                    obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    if (reader["sale_cancel_date"].ToString() != string.Empty)
+                                    {
+                                        obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    }
+                                    else
+                                    {
+                                        obj.CancelDate = null;
+                                    }
                                     obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
                                     obj.dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]);
                                     list.Add(obj);
@@ -594,13 +635,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.id = Convert.ToInt32(reader["id_sale"]); ;
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
-                                    //obj.BillToReceive = _billToReceiveController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
                                     obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
-                                    obj.PaymentConditionId = Convert.ToInt32(reader["payConditionId"]);
+                                    obj.PaymentConditionId = Convert.ToInt32(reader["paycondId"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
-                                    obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    if (reader["sale_cancel_date"].ToString() != string.Empty)
+                                    {
+                                        obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    }
+                                    else
+                                    {
+                                        obj.CancelDate = null;
+                                    }
                                     obj.dateOfCreation = Convert.ToDateTime(reader["date_creation"]);
                                     obj.dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]);
                                     list.Add(obj);

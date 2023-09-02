@@ -267,7 +267,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_BillNum.Value = bill.BillNumber;
             edt_BillSeries.Value = bill.BillSeries;
             edt_instalmentNumber.Value = bill.InstalmentNumber;
-            edt_totalValue.Value = (decimal)bill.TotalValue;
+            if (bill.DueDate.Day > DateTime.Today.Day)
+            {
+                edt_totalValue.Value = Convert.ToDecimal(bill.TotalValue - (bill.TotalValue * bill.PaymentCondition.discountPerc/100));
+            }
+            else
+            {
+                edt_totalValue.Value = Convert.ToDecimal(bill.TotalValue + bill.PaymentCondition.fineValue);
+            }
+
             cbox_payMethod.SelectedItem = bill.PaymentMethod.paymentMethod;
             datePicker_due.Value = bill.DueDate;
             lbl_CreationDate.Text = bill.dateOfCreation.ToShortTimeString();

@@ -30,7 +30,7 @@
     There are any number of "resheader" rows that contain simple 
     name/value pairs.
     
-    Each data row contains a name, and value. A Linha also contains a 
+    Each data row contains a name, and value. The row also contains a 
     type or mimetype. Type corresponds to a .NET class that support 
     text/value conversion through the TypeConverter architecture. 
     Classes that don't support this are serialized and stored with the 
@@ -119,25 +119,25 @@
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
   <data name="customerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="customerToolStripMenuItem.Text" xml:space="preserve">
     <value>Clientes</value>
   </data>
   <data name="employeeToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="employeeToolStripMenuItem.Text" xml:space="preserve">
     <value>Funcionários</value>
   </data>
   <data name="suppliersToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="suppliersToolStripMenuItem.Text" xml:space="preserve">
     <value>Fornecedores</value>
   </data>
   <data name="phoneClassificationToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>175, 22</value>
   </data>
   <data name="phoneClassificationToolStripMenuItem.Text" xml:space="preserve">
     <value>Classe de Telefones</value>
@@ -149,31 +149,31 @@
     <value>Pessoas</value>
   </data>
   <data name="productToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="productToolStripMenuItem.Text" xml:space="preserve">
     <value>Produtos</value>
   </data>
   <data name="productGroupsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="productGroupsToolStripMenuItem.Text" xml:space="preserve">
     <value>Grupo de Produtos</value>
   </data>
   <data name="brandsToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="brandsToolStripMenuItem1.Text" xml:space="preserve">
     <value>Marcas</value>
   </data>
   <data name="servicesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="servicesToolStripMenuItem.Text" xml:space="preserve">
     <value>Serviços</value>
   </data>
   <data name="purchasesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>174, 22</value>
   </data>
   <data name="purchasesToolStripMenuItem.Text" xml:space="preserve">
     <value>Compras</value>
@@ -185,19 +185,19 @@
     <value>Produtos</value>
   </data>
   <data name="citiesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>116, 22</value>
   </data>
   <data name="citiesToolStripMenuItem.Text" xml:space="preserve">
     <value>Cidades</value>
   </data>
   <data name="statesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>116, 22</value>
   </data>
   <data name="statesToolStripMenuItem.Text" xml:space="preserve">
     <value>Estados</value>
   </data>
   <data name="countriesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>116, 22</value>
   </data>
   <data name="countriesToolStripMenuItem.Text" xml:space="preserve">
     <value>Países</value>
@@ -209,13 +209,13 @@
     <value>Localizações</value>
   </data>
   <data name="methodsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>130, 22</value>
   </data>
   <data name="methodsToolStripMenuItem.Text" xml:space="preserve">
     <value>Métodos</value>
   </data>
   <data name="conditionsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>130, 22</value>
   </data>
   <data name="conditionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Condições</value>
@@ -239,7 +239,7 @@
     <value>Buscar Contas à Pagar</value>
   </data>
   <data name="billsToPayToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>165, 22</value>
   </data>
   <data name="billsToPayToolStripMenuItem.Text" xml:space="preserve">
     <value>Contas à Pagar</value>
@@ -257,7 +257,7 @@
     <value>Buscar Contas à Receber</value>
   </data>
   <data name="billsToReceiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>165, 22</value>
   </data>
   <data name="billsToReceiveToolStripMenuItem.Text" xml:space="preserve">
     <value>Contas à Receber</value>
@@ -287,16 +287,22 @@
     <value>FormTeste</value>
   </data>
   <data name="newSaleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>202, 22</value>
   </data>
   <data name="newSaleToolStripMenuItem.Text" xml:space="preserve">
     <value>Nova Venda</value>
   </data>
   <data name="findSalesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>202, 22</value>
   </data>
   <data name="findSalesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Buscar Vendas</value>
+    <value>Buscar Vendas/Clientes</value>
+  </data>
+  <data name="buscarVendasProdutosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>202, 22</value>
+  </data>
+  <data name="buscarVendasProdutosToolStripMenuItem.Text" xml:space="preserve">
+    <value>Buscar Vendas/Produtos</value>
   </data>
   <data name="saleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>56, 20</value>
@@ -532,6 +538,12 @@
     <value>findSalesToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;findSalesToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buscarVendasProdutosToolStripMenuItem.Name" xml:space="preserve">
+    <value>buscarVendasProdutosToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;buscarVendasProdutosToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">
