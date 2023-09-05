@@ -16,7 +16,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             Users User;
         }
 
-        public int PaymentConditionId { get; set; }
+        public PaymentConditions PaymentCondition { get; set; }
         public Users User { get; set; }
         public Clients Client { get; set; }
         public DateTime? CancelDate { get; set; }

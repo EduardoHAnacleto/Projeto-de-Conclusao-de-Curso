@@ -361,7 +361,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         public bool ConfirmSale(Sales sale) //To do: Abre form de adicionar condição de pagamento para completar a venda
         {
             PaymentConditions_Controller _pCController = new PaymentConditions_Controller();
-            PaymentConditions obj = _pCController.FindItemId(sale.PaymentConditionId);
+            PaymentConditions obj = _pCController.FindItemId(sale.PaymentCondition.id);
             string caption = "Confirme a venda.";
             string message = "Cliente : "
                              + sale.Client.name
@@ -574,12 +574,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             DateTime emissionDate = DateTime.Now;
             Sales sale = new Sales();
+            PaymentConditions_Controller pcController = new PaymentConditions_Controller();
             int idSale = _controller.BringNewId();
 
             sale.User = this.GetUser();
             sale.Client = this.GetClient();
             sale.TotalValue = Convert.ToDouble(DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value);
-            sale.PaymentConditionId = (int)edt_payConditionId.Value;
+            sale.PaymentCondition = pcController.FindItemId((int)edt_payConditionId.Value);
             if (check_Active.Checked)
             {
                 sale.CancelDate = null;
@@ -742,7 +743,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         public void PopulatePaymentCondition(Sales sale)
         {
             PaymentConditions_Controller _pCController = new PaymentConditions_Controller();
-            PaymentConditions obj = _pCController.FindItemId(sale.PaymentConditionId);
+            PaymentConditions obj = _pCController.FindItemId(sale.PaymentCondition.id);
             edt_payCondition.Text = obj.conditionName;
             edt_payConditionDiscount.Value = (decimal)obj.discountPerc;
             edt_payConditionFees.Value = (decimal)obj.paymentFees;

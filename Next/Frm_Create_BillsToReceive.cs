@@ -79,7 +79,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_instalmentId.Value = obj.InstalmentNumber;
             edt_instalmentValue.Value = (decimal)obj.InstalmentValue;
 
-            if (obj.DueDate.Day > DateTime.Today.Day)
+            if (obj.DueDate > DateTime.Today)
             {
                 edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue - (obj.InstalmentValue * obj.PaymentCondition.discountPerc / 100));
             }

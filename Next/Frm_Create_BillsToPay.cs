@@ -267,7 +267,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_BillNum.Value = bill.BillNumber;
             edt_BillSeries.Value = bill.BillSeries;
             edt_instalmentNumber.Value = bill.InstalmentNumber;
-            if (bill.DueDate.Day > DateTime.Today.Day)
+            if (bill.DueDate > DateTime.Today)
             {
                 edt_totalValue.Value = Convert.ToDecimal(bill.TotalValue - (bill.TotalValue * bill.PaymentCondition.discountPerc/100));
             }

@@ -28,9 +28,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             bool status = false;
 
             string sql = "INSERT INTO PURCHASES (BILLMODEL, BILLNUMBER, BILLSERIES, SUPPLIER_ID, EMISSIONDATE, ARRIVALDATE, FREIGHTCOST, PURCHASE_TOTALCOST, " +
-                " PURCHASE_EXTRAEXPENSES, PURCHASE_INSURANCECOST, USER_ID, DATE_CREATION, DATE_LAST_UPDATE ) "
+                " PURCHASE_EXTRAEXPENSES, PURCHASE_INSURANCECOST, USER_ID, DATE_CREATION, DATE_LAST_UPDATE, PAYCONDITION_ID ) "
                          + " VALUES (@BMODEL, @BNUM, @BSERIES, @SUPPLIERID, @EMDATE, @ARRIVALDATE, @FREIGHT, @TOTALCOST, @EXPENSES," +
-                         " @INSURANCE, @USERID, @DC, @DU);";
+                         " @INSURANCE, @USERID, @DC, @DU, @PAYCONDID);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -41,6 +41,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
+                    command.Parameters.AddWithValue("@PAYCONDID", obj.PaymentCondition.id);
                     command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
                     command.Parameters.AddWithValue("@FREIGHT", (decimal)obj.Freight_Cost);
                     command.Parameters.AddWithValue("@TOTALCOST", (decimal)obj.Total_Cost);
@@ -77,7 +78,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
             string sql = "UPDATE PURCHASES SET EMISSIONDATE = @EMDATE, ARRIVALDATE = @ARRIVALDATE, FREIGHTCOST = @FREIGHT," +
                 " PURCHASE_TOTALCOST = @TOTALCOST, PURCHASE_EXTRAEXPENSES = @EXPENSES, " +
-                " PURCHASE_INSURANCECOST = @INSURANCE," +
+                " PURCHASE_INSURANCECOST = @INSURANCE, PAYCONDITION_ID = @PAYCONDID, " +
                 " USER_ID = @USERID, DATE_LAST_UPDATE = @USERID " +
                 " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
 
@@ -91,6 +92,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                     command.Parameters.AddWithValue("@STATUS", obj.Status);
+                    command.Parameters.AddWithValue("@PAYCONDID", obj.PaymentCondition.id);
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
                     command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
                     command.Parameters.AddWithValue("@FREIGHT", (decimal)obj.Freight_Cost);
@@ -184,6 +186,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                     ArrivalDate = Convert.ToDateTime(reader["arrivalDate"]),
                                     Freight_Cost = Convert.ToDouble(reader["freightCost"]),
+                                    PaymentCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["paycondition_id"])),
                                     Total_Cost = Convert.ToDouble(reader["purchase_TotalCost"]),
                                     ExtraExpenses = Convert.ToDouble(reader["purchase_ExtraExpenses"]),
                                     InsuranceCost = Convert.ToDouble(reader["purchase_InsuranceCost"]),

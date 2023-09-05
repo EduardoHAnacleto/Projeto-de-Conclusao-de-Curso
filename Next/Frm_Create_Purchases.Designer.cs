@@ -270,7 +270,7 @@
             // btn_removeItem
             // 
             this.btn_removeItem.Location = new System.Drawing.Point(1055, 11);
-            this.btn_removeItem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_removeItem.Margin = new System.Windows.Forms.Padding(2);
             this.btn_removeItem.Name = "btn_removeItem";
             this.btn_removeItem.Size = new System.Drawing.Size(56, 19);
             this.btn_removeItem.TabIndex = 16;
@@ -436,7 +436,7 @@
             this.gbox_User.Controls.Add(this.edt_userName);
             this.gbox_User.Controls.Add(this.lbl_userSalesman);
             this.gbox_User.Controls.Add(this.lbl_userId);
-            this.gbox_User.Location = new System.Drawing.Point(12, 12);
+            this.gbox_User.Location = new System.Drawing.Point(11, 568);
             this.gbox_User.Name = "gbox_User";
             this.gbox_User.Size = new System.Drawing.Size(282, 100);
             this.gbox_User.TabIndex = 8;
@@ -486,7 +486,7 @@
             // lbl_requiredCamps
             // 
             this.lbl_requiredCamps.AutoSize = true;
-            this.lbl_requiredCamps.Location = new System.Drawing.Point(12, 565);
+            this.lbl_requiredCamps.Location = new System.Drawing.Point(6, 76);
             this.lbl_requiredCamps.Name = "lbl_requiredCamps";
             this.lbl_requiredCamps.Size = new System.Drawing.Size(114, 13);
             this.lbl_requiredCamps.TabIndex = 30;
@@ -498,9 +498,10 @@
             this.gbox_date.Controls.Add(this.medt_CancelDate);
             this.gbox_date.Controls.Add(this.medt_date);
             this.gbox_date.Controls.Add(this.lbl_date);
-            this.gbox_date.Location = new System.Drawing.Point(12, 581);
+            this.gbox_date.Controls.Add(this.lbl_requiredCamps);
+            this.gbox_date.Location = new System.Drawing.Point(11, 12);
             this.gbox_date.Name = "gbox_date";
-            this.gbox_date.Size = new System.Drawing.Size(201, 63);
+            this.gbox_date.Size = new System.Drawing.Size(201, 92);
             this.gbox_date.TabIndex = 29;
             this.gbox_date.TabStop = false;
             this.gbox_date.Text = "Datas";
@@ -898,7 +899,7 @@
             this.gbox_payCond.Controls.Add(this.edt_payCondName);
             this.gbox_payCond.Controls.Add(this.lbl_payCondId);
             this.gbox_payCond.Controls.Add(this.lbl_payCondName);
-            this.gbox_payCond.Location = new System.Drawing.Point(255, 565);
+            this.gbox_payCond.Location = new System.Drawing.Point(300, 568);
             this.gbox_payCond.Name = "gbox_payCond";
             this.gbox_payCond.Size = new System.Drawing.Size(293, 69);
             this.gbox_payCond.TabIndex = 50;
@@ -966,7 +967,7 @@
             this.InstalmentMethod,
             this.InstalmentValue});
             this.DGV_Instalments.Enabled = false;
-            this.DGV_Instalments.Location = new System.Drawing.Point(554, 563);
+            this.DGV_Instalments.Location = new System.Drawing.Point(599, 566);
             this.DGV_Instalments.MultiSelect = false;
             this.DGV_Instalments.Name = "DGV_Instalments";
             this.DGV_Instalments.ReadOnly = true;
@@ -1064,7 +1065,6 @@
             this.Controls.Add(this.gbox_info);
             this.Controls.Add(this.gbox_supplier);
             this.Controls.Add(this.gbox_options);
-            this.Controls.Add(this.lbl_requiredCamps);
             this.Controls.Add(this.gbox_date);
             this.Controls.Add(this.gbox_User);
             this.Controls.Add(this.gbox_products);
@@ -1104,7 +1104,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchSummary)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
