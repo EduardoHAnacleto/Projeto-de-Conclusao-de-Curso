@@ -108,9 +108,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             formCountry.ShowDialog();
             if (!formCountry.ActiveControl.ContainsFocus)
             {
+                country = formCountry.GetObject();
                 if (country != null)
                 {
-                    country = formCountry.GetObject();
                     edt_country.Text = country.countryName;
                     edt_countryId.Text = country.id.ToString();
                     formCountry.Close();

@@ -35,7 +35,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             PaymentConditions_Controller condController = new PaymentConditions_Controller();
             DateTime emDate = DateTime.Now;
             List<BillsToReceive> list = new List<BillsToReceive>();
-            PaymentConditions cond = condController.FindItemId(sale.PaymentConditionId);
+            PaymentConditions cond = condController.FindItemId(sale.PaymentCondition.id);
             int instalmentQtd = cond.BillsInstalments.Count;
 
             foreach (BillsInstalments instalments in cond.BillsInstalments)

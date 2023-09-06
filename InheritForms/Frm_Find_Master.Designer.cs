@@ -73,7 +73,7 @@
             this.btn_Select.Location = new System.Drawing.Point(466, 337);
             this.btn_Select.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Select.Name = "btn_Select";
-            this.btn_Select.Size = new System.Drawing.Size(56, 19);
+            this.btn_Select.Size = new System.Drawing.Size(65, 19);
             this.btn_Select.TabIndex = 3;
             this.btn_Select.Text = "&Selecionar";
             this.btn_Select.UseVisualStyleBackColor = true;

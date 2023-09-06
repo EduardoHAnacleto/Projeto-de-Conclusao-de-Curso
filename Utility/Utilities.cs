@@ -133,7 +133,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Utility
             }
             if (status)
             {
-                string message = $"{camp} deve ser selecionado.";
+                string message = $"{camp} é obrigatório, deve ser selecionado.";
                 string caption = "Campo é requerido.";
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;

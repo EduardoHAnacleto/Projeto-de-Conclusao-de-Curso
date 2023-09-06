@@ -33,11 +33,11 @@
             this.edt_cityName = new System.Windows.Forms.TextBox();
             this.edt_cityPhonePrefix = new System.Windows.Forms.TextBox();
             this.DGV_Cities = new System.Windows.Forms.DataGridView();
-            this.btn_Search = new System.Windows.Forms.Button();
             this.CityId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CityName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PhonePrefix = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.IdState = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Search = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Cities)).BeginInit();
             this.SuspendLayout();
@@ -85,6 +85,8 @@
             // 
             // DGV_Cities
             // 
+            this.DGV_Cities.AllowUserToAddRows = false;
+            this.DGV_Cities.AllowUserToDeleteRows = false;
             this.DGV_Cities.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Cities.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.CityId,
@@ -95,6 +97,7 @@
             this.DGV_Cities.MultiSelect = false;
             this.DGV_Cities.Name = "DGV_Cities";
             this.DGV_Cities.ReadOnly = true;
+            this.DGV_Cities.RowHeadersVisible = false;
             this.DGV_Cities.RowHeadersWidth = 51;
             this.DGV_Cities.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Cities.Size = new System.Drawing.Size(581, 242);
@@ -103,15 +106,6 @@
             this.DGV_Cities.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Cities_CellContentClick);
             this.DGV_Cities.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Cities_CellContentDoubleClick);
             this.DGV_Cities.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DGV_Cities_KeyPress);
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Location = new System.Drawing.Point(447, 21);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(75, 21);
-            this.btn_Search.TabIndex = 10;
-            this.btn_Search.Text = "Bu&scar";
-            this.btn_Search.UseVisualStyleBackColor = true;
             // 
             // CityId
             // 
@@ -144,6 +138,16 @@
             this.IdState.Name = "IdState";
             this.IdState.ReadOnly = true;
             this.IdState.Width = 120;
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(447, 21);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(75, 21);
+            this.btn_Search.TabIndex = 10;
+            this.btn_Search.Text = "Bu&scar";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
             // Frm_Find_Cities
             // 

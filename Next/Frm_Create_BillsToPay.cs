@@ -25,6 +25,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_BillSeries.Controls[0].Visible = false;
             edt_totalValue.Controls[0].Visible = false;
             edt_BillModel.Controls[0].Visible = false;
+            btn_SelectDelete.Visible = false;
             PopulateComboBox();
         }
 
@@ -178,13 +179,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_BillSeries.Value = 0;
             edt_instalmentNumber.Value = 0;
             edt_totalValue.Value = 0;
-            cbox_payMethod.SelectedIndex = 0;
             datePicker_due.Value = datePicker_due.MinDate;
             datePicker_paid.Value = datePicker_paid.MinDate;
             check_Active.Checked = false;
             check_Paid.Checked = false;
             lbl_CreationDate.Text = DateTime.Now.ToShortDateString();
-            cbox_payMethod.SelectedIndex = 0;
+            if (cbox_payMethod.Items.Count > 0 )
+            {
+                cbox_payMethod.SelectedIndex = 0;
+            }
             lbl_LastUpdate.Visible = false;
         }
 
@@ -294,17 +297,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 check_Paid.Checked = true;
                 check_Active.Checked = false;
-                check_onHold.Checked = false;
+                check_Cancelled.Checked = false;
             }
             else if (bill.Status == 0)
             {
                 check_Active.Checked = true;
                 check_Paid.Checked = false;
-                check_onHold.Checked = false;
+                check_Cancelled.Checked = false;
             }
             else if (bill.Status == 2)
             {
-                check_onHold.Checked = true;
+                check_Cancelled.Checked = true;
                 check_Active.Checked = false;
                 check_Paid.Checked = false;
             }
@@ -345,10 +348,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (check_Active.Checked)
             {
                 check_Paid.Checked = false;
-                check_onHold.Checked = false;
+                check_Cancelled.Checked = false;
                 lbl_paidDate.Visible = false;
                 datePicker_paid.Visible = false;
-                check_Completed.Checked = false;
+                check_Cancelled.Checked = false;
             }
         }
 
@@ -356,9 +359,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (check_Paid.Checked)
             {
-                check_onHold.Checked = false;
+                check_Cancelled.Checked = false;
                 check_Active.Checked = false;
-                check_Completed.Checked = false;
+                check_Cancelled.Checked = false;
                 lbl_paidDate.Visible = true;
                 datePicker_paid.Visible = true;
             }
@@ -437,24 +440,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             SearchSupplier();
         }
 
-        private void check_onHold_CheckedChanged(object sender, EventArgs e)
-        {
-            if (check_onHold.Checked)
-            {
-                check_Paid.Checked = false;
-                check_Completed.Checked = false;
-                check_Active.Checked = false;
-                lbl_paidDate.Visible = false;
-                datePicker_paid.Visible = false;
-            }
-        }
-
         private void check_Completed_CheckedChanged(object sender, EventArgs e)
         {
-            if (check_Completed.Checked)
+            if (check_Cancelled.Checked)
             {
                 check_Paid.Checked = false;
-                check_onHold.Checked = false;
                 check_Active.Checked = false;
                 lbl_paidDate.Visible = true;
                 datePicker_paid.Visible = true;

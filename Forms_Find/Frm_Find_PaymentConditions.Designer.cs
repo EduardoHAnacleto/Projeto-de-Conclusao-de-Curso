@@ -29,15 +29,15 @@
         private void InitializeComponent()
         {
             this.DGV_PayConditions = new System.Windows.Forms.DataGridView();
-            this.btn_Search = new System.Windows.Forms.Button();
-            this.lbl_payCond = new System.Windows.Forms.Label();
-            this.edt_payCond = new System.Windows.Forms.TextBox();
             this.ID_PayCond = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentFees = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FineValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DiscountPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InstalmentQuantity = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Search = new System.Windows.Forms.Button();
+            this.lbl_payCond = new System.Windows.Forms.Label();
+            this.edt_payCond = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PayConditions)).BeginInit();
             this.SuspendLayout();
@@ -62,6 +62,7 @@
             this.DGV_PayConditions.MultiSelect = false;
             this.DGV_PayConditions.Name = "DGV_PayConditions";
             this.DGV_PayConditions.ReadOnly = true;
+            this.DGV_PayConditions.RowHeadersVisible = false;
             this.DGV_PayConditions.RowHeadersWidth = 51;
             this.DGV_PayConditions.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_PayConditions.Size = new System.Drawing.Size(578, 283);
@@ -69,33 +70,6 @@
             this.DGV_PayConditions.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayConditions_CellClick);
             this.DGV_PayConditions.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayConditions_CellContentClick);
             this.DGV_PayConditions.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayConditions_CellContentDoubleClick);
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Location = new System.Drawing.Point(327, 23);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(64, 20);
-            this.btn_Search.TabIndex = 8;
-            this.btn_Search.Text = "Bu&scar";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
-            // 
-            // lbl_payCond
-            // 
-            this.lbl_payCond.AutoSize = true;
-            this.lbl_payCond.Location = new System.Drawing.Point(47, 7);
-            this.lbl_payCond.Name = "lbl_payCond";
-            this.lbl_payCond.Size = new System.Drawing.Size(124, 13);
-            this.lbl_payCond.TabIndex = 9;
-            this.lbl_payCond.Text = "Condição de Pagamento";
-            // 
-            // edt_payCond
-            // 
-            this.edt_payCond.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_payCond.Location = new System.Drawing.Point(50, 23);
-            this.edt_payCond.Name = "edt_payCond";
-            this.edt_payCond.Size = new System.Drawing.Size(271, 20);
-            this.edt_payCond.TabIndex = 10;
             // 
             // ID_PayCond
             // 
@@ -144,6 +118,33 @@
             this.InstalmentQuantity.Name = "InstalmentQuantity";
             this.InstalmentQuantity.ReadOnly = true;
             this.InstalmentQuantity.Width = 65;
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(327, 23);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(64, 20);
+            this.btn_Search.TabIndex = 8;
+            this.btn_Search.Text = "Bu&scar";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
+            // 
+            // lbl_payCond
+            // 
+            this.lbl_payCond.AutoSize = true;
+            this.lbl_payCond.Location = new System.Drawing.Point(47, 7);
+            this.lbl_payCond.Name = "lbl_payCond";
+            this.lbl_payCond.Size = new System.Drawing.Size(124, 13);
+            this.lbl_payCond.TabIndex = 9;
+            this.lbl_payCond.Text = "Condição de Pagamento";
+            // 
+            // edt_payCond
+            // 
+            this.edt_payCond.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_payCond.Location = new System.Drawing.Point(50, 23);
+            this.edt_payCond.Name = "edt_payCond";
+            this.edt_payCond.Size = new System.Drawing.Size(271, 20);
+            this.edt_payCond.TabIndex = 10;
             // 
             // Frm_Find_PaymentConditions
             // 

@@ -29,6 +29,12 @@
         private void InitializeComponent()
         {
             this.DGV_Sales = new System.Windows.Forms.DataGridView();
+            this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleDateCreation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleCancelDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGV_SaleProducts = new System.Windows.Forms.DataGridView();
             this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -38,35 +44,31 @@
             this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_Search = new System.Windows.Forms.Button();
             this.gbox_sale = new System.Windows.Forms.GroupBox();
-            this.gbox_products = new System.Windows.Forms.GroupBox();
-            this.btn_Clear = new System.Windows.Forms.Button();
-            this.btn_Close = new System.Windows.Forms.Button();
-            this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleDateCreation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleCancelDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.edt_clientName = new System.Windows.Forms.TextBox();
-            this.lbl_clientName = new System.Windows.Forms.Label();
-            this.dateTime_filter = new System.Windows.Forms.DateTimePicker();
-            this.rbtn_DateCreation = new System.Windows.Forms.RadioButton();
-            this.rbtn_cancelDate = new System.Windows.Forms.RadioButton();
-            this.gbox_date = new System.Windows.Forms.GroupBox();
-            this.gbox_status = new System.Windows.Forms.GroupBox();
-            this.rbtn_active = new System.Windows.Forms.RadioButton();
-            this.rbtn_cancelled = new System.Windows.Forms.RadioButton();
             this.btn_SelectSale = new System.Windows.Forms.Button();
+            this.gbox_status = new System.Windows.Forms.GroupBox();
+            this.rbtn_cancelled = new System.Windows.Forms.RadioButton();
+            this.rbtn_active = new System.Windows.Forms.RadioButton();
+            this.gbox_date = new System.Windows.Forms.GroupBox();
+            this.dateTime_filter = new System.Windows.Forms.DateTimePicker();
+            this.rbtn_cancelDate = new System.Windows.Forms.RadioButton();
+            this.rbtn_DateCreation = new System.Windows.Forms.RadioButton();
+            this.lbl_clientName = new System.Windows.Forms.Label();
+            this.btn_Clear = new System.Windows.Forms.Button();
+            this.edt_clientName = new System.Windows.Forms.TextBox();
+            this.gbox_products = new System.Windows.Forms.GroupBox();
+            this.btn_Close = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Sales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_sale.SuspendLayout();
-            this.gbox_products.SuspendLayout();
-            this.gbox_date.SuspendLayout();
             this.gbox_status.SuspendLayout();
+            this.gbox_date.SuspendLayout();
+            this.gbox_products.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGV_Sales
             // 
+            this.DGV_Sales.AllowUserToAddRows = false;
+            this.DGV_Sales.AllowUserToDeleteRows = false;
             this.DGV_Sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Sales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SaleId,
@@ -84,6 +86,47 @@
             this.DGV_Sales.Size = new System.Drawing.Size(715, 150);
             this.DGV_Sales.TabIndex = 0;
             this.DGV_Sales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Sales_CellContentClick);
+            // 
+            // SaleId
+            // 
+            this.SaleId.HeaderText = "ID Venda";
+            this.SaleId.Name = "SaleId";
+            this.SaleId.ReadOnly = true;
+            this.SaleId.Width = 70;
+            // 
+            // SaleClientName
+            // 
+            this.SaleClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SaleClientName.HeaderText = "Cliente";
+            this.SaleClientName.Name = "SaleClientName";
+            this.SaleClientName.ReadOnly = true;
+            // 
+            // UserId
+            // 
+            this.UserId.HeaderText = "ID Usuário";
+            this.UserId.Name = "UserId";
+            this.UserId.ReadOnly = true;
+            this.UserId.Width = 70;
+            // 
+            // SaleTotalValue
+            // 
+            this.SaleTotalValue.HeaderText = "Valor Total";
+            this.SaleTotalValue.Name = "SaleTotalValue";
+            this.SaleTotalValue.ReadOnly = true;
+            // 
+            // SaleDateCreation
+            // 
+            this.SaleDateCreation.HeaderText = "Data";
+            this.SaleDateCreation.Name = "SaleDateCreation";
+            this.SaleDateCreation.ReadOnly = true;
+            this.SaleDateCreation.Width = 85;
+            // 
+            // SaleCancelDate
+            // 
+            this.SaleCancelDate.HeaderText = "Cancelamento";
+            this.SaleCancelDate.Name = "SaleCancelDate";
+            this.SaleCancelDate.ReadOnly = true;
+            this.SaleCancelDate.Width = 85;
             // 
             // DGV_SaleProducts
             // 
@@ -182,137 +225,15 @@
             this.gbox_sale.TabStop = false;
             this.gbox_sale.Text = "Vendas";
             // 
-            // gbox_products
+            // btn_SelectSale
             // 
-            this.gbox_products.Controls.Add(this.DGV_SaleProducts);
-            this.gbox_products.Location = new System.Drawing.Point(12, 267);
-            this.gbox_products.Name = "gbox_products";
-            this.gbox_products.Size = new System.Drawing.Size(1006, 264);
-            this.gbox_products.TabIndex = 11;
-            this.gbox_products.TabStop = false;
-            this.gbox_products.Text = "Produtos";
-            // 
-            // btn_Clear
-            // 
-            this.btn_Clear.Location = new System.Drawing.Point(911, 206);
-            this.btn_Clear.Name = "btn_Clear";
-            this.btn_Clear.Size = new System.Drawing.Size(89, 23);
-            this.btn_Clear.TabIndex = 12;
-            this.btn_Clear.Text = "Limpar Filtros";
-            this.btn_Clear.UseVisualStyleBackColor = true;
-            this.btn_Clear.Click += new System.EventHandler(this.btn_Clear_Click);
-            // 
-            // btn_Close
-            // 
-            this.btn_Close.Location = new System.Drawing.Point(927, 537);
-            this.btn_Close.Name = "btn_Close";
-            this.btn_Close.Size = new System.Drawing.Size(75, 23);
-            this.btn_Close.TabIndex = 13;
-            this.btn_Close.Text = "Sair";
-            this.btn_Close.UseVisualStyleBackColor = true;
-            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
-            // 
-            // SaleId
-            // 
-            this.SaleId.HeaderText = "ID Venda";
-            this.SaleId.Name = "SaleId";
-            this.SaleId.ReadOnly = true;
-            this.SaleId.Width = 70;
-            // 
-            // SaleClientName
-            // 
-            this.SaleClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SaleClientName.HeaderText = "Cliente";
-            this.SaleClientName.Name = "SaleClientName";
-            this.SaleClientName.ReadOnly = true;
-            // 
-            // UserId
-            // 
-            this.UserId.HeaderText = "ID Usuário";
-            this.UserId.Name = "UserId";
-            this.UserId.ReadOnly = true;
-            this.UserId.Width = 70;
-            // 
-            // SaleTotalValue
-            // 
-            this.SaleTotalValue.HeaderText = "Valor Total";
-            this.SaleTotalValue.Name = "SaleTotalValue";
-            this.SaleTotalValue.ReadOnly = true;
-            // 
-            // SaleDateCreation
-            // 
-            this.SaleDateCreation.HeaderText = "Data";
-            this.SaleDateCreation.Name = "SaleDateCreation";
-            this.SaleDateCreation.ReadOnly = true;
-            this.SaleDateCreation.Width = 85;
-            // 
-            // SaleCancelDate
-            // 
-            this.SaleCancelDate.HeaderText = "Cancelamento";
-            this.SaleCancelDate.Name = "SaleCancelDate";
-            this.SaleCancelDate.ReadOnly = true;
-            this.SaleCancelDate.Width = 85;
-            // 
-            // edt_clientName
-            // 
-            this.edt_clientName.Location = new System.Drawing.Point(6, 36);
-            this.edt_clientName.Name = "edt_clientName";
-            this.edt_clientName.Size = new System.Drawing.Size(201, 20);
-            this.edt_clientName.TabIndex = 11;
-            // 
-            // lbl_clientName
-            // 
-            this.lbl_clientName.AutoSize = true;
-            this.lbl_clientName.Location = new System.Drawing.Point(6, 20);
-            this.lbl_clientName.Name = "lbl_clientName";
-            this.lbl_clientName.Size = new System.Drawing.Size(39, 13);
-            this.lbl_clientName.TabIndex = 12;
-            this.lbl_clientName.Text = "Cliente";
-            // 
-            // dateTime_filter
-            // 
-            this.dateTime_filter.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateTime_filter.Location = new System.Drawing.Point(6, 19);
-            this.dateTime_filter.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.dateTime_filter.Name = "dateTime_filter";
-            this.dateTime_filter.Size = new System.Drawing.Size(96, 20);
-            this.dateTime_filter.TabIndex = 13;
-            // 
-            // rbtn_DateCreation
-            // 
-            this.rbtn_DateCreation.AutoSize = true;
-            this.rbtn_DateCreation.Location = new System.Drawing.Point(6, 45);
-            this.rbtn_DateCreation.Name = "rbtn_DateCreation";
-            this.rbtn_DateCreation.Size = new System.Drawing.Size(103, 17);
-            this.rbtn_DateCreation.TabIndex = 14;
-            this.rbtn_DateCreation.TabStop = true;
-            this.rbtn_DateCreation.Text = "Data de Entrada";
-            this.rbtn_DateCreation.UseVisualStyleBackColor = true;
-            this.rbtn_DateCreation.CheckedChanged += new System.EventHandler(this.rbtn_DateCreation_CheckedChanged);
-            // 
-            // rbtn_cancelDate
-            // 
-            this.rbtn_cancelDate.AutoSize = true;
-            this.rbtn_cancelDate.Location = new System.Drawing.Point(6, 68);
-            this.rbtn_cancelDate.Name = "rbtn_cancelDate";
-            this.rbtn_cancelDate.Size = new System.Drawing.Size(134, 17);
-            this.rbtn_cancelDate.TabIndex = 15;
-            this.rbtn_cancelDate.TabStop = true;
-            this.rbtn_cancelDate.Text = "Data de Cancelamento";
-            this.rbtn_cancelDate.UseVisualStyleBackColor = true;
-            this.rbtn_cancelDate.CheckedChanged += new System.EventHandler(this.rbtn_cancelDate_CheckedChanged);
-            // 
-            // gbox_date
-            // 
-            this.gbox_date.Controls.Add(this.dateTime_filter);
-            this.gbox_date.Controls.Add(this.rbtn_cancelDate);
-            this.gbox_date.Controls.Add(this.rbtn_DateCreation);
-            this.gbox_date.Location = new System.Drawing.Point(855, 94);
-            this.gbox_date.Name = "gbox_date";
-            this.gbox_date.Size = new System.Drawing.Size(145, 90);
-            this.gbox_date.TabIndex = 16;
-            this.gbox_date.TabStop = false;
-            this.gbox_date.Text = "Data";
+            this.btn_SelectSale.Location = new System.Drawing.Point(621, 220);
+            this.btn_SelectSale.Name = "btn_SelectSale";
+            this.btn_SelectSale.Size = new System.Drawing.Size(100, 23);
+            this.btn_SelectSale.TabIndex = 18;
+            this.btn_SelectSale.Text = "Selecionar Venda";
+            this.btn_SelectSale.UseVisualStyleBackColor = true;
+            this.btn_SelectSale.Click += new System.EventHandler(this.btn_SelectSale_Click);
             // 
             // gbox_status
             // 
@@ -324,18 +245,6 @@
             this.gbox_status.TabIndex = 17;
             this.gbox_status.TabStop = false;
             this.gbox_status.Text = "Status";
-            // 
-            // rbtn_active
-            // 
-            this.rbtn_active.AutoSize = true;
-            this.rbtn_active.Location = new System.Drawing.Point(6, 19);
-            this.rbtn_active.Name = "rbtn_active";
-            this.rbtn_active.Size = new System.Drawing.Size(54, 17);
-            this.rbtn_active.TabIndex = 0;
-            this.rbtn_active.TabStop = true;
-            this.rbtn_active.Text = "Ativos";
-            this.rbtn_active.UseVisualStyleBackColor = true;
-            this.rbtn_active.CheckedChanged += new System.EventHandler(this.rbtn_active_CheckedChanged);
             // 
             // rbtn_cancelled
             // 
@@ -349,15 +258,108 @@
             this.rbtn_cancelled.UseVisualStyleBackColor = true;
             this.rbtn_cancelled.CheckedChanged += new System.EventHandler(this.rbtn_cancelled_CheckedChanged);
             // 
-            // btn_SelectSale
+            // rbtn_active
             // 
-            this.btn_SelectSale.Location = new System.Drawing.Point(621, 220);
-            this.btn_SelectSale.Name = "btn_SelectSale";
-            this.btn_SelectSale.Size = new System.Drawing.Size(100, 23);
-            this.btn_SelectSale.TabIndex = 18;
-            this.btn_SelectSale.Text = "Selecionar Venda";
-            this.btn_SelectSale.UseVisualStyleBackColor = true;
-            this.btn_SelectSale.Click += new System.EventHandler(this.btn_SelectSale_Click);
+            this.rbtn_active.AutoSize = true;
+            this.rbtn_active.Location = new System.Drawing.Point(6, 19);
+            this.rbtn_active.Name = "rbtn_active";
+            this.rbtn_active.Size = new System.Drawing.Size(54, 17);
+            this.rbtn_active.TabIndex = 0;
+            this.rbtn_active.TabStop = true;
+            this.rbtn_active.Text = "Ativos";
+            this.rbtn_active.UseVisualStyleBackColor = true;
+            this.rbtn_active.CheckedChanged += new System.EventHandler(this.rbtn_active_CheckedChanged);
+            // 
+            // gbox_date
+            // 
+            this.gbox_date.Controls.Add(this.dateTime_filter);
+            this.gbox_date.Controls.Add(this.rbtn_cancelDate);
+            this.gbox_date.Controls.Add(this.rbtn_DateCreation);
+            this.gbox_date.Location = new System.Drawing.Point(855, 94);
+            this.gbox_date.Name = "gbox_date";
+            this.gbox_date.Size = new System.Drawing.Size(145, 90);
+            this.gbox_date.TabIndex = 16;
+            this.gbox_date.TabStop = false;
+            this.gbox_date.Text = "Data";
+            // 
+            // dateTime_filter
+            // 
+            this.dateTime_filter.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateTime_filter.Location = new System.Drawing.Point(6, 19);
+            this.dateTime_filter.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.dateTime_filter.Name = "dateTime_filter";
+            this.dateTime_filter.Size = new System.Drawing.Size(96, 20);
+            this.dateTime_filter.TabIndex = 13;
+            // 
+            // rbtn_cancelDate
+            // 
+            this.rbtn_cancelDate.AutoSize = true;
+            this.rbtn_cancelDate.Location = new System.Drawing.Point(6, 68);
+            this.rbtn_cancelDate.Name = "rbtn_cancelDate";
+            this.rbtn_cancelDate.Size = new System.Drawing.Size(134, 17);
+            this.rbtn_cancelDate.TabIndex = 15;
+            this.rbtn_cancelDate.TabStop = true;
+            this.rbtn_cancelDate.Text = "Data de Cancelamento";
+            this.rbtn_cancelDate.UseVisualStyleBackColor = true;
+            this.rbtn_cancelDate.CheckedChanged += new System.EventHandler(this.rbtn_cancelDate_CheckedChanged);
+            // 
+            // rbtn_DateCreation
+            // 
+            this.rbtn_DateCreation.AutoSize = true;
+            this.rbtn_DateCreation.Location = new System.Drawing.Point(6, 45);
+            this.rbtn_DateCreation.Name = "rbtn_DateCreation";
+            this.rbtn_DateCreation.Size = new System.Drawing.Size(103, 17);
+            this.rbtn_DateCreation.TabIndex = 14;
+            this.rbtn_DateCreation.TabStop = true;
+            this.rbtn_DateCreation.Text = "Data de Entrada";
+            this.rbtn_DateCreation.UseVisualStyleBackColor = true;
+            this.rbtn_DateCreation.CheckedChanged += new System.EventHandler(this.rbtn_DateCreation_CheckedChanged);
+            // 
+            // lbl_clientName
+            // 
+            this.lbl_clientName.AutoSize = true;
+            this.lbl_clientName.Location = new System.Drawing.Point(6, 20);
+            this.lbl_clientName.Name = "lbl_clientName";
+            this.lbl_clientName.Size = new System.Drawing.Size(39, 13);
+            this.lbl_clientName.TabIndex = 12;
+            this.lbl_clientName.Text = "Cliente";
+            // 
+            // btn_Clear
+            // 
+            this.btn_Clear.Location = new System.Drawing.Point(911, 206);
+            this.btn_Clear.Name = "btn_Clear";
+            this.btn_Clear.Size = new System.Drawing.Size(89, 23);
+            this.btn_Clear.TabIndex = 12;
+            this.btn_Clear.Text = "Limpar Filtros";
+            this.btn_Clear.UseVisualStyleBackColor = true;
+            this.btn_Clear.Click += new System.EventHandler(this.btn_Clear_Click);
+            // 
+            // edt_clientName
+            // 
+            this.edt_clientName.Location = new System.Drawing.Point(6, 36);
+            this.edt_clientName.Name = "edt_clientName";
+            this.edt_clientName.Size = new System.Drawing.Size(201, 20);
+            this.edt_clientName.TabIndex = 11;
+            // 
+            // gbox_products
+            // 
+            this.gbox_products.Controls.Add(this.DGV_SaleProducts);
+            this.gbox_products.Location = new System.Drawing.Point(12, 267);
+            this.gbox_products.Name = "gbox_products";
+            this.gbox_products.Size = new System.Drawing.Size(1006, 264);
+            this.gbox_products.TabIndex = 11;
+            this.gbox_products.TabStop = false;
+            this.gbox_products.Text = "Produtos";
+            // 
+            // btn_Close
+            // 
+            this.btn_Close.Location = new System.Drawing.Point(927, 537);
+            this.btn_Close.Name = "btn_Close";
+            this.btn_Close.Size = new System.Drawing.Size(75, 23);
+            this.btn_Close.TabIndex = 13;
+            this.btn_Close.Text = "Sair";
+            this.btn_Close.UseVisualStyleBackColor = true;
+            this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
             // MasterDetails_SaleProducts
             // 
@@ -373,11 +375,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).EndInit();
             this.gbox_sale.ResumeLayout(false);
             this.gbox_sale.PerformLayout();
-            this.gbox_products.ResumeLayout(false);
-            this.gbox_date.ResumeLayout(false);
-            this.gbox_date.PerformLayout();
             this.gbox_status.ResumeLayout(false);
             this.gbox_status.PerformLayout();
+            this.gbox_date.ResumeLayout(false);
+            this.gbox_date.PerformLayout();
+            this.gbox_products.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

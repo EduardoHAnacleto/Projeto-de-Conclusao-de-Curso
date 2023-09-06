@@ -48,7 +48,7 @@
             // medt_regNumber
             // 
             this.medt_regNumber.Location = new System.Drawing.Point(361, 23);
-            this.medt_regNumber.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.medt_regNumber.Margin = new System.Windows.Forms.Padding(2);
             this.medt_regNumber.Mask = "000.000.000-00";
             this.medt_regNumber.Name = "medt_regNumber";
             this.medt_regNumber.Size = new System.Drawing.Size(101, 20);
@@ -69,7 +69,7 @@
             // 
             this.edt_Name.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_Name.Location = new System.Drawing.Point(53, 23);
-            this.edt_Name.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.edt_Name.Margin = new System.Windows.Forms.Padding(2);
             this.edt_Name.Name = "edt_Name";
             this.edt_Name.Size = new System.Drawing.Size(303, 20);
             this.edt_Name.TabIndex = 32;
@@ -107,6 +107,7 @@
             this.DGV_People.MultiSelect = false;
             this.DGV_People.Name = "DGV_People";
             this.DGV_People.ReadOnly = true;
+            this.DGV_People.RowHeadersVisible = false;
             this.DGV_People.RowHeadersWidth = 51;
             this.DGV_People.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_People.Size = new System.Drawing.Size(579, 274);

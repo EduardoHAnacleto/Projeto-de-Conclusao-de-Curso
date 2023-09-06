@@ -33,11 +33,11 @@
             this.edt_stateName = new System.Windows.Forms.TextBox();
             this.edt_FU = new System.Windows.Forms.TextBox();
             this.DGV_States = new System.Windows.Forms.DataGridView();
-            this.btn_Search = new System.Windows.Forms.Button();
             this.ID_STATE = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.States = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StateFederationUnit = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StateCountryName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Search = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_States)).BeginInit();
             this.SuspendLayout();
@@ -85,6 +85,8 @@
             // 
             // DGV_States
             // 
+            this.DGV_States.AllowUserToAddRows = false;
+            this.DGV_States.AllowUserToDeleteRows = false;
             this.DGV_States.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_States.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_STATE,
@@ -95,6 +97,7 @@
             this.DGV_States.MultiSelect = false;
             this.DGV_States.Name = "DGV_States";
             this.DGV_States.ReadOnly = true;
+            this.DGV_States.RowHeadersVisible = false;
             this.DGV_States.RowHeadersWidth = 51;
             this.DGV_States.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_States.Size = new System.Drawing.Size(582, 272);
@@ -102,16 +105,6 @@
             this.DGV_States.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_States_CellClick);
             this.DGV_States.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_States_CellContentDoubleClick);
             this.DGV_States.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DGV_States_KeyPress);
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Location = new System.Drawing.Point(513, 23);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(75, 21);
-            this.btn_Search.TabIndex = 11;
-            this.btn_Search.Text = "Bu&scar";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
             // ID_STATE
             // 
@@ -144,6 +137,16 @@
             this.StateCountryName.Name = "StateCountryName";
             this.StateCountryName.ReadOnly = true;
             this.StateCountryName.Width = 125;
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(447, 21);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(75, 21);
+            this.btn_Search.TabIndex = 11;
+            this.btn_Search.Text = "Bu&scar";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
             // Frm_Find_States
             // 

@@ -66,24 +66,29 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public override void SelectObject()
         {
-            var obj = GetObject();
-            if (obj != null)
+            try
             {
-                if (hasFather)
+                var obj = GetObject();
+                if (obj != null)
                 {
-                    base.item = obj;
-                    this.Hide();
+                    if (hasFather)
+                    {
+                        base.item = obj;
+                        this.Hide();
+                    }
+                    else
+                    {
+                        NewPopulatedForm();
+                        SetDataSourceToDGV();
+                    }
                 }
                 else
                 {
-                    NewPopulatedForm();
-                    SetDataSourceToDGV();
+                    Utilities.IsNotSelected(obj, "A Linha");
                 }
             }
-            else
-            {
-                Utilities.IsNotSelected(obj, "A Linha");
-            }
+            catch (Exception ex) { }
+
         }
 
         public override void NewPopulatedForm()

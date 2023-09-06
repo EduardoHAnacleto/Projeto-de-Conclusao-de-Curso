@@ -22,6 +22,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_saleNumber.Controls[0].Visible = false;
             edt_instalmentValue.Controls[0].Visible = false;
             PopulateComboBox();
+            btn_SelectDelete.Visible = false;
         }
 
         private readonly BillsToReceive_Controller _controller = new BillsToReceive_Controller();
@@ -81,11 +82,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
             if (obj.DueDate > DateTime.Today)
             {
-                edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue - (obj.InstalmentValue * obj.PaymentCondition.discountPerc / 100));
+                edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue - (obj.InstalmentValue * obj.Sale.PaymentCondition.discountPerc / 100));
             }
             else
             {
-                edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue + obj.PaymentCondition.fineValue);
+                edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue + obj.Sale.PaymentCondition.fineValue);
             }
 
 
@@ -214,31 +215,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
-        public override void DeleteObject() //DeleteObject
-        {
-            if (CheckCamps())
-            {
-                LockCamps();
-                try
-                {
-                    int saleId = (int)edt_saleNumber.Value;
-                    int iNum = (int)edt_instalmentId.Value;
-                    _controller.DeleteItem(saleId, iNum);
-                    this.ClearCamps();
-                    this.edt_id.Value = this.BringNewId();
-                    btn_SelectDelete.Enabled = false;
-                    btn_Edit.Enabled = false;
-                    btn_Edit.Text = "&Alterar";
-                    Populated(false);
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-            }
-            UnlockCamps();
-        }
-
         public void PopulateComboBox()
         {
             ComboBox comboBox = new ComboBox();
@@ -257,24 +233,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public override bool CheckCamps() //Validacao de campos
         {
-            if (Utilities.HasOnlyLetters(edt_clientName.Text, "Client name"))
+            if (Utilities.HasOnlyLetters(edt_clientName.Text, "Nome do Cliente"))
             {
                 edt_clientName.Focus();
                 return false;
             }
-            else if (!Utilities.IsDouble(edt_instalmentValue.Text, "Instalment value"))
+            else if (!Utilities.IsDouble(edt_instalmentValue.Text, "Valor da Parcela"))
             {
                 edt_instalmentValue.Focus();
-                return false;
-            }
-            else if ((!check_Active.Checked) && (!check_Paid.Checked))
-            {
-                string message = "At least one status box must be checked.";
-                string caption = "Status not checked.";
-                MessageBoxIcon icon = MessageBoxIcon.Error;
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                Utilities.Msgbox(message, caption, buttons, icon);
-                gbox_isPaid.Focus();
                 return false;
             }
             else if (Utilities.IsNotSelected(cbox_paymentMethod.SelectedItem, "Payment Method"))
@@ -295,9 +261,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (check_Paid.Checked)
             {
                 check_Active.Checked = false;
+                check_Cancelled.Checked = false;
+                datePicker_PaidDate.Value = DateTime.Now;
+                datePicker_PaidDate.Visible = true;
             }
-            datePicker_PaidDate.Value = DateTime.Now;
-            datePicker_PaidDate.Visible = true;
         }
 
         private void check_Active_CheckedChanged(object sender, EventArgs e)
@@ -305,8 +272,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (check_Active.Checked)
             {
                 check_Paid.Checked = false;
+                check_Cancelled.Checked = false;
+                datePicker_PaidDate.Visible = false;
             }
-            datePicker_PaidDate.Visible = false;
         }
 
         public void SearchClient() // Abre Form para encontrar e levar Cliente
@@ -330,6 +298,37 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void btn_search_Click(object sender, EventArgs e)
         {
             SearchClient();
+        }
+
+        private void check_Cancelled_CheckedChanged(object sender, EventArgs e)
+        {
+            if (check_Cancelled.Checked)
+            {
+                check_Active.Checked = false;
+                check_Paid.Checked = false;
+                lbl_LastUpdate.Text = "Cancelado em : " + DateTime.Now.ToString();
+                datePicker_PaidDate.Visible = false;
+            }
+        }
+
+        private void datePicker_PaidDate_ValueChanged(object sender, EventArgs e)
+        {
+            if (datePicker_PaidDate.Value < datePicker_emission.Value && datePicker_PaidDate.Value != datePicker_PaidDate.MinDate)
+            {
+                string message = "Data de pagamento não pode ser menor que a da emissão.";
+                string caption = "Data de pagamento inválida.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+            }
+            else
+            {
+                check_Paid.Checked = true;
+                check_Active.Checked = false;
+                check_Cancelled.Checked = false;
+                datePicker_PaidDate.Value = DateTime.Now;
+                datePicker_PaidDate.Visible = true;
+            }
         }
     }
 }

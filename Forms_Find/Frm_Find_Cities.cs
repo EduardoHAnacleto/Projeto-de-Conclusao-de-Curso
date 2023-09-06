@@ -246,5 +246,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 Utilities.IsNotSelected(obj, "A linha");
             }
         }
+
+        private void btn_Search_Click(object sender, EventArgs e)
+        {
+            SearchObject();
+        }
     }
 }

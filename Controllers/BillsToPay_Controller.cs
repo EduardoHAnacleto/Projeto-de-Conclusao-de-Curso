@@ -32,17 +32,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToPaysDAO.SelectAllFromDb();
         }
-        public BillsToPay FindItemId(int billNum, int billType, int billSeries, int instalmentNum, int supplierId)
+        public BillsToPay FindItemId(int billNum, int billModel, int billSeries, int instalmentNum, int supplierId)
         {
-            return _billToPaysDAO.SelectFromDb( billNum, billType, billSeries, instalmentNum, supplierId);
+            return _billToPaysDAO.SelectFromDb( billNum, billModel, billSeries, instalmentNum, supplierId);
+        }
+        public List<BillsToPay> FindItemId(int billNum, int billModel, int billSeries, int supplierId)
+        {
+            return _billToPaysDAO.SelectFromDb(billNum, billModel, billSeries, supplierId);
         }
         public List<BillsToPay> FindSupplierId(int supplierId)
         {
             return _billToPaysDAO.SelectSupplierFromDb(supplierId);
-        }
-        public List<BillsToPay> FindPurchaseid(int purchaseId)
-        {
-            return _billToPaysDAO.SelectPurchaseFromDb(purchaseId);
         }
         public List<BillsToPay> FindIsPaid(bool isPaid)
         {

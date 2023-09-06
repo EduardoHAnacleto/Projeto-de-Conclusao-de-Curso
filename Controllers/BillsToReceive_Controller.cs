@@ -70,5 +70,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             ds = _billToReceivesDAO.SelectDataSourceFromDB();
             return ds;
         }
+
+        public bool CancelBills(int id)
+        {
+            return _billToReceivesDAO.CancelBillsFromDb(id);
+        }
     }
 }

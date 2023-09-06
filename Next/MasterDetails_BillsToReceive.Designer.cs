@@ -67,6 +67,7 @@
             this.btn_ClearSaleFilters = new System.Windows.Forms.Button();
             this.rbtn_PaidStatus = new System.Windows.Forms.RadioButton();
             this.rbtn_ActiveStatus = new System.Windows.Forms.RadioButton();
+            this.btn_select = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).BeginInit();
             this.gbox_client.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).BeginInit();
@@ -494,11 +495,22 @@
             this.rbtn_ActiveStatus.UseVisualStyleBackColor = true;
             this.rbtn_ActiveStatus.CheckedChanged += new System.EventHandler(this.rbtn_ActiveStatus_CheckedChanged);
             // 
+            // btn_select
+            // 
+            this.btn_select.Location = new System.Drawing.Point(997, 605);
+            this.btn_select.Name = "btn_select";
+            this.btn_select.Size = new System.Drawing.Size(75, 23);
+            this.btn_select.TabIndex = 15;
+            this.btn_select.Text = "Selecionar";
+            this.btn_select.UseVisualStyleBackColor = true;
+            this.btn_select.Click += new System.EventHandler(this.btn_select_Click);
+            // 
             // MasterDetails_BillsToReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1165, 640);
+            this.Controls.Add(this.btn_select);
             this.Controls.Add(this.gbox_SaleFilters);
             this.Controls.Add(this.gbox_clientFilters);
             this.Controls.Add(this.btn_exit);
@@ -563,5 +575,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EmissionDateBillsReceive;
         private System.Windows.Forms.DataGridViewTextBoxColumn DueDateBillsReceive;
         private System.Windows.Forms.DataGridViewTextBoxColumn StatusBillsReceive;
+        private System.Windows.Forms.Button btn_select;
     }
 }

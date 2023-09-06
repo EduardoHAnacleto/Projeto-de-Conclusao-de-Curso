@@ -206,13 +206,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
                 {
                     PopulateCamps(obj);
                 }
-                else
+            }
+            else
+            {
+                if (Utilities.AskToCreate())
                 {
-                    if (Utilities.AskToCreate())
-                    {
-                        NewObject();
-                    }
+                    NewObject();
                 }
+            
             }
         }
 

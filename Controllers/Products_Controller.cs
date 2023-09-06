@@ -69,7 +69,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _productsDAO.UpdatePriceNStockDb(prodId, stock, prodCost);
         }
-        
 
+        public bool RestoreStock(SaleItems saleItems)
+        {
+            return _productsDAO.RestoreStock(saleItems);
+        }
     }
 }

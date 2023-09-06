@@ -54,8 +54,7 @@
             this.lbl_DueDate = new System.Windows.Forms.Label();
             this.datePicker_due = new System.Windows.Forms.DateTimePicker();
             this.gbox_isPaid = new System.Windows.Forms.GroupBox();
-            this.check_Completed = new System.Windows.Forms.CheckBox();
-            this.check_onHold = new System.Windows.Forms.CheckBox();
+            this.check_Cancelled = new System.Windows.Forms.CheckBox();
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.check_Paid = new System.Windows.Forms.CheckBox();
             this.gbox_dates.SuspendLayout();
@@ -352,38 +351,26 @@
             // 
             // gbox_isPaid
             // 
-            this.gbox_isPaid.Controls.Add(this.check_Completed);
-            this.gbox_isPaid.Controls.Add(this.check_onHold);
+            this.gbox_isPaid.Controls.Add(this.check_Cancelled);
             this.gbox_isPaid.Controls.Add(this.check_Active);
             this.gbox_isPaid.Controls.Add(this.check_Paid);
-            this.gbox_isPaid.Location = new System.Drawing.Point(497, 8);
+            this.gbox_isPaid.Location = new System.Drawing.Point(565, 8);
             this.gbox_isPaid.Name = "gbox_isPaid";
-            this.gbox_isPaid.Size = new System.Drawing.Size(141, 59);
+            this.gbox_isPaid.Size = new System.Drawing.Size(95, 86);
             this.gbox_isPaid.TabIndex = 36;
             this.gbox_isPaid.TabStop = false;
             this.gbox_isPaid.Text = "* Status";
             // 
-            // check_Completed
+            // check_Cancelled
             // 
-            this.check_Completed.AutoSize = true;
-            this.check_Completed.Location = new System.Drawing.Point(59, 14);
-            this.check_Completed.Name = "check_Completed";
-            this.check_Completed.Size = new System.Drawing.Size(73, 17);
-            this.check_Completed.TabIndex = 14;
-            this.check_Completed.Text = "Finalizado";
-            this.check_Completed.UseVisualStyleBackColor = true;
-            this.check_Completed.CheckedChanged += new System.EventHandler(this.check_Completed_CheckedChanged);
-            // 
-            // check_onHold
-            // 
-            this.check_onHold.AutoSize = true;
-            this.check_onHold.Location = new System.Drawing.Point(59, 37);
-            this.check_onHold.Name = "check_onHold";
-            this.check_onHold.Size = new System.Drawing.Size(77, 17);
-            this.check_onHold.TabIndex = 13;
-            this.check_onHold.Text = "Em Espera";
-            this.check_onHold.UseVisualStyleBackColor = true;
-            this.check_onHold.CheckedChanged += new System.EventHandler(this.check_onHold_CheckedChanged);
+            this.check_Cancelled.AutoSize = true;
+            this.check_Cancelled.Location = new System.Drawing.Point(6, 60);
+            this.check_Cancelled.Name = "check_Cancelled";
+            this.check_Cancelled.Size = new System.Drawing.Size(77, 17);
+            this.check_Cancelled.TabIndex = 14;
+            this.check_Cancelled.Text = "Cancelado";
+            this.check_Cancelled.UseVisualStyleBackColor = true;
+            this.check_Cancelled.CheckedChanged += new System.EventHandler(this.check_Completed_CheckedChanged);
             // 
             // check_Active
             // 
@@ -392,9 +379,9 @@
             this.check_Active.CheckState = System.Windows.Forms.CheckState.Checked;
             this.check_Active.Location = new System.Drawing.Point(6, 14);
             this.check_Active.Name = "check_Active";
-            this.check_Active.Size = new System.Drawing.Size(50, 17);
+            this.check_Active.Size = new System.Drawing.Size(75, 17);
             this.check_Active.TabIndex = 11;
-            this.check_Active.Text = "Ativo";
+            this.check_Active.Text = "Em Aberto";
             this.check_Active.UseVisualStyleBackColor = true;
             this.check_Active.CheckedChanged += new System.EventHandler(this.check_Active_CheckedChanged);
             // 
@@ -486,7 +473,6 @@
         private System.Windows.Forms.GroupBox gbox_isPaid;
         private System.Windows.Forms.CheckBox check_Active;
         private System.Windows.Forms.CheckBox check_Paid;
-        private System.Windows.Forms.CheckBox check_onHold;
-        private System.Windows.Forms.CheckBox check_Completed;
+        private System.Windows.Forms.CheckBox check_Cancelled;
     }
 }

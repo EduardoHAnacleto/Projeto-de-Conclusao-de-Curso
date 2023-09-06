@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Configuration;
 using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using System.Collections;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 {
@@ -418,5 +419,40 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
         }
 
+        public bool RestoreStock(SaleItems saleItems)
+        {
+            bool status = false;
+
+            string sql = "UPDATE PRODUCTS SET STOCK = STOCK + @RESTOCK " +
+                "WHERE ID_PRODUCT = @ID ; ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", saleItems.Product.id);
+                    command.Parameters.AddWithValue("@RESTOCK", saleItems.Quantity);
+
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Register altered with success!");
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
     }
 }

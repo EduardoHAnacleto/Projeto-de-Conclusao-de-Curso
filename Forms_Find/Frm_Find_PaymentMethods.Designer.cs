@@ -31,9 +31,9 @@
             this.lbl_PaymentMethod = new System.Windows.Forms.Label();
             this.edt_paymentMethod = new System.Windows.Forms.TextBox();
             this.DGV_PayMethods = new System.Windows.Forms.DataGridView();
-            this.btn_Search = new System.Windows.Forms.Button();
             this.IDPayMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Payment_Method = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Search = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PayMethods)).BeginInit();
             this.SuspendLayout();
@@ -73,6 +73,7 @@
             this.DGV_PayMethods.MultiSelect = false;
             this.DGV_PayMethods.Name = "DGV_PayMethods";
             this.DGV_PayMethods.ReadOnly = true;
+            this.DGV_PayMethods.RowHeadersVisible = false;
             this.DGV_PayMethods.RowHeadersWidth = 51;
             this.DGV_PayMethods.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_PayMethods.Size = new System.Drawing.Size(582, 268);
@@ -80,16 +81,6 @@
             this.DGV_PayMethods.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayMethods_CellClick);
             this.DGV_PayMethods.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayMethods_CellContentClick);
             this.DGV_PayMethods.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_PayMethods_CellContentDoubleClick);
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Location = new System.Drawing.Point(320, 23);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(75, 20);
-            this.btn_Search.TabIndex = 20;
-            this.btn_Search.Text = "Bu&scar";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
             // IDPayMethod
             // 
@@ -106,6 +97,16 @@
             this.Payment_Method.MinimumWidth = 6;
             this.Payment_Method.Name = "Payment_Method";
             this.Payment_Method.ReadOnly = true;
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(320, 23);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(75, 20);
+            this.btn_Search.TabIndex = 20;
+            this.btn_Search.Text = "Bu&scar";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
             // Frm_Find_PaymentMethods
             // 

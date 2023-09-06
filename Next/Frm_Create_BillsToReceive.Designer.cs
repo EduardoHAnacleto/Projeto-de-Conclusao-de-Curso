@@ -29,6 +29,10 @@
         private void InitializeComponent()
         {
             this.DGV_Instalments = new System.Windows.Forms.DataGridView();
+            this.Instalment_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.DueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PaymentMethod_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_billInstalment = new System.Windows.Forms.GroupBox();
             this.edt_instalmentValue = new System.Windows.Forms.NumericUpDown();
             this.edt_instalmentId = new System.Windows.Forms.NumericUpDown();
@@ -50,15 +54,12 @@
             this.datePicker_due = new System.Windows.Forms.DateTimePicker();
             this.datePicker_emission = new System.Windows.Forms.DateTimePicker();
             this.gbox_isPaid = new System.Windows.Forms.GroupBox();
+            this.check_Cancelled = new System.Windows.Forms.CheckBox();
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.check_Paid = new System.Windows.Forms.CheckBox();
             this.lbl_PaymentForm = new System.Windows.Forms.Label();
             this.lbl_saleId = new System.Windows.Forms.Label();
             this.edt_saleNumber = new System.Windows.Forms.NumericUpDown();
-            this.Instalment_Number = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.DueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Value = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PaymentMethod_Name = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
@@ -74,6 +75,7 @@
             // 
             // DGV_Instalments
             // 
+            this.DGV_Instalments.AllowUserToAddRows = false;
             this.DGV_Instalments.AllowUserToDeleteRows = false;
             this.DGV_Instalments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Instalments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
@@ -90,6 +92,38 @@
             this.DGV_Instalments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Instalments.Size = new System.Drawing.Size(471, 167);
             this.DGV_Instalments.TabIndex = 33;
+            // 
+            // Instalment_Number
+            // 
+            this.Instalment_Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
+            this.Instalment_Number.HeaderText = "Parcela";
+            this.Instalment_Number.MinimumWidth = 6;
+            this.Instalment_Number.Name = "Instalment_Number";
+            this.Instalment_Number.ReadOnly = true;
+            this.Instalment_Number.Width = 60;
+            // 
+            // DueDate
+            // 
+            this.DueDate.HeaderText = "Data de Vencimento";
+            this.DueDate.MinimumWidth = 6;
+            this.DueDate.Name = "DueDate";
+            this.DueDate.ReadOnly = true;
+            // 
+            // Value
+            // 
+            this.Value.HeaderText = "Valor";
+            this.Value.MinimumWidth = 6;
+            this.Value.Name = "Value";
+            this.Value.ReadOnly = true;
+            this.Value.Width = 65;
+            // 
+            // PaymentMethod_Name
+            // 
+            this.PaymentMethod_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PaymentMethod_Name.HeaderText = "Método de Pagamento";
+            this.PaymentMethod_Name.MinimumWidth = 6;
+            this.PaymentMethod_Name.Name = "PaymentMethod_Name";
+            this.PaymentMethod_Name.ReadOnly = true;
             // 
             // gbox_billInstalment
             // 
@@ -252,8 +286,9 @@
             this.datePicker_PaidDate.Name = "datePicker_PaidDate";
             this.datePicker_PaidDate.Size = new System.Drawing.Size(96, 20);
             this.datePicker_PaidDate.TabIndex = 4;
-            this.datePicker_PaidDate.Value = new System.DateTime(2000, 1, 1, 5, 17, 0, 0);
+            this.datePicker_PaidDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             this.datePicker_PaidDate.Visible = false;
+            this.datePicker_PaidDate.ValueChanged += new System.EventHandler(this.datePicker_PaidDate_ValueChanged);
             // 
             // lbl_DueDate
             // 
@@ -293,23 +328,36 @@
             // 
             // gbox_isPaid
             // 
+            this.gbox_isPaid.Controls.Add(this.check_Cancelled);
             this.gbox_isPaid.Controls.Add(this.check_Active);
             this.gbox_isPaid.Controls.Add(this.check_Paid);
-            this.gbox_isPaid.Location = new System.Drawing.Point(591, 15);
+            this.gbox_isPaid.Enabled = false;
+            this.gbox_isPaid.Location = new System.Drawing.Point(576, 8);
             this.gbox_isPaid.Name = "gbox_isPaid";
-            this.gbox_isPaid.Size = new System.Drawing.Size(69, 59);
+            this.gbox_isPaid.Size = new System.Drawing.Size(84, 79);
             this.gbox_isPaid.TabIndex = 27;
             this.gbox_isPaid.TabStop = false;
             this.gbox_isPaid.Text = "* Status";
+            // 
+            // check_Cancelled
+            // 
+            this.check_Cancelled.AutoSize = true;
+            this.check_Cancelled.Location = new System.Drawing.Point(6, 60);
+            this.check_Cancelled.Name = "check_Cancelled";
+            this.check_Cancelled.Size = new System.Drawing.Size(77, 17);
+            this.check_Cancelled.TabIndex = 13;
+            this.check_Cancelled.Text = "Cancelado";
+            this.check_Cancelled.UseVisualStyleBackColor = true;
+            this.check_Cancelled.CheckedChanged += new System.EventHandler(this.check_Cancelled_CheckedChanged);
             // 
             // check_Active
             // 
             this.check_Active.AutoSize = true;
             this.check_Active.Location = new System.Drawing.Point(6, 14);
             this.check_Active.Name = "check_Active";
-            this.check_Active.Size = new System.Drawing.Size(50, 17);
+            this.check_Active.Size = new System.Drawing.Size(75, 17);
             this.check_Active.TabIndex = 11;
-            this.check_Active.Text = "Ativo";
+            this.check_Active.Text = "Em Aberto";
             this.check_Active.UseVisualStyleBackColor = true;
             this.check_Active.CheckedChanged += new System.EventHandler(this.check_Active_CheckedChanged);
             // 
@@ -353,38 +401,6 @@
             this.edt_saleNumber.Name = "edt_saleNumber";
             this.edt_saleNumber.Size = new System.Drawing.Size(65, 20);
             this.edt_saleNumber.TabIndex = 34;
-            // 
-            // Instalment_Number
-            // 
-            this.Instalment_Number.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.None;
-            this.Instalment_Number.HeaderText = "Parcela";
-            this.Instalment_Number.MinimumWidth = 6;
-            this.Instalment_Number.Name = "Instalment_Number";
-            this.Instalment_Number.ReadOnly = true;
-            this.Instalment_Number.Width = 60;
-            // 
-            // DueDate
-            // 
-            this.DueDate.HeaderText = "Data de Vencimento";
-            this.DueDate.MinimumWidth = 6;
-            this.DueDate.Name = "DueDate";
-            this.DueDate.ReadOnly = true;
-            // 
-            // Value
-            // 
-            this.Value.HeaderText = "Valor";
-            this.Value.MinimumWidth = 6;
-            this.Value.Name = "Value";
-            this.Value.ReadOnly = true;
-            this.Value.Width = 65;
-            // 
-            // PaymentMethod_Name
-            // 
-            this.PaymentMethod_Name.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PaymentMethod_Name.HeaderText = "Método de Pagamento";
-            this.PaymentMethod_Name.MinimumWidth = 6;
-            this.PaymentMethod_Name.Name = "PaymentMethod_Name";
-            this.PaymentMethod_Name.ReadOnly = true;
             // 
             // Frm_Create_BillsToReceive
             // 
@@ -470,5 +486,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn DueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn Value;
         private System.Windows.Forms.DataGridViewTextBoxColumn PaymentMethod_Name;
+        private System.Windows.Forms.CheckBox check_Cancelled;
     }
 }

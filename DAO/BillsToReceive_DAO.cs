@@ -20,6 +20,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private readonly PaymentMethods_Controller _paymentMethodsController = new PaymentMethods_Controller();
         private readonly Clients_Controller _clientsController = new Clients_Controller();
         private readonly Sales_Controller _salesController = new Sales_Controller();
+        private readonly PaymentConditions_Controller _pcController = new PaymentConditions_Controller();
 
         public bool SaveToDb(BillsToReceive obj)
         {
@@ -198,6 +199,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                     InstalmentValue = Convert.ToDouble(reader["instalmentValue"]),
                                     PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
+                                    PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
                                     InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
@@ -250,6 +252,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         InstalmentValue = Convert.ToDouble(reader["instalmentValue"]),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
+                                        PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                     };
@@ -392,6 +395,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                         InstalmentValue = Convert.ToDouble(reader["instalmentValue"]),
+                                        PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
@@ -445,6 +449,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                         InstalmentValue = Convert.ToDouble(reader["instalmentValue"]),
+                                        PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
@@ -492,6 +497,44 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 con.Close();
             }
             return dt;
+        }
+
+        public bool CancelBillsFromDb(int id)
+        {
+            {
+                bool status = false;
+
+                string sql = "UPDATE BILLSTORECEIVE SET DATE_CANCELLED = @CANCELDATE " +
+                    "WHERE SALEID = @SALEID; ";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.Parameters.AddWithValue("@CANCELDATE", DateTime.Today.Date);
+                        command.Parameters.AddWithValue("@SALEID", id);
+                        connection.Open();
+                        int i = command.ExecuteNonQuery();
+                        if (i > 0)
+                        {
+                            MessageBox.Show("Register altered with success!");
+                            status = true;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error : " + ex.Message);
+                        return status;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                    return status;
+                }
+            }
         }
     }
 }

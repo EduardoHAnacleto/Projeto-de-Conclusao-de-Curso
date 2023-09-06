@@ -82,6 +82,7 @@
             this.DGV_PhoneClassification.MultiSelect = false;
             this.DGV_PhoneClassification.Name = "DGV_PhoneClassification";
             this.DGV_PhoneClassification.ReadOnly = true;
+            this.DGV_PhoneClassification.RowHeadersVisible = false;
             this.DGV_PhoneClassification.RowHeadersWidth = 51;
             this.DGV_PhoneClassification.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_PhoneClassification.Size = new System.Drawing.Size(579, 269);

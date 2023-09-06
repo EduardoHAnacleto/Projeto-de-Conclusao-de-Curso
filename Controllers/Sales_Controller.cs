@@ -54,8 +54,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public bool UpdateItem(Sales sale)
         {
             _sale = sale;
-            string format = "yyyy-MM-dd";
-            _sale.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
             return _salesDAO.EditFromDB(_sale);
         }
 

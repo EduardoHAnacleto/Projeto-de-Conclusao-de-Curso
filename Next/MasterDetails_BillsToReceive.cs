@@ -384,5 +384,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 SortByBillStatus("EM ESPERA");
             }
         }
+
+        private void btn_select_Click(object sender, EventArgs e)
+        {
+            var row = DGV_BillsToReceive.SelectedRows[0];
+            NewBillToReceiveForm(Convert.ToInt32(row.Cells["SaleNumberBillsReceive"].Value),
+                Convert.ToInt32(row.Cells["InstalmentNumber"].Value));
+        }
     }
 }

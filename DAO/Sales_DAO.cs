@@ -206,32 +206,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
             string sql;
-            if (sale.CancelDate == null)
-            {
-                sql = "UPDATE SALES SET CLIENT_ID = @CLIENTID, USER_ID = @USERID, SALE_TOTAL_COST = @SALECOST," +
-                    " SALE_TOTAL_VALUE = @SALEVALUE," +
-                    " TOTAL_ITEMS_QUANTITY = @TOTALQTD, DATE_LAST_UPDATE = @DU, paycondId = @PAYCONDID " +
-                    "WHERE ID_SALE = @ID ; ";
-            }
-            else
-            {
-                sql = "UPDATE SALES SET CLIENT_ID = @CLIENTID, USER_ID = @USERID, SALE_TOTAL_COST = @SALECOST," +
-                    " SALE_TOTAL_VALUE = @SALEVALUE, " +
-                    " TOTAL_ITEMS_QUANTITY = @TOTALQTD, SALE_CANCEL_DATE = @CANCELDATE, DATE_LAST_UPDATE = @DU, paycondId = @PAYCONDID  " +
-                    "WHERE ID_SALE = @ID ; ";
-            }
+            sql = "UPDATE SALES SET SALE_CANCEL_DATE = @CANCELDATE " +
+                  "WHERE ID_SALE = @ID ; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@CLIENTID", sale.Client.id);
-                    command.Parameters.AddWithValue("@USERID", sale.User.id);
-                    command.Parameters.AddWithValue("@SALECOST", (decimal)sale.TotalCost);
-                    command.Parameters.AddWithValue("@SALEVALUE", (decimal)sale.TotalValue);
-                    command.Parameters.AddWithValue("@PAYCONDID", sale.PaymentCondition.id);
-                    command.Parameters.AddWithValue("@TOTALQTD", sale.TotalItemsQuantity);
+                    command.Parameters.AddWithValue("@ID", sale.id);
                     if (sale.CancelDate != null)
                     {
                         command.Parameters.AddWithValue("@CANCELDATE", sale.CancelDate);
@@ -241,39 +224,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
                     }
 
-                    command.Parameters.AddWithValue("@DC", sale.dateOfCreation);
 
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     connection.Close();
                     if (i > 0)
                     {
-                        status = _saleItemsController.DeleteItem(sale.id); // Pega a lista de itens já no banco, remove os que foram removidos da lista
-                        //List<SaleItems> toBeRemoved = sale.SaleItems.Except(itemList).ToList();
-                        foreach (SaleItems item in sale.SaleItems)
-                        {
-                            if (item != null)
-                            {
-                                status = _saleItemsController.SaveItem(item);
-                                if (!status)
-                                {
-                                    MessageBox.Show("An error has occurred.");
-                                    break;
-                                }
-                            }
-                        }
-                        //foreach (SaleItems item in toBeRemoved)
-                        //{
-                        //    status = _saleItemsController.DeleteItem(item.id);
-                        //    if (!status)
-                        //    {
-                        //        MessageBox.Show("An error has occurred.");
-                        //        break;
-                        //    }
-                        //}
                         if (status)
                         {
-                            MessageBox.Show("Register altered with success!");
+                            MessageBox.Show("Venda Cancelada com sucesso!");
                         }
                     }
 

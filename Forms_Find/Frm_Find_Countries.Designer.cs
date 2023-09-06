@@ -143,6 +143,7 @@
             this.DGV_Countries.MultiSelect = false;
             this.DGV_Countries.Name = "DGV_Countries";
             this.DGV_Countries.ReadOnly = true;
+            this.DGV_Countries.RowHeadersVisible = false;
             this.DGV_Countries.RowHeadersWidth = 51;
             this.DGV_Countries.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Countries.Size = new System.Drawing.Size(582, 243);

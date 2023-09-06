@@ -286,13 +286,38 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         }
                         UnlockCamps();
                     }
-                    else if (btn_new.Text == "Cancelar")
+                    else if (btn_new.Text == "Cancelar Compra")
                     {
-                        status = _controller.UpdateItem(purchase);
-                        if (status)
+                        if (CheckInstalmentsForCancel())
                         {
-                            SetFormToEdit();
+                            string caption = "Confirme o cancelamento.";
+                            string message = "Deseja cancelar a compra?";
+
+                            MessageBoxIcon icon = MessageBoxIcon.Question;
+                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                            DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
+                            if (dialogResult == DialogResult.Yes)
+                            {
+                                purchase.CancelledDate = DateTime.Now;
+                                check_Active.Checked = false;
+                                check_Cancelled.Checked = true;
+                                status = _controller.UpdateItem(purchase);
+                            }
+                            if (status)
+                            {
+                                LockCamps();
+                            }
                         }
+                        else
+                        {
+                            string caption = "Erro ao cancelar Compra.";
+                            string message = "Uma ou mais parcelas já foram pagas, não é possível cancelar.";
+
+                            MessageBoxIcon icon = MessageBoxIcon.Error;
+                            MessageBoxButtons buttons = MessageBoxButtons.OK;
+                            MessageBox.Show(message, caption, buttons, icon);
+                        }
+
                     }
                 }
                 catch (Exception ex)
@@ -302,18 +327,32 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
+        public bool CheckInstalmentsForCancel()
+        {
+            var obj = this.GetObject();
+            BillsToPay_Controller btpController = new BillsToPay_Controller();
+            var bills = btpController.FindItemId(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
+            if (bills != null)
+            {
+                foreach (var b in bills)
+                {
+                    if (b.PaidDate.HasValue)
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
 
         private void SetFormToEdit()
         {
-            var edit = "&Alterar";
-            var del = "Apagar";
+            var edit = "&Cancelar Compra";
             btn_new.Text = edit;
             lbl_new.Text = edit;
             btn_new.Enabled = true;
             btn_Save.Enabled = false;
-            btn_FindSup.Enabled = false;
-            btn_FindSup.Text = del;
-            lbl_findsupplier.Text = del;
         }
 
         public virtual void Populated(bool populated)
@@ -382,7 +421,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 item.WeightedCostAverage = Convert.ToDecimal(row.Cells["ProdWeightedAvg"].Value);
                 list.Add(item);
             }
-
             return list;
         }
 
@@ -393,7 +431,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_User.Enabled = false;
             gbox_products.Enabled = false;
             gbox_billInfo.Enabled = false;
-            gbox_options.Enabled = false;
+            btn_Save.Enabled = false;
+            btn_new.Enabled = false;
+            btn_FindSup.Enabled = false;
         }
 
         private void UnlockCamps()
@@ -403,7 +443,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_User.Enabled = true;
             gbox_products.Enabled = true;
             gbox_billInfo.Enabled = true;
-            gbox_options.Enabled = true;
+            btn_Save.Enabled = true;
+            btn_new.Enabled = true;
+            btn_FindSup.Enabled = true;
         }
 
         private void ClearCamps()
@@ -706,6 +748,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void edt_insurance_ValueChanged(object sender, EventArgs e)
         {
             SetSummary();
+        }
+
+        private void check_Active_CheckedChanged(object sender, EventArgs e)
+        {
+            if (check_Active.Checked)
+            {
+                check_Cancelled.Checked = false;
+                medt_CancelDate.Text = string.Empty;
+            }
+        }
+
+        private void check_Cancelled_CheckedChanged(object sender, EventArgs e)
+        {
+            if ( check_Cancelled.Checked)
+            {
+                check_Active.Checked = false;
+                medt_CancelDate.Text = DateTime.Now.ToString();
+            }
         }
     }
 }

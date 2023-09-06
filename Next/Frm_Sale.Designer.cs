@@ -51,7 +51,6 @@
             this.lbl_productName = new System.Windows.Forms.Label();
             this.edt_productName = new System.Windows.Forms.TextBox();
             this.gbox_options = new System.Windows.Forms.GroupBox();
-            this.btn_CancelSale = new System.Windows.Forms.Button();
             this.lbl_findClient = new System.Windows.Forms.Label();
             this.lbl_new = new System.Windows.Forms.Label();
             this.lbl_Save = new System.Windows.Forms.Label();
@@ -361,7 +360,6 @@
             // 
             // gbox_options
             // 
-            this.gbox_options.Controls.Add(this.btn_CancelSale);
             this.gbox_options.Controls.Add(this.lbl_findClient);
             this.gbox_options.Controls.Add(this.lbl_new);
             this.gbox_options.Controls.Add(this.lbl_Save);
@@ -371,20 +369,10 @@
             this.gbox_options.Controls.Add(this.btn_new);
             this.gbox_options.Location = new System.Drawing.Point(19, 457);
             this.gbox_options.Name = "gbox_options";
-            this.gbox_options.Size = new System.Drawing.Size(318, 88);
+            this.gbox_options.Size = new System.Drawing.Size(261, 88);
             this.gbox_options.TabIndex = 11;
             this.gbox_options.TabStop = false;
             this.gbox_options.Text = "Atalhos";
-            // 
-            // btn_CancelSale
-            // 
-            this.btn_CancelSale.Location = new System.Drawing.Point(252, 20);
-            this.btn_CancelSale.Name = "btn_CancelSale";
-            this.btn_CancelSale.Size = new System.Drawing.Size(60, 48);
-            this.btn_CancelSale.TabIndex = 7;
-            this.btn_CancelSale.Text = "Cancelar\r\nCompra";
-            this.btn_CancelSale.UseVisualStyleBackColor = true;
-            this.btn_CancelSale.Visible = false;
             // 
             // lbl_findClient
             // 
@@ -1103,7 +1091,6 @@
         private System.Windows.Forms.Label lbl_ProdDiscCash;
         private System.Windows.Forms.DataGridView DGV_SaleSummary;
         private System.Windows.Forms.Button btn_DeleteItem;
-        private System.Windows.Forms.Button btn_CancelSale;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentDays;
         private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentPercentage;

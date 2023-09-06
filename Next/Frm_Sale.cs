@@ -47,7 +47,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         private BillsToReceive_Controller _BTRController = new BillsToReceive_Controller();
         //private BillsInstalments_Controller _billsController = null;
 
-        private void SetSale(Sales sale)
+        public void SetSale(Sales sale)
         {
             Sale = sale;
         }
@@ -89,25 +89,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             {
                 NewSale();
             }
-            else if (btn_new.Text == "&Alterar")
-            {
-                BackupSale = Sale;
-               // BackupSale.dateOfCreation = Sale.dateOfCreation;
-                UnlockCamps();
-                gbox_Status.Enabled = true;
-                btn_CancelSale.Visible = true;
-                btn_new.Text = "Cancelar";
-                lbl_new.Text = "Cancelar";
-                btn_Save.Enabled = true;
-                btn_FindClient.Enabled = true;
-            }
             else if (btn_new.Text == "Cancelar")
             {
-                LockCamps();
-                SetFormToEdit();
-                PopulateCamps(BackupSale);
-                gbox_Status.Enabled = false;
-                btn_CancelSale.Visible = false;
+                medt_CancelDate.Text = DateTime.Now.ToString();
+                this.Save();
             }
         }
 
@@ -542,10 +527,44 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     }
                     else if (btn_new.Text == "Cancelar")
                     {
-                        status = _controller.UpdateItem(sale);
-                        if (status)
+                        if (CheckInstalmentsForCancel())
                         {
-                            SetFormToEdit();
+                            string caption = "Confirme o cancelamento.";
+                            string message = "Deseja cancelar a compra?";
+
+                            MessageBoxIcon icon = MessageBoxIcon.Error;
+                            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+                            DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
+                            if (dialogResult == DialogResult.Yes)
+                            {
+                                sale.CancelDate = DateTime.Now.Date;
+                                check_Active.Checked = false;
+                                check_Cancelled.Checked = true;
+                                sale.id = Sale.id;
+                                status = _controller.UpdateItem(sale);
+                            }
+                            if (status)
+                            {
+                                status = _BTRController.CancelBills(sale.id);
+                                if (status)
+                                {
+                                    foreach (var item in sale.SaleItems)
+                                    {
+                                        _pController.RestoreStock(item);
+                                    }
+                                    LockCamps();
+                                }
+
+                            }
+                        }
+                        else
+                        {
+                            string caption = "Erro ao cancelar Venda.";
+                            string message = "Uma ou mais parcelas já foram pagas, não é possível cancelar.";
+
+                            MessageBoxIcon icon = MessageBoxIcon.Error;
+                            MessageBoxButtons buttons = MessageBoxButtons.OK;
+                            MessageBox.Show(message, caption, buttons, icon);
                         }
                     }
                 }
@@ -556,18 +575,21 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
         }
 
-        public void DeleteObject()
+        public bool CheckInstalmentsForCancel()
         {
-            LockCamps();
-            try
+            var obj = this.GetObject();
+            var bills = _BTRController.FindSaleId(obj.id);
+            if (bills != null)
             {
-                _controller.DeleteItem(BackupSale.id);
-                this.ClearCamps();
+                foreach (var b in bills)
+                {
+                    if (b.PaidDate.HasValue)
+                    {
+                        return false;
+                    }
+                }
             }
-            catch (Exception ex)
-            {
-                throw new Exception(ex.Message);
-            }
+            return true;
         }
 
         private Sales GetObject()
@@ -697,15 +719,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public void SetFormToEdit()
         {
-            var edit = "&Alterar";
-            var del = "Apagar";
+            var edit = "Cancelar";
             btn_new.Text = edit;
             lbl_new.Text = edit;
             btn_new.Enabled = true;
             btn_Save.Enabled = false;
             btn_FindClient.Enabled = false;
-            btn_FindClient.Text = del;
-            lbl_findClient.Text = del;
+            medt_CancelDate.Visible = true;
+            lbl_CancelDate.Visible = true;
         }
 
         public void PopulateCamps(Sales sale)
@@ -763,17 +784,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             DGV_SaleProducts.Rows.Clear();
             foreach (SaleItems item in sale.SaleItems)
             {
-                //DataGridViewRow row = new DataGridViewRow();
-                //row.CreateCells(DGV_SaleProducts);
-                //row.Cells["IdProduct"].Value = item.Product.id;
-                //row.Cells["NameProduct"].Value = item.Product.productName;
-                //row.Cells["ProductCost"].Value = item.ProductCost;
-                //row.Cells["QuantityProduct"].Value = item.Quantity;
-                //row.Cells["ItemDiscountCash"].Value = item.ItemDiscountCash;
-                //row.Cells["ItemDiscountPerc"].Value = item.ItemDiscountPerc;
-                //row.Cells["UnValueProduct"].Value = item.ProductValue;
-                //row.Cells["ProductTotalValue"].Value = item.ProductValue * item.Quantity;
-                //DGV_SaleProducts.Rows.Add(row);
                 var totalValue = item.ProductValue * item.Quantity;
                 DGV_SaleProducts.Rows.Add(
                     item.Product.id,
@@ -806,6 +816,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_ProdDiscCash.Value = 0;
             edt_ProdUnValue.Value = 0;
             edt_totalPValue.Value = 0;
+            medt_CancelDate.Visible = false;
+            lbl_CancelDate.Visible = false;
         }
 
         private void UnlockCamps()
@@ -839,7 +851,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             btn_SearchPayCondition.Enabled = false;
             btn_new.Enabled = false;
             btn_Save.Enabled = false;
-            btn_Close.Enabled = false;
         }
 
         private bool CheckCamps()
@@ -863,15 +874,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 Utilities.Msgbox(message, caption, buttons, icon);
                 return false;
             }
-            //else if (edt_subtotal.Value < 0)
-            //{
-            //    string message = "Sub-Total must be 0 or higher.";
-            //    string caption = "Sub-Total is not valid.";
-            //    MessageBoxButtons buttons = MessageBoxButtons.OK;
-            //    MessageBoxIcon icon = MessageBoxIcon.Error;
-            //    Utilities.Msgbox(message, caption, buttons, icon);
-            //    return false;
-            //}
             if (edt_clientId.Value <= 1)
             {
                 PaymentConditions_Controller pCController = new PaymentConditions_Controller();
@@ -929,7 +931,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 {
                     int amount = 1;
                     decimal discountCash = 0;
-                    decimal discountPerc = 0;
                     decimal totalValue = (decimal)prod.salePrice;
 
                     if (!CheckEqualDGVProduct(product.id, amount, discountCash, totalValue))
@@ -1016,6 +1017,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             {
                 check_Active.Checked = false;
             }
+        }
+
+        private void btn_CancelSale_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -113,6 +113,9 @@
             this.DGV_PurchSummary = new System.Windows.Forms.DataGridView();
             this.PurchSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.gbox_status = new System.Windows.Forms.GroupBox();
+            this.check_Active = new System.Windows.Forms.CheckBox();
+            this.check_Cancelled = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).BeginInit();
             this.gbox_products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodDiscCash)).BeginInit();
@@ -138,6 +141,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payCondId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchSummary)).BeginInit();
+            this.gbox_status.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGV_PurchasesProducts
@@ -511,9 +515,9 @@
             this.lbl_CancelDate.AutoSize = true;
             this.lbl_CancelDate.Location = new System.Drawing.Point(11, 45);
             this.lbl_CancelDate.Name = "lbl_CancelDate";
-            this.lbl_CancelDate.Size = new System.Drawing.Size(84, 13);
+            this.lbl_CancelDate.Size = new System.Drawing.Size(81, 13);
             this.lbl_CancelDate.TabIndex = 3;
-            this.lbl_CancelDate.Text = "Último Alterado :";
+            this.lbl_CancelDate.Text = "Cancelado em :";
             this.lbl_CancelDate.Visible = false;
             // 
             // medt_CancelDate
@@ -1054,11 +1058,47 @@
             this.PurchTotal.Name = "PurchTotal";
             this.PurchTotal.ReadOnly = true;
             // 
+            // gbox_status
+            // 
+            this.gbox_status.Controls.Add(this.check_Cancelled);
+            this.gbox_status.Controls.Add(this.check_Active);
+            this.gbox_status.Location = new System.Drawing.Point(1023, 119);
+            this.gbox_status.Name = "gbox_status";
+            this.gbox_status.Size = new System.Drawing.Size(118, 71);
+            this.gbox_status.TabIndex = 53;
+            this.gbox_status.TabStop = false;
+            this.gbox_status.Text = "Status da Compra";
+            // 
+            // check_Active
+            // 
+            this.check_Active.AutoSize = true;
+            this.check_Active.Checked = true;
+            this.check_Active.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.check_Active.Location = new System.Drawing.Point(6, 20);
+            this.check_Active.Name = "check_Active";
+            this.check_Active.Size = new System.Drawing.Size(50, 17);
+            this.check_Active.TabIndex = 0;
+            this.check_Active.Text = "Ativo";
+            this.check_Active.UseVisualStyleBackColor = true;
+            this.check_Active.CheckedChanged += new System.EventHandler(this.check_Active_CheckedChanged);
+            // 
+            // check_Cancelled
+            // 
+            this.check_Cancelled.AutoSize = true;
+            this.check_Cancelled.Location = new System.Drawing.Point(6, 43);
+            this.check_Cancelled.Name = "check_Cancelled";
+            this.check_Cancelled.Size = new System.Drawing.Size(77, 17);
+            this.check_Cancelled.TabIndex = 1;
+            this.check_Cancelled.Text = "Cancelado";
+            this.check_Cancelled.UseVisualStyleBackColor = true;
+            this.check_Cancelled.CheckedChanged += new System.EventHandler(this.check_Cancelled_CheckedChanged);
+            // 
             // Frm_Create_Purchases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1153, 738);
+            this.Controls.Add(this.gbox_status);
             this.Controls.Add(this.DGV_PurchSummary);
             this.Controls.Add(this.DGV_Instalments);
             this.Controls.Add(this.gbox_payCond);
@@ -1103,6 +1143,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payCondId)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchSummary)).EndInit();
+            this.gbox_status.ResumeLayout(false);
+            this.gbox_status.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1194,5 +1236,8 @@
         private System.Windows.Forms.DataGridView DGV_PurchSummary;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchSubTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchTotal;
+        private System.Windows.Forms.GroupBox gbox_status;
+        private System.Windows.Forms.CheckBox check_Cancelled;
+        private System.Windows.Forms.CheckBox check_Active;
     }
 }

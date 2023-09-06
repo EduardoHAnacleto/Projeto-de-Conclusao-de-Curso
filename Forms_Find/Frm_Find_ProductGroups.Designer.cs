@@ -83,6 +83,7 @@
             this.DGV_ProdGroups.MultiSelect = false;
             this.DGV_ProdGroups.Name = "DGV_ProdGroups";
             this.DGV_ProdGroups.ReadOnly = true;
+            this.DGV_ProdGroups.RowHeadersVisible = false;
             this.DGV_ProdGroups.RowHeadersWidth = 51;
             this.DGV_ProdGroups.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_ProdGroups.Size = new System.Drawing.Size(582, 281);

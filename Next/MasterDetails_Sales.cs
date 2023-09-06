@@ -200,11 +200,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
             if (Convert.ToInt32(edt_UserId.Value) > 0)
             {
                 SetSalesDataSourceToDGV();
-                foreach (DataGridViewRow item in DGV_Sales.Rows)
+                foreach (DataGridViewRow row in DGV_Sales.Rows)
                 {
-                    if (Convert.ToInt32(item.Cells["SaleUserId"].Value) != Convert.ToInt32(edt_UserId.Value))
+                    if (Convert.ToInt32(row.Cells["SaleUserId"].Value) != Convert.ToInt32(edt_UserId.Value))
                     {
-                        item.Dispose();
+                        DGV_Sales.Rows.Remove(row);
                     }
                 }
             }
@@ -217,13 +217,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
 
         private void dateTime_DateFilter_ValueChanged(object sender, EventArgs e)
         {
+            SetSalesDataSourceToDGV();
             if (dateTime_DateFilter.Value <= dateTime_DateFilter.MinDate)
             {
                 foreach (DataGridViewRow row in DGV_Sales.Rows)
                 {
                     if (Convert.ToDateTime(row.Cells["SaleDate"].Value) < dateTime_DateFilter.Value)
                     {
-                        row.Dispose();
+                        DGV_Sales.Rows.Remove(row);
                     }
                 }
             }
@@ -231,6 +232,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
 
         private void rbtn_ActiveStatus_CheckedChanged(object sender, EventArgs e)
         {
+            SetSalesDataSourceToDGV();
             if (rbtn_ActiveStatus.Checked)
             {
                 rbtn_CancelledStatus.Checked = false;
@@ -246,6 +248,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
 
         private void rbtn_CancelledStatus_CheckedChanged(object sender, EventArgs e)
         {
+            SetSalesDataSourceToDGV();
             if (rbtn_CancelledStatus.Checked)
             {
                 rbtn_ActiveStatus.Checked = false;
@@ -261,14 +264,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
 
         private void rbtn_LegalClients_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbtn_LegalClients.Checked)
+            if (rbtn_LegalClients.Checked == true)
             {
+                SetClientsDataSourceToDGV();
                 rbtn_Natural.Checked = false;
                 foreach (DataGridViewRow row in DGV_Clients.Rows)
                 {
                     if (row.Cells["ClientType"].ToString() != "JURÍDICO")
                     {
-                        row.Dispose();
+                        DGV_Clients.Rows.Remove(row);
                     }
                 }
             }
@@ -276,14 +280,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
 
         private void rbtn_Natural_CheckedChanged(object sender, EventArgs e)
         {
-            if (rbtn_Natural.Checked)
+            if (rbtn_Natural.Checked == true)
             {
+                SetClientsDataSourceToDGV();
                 rbtn_LegalClients.Checked = false;
                 foreach (DataGridViewRow row in DGV_Clients.Rows)
                 {
                     if (row.Cells["ClientType"].ToString() != "FÍSICO")
                     {
-                        row.Dispose();
+                        DGV_Clients.Rows.Remove(row);
                     }
                 }
             }
@@ -327,7 +332,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
 
         private void btn_SelectClient_Click(object sender, EventArgs e)
         {
-            FilterByClient();
+            
         }
 
         public void FilterByClient()
@@ -463,10 +468,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 Users user = UsersController.FindItemId(sale.User.id);
                 Frm_Sale frmSale = new Frm_Sale(user);
                 frmSale.PopulateCamps(sale);
+                frmSale.SetSale(sale);
                 frmSale.SetFormToEdit();
                 frmSale.ShowDialog();
                 SetSalesDataSourceToDGV();
             }
+        }
+
+        private void gbox_clientFilters_Enter(object sender, EventArgs e)
+        {
+
         }
     }
 }

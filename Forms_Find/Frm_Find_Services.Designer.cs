@@ -31,10 +31,10 @@
             this.edt_serviceDescription = new System.Windows.Forms.TextBox();
             this.btn_Search = new System.Windows.Forms.Button();
             this.DGV_Services = new System.Windows.Forms.DataGridView();
-            this.lbl_serviceDescription = new System.Windows.Forms.Label();
             this.ServiceId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ServiceDescription = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ServiceValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbl_serviceDescription = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Services)).BeginInit();
             this.SuspendLayout();
@@ -76,6 +76,7 @@
             this.DGV_Services.MultiSelect = false;
             this.DGV_Services.Name = "DGV_Services";
             this.DGV_Services.ReadOnly = true;
+            this.DGV_Services.RowHeadersVisible = false;
             this.DGV_Services.RowHeadersWidth = 51;
             this.DGV_Services.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Services.Size = new System.Drawing.Size(578, 259);
@@ -84,15 +85,6 @@
             this.DGV_Services.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Services_CellContentClick);
             this.DGV_Services.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Services_CellContentDoubleClick);
             this.DGV_Services.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.DGV_Services_KeyPress);
-            // 
-            // lbl_serviceDescription
-            // 
-            this.lbl_serviceDescription.AutoSize = true;
-            this.lbl_serviceDescription.Location = new System.Drawing.Point(45, 7);
-            this.lbl_serviceDescription.Name = "lbl_serviceDescription";
-            this.lbl_serviceDescription.Size = new System.Drawing.Size(43, 13);
-            this.lbl_serviceDescription.TabIndex = 10;
-            this.lbl_serviceDescription.Text = "Serviço";
             // 
             // ServiceId
             // 
@@ -117,6 +109,15 @@
             this.ServiceValue.Name = "ServiceValue";
             this.ServiceValue.ReadOnly = true;
             this.ServiceValue.Width = 80;
+            // 
+            // lbl_serviceDescription
+            // 
+            this.lbl_serviceDescription.AutoSize = true;
+            this.lbl_serviceDescription.Location = new System.Drawing.Point(45, 7);
+            this.lbl_serviceDescription.Name = "lbl_serviceDescription";
+            this.lbl_serviceDescription.Size = new System.Drawing.Size(43, 13);
+            this.lbl_serviceDescription.TabIndex = 10;
+            this.lbl_serviceDescription.Text = "Serviço";
             // 
             // Frm_Find_Services
             // 
