@@ -126,7 +126,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.Purchase = new Purchases();
             obj.Purchase.id = 0;
             obj.InstalmentNumber = (int)edt_instalmentNumber.Value;
-            obj.TotalValue = (double)edt_totalValue.Value;
+            obj.TotalValue = edt_totalValue.Value;
             obj.DueDate = datePicker_due.Value;
             obj.EmissionDate = DateTime.Now;
             if (check_Paid.Checked)

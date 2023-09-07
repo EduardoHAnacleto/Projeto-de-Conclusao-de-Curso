@@ -171,6 +171,7 @@
             // 
             this.edt_weeklyHours.Location = new System.Drawing.Point(5, 67);
             this.edt_weeklyHours.Margin = new System.Windows.Forms.Padding(2);
+            this.edt_weeklyHours.MaxLength = 3;
             this.edt_weeklyHours.Name = "edt_weeklyHours";
             this.edt_weeklyHours.Size = new System.Drawing.Size(48, 20);
             this.edt_weeklyHours.TabIndex = 35;
@@ -179,6 +180,7 @@
             // 
             this.edt_baseSalary.Location = new System.Drawing.Point(92, 67);
             this.edt_baseSalary.Margin = new System.Windows.Forms.Padding(2);
+            this.edt_baseSalary.MaxLength = 10;
             this.edt_baseSalary.Name = "edt_baseSalary";
             this.edt_baseSalary.Size = new System.Drawing.Size(60, 20);
             this.edt_baseSalary.TabIndex = 33;
@@ -226,6 +228,7 @@
             // 
             this.edt_jobRole.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_jobRole.Location = new System.Drawing.Point(5, 31);
+            this.edt_jobRole.MaxLength = 30;
             this.edt_jobRole.Name = "edt_jobRole";
             this.edt_jobRole.Size = new System.Drawing.Size(136, 20);
             this.edt_jobRole.TabIndex = 45;
@@ -236,10 +239,10 @@
             this.rbtn_active.Checked = true;
             this.rbtn_active.Location = new System.Drawing.Point(17, 22);
             this.rbtn_active.Name = "rbtn_active";
-            this.rbtn_active.Size = new System.Drawing.Size(55, 17);
+            this.rbtn_active.Size = new System.Drawing.Size(49, 17);
             this.rbtn_active.TabIndex = 48;
             this.rbtn_active.TabStop = true;
-            this.rbtn_active.Text = "Active";
+            this.rbtn_active.Text = "Ativo";
             this.rbtn_active.UseVisualStyleBackColor = true;
             this.rbtn_active.CheckedChanged += new System.EventHandler(this.rbtn_active_CheckedChanged);
             // 
@@ -248,10 +251,10 @@
             this.rbtn_dismissed.AutoSize = true;
             this.rbtn_dismissed.Location = new System.Drawing.Point(17, 38);
             this.rbtn_dismissed.Name = "rbtn_dismissed";
-            this.rbtn_dismissed.Size = new System.Drawing.Size(63, 17);
+            this.rbtn_dismissed.Size = new System.Drawing.Size(57, 17);
             this.rbtn_dismissed.TabIndex = 49;
             this.rbtn_dismissed.TabStop = true;
-            this.rbtn_dismissed.Text = "Inactive";
+            this.rbtn_dismissed.Text = "Inativo";
             this.rbtn_dismissed.UseVisualStyleBackColor = true;
             this.rbtn_dismissed.CheckedChanged += new System.EventHandler(this.rbtn_dismissed_CheckedChanged);
             // 

@@ -601,7 +601,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
             sale.User = this.GetUser();
             sale.Client = this.GetClient();
-            sale.TotalValue = Convert.ToDouble(DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value);
+            sale.TotalValue = Convert.ToDecimal(DGV_SaleSummary.Rows[0].Cells["SaleTotal"].Value);
             sale.PaymentCondition = pcController.FindItemId((int)edt_payConditionId.Value);
             if (check_Active.Checked)
             {
@@ -619,9 +619,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             return sale;
         }
 
-        private double GetTotalCost(List<SaleItems> list)
+        private decimal GetTotalCost(List<SaleItems> list)
         {
-            double totalCost = 0;
+            decimal totalCost = 0;
             foreach (SaleItems item in list)
             {
                 totalCost += item.ProductCost;
@@ -638,17 +638,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 saleItem.id = idSale;
                 saleItem.Product = _pController.FindItemId((int)row.Cells["IdProduct"].Value);
                 saleItem.Quantity = Convert.ToInt32(row.Cells["QuantityProduct"].Value);
-                saleItem.ProductValue = Convert.ToDouble(row.Cells["UnValueProduct"].Value);
-                saleItem.TotalValue = Convert.ToDouble(row.Cells["ProductTotalValue"].Value);
+                saleItem.ProductValue = Convert.ToDecimal(row.Cells["UnValueProduct"].Value);
+                saleItem.TotalValue = Convert.ToDecimal(row.Cells["ProductTotalValue"].Value);
                 saleItem.ProductCost = saleItem.Product.productCost;
-                saleItem.ItemDiscountCash = Convert.ToDouble(row.Cells["ProductDiscoutCash"].Value);
+                saleItem.ItemDiscountCash = Convert.ToDecimal(row.Cells["ProductDiscoutCash"].Value);
 
                 list.Add(saleItem);
             }
             return list;
         }
 
-        private List<BillsToReceive> GetBillToReceive(double totalValue, DateTime emissionDate) //To do??
+        private List<BillsToReceive> GetBillToReceive(decimal totalValue, DateTime emissionDate) //To do??
         {
             List<BillsToReceive> list = new List<BillsToReceive>();
             BillsToReceive bill = new BillsToReceive();

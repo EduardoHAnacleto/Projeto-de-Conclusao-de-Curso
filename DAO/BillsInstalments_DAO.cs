@@ -33,7 +33,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@INSTALNUMBER", obj.InstalmentNumber);
                     command.Parameters.AddWithValue("@METHODID", obj.PaymentMethod.id);
                     command.Parameters.AddWithValue("@DAYS", obj.TotalDays);
-                    command.Parameters.AddWithValue("@VALUEPERC", (decimal) obj.ValuePercentage);
+                    command.Parameters.AddWithValue("@VALUEPERC", obj.ValuePercentage);
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
@@ -213,7 +213,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     InstalmentNumber = Convert.ToInt32(reader["instalment_number"]),
                                     PaymentMethod = _paymethodController.FindItemId(Convert.ToInt32(reader["paymethod_id"])),
                                     TotalDays = Convert.ToInt32(reader["total_days"]),
-                                    ValuePercentage = Convert.ToDouble(reader["value_percentage"]),
+                                    ValuePercentage = Convert.ToDecimal(reader["value_percentage"]),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                                 };
@@ -294,7 +294,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                             InstalmentNumber = Convert.ToInt32(reader["INSTALMENT_NUMBER"]),
                             TotalDays = Convert.ToInt32(reader["total_days"]),
                             PaymentMethod = _PMController.FindItemId(Convert.ToInt32(reader["PAYMETHOD_ID"])),
-                            ValuePercentage = Convert.ToDouble(reader["VALUE_PERCENTAGE"]),
+                            ValuePercentage = Convert.ToDecimal(reader["VALUE_PERCENTAGE"]),
                             dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                             dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                         };
@@ -346,7 +346,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                             InstalmentNumber = Convert.ToInt32(dr["INSTALMENT_NUMBER"]),
                             TotalDays = Convert.ToInt32(dr["total_days"]),
                             PaymentMethod = _PMController.FindItemId(Convert.ToInt32(dr["PAYMETHOD_ID"])),
-                            ValuePercentage = Convert.ToDouble(dr["VALUE_PERCENTAGE"]),
+                            ValuePercentage = Convert.ToDecimal(dr["VALUE_PERCENTAGE"]),
                             dateOfCreation = Convert.ToDateTime(dr["date_creation"]),
                             dateOfLastUpdate = Convert.ToDateTime(dr["date_last_update"])
                         };

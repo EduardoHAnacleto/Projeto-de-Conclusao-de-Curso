@@ -27,7 +27,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public DateTime EmissionDate { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime? PaidDate { get; set; }
-        public double InstalmentValue { get; set; }
+        public decimal InstalmentValue { get; set; }
         public PaymentConditions PaymentCondition { get; set; }
 
         public static List<BillsToReceive> MakeBills(Sales sale, int saleId)

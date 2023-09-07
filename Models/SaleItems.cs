@@ -15,9 +15,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
 
         public Products Product { get; set; }
         public int Quantity { get; set; }
-        public double ProductValue { get; set; }
-        public double TotalValue { get; set; }
-        public double ProductCost { get; set; }
-        public double ItemDiscountCash { get; set; }
+        public decimal ProductValue { get; set; }
+        public decimal TotalValue { get; set; }
+        public decimal ProductCost { get; set; }
+        public decimal ItemDiscountCash { get; set; }
     }
 }

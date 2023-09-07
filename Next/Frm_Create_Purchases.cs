@@ -377,11 +377,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.PaymentCondition = _pCController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
             obj.User = User;
             obj.Supplier = _sController.FindItemId( Convert.ToInt32(edt_supplierId.Value));
-            obj.Freight_Cost = Convert.ToDouble(edt_transportFee.Value);
+            obj.Freight_Cost = Convert.ToDecimal(edt_transportFee.Value);
 
             obj.EmissionDate = dateTime_emissionDate.Value;
-            obj.ExtraExpenses = Convert.ToDouble(edt_extraExpenses.Value);
-            obj.InsuranceCost = Convert.ToDouble(edt_insurance.Value);
+            obj.ExtraExpenses = Convert.ToDecimal(edt_extraExpenses.Value);
+            obj.InsuranceCost = Convert.ToDecimal(edt_insurance.Value);
             obj.ArrivalDate = dateTime_ArrivalDate.Value;
             obj.Status = 0;
             obj.BillNumber = Convert.ToInt32(edt_billNumber.Value);
@@ -392,7 +392,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             return obj;
         }
 
-        private double GetTotalCost(List<PurchaseItems> purchasedItems, double extraExpenses, double insuranceCost)
+        private decimal GetTotalCost(List<PurchaseItems> purchasedItems, decimal extraExpenses, decimal insuranceCost)
         {
             var totalCost = extraExpenses + insuranceCost;
             decimal itemTotalCost = 0;
@@ -400,7 +400,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 itemTotalCost += (item.Quantity * item.NewBaseUnCost) - item.DiscountCash;
             }
-            return totalCost + Convert.ToDouble(itemTotalCost);
+            return totalCost + itemTotalCost;
         }
 
         public List<PurchaseItems> GetDGVList(int billNum, int billMod, int bSer, int supId)

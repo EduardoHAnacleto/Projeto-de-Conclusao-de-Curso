@@ -13,9 +13,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             List<BillsInstalments> BillsInstalments = new List<BillsInstalments>();
         }
         public string conditionName { get; set; }
-        public double paymentFees { get; set; }
-        public double fineValue { get; set; }
-        public double discountPerc { get; set; }
+        public decimal paymentFees { get; set; }
+        public decimal fineValue { get; set; }
+        public decimal discountPerc { get; set; }
         public int instalmentQuantity { get; set; }
         public List<BillsInstalments> BillsInstalments { get; set; }
 

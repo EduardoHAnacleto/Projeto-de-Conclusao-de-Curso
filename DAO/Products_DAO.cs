@@ -200,8 +200,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                 {
                                     id = Convert.ToInt32(reader["id_product"]),
                                     productName = Convert.ToString(reader["product_name"]),
-                                    salePrice = Convert.ToDouble(reader["product_sale_price"]),
-                                    productCost = Convert.ToDouble(reader["product_cost"]),
+                                    salePrice = Convert.ToDecimal(reader["product_sale_price"]),
+                                    productCost = Convert.ToDecimal(reader["product_cost"]),
                                     stock = Convert.ToInt32(reader["stock"]),
                                     productGroup = _PController.FindItemId(Convert.ToInt32(reader["product_group_id"])),
                                     BarCode = Convert.ToInt64(reader["product_barCode"]),
@@ -247,8 +247,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                 {
                                     id = Convert.ToInt32(reader["id_product"]),
                                     productName = Convert.ToString(reader["product_name"]),
-                                    salePrice = Convert.ToDouble(reader["product_sale_price"]),
-                                    productCost = Convert.ToDouble(reader["product_cost"]),
+                                    salePrice = Convert.ToDecimal(reader["product_sale_price"]),
+                                    productCost = Convert.ToDecimal(reader["product_cost"]),
                                     stock = Convert.ToInt32(reader["stock"]),
                                     productGroup = _PController.FindItemId(Convert.ToInt32(reader["product_group_id"])),
                                     BarCode = Convert.ToInt64(reader["product_barCode"]),
@@ -294,8 +294,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                 {
                                     id = Convert.ToInt32(reader["id_product"]),
                                     productName = Convert.ToString(reader["product_name"]),
-                                    salePrice = Convert.ToDouble(reader["product_sale_price"]),
-                                    productCost = Convert.ToDouble(reader["product_cost"]),
+                                    salePrice = Convert.ToDecimal(reader["product_sale_price"]),
+                                    productCost = Convert.ToDecimal(reader["product_cost"]),
                                     stock = Convert.ToInt32(reader["stock"]),
                                     BarCode = Convert.ToInt64(reader["product_barCode"]),
                                     productGroup = _PController.FindItemId(Convert.ToInt32(reader["product_group_id"])),

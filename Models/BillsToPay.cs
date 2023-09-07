@@ -22,7 +22,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public int BillNumber { get; set; }
         public int BillSeries { get; set; }
         public int BillModel { get; set; }
-        public double TotalValue { get; set; }
+        public decimal TotalValue { get; set; }
         public int InstalmentNumber { get; set; }
 
         public DateTime EmissionDate { get; set; }

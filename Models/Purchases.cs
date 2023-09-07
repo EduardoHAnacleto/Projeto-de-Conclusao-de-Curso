@@ -15,10 +15,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public DateTime ArrivalDate { get; set; }
         public DateTime? CancelledDate { get; set; }
 
-        public double Freight_Cost { get; set; }
-        public double Total_Cost { get; set; }
-        public double ExtraExpenses { get; set; }
-        public double InsuranceCost { get; set; }
+        public decimal Freight_Cost { get; set; }
+        public decimal Total_Cost { get; set; }
+        public decimal ExtraExpenses { get; set; }
+        public decimal InsuranceCost { get; set; }
         public int BillNumber { get; set; }
         public int BillSeries { get; set; }
         public int BillModel { get; set; }

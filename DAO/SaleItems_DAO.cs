@@ -129,10 +129,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 id = Convert.ToInt32(reader["sale_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
-                                ProductValue = Convert.ToDouble(reader["item_value"]),
-                                ProductCost = Convert.ToDouble(reader["item_cost"]),
-                                TotalValue = Convert.ToDouble(reader["total_value"]),
-                                ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
+                                ProductValue = Convert.ToDecimal(reader["item_value"]),
+                                ProductCost = Convert.ToDecimal(reader["item_cost"]),
+                                TotalValue = Convert.ToDecimal(reader["total_value"]),
+                                ItemDiscountCash = Convert.ToDecimal(reader["discount_cash"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -176,10 +176,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 id = Convert.ToInt32(reader["sale_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
-                                ProductValue = Convert.ToDouble(reader["item_value"]),
-                                ProductCost = Convert.ToDouble(reader["item_cost"]),
-                                TotalValue = Convert.ToDouble(reader["total_value"]),
-                                ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
+                                ProductValue = Convert.ToDecimal(reader["item_value"]),
+                                ProductCost = Convert.ToDecimal(reader["item_cost"]),
+                                TotalValue = Convert.ToDecimal(reader["total_value"]),
+                                ItemDiscountCash = Convert.ToDecimal(reader["discount_cash"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -223,10 +223,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 id = Convert.ToInt32(reader["sale_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
-                                ProductValue = Convert.ToDouble(reader["item_value"]),
-                                ProductCost = Convert.ToDouble(reader["item_cost"]),
-                                TotalValue = Convert.ToDouble(reader["total_value"]),
-                                ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
+                                ProductValue = Convert.ToDecimal(reader["item_value"]),
+                                ProductCost = Convert.ToDecimal(reader["item_cost"]),
+                                TotalValue = Convert.ToDecimal(reader["total_value"]),
+                                ItemDiscountCash = Convert.ToDecimal(reader["discount_cash"]),
                                 dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -270,10 +270,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 id = id,
                                 Product          = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity         = Convert.ToInt32(reader["quantity"]),
-                                ProductValue     = Convert.ToDouble(reader["item_value"]),
-                                ProductCost      = Convert.ToDouble(reader["item_cost"]),
-                                TotalValue       = Convert.ToDouble(reader["total_value"]),
-                                ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
+                                ProductValue     = Convert.ToDecimal(reader["item_value"]),
+                                ProductCost      = Convert.ToDecimal(reader["item_cost"]),
+                                TotalValue       = Convert.ToDecimal(reader["total_value"]),
+                                ItemDiscountCash = Convert.ToDecimal(reader["discount_cash"]),
                                 dateOfCreation   = Convert.ToDateTime(reader["date_creation"]),
                                 dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                             };
@@ -314,10 +314,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                             id = id,
                             Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                             Quantity = Convert.ToInt32(reader["quantity"]),
-                            ProductValue = Convert.ToDouble(reader["item_value"]),
-                            ProductCost = Convert.ToDouble(reader["item_cost"]),
-                            TotalValue = Convert.ToDouble(reader["total_value"]),
-                            ItemDiscountCash = Convert.ToDouble(reader["discount_cash"]),
+                            ProductValue = Convert.ToDecimal(reader["item_value"]),
+                            ProductCost = Convert.ToDecimal(reader["item_cost"]),
+                            TotalValue = Convert.ToDecimal(reader["total_value"]),
+                            ItemDiscountCash = Convert.ToDecimal(reader["discount_cash"]),
                             dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                             dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                         };

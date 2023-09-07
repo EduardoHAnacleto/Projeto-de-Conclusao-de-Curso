@@ -64,7 +64,7 @@
     instalment_number int not null,
     paymethod_id int not null references PaymentMethods(id_payment_method),
     total_days int not null,
-    value_percentage decimal(3,2),
+    value_percentage decimal(5,2) not null,
     date_creation datetime not null,
     date_last_update datetime not null,
     primary key (paycondition_id, instalment_number)
@@ -242,7 +242,7 @@
         date_creation datetime not null,
     );
 
-		    create table BILLSTORECEIVE(
+	create table BILLSTORECEIVE(
         sale_id int not null references SALES(id_sale),
         instalmentNumber int not null, 
         instalmentValue decimal not null,
@@ -255,7 +255,7 @@
         dueDate date not null,
         emissionDate date not null,
         date_creation date not null,
-        date_last_update date not null,
+        DATE_CANCELLED date,
         primary key(sale_id,instalmentNumber),
 		foreign key(sale_id) references SALES(id_sale)
     );
@@ -298,6 +298,7 @@
         purchase_InsuranceCost decimal,
         cancelledDate date,
         paidDate date,
+        paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition),
         supplier_id int not null references SUPPLIERS(id_supplier),
         user_id int not null references USERS (id_user),
         date_creation datetime not null,

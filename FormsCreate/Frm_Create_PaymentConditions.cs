@@ -63,9 +63,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_discount.Enabled = true;
             edt_paymentCondition.Enabled = true;
             edt_paymentFee.Enabled = true;
-            edt_totalPercentage.Enabled = true;
             edt_paymentFine.Enabled = true;
-            edt_instalmentNumber.Enabled = true;
             edt_valuePercentage.Enabled = true;
             btn_SearchMethod.Enabled = true;
             DGV_Instalments.Enabled = true;
@@ -76,13 +74,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         {
             base.ClearCamps();
             edt_daysCount.Value = 0;
-            edt_discount.Text = String.Empty;
+            edt_discount.Text = "0";
             edt_paymentCondition.Text = String.Empty;
-            edt_paymentFee.Text = String.Empty;
-            edt_totalPercentage.Text = String.Empty;
-            edt_paymentFine.Text = String.Empty;
+            edt_paymentFee.Text = "0";
+            edt_totalPercentage.Text = "0";
+            edt_paymentFine.Text = "0";
             edt_instalmentNumber.Value = 0;
-            edt_valuePercentage.Text = String.Empty;
+            edt_valuePercentage.Text = "0";
             DGV_Instalments.Rows.Clear();
         }
 
@@ -216,16 +214,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             DateTime time = DateTime.Now;
             conditions.id = Convert.ToInt32(edt_id.Value);
             conditions.conditionName = edt_paymentCondition.Text;
-            conditions.fineValue = Convert.ToDouble(edt_paymentFine.Value);
-            conditions.paymentFees = Convert.ToDouble(edt_paymentFee.Value);
-            conditions.discountPerc = Convert.ToDouble(edt_discount.Value);
+            conditions.fineValue = Convert.ToDecimal(edt_paymentFine.Value);
+            conditions.paymentFees = Convert.ToDecimal(edt_paymentFee.Value);
+            conditions.discountPerc = Convert.ToDecimal(edt_discount.Value);
             foreach (DataGridViewRow row in DGV_Instalments.Rows)
             {
                 bill = new BillsInstalments();
                 bill.id = conditions.id;
                 bill.InstalmentNumber = Convert.ToInt32(row.Cells["InstalmentNumber"].Value);
                 bill.TotalDays = Convert.ToInt32(row.Cells["IntalmentDays"].Value);
-                bill.ValuePercentage = Convert.ToDouble(row.Cells["InstalmentPercentage"].Value);
+                bill.ValuePercentage = Convert.ToDecimal(row.Cells["InstalmentPercentage"].Value);
                 bill.PaymentMethod = method.FindItemName(row.Cells["InstalmentPayMethod"].Value.ToString());
                 if (bill.dateOfCreation == DateTime.MinValue)
                 {
@@ -373,6 +371,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 catch (Exception ex)
                 {
                     throw new Exception(ex.Message);
+                }
+                finally
+                {
+                    ClearCamps();
+                    UnlockCamps();
                 }
             }
         }

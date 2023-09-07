@@ -15,7 +15,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
 
         public int InstalmentNumber { get; set; }
         public int TotalDays { get; set; }
-        public double ValuePercentage { get; set; }
+        public decimal ValuePercentage { get; set; }
         public PaymentMethods PaymentMethod { get; set; }
     }
 }

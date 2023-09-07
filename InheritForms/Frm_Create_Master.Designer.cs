@@ -100,7 +100,7 @@
             this.btn_Edit.Name = "btn_Edit";
             this.btn_Edit.Size = new System.Drawing.Size(56, 19);
             this.btn_Edit.TabIndex = 13;
-            this.btn_Edit.Text = "Alt&erar";
+            this.btn_Edit.Text = "&Alterar";
             this.btn_Edit.UseVisualStyleBackColor = true;
             this.btn_Edit.Click += new System.EventHandler(this.btn_Edit_Click);
             // 

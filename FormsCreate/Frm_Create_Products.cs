@@ -65,7 +65,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 edt_barCode.Focus();
                 return false;
             }
-            else if (Convert.ToDecimal(edt_productCost.Text) >= Convert.ToDecimal(edt_productSalePrice.Text))
+            else if ((Convert.ToDecimal(edt_productCost.Text) >= Convert.ToDecimal(edt_productSalePrice.Text)) && edt_productCost.Value != 0)
             {
                 string message = "Valor de venda deve ser maior que o de custo.";
                 string caption = "Campo inválido.";
@@ -94,7 +94,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override void UnlockCamps()
         {
-            edt_productCost.Enabled = true;
             edt_productName.Enabled = true;
             edt_productSalePrice.Enabled = true;
             cbox_brands.Enabled = true;
@@ -139,8 +138,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             Products product = new Products();
             product.id = Convert.ToInt32(edt_id.Value);
             product.productName = edt_productName.Text;
-            product.productCost = Convert.ToDouble(edt_productCost.Text);
-            product.salePrice = Convert.ToDouble(edt_productSalePrice.Text);
+            product.productCost = Convert.ToDecimal(edt_productCost.Text);
+            product.salePrice = Convert.ToDecimal(edt_productSalePrice.Text);
             product.stock = Convert.ToInt32(edt_stock.Value);
             product.BarCode = Convert.ToInt64(edt_barCode.Text);
 

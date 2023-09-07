@@ -310,8 +310,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                 obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
                                 obj.SaleItems = _saleItemsController.FindSaleId(id);
-                                obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
-                                obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
+                                obj.TotalCost = Convert.ToDecimal(reader["sale_total_cost"]);
+                                obj.TotalValue = Convert.ToDecimal(reader["sale_total_value"]);
                                 obj.PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["paycondition_id"]));
                                 obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                 // obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
@@ -367,8 +367,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.Client = _clientsController.FindItemId(id);
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
                                     obj.PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["paycondition_id"]));
-                                    obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
-                                    obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
+                                    obj.TotalCost = Convert.ToDecimal(reader["sale_total_cost"]);
+                                    obj.TotalValue = Convert.ToDecimal(reader["sale_total_value"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                     if (reader["sale_cancel_date"].ToString() != string.Empty)
                                     {
@@ -425,9 +425,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
-                                    obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
+                                    obj.TotalCost = Convert.ToDecimal(reader["sale_total_cost"]);
                                     obj.PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["paycondition_id"]));
-                                    obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
+                                    obj.TotalValue = Convert.ToDecimal(reader["sale_total_value"]);
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
 
                                     if (reader["sale_cancel_date"].ToString() != string.Empty)
@@ -483,8 +483,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
-                                    obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
-                                    obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
+                                    obj.TotalCost = Convert.ToDecimal(reader["sale_total_cost"]);
+                                    obj.TotalValue = Convert.ToDecimal(reader["sale_total_value"]);
                                     obj.PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["paycondition_id"]));
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                     if (reader["sale_cancel_date"].ToString() != string.Empty)
@@ -540,8 +540,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
-                                    obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
-                                    obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
+                                    obj.TotalCost = Convert.ToDecimal(reader["sale_total_cost"]);
+                                    obj.TotalValue = Convert.ToDecimal(reader["sale_total_value"]);
                                     obj.PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["paycondition_id"]));
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                     if (reader["sale_cancel_date"].ToString() != string.Empty)
@@ -596,8 +596,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     obj.User = _usersController.FindItemId(Convert.ToInt32(reader["user_id"]));
                                     obj.Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"]));
                                     obj.SaleItems = _saleItemsController.FindSaleId(Convert.ToInt32(reader["id_sale"]));
-                                    obj.TotalCost = Convert.ToDouble(reader["sale_total_cost"]);
-                                    obj.TotalValue = Convert.ToDouble(reader["sale_total_value"]);
+                                    obj.TotalCost = Convert.ToDecimal(reader["sale_total_cost"]);
+                                    obj.TotalValue = Convert.ToDecimal(reader["sale_total_value"]);
                                     obj.PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["paycondition_id"]));
                                     obj.TotalItemsQuantity = Convert.ToInt32(reader["total_items_quantity"]);
                                     if (reader["sale_cancel_date"].ToString() != string.Empty)

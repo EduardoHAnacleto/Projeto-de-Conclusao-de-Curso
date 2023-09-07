@@ -107,6 +107,7 @@
             // 
             this.edt_stateInscription.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_stateInscription.Location = new System.Drawing.Point(373, 24);
+            this.edt_stateInscription.MaxLength = 9;
             this.edt_stateInscription.Name = "edt_stateInscription";
             this.edt_stateInscription.Size = new System.Drawing.Size(99, 20);
             this.edt_stateInscription.TabIndex = 33;
@@ -124,6 +125,7 @@
             // 
             this.edt_socialReason.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_socialReason.Location = new System.Drawing.Point(241, 75);
+            this.edt_socialReason.MaxLength = 50;
             this.edt_socialReason.Name = "edt_socialReason";
             this.edt_socialReason.Size = new System.Drawing.Size(244, 20);
             this.edt_socialReason.TabIndex = 35;

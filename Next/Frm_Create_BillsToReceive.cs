@@ -35,7 +35,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             BillsToReceive bill = new BillsToReceive();
             bill.Client = _cController.FindItemId(Convert.ToInt32(edt_clientId.Value));
-            bill.InstalmentValue = Convert.ToDouble(edt_instalmentValue.Value);
+            bill.InstalmentValue = Convert.ToDecimal(edt_instalmentValue.Value);
             bill.EmissionDate = Convert.ToDateTime(datePicker_emission.Text);
             bill.DueDate = Convert.ToDateTime(datePicker_due.Text);
             bill.dateOfLastUpdate = DateTime.Now;
@@ -49,7 +49,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.Sale = _salesController.FindItemId(Convert.ToInt32(edt_saleNumber.Value));
             obj.PaymentMethod = _payMethodController.FindItemName(cbox_paymentMethod.SelectedItem.ToString());
             obj.InstalmentNumber = (int)edt_instalmentId.Value;
-            obj.InstalmentValue = (double)edt_instalmentValue.Value;
+            obj.InstalmentValue = edt_instalmentValue.Value;
             obj.EmissionDate = datePicker_emission.Value;
             obj.DueDate = datePicker_due.Value;
             obj.InstalmentsQtd = DGV_Instalments.Rows.Count;

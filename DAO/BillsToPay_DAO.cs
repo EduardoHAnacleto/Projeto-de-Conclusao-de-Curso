@@ -200,7 +200,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                             BillSeries = billSeries,
                                             BillModel = billModel,
 
-                                            TotalValue = Convert.ToDouble(reader["BillValue"]),
+                                            TotalValue = Convert.ToDecimal(reader["BillValue"]),
                                             Status = Convert.ToInt32(reader["isPaid"]),
                                             DueDate = Convert.ToDateTime(reader["dueDate"]),
                                             EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
@@ -265,7 +265,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     BillSeries = billSeries,
                                     BillModel = billModel,
 
-                                    TotalValue = Convert.ToDouble(reader["BillValue"]),
+                                    TotalValue = Convert.ToDecimal(reader["BillValue"]),
                                     Status = Convert.ToInt32(reader["isPaid"]),
                                     DueDate = Convert.ToDateTime(reader["dueDate"]),
                                     EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
@@ -324,7 +324,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         BillSeries = Convert.ToInt32(reader["billModel"]),
                                         BillModel = Convert.ToInt32(reader["billSeries"]),
 
-                                        TotalValue = Convert.ToDouble(reader["BillValue"]),
+                                        TotalValue = Convert.ToDecimal(reader["BillValue"]),
                                         Status = Convert.ToInt32(reader["billStatus"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         PaidDate = Convert.ToDateTime(reader["paidDate"]),
@@ -416,7 +416,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         BillSeries = Convert.ToInt32(reader["billModel"]),
                                         BillModel = Convert.ToInt32(reader["billSeries"]),
 
-                                        TotalValue = Convert.ToDouble(reader["BillValue"]),
+                                        TotalValue = Convert.ToDecimal(reader["BillValue"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         Status = Convert.ToInt32(reader["billStatus"]),
                                         PaidDate = Convert.ToDateTime(reader["paidDate"]),

@@ -21,8 +21,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public Clients Client { get; set; }
         public DateTime? CancelDate { get; set; }
         //public List<BillsToReceive> BillToReceive { get; set; }
-        public double TotalCost { get; set; }
-        public double TotalValue { get; set; }
+        public decimal TotalCost { get; set; }
+        public decimal TotalValue { get; set; }
         public List<SaleItems> SaleItems { get; set; }
         public int TotalItemsQuantity { get; set;}
     }
