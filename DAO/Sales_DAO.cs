@@ -207,7 +207,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             bool status = false;
             string sql;
             sql = "UPDATE SALES SET SALE_CANCEL_DATE = @CANCELDATE " +
-                  "WHERE ID_SALE = @ID ; ";
+                  "WHERE SALE_ID = @ID ; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -663,6 +663,51 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 int i = Convert.ToInt32(command.ExecuteScalar());
                 connection.Close();
                 return i;
+            }
+        }
+
+        public bool CancelSale(int id)
+        {
+            bool status = false;
+            string sql;
+            sql = "UPDATE SALES SET SALE_CANCEL_DATE = @CANCELDATE " +
+                  "WHERE ID_SALE = @ID ; ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", id);
+                    command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
+
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    connection.Close();
+                    if (i > 0)
+                    {
+                        status = true;
+                        MessageBox.Show("Venda Cancelada com sucesso!");
+                    }
+
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
             }
         }
     }

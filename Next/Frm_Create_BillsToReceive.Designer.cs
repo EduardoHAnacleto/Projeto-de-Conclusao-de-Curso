@@ -276,7 +276,6 @@
             this.lbl_paidDate.Size = new System.Drawing.Size(61, 13);
             this.lbl_paidDate.TabIndex = 5;
             this.lbl_paidDate.Text = "Pagamento";
-            this.lbl_paidDate.Visible = false;
             // 
             // datePicker_PaidDate
             // 
@@ -287,7 +286,6 @@
             this.datePicker_PaidDate.Size = new System.Drawing.Size(96, 20);
             this.datePicker_PaidDate.TabIndex = 4;
             this.datePicker_PaidDate.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.datePicker_PaidDate.Visible = false;
             this.datePicker_PaidDate.ValueChanged += new System.EventHandler(this.datePicker_PaidDate_ValueChanged);
             // 
             // lbl_DueDate

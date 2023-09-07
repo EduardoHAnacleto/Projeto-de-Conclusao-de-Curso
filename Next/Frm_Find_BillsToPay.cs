@@ -9,6 +9,7 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.Next
 {
@@ -87,7 +88,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     Utilities.IsNotSelected(obj, "A Linha");
                 }
             }
-            catch (Exception ex) { }
+            catch (Exception ex) {
+                MessageBox.Show("Error : " + ex.Message);
+            }
 
         }
 
@@ -119,9 +122,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     {
                         isPaid = "ATIVO";
                     }
-                    else
+                    else if (isPaid == "1")
                     {
                         isPaid = "PAGO";
+                    }
+                    else
+                    {
+                        isPaid = "CANCELADO";
                     }
                     DGV_BillsToPay.Rows.Add(supplierId, billNum,billModel,billSeries,instalmentNumber,dueDate,isPaid);                     
                 }

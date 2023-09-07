@@ -58,11 +58,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 obj.PaidDate = null;
                 obj.IsPaid = false;
+                obj.CancelledDate = null;
             }
-            else
+            else if (check_Paid.Checked)
             {
                 obj.IsPaid = true;
                 obj.PaidDate = datePicker_PaidDate.Value;
+                obj.CancelledDate = null;
+            }
+            else if (check_Cancelled.Checked)
+            {
+                obj.IsPaid = false;
+                obj.CancelledDate = DateTime.Now;
             }
             return obj;
         }
@@ -71,10 +78,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (obj.dateOfLastUpdate != null)
             {
-                lbl_LastUpdate.Text = obj.dateOfLastUpdate.ToShortTimeString();
                 lbl_LastUpdate.Visible = true;
+                lbl_LastUpdate.Text = obj.dateOfLastUpdate.ToShortDateString();
+
             }
-            lbl_Sign_creationDate.Text = obj.dateOfCreation.ToShortTimeString();
+            edt_id.Text = obj.Sale.id.ToString();
             edt_clientId.Value = obj.Client.id;
             edt_clientName.Text = obj.Client.name;
             edt_instalmentId.Value = obj.InstalmentNumber;
@@ -94,18 +102,30 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             cbox_paymentMethod.SelectedItem = obj.PaymentMethod.paymentMethod;
             datePicker_emission.Value = obj.EmissionDate;
             datePicker_due.Value = obj.DueDate;
-            if (obj.IsPaid)
+            if (obj.PaidDate.HasValue)
             {
                 datePicker_PaidDate.Value = (DateTime)obj.PaidDate;
                 check_Active.Checked = false;
                 check_Paid.Checked = true;
+                check_Cancelled.Checked = false;
             }
             else
             {
+                check_Cancelled.Checked = false;
                 check_Active.Checked = true;
                 check_Paid.Checked = false;
-                lbl_paidDate.Visible = false;
-                datePicker_PaidDate.Visible = false;
+            }
+            if (obj.CancelledDate.HasValue)
+            {
+                check_Active.Checked = false;
+                check_Paid.Checked = false;
+                check_Cancelled.Checked = true;
+                LockCamps();
+                btn_Edit.Enabled = false;
+                btn_Edit.Visible = false;
+                lbl_Sign_LastUpdate.Text = "Cancelado em : ";
+                btn_NewSave.Visible = false;
+                lbl_LastUpdate.Text = Convert.ToDateTime( obj.CancelledDate).ToShortDateString();
             }
             PopulateDGV(obj);
         }
@@ -306,7 +326,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 check_Active.Checked = false;
                 check_Paid.Checked = false;
-                lbl_LastUpdate.Text = "Cancelado em : " + DateTime.Now.ToString();
+                lbl_Sign_LastUpdate.Text = "Cancelado em : ";
+                lbl_LastUpdate.Text = DateTime.Now.ToShortDateString();
                 datePicker_PaidDate.Visible = false;
             }
         }

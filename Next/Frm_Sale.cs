@@ -541,21 +541,26 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                                 check_Active.Checked = false;
                                 check_Cancelled.Checked = true;
                                 sale.id = Sale.id;
-                                status = _controller.UpdateItem(sale);
-                            }
-                            if (status)
-                            {
-                                status = _BTRController.CancelBills(sale.id);
+                                status = _controller.CancelSale(sale.id);
                                 if (status)
                                 {
-                                    foreach (var item in sale.SaleItems)
+                                    status = _BTRController.CancelBills(sale.id);
+                                    if (status)
                                     {
-                                        _pController.RestoreStock(item);
+                                        foreach (var item in sale.SaleItems)
+                                        {
+                                            _pController.RestoreStock(item);
+                                        }
+                                        LockCamps();
                                     }
-                                    LockCamps();
-                                }
 
+                                }
                             }
+                            else
+                            {
+                                btn_new.Enabled = true;
+                            }
+
                         }
                         else
                         {
@@ -741,6 +746,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             PopulateDate(sale);
             PopulateBillsDGV(pcController.FindItemId(Convert.ToInt32(edt_payConditionId.Value)).BillsInstalments);
             CalculateSubTotal();
+            PopulateStatus(sale);
+        }
+
+        public void PopulateStatus(Sales sale)
+        {
+            if (sale.CancelDate.HasValue)
+            {
+                check_Active.Checked = false;
+                check_Cancelled.Checked = true;
+                medt_CancelDate.Text = sale.CancelDate.ToString();
+                btn_new.Enabled = false;
+            }
+            
         }
 
         public void PopulateDate(Sales sale)
@@ -835,6 +853,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             btn_Save.Enabled = true;
             edt_ProdDiscCash.Enabled = true;
             btn_Close.Enabled = true;
+            btn_DeleteItem.Enabled = true;
+            btn_find.Enabled = true;
         }
 
         private void LockCamps()
@@ -851,6 +871,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             btn_SearchPayCondition.Enabled = false;
             btn_new.Enabled = false;
             btn_Save.Enabled = false;
+            btn_DeleteItem.Enabled = false;
+            btn_find.Enabled = false;
+            
         }
 
         private bool CheckCamps()

@@ -256,6 +256,7 @@
         emissionDate date not null,
         date_creation date not null,
         DATE_CANCELLED date,
+        date_last_update date not null,
         primary key(sale_id,instalmentNumber),
 		foreign key(sale_id) references SALES(id_sale)
     );

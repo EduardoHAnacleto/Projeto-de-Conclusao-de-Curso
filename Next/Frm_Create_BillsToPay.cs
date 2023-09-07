@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Eventing.Reader;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
@@ -26,6 +27,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_totalValue.Controls[0].Visible = false;
             edt_BillModel.Controls[0].Visible = false;
             btn_SelectDelete.Visible = false;
+            lbl_Sign_LastUpdate.Text = "Cancelado em :";
             PopulateComboBox();
         }
 
@@ -86,7 +88,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 Utilities.Msgbox(message, caption, buttons, icon);
                 return false;
             }
-            else if (!(check_Active.Checked) && !(check_Paid.Checked))
+            else if (!(check_Active.Checked) && !(check_Paid.Checked) && !(check_Cancelled.Checked))
             {
                 string message = "Status deve ser selecionado.";
                 string caption = "Campo inválido.";
@@ -156,6 +158,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_billInfo.Enabled = false;
             check_Active.Enabled = false;
             check_Paid.Enabled = false;
+            gbox_dates.Enabled = false;
+            datePicker_due.Enabled = false;
+            datePicker_paid.Enabled = false;
         }
 
         public override void UnlockCamps()
@@ -167,7 +172,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_billInfo.Enabled = true;
             check_Active.Enabled = true;
             check_Paid.Enabled = true;
-
+            gbox_dates.Enabled = true;
+            datePicker_due.Enabled = false;
+            datePicker_paid.Enabled = false;
         }
 
         public override void ClearCamps()
@@ -252,6 +259,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 btn_Edit.Text = "Cancelar";
                 btn_NewSave.Enabled = true;
                 btn_SelectDelete.Enabled = true;
+                gbox_billInfo.Enabled = false;
                 _auxObj = GetObject();
             }
             else if (btn_Edit.Text == "Cancelar")
@@ -270,23 +278,31 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_BillNum.Value = bill.BillNumber;
             edt_BillSeries.Value = bill.BillSeries;
             edt_instalmentNumber.Value = bill.InstalmentNumber;
+            lbl_CreationDate.Text = bill.dateOfCreation.ToString();
+            
             if (bill.DueDate > DateTime.Today)
             {
-                edt_totalValue.Value = Convert.ToDecimal(bill.TotalValue - (bill.TotalValue * bill.PaymentCondition.discountPerc/100));
+                edt_totalValue.Value = bill.TotalValue - (bill.TotalValue * bill.PaymentCondition.discountPerc/100);
+            }
+            else if (bill.DueDate < DateTime.Today) 
+            {
+                edt_totalValue.Value = bill.TotalValue + bill.PaymentCondition.fineValue;
             }
             else
             {
-                edt_totalValue.Value = Convert.ToDecimal(bill.TotalValue + bill.PaymentCondition.fineValue);
+                edt_totalValue.Value = bill.TotalValue;
             }
+            
 
             cbox_payMethod.SelectedItem = bill.PaymentMethod.paymentMethod;
             datePicker_due.Value = bill.DueDate;
-            lbl_CreationDate.Text = bill.dateOfCreation.ToShortTimeString();
+            lbl_CreationDate.Text = bill.dateOfCreation.ToShortDateString();
             edt_supplierId.Value = bill.Supplier.id;
             edt_supplierName.Text = bill.Supplier.name;
             if (bill.dateOfLastUpdate != null)
             {
-                lbl_LastUpdate.Text = bill.dateOfLastUpdate.ToShortTimeString();
+                lbl_Sign_LastUpdate.Text = "Atualizado em :";
+                lbl_LastUpdate.Text = bill.dateOfLastUpdate.ToShortDateString();
                 lbl_LastUpdate.Visible = true;
             }
             if (bill.PaidDate != null)
@@ -310,6 +326,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 check_Cancelled.Checked = true;
                 check_Active.Checked = false;
                 check_Paid.Checked = false;
+                btn_NewSave.Visible = false;
+                btn_Edit.Visible = false;
             }
         }
 
@@ -352,6 +370,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 lbl_paidDate.Visible = false;
                 datePicker_paid.Visible = false;
                 check_Cancelled.Checked = false;
+                lbl_LastUpdate.Text = string.Empty;
             }
         }
 
@@ -364,6 +383,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 check_Cancelled.Checked = false;
                 lbl_paidDate.Visible = true;
                 datePicker_paid.Visible = true;
+                lbl_LastUpdate.Text = string.Empty;
             }
         }
 
@@ -448,6 +468,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 check_Active.Checked = false;
                 lbl_paidDate.Visible = true;
                 datePicker_paid.Visible = true;
+                lbl_LastUpdate.Text = DateTime.Now.Date.ToString();
             }
         }
     }

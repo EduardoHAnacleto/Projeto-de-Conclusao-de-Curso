@@ -166,19 +166,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1
             frmMasterDetailsSales.ShowDialog();
         }
 
-        private void purchasesToolStripMenuItem_Click(object sender, EventArgs e)
+        private void buscarVendasProdutosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MasterDetails_SaleProducts masterDetails_SaleProducts = new MasterDetails_SaleProducts();
+            masterDetails_SaleProducts.ShowDialog();
+        }
+
+        private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
             user.id = 2;
             user.name = "teste";
             Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases(user);
             frmCreatePurchases.ShowDialog();
-        }
-
-        private void buscarVendasProdutosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MasterDetails_SaleProducts masterDetails_SaleProducts = new MasterDetails_SaleProducts();
-            masterDetails_SaleProducts.ShowDialog();
         }
     }
 }

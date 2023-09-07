@@ -144,7 +144,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public void AddProductToDGV() 
         {
-            if (ValidatedBill)
+            if (!ValidatedBill)
             {
                 ValidateBill();
             }
@@ -211,6 +211,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (!FindBill())
             {
                 gbox_billInfo.Enabled = false;
+                edt_billModel.Enabled = false;
+                edt_billNumber.Enabled = false;
+                edt_billSeries.Enabled = false;
                 gbox_supplier.Enabled = false;
             }
             else
@@ -716,6 +719,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 gbox_billInfo.Enabled = true;
                 gbox_supplier.Enabled = true;
+                edt_billSeries.Enabled = true;
+                edt_billNumber.Enabled = true;
+                edt_billModel.Enabled = true;
             }
         }
 

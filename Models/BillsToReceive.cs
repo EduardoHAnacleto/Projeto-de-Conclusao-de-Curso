@@ -27,6 +27,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public DateTime EmissionDate { get; set; }
         public DateTime DueDate { get; set; }
         public DateTime? PaidDate { get; set; }
+        public DateTime? CancelledDate { get; set; }
         public decimal InstalmentValue { get; set; }
         public PaymentConditions PaymentCondition { get; set; }
 
@@ -48,11 +49,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
                 bill.Client = sale.Client;
                 bill.Sale = sale;
                 bill.Sale.id = saleId;
+                bill.PaymentCondition = sale.PaymentCondition;
                 bill.EmissionDate = emDate;
                 bill.DueDate = emDate.AddDays(instalments.TotalDays);
                 bill.InstalmentValue = ((instalments.ValuePercentage/100) * sale.TotalValue) + (cond.paymentFees / cond.BillsInstalments.Count);
                 bill.PaymentMethod = instalments.PaymentMethod;
                 bill.InstalmentsQtd = instalmentQtd;
+                bill.CancelledDate = null;
 
                 list.Add(bill);
             }

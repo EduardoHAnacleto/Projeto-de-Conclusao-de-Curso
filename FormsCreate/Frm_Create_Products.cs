@@ -130,7 +130,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             cbox_brands.SelectedItem = product.brand.brandName;
             cbox_ProductGroup.SelectedItem = product.productGroup.productGroup;
             edt_barCode.Text = product.BarCode.ToString();
-            edt_ProfitPerc.Value = (decimal) (product.salePrice / product.productCost) * 100;
+            if (product.productCost != 0)
+            {
+                edt_ProfitPerc.Value = (product.salePrice / product.productCost) * 100;
+            }
+            else
+            {
+                edt_ProfitPerc.Value = 0;
+            }
         }
 
         public Products GetObject()

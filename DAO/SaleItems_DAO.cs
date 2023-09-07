@@ -31,12 +31,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", obj.id);
                     command.Parameters.AddWithValue("@PRODID", obj.Product.id);
-                    command.Parameters.AddWithValue("@PRODVALUE", (decimal)obj.ProductValue);
-                    command.Parameters.AddWithValue("@PRODCOST", (decimal)obj.ProductCost);
-                    command.Parameters.AddWithValue("@TOTALVALUE", (decimal)obj.TotalValue);
-                    command.Parameters.AddWithValue("@DISCCASH", (decimal)obj.ItemDiscountCash);
+                    command.Parameters.AddWithValue("@PRODVALUE", obj.ProductValue);
+                    command.Parameters.AddWithValue("@PRODCOST", obj.ProductCost);
+                    command.Parameters.AddWithValue("@TOTALVALUE", obj.TotalValue);
+                    command.Parameters.AddWithValue("@DISCCASH", obj.ItemDiscountCash);
                     command.Parameters.AddWithValue("@QTD", obj.Quantity);
-                    command.Parameters.AddWithValue("@DC", obj.dateOfLastUpdate);
+                    command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
                     int i = command.ExecuteNonQuery();

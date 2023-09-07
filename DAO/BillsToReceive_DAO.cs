@@ -27,8 +27,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             bool status = false;
 
             string sql = "INSERT INTO BILLSTORECEIVE ( SALE_ID, INSTALMENTVALUE, ISPAID, CLIENT_ID, PAYMETHOD_ID, INSTALMENTNUMBER, " +
-                "INSTALMENTSQTD, DUEDATE, EMISSIONDATE, PAIDDATE, DATE_CREATION, DATE_LAST_UPDATE ) "
-                         + " VALUES (@SALEID, @IVALUE, @ISPAID, @CLIENTID, @METHODID, @INUM, @IQTD, @DUEDATE, @EMDATE, @PDATE, @DC, @DU);";
+                "INSTALMENTSQTD, DUEDATE, EMISSIONDATE, PAIDDATE, DATE_CREATION, DATE_LAST_UPDATE, DATE_CANCELLED, PAYCOND_ID ) "
+                         + " VALUES (@SALEID, @IVALUE, @ISPAID, @CLIENTID, @METHODID, @INUM, @IQTD, @DUEDATE, @EMDATE, @PDATE, @DC, @DU, @DCANCEL, @PAYCONDID);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -42,6 +42,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     command.Parameters.AddWithValue("@IQTD", obj.InstalmentsQtd);
                     command.Parameters.AddWithValue("@IVALUE", obj.InstalmentValue);
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
+                    command.Parameters.AddWithValue("@PAYCONDID", obj.PaymentCondition.id);
                     command.Parameters.AddWithValue("@DUEDATE", obj.DueDate);
                     if (obj.PaidDate.HasValue)
                     {
@@ -50,6 +51,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     else
                     {
                         command.Parameters.AddWithValue("@PDATE", DBNull.Value);
+                    }
+                    if (obj.CancelledDate.HasValue)
+                    {
+                        command.Parameters.AddWithValue("@DCANCEL", obj.CancelledDate);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@DCANCEL", DBNull.Value);
                     }
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
@@ -178,6 +187,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         {
                             if (reader.Read())
                             {
+                                DateTime? cancelDate;
                                 DateTime? paidDate;
                                 if (reader["paidDate"] == DBNull.Value)
                                 {
@@ -187,6 +197,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 {
                                     paidDate = Convert.ToDateTime(reader["paidDate"].ToString());
                                 }
+
+                                if (reader["DATE_CANCELLED"] == DBNull.Value)
+                                {
+                                    cancelDate = null;
+                                }
+                                else
+                                {
+                                    cancelDate = Convert.ToDateTime(reader["DATE_CANCELLED"].ToString());
+                                }
                                 BillsToReceive obj = new BillsToReceive()
                                 {
                                     id = Convert.ToInt32(reader["sale_id"]),
@@ -194,6 +213,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
                                     IsPaid = Convert.ToBoolean(reader["isPaid"]),
                                     PaidDate = paidDate,
+                                    CancelledDate = cancelDate,
                                     DueDate = Convert.ToDateTime(reader["dueDate"]),
                                     EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                     InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
@@ -505,7 +525,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 bool status = false;
 
                 string sql = "UPDATE BILLSTORECEIVE SET DATE_CANCELLED = @CANCELDATE " +
-                    "WHERE SALEID = @SALEID; ";
+                    "WHERE SALE_ID = @SALEID; ";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {

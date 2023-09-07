@@ -175,6 +175,8 @@
             // 
             // DGV_Sales
             // 
+            this.DGV_Sales.AllowUserToAddRows = false;
+            this.DGV_Sales.AllowUserToDeleteRows = false;
             this.DGV_Sales.AllowUserToResizeRows = false;
             this.DGV_Sales.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Sales.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
