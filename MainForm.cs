@@ -28,8 +28,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         public Frm_Main()
         {   
             InitializeComponent();
+
         }
 
+        private Users _user = new Users();
+
+        private void SetUser()
+        {
+            Users user = new Users();
+            user.id = 2;
+            user.name = "Usuario Teste";
+            _user = user;
+        }
         //string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
 
         private void btn_close_Click(object sender, EventArgs e)
@@ -179,6 +189,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1
             user.name = "teste";
             Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases(user);
             frmCreatePurchases.ShowDialog();
+        }
+
+        private void findBillsToPayToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MasterDetails_PurchasesBillsToPay frmPurchaseBillsToPay = new MasterDetails_PurchasesBillsToPay(_user);
+            frmPurchaseBillsToPay.ShowDialog();
+        }
+
+        private void mestreDetalhesCompraProdutoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MasterDetails_PurchasesProducts frmPurchasesProducts = new MasterDetails_PurchasesProducts(_user);
+            frmPurchasesProducts.ShowDialog();
+        }
+
+        private void mDComprasContasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            MasterDetails_PurchasesBillsToPay frmPurchaseBillsToPay = new MasterDetails_PurchasesBillsToPay(_user);
+            frmPurchaseBillsToPay.ShowDialog();
         }
     }
 }

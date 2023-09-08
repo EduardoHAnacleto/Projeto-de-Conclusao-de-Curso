@@ -114,8 +114,8 @@
             this.PurchSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_status = new System.Windows.Forms.GroupBox();
-            this.check_Active = new System.Windows.Forms.CheckBox();
             this.check_Cancelled = new System.Windows.Forms.CheckBox();
+            this.check_Active = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).BeginInit();
             this.gbox_products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodDiscCash)).BeginInit();
@@ -1062,12 +1062,24 @@
             // 
             this.gbox_status.Controls.Add(this.check_Cancelled);
             this.gbox_status.Controls.Add(this.check_Active);
+            this.gbox_status.Enabled = false;
             this.gbox_status.Location = new System.Drawing.Point(1023, 119);
             this.gbox_status.Name = "gbox_status";
             this.gbox_status.Size = new System.Drawing.Size(118, 71);
             this.gbox_status.TabIndex = 53;
             this.gbox_status.TabStop = false;
             this.gbox_status.Text = "Status da Compra";
+            // 
+            // check_Cancelled
+            // 
+            this.check_Cancelled.AutoSize = true;
+            this.check_Cancelled.Location = new System.Drawing.Point(6, 43);
+            this.check_Cancelled.Name = "check_Cancelled";
+            this.check_Cancelled.Size = new System.Drawing.Size(77, 17);
+            this.check_Cancelled.TabIndex = 1;
+            this.check_Cancelled.Text = "Cancelado";
+            this.check_Cancelled.UseVisualStyleBackColor = true;
+            this.check_Cancelled.CheckedChanged += new System.EventHandler(this.check_Cancelled_CheckedChanged);
             // 
             // check_Active
             // 
@@ -1081,17 +1093,6 @@
             this.check_Active.Text = "Ativo";
             this.check_Active.UseVisualStyleBackColor = true;
             this.check_Active.CheckedChanged += new System.EventHandler(this.check_Active_CheckedChanged);
-            // 
-            // check_Cancelled
-            // 
-            this.check_Cancelled.AutoSize = true;
-            this.check_Cancelled.Location = new System.Drawing.Point(6, 43);
-            this.check_Cancelled.Name = "check_Cancelled";
-            this.check_Cancelled.Size = new System.Drawing.Size(77, 17);
-            this.check_Cancelled.TabIndex = 1;
-            this.check_Cancelled.Text = "Cancelado";
-            this.check_Cancelled.UseVisualStyleBackColor = true;
-            this.check_Cancelled.CheckedChanged += new System.EventHandler(this.check_Cancelled_CheckedChanged);
             // 
             // Frm_Create_Purchases
             // 

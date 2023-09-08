@@ -119,7 +119,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 rbtn_cancelled.Checked = false;
                 foreach (DataGridViewRow row in DGV_Sales.Rows)
                 {
-                    if (row.Cells["SaleCancelDate"].Value.ToString() != string.Empty)
+                    if (row.Cells["SaleCancelDate"].Value != null)
                     {
                         DGV_Sales.Rows.Remove(row);
                     }
@@ -135,7 +135,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 rbtn_active.Checked = false;
                 foreach (DataGridViewRow row in DGV_Sales.Rows)
                 {
-                    if (row.Cells["SaleCancelDate"].Value.ToString() == string.Empty)
+                    if (row.Cells["SaleCancelDate"].Value == null)
                     {
                         DGV_Sales.Rows.Remove(row);
                     }
@@ -167,7 +167,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 rbtn_DateCreation.Checked = false;
                 foreach (DataGridViewRow row in DGV_Sales.Rows)
                 {
-                    if (row.Cells["SaleCancelDate"].Value.ToString() == string.Empty ||
+                    if (row.Cells["SaleCancelDate"].Value == null ||
                         (Convert.ToDateTime(row.Cells["SaleCancelDate"].Value) < dateTime_filter.Value))
                     {
                         DGV_Sales.Rows.Remove(row);
@@ -178,7 +178,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void btn_SelectSale_Click(object sender, EventArgs e)
         {
-            if (DGV_Sales.SelectedRows[0].Cells["SaleId"].Value.ToString() != string.Empty)
+            if (DGV_Sales.SelectedRows[0].Cells["SaleId"].Value != null)
             {
                 Frm_Sale frmSale = new Frm_Sale(User);
                 Sales sale = _saleController.FindItemId(Convert.ToInt32(DGV_Sales.SelectedRows[0].Cells["SaleId"].Value));

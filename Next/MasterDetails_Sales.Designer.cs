@@ -38,15 +38,6 @@
             this.btn_FindClient = new System.Windows.Forms.Button();
             this.lbl_SaleId = new System.Windows.Forms.Label();
             this.DGV_Sales = new System.Windows.Forms.DataGridView();
-            this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SalePayCond = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_SelectSale = new System.Windows.Forms.Button();
             this.edt_saleId = new System.Windows.Forms.NumericUpDown();
             this.btn_findSale = new System.Windows.Forms.Button();
@@ -73,6 +64,15 @@
             this.btn_Close = new System.Windows.Forms.Button();
             this.lbl_ClientId = new System.Windows.Forms.Label();
             this.edt_clientId = new System.Windows.Forms.NumericUpDown();
+            this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalePayCond = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Sales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_saleId)).BeginInit();
@@ -198,77 +198,6 @@
             this.DGV_Sales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Sales.Size = new System.Drawing.Size(1049, 295);
             this.DGV_Sales.TabIndex = 6;
-            // 
-            // SaleId
-            // 
-            this.SaleId.HeaderText = "ID Venda";
-            this.SaleId.Name = "SaleId";
-            this.SaleId.ReadOnly = true;
-            this.SaleId.Width = 50;
-            // 
-            // SaleUserId
-            // 
-            this.SaleUserId.HeaderText = "ID Usuário";
-            this.SaleUserId.MinimumWidth = 6;
-            this.SaleUserId.Name = "SaleUserId";
-            this.SaleUserId.ReadOnly = true;
-            this.SaleUserId.Width = 50;
-            // 
-            // SaleClientId
-            // 
-            this.SaleClientId.HeaderText = "Cliente ID";
-            this.SaleClientId.MinimumWidth = 6;
-            this.SaleClientId.Name = "SaleClientId";
-            this.SaleClientId.ReadOnly = true;
-            this.SaleClientId.Width = 50;
-            // 
-            // SaleClientName
-            // 
-            this.SaleClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SaleClientName.HeaderText = "Cliente";
-            this.SaleClientName.MinimumWidth = 6;
-            this.SaleClientName.Name = "SaleClientName";
-            this.SaleClientName.ReadOnly = true;
-            // 
-            // SaleTotalValue
-            // 
-            this.SaleTotalValue.HeaderText = "Valor Total";
-            this.SaleTotalValue.MinimumWidth = 6;
-            this.SaleTotalValue.Name = "SaleTotalValue";
-            this.SaleTotalValue.ReadOnly = true;
-            this.SaleTotalValue.Width = 75;
-            // 
-            // SalePayCond
-            // 
-            this.SalePayCond.HeaderText = "Condição de Pagamento";
-            this.SalePayCond.MinimumWidth = 6;
-            this.SalePayCond.Name = "SalePayCond";
-            this.SalePayCond.ReadOnly = true;
-            this.SalePayCond.Width = 130;
-            // 
-            // SaleProdQtd
-            // 
-            this.SaleProdQtd.HeaderText = "Quantidade de Produtos";
-            this.SaleProdQtd.MinimumWidth = 6;
-            this.SaleProdQtd.Name = "SaleProdQtd";
-            this.SaleProdQtd.ReadOnly = true;
-            this.SaleProdQtd.Width = 80;
-            // 
-            // SaleDate
-            // 
-            this.SaleDate.HeaderText = "Data";
-            this.SaleDate.MinimumWidth = 6;
-            this.SaleDate.Name = "SaleDate";
-            this.SaleDate.ReadOnly = true;
-            this.SaleDate.Width = 120;
-            // 
-            // SaleStatus
-            // 
-            this.SaleStatus.HeaderText = "Status";
-            this.SaleStatus.MinimumWidth = 6;
-            this.SaleStatus.Name = "SaleStatus";
-            this.SaleStatus.ReadOnly = true;
-            this.SaleStatus.Width = 70;
             // 
             // btn_SelectSale
             // 
@@ -562,6 +491,77 @@
             this.edt_clientId.Name = "edt_clientId";
             this.edt_clientId.Size = new System.Drawing.Size(60, 20);
             this.edt_clientId.TabIndex = 16;
+            // 
+            // SaleId
+            // 
+            this.SaleId.HeaderText = "ID Venda";
+            this.SaleId.Name = "SaleId";
+            this.SaleId.ReadOnly = true;
+            this.SaleId.Width = 50;
+            // 
+            // SaleUserId
+            // 
+            this.SaleUserId.HeaderText = "ID Usuário";
+            this.SaleUserId.MinimumWidth = 6;
+            this.SaleUserId.Name = "SaleUserId";
+            this.SaleUserId.ReadOnly = true;
+            this.SaleUserId.Width = 50;
+            // 
+            // SaleClientId
+            // 
+            this.SaleClientId.HeaderText = "Cliente ID";
+            this.SaleClientId.MinimumWidth = 6;
+            this.SaleClientId.Name = "SaleClientId";
+            this.SaleClientId.ReadOnly = true;
+            this.SaleClientId.Width = 50;
+            // 
+            // SaleClientName
+            // 
+            this.SaleClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SaleClientName.HeaderText = "Cliente";
+            this.SaleClientName.MinimumWidth = 6;
+            this.SaleClientName.Name = "SaleClientName";
+            this.SaleClientName.ReadOnly = true;
+            // 
+            // SaleTotalValue
+            // 
+            this.SaleTotalValue.HeaderText = "Valor Total";
+            this.SaleTotalValue.MinimumWidth = 6;
+            this.SaleTotalValue.Name = "SaleTotalValue";
+            this.SaleTotalValue.ReadOnly = true;
+            this.SaleTotalValue.Width = 75;
+            // 
+            // SalePayCond
+            // 
+            this.SalePayCond.HeaderText = "Condição de Pagamento";
+            this.SalePayCond.MinimumWidth = 6;
+            this.SalePayCond.Name = "SalePayCond";
+            this.SalePayCond.ReadOnly = true;
+            this.SalePayCond.Width = 160;
+            // 
+            // SaleProdQtd
+            // 
+            this.SaleProdQtd.HeaderText = "Quantidade de Produtos";
+            this.SaleProdQtd.MinimumWidth = 6;
+            this.SaleProdQtd.Name = "SaleProdQtd";
+            this.SaleProdQtd.ReadOnly = true;
+            this.SaleProdQtd.Width = 65;
+            // 
+            // SaleDate
+            // 
+            this.SaleDate.HeaderText = "Data";
+            this.SaleDate.MinimumWidth = 6;
+            this.SaleDate.Name = "SaleDate";
+            this.SaleDate.ReadOnly = true;
+            this.SaleDate.Width = 120;
+            // 
+            // SaleStatus
+            // 
+            this.SaleStatus.HeaderText = "Status";
+            this.SaleStatus.MinimumWidth = 6;
+            this.SaleStatus.Name = "SaleStatus";
+            this.SaleStatus.ReadOnly = true;
+            this.SaleStatus.Width = 90;
             // 
             // MasterDetails_Sales
             // 

@@ -62,6 +62,8 @@
             this.buscarVendasProdutosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mestreDetalhesCompraProdutoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mDComprasContasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -217,6 +219,7 @@
             // 
             this.findBillsToPayToolStripMenuItem.Name = "findBillsToPayToolStripMenuItem";
             resources.ApplyResources(this.findBillsToPayToolStripMenuItem, "findBillsToPayToolStripMenuItem");
+            this.findBillsToPayToolStripMenuItem.Click += new System.EventHandler(this.findBillsToPayToolStripMenuItem_Click);
             // 
             // billsToReceiveToolStripMenuItem
             // 
@@ -284,7 +287,9 @@
             this.manageUserToolStripMenuItem,
             this.formTesteToolStripMenuItem,
             this.saleToolStripMenuItem,
-            this.comprasToolStripMenuItem});
+            this.comprasToolStripMenuItem,
+            this.mestreDetalhesCompraProdutoToolStripMenuItem,
+            this.mDComprasContasToolStripMenuItem});
             resources.ApplyResources(this.menuStrip2, "menuStrip2");
             this.menuStrip2.Name = "menuStrip2";
             // 
@@ -293,6 +298,18 @@
             this.comprasToolStripMenuItem.Name = "comprasToolStripMenuItem";
             resources.ApplyResources(this.comprasToolStripMenuItem, "comprasToolStripMenuItem");
             this.comprasToolStripMenuItem.Click += new System.EventHandler(this.comprasToolStripMenuItem_Click);
+            // 
+            // mestreDetalhesCompraProdutoToolStripMenuItem
+            // 
+            this.mestreDetalhesCompraProdutoToolStripMenuItem.Name = "mestreDetalhesCompraProdutoToolStripMenuItem";
+            resources.ApplyResources(this.mestreDetalhesCompraProdutoToolStripMenuItem, "mestreDetalhesCompraProdutoToolStripMenuItem");
+            this.mestreDetalhesCompraProdutoToolStripMenuItem.Click += new System.EventHandler(this.mestreDetalhesCompraProdutoToolStripMenuItem_Click);
+            // 
+            // mDComprasContasToolStripMenuItem
+            // 
+            this.mDComprasContasToolStripMenuItem.Name = "mDComprasContasToolStripMenuItem";
+            resources.ApplyResources(this.mDComprasContasToolStripMenuItem, "mDComprasContasToolStripMenuItem");
+            this.mDComprasContasToolStripMenuItem.Click += new System.EventHandler(this.mDComprasContasToolStripMenuItem_Click);
             // 
             // Frm_Main
             // 
@@ -343,6 +360,8 @@
         private System.Windows.Forms.MenuStrip menuStrip2;
         private System.Windows.Forms.ToolStripMenuItem buscarVendasProdutosToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem comprasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mestreDetalhesCompraProdutoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem mDComprasContasToolStripMenuItem;
     }
 }
 

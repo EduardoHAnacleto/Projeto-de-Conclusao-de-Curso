@@ -334,7 +334,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     email = Convert.ToString(reader["supplier_email"]),
                                     phoneNumber1 = Convert.ToString(reader["supplier_phone1"]),
                                     phoneNumber2 = Convert.ToString(reader["supplier_phone2"]),
-                                    phoneNumber3 = Convert.ToString(reader["client_phone3"]),
+                                    phoneNumber3 = Convert.ToString(reader["supplier_phone3"]),
                                     phoneClass1 = _PCController.FindItemId(Convert.ToInt32(reader["supplier_phone_class1"])),
                                     phoneClass2 = _PCController.FindItemId(Convert.ToInt32(reader["supplier_phone_class2"])),
                                     phoneClass3 = _PCController.FindItemId(Convert.ToInt32(reader["supplier_phone_class3"])),

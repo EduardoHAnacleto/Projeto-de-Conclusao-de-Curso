@@ -364,11 +364,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 this.LockCamps();
                 this.SetFormToEdit();
+                gbox_status.Enabled = false;
             }
             else if (!populated)
             {
                 this.UnlockCamps();
                 this.ClearCamps();
+                gbox_status.Enabled = true;
             }
         }
 

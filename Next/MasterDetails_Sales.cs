@@ -98,12 +98,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                         }
                         DGV_Sales.Rows.Add();
                         DGV_Sales.Rows[i].Cells["SaleId"].Value = dr["id_sale"].ToString();
-                        //DGV_Sales.Rows[i].Cells["SaleUserId"].Value = dr["user_id"].ToString();
+                        DGV_Sales.Rows[i].Cells["SaleUserId"].Value = dr["user_id"].ToString();
                         DGV_Sales.Rows[i].Cells["SaleClientId"].Value = dr["client_id"].ToString();
                         DGV_Sales.Rows[i].Cells["SaleClientName"].Value = ClientsController.FindItemId(Convert.ToInt32(dr["client_id"])).name;
                         //DGV_Sales.Rows[i].Cells["SaleSubTotal"].Value = dr["SaleSubTotal"].ToString();
                         DGV_Sales.Rows[i].Cells["SaleTotalValue"].Value = totalValue.ToString("0.00");
-                        //DGV_Sales.Rows[i].Cells["SalePayCond"].Value = PayCondController.FindItemId(Convert.ToInt32(dr["SalePayCond"])).conditionName;
+                        DGV_Sales.Rows[i].Cells["SalePayCond"].Value = PayCondController.FindItemId(Convert.ToInt32(dr["paycondition_id"])).conditionName;
                         DGV_Sales.Rows[i].Cells["SaleProdQtd"].Value = dr["total_Items_Quantity"].ToString();
                         DGV_Sales.Rows[i].Cells["SaleDate"].Value = dr["date_creation"].ToString();
                         DGV_Sales.Rows[i].Cells["SaleStatus"].Value = saleStatus;

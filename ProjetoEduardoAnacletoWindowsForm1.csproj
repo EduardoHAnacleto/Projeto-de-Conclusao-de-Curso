@@ -367,6 +367,18 @@
     <Compile Include="Authorization\Frm_UserControl_Login.Designer.cs">
       <DependentUpon>Frm_UserControl_Login.cs</DependentUpon>
     </Compile>
+    <Compile Include="Next\MasterDetails_PurchasesBillsToPay.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Next\MasterDetails_PurchasesBillsToPay.Designer.cs">
+      <DependentUpon>MasterDetails_PurchasesBillsToPay.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Next\MasterDetails_PurchasesProducts.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Next\MasterDetails_PurchasesProducts.Designer.cs">
+      <DependentUpon>MasterDetails_PurchasesProducts.cs</DependentUpon>
+    </Compile>
     <Compile Include="Next\MasterDetails_SaleProducts.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -526,6 +538,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Authorization\Frm_UserControl_Login.resx">
       <DependentUpon>Frm_UserControl_Login.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Next\MasterDetails_PurchasesBillsToPay.resx">
+      <DependentUpon>MasterDetails_PurchasesBillsToPay.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Next\MasterDetails_PurchasesProducts.resx">
+      <DependentUpon>MasterDetails_PurchasesProducts.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Next\MasterDetails_SaleProducts.resx">
       <DependentUpon>MasterDetails_SaleProducts.cs</DependentUpon>

@@ -180,7 +180,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 {
                     connection.Open();
                     string sql = "SELECT * FROM BILLSTOPAY WHERE BILLNUMBER = @BNUM AND BILLMODEL = @BMODEL AND BILLSERIES = @BSERIES " +
-                        " AND SUPPLIER_ID = @SUPPLIERID ; ";
+                        " AND SUPPLIER_ID = @SUPPLIERID ;";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@BNUM", billNumber);
@@ -189,43 +189,41 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            while (reader.Read())
+
+                            if (reader.HasRows)
                             {
-                                if (reader.HasRows)
+                                foreach (var row in reader)
                                 {
-                                    foreach (DataRow row in reader)
+                                    BillsToPay obj = new BillsToPay()
                                     {
-                                        BillsToPay obj = new BillsToPay()
-                                        {
-                                            BillNumber = billNumber,
-                                            BillSeries = billSeries,
-                                            BillModel = billModel,
+                                        BillNumber = billNumber,
+                                        BillModel = billModel,
+                                        BillSeries = billSeries,
+                                        InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
 
-                                            TotalValue = Convert.ToDecimal(reader["BillValue"]),
-                                            Status = Convert.ToInt32(reader["isPaid"]),
-                                            DueDate = Convert.ToDateTime(reader["dueDate"]),
-                                            EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
-                                            Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
-                                            InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
-                                            PaymentCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
-                                            PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
-                                            dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
-                                            dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
-                                        };
-                                        if (reader["paidDate"] == DBNull.Value || reader["paidDate"] == null)
-                                        {
-                                            obj.PaidDate = null;
-                                        }
-                                        else
-                                        {
-                                            obj.PaidDate = Convert.ToDateTime(reader["paidDate"]);
-                                        }
-                                        list.Add(obj);
+                                        Status = Convert.ToInt32(reader["billStatus"]),
+                                        TotalValue = Convert.ToDecimal(reader["BillValue"]),
+                                        DueDate = Convert.ToDateTime(reader["dueDate"]),
+                                        EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
+                                        Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
+
+                                        PaymentCondition = _paymentConditionsController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
+                                        PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
+                                        dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                                        dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                    };
+                                    if (reader["paidDate"] == DBNull.Value)
+                                    {
+                                        obj.PaidDate = null;
                                     }
+                                    else
+                                    {
+                                        obj.PaidDate = Convert.ToDateTime(reader["paidDate"]);
+                                    }
+                                    list.Add(obj);
                                 }
-                                return list;
-
                             }
+                            return list;
                         }
                     }
                 }

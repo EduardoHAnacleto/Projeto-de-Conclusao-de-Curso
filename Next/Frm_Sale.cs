@@ -756,7 +756,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 check_Active.Checked = false;
                 check_Cancelled.Checked = true;
                 medt_CancelDate.Text = sale.CancelDate.ToString();
-                btn_new.Enabled = false;
+                lbl_new.Visible = false;
+                btn_new.Visible = false;
+                btn_FindClient.Visible = false;
+                lbl_findClient.Visible = false;
+                btn_Save.Visible = false;
+                lbl_Save.Visible = false;
             }
             
         }
