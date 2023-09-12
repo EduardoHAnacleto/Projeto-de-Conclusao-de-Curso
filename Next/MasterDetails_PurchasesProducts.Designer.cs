@@ -31,6 +31,13 @@
             this.btn_Close = new System.Windows.Forms.Button();
             this.gbox_products = new System.Windows.Forms.GroupBox();
             this.DGV_PurchaseProducts = new System.Windows.Forms.DataGridView();
+            this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductDiscoutCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductWeightedAvg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_purchase = new System.Windows.Forms.GroupBox();
             this.btn_SelectPurchase = new System.Windows.Forms.Button();
             this.gbox_status = new System.Windows.Forms.GroupBox();
@@ -44,14 +51,6 @@
             this.btn_Clear = new System.Windows.Forms.Button();
             this.edt_supplierName = new System.Windows.Forms.TextBox();
             this.DGV_Purchases = new System.Windows.Forms.DataGridView();
-            this.btn_Search = new System.Windows.Forms.Button();
-            this.IdProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.NameProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.QuantityProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductDiscoutCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UnValueProduct = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductWeightedAvg = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProductTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BillNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BillModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.BillSeries = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -60,6 +59,7 @@
             this.PurchaseTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchaseDateCreation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchaseCancelDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.btn_Search = new System.Windows.Forms.Button();
             this.gbox_products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchaseProducts)).BeginInit();
             this.gbox_purchase.SuspendLayout();
@@ -110,6 +110,60 @@
             this.DGV_PurchaseProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_PurchaseProducts.Size = new System.Drawing.Size(984, 221);
             this.DGV_PurchaseProducts.TabIndex = 6;
+            // 
+            // IdProduct
+            // 
+            this.IdProduct.HeaderText = "ID";
+            this.IdProduct.MinimumWidth = 6;
+            this.IdProduct.Name = "IdProduct";
+            this.IdProduct.ReadOnly = true;
+            this.IdProduct.Width = 45;
+            // 
+            // NameProduct
+            // 
+            this.NameProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.NameProduct.HeaderText = "Produto";
+            this.NameProduct.MinimumWidth = 6;
+            this.NameProduct.Name = "NameProduct";
+            this.NameProduct.ReadOnly = true;
+            // 
+            // QuantityProduct
+            // 
+            this.QuantityProduct.HeaderText = "Quantidade";
+            this.QuantityProduct.MinimumWidth = 6;
+            this.QuantityProduct.Name = "QuantityProduct";
+            this.QuantityProduct.ReadOnly = true;
+            this.QuantityProduct.Width = 70;
+            // 
+            // ProductDiscoutCash
+            // 
+            this.ProductDiscoutCash.HeaderText = "Desconto $";
+            this.ProductDiscoutCash.MinimumWidth = 6;
+            this.ProductDiscoutCash.Name = "ProductDiscoutCash";
+            this.ProductDiscoutCash.ReadOnly = true;
+            this.ProductDiscoutCash.Width = 70;
+            // 
+            // UnValueProduct
+            // 
+            this.UnValueProduct.HeaderText = "Valor UN";
+            this.UnValueProduct.MinimumWidth = 6;
+            this.UnValueProduct.Name = "UnValueProduct";
+            this.UnValueProduct.ReadOnly = true;
+            this.UnValueProduct.Width = 70;
+            // 
+            // ProductWeightedAvg
+            // 
+            this.ProductWeightedAvg.HeaderText = "Média Ponderada";
+            this.ProductWeightedAvg.Name = "ProductWeightedAvg";
+            this.ProductWeightedAvg.ReadOnly = true;
+            // 
+            // ProductTotalValue
+            // 
+            this.ProductTotalValue.HeaderText = "Valor Total";
+            this.ProductTotalValue.MinimumWidth = 6;
+            this.ProductTotalValue.Name = "ProductTotalValue";
+            this.ProductTotalValue.ReadOnly = true;
+            this.ProductTotalValue.Width = 90;
             // 
             // gbox_purchase
             // 
@@ -267,71 +321,9 @@
             this.DGV_Purchases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Purchases.Size = new System.Drawing.Size(843, 150);
             this.DGV_Purchases.TabIndex = 0;
+            this.DGV_Purchases.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Purchases_CellClick);
             this.DGV_Purchases.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Purchases_CellContentClick);
-            // 
-            // btn_Search
-            // 
-            this.btn_Search.Location = new System.Drawing.Point(248, 36);
-            this.btn_Search.Name = "btn_Search";
-            this.btn_Search.Size = new System.Drawing.Size(75, 20);
-            this.btn_Search.TabIndex = 9;
-            this.btn_Search.Text = "Buscar";
-            this.btn_Search.UseVisualStyleBackColor = true;
-            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
-            // 
-            // IdProduct
-            // 
-            this.IdProduct.HeaderText = "ID";
-            this.IdProduct.MinimumWidth = 6;
-            this.IdProduct.Name = "IdProduct";
-            this.IdProduct.ReadOnly = true;
-            this.IdProduct.Width = 45;
-            // 
-            // NameProduct
-            // 
-            this.NameProduct.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.NameProduct.HeaderText = "Produto";
-            this.NameProduct.MinimumWidth = 6;
-            this.NameProduct.Name = "NameProduct";
-            this.NameProduct.ReadOnly = true;
-            // 
-            // QuantityProduct
-            // 
-            this.QuantityProduct.HeaderText = "Quantidade";
-            this.QuantityProduct.MinimumWidth = 6;
-            this.QuantityProduct.Name = "QuantityProduct";
-            this.QuantityProduct.ReadOnly = true;
-            this.QuantityProduct.Width = 70;
-            // 
-            // ProductDiscoutCash
-            // 
-            this.ProductDiscoutCash.HeaderText = "Desconto $";
-            this.ProductDiscoutCash.MinimumWidth = 6;
-            this.ProductDiscoutCash.Name = "ProductDiscoutCash";
-            this.ProductDiscoutCash.ReadOnly = true;
-            this.ProductDiscoutCash.Width = 70;
-            // 
-            // UnValueProduct
-            // 
-            this.UnValueProduct.HeaderText = "Valor UN";
-            this.UnValueProduct.MinimumWidth = 6;
-            this.UnValueProduct.Name = "UnValueProduct";
-            this.UnValueProduct.ReadOnly = true;
-            this.UnValueProduct.Width = 70;
-            // 
-            // ProductWeightedAvg
-            // 
-            this.ProductWeightedAvg.HeaderText = "Média Ponderada";
-            this.ProductWeightedAvg.Name = "ProductWeightedAvg";
-            this.ProductWeightedAvg.ReadOnly = true;
-            // 
-            // ProductTotalValue
-            // 
-            this.ProductTotalValue.HeaderText = "Valor Total";
-            this.ProductTotalValue.MinimumWidth = 6;
-            this.ProductTotalValue.Name = "ProductTotalValue";
-            this.ProductTotalValue.ReadOnly = true;
-            this.ProductTotalValue.Width = 90;
+            this.DGV_Purchases.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.DGV_Purchases_CellMouseClick);
             // 
             // BillNumber
             // 
@@ -387,6 +379,16 @@
             this.PurchaseCancelDate.Name = "PurchaseCancelDate";
             this.PurchaseCancelDate.ReadOnly = true;
             this.PurchaseCancelDate.Width = 90;
+            // 
+            // btn_Search
+            // 
+            this.btn_Search.Location = new System.Drawing.Point(248, 36);
+            this.btn_Search.Name = "btn_Search";
+            this.btn_Search.Size = new System.Drawing.Size(75, 20);
+            this.btn_Search.TabIndex = 9;
+            this.btn_Search.Text = "Buscar";
+            this.btn_Search.UseVisualStyleBackColor = true;
+            this.btn_Search.Click += new System.EventHandler(this.btn_Search_Click);
             // 
             // MasterDetails_PurchasesProducts
             // 

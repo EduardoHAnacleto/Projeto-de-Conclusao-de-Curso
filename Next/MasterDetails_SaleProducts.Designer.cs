@@ -85,6 +85,7 @@
             this.DGV_Sales.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Sales.Size = new System.Drawing.Size(715, 150);
             this.DGV_Sales.TabIndex = 0;
+            this.DGV_Sales.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Sales_CellClick);
             this.DGV_Sales.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Sales_CellContentClick);
             // 
             // SaleId

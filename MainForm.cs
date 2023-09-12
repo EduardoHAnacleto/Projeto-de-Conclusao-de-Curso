@@ -171,8 +171,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         private void findSalesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             MasterDetails_Sales frmMasterDetailsSales = new MasterDetails_Sales();
-            frmMasterDetailsSales.SetClientsDataSourceToDGV();
-            frmMasterDetailsSales.SetSalesDataSourceToDGV();
             frmMasterDetailsSales.ShowDialog();
         }
 

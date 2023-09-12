@@ -38,6 +38,15 @@
             this.btn_FindClient = new System.Windows.Forms.Button();
             this.lbl_SaleId = new System.Windows.Forms.Label();
             this.DGV_Sales = new System.Windows.Forms.DataGridView();
+            this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SalePayCond = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SaleStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_SelectSale = new System.Windows.Forms.Button();
             this.edt_saleId = new System.Windows.Forms.NumericUpDown();
             this.btn_findSale = new System.Windows.Forms.Button();
@@ -60,19 +69,7 @@
             this.rbtn_Natural = new System.Windows.Forms.RadioButton();
             this.rbtn_LegalClients = new System.Windows.Forms.RadioButton();
             this.btn_ClearClientFilters = new System.Windows.Forms.Button();
-            this.btn_SelectClient = new System.Windows.Forms.Button();
             this.btn_Close = new System.Windows.Forms.Button();
-            this.lbl_ClientId = new System.Windows.Forms.Label();
-            this.edt_clientId = new System.Windows.Forms.NumericUpDown();
-            this.SaleId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleUserId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleClientId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SalePayCond = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SaleStatus = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Clients)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Sales)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_saleId)).BeginInit();
@@ -80,7 +77,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_UserId)).BeginInit();
             this.gbox_SaleFilters.SuspendLayout();
             this.gbox_clientFilters.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).BeginInit();
             this.SuspendLayout();
             // 
             // DGV_Clients
@@ -103,6 +99,8 @@
             this.DGV_Clients.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Clients.Size = new System.Drawing.Size(637, 168);
             this.DGV_Clients.TabIndex = 0;
+            this.DGV_Clients.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clients_CellClick);
+            this.DGV_Clients.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_Clients_CellContentClick);
             // 
             // ClientId
             // 
@@ -139,7 +137,7 @@
             // lbl_client
             // 
             this.lbl_client.AutoSize = true;
-            this.lbl_client.Location = new System.Drawing.Point(111, 14);
+            this.lbl_client.Location = new System.Drawing.Point(11, 15);
             this.lbl_client.Name = "lbl_client";
             this.lbl_client.Size = new System.Drawing.Size(41, 13);
             this.lbl_client.TabIndex = 1;
@@ -148,7 +146,8 @@
             // edt_clientName
             // 
             this.edt_clientName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_clientName.Location = new System.Drawing.Point(149, 11);
+            this.edt_clientName.Enabled = false;
+            this.edt_clientName.Location = new System.Drawing.Point(49, 12);
             this.edt_clientName.MaxLength = 30;
             this.edt_clientName.Name = "edt_clientName";
             this.edt_clientName.Size = new System.Drawing.Size(239, 20);
@@ -156,7 +155,7 @@
             // 
             // btn_FindClient
             // 
-            this.btn_FindClient.Location = new System.Drawing.Point(393, 11);
+            this.btn_FindClient.Location = new System.Drawing.Point(293, 12);
             this.btn_FindClient.Name = "btn_FindClient";
             this.btn_FindClient.Size = new System.Drawing.Size(75, 19);
             this.btn_FindClient.TabIndex = 3;
@@ -199,6 +198,77 @@
             this.DGV_Sales.Size = new System.Drawing.Size(1049, 295);
             this.DGV_Sales.TabIndex = 6;
             // 
+            // SaleId
+            // 
+            this.SaleId.HeaderText = "ID Venda";
+            this.SaleId.Name = "SaleId";
+            this.SaleId.ReadOnly = true;
+            this.SaleId.Width = 50;
+            // 
+            // SaleUserId
+            // 
+            this.SaleUserId.HeaderText = "ID Usuário";
+            this.SaleUserId.MinimumWidth = 6;
+            this.SaleUserId.Name = "SaleUserId";
+            this.SaleUserId.ReadOnly = true;
+            this.SaleUserId.Width = 50;
+            // 
+            // SaleClientId
+            // 
+            this.SaleClientId.HeaderText = "Cliente ID";
+            this.SaleClientId.MinimumWidth = 6;
+            this.SaleClientId.Name = "SaleClientId";
+            this.SaleClientId.ReadOnly = true;
+            this.SaleClientId.Width = 50;
+            // 
+            // SaleClientName
+            // 
+            this.SaleClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.SaleClientName.HeaderText = "Cliente";
+            this.SaleClientName.MinimumWidth = 6;
+            this.SaleClientName.Name = "SaleClientName";
+            this.SaleClientName.ReadOnly = true;
+            // 
+            // SaleTotalValue
+            // 
+            this.SaleTotalValue.HeaderText = "Valor Total";
+            this.SaleTotalValue.MinimumWidth = 6;
+            this.SaleTotalValue.Name = "SaleTotalValue";
+            this.SaleTotalValue.ReadOnly = true;
+            this.SaleTotalValue.Width = 75;
+            // 
+            // SalePayCond
+            // 
+            this.SalePayCond.HeaderText = "Condição de Pagamento";
+            this.SalePayCond.MinimumWidth = 6;
+            this.SalePayCond.Name = "SalePayCond";
+            this.SalePayCond.ReadOnly = true;
+            this.SalePayCond.Width = 160;
+            // 
+            // SaleProdQtd
+            // 
+            this.SaleProdQtd.HeaderText = "Quantidade de Produtos";
+            this.SaleProdQtd.MinimumWidth = 6;
+            this.SaleProdQtd.Name = "SaleProdQtd";
+            this.SaleProdQtd.ReadOnly = true;
+            this.SaleProdQtd.Width = 65;
+            // 
+            // SaleDate
+            // 
+            this.SaleDate.HeaderText = "Data";
+            this.SaleDate.MinimumWidth = 6;
+            this.SaleDate.Name = "SaleDate";
+            this.SaleDate.ReadOnly = true;
+            this.SaleDate.Width = 120;
+            // 
+            // SaleStatus
+            // 
+            this.SaleStatus.HeaderText = "Status";
+            this.SaleStatus.MinimumWidth = 6;
+            this.SaleStatus.Name = "SaleStatus";
+            this.SaleStatus.ReadOnly = true;
+            this.SaleStatus.Width = 90;
+            // 
             // btn_SelectSale
             // 
             this.btn_SelectSale.Location = new System.Drawing.Point(892, 595);
@@ -211,6 +281,7 @@
             // 
             // edt_saleId
             // 
+            this.edt_saleId.Enabled = false;
             this.edt_saleId.Location = new System.Drawing.Point(71, 19);
             this.edt_saleId.Maximum = new decimal(new int[] {
             -1530494977,
@@ -448,16 +519,6 @@
             this.btn_ClearClientFilters.UseVisualStyleBackColor = true;
             this.btn_ClearClientFilters.Click += new System.EventHandler(this.btn_ClearClientFilters_Click);
             // 
-            // btn_SelectClient
-            // 
-            this.btn_SelectClient.Location = new System.Drawing.Point(655, 181);
-            this.btn_SelectClient.Name = "btn_SelectClient";
-            this.btn_SelectClient.Size = new System.Drawing.Size(97, 23);
-            this.btn_SelectClient.TabIndex = 13;
-            this.btn_SelectClient.Text = "Filtrar por Cliente";
-            this.btn_SelectClient.UseVisualStyleBackColor = true;
-            this.btn_SelectClient.Click += new System.EventHandler(this.btn_SelectClient_Click);
-            // 
             // btn_Close
             // 
             this.btn_Close.Location = new System.Drawing.Point(984, 595);
@@ -469,109 +530,12 @@
             this.btn_Close.UseVisualStyleBackColor = true;
             this.btn_Close.Click += new System.EventHandler(this.btn_Close_Click);
             // 
-            // lbl_ClientId
-            // 
-            this.lbl_ClientId.AutoSize = true;
-            this.lbl_ClientId.Location = new System.Drawing.Point(10, 14);
-            this.lbl_ClientId.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lbl_ClientId.Name = "lbl_ClientId";
-            this.lbl_ClientId.Size = new System.Drawing.Size(24, 13);
-            this.lbl_ClientId.TabIndex = 15;
-            this.lbl_ClientId.Text = "ID :";
-            // 
-            // edt_clientId
-            // 
-            this.edt_clientId.Location = new System.Drawing.Point(38, 11);
-            this.edt_clientId.Margin = new System.Windows.Forms.Padding(2);
-            this.edt_clientId.Maximum = new decimal(new int[] {
-            9999,
-            0,
-            0,
-            0});
-            this.edt_clientId.Name = "edt_clientId";
-            this.edt_clientId.Size = new System.Drawing.Size(60, 20);
-            this.edt_clientId.TabIndex = 16;
-            // 
-            // SaleId
-            // 
-            this.SaleId.HeaderText = "ID Venda";
-            this.SaleId.Name = "SaleId";
-            this.SaleId.ReadOnly = true;
-            this.SaleId.Width = 50;
-            // 
-            // SaleUserId
-            // 
-            this.SaleUserId.HeaderText = "ID Usuário";
-            this.SaleUserId.MinimumWidth = 6;
-            this.SaleUserId.Name = "SaleUserId";
-            this.SaleUserId.ReadOnly = true;
-            this.SaleUserId.Width = 50;
-            // 
-            // SaleClientId
-            // 
-            this.SaleClientId.HeaderText = "Cliente ID";
-            this.SaleClientId.MinimumWidth = 6;
-            this.SaleClientId.Name = "SaleClientId";
-            this.SaleClientId.ReadOnly = true;
-            this.SaleClientId.Width = 50;
-            // 
-            // SaleClientName
-            // 
-            this.SaleClientName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.SaleClientName.HeaderText = "Cliente";
-            this.SaleClientName.MinimumWidth = 6;
-            this.SaleClientName.Name = "SaleClientName";
-            this.SaleClientName.ReadOnly = true;
-            // 
-            // SaleTotalValue
-            // 
-            this.SaleTotalValue.HeaderText = "Valor Total";
-            this.SaleTotalValue.MinimumWidth = 6;
-            this.SaleTotalValue.Name = "SaleTotalValue";
-            this.SaleTotalValue.ReadOnly = true;
-            this.SaleTotalValue.Width = 75;
-            // 
-            // SalePayCond
-            // 
-            this.SalePayCond.HeaderText = "Condição de Pagamento";
-            this.SalePayCond.MinimumWidth = 6;
-            this.SalePayCond.Name = "SalePayCond";
-            this.SalePayCond.ReadOnly = true;
-            this.SalePayCond.Width = 160;
-            // 
-            // SaleProdQtd
-            // 
-            this.SaleProdQtd.HeaderText = "Quantidade de Produtos";
-            this.SaleProdQtd.MinimumWidth = 6;
-            this.SaleProdQtd.Name = "SaleProdQtd";
-            this.SaleProdQtd.ReadOnly = true;
-            this.SaleProdQtd.Width = 65;
-            // 
-            // SaleDate
-            // 
-            this.SaleDate.HeaderText = "Data";
-            this.SaleDate.MinimumWidth = 6;
-            this.SaleDate.Name = "SaleDate";
-            this.SaleDate.ReadOnly = true;
-            this.SaleDate.Width = 120;
-            // 
-            // SaleStatus
-            // 
-            this.SaleStatus.HeaderText = "Status";
-            this.SaleStatus.MinimumWidth = 6;
-            this.SaleStatus.Name = "SaleStatus";
-            this.SaleStatus.ReadOnly = true;
-            this.SaleStatus.Width = 90;
-            // 
             // MasterDetails_Sales
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1089, 625);
-            this.Controls.Add(this.edt_clientId);
-            this.Controls.Add(this.lbl_ClientId);
             this.Controls.Add(this.btn_Close);
-            this.Controls.Add(this.btn_SelectClient);
             this.Controls.Add(this.gbox_clientFilters);
             this.Controls.Add(this.gbox_SaleFilters);
             this.Controls.Add(this.gbox_sale);
@@ -592,7 +556,6 @@
             this.gbox_SaleFilters.PerformLayout();
             this.gbox_clientFilters.ResumeLayout(false);
             this.gbox_clientFilters.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -623,12 +586,9 @@
         private System.Windows.Forms.Button btn_ClearClientFilters;
         private System.Windows.Forms.RadioButton rbtn_Natural;
         private System.Windows.Forms.RadioButton rbtn_LegalClients;
-        private System.Windows.Forms.Button btn_SelectClient;
         private System.Windows.Forms.Button btn_Close;
         private System.Windows.Forms.Label lbl_UserId;
         private System.Windows.Forms.NumericUpDown edt_UserId;
-        private System.Windows.Forms.Label lbl_ClientId;
-        private System.Windows.Forms.NumericUpDown edt_clientId;
         private System.Windows.Forms.Label lbl_maxDate;
         private System.Windows.Forms.DateTimePicker dateTime_MaxDateFilter;
         private System.Windows.Forms.Label lbl_minDate;

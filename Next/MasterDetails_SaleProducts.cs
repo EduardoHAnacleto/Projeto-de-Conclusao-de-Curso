@@ -187,5 +187,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 PopulateSalesDGV();
             }
         }
+
+        private void DGV_Sales_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            PopulateSaleProducts();
+        }
     }
 }

@@ -194,7 +194,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     PurchasedItems = _purchaseItemsController.FindItemId(billModel, billNumber, billSeries, supplierId),
                                     Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"]))
                                 };
-                                if (reader["cancelledDate"].ToString() != string.Empty) {
+                                if (reader["cancelledDate"].ToString() != string.Empty) 
+                                {
                                     obj.CancelledDate = Convert.ToDateTime(reader["cancelledDate"]);
                                 }
                                 return obj;

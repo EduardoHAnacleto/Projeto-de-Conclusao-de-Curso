@@ -21,8 +21,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
         {
             InitializeComponent();
             edt_saleId.Controls[0].Visible = false;
-            edt_clientId.Controls[0].Visible = false;
             edt_UserId.Controls[0].Visible = false;
+            SetClientsDataSourceToDGV();
         }
 
         private Users User { get; set; }
@@ -91,7 +91,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                     if (dr != null)
                     {
                         decimal totalValue = (decimal)dr["sale_total_value"];
-                        string saleStatus = "ACTIVE";
+                        string saleStatus = "ATIVO";
                         if (dr["sale_cancel_date"].ToString() != string.Empty)
                         {
                             saleStatus = "CANCELADO";
@@ -145,7 +145,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 {
                     if (item.Cells["SalePayCond"].Value.ToString() != cond)
                     {
-                        item.Dispose();
+                        DGV_Sales.Rows.Remove(item);
                     }
                 }
                 edt_payCondition.Enabled = true;
@@ -161,20 +161,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
         {
             Close();
         }
-
-        //private void PopulateDGVSales()
-        //{
-        //    DGV_Sales.Rows.Clear();
-        //    DGV_Sales.DataSource = SalesController.PopulateDGV();
-        //    SaleStatusToString();
-        //}
-
-        //private void PopulateDGVClients()
-        //{
-        //    DGV_Clients.Rows.Clear();
-        //    DGV_Clients.DataSource = ClientsController.PopulateDGV();
-        //    ClientTypeToString();
-        //}
 
         private void btn_findSale_Click(object sender, EventArgs e)
         {
@@ -240,7 +226,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 {
                     if (row.Cells["SaleStatus"].ToString() != "ATIVO")
                     {
-                        row.Dispose();
+                        DGV_Sales.Rows.Remove(row);
                     }
                 }
             }
@@ -256,7 +242,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 {
                     if (row.Cells["SaleStatus"].ToString() != "CANCELADO")
                     {
-                        row.Dispose();
+                        DGV_Sales.Rows.Remove(row);
                     }
                 }
             }
@@ -337,88 +323,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
 
         public void FilterByClient()
         {
-            bool foundClient = FindClientDGV();
-            if (foundClient)
-            {
-                if (DGV_Sales.Rows.Count > 0)
+            if (DGV_Clients.SelectedRows[0] != null)
+            {            
+                SetSalesDataSourceToDGV();
+                foreach (DataGridViewRow row in DGV_Sales.Rows)
                 {
-                    foreach (DataGridViewRow row in DGV_Sales.Rows)
+                    if (row.Cells["SaleClientName"].Value.ToString() != edt_clientName.Text)
                     {
-                        if (row.Cells["SaleClientName"].Value.ToString() != edt_clientName.Text)
-                        {
-                            row.Dispose();
-                        }
+                        DGV_Sales.Rows.Remove(row);
                     }
-                }
-            }
-        }
-
-        private bool FindClientDGV()
-        {
-            bool foundClient = false;
-            if (edt_clientId.Value > 0)
-            {
-                if (DGV_Clients.Rows.Count > 0)
-                {
-                    foreach (DataGridViewRow row in DGV_Clients.Rows)
-                    {
-                        if (Convert.ToInt32(row.Cells["SaleClientId"].Value) == Convert.ToInt32(edt_clientId.Value))
-                        {
-                            row.Selected = true;
-                            return true;
-                        }
-                    }
-                }
-            }
-            else if (!string.IsNullOrWhiteSpace(edt_clientName.Text))
-            {
-                if (DGV_Clients.Rows.Count > 0)
-                {
-                    foreach (DataGridViewRow row in DGV_Clients.Rows)
-                    {
-                        if (row.Cells["ClientName"].Value.ToString() == edt_clientName.Text)
-                        {
-                            row.Selected = true;
-                            return true;
-                        }
-                    }
-                }
-            }
-            if (!foundClient)
-            {
-                if (Utilities.AskToFind())
-                {
-                    Frm_Find_Clients formClient = new Frm_Find_Clients();
-                    formClient.hasFather = true;
-                    formClient.ShowDialog();
-                    if (!formClient.ActiveControl.ContainsFocus)
-                    {
-                        Clients client = new Clients();
-                        client = formClient.GetObject();
-                        if (client != null)
-                        {
-                            edt_clientId.Value = client.id;
-                            edt_clientName.Text = client.name;
-                            foundClient = true;
-                        }
-                    }
-                    formClient.Close();
-                    if (foundClient)
-                    {
-                        FilterSaleByFoundClient();
-                    }
-                }
-            }
-            return false;
-        }
-
-        private void FilterSaleByFoundClient()
-        {
-            foreach (DataGridViewRow row in DGV_Clients.Rows)
-            {
-                if (row.Cells["ClientName"].Value.ToString() == edt_clientName.Text)
-                {
-                    row.Selected = true;
                 }
             }
         }
@@ -434,11 +347,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 client = formClient.GetObject();
                 if (client != null)
                 {
-                    edt_clientId.Value = client.id;
                     edt_clientName.Text = client.name;
+                    FilterByClient();
                 }
             }
-            FilterSaleByFoundClient();
         }
 
         private void dateTime_MaxDateFilter_ValueChanged(object sender, EventArgs e)
@@ -449,7 +361,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
                 {
                     if (Convert.ToDateTime(row.Cells["SaleDate"].Value) > dateTime_MaxDateFilter.Value)
                     {
-                        row.Dispose();
+                        DGV_Sales.Rows.Remove(row);
                     }
                 }
             }
@@ -478,6 +390,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.MasterDetails
         private void gbox_clientFilters_Enter(object sender, EventArgs e)
         {
 
+        }
+
+        private void DGV_Clients_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FilterByClient();
+        }
+
+        private void DGV_Clients_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            FilterByClient();
         }
     }
 }

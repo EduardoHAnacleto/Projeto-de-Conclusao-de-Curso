@@ -74,7 +74,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         public List<PurchaseItems> SelectFromDb(int bModel, int bNum, int bSeries, int supplierId)
         {
-            string sql = "SELECT * FROM PURCHASEITEMS WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM, BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID ;";
+            string sql = "SELECT * FROM PURCHASEITEMS WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID ;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;
@@ -86,31 +86,32 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 cmd.Parameters.AddWithValue("@BSERIES", bSeries);
                 cmd.Parameters.AddWithValue("@SUPPLIERID", supplierId);
                 SqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                if (reader.HasRows)
                 {
-                    if (reader.HasRows)
+                    List<PurchaseItems> list = new List<PurchaseItems>();
+                    foreach (var item in reader)
                     {
-                        List<PurchaseItems> list = new List<PurchaseItems>();
-                        foreach (PurchaseItems item in reader)
+                        PurchaseItems obj = new PurchaseItems
                         {
-                            PurchaseItems obj = new PurchaseItems 
-                            {
-                                BillNumberId = Convert.ToInt32(reader["billModel"]),
-                                BillModelId = Convert.ToInt32(reader["billNumber"]),
-                                BillSeriesId = Convert.ToInt32(reader["billSeries"]),
-                                SupplierId = Convert.ToInt32(reader["supplier_id"]),
-                                Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
-                                Quantity = Convert.ToInt32(reader["quantity"]),
-                                NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
-                                PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
-                                WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
-                                dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
-                                dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
-                            };
-                            list.Add(obj);
+                            BillNumberId = Convert.ToInt32(reader["billModel"]),
+                            BillModelId = Convert.ToInt32(reader["billNumber"]),
+                            BillSeriesId = Convert.ToInt32(reader["billSeries"]),
+                            SupplierId = Convert.ToInt32(reader["supplier_id"]),
+                            Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
+                            Quantity = Convert.ToInt32(reader["quantity"]),
+                            NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
+                            PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
+                            WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
+                            dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                            CancelledDate = null
+                        };
+                        if (reader["date_creation"] != DBNull.Value)
+                        {
+                            obj.CancelledDate = Convert.ToDateTime(reader["DATE_CANCELLED"]);
                         }
-                        return list;
+                        list.Add(obj);
                     }
+                    return list;
                 }
             }
             catch (Exception ex)
@@ -224,7 +225,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         public List<PurchaseItems> SelectPurchaseIdFromDb(int bModel, int bNum, int bSeries, int supplierId)
         {
-            string sql = "SELECT * FROM PURCHASEITEMS WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM, BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID ;";
+            string sql = "SELECT * FROM PURCHASEITEMS WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID ;";
             SqlConnection con = new SqlConnection(connectionString);
             SqlCommand cmd = new SqlCommand(sql, con);
             cmd.CommandType = CommandType.Text;

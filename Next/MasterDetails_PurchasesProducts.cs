@@ -107,6 +107,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (DGV_Purchases.SelectedRows[0] != null)
             {
+                PurchaseItems_Controller piController = new PurchaseItems_Controller();
                 int billNum = Convert.ToInt32(DGV_Purchases.SelectedRows[0].Cells["BillNumber"].Value);
                 int billMod = Convert.ToInt32(DGV_Purchases.SelectedRows[0].Cells["BillModel"].Value);
                 int billSer = Convert.ToInt32(DGV_Purchases.SelectedRows[0].Cells["BillSeries"].Value);
@@ -230,6 +231,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void btn_Close_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void DGV_Purchases_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            PopulateDGVProducts();
+        }
+
+        private void DGV_Purchases_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            PopulateDGVProducts();
         }
     }
 }
