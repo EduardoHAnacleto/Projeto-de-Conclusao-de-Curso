@@ -318,7 +318,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                             if (reader.Read())
                             {
                                 List<BillsToPay> list = new List<BillsToPay>();
-                                foreach (BillsToPay item in reader)
+                                foreach (var item in reader)
                                 {
                                     BillsToPay obj = new BillsToPay()
                                     {
@@ -330,13 +330,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                         TotalValue = Convert.ToDecimal(reader["BillValue"]),
                                         Status = Convert.ToInt32(reader["billStatus"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
-                                        PaidDate = Convert.ToDateTime(reader["paidDate"]),
+                                        PaidDate = null,
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
                                         Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                     };
+                                    if (reader["paidDate"] != DBNull.Value)
+                                    {
+                                        obj.PaidDate = Convert.ToDateTime(reader["paidDate"]);
+                                    }
                                     list.Add(obj);
                                 }
                                 return list;

@@ -141,10 +141,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1
 
         private void findBillsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MasterDetails_BillsToReceive frmMDBillsToReceive = new MasterDetails_BillsToReceive();
-            frmMDBillsToReceive.SetClientsDataSourceToDGV();
-            frmMDBillsToReceive.SetBillsToReceiveDataSourceToDGV();
-            frmMDBillsToReceive.ShowDialog();
+            Frm_Find_BillsToReceive frmFindBillsToReceive = new Frm_Find_BillsToReceive();
+            frmFindBillsToReceive.ShowDialog();
         }
 
         private void addNewBillToolStripMenuItem_Click(object sender, EventArgs e)
@@ -205,6 +203,27 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         {
             MasterDetails_PurchasesBillsToPay frmPurchaseBillsToPay = new MasterDetails_PurchasesBillsToPay(_user);
             frmPurchaseBillsToPay.ShowDialog();
+        }
+
+        private void buscarVendasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_Find_Sales frmFindSales = new Frm_Find_Sales();
+            frmFindSales.ShowDialog();
+        }
+
+        private void buscarComprasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_Find_Purchases frmFindPurchases = new Frm_Find_Purchases();
+            frmFindPurchases.ShowDialog();
+        }
+
+        private void novaCompraToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Users user = new Users();
+            user.id = 2;
+            user.name = "teste";
+            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases(user);
+            frmCreatePurchases.ShowDialog();
         }
     }
 }

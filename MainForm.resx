@@ -287,43 +287,31 @@
     <value>Vendas</value>
   </data>
   <data name="newSaleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="newSaleToolStripMenuItem.Text" xml:space="preserve">
     <value>Nova Venda</value>
   </data>
-  <data name="findSalesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="findSalesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Buscar Vendas/Clientes</value>
-  </data>
-  <data name="buscarVendasProdutosToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>202, 22</value>
-  </data>
-  <data name="buscarVendasProdutosToolStripMenuItem.Text" xml:space="preserve">
-    <value>Buscar Vendas/Produtos</value>
-  </data>
   <metadata name="menuStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
+  <data name="novaCompraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="novaCompraToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nova Compra</value>
+  </data>
+  <data name="buscarComprasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="buscarComprasToolStripMenuItem.Text" xml:space="preserve">
+    <value>Buscar Compras</value>
+  </data>
   <data name="comprasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 20</value>
   </data>
   <data name="comprasToolStripMenuItem.Text" xml:space="preserve">
     <value>Compras</value>
-  </data>
-  <data name="mestreDetalhesCompraProdutoToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>189, 20</value>
-  </data>
-  <data name="mestreDetalhesCompraProdutoToolStripMenuItem.Text" xml:space="preserve">
-    <value>MestreDetalhes CompraProduto</value>
-  </data>
-  <data name="mDComprasContasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>129, 20</value>
-  </data>
-  <data name="mDComprasContasToolStripMenuItem.Text" xml:space="preserve">
-    <value>MD Compras Contas</value>
   </data>
   <data name="menuStrip2.Location" type="System.Drawing.Point, System.Drawing">
     <value>0, 0</value>
@@ -349,6 +337,12 @@
   </data>
   <data name="&gt;&gt;menuStrip2.ZOrder" xml:space="preserve">
     <value>0</value>
+  </data>
+  <data name="buscarVendasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="buscarVendasToolStripMenuItem.Text" xml:space="preserve">
+    <value>Buscar Vendas</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -540,34 +534,28 @@
   <data name="&gt;&gt;newSaleToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;findSalesToolStripMenuItem.Name" xml:space="preserve">
-    <value>findSalesToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;findSalesToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;buscarVendasProdutosToolStripMenuItem.Name" xml:space="preserve">
-    <value>buscarVendasProdutosToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;buscarVendasProdutosToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;comprasToolStripMenuItem.Name" xml:space="preserve">
     <value>comprasToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;comprasToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mestreDetalhesCompraProdutoToolStripMenuItem.Name" xml:space="preserve">
-    <value>mestreDetalhesCompraProdutoToolStripMenuItem</value>
+  <data name="&gt;&gt;buscarVendasToolStripMenuItem.Name" xml:space="preserve">
+    <value>buscarVendasToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;mestreDetalhesCompraProdutoToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;buscarVendasToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;mDComprasContasToolStripMenuItem.Name" xml:space="preserve">
-    <value>mDComprasContasToolStripMenuItem</value>
+  <data name="&gt;&gt;novaCompraToolStripMenuItem.Name" xml:space="preserve">
+    <value>novaCompraToolStripMenuItem</value>
   </data>
-  <data name="&gt;&gt;mDComprasContasToolStripMenuItem.Type" xml:space="preserve">
+  <data name="&gt;&gt;novaCompraToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;buscarComprasToolStripMenuItem.Name" xml:space="preserve">
+    <value>buscarComprasToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;buscarComprasToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;$this.Name" xml:space="preserve">

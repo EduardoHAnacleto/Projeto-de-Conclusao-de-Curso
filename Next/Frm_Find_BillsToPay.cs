@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
@@ -60,7 +61,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             int billSeries = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billSeries"].Value);
             int billModel = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billModel"].Value);
             int instalmentNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["instalmentNumber"].Value);
-            int supplierId = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["supplierId"].Value);
+            int supplierId = _controller.FindSupplierId(Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["supplierName"].Value)).FirstOrDefault().Supplier.id;
             BillsToPay obj = _controller.FindItemId(billNumber,billModel,billSeries,instalmentNumber, supplierId);
             return obj;
         }
@@ -111,11 +112,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 foreach (DataRow dr in dt.Rows)
                 {
-                    var supplierId = dr["supplier_id"].ToString();
+                    var supplierName = _controller.FindSupplierId(Convert.ToInt32(dr["supplier_id"])).FirstOrDefault().Supplier.name;
                     var billNum = dr["billNumber"].ToString();
                     var billModel = dr["billModel"].ToString();
                     var billSeries = dr["billSeries"].ToString(); 
                     var instalmentNumber = dr["instalmentNumber"].ToString();
+                    var emissionDate = Convert.ToDateTime(dr["emissionDate"]).ToShortDateString();
                     var dueDate = Convert.ToDateTime(dr["dueDate"].ToString()).ToShortDateString();
                     var isPaid = dr["billStatus"].ToString();
                     if (isPaid == "0")
@@ -130,7 +132,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     {
                         isPaid = "CANCELADO";
                     }
-                    DGV_BillsToPay.Rows.Add(supplierId, billNum,billModel,billSeries,instalmentNumber,dueDate,isPaid);                     
+                    DGV_BillsToPay.Rows.Add(supplierName, billNum,billModel,billSeries,instalmentNumber,emissionDate,dueDate,isPaid);                     
                 }
             }
         }

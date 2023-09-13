@@ -48,6 +48,7 @@
             // 
             // btn_exit
             // 
+            this.btn_exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_exit.Location = new System.Drawing.Point(535, 337);
             this.btn_exit.Margin = new System.Windows.Forms.Padding(2);
             this.btn_exit.Name = "btn_exit";
@@ -59,6 +60,7 @@
             // 
             // btn_New
             // 
+            this.btn_New.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_New.Location = new System.Drawing.Point(406, 337);
             this.btn_New.Margin = new System.Windows.Forms.Padding(2);
             this.btn_New.Name = "btn_New";
@@ -70,6 +72,7 @@
             // 
             // btn_Select
             // 
+            this.btn_Select.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Select.Location = new System.Drawing.Point(466, 337);
             this.btn_Select.Margin = new System.Windows.Forms.Padding(2);
             this.btn_Select.Name = "btn_Select";
