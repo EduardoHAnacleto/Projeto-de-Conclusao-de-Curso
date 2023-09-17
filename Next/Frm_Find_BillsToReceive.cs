@@ -1,4 +1,5 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using ProjetoEduardoAnacletoWindowsForm1.Forms;
 using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
@@ -170,5 +171,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             frmBillsToReceive.Populated(true);
             frmBillsToReceive.ShowDialog();
         }
+
+        public override void NewObject()
+        {
+            Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive();
+            frmBillsToReceive.Populated(false);
+            frmBillsToReceive.ShowDialog();
+            this.SetDataSourceToDGV();
+        }
+
+
     }
 }

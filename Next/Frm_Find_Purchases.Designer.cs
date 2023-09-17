@@ -226,6 +226,7 @@
             this.Controls.Add(this.edt_billNumber);
             this.Controls.Add(this.DGV_Purchases);
             this.Name = "Frm_Find_Purchases";
+            this.Text = "Buscar Compras";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_New, 0);

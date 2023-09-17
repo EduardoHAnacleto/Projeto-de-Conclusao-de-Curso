@@ -1,5 +1,7 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
 using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using ProjetoEduardoAnacletoWindowsForm1.FormsCreate;
+using ProjetoEduardoAnacletoWindowsForm1.Models;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
 using System;
 using System.Collections.Generic;
@@ -21,7 +23,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             lbl_id.Visible = false;
         }
 
+        private Users _user = new Users();
+
         Purchases_Controller _controller = new Purchases_Controller();
+
+        public void SetUser(Users user)
+        {
+            _user = user;
+        }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
@@ -48,10 +57,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     var idUser = Convert.ToInt32(dr["user_id"]);
                     var totalValue = Convert.ToDecimal(dr["purchase_TotalCost"]);
                     var emissionDate = Convert.ToDateTime(dr["emissionDate"]);
-                    DateTime? cancelDate = null;
+                    string cancelDate = null;
                     if (dr["cancelledDate"] != DBNull.Value)
                     {
-                        cancelDate = Convert.ToDateTime(dr["cancelledDate"]).Date;
+                        cancelDate = Convert.ToDateTime(dr["cancelledDate"]).Date.ToShortDateString();
                     }
 
                     DGV_Purchases.Rows.Add(
@@ -127,11 +136,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 var bModel = Convert.ToInt32(DGV_Purchases.SelectedRows[0].Cells["BillModel"].Value);
                 var bNumber = Convert.ToInt32(DGV_Purchases.SelectedRows[0].Cells["BillNumber"].Value);
                 var bSeries = Convert.ToInt32(DGV_Purchases.SelectedRows[0].Cells["BillSeries"].Value);
-                var supplierId = supController.FindItemId(Convert.ToInt32(DGV_Purchases.SelectedRows[0].Cells["PurchaseSupplierName"].Value)).id;
+                var supplierId = supController.FindItemName(DGV_Purchases.SelectedRows[0].Cells["PurchaseSupplierName"].Value.ToString()).id;
                 obj = _controller.FindItemId(bModel, bNumber, bSeries, supplierId);
                 return obj;
             }
             return null;
+        }
+
+        public override void NewObject()
+        {
+            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases(_user);
+            frmCreatePurchases.Populated(false);
+            frmCreatePurchases.ShowDialog();
+            this.SetDataSourceToDGV();
         }
     }
 }

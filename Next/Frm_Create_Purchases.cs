@@ -301,7 +301,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                             DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
                             if (dialogResult == DialogResult.Yes)
                             {
-                                purchase.CancelledDate = DateTime.Now;
+                                purchase.CancelledDate = DateTime.Now.Date;
                                 check_Active.Checked = false;
                                 check_Cancelled.Checked = true;
                                 status = _controller.UpdateItem(purchase);
@@ -351,10 +351,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void SetFormToEdit()
         {
-            var edit = "&Cancelar Compra";
+            var edit = "Cancelar Compra";
             btn_new.Text = edit;
             lbl_new.Text = edit;
             btn_new.Enabled = true;
+            btn_Close.Enabled = true;
             btn_Save.Enabled = false;
         }
 
@@ -432,25 +433,33 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void LockCamps()
         {
             gbox_date.Enabled = false;
-            gbox_options.Enabled = false;
+            btn_new.Enabled = false;
+            btn_findSupplier.Enabled = false;
+            btn_Save.Enabled = false;
+            btn_Close.Enabled = false;
             gbox_User.Enabled = false;
             gbox_products.Enabled = false;
             gbox_billInfo.Enabled = false;
             btn_Save.Enabled = false;
             btn_new.Enabled = false;
             btn_FindSup.Enabled = false;
+            btn_findSupplier.Enabled = false;
         }
 
         private void UnlockCamps()
         {
             gbox_date.Enabled = true;
-            gbox_options.Enabled = true;
+            btn_new.Enabled = true;
+            btn_findSupplier.Enabled = true;
+            btn_Save.Enabled = true;
+            btn_Close.Enabled = true;
             gbox_User.Enabled = true;
             gbox_products.Enabled = true;
             gbox_billInfo.Enabled = true;
             btn_Save.Enabled = true;
             btn_new.Enabled = true;
             btn_FindSup.Enabled = true;
+            btn_findSupplier.Enabled = true;
         }
 
         private void ClearCamps()
@@ -485,6 +494,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             PopulateSupplier(purchase.Supplier);
             PopulateStatusInfo(purchase);
             PopulatePaymentInfo(purchase);
+
+            PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
+            var payCond = payCondController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
+            SetBillInstalmentsToDGV(payCond);
+            SetSummary();
+            
         }
 
         private void PopulatePaymentInfo(Purchases purchase)
@@ -525,8 +540,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     item.Product.salePrice,
                     item.Product.stock,
                     item.PurchasePercentage,
-                    item.WeightedCostAverage,
-                    item.Product.salePrice
+                    item.WeightedCostAverage
                     );
             }
         }
@@ -638,7 +652,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void btn_new_Click(object sender, EventArgs e)
         {
-            ClearCamps();
+            if (btn_new.Text != "Cancelar Compra")
+            {
+                ClearCamps();
+            }
+            else
+            {
+                Save();
+            }
         }
 
         private void btn_FindSup_Click(object sender, EventArgs e)

@@ -69,8 +69,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public bool UpdateItem(Purchases purchase)
         {
             _purchase = purchase;
-            string format = "yyyy-MM-dd";
-            _purchase.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
+            _purchase.dateOfLastUpdate = DateTime.Now.Date;
             return _purchasesDAO.EditFromDB(_purchase);
         }
 

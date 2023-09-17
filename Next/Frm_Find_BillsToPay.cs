@@ -57,11 +57,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private BillsToPay GetObject()
         {
-            int billNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billNumber"].Value);
+            Suppliers_Controller supController = new Suppliers_Controller();
+            int billNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["BillNumber"].Value);
             int billSeries = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billSeries"].Value);
             int billModel = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billModel"].Value);
-            int instalmentNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["instalmentNumber"].Value);
-            int supplierId = _controller.FindSupplierId(Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["supplierName"].Value)).FirstOrDefault().Supplier.id;
+            int instalmentNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["InstalmentNumber"].Value);
+            int supplierId = supController.FindItemName(DGV_BillsToPay.SelectedRows[0].Cells["SupplierName"].Value.ToString()).id;
             BillsToPay obj = _controller.FindItemId(billNumber,billModel,billSeries,instalmentNumber, supplierId);
             return obj;
         }
@@ -98,8 +99,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public override void NewPopulatedForm()
         {
             Frm_Create_BillsToPay frmCreateBillsToPay = new Frm_Create_BillsToPay();
-            frmCreateBillsToPay.PopulateCamps(this.GetObject());
             frmCreateBillsToPay.Populated(true);
+            frmCreateBillsToPay.PopulateCamps(this.GetObject());
             frmCreateBillsToPay.ShowDialog();
             this.SetDataSourceToDGV();
         }
@@ -141,6 +142,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             Frm_Create_BillsToPay frmCreateBillsToPay = new Frm_Create_BillsToPay();
             frmCreateBillsToPay.Populated(false);
+            frmCreateBillsToPay.LockCancelled();
             frmCreateBillsToPay.ShowDialog();
             this.SetDataSourceToDGV();
         }

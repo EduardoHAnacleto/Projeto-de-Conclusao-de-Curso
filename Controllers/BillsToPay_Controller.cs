@@ -59,6 +59,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             _billToPay.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
             _billToPaysDAO.EditFromDB(_billToPay);
         }
+        public bool CancelPurchaseBills(int billNum, int billModel, int billSeries, int supplierId) 
+        {
+            return _billToPaysDAO.CancelPurchaseBills(billNum, billModel, billSeries, supplierId);
+        }
 
         public DataTable PopulateDGV() 
         {

@@ -207,13 +207,21 @@ namespace ProjetoEduardoAnacletoWindowsForm1
 
         private void buscarVendasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Users user = new Users();
+            user.id = 2;
+            user.name = "teste";
             Frm_Find_Sales frmFindSales = new Frm_Find_Sales();
+            frmFindSales.SetUser(user);
             frmFindSales.ShowDialog();
         }
 
         private void buscarComprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Users user = new Users();
+            user.id = 2;
+            user.name = "teste";
             Frm_Find_Purchases frmFindPurchases = new Frm_Find_Purchases();
+            frmFindPurchases.SetUser(user);
             frmFindPurchases.ShowDialog();
         }
 

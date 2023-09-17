@@ -24,7 +24,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             lbl_id.Visible = false;
         }
 
+        private Users _user = new Users();
+
         private Sales_Controller _controller = new Sales_Controller();
+
+        public void SetUser(Users user)
+        {
+            _user = user;
+        }
 
         private void btn_Find_Click(object sender, EventArgs e)
         {
@@ -142,6 +149,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 return obj;
             }
             return null;
+        }
+
+        public override void NewObject()
+        {
+            Frm_Sale frmSale = new Frm_Sale(_user);
+            frmSale.SetUser(_user);
+            frmSale.Populated(false);
+            frmSale.ShowDialog();
+            this.SetDataSourceToDGV();
         }
     }
 }

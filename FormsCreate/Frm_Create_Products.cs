@@ -132,12 +132,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_barCode.Text = product.BarCode.ToString();
             if (product.productCost != 0)
             {
-                edt_ProfitPerc.Value = (product.salePrice / product.productCost) * 100;
+                edt_ProfitPerc.Value = ((product.salePrice / product.productCost) - 1) *100;
             }
             else
             {
                 edt_ProfitPerc.Value = 0;
             }
+
         }
 
         public Products GetObject()

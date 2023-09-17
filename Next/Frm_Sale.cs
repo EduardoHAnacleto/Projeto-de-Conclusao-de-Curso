@@ -52,7 +52,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             Sale = sale;
         }
 
-        private void SetUser(Users user)
+        public void SetUser(Users user)
         {
             edt_userId.Value = user.id;
             edt_userName.Text = user.name;
@@ -813,7 +813,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     item.Product.productName,
                     item.Quantity,
                     item.ItemDiscountCash,
-                    item.Product.productCost,
                     item.ProductValue,
                     totalValue
                     );

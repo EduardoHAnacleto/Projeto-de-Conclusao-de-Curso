@@ -76,10 +76,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "UPDATE PURCHASES SET EMISSIONDATE = @EMDATE, ARRIVALDATE = @ARRIVALDATE, FREIGHTCOST = @FREIGHT," +
-                " PURCHASE_TOTALCOST = @TOTALCOST, PURCHASE_EXTRAEXPENSES = @EXPENSES, " +
-                " PURCHASE_INSURANCECOST = @INSURANCE, PAYCONDITION_ID = @PAYCONDID, " +
-                " USER_ID = @USERID, DATE_LAST_UPDATE = @USERID " +
+            string sql = "UPDATE PURCHASES SET CANCELLEDDATE = @CANCELDATE, DATE_LAST_UPDATE = @DU " +
                 " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -91,23 +88,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@BNUM", obj.BillNumber);
                     command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
-                    command.Parameters.AddWithValue("@STATUS", obj.Status);
-                    command.Parameters.AddWithValue("@PAYCONDID", obj.PaymentCondition.id);
-                    command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
-                    command.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
-                    command.Parameters.AddWithValue("@FREIGHT", (decimal)obj.Freight_Cost);
-                    command.Parameters.AddWithValue("@TOTALCOST", (decimal)obj.Total_Cost);
-                    command.Parameters.AddWithValue("@EXPENSES", (decimal)obj.ExtraExpenses);
-                    command.Parameters.AddWithValue("@INSURANCE", (decimal)obj.InsuranceCost);
-                    command.Parameters.AddWithValue("@USERID", obj.User.id);
-                    command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
+
+                    command.Parameters.AddWithValue("@CANCELDATE", obj.CancelledDate);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register altered with success!");
+                        MessageBox.Show("Compra cancelada com sucesso.");
                         status = true;
+                        status = _billsToPayController.CancelPurchaseBills(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
                     }
 
                 }
@@ -194,7 +184,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     PurchasedItems = _purchaseItemsController.FindItemId(billModel, billNumber, billSeries, supplierId),
                                     Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"]))
                                 };
-                                if (reader["cancelledDate"].ToString() != string.Empty) 
+                                if (reader["cancelledDate"] != DBNull.Value) 
                                 {
                                     obj.CancelledDate = Convert.ToDateTime(reader["cancelledDate"]);
                                 }

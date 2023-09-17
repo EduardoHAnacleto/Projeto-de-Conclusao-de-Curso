@@ -51,7 +51,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.InheritForms
                 btn_SelectDelete.Enabled = false;
                 //btn_Edit.Enabled = false;
                 btn_NewSave.Enabled = true;
-
+                
                 this.UnlockCamps();
                 this.ClearCamps();
                 try

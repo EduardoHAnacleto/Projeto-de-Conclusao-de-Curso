@@ -120,7 +120,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             var obj = new BillsToPay();
             obj.Supplier = _supplierController.FindItemId((int)edt_supplierId.Value);
-
+            
             obj.BillNumber = (int)edt_BillNum.Value;
             obj.BillModel = (int)edt_BillModel.Value;
             obj.BillSeries = (int)edt_BillSeries.Value;
@@ -161,6 +161,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_dates.Enabled = false;
             datePicker_due.Enabled = false;
             datePicker_paid.Enabled = false;
+            gbox_billDates.Enabled = false;
         }
 
         public override void UnlockCamps()
@@ -169,12 +170,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_isPaid.Enabled = true;
             gbox_dates.Enabled = true;
             //gbox_danfe.Enabled = true;
+            gbox_billDates.Enabled = true;
             gbox_billInfo.Enabled = true;
             check_Active.Enabled = true;
             check_Paid.Enabled = true;
             gbox_dates.Enabled = true;
-            datePicker_due.Enabled = false;
-            datePicker_paid.Enabled = false;
+            datePicker_due.Enabled = true;
+            datePicker_paid.Enabled = true;
+
         }
 
         public override void ClearCamps()
@@ -218,10 +221,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     }
                     else if (btn_Edit.Text == "Cancelar")
                     {
-                        _controller.UpdateItem(GetObject());
-                        btn_Edit.Text = "&Alterar";
-                        btn_NewSave.Enabled = false;
-                        btn_SelectDelete.Enabled = false;
+                        if (RightInstalment())
+                        {
+                            _controller.UpdateItem(GetObject());
+                            btn_Edit.Text = "&Alterar";
+                            btn_NewSave.Enabled = false;
+                            btn_SelectDelete.Enabled = false;
+                        }
                     }
                 }
                 catch (Exception ex)
@@ -229,6 +235,41 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     throw new Exception(ex.Message);
                 }
             }
+        }
+
+        private bool RightInstalment()
+        {
+            var billNumber = Convert.ToInt32(edt_BillNum.Value);
+            var billModel = Convert.ToInt32(edt_BillModel.Value);
+            var billSeries = Convert.ToInt32(edt_BillSeries.Value);
+            var supplierId = Convert.ToInt32(edt_supplierId.Value);
+            var instalmentNum = Convert.ToInt32(edt_instalmentNumber.Value);
+            var obj = _controller.FindItemId(billNumber,billModel,billSeries,supplierId);
+            if (instalmentNum > 1)
+            {
+                for (int i = 0; i > obj.Count; i++) 
+                {
+                    if (obj[i].Status == 2) //Confirmar
+                    {
+                        string message = "As contas referente a essa nota foram canceladas, não é possível alterar.";
+                        string caption = "Não é possível alterar a parcela.";
+                        MessageBoxIcon icon = MessageBoxIcon.Error;
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        MessageBox.Show(message, caption, buttons, icon);
+                        return false;
+                    }
+                    if (obj[i].PaidDate == null && obj[i].Status == 0)
+                    {
+                        string message = "Existem parcelas anteriores referente a essa compra em aberto.";
+                        string caption = "Não é possível alterar essa parcela.";
+                        MessageBoxIcon icon = MessageBoxIcon.Error;
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        MessageBox.Show(message, caption, buttons, icon);
+                        return false;
+                    }
+                }
+            }
+            return true;
         }
 
         public override void Populated(bool populated)
@@ -286,7 +327,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             else if (bill.DueDate < DateTime.Today) 
             {
-                edt_totalValue.Value = bill.TotalValue + bill.PaymentCondition.fineValue;
+                var obj = _controller.FindItemId(bill.BillNumber, bill.BillModel, bill.BillSeries, bill.InstalmentNumber, bill.Supplier.id);
+                edt_totalValue.Value = bill.TotalValue + obj.PaymentCondition.fineValue;
             }
             else
             {
@@ -308,7 +350,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (bill.PaidDate != null)
             {
                 datePicker_paid.Value = (DateTime)bill.PaidDate;
+                datePicker_paid.Visible = true; //
             }
+            
             if (bill.Status == 1)
             {
                 check_Paid.Checked = true;
@@ -322,12 +366,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 check_Cancelled.Checked = false;
             }
             else if (bill.Status == 2)
-            {
-                check_Cancelled.Checked = true;
+            {             
                 check_Active.Checked = false;
                 check_Paid.Checked = false;
                 btn_NewSave.Visible = false;
                 btn_Edit.Visible = false;
+                check_Cancelled.Checked = true;
+                lbl_Sign_LastUpdate.Text = "Cancelado em :";
             }
         }
 
@@ -470,6 +515,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 datePicker_paid.Visible = true;
                 lbl_LastUpdate.Text = DateTime.Now.Date.ToString();
             }
+        }
+
+        public void LockCancelled()
+        {
+            check_Cancelled.Enabled = false;
         }
     }
 }

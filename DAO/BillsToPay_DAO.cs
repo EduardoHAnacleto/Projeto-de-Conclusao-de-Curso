@@ -275,15 +275,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                 };
-                                if (reader["paidDate"] == DBNull.Value || reader["paidDate"] == null)
-                                {
-                                    obj.PaidDate = null;
-                                    obj.Status = 0;
-                                }
-                                else
+                                if (reader["paidDate"] != DBNull.Value)
                                 {
                                     obj.PaidDate = Convert.ToDateTime(reader["paidDate"]);
                                     obj.Status = 1;
+                                }
+                                else
+                                {
+                                    Purchases_Controller purchController = new Purchases_Controller();
+                                    var purch = purchController.FindItemId(obj.BillModel, obj.BillNumber, obj.BillSeries, obj.Supplier.id);
+                                    if (purch.CancelledDate == null)
+                                    {
+                                        obj.PaidDate = null;
+                                        obj.Status = 0;
+                                    }
+                                    else
+                                    {
+                                        obj.Status = 2;
+                                    }
                                 }
                                 return obj;
                             }
@@ -477,6 +486,44 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             return dt;
         }
 
+        public bool CancelPurchaseBills(int billNum, int billModel, int billSeries, int supplierId)
+        {
+            bool status = false;
 
+            string sql = "UPDATE BILLSTOPAY SET billStatus = @STATUS, DATE_LAST_UPDATE = @DU " +
+                "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND SUPPLIER_ID = @SUPPLIERID; ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@STATUS", 2); // 2 == Cancelado
+                    command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
+                    command.Parameters.AddWithValue("@BNUMBER", billNum);
+                    command.Parameters.AddWithValue("@BSERIES", billSeries);
+                    command.Parameters.AddWithValue("@BMODEL", billSeries);
+                    command.Parameters.AddWithValue("@DU", DateTime.Now.Date);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Parcelas canceladas.");
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
     }
 }
