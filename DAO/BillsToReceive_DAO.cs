@@ -257,15 +257,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                             if (reader.Read())
                             {
                                 List<BillsToReceive> list = new List<BillsToReceive>();
-                                foreach (DataRow row in reader)
+                                foreach (var row in reader)
                                 {
                                     BillsToReceive obj = new BillsToReceive()
                                     {
                                         id = Convert.ToInt32(reader["sale_id"]),
                                         Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
                                         Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
-                                        IsPaid = Convert.ToBoolean(reader["isPaid"]),
-                                        PaidDate = Convert.ToDateTime(reader["paidDate"]),
+                                        //IsPaid = Convert.ToBoolean(reader["isPaid"]),
+                                        PaidDate = null,
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
                                         EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
                                         InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
@@ -275,7 +275,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                        CancelledDate = null
                                     };
+                                    if (reader["paidDate"] != DBNull.Value)
+                                    {
+                                        obj.PaidDate = Convert.ToDateTime(reader["paidDate"]);
+                                    }
+                                    if (reader["date_cancelled"] != DBNull.Value)
+                                    {
+                                        obj.CancelledDate = Convert.ToDateTime(reader["date_cancelled"]);
+                                    }
                                     list.Add(obj);
                                 }
                                 return list;

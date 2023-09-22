@@ -155,7 +155,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public BillsToReceive GetObject()
         {
-            if (!Utilities.IsNotSelected(base.item, "Linha"))
+            if (DGV_BillsToReceive.SelectedRows[0] != null)
             {
                 var obj = new BillsToReceive();
                 obj = _controller.FindSaleId(Convert.ToInt32(DGV_BillsToReceive.SelectedRows[0].Cells["SaleNumberBillsReceive"].Value)).FirstOrDefault();
