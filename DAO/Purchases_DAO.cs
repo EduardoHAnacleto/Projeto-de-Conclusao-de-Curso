@@ -89,8 +89,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
 
-                    command.Parameters.AddWithValue("@CANCELDATE", obj.CancelledDate);
-                    command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+                    command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
+                    command.Parameters.AddWithValue("@DU", DateTime.Now.Date) ;
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
@@ -98,6 +98,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         MessageBox.Show("Compra cancelada com sucesso.");
                         status = true;
                         status = _billsToPayController.CancelPurchaseBills(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
+                        if (status)
+                        {
+                            Products_Controller pController = new Products_Controller();
+                            foreach (var items in obj.PurchasedItems)
+                            {
+                                status = pController.RemoveStock(items.id, items.Quantity);
+                            }
+
+                        }
+
                     }
 
                 }
@@ -523,6 +533,54 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     {
                         MessageBox.Show("Register added with success!");
                         status = true;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
+        internal bool CancelPurchase(Purchases obj)
+        {
+            bool status = false;
+
+            string sql = "UPDATE PURCHASES SET CANCELLEDDATE = @CANCELDATE, DATE_LAST_UPDATE = @DU " +
+                " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                    command.Parameters.AddWithValue("@BNUM", obj.BillNumber);
+                    command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                    command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+
+                    command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
+                    command.Parameters.AddWithValue("@DU", DateTime.Now.Date);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Compra cancelada com sucesso.");
+                        status = true;
+                        if (status)
+                        {
+                            Products_Controller pController = new Products_Controller();
+                            foreach (var items in obj.PurchasedItems)
+                            {
+                                status = pController.RemoveStock(items.Product.id, items.Quantity);
+                            }
+                        }
                     }
                 }
                 catch (Exception ex)

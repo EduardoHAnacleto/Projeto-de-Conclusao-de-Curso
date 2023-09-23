@@ -125,6 +125,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1
 
             //PaymentConditions_DAO dao = new PaymentConditions_DAO();
             //dao.testando();
+            Products_DAO dao = new Products_DAO();
+            dao.RestoreStock(2, 1);
         }
 
         private void suppliersToolStripMenuItem_Click(object sender, EventArgs e)

@@ -223,7 +223,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     {
                         if (RightInstalment())
                         {
-                            _controller.UpdateItem(GetObject());
+                            var obj = GetObject();
+                            _controller.CancelPurchaseBills(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
+                            Purchases_Controller purchController = new Purchases_Controller();
+                            var purchase = purchController.FindItemId(obj.BillModel, obj.BillNumber, obj.BillSeries, obj.Supplier.id);
+                            purchController.CancelPurchase(purchase); //Cancela a compra
                             btn_Edit.Text = "&Alterar";
                             btn_NewSave.Enabled = false;
                             btn_SelectDelete.Enabled = false;

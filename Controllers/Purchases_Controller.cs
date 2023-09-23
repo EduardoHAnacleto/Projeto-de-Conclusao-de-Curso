@@ -84,5 +84,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             return _purchasesDAO.ConnectPurchaseBill(bill, purchase);
         }
+
+        internal bool CancelPurchase(Purchases purchase)
+        {
+            return _purchasesDAO.CancelPurchase(purchase);
+        }
     }
 }

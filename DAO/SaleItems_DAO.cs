@@ -437,5 +437,42 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             return dt;
         }
+
+        //public bool CancelSaleItems(int saleId)
+        //{
+        //    bool status = false;
+
+        //    string sql = "UPDATE SALEITEMS SET CANCEL_DATE = @CANCELDATE, DATE_LAST_UPDATE = @DU " +
+        //        "WHERE SALE_ID = @SALEID; ";
+
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        try
+        //        {
+        //            SqlCommand command = new SqlCommand(sql, connection);
+        //            command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date); // 2 == Cancelado
+        //            command.Parameters.AddWithValue("@SALEID", saleId);
+        //            command.Parameters.AddWithValue("@DU", DateTime.Now.Date);
+        //            connection.Open();
+        //            int i = command.ExecuteNonQuery();
+        //            if (i > 0)
+        //            {
+        //                MessageBox.Show("Items cancelados.");
+        //                status = true;
+        //            }
+
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Error : " + ex.Message);
+        //            return status;
+        //        }
+        //        finally
+        //        {
+        //            connection.Close();
+        //        }
+        //        return status;
+        //    }
+        //}
     }
 }

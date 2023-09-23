@@ -527,7 +527,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     }
                     else if (btn_new.Text == "Cancelar")
                     {
-                        if (CheckInstalmentsForCancel())
+                        var cancelledSale = _controller.FindItemId(Sale.id);
+                        if (CheckInstalmentsForCancel(cancelledSale.id))
                         {
                             string caption = "Confirme o cancelamento.";
                             string message = "Deseja cancelar a compra?";
@@ -537,20 +538,21 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                             DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
                             if (dialogResult == DialogResult.Yes)
                             {
-                                sale.CancelDate = DateTime.Now.Date;
+
+                                cancelledSale.CancelDate = DateTime.Now.Date;
                                 check_Active.Checked = false;
                                 check_Cancelled.Checked = true;
-                                sale.id = Sale.id;
-                                status = _controller.CancelSale(sale.id);
+                                //sale.id = Sale.id;
+                                status = _controller.CancelSale(cancelledSale);
                                 if (status)
                                 {
                                     status = _BTRController.CancelBills(sale.id);
                                     if (status)
                                     {
-                                        foreach (var item in sale.SaleItems)
-                                        {
-                                            _pController.RestoreStock(item);
-                                        }
+                                        //foreach (var item in cancelledSale.SaleItems)
+                                        //{
+                                        //    _pController.RestoreStock(item.Product.id, item.Quantity);
+                                        //}
                                         LockCamps();
                                     }
 
@@ -580,10 +582,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
         }
 
-        public bool CheckInstalmentsForCancel()
+        public bool CheckInstalmentsForCancel(int saleId)
         {
             var obj = this.GetObject();
-            var bills = _BTRController.FindSaleId(obj.id);
+            var bills = _BTRController.FindSaleId(saleId);
             if (bills != null)
             {
                 foreach (var b in bills)
@@ -637,9 +639,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         private List<SaleItems> GetSaleItems(int idSale)
         {
             List<SaleItems> list = new List<SaleItems>();
-            SaleItems saleItem = new SaleItems();
             foreach (DataGridViewRow row in DGV_SaleProducts.Rows)
             {
+                SaleItems saleItem = new SaleItems();
                 saleItem.id = idSale;
                 saleItem.Product = _pController.FindItemId((int)row.Cells["IdProduct"].Value);
                 saleItem.Quantity = Convert.ToInt32(row.Cells["QuantityProduct"].Value);
@@ -736,6 +738,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public void PopulateCamps(Sales sale)
         {
+            Sale = sale;
             PaymentConditions_Controller pcController = new PaymentConditions_Controller();
             Populated(true);
             SetFormToEdit();

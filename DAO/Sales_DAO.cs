@@ -163,11 +163,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     connection.Close();
                     if (i > 0)
                     {
+                        Products_Controller prodController = new Products_Controller();
                         foreach (SaleItems item in sale.SaleItems)
                         {
                             if (item != null)
                             {
                                 status = _saleItemsController.SaveItem(item);
+                                status = prodController.RemoveStock(item.Product.id, item.Quantity);
                                 if (!status)
                                 {
                                     MessageBox.Show("An error has occurred.");
@@ -688,8 +690,68 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     {
                         status = true;
                         MessageBox.Show("Venda Cancelada com sucesso!");
+                        if (status)
+                        {
+                            Products_Controller prodController = new Products_Controller();
+                            var obj = this.SelectFromDb(id);
+                            foreach (var prod in obj.SaleItems)
+                            {
+                                status = prodController.RestoreStock(prod.id, prod.Quantity);
+                            }
+                        }
                     }
+                }
+                catch (SqlException ex)
+                {
+                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+                    {
+                        Console.WriteLine(ex.Message);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return false;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
 
+        public bool CancelSale(Sales sale)
+        {
+            bool status = false;
+            string sql;
+            sql = "UPDATE SALES SET SALE_CANCEL_DATE = @CANCELDATE " +
+                  "WHERE ID_SALE = @ID ; ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", sale.id);
+                    command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
+
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    connection.Close();
+                    if (i > 0)
+                    {
+                        status = true;
+                        Products_Controller prodController = new Products_Controller();
+                        foreach (var prod in sale.SaleItems)
+                        {
+                            status = prodController.RestoreStock(prod.Product.id, prod.Quantity);
+                        }
+                        if (status)
+                        {
+                            MessageBox.Show("Venda Cancelada com sucesso!");
+                        }
+                    }
                 }
                 catch (SqlException ex)
                 {

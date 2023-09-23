@@ -419,7 +419,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
         }
 
-        public bool RestoreStock(SaleItems saleItems)
+        public bool RestoreStock( SaleItems saleItems)
         {
             bool status = false;
 
@@ -445,6 +445,78 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
+        public bool RestoreStock(int prodId, int qtd)
+        {
+            bool status = false;
+
+            string sql = "UPDATE PRODUCTS SET STOCK = STOCK + @RESTOCK " +
+                "WHERE ID_PRODUCT = @ID ; ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", prodId);
+                    command.Parameters.AddWithValue("@RESTOCK", qtd);
+
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Estoque adicionado!");
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
+        internal bool RemoveStock(int prodId, int qtd)
+        {
+            bool status = false;
+
+            string sql = "UPDATE PRODUCTS SET STOCK = STOCK - @RESTOCK " +
+                "WHERE ID_PRODUCT = @ID ; ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", prodId);
+                    command.Parameters.AddWithValue("@RESTOCK", qtd);
+
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Estoque removido!");
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro : " + ex.Message);
                     return status;
                 }
                 finally

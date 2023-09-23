@@ -371,6 +371,45 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             return dt;
         }
+
+        public bool CancelPurchaseItems(int bModel, int bNum, int bSeries, int supplierId)
+        {
+            bool status = false;
+
+            string sql = "UPDATE PURCHASEITEMS SET DATE_CANCELLED = @CANCELDATE, DATE_LAST_UPDATE = @DU" +
+                " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM, BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date); 
+                    command.Parameters.AddWithValue("@BMODEL", bModel);
+                    command.Parameters.AddWithValue("@BNUM", bNum);
+                    command.Parameters.AddWithValue("@BSERIES", bSeries);
+                    command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        MessageBox.Show("Items cancelados.");
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
     }
 }
 

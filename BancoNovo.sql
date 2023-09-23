@@ -282,6 +282,7 @@
         ITEM_COST decimal not null,
         DISCOUNT_CASH decimal not null,
         TOTAL_VALUE decimal not null,
+        CANCEL_DATE date,
         DATE_CREATION date not null,
         DATE_LAST_UPDATE date not null,
         primary key(SALE_ID, PRODUCT_ID)
@@ -344,6 +345,7 @@
         PRODUCT_ID int not null references PRODUCTS(id_product),
         QUANTITY int not null,
         PRODUCT_COST decimal not null,
+        CANCEL_DATE date,
         PURCHASE_PERCENTAGE decimal not null,
         DISCOUNT_CASH decimal not null,
         WEIGHTED_AVG decimal(10,4) not null,

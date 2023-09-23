@@ -78,5 +78,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _salesDAO.CancelSale(id);
         }
+
+        public bool CancelSale(Sales sale)
+        {
+            return _salesDAO.CancelSale(sale);
+        }
     }
 }

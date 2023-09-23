@@ -74,5 +74,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _productsDAO.RestoreStock(saleItems);
         }
+
+        public bool RestoreStock(int prodId, int qtd)
+        {
+            return _productsDAO.RestoreStock(prodId, qtd);
+        }
+
+        public bool RemoveStock(int prodId, int qtd)
+        {
+            return _productsDAO.RemoveStock(prodId, qtd);
+        }
+
     }
 }
