@@ -178,11 +178,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 try
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM BILLSTORECEIVE WHERE SALE_ID = @SALEID AND INSTALMENTNUMBER = @IQTD ; ";
+                    string sql = "SELECT * FROM BILLSTORECEIVE WHERE SALE_ID = @SALEID AND INSTALMENTNUMBER = @INSTALMENT ; ";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
                         command.Parameters.AddWithValue("@SALEID", saleId);
-                        command.Parameters.AddWithValue("@IQTD", instalmentNum);
+                        command.Parameters.AddWithValue("@INSTALMENT", instalmentNum);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
                             if (reader.Read())

@@ -154,10 +154,16 @@
             // 
             // edt_instalmentId
             // 
+            this.edt_instalmentId.Enabled = false;
             this.edt_instalmentId.Location = new System.Drawing.Point(6, 35);
             this.edt_instalmentId.Name = "edt_instalmentId";
             this.edt_instalmentId.Size = new System.Drawing.Size(39, 20);
             this.edt_instalmentId.TabIndex = 26;
+            this.edt_instalmentId.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
             // btn_AddInstalments
             // 
@@ -167,6 +173,7 @@
             this.btn_AddInstalments.TabIndex = 25;
             this.btn_AddInstalments.Text = "Adicionar";
             this.btn_AddInstalments.UseVisualStyleBackColor = true;
+            this.btn_AddInstalments.Click += new System.EventHandler(this.btn_AddInstalments_Click);
             // 
             // label1
             // 
@@ -212,6 +219,7 @@
             // 
             // edt_clientId
             // 
+            this.edt_clientId.Enabled = false;
             this.edt_clientId.Location = new System.Drawing.Point(5, 32);
             this.edt_clientId.Name = "edt_clientId";
             this.edt_clientId.Size = new System.Drawing.Size(42, 20);
@@ -329,7 +337,6 @@
             this.gbox_isPaid.Controls.Add(this.check_Cancelled);
             this.gbox_isPaid.Controls.Add(this.check_Active);
             this.gbox_isPaid.Controls.Add(this.check_Paid);
-            this.gbox_isPaid.Enabled = false;
             this.gbox_isPaid.Location = new System.Drawing.Point(576, 8);
             this.gbox_isPaid.Name = "gbox_isPaid";
             this.gbox_isPaid.Size = new System.Drawing.Size(84, 79);
@@ -390,6 +397,7 @@
             // 
             // edt_saleNumber
             // 
+            this.edt_saleNumber.Enabled = false;
             this.edt_saleNumber.Location = new System.Drawing.Point(263, 113);
             this.edt_saleNumber.Maximum = new decimal(new int[] {
             9999999,

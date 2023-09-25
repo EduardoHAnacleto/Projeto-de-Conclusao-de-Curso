@@ -57,35 +57,47 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                             dueDate = "";
                         }
                         DGV_BillsToReceive.Rows[i].Cells["DueDateBillsReceive"].Value = dueDate;
-                        DGV_BillsToReceive.Rows[i].Cells["StatusBillsReceive"].Value = dr["isPaid"].ToString();
+                        if (dr["date_cancelled"] != DBNull.Value)
+                        {
+                            DGV_BillsToReceive.Rows[i].Cells["StatusBillsReceive"].Value = "CANCELADO";
+                        }
+                        else if (dr["paidDate"] != DBNull.Value)
+                        {
+                            DGV_BillsToReceive.Rows[i].Cells["StatusBillsReceive"].Value = "PAGO";
+                        }
+                        else
+                        {
+                            DGV_BillsToReceive.Rows[i].Cells["StatusBillsReceive"].Value = "ATIVO";
+                        }
+
                     }
                     i++;
                 }
             }
-            UpdateDGVBillsToReceiveColumnItem(dt);
+            //UpdateDGVBillsToReceiveColumnItem();
         }
 
-        public void UpdateDGVBillsToReceiveColumnItem(DataTable dt) //Formata campo Status para PAID ou ACTIVE
-        {
-            foreach (DataGridViewRow row in DGV_BillsToReceive.Rows)
-            {
-                if (row != null)
-                {
-                    if (Convert.ToInt32(row.Cells["StatusBillsReceive"].Value) == 1)
-                    {
-                        row.Cells["StatusBillsReceive"].Value = "PAGO";
-                    }
-                    else if (Convert.ToInt32(row.Cells["StatusBillsReceive"].Value) == 0)
-                    {
-                        row.Cells["StatusBillsReceive"].Value = "ATIVO";
-                    }
-                    else
-                    {
-                        row.Cells["StatusBillsReceive"].Value = "EM ESPERA";
-                    }
-                }
-            }
-        }
+        //public void UpdateDGVBillsToReceiveColumnItem() //Formata campo Status para PAID ou ACTIVE
+        //{
+        //    foreach (DataGridViewRow row in DGV_BillsToReceive.Rows)
+        //    {
+        //        if (row != null)
+        //        {
+        //            if (Convert.ToInt32(row.Cells["StatusBillsReceive"].Value) == 1)
+        //            {
+        //                row.Cells["StatusBillsReceive"].Value = "PAGO";
+        //            }
+        //            else if (Convert.ToInt32(row.Cells["StatusBillsReceive"].Value) == 0)
+        //            {
+        //                row.Cells["StatusBillsReceive"].Value = "ATIVO";
+        //            }
+        //            else if (Convert.ToInt32(row.Cells["StatusBillsReceive"].Value) == 2)
+        //            {
+        //                row.Cells["StatusBillsReceive"].Value = "CANCELADO";
+        //            }
+        //        }
+        //    }
+        //}
 
         private void btn_Find_Click(object sender, EventArgs e)
         {
@@ -94,40 +106,45 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void FindClientBills()
         {
+            bool found = false;
+            DGV_BillsToReceive.Rows.Clear();
             if (edt_clientName.Text != string.Empty)
             {
-                bool found = false;
-                foreach (DataGridViewRow row in DGV_BillsToReceive.Rows)
+                SetBillsToReceiveDataSourceToDGV();
+                for (int i = DGV_BillsToReceive.Rows.Count-1; i >= 0; i--)
                 {
+                    DataGridViewRow row = DGV_BillsToReceive.Rows[i];
                     if (row.Cells["ClientName"].Value.ToString() != edt_clientName.Text)
                     {
-                        DGV_BillsToReceive.Rows.RemoveAt(row.Index);
+                        DGV_BillsToReceive.Rows.Remove(row);
                     }
                     else
                     {
                         found = true;
                     }
-                }
-                if (!found)
+                } 
+            }
+            if (!found)
+            {
+                if (Utilities.AskToFind())
                 {
-                    if (Utilities.AskToFind())
+                    SetBillsToReceiveDataSourceToDGV();
+                    Frm_Find_Clients frmFindClientes = new Frm_Find_Clients();
+                    frmFindClientes.hasFather = true;
+                    frmFindClientes.ShowDialog();
+                    if (!frmFindClientes.ActiveControl.ContainsFocus)
                     {
-                        Frm_Find_Clients frmFindClientes = new Frm_Find_Clients();
-                        frmFindClientes.hasFather = true;
-                        frmFindClientes.ShowDialog();
-                        if (!frmFindClientes.ActiveControl.ContainsFocus)
+                        Clients client = new Clients();
+                        client = frmFindClientes.GetObject();
+                        if (client != null)
                         {
-                            Clients client = new Clients();
-                            client = frmFindClientes.GetObject();
-                            if (client != null)
-                            {
-                                edt_clientName.Text = client.name;
-                            }
-                            frmFindClientes.Close();
-                            FindClientBills();
+                            edt_clientName.Text = client.name;
                         }
+                        frmFindClientes.Close();
+                        FindClientBills();
                     }
                 }
+                
             }
         }
 
@@ -157,8 +174,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (DGV_BillsToReceive.SelectedRows[0] != null)
             {
-                var obj = new BillsToReceive();
-                obj = _controller.FindSaleId(Convert.ToInt32(DGV_BillsToReceive.SelectedRows[0].Cells["SaleNumberBillsReceive"].Value)).FirstOrDefault();
+                var instalment = Convert.ToInt32(DGV_BillsToReceive.SelectedRows[0].Cells["InstalmentNumber"].Value);
+                var saleId = Convert.ToInt32(DGV_BillsToReceive.SelectedRows[0].Cells["SaleNumberBillsReceive"].Value);
+                var obj = _controller.FindItemId(saleId, instalment);
                 return obj;
             }
             return null;
@@ -175,7 +193,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public override void NewObject()
         {
             Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive();
-            frmBillsToReceive.Populated(false);
+            //frmBillsToReceive.Populated(false);
             frmBillsToReceive.ShowDialog();
             this.SetDataSourceToDGV();
         }

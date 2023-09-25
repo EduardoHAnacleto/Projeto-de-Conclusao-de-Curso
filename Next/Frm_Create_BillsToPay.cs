@@ -325,11 +325,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_instalmentNumber.Value = bill.InstalmentNumber;
             lbl_CreationDate.Text = bill.dateOfCreation.ToString();
             
-            if (bill.DueDate > DateTime.Today)
+            if (bill.DueDate < DateTime.Today)
             {
                 edt_totalValue.Value = bill.TotalValue - (bill.TotalValue * bill.PaymentCondition.discountPerc/100);
             }
-            else if (bill.DueDate < DateTime.Today) 
+            else if (bill.DueDate > DateTime.Today) 
             {
                 var obj = _controller.FindItemId(bill.BillNumber, bill.BillModel, bill.BillSeries, bill.InstalmentNumber, bill.Supplier.id);
                 edt_totalValue.Value = bill.TotalValue + obj.PaymentCondition.fineValue;

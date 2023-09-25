@@ -46,12 +46,21 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             var obj = new BillsToReceive();
             obj.Client = _cController.FindItemId(Convert.ToInt32(edt_clientId.Value));
-            obj.Sale = _salesController.FindItemId(Convert.ToInt32(edt_saleNumber.Value));
-            obj.PaymentMethod = _payMethodController.FindItemName(cbox_paymentMethod.SelectedItem.ToString());
+            if (edt_saleNumber.Value != 0)
+            {
+                obj.Sale = _salesController.FindItemId(Convert.ToInt32(edt_saleNumber.Value));
+            }
+            else
+            {
+                obj.Sale = new Sales();
+                obj.Sale.id = 0;
+            }
+
+            obj.PaymentMethod = _payMethodController.FindItemName(DGV_Instalments.Rows[0].Cells["PaymentMethod_Name"].Value.ToString());
             obj.InstalmentNumber = (int)edt_instalmentId.Value;
-            obj.InstalmentValue = edt_instalmentValue.Value;
+            obj.InstalmentValue = Convert.ToDecimal(DGV_Instalments.Rows[0].Cells["Value"].Value);
             obj.EmissionDate = datePicker_emission.Value;
-            obj.DueDate = datePicker_due.Value;
+            obj.DueDate = Convert.ToDateTime(DGV_Instalments.Rows[0].Cells["DueDate"].Value);
             obj.InstalmentsQtd = DGV_Instalments.Rows.Count;
 
             if (check_Active.Checked)
@@ -88,11 +97,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_instalmentId.Value = obj.InstalmentNumber;
             edt_instalmentValue.Value = (decimal)obj.InstalmentValue;
 
-            if (obj.DueDate > DateTime.Today)
+            if (obj.DueDate < DateTime.Today)
             {
                 edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue - (obj.InstalmentValue * obj.Sale.PaymentCondition.discountPerc / 100));
             }
-            else
+            else if (obj.DueDate > DateTime.Today)
             {
                 edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue + obj.Sale.PaymentCondition.fineValue);
             }
@@ -132,6 +141,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public void PopulateDGV(BillsToReceive obj)
         {
+            DGV_Instalments.Rows.Clear();
             if (obj != null)
             {
                 string dueDate;
@@ -150,8 +160,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public override void LockCamps()
         {
             gbox_client.Enabled = false;
-            gbox_billDates.Enabled = false;
-            gbox_billInstalment.Enabled = false;
+            datePicker_due.Enabled = false;
+            datePicker_emission.Enabled = false;
+            datePicker_PaidDate.Enabled = false;
+            edt_instalmentId.Enabled = false;
+            edt_instalmentValue.Enabled = false;
             DGV_Instalments.Enabled = false;
             gbox_isPaid.Enabled = false;
             edt_saleNumber.Enabled = false;
@@ -189,37 +202,40 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public override void Save()
         {
-            if (CheckCamps())
+            LockCamps();
+            try
             {
-                LockCamps();
-                try
+                if (btn_Edit.Text == "&Alterar")
                 {
-                    if (btn_Edit.Text == "&Alterar")
+                    if (CheckCamps())
                     {
                         _controller.SaveItem(this.GetObject());
                         ClearCamps();
-                        Populated(false);
-                    }
-                    else if (btn_Edit.Text == "Cancelar")
-                    {
-                        _controller.UpdateItem(GetObject());
-                        btn_Edit.Text = "&Alterar";
-                        btn_NewSave.Enabled = false;
-                        btn_SelectDelete.Enabled = false;
+                        UnlockCamps();
                     }
                 }
-                catch (Exception ex)
+                else if (btn_Edit.Text == "Cancelar")
                 {
-                    throw new Exception(ex.Message);
+                    _controller.UpdateItem(GetObject());
+                    btn_Edit.Text = "&Alterar";
+                    btn_NewSave.Enabled = false;
+                    btn_SelectDelete.Enabled = false;
                 }
             }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+
         }
 
         public override void EditObject() //EditObject
         {
             if (btn_Edit.Text == "&Alterar")
             {
-                UnlockCamps();
+                edt_instalmentValue.Enabled = true;
+                gbox_isPaid.Enabled = true;
+                datePicker_PaidDate.Enabled = true;
                 btn_Edit.Text = "Cancelar";
                 btn_NewSave.Enabled = true;
                 btn_SelectDelete.Enabled = true;
@@ -253,27 +269,51 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public override bool CheckCamps() //Validacao de campos
         {
-            if (Utilities.HasOnlyLetters(edt_clientName.Text, "Nome do Cliente"))
+            if (edt_clientId.Value == 0)
             {
+                string message = "Data de pagamento não pode ser menor que a da emissão.";
+                string caption = "Data de pagamento inválida.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
                 edt_clientName.Focus();
                 return false;
             }
-            else if (!Utilities.IsDouble(edt_instalmentValue.Text, "Valor da Parcela"))
+            else if (datePicker_emission.Value <= datePicker_emission.MinDate)  //testar
             {
-                edt_instalmentValue.Focus();
+                string message = "Data de emissão deve ser ao mínimo 30 dias atrás.";
+                string caption = "Data de emissão inválida.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                datePicker_emission.Focus();
                 return false;
             }
-            else if (Utilities.IsNotSelected(cbox_paymentMethod.SelectedItem, "Payment Method"))
+            else if (!check_Active.Checked && !check_Cancelled.Checked && !check_Paid.Checked)
             {
-                cbox_paymentMethod.Focus();
+                string message = "Status da compra deve ser selecionado.";
+                string caption = "Status não selecionado.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                gbox_isPaid.Focus();
                 return false;
             }
-            else if (Utilities.HasOnlySpaces(datePicker_due.Text, "Date Movements"))  //testar
+            if (datePicker_emission.Value < DateTime.Today.Date)
             {
-                //gbox_dates.Focus();
-                return false;
+                TimeSpan diff = DateTime.Now - datePicker_emission.Value;
+                if (diff.TotalDays < 30)
+                {
+                    string message = "Data de emissão deve ser ao mínimo 30 dias atrás.";
+                    string caption = "Data de emissão inválida.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    datePicker_emission.Focus();
+                    return false;
+                }
             }
-            else return true;
+            return true;
         }
 
         private void check_Paid_CheckedChanged(object sender, EventArgs e)
@@ -284,6 +324,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 check_Cancelled.Checked = false;
                 datePicker_PaidDate.Value = DateTime.Now;
                 datePicker_PaidDate.Visible = true;
+                lbl_Sign_LastUpdate.Text = "Atualizado em : ";
+                lbl_LastUpdate.Text = DateTime.Now.ToShortDateString();
             }
         }
 
@@ -294,6 +336,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 check_Paid.Checked = false;
                 check_Cancelled.Checked = false;
                 datePicker_PaidDate.Visible = false;
+                lbl_Sign_LastUpdate.Text = "Atualizado em : ";
+                lbl_LastUpdate.Text = DateTime.Now.ToShortDateString();
             }
         }
 
@@ -349,6 +393,41 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 check_Cancelled.Checked = false;
                 datePicker_PaidDate.Value = DateTime.Now;
                 datePicker_PaidDate.Visible = true;
+            }
+        }
+
+        private void btn_AddInstalments_Click(object sender, EventArgs e)
+        {
+            AddInstalmentToDGV();
+        }
+
+        private void AddInstalmentToDGV()
+        {
+            if (edt_instalmentValue.Value > 0)
+            {
+                DGV_Instalments.Rows.Clear();
+                DGV_Instalments.Rows.Add(
+                    1,
+                    datePicker_due.Value,
+                    edt_instalmentValue.Value,
+                    cbox_paymentMethod.SelectedItem.ToString()
+                    );
+            }
+            else if (edt_instalmentValue.Value <= 0)
+            {
+                string message = "Valor da parcela deve ser maior que 0.";
+                string caption = "Valor da parcela inválida.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+            }
+            else if (datePicker_due.Value < DateTime.Today.Date)
+            {
+                string message = "Data de vencimento deve ser hoje ou maior.";
+                string caption = "Data de vencimento inválida.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
             }
         }
     }
