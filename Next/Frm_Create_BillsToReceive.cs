@@ -95,16 +95,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_clientId.Value = obj.Client.id;
             edt_clientName.Text = obj.Client.name;
             edt_instalmentId.Value = obj.InstalmentNumber;
-            edt_instalmentValue.Value = (decimal)obj.InstalmentValue;
-
-            if (obj.DueDate < DateTime.Today)
-            {
-                edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue - (obj.InstalmentValue * obj.Sale.PaymentCondition.discountPerc / 100));
-            }
-            else if (obj.DueDate > DateTime.Today)
-            {
-                edt_instalmentValue.Value = Convert.ToDecimal(obj.InstalmentValue + obj.Sale.PaymentCondition.fineValue);
-            }
 
 
             edt_saleNumber.Value = obj.Sale.id;
@@ -135,6 +125,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 lbl_Sign_LastUpdate.Text = "Cancelado em : ";
                 btn_NewSave.Visible = false;
                 lbl_LastUpdate.Text = Convert.ToDateTime( obj.CancelledDate).ToShortDateString();
+            }
+
+            if (obj.Sale.id <= 1 || obj.PaidDate.HasValue)
+            {
+                edt_instalmentValue.Value = (decimal)obj.InstalmentValue;
+            }
+            else
+            {
+                edt_instalmentValue.Value = PaymentConditions.CalcValue(obj.InstalmentValue, obj.PaymentCondition, obj.DueDate);
             }
             PopulateDGV(obj);
         }

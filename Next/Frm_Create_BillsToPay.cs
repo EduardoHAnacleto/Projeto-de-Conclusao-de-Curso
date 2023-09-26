@@ -324,21 +324,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_BillSeries.Value = bill.BillSeries;
             edt_instalmentNumber.Value = bill.InstalmentNumber;
             lbl_CreationDate.Text = bill.dateOfCreation.ToString();
-            
-            if (bill.DueDate < DateTime.Today)
-            {
-                edt_totalValue.Value = bill.TotalValue - (bill.TotalValue * bill.PaymentCondition.discountPerc/100);
-            }
-            else if (bill.DueDate > DateTime.Today) 
-            {
-                var obj = _controller.FindItemId(bill.BillNumber, bill.BillModel, bill.BillSeries, bill.InstalmentNumber, bill.Supplier.id);
-                edt_totalValue.Value = bill.TotalValue + obj.PaymentCondition.fineValue;
-            }
-            else
-            {
-                edt_totalValue.Value = bill.TotalValue;
-            }
-            
+
+      
 
             cbox_payMethod.SelectedItem = bill.PaymentMethod.paymentMethod;
             datePicker_due.Value = bill.DueDate;
@@ -377,6 +364,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 btn_Edit.Visible = false;
                 check_Cancelled.Checked = true;
                 lbl_Sign_LastUpdate.Text = "Cancelado em :";
+            }
+
+            if (bill.Supplier.id <= 1 || bill.PaidDate.HasValue)
+            {
+                edt_totalValue.Value = (decimal)bill.TotalValue;
+            }
+            else
+            {
+                var obj = _controller.FindItemId(bill.BillNumber, bill.BillModel, bill.BillSeries, bill.InstalmentNumber, bill.Supplier.id);
+                edt_totalValue.Value = PaymentConditions.CalcValue(bill.TotalValue, obj.PaymentCondition, bill.DueDate);
             }
         }
 
