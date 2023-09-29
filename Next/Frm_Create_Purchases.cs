@@ -440,6 +440,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_User.Enabled = false;
             gbox_products.Enabled = false;
             gbox_billInfo.Enabled = false;
+            gbox_info.Enabled = false;
             btn_Save.Enabled = false;
             btn_new.Enabled = false;
             btn_FindSup.Enabled = false;
@@ -448,6 +449,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void UnlockCamps()
         {
+            gbox_info.Enabled = true;
             gbox_date.Enabled = true;
             btn_new.Enabled = true;
             btn_findSupplier.Enabled = true;

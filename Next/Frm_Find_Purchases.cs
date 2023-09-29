@@ -68,7 +68,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         billMod,
                         billSer,
                         supplierName,
-                        idUser,
                         totalValue,
                         emissionDate.ToShortDateString(),
                         cancelDate

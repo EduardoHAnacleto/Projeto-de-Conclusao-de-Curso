@@ -358,11 +358,13 @@
             // check_Active
             // 
             this.check_Active.AutoSize = true;
+            this.check_Active.Checked = true;
+            this.check_Active.CheckState = System.Windows.Forms.CheckState.Checked;
             this.check_Active.Location = new System.Drawing.Point(6, 14);
             this.check_Active.Name = "check_Active";
-            this.check_Active.Size = new System.Drawing.Size(75, 17);
+            this.check_Active.Size = new System.Drawing.Size(50, 17);
             this.check_Active.TabIndex = 11;
-            this.check_Active.Text = "Em Aberto";
+            this.check_Active.Text = "Ativo";
             this.check_Active.UseVisualStyleBackColor = true;
             this.check_Active.CheckedChanged += new System.EventHandler(this.check_Active_CheckedChanged);
             // 

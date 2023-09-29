@@ -23,6 +23,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_instalmentValue.Controls[0].Visible = false;
             PopulateComboBox();
             btn_SelectDelete.Visible = false;
+            edt_id.Visible = false;
+            lbl_id.Visible = false;
+            check_Cancelled.Enabled = false;
         }
 
         private readonly BillsToReceive_Controller _controller = new BillsToReceive_Controller();
@@ -85,6 +88,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public void PopulateCamps(BillsToReceive obj)
         {
+            check_Cancelled.Enabled = true;
+            _auxObj = obj;
             if (obj.dateOfLastUpdate != null)
             {
                 lbl_LastUpdate.Visible = true;
@@ -134,6 +139,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             else
             {
                 edt_instalmentValue.Value = PaymentConditions.CalcValue(obj.InstalmentValue, obj.PaymentCondition, obj.DueDate);
+                obj.InstalmentValue = edt_instalmentValue.Value;
             }
             PopulateDGV(obj);
         }
@@ -238,7 +244,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 btn_Edit.Text = "Cancelar";
                 btn_NewSave.Enabled = true;
                 btn_SelectDelete.Enabled = true;
-                _auxObj = GetObject();
             }
             else if (btn_Edit.Text == "Cancelar")
             {
