@@ -110,6 +110,7 @@
             this.edt_productSalePrice.Size = new System.Drawing.Size(73, 20);
             this.edt_productSalePrice.TabIndex = 27;
             this.edt_productSalePrice.Text = "0";
+            this.edt_productSalePrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_productName
             // 
@@ -179,6 +180,7 @@
             this.edt_stock.Name = "edt_stock";
             this.edt_stock.Size = new System.Drawing.Size(56, 20);
             this.edt_stock.TabIndex = 33;
+            this.edt_stock.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_stock
             // 
@@ -211,6 +213,7 @@
             this.edt_ProfitPerc.Name = "edt_ProfitPerc";
             this.edt_ProfitPerc.Size = new System.Drawing.Size(68, 20);
             this.edt_ProfitPerc.TabIndex = 37;
+            this.edt_ProfitPerc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_ProfitPerc.ValueChanged += new System.EventHandler(this.edt_ProfitPerc_ValueChanged);
             // 
             // lbl_profitPerc
@@ -235,6 +238,7 @@
             this.edt_productCost.Name = "edt_productCost";
             this.edt_productCost.Size = new System.Drawing.Size(60, 20);
             this.edt_productCost.TabIndex = 39;
+            this.edt_productCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_barCode
             // 
@@ -243,6 +247,7 @@
             this.edt_barCode.Name = "edt_barCode";
             this.edt_barCode.Size = new System.Drawing.Size(250, 20);
             this.edt_barCode.TabIndex = 41;
+            this.edt_barCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Frm_Create_Products
             // 

@@ -282,5 +282,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 catch { }
             }
         }
+
+        private void medt_regNumber_Leave(object sender, EventArgs e)
+        {
+            if (!Validator.IsCpf(Utilities.RemoveRegMask(medt_regNumber.Text)) || !Validator.IsCnpj(Utilities.RemoveRegMask(medt_regNumber.Text)))
+            {
+                string message = "CPF/CNPJ inválido.";
+                string caption = "Campo é requerido.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+            }
+        }
     }
 }

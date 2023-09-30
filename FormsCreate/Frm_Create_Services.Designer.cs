@@ -80,6 +80,7 @@
             this.edt_serviceValue.Name = "edt_serviceValue";
             this.edt_serviceValue.Size = new System.Drawing.Size(53, 20);
             this.edt_serviceValue.TabIndex = 19;
+            this.edt_serviceValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Frm_Create_Services
             // 

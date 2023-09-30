@@ -55,13 +55,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     connection.Close();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register added with success!");
                         status = true;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -116,7 +115,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -165,7 +164,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -214,7 +213,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -266,7 +265,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -304,7 +303,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -330,7 +329,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register erased with success!");
+                        MessageBox.Show("Registro apagado com sucesso.");
                         status = true;
                     }
 
@@ -363,7 +362,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -393,14 +392,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Items cancelados.");
                         status = true;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally

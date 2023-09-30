@@ -111,6 +111,8 @@
             this.edt_stateInscription.Name = "edt_stateInscription";
             this.edt_stateInscription.Size = new System.Drawing.Size(99, 20);
             this.edt_stateInscription.TabIndex = 33;
+            this.edt_stateInscription.Text = " ";
+            this.edt_stateInscription.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_stateInscription
             // 

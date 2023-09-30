@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using System.Configuration;
 using System.Drawing.Drawing2D;
+using Microsoft.Win32;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 {
@@ -55,13 +56,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     connection.Close();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register added with success!");
+                        MessageBox.Show("Compra salva com sucesso.");
                         status = true;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -94,8 +95,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
-                    {
-                        MessageBox.Show("Compra cancelada com sucesso.");
+                    {                                           
                         status = true;
                         status = _billsToPayController.CancelPurchaseBills(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
                         if (status)
@@ -105,7 +105,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                             {
                                 status = pController.RemoveStock(items.id, items.Quantity);
                             }
-
+                        }
+                        if (status)
+                        {
+                            MessageBox.Show("Compra cancelada com sucesso.");
                         }
 
                     }
@@ -113,7 +116,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -141,14 +144,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register erased with success!");
+                        MessageBox.Show("Registro apagado com sucesso.");
                         status = true;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -205,7 +208,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                 }
                 finally
                 {
@@ -245,7 +248,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -284,7 +287,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -323,7 +326,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -362,7 +365,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -401,7 +404,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -440,7 +443,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -477,7 +480,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -501,7 +504,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -531,13 +534,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     connection.Close();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register added with success!");
                         status = true;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -571,7 +573,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Compra cancelada com sucesso.");
                         status = true;
                         if (status)
                         {
@@ -581,11 +582,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 status = pController.RemoveStock(items.Product.id, items.Quantity);
                             }
                         }
+                        if (status)
+                        {
+                            MessageBox.Show("Compra cancelada com sucesso.");
+                        }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally

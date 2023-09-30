@@ -76,7 +76,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 Utilities.Msgbox(message, caption, buttons, icon);
-                edt_BrandName.Focus();
                 return false;
             }
             else return true;
@@ -153,6 +152,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 }
             }
             UnlockCamps();
+        }
+
+        private void edt_BrandName_Leave(object sender, EventArgs e)
+        {
+            CheckCamps();
         }
     }
 }

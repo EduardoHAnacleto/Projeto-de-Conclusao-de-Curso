@@ -188,6 +188,7 @@
             this.edt_billSeries.Name = "edt_billSeries";
             this.edt_billSeries.Size = new System.Drawing.Size(75, 20);
             this.edt_billSeries.TabIndex = 18;
+            this.edt_billSeries.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_billModel
             // 
@@ -200,6 +201,7 @@
             this.edt_billModel.Name = "edt_billModel";
             this.edt_billModel.Size = new System.Drawing.Size(67, 20);
             this.edt_billModel.TabIndex = 17;
+            this.edt_billModel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_billNumber
             // 
@@ -212,6 +214,7 @@
             this.edt_billNumber.Name = "edt_billNumber";
             this.edt_billNumber.Size = new System.Drawing.Size(70, 20);
             this.edt_billNumber.TabIndex = 16;
+            this.edt_billNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Frm_Find_Purchases
             // 

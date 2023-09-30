@@ -175,6 +175,7 @@
             this.edt_weeklyHours.Name = "edt_weeklyHours";
             this.edt_weeklyHours.Size = new System.Drawing.Size(48, 20);
             this.edt_weeklyHours.TabIndex = 35;
+            this.edt_weeklyHours.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_baseSalary
             // 
@@ -184,6 +185,7 @@
             this.edt_baseSalary.Name = "edt_baseSalary";
             this.edt_baseSalary.Size = new System.Drawing.Size(60, 20);
             this.edt_baseSalary.TabIndex = 33;
+            this.edt_baseSalary.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // gbox_jobInfo
             // 

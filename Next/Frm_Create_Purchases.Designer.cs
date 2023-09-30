@@ -303,6 +303,7 @@
             this.edt_prodDiscCash.Name = "edt_prodDiscCash";
             this.edt_prodDiscCash.Size = new System.Drawing.Size(58, 20);
             this.edt_prodDiscCash.TabIndex = 14;
+            this.edt_prodDiscCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btn_AddProduct
             // 
@@ -371,6 +372,7 @@
             this.edt_prodUnCost.Name = "edt_prodUnCost";
             this.edt_prodUnCost.Size = new System.Drawing.Size(56, 20);
             this.edt_prodUnCost.TabIndex = 6;
+            this.edt_prodUnCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_prodQtd
             // 
@@ -388,6 +390,7 @@
             this.edt_prodQtd.Name = "edt_prodQtd";
             this.edt_prodQtd.Size = new System.Drawing.Size(63, 20);
             this.edt_prodQtd.TabIndex = 5;
+            this.edt_prodQtd.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_prodQtd.Value = new decimal(new int[] {
             1,
             0,
@@ -405,6 +408,7 @@
             this.edt_prodBarCode.Name = "edt_prodBarCode";
             this.edt_prodBarCode.Size = new System.Drawing.Size(179, 20);
             this.edt_prodBarCode.TabIndex = 4;
+            this.edt_prodBarCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_productName
             // 
@@ -433,6 +437,7 @@
             this.edt_prodId.Name = "edt_prodId";
             this.edt_prodId.Size = new System.Drawing.Size(60, 20);
             this.edt_prodId.TabIndex = 1;
+            this.edt_prodId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // gbox_User
             // 
@@ -459,6 +464,7 @@
             this.edt_userId.Name = "edt_userId";
             this.edt_userId.Size = new System.Drawing.Size(46, 20);
             this.edt_userId.TabIndex = 3;
+            this.edt_userId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_userName
             // 
@@ -640,6 +646,7 @@
             this.edt_transportFee.Name = "edt_transportFee";
             this.edt_transportFee.Size = new System.Drawing.Size(84, 20);
             this.edt_transportFee.TabIndex = 32;
+            this.edt_transportFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_transportFee.ValueChanged += new System.EventHandler(this.edt_transportFee_ValueChanged);
             // 
             // lbl_transportFee
@@ -663,6 +670,7 @@
             this.edt_supplierId.Name = "edt_supplierId";
             this.edt_supplierId.Size = new System.Drawing.Size(38, 20);
             this.edt_supplierId.TabIndex = 34;
+            this.edt_supplierId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_supplierId
             // 
@@ -694,6 +702,7 @@
             this.edt_extraExpenses.Name = "edt_extraExpenses";
             this.edt_extraExpenses.Size = new System.Drawing.Size(77, 20);
             this.edt_extraExpenses.TabIndex = 39;
+            this.edt_extraExpenses.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_extraExpenses.ValueChanged += new System.EventHandler(this.edt_extraExpenses_ValueChanged);
             // 
             // edt_insurance
@@ -708,6 +717,7 @@
             this.edt_insurance.Name = "edt_insurance";
             this.edt_insurance.Size = new System.Drawing.Size(77, 20);
             this.edt_insurance.TabIndex = 40;
+            this.edt_insurance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_insurance.ValueChanged += new System.EventHandler(this.edt_insurance_ValueChanged);
             // 
             // lbl_insurance
@@ -760,6 +770,7 @@
             this.gbox_supplier.TabIndex = 46;
             this.gbox_supplier.TabStop = false;
             this.gbox_supplier.Text = "* Fornecedor";
+            this.gbox_supplier.Leave += new System.EventHandler(this.gbox_supplier_Leave);
             // 
             // gbox_billInfo
             // 
@@ -787,6 +798,7 @@
             this.edt_billSeries.Name = "edt_billSeries";
             this.edt_billSeries.Size = new System.Drawing.Size(58, 20);
             this.edt_billSeries.TabIndex = 52;
+            this.edt_billSeries.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_billModel
             // 
@@ -799,6 +811,7 @@
             this.edt_billModel.Name = "edt_billModel";
             this.edt_billModel.Size = new System.Drawing.Size(58, 20);
             this.edt_billModel.TabIndex = 51;
+            this.edt_billModel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_billNumber
             // 
@@ -811,6 +824,7 @@
             this.edt_billNumber.Name = "edt_billNumber";
             this.edt_billNumber.Size = new System.Drawing.Size(58, 20);
             this.edt_billNumber.TabIndex = 50;
+            this.edt_billNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_billNumber
             // 
@@ -932,6 +946,7 @@
             this.edt_payCondId.Name = "edt_payCondId";
             this.edt_payCondId.Size = new System.Drawing.Size(39, 20);
             this.edt_payCondId.TabIndex = 55;
+            this.edt_payCondId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_payCondName
             // 

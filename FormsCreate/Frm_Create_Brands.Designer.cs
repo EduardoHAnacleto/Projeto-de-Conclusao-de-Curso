@@ -65,6 +65,7 @@
             this.edt_BrandName.Name = "edt_BrandName";
             this.edt_BrandName.Size = new System.Drawing.Size(222, 20);
             this.edt_BrandName.TabIndex = 15;
+            this.edt_BrandName.Leave += new System.EventHandler(this.edt_BrandName_Leave);
             // 
             // Frm_Create_Brands
             // 

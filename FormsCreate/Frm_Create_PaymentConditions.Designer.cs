@@ -42,6 +42,10 @@
             this.btn_AddInstalment = new System.Windows.Forms.Button();
             this.cbox_payMethods = new System.Windows.Forms.ComboBox();
             this.DGV_Instalments = new System.Windows.Forms.DataGridView();
+            this.InstalmentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IntalmentDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InstalmentPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.InstalmentPayMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_paymentDiscount = new System.Windows.Forms.Label();
             this.lbl_paymentFee = new System.Windows.Forms.Label();
             this.lbl_paymentFine = new System.Windows.Forms.Label();
@@ -50,10 +54,6 @@
             this.edt_paymentFine = new System.Windows.Forms.NumericUpDown();
             this.edt_paymentFee = new System.Windows.Forms.NumericUpDown();
             this.edt_discount = new System.Windows.Forms.NumericUpDown();
-            this.InstalmentNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IntalmentDays = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InstalmentPercentage = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.InstalmentPayMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_Instalments.SuspendLayout();
@@ -108,6 +108,7 @@
             this.edt_valuePercentage.Name = "edt_valuePercentage";
             this.edt_valuePercentage.Size = new System.Drawing.Size(62, 20);
             this.edt_valuePercentage.TabIndex = 33;
+            this.edt_valuePercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_totalPercentage
             // 
@@ -126,6 +127,7 @@
             this.edt_totalPercentage.Size = new System.Drawing.Size(39, 20);
             this.edt_totalPercentage.TabIndex = 31;
             this.edt_totalPercentage.Text = "0";
+            this.edt_totalPercentage.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_daysCount
             // 
@@ -138,6 +140,7 @@
             this.edt_daysCount.Name = "edt_daysCount";
             this.edt_daysCount.Size = new System.Drawing.Size(52, 20);
             this.edt_daysCount.TabIndex = 30;
+            this.edt_daysCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_instalmentNumber
             // 
@@ -151,6 +154,7 @@
             this.edt_instalmentNumber.Name = "edt_instalmentNumber";
             this.edt_instalmentNumber.Size = new System.Drawing.Size(39, 20);
             this.edt_instalmentNumber.TabIndex = 30;
+            this.edt_instalmentNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_instalmentNumber.Value = new decimal(new int[] {
             1,
             0,
@@ -250,6 +254,38 @@
             this.DGV_Instalments.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_Instalments_RowsRemoved);
             this.DGV_Instalments.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.DGV_Instalments_UserDeletedRow);
             // 
+            // InstalmentNumber
+            // 
+            this.InstalmentNumber.HeaderText = "Nº";
+            this.InstalmentNumber.MinimumWidth = 6;
+            this.InstalmentNumber.Name = "InstalmentNumber";
+            this.InstalmentNumber.ReadOnly = true;
+            this.InstalmentNumber.Width = 50;
+            // 
+            // IntalmentDays
+            // 
+            this.IntalmentDays.HeaderText = "Dias";
+            this.IntalmentDays.MinimumWidth = 6;
+            this.IntalmentDays.Name = "IntalmentDays";
+            this.IntalmentDays.ReadOnly = true;
+            this.IntalmentDays.Width = 65;
+            // 
+            // InstalmentPercentage
+            // 
+            this.InstalmentPercentage.HeaderText = "%";
+            this.InstalmentPercentage.MinimumWidth = 6;
+            this.InstalmentPercentage.Name = "InstalmentPercentage";
+            this.InstalmentPercentage.ReadOnly = true;
+            this.InstalmentPercentage.Width = 65;
+            // 
+            // InstalmentPayMethod
+            // 
+            this.InstalmentPayMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.InstalmentPayMethod.HeaderText = "Método";
+            this.InstalmentPayMethod.MinimumWidth = 6;
+            this.InstalmentPayMethod.Name = "InstalmentPayMethod";
+            this.InstalmentPayMethod.ReadOnly = true;
+            // 
             // lbl_paymentDiscount
             // 
             this.lbl_paymentDiscount.AutoSize = true;
@@ -307,6 +343,7 @@
             this.edt_paymentFine.Name = "edt_paymentFine";
             this.edt_paymentFine.Size = new System.Drawing.Size(49, 20);
             this.edt_paymentFine.TabIndex = 30;
+            this.edt_paymentFine.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_paymentFee
             // 
@@ -320,6 +357,7 @@
             this.edt_paymentFee.Name = "edt_paymentFee";
             this.edt_paymentFee.Size = new System.Drawing.Size(49, 20);
             this.edt_paymentFee.TabIndex = 31;
+            this.edt_paymentFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_discount
             // 
@@ -328,38 +366,7 @@
             this.edt_discount.Name = "edt_discount";
             this.edt_discount.Size = new System.Drawing.Size(61, 20);
             this.edt_discount.TabIndex = 32;
-            // 
-            // InstalmentNumber
-            // 
-            this.InstalmentNumber.HeaderText = "Nº";
-            this.InstalmentNumber.MinimumWidth = 6;
-            this.InstalmentNumber.Name = "InstalmentNumber";
-            this.InstalmentNumber.ReadOnly = true;
-            this.InstalmentNumber.Width = 50;
-            // 
-            // IntalmentDays
-            // 
-            this.IntalmentDays.HeaderText = "Dias";
-            this.IntalmentDays.MinimumWidth = 6;
-            this.IntalmentDays.Name = "IntalmentDays";
-            this.IntalmentDays.ReadOnly = true;
-            this.IntalmentDays.Width = 65;
-            // 
-            // InstalmentPercentage
-            // 
-            this.InstalmentPercentage.HeaderText = "%";
-            this.InstalmentPercentage.MinimumWidth = 6;
-            this.InstalmentPercentage.Name = "InstalmentPercentage";
-            this.InstalmentPercentage.ReadOnly = true;
-            this.InstalmentPercentage.Width = 65;
-            // 
-            // InstalmentPayMethod
-            // 
-            this.InstalmentPayMethod.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.InstalmentPayMethod.HeaderText = "Método";
-            this.InstalmentPayMethod.MinimumWidth = 6;
-            this.InstalmentPayMethod.Name = "InstalmentPayMethod";
-            this.InstalmentPayMethod.ReadOnly = true;
+            this.edt_discount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Frm_Create_PaymentConditions
             // 

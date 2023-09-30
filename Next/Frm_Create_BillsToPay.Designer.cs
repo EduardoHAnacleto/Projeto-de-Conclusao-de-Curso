@@ -107,6 +107,7 @@
             this.edt_totalValue.Name = "edt_totalValue";
             this.edt_totalValue.Size = new System.Drawing.Size(58, 20);
             this.edt_totalValue.TabIndex = 36;
+            this.edt_totalValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_instalmentNumber
             // 
@@ -119,6 +120,7 @@
             this.edt_instalmentNumber.Name = "edt_instalmentNumber";
             this.edt_instalmentNumber.Size = new System.Drawing.Size(52, 20);
             this.edt_instalmentNumber.TabIndex = 35;
+            this.edt_instalmentNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_paymentMethod
             // 
@@ -182,6 +184,7 @@
             this.edt_BillModel.Name = "edt_BillModel";
             this.edt_BillModel.Size = new System.Drawing.Size(65, 20);
             this.edt_BillModel.TabIndex = 37;
+            this.edt_BillModel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_BillSeries
             // 
@@ -194,6 +197,7 @@
             this.edt_BillSeries.Name = "edt_BillSeries";
             this.edt_BillSeries.Size = new System.Drawing.Size(60, 20);
             this.edt_BillSeries.TabIndex = 36;
+            this.edt_BillSeries.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_BillNum
             // 
@@ -206,6 +210,7 @@
             this.edt_BillNum.Name = "edt_BillNum";
             this.edt_BillNum.Size = new System.Drawing.Size(73, 20);
             this.edt_BillNum.TabIndex = 36;
+            this.edt_BillNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_serieDanfe
             // 
@@ -270,6 +275,7 @@
             this.edt_supplierId.Name = "edt_supplierId";
             this.edt_supplierId.Size = new System.Drawing.Size(48, 20);
             this.edt_supplierId.TabIndex = 36;
+            this.edt_supplierId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_supplierName
             // 

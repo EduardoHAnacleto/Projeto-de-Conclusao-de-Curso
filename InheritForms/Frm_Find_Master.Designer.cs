@@ -88,6 +88,7 @@
             this.edt_id.Name = "edt_id";
             this.edt_id.Size = new System.Drawing.Size(32, 20);
             this.edt_id.TabIndex = 6;
+            this.edt_id.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_id.ValueChanged += new System.EventHandler(this.edt_id_ValueChanged);
             // 
             // Frm_Find_Master

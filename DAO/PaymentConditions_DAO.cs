@@ -36,7 +36,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -97,20 +97,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                 status = _billsInstalmentsController.SaveItem(instalment);
                                 if (!status)
                                 {
-                                    MessageBox.Show("An error has occurred.");
                                     break;
                                 }
                             }
                         }
                         if (status)
                         {
-                            MessageBox.Show("Register added with success!");
+                            MessageBox.Show("Registro salvo com sucesso.");
                         }
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -192,14 +191,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                             status = _billsInstalmentsController.DeleteItem(cond.id);
                             if (!status)
                             {
-                                throw new SystemException("An error has ocurred in database when reordering instalments.");
+                                throw new SystemException("Ocorreu um erro.");
                             }
                             foreach (BillsInstalments item in cond.BillsInstalments)
                             {
                                 status = _billsInstalmentsController.SaveItem(item);
                                 if (!status)
                                 {
-                                    throw new SystemException("An error has ocurred in database when updating instalments.");
+                                    throw new SystemException("Ocorreu um erro.");
                                 }
                             }
                             //foreach (BillsInstalments item in toBeRemoved)
@@ -225,14 +224,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         }
                         if (status)
                         {
-                            MessageBox.Show("Register altered with success!");
+                            MessageBox.Show("Registro salvo com sucesso.");
                         }
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return false;
                 }
                 finally
@@ -258,7 +257,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register erased with success!");
+                        MessageBox.Show("Registro apagado com sucesso.");
                         status = true;
                     }
 
@@ -310,7 +309,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                 }
                 finally
                 {
@@ -354,7 +353,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                 }
                 finally
                 {
@@ -393,7 +392,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -417,7 +416,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -441,7 +440,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {

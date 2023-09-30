@@ -53,6 +53,7 @@
             this.medt_regNumber.Name = "medt_regNumber";
             this.medt_regNumber.Size = new System.Drawing.Size(101, 20);
             this.medt_regNumber.TabIndex = 38;
+            this.medt_regNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.medt_regNumber.ValidatingType = typeof(int);
             // 
             // lbl_regNumber

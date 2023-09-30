@@ -138,7 +138,7 @@
             this.Controls.Add(this.lbl_countryName);
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_Countries";
-            this.Text = "Criar País";
+            this.Text = " ";
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);

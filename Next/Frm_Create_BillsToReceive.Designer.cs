@@ -151,6 +151,7 @@
             this.edt_instalmentValue.Name = "edt_instalmentValue";
             this.edt_instalmentValue.Size = new System.Drawing.Size(66, 20);
             this.edt_instalmentValue.TabIndex = 27;
+            this.edt_instalmentValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_instalmentId
             // 
@@ -159,6 +160,7 @@
             this.edt_instalmentId.Name = "edt_instalmentId";
             this.edt_instalmentId.Size = new System.Drawing.Size(39, 20);
             this.edt_instalmentId.TabIndex = 26;
+            this.edt_instalmentId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_instalmentId.Value = new decimal(new int[] {
             1,
             0,
@@ -224,6 +226,7 @@
             this.edt_clientId.Name = "edt_clientId";
             this.edt_clientId.Size = new System.Drawing.Size(42, 20);
             this.edt_clientId.TabIndex = 25;
+            this.edt_clientId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btn_search
             // 
@@ -409,6 +412,7 @@
             this.edt_saleNumber.Name = "edt_saleNumber";
             this.edt_saleNumber.Size = new System.Drawing.Size(65, 20);
             this.edt_saleNumber.TabIndex = 34;
+            this.edt_saleNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Frm_Create_BillsToReceive
             // 

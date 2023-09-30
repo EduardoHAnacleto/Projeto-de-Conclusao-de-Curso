@@ -155,6 +155,7 @@
             this.edt_id.Name = "edt_id";
             this.edt_id.Size = new System.Drawing.Size(39, 20);
             this.edt_id.TabIndex = 15;
+            this.edt_id.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_requiredSymbol
             // 

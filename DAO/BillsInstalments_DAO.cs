@@ -46,7 +46,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                     return status;
                 }
                 finally
@@ -85,7 +85,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                     return status;
                 }
                 finally
@@ -117,7 +117,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                     return status;
                 }
                 finally
@@ -150,7 +150,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                     return status;
                 }
                 finally
@@ -181,7 +181,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                     return status;
                 }
                 finally
@@ -224,7 +224,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                 }
                 finally
                 {
@@ -263,7 +263,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro : " + ex.Message);
             }
             finally
             {
@@ -304,7 +304,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                 }
                 finally
                 {
@@ -356,7 +356,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro : " + ex.Message);
             }
             finally
             {
@@ -380,7 +380,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro : " + ex.Message);
             }
             finally
             {

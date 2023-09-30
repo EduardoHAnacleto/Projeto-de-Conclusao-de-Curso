@@ -229,6 +229,7 @@
             this.edt_userId.Name = "edt_userId";
             this.edt_userId.Size = new System.Drawing.Size(46, 20);
             this.edt_userId.TabIndex = 3;
+            this.edt_userId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_userName
             // 
@@ -294,6 +295,7 @@
             this.edt_clientId.Name = "edt_clientId";
             this.edt_clientId.Size = new System.Drawing.Size(41, 20);
             this.edt_clientId.TabIndex = 12;
+            this.edt_clientId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btn_find
             // 
@@ -564,6 +566,7 @@
             this.edt_ProdUnValue.Name = "edt_ProdUnValue";
             this.edt_ProdUnValue.Size = new System.Drawing.Size(73, 20);
             this.edt_ProdUnValue.TabIndex = 32;
+            this.edt_ProdUnValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_ProdDiscCash
             // 
@@ -577,6 +580,7 @@
             this.edt_ProdDiscCash.Name = "edt_ProdDiscCash";
             this.edt_ProdDiscCash.Size = new System.Drawing.Size(59, 20);
             this.edt_ProdDiscCash.TabIndex = 5;
+            this.edt_ProdDiscCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_barCode
             // 
@@ -589,6 +593,7 @@
             this.edt_barCode.Name = "edt_barCode";
             this.edt_barCode.Size = new System.Drawing.Size(226, 20);
             this.edt_barCode.TabIndex = 2;
+            this.edt_barCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_barCode.ValueChanged += new System.EventHandler(this.edt_barCode_ValueChanged);
             this.edt_barCode.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_barCode_KeyPress);
             // 
@@ -603,6 +608,7 @@
             this.edt_amount.Name = "edt_amount";
             this.edt_amount.Size = new System.Drawing.Size(44, 20);
             this.edt_amount.TabIndex = 4;
+            this.edt_amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_amount.Value = new decimal(new int[] {
             1,
             0,
@@ -623,6 +629,7 @@
             this.edt_totalPValue.Name = "edt_totalPValue";
             this.edt_totalPValue.Size = new System.Drawing.Size(70, 20);
             this.edt_totalPValue.TabIndex = 26;
+            this.edt_totalPValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_productId
             // 
@@ -635,6 +642,7 @@
             this.edt_productId.Name = "edt_productId";
             this.edt_productId.Size = new System.Drawing.Size(36, 20);
             this.edt_productId.TabIndex = 25;
+            this.edt_productId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // gbox_date
             // 
@@ -832,6 +840,7 @@
             this.edt_payConditionQnt.Name = "edt_payConditionQnt";
             this.edt_payConditionQnt.Size = new System.Drawing.Size(43, 20);
             this.edt_payConditionQnt.TabIndex = 7;
+            this.edt_payConditionQnt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_payConditionDiscount
             // 
@@ -841,6 +850,7 @@
             this.edt_payConditionDiscount.Name = "edt_payConditionDiscount";
             this.edt_payConditionDiscount.Size = new System.Drawing.Size(44, 20);
             this.edt_payConditionDiscount.TabIndex = 6;
+            this.edt_payConditionDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_payConditionFine
             // 
@@ -855,6 +865,7 @@
             this.edt_payConditionFine.Name = "edt_payConditionFine";
             this.edt_payConditionFine.Size = new System.Drawing.Size(45, 20);
             this.edt_payConditionFine.TabIndex = 5;
+            this.edt_payConditionFine.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_payConditionFees
             // 
@@ -863,6 +874,7 @@
             this.edt_payConditionFees.Name = "edt_payConditionFees";
             this.edt_payConditionFees.Size = new System.Drawing.Size(43, 20);
             this.edt_payConditionFees.TabIndex = 4;
+            this.edt_payConditionFees.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_payCondition
             // 
@@ -894,6 +906,7 @@
             this.edt_payConditionId.Name = "edt_payConditionId";
             this.edt_payConditionId.Size = new System.Drawing.Size(44, 20);
             this.edt_payConditionId.TabIndex = 1;
+            this.edt_payConditionId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_payConditionID
             // 

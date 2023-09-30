@@ -798,5 +798,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 medt_CancelDate.Text = DateTime.Now.ToString();
             }
         }
+
+        private void gbox_supplier_Leave(object sender, EventArgs e)
+        {
+            if (edt_billModel.Value != 0 
+                && edt_billNumber.Value != 0
+                && edt_billSeries.Value != 0
+                && edt_supplierId.Value != 0)
+            {
+                ValidateBill();
+            }
+        }
     }
 }

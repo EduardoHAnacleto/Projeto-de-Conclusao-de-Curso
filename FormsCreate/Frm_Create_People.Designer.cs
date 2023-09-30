@@ -256,6 +256,7 @@
             this.edt_houseNumber.Name = "edt_houseNumber";
             this.edt_houseNumber.Size = new System.Drawing.Size(44, 20);
             this.edt_houseNumber.TabIndex = 5;
+            this.edt_houseNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // lbl_houseNumber
             // 
@@ -305,6 +306,7 @@
             this.medt_zipCode.Name = "medt_zipCode";
             this.medt_zipCode.Size = new System.Drawing.Size(76, 20);
             this.medt_zipCode.TabIndex = 0;
+            this.medt_zipCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.medt_zipCode.ValidatingType = typeof(int);
             // 
             // gbox_phones
@@ -421,7 +423,9 @@
             this.medt_regNumber.Name = "medt_regNumber";
             this.medt_regNumber.Size = new System.Drawing.Size(116, 20);
             this.medt_regNumber.TabIndex = 30;
+            this.medt_regNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.medt_regNumber.ValidatingType = typeof(int);
+            this.medt_regNumber.Leave += new System.EventHandler(this.medt_regNumber_Leave);
             // 
             // lbl_regNumber
             // 
@@ -461,6 +465,7 @@
             this.edt_age.Name = "edt_age";
             this.edt_age.Size = new System.Drawing.Size(31, 20);
             this.edt_age.TabIndex = 25;
+            this.edt_age.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_age.TextChanged += new System.EventHandler(this.edt_age_TextChanged);
             // 
             // gbox_gender

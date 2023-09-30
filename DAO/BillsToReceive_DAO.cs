@@ -67,13 +67,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     connection.Close();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register added with success!");
                         status = true;
                     }
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                     return status;
                 }
                 finally
@@ -120,14 +119,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register altered with success!");
                         status = true;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                     return status;
                 }
                 finally
@@ -153,14 +151,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register erased with success!");
                         status = true;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                     return status;
                 }
                 finally
@@ -231,7 +228,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                 }
                 finally
                 {
@@ -294,7 +291,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                 }
                 finally
                 {
@@ -347,7 +344,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                 }
                 finally
                 {
@@ -386,7 +383,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro : " + ex.Message);
             }
             finally
             {
@@ -439,7 +436,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                 }
                 finally
                 {
@@ -493,7 +490,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro : " + ex.Message);
                 }
                 finally
                 {
@@ -519,7 +516,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro : " + ex.Message);
             }
             finally
             {
@@ -547,14 +544,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         int i = command.ExecuteNonQuery();
                         if (i > 0)
                         {
-                            MessageBox.Show("Register altered with success!");
                             status = true;
                         }
 
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error : " + ex.Message);
+                        MessageBox.Show("Erro : " + ex.Message);
                         return status;
                     }
                     finally

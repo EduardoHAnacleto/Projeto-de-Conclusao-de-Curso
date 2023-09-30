@@ -33,7 +33,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -71,7 +71,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register added with success!");
+                        MessageBox.Show("Registro salvo com sucesso.");
                         status = true;
                     }
 
@@ -85,7 +85,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -121,7 +121,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register altered with success!");
+                        MessageBox.Show("Registro alterado com sucesso.");
                         status = true;
                     }
 
@@ -135,7 +135,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -161,14 +161,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register erased with success!");
+                        MessageBox.Show("Registro apagado com sucesso.");
                         status = true;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -216,7 +216,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                 }
                 finally
                 {
@@ -263,7 +263,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                 }
                 finally
                 {
@@ -310,7 +310,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 }
                 catch (SqlException ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                 }
                 finally
                 {
@@ -349,7 +349,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -373,7 +373,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error : " + ex.Message);
+                MessageBox.Show("Erro: " + ex.Message);
             }
             finally
             {
@@ -401,14 +401,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register altered with success!");
                         status = true;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -437,14 +436,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Register altered with success!");
                         status = true;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -473,14 +471,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Estoque adicionado!");
                         status = true;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally
@@ -509,14 +506,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {
-                        MessageBox.Show("Estoque removido!");
                         status = true;
                     }
 
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Erro : " + ex.Message);
+                    MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
                 finally

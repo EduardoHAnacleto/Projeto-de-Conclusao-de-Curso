@@ -124,17 +124,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         {
             if (!Utilities.HasOnlyLetters(edt_cityName.Text, "Nome da cidade")) 
             {
-                edt_cityName.Focus();
                 return false;
             }
             else if (Utilities.HasOnlySpaces(edt_phonePrefix.Text, "Prefixo do telefone"))
             {
-                edt_phonePrefix.Focus();
                 return false;
             }
             else if (Utilities.IsNotSelected(edt_stateId.Text, "Estado"))
             {
-                btn_SearchState.Focus();
                 return false;
             }
             else return true;
@@ -236,6 +233,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 }
             }
             UnlockCamps();
+        }
+
+        private void edt_cityName_Leave(object sender, EventArgs e)
+        {
+
+        }
+
+        private void edt_phonePrefix_Leave(object sender, EventArgs e)
+        {
+
         }
     }
 }

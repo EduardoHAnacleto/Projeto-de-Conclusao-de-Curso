@@ -71,6 +71,7 @@
             this.edt_stateId.Name = "edt_stateId";
             this.edt_stateId.Size = new System.Drawing.Size(36, 20);
             this.edt_stateId.TabIndex = 31;
+            this.edt_stateId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_stateId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_stateId_KeyPress);
             // 
             // edt_state
@@ -110,6 +111,7 @@
             this.edt_phonePrefix.Name = "edt_phonePrefix";
             this.edt_phonePrefix.Size = new System.Drawing.Size(45, 20);
             this.edt_phonePrefix.TabIndex = 27;
+            this.edt_phonePrefix.Leave += new System.EventHandler(this.edt_phonePrefix_Leave);
             // 
             // edt_cityName
             // 
@@ -119,6 +121,7 @@
             this.edt_cityName.Name = "edt_cityName";
             this.edt_cityName.Size = new System.Drawing.Size(300, 20);
             this.edt_cityName.TabIndex = 26;
+            this.edt_cityName.Leave += new System.EventHandler(this.edt_cityName_Leave);
             // 
             // lbl_phonePrefix
             // 
