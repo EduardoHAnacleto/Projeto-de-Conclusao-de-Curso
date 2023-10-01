@@ -52,15 +52,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             string sql = "INSERT INTO SUPPLIERS ( SUPPLIER_NAME, SUPPLIER_REGISTRATION, SUPPLIER_EMAIL," +
                 "SUPPLIER_PHONE1, SUPPLIER_PHONE2, SUPPLIER_PHONE3, SUPPLIER_PHONE_CLASS1, SUPPLIER_PHONE_CLASS2, SUPPLIER_PHONE_CLASS3," +
                 "SUPPLIER_STREET_NAME, SUPPLIER_DISTRICT, SUPPLIER_HOUSE_NUMBER, SUPPLIER_HOME_TYPE, SUPPLIER_COMPLEMENT, SUPPLIER_ZIP_CODE," +
-                " CITY_ID, SUPPLIER_SOCIAL_REASON, SUPPLIER_STATE_INSCRIPTION, DATE_CREATION, DATE_LAST_UPDATE) VALUES " +
+                " CITY_ID, SUPPLIER_SOCIAL_REASON, SUPPLIER_STATE_INSCRIPTION, DATE_CREATION, DATE_LAST_UPDATE, PAYCOND_ID) VALUES " +
                 "(@NAME, @REGISTRATION, @EMAIL, @PHONE1, @PHONE2, @PHONE3, @PCLASS1, @PCLASS2, @PCLASS3," +
-                "@STREET, @DISTRICT, @HOUSENUMBER, @HOMETYPE, @COMPLEMENT, @ZIPCODE, @CITYID, @SOCIAL, @INSCRIPTION, @DC, @DU)";
+                "@STREET, @DISTRICT, @HOUSENUMBER, @HOMETYPE, @COMPLEMENT, @ZIPCODE, @CITYID, @SOCIAL, @INSCRIPTION, @DC, @DU, @PAYCONDID)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@NAME", obj.name);
+                    command.Parameters.AddWithValue("PAYCONDID", obj.PaymentCondition.id);
                     command.Parameters.AddWithValue("@REGISTRATION", obj.registrationNumber);
                     command.Parameters.AddWithValue("@EMAIL", obj.email);
                     command.Parameters.AddWithValue("@PHONE1", obj.phoneNumber1);
@@ -111,7 +112,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 "SUPPLIER_PHONE3 = @PHONE3, SUPPLIER_PHONE_CLASS1 = @PCLASS1, SUPPLIER_PHONE_CLASS2 = @PCLASS2, SUPPLIER_PHONE_CLASS3 = @PCLASS3," +
                 "SUPPLIER_STREET_NAME = @STREET, SUPPLIER_DISTRICT = @DISTRICT, SUPPLIER_HOUSE_NUMBER = @HNUMBER, SUPPLIER_HOME_TYPE = @HTYPE," +
                 "SUPPLIER_COMPLEMENT = @COMPLEMENT, SUPPLIER_ZIP_CODE = @ZIPCODE, CITY_ID = @CITYID," +
-                "SUPPLIER_SOCIAL_REASON = @SOCIALREASON, SUPPLIER_STATE_INSCRIPTION = @STATEINSCIPTION ,DATE_LAST_UPDATE = @DU " +
+                "SUPPLIER_SOCIAL_REASON = @SOCIALREASON, SUPPLIER_STATE_INSCRIPTION = @STATEINSCIPTION ,DATE_LAST_UPDATE = @DU," +
+                "PAYCOND_ID = @PAYCONDID " +
                 "WHERE ID_SUPPLIER = @ID ; ";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -119,6 +121,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", obj.id);
+                    command.Parameters.AddWithValue("PAYCONDID", obj.PaymentCondition.id);
                     command.Parameters.AddWithValue("@NAME", obj.name);
                     command.Parameters.AddWithValue("@REGISTRATION", obj.registrationNumber);
                     command.Parameters.AddWithValue("@EMAIL", obj.email);
@@ -210,9 +213,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                             {
                                 Cities_Controller _SController = new Cities_Controller();
                                 PhoneClassifications_Controller _PCController = new PhoneClassifications_Controller();
+                                PaymentConditions_Controller _payController = new PaymentConditions_Controller();
                                 Suppliers obj = new Suppliers
                                 {
                                     id = Convert.ToInt32(reader["id_supplier"]),
+                                    PaymentCondition = _payController.FindItemId(Convert.ToInt32(reader["paycond_id"])),
                                     name = Convert.ToString(reader["supplier_name"]),
                                     registrationNumber = Convert.ToString(reader["supplier_registration"]),
                                     email = Convert.ToString(reader["supplier_email"]),
@@ -268,10 +273,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                             {
                                 Cities_Controller _SController = new Cities_Controller();
                                 PhoneClassifications_Controller _PCController = new PhoneClassifications_Controller();
+                                PaymentConditions_Controller _payController = new PaymentConditions_Controller();
                                 Suppliers obj = new Suppliers
                                 {
                                     id = Convert.ToInt32(reader["id_supplier"]),
                                     name = Convert.ToString(reader["supplier_name"]),
+                                    PaymentCondition = _payController.FindItemId(Convert.ToInt32(reader["paycond_id"])),
                                     registrationNumber = Convert.ToString(reader["supplier_registration"]),
                                     email = Convert.ToString(reader["supplier_email"]),
                                     phoneNumber1 = Convert.ToString(reader["supplier_phone1"]),
@@ -326,10 +333,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                             {
                                 Cities_Controller _SController = new Cities_Controller();
                                 PhoneClassifications_Controller _PCController = new PhoneClassifications_Controller();
+                                PaymentConditions_Controller _payController = new PaymentConditions_Controller();
                                 Suppliers obj = new Suppliers
                                 {
                                     id = Convert.ToInt32(reader["id_supplier"]),
                                     name = Convert.ToString(reader["supplier_name"]),
+                                    PaymentCondition = _payController.FindItemId(Convert.ToInt32(reader["paycond_id"])),
                                     registrationNumber = Convert.ToString(reader["supplier_registration"]),
                                     email = Convert.ToString(reader["supplier_email"]),
                                     phoneNumber1 = Convert.ToString(reader["supplier_phone1"]),

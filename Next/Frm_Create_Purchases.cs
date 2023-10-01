@@ -53,7 +53,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private readonly Purchases_Controller _controller = new Purchases_Controller();
         private readonly PurchaseItems_Controller _pIController = new PurchaseItems_Controller();
         private Purchases BackupPurchase = null;
-        private bool ValidatedBill = true;
+        private bool ValidatedBill = false;
 
         public void NewFormSearchProduct() //Abre form para encontrar e levar PRODUTO
         {
@@ -170,6 +170,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         purchPerc,
                         newUnCost
                         );
+                    ClearProductCamps();
                 }
                 if (!validated)
                 {
@@ -186,6 +187,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     CalculateSetNewUnCost();
                 }
             }
+        }
+
+        private void ClearProductCamps()
+        {
+            edt_prodId.Value = 0;
+            edt_prodDiscCash.Value = 0;
+            edt_prodBarCode.Value = 0;
+            edt_prodQtd.Value = 0;
+            edt_prodTotal.Value = 0;
+            edt_prodUnCost.Value = 0;
+            edt_prodUnd.Text = string.Empty;
+            edt_productName.Text = string.Empty;
         }
 
         private bool FindBill()
@@ -210,11 +223,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (!FindBill())
             {
-                gbox_billInfo.Enabled = false;
                 edt_billModel.Enabled = false;
                 edt_billNumber.Enabled = false;
                 edt_billSeries.Enabled = false;
                 gbox_supplier.Enabled = false;
+                gbox_products.Enabled = true;
+                gbox_payCond.Enabled = true;
+                gbox_billInfo.Enabled = true;
             }
             else
             {
@@ -235,6 +250,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 SetSummary();
             }
         }
+
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
@@ -504,6 +520,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             
         }
 
+        public void PopulatePaymentCondition(PaymentConditions payCondition)
+        {
+            edt_payCondId.Value = payCondition.id;
+            edt_payCondName.Text = payCondition.conditionName;
+            SetBillInstalmentsToDGV(payCondition);
+        }
+
         private void PopulatePaymentInfo(Purchases purchase)
         {
             edt_billModel.Value = purchase.BillModel;
@@ -647,6 +670,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 {
                     edt_supplierId.Value = supplier.id;
                     edt_supplierName.Text = supplier.name;
+                    PopulatePaymentCondition(supplier.PaymentCondition);
                 }
             }
             formSuppliers.Close();
@@ -696,6 +720,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
             }
             formPayCondition.Close();
+
         }
 
         public void SetBillInstalmentsToDGV(PaymentConditions payCond) //OK -Cria DataTable, chama Controller para trazer o DataTable e colocar na DGV como DataSource, linka db com DGV
@@ -710,7 +735,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     bill.TotalDays.ToString(),
                     bill.ValuePercentage.ToString(),
                     bill.PaymentMethod.paymentMethod,
-                    instalmentCost
+                    instalmentCost.ToString("#.##")
                     );
             }
         }
@@ -742,11 +767,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             if (DGV_PurchasesProducts.Rows.Count == 0)
             {
-                gbox_billInfo.Enabled = true;
                 gbox_supplier.Enabled = true;
                 edt_billSeries.Enabled = true;
                 edt_billNumber.Enabled = true;
                 edt_billModel.Enabled = true;
+                gbox_products.Enabled = false;
+                gbox_payCond.Enabled = false;
+                gbox_billInfo.Enabled = false;
             }
         }
 
@@ -808,6 +835,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 ValidateBill();
             }
+        }
+
+        private void edt_prodUnCost_Leave(object sender, EventArgs e)
+        {
+            CalcProdTotal();
+        }
+
+        private void CalcProdTotal()
+        {
+            if (edt_prodQtd.Value > 0 && edt_prodUnCost.Value > 0)
+            {
+                edt_prodTotal.Value = edt_prodQtd.Value + edt_prodUnCost.Value;
+            }
+        }
+
+        private void edt_prodQtd_Leave(object sender, EventArgs e)
+        {
+            CalcProdTotal();
         }
     }
 }

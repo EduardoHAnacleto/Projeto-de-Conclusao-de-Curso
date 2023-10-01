@@ -15,5 +15,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
 
         public People person { get; set; }
         public int clientType { get; set; }
+        public PaymentConditions PaymentCondition { get; set; }
     }
 }

@@ -29,16 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_PurchasesProducts = new System.Windows.Forms.DataGridView();
-            this.ProdId = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdNewBaseUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentSalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdCurrentStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdPurchPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.ProdWeightedAvg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_products = new System.Windows.Forms.GroupBox();
             this.btn_removeItem = new System.Windows.Forms.Button();
             this.lbl_prodDiscCash = new System.Windows.Forms.Label();
@@ -111,11 +101,25 @@
             this.InstalmentMethod = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.InstalmentValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DGV_PurchSummary = new System.Windows.Forms.DataGridView();
-            this.PurchSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PurchTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gbox_status = new System.Windows.Forms.GroupBox();
             this.check_Cancelled = new System.Windows.Forms.CheckBox();
             this.check_Active = new System.Windows.Forms.CheckBox();
+            this.edt_prodTotal = new System.Windows.Forms.NumericUpDown();
+            this.edt_prodUnd = new System.Windows.Forms.TextBox();
+            this.lbl_und = new System.Windows.Forms.Label();
+            this.lbl_totalProduct = new System.Windows.Forms.Label();
+            this.PurchSubTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchTotal = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdQtd = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdDiscountCash = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdNewBaseUnCost = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentSalePrice = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdCurrentStock = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdPurchPerc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ProdWeightedAvg = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).BeginInit();
             this.gbox_products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodDiscCash)).BeginInit();
@@ -142,6 +146,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Instalments)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchSummary)).BeginInit();
             this.gbox_status.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_prodTotal)).BeginInit();
             this.SuspendLayout();
             // 
             // DGV_PurchasesProducts
@@ -168,86 +173,12 @@
             this.DGV_PurchasesProducts.Size = new System.Drawing.Size(1087, 228);
             this.DGV_PurchasesProducts.TabIndex = 0;
             // 
-            // ProdId
-            // 
-            this.ProdId.HeaderText = "ID";
-            this.ProdId.MinimumWidth = 6;
-            this.ProdId.Name = "ProdId";
-            this.ProdId.ReadOnly = true;
-            this.ProdId.Width = 50;
-            // 
-            // ProdName
-            // 
-            this.ProdName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.ProdName.HeaderText = "Produto";
-            this.ProdName.MinimumWidth = 6;
-            this.ProdName.Name = "ProdName";
-            this.ProdName.ReadOnly = true;
-            // 
-            // ProdQtd
-            // 
-            this.ProdQtd.HeaderText = "Quantidade";
-            this.ProdQtd.MinimumWidth = 6;
-            this.ProdQtd.Name = "ProdQtd";
-            this.ProdQtd.ReadOnly = true;
-            this.ProdQtd.Width = 65;
-            // 
-            // ProdCurrentUnCost
-            // 
-            this.ProdCurrentUnCost.HeaderText = "Custo Unitário Atual";
-            this.ProdCurrentUnCost.MinimumWidth = 6;
-            this.ProdCurrentUnCost.Name = "ProdCurrentUnCost";
-            this.ProdCurrentUnCost.Width = 125;
-            // 
-            // ProdDiscountCash
-            // 
-            this.ProdDiscountCash.HeaderText = "Desconto";
-            this.ProdDiscountCash.MinimumWidth = 6;
-            this.ProdDiscountCash.Name = "ProdDiscountCash";
-            this.ProdDiscountCash.ReadOnly = true;
-            this.ProdDiscountCash.Width = 70;
-            // 
-            // ProdNewBaseUnCost
-            // 
-            this.ProdNewBaseUnCost.HeaderText = "Custo Unitário Sugerido";
-            this.ProdNewBaseUnCost.MinimumWidth = 6;
-            this.ProdNewBaseUnCost.Name = "ProdNewBaseUnCost";
-            this.ProdNewBaseUnCost.Width = 125;
-            // 
-            // ProdCurrentSalePrice
-            // 
-            this.ProdCurrentSalePrice.HeaderText = "Preço de Venda Atual";
-            this.ProdCurrentSalePrice.MinimumWidth = 6;
-            this.ProdCurrentSalePrice.Name = "ProdCurrentSalePrice";
-            this.ProdCurrentSalePrice.ReadOnly = true;
-            this.ProdCurrentSalePrice.Width = 125;
-            // 
-            // ProdCurrentStock
-            // 
-            this.ProdCurrentStock.HeaderText = "Estoque Atual";
-            this.ProdCurrentStock.MinimumWidth = 6;
-            this.ProdCurrentStock.Name = "ProdCurrentStock";
-            this.ProdCurrentStock.ReadOnly = true;
-            this.ProdCurrentStock.Width = 60;
-            // 
-            // ProdPurchPerc
-            // 
-            this.ProdPurchPerc.HeaderText = "Porcentagem da Compra";
-            this.ProdPurchPerc.MinimumWidth = 6;
-            this.ProdPurchPerc.Name = "ProdPurchPerc";
-            this.ProdPurchPerc.ReadOnly = true;
-            this.ProdPurchPerc.Width = 125;
-            // 
-            // ProdWeightedAvg
-            // 
-            this.ProdWeightedAvg.HeaderText = "Média Ponderada";
-            this.ProdWeightedAvg.MinimumWidth = 6;
-            this.ProdWeightedAvg.Name = "ProdWeightedAvg";
-            this.ProdWeightedAvg.ReadOnly = true;
-            this.ProdWeightedAvg.Width = 125;
-            // 
             // gbox_products
             // 
+            this.gbox_products.Controls.Add(this.lbl_totalProduct);
+            this.gbox_products.Controls.Add(this.lbl_und);
+            this.gbox_products.Controls.Add(this.edt_prodUnd);
+            this.gbox_products.Controls.Add(this.edt_prodTotal);
             this.gbox_products.Controls.Add(this.btn_removeItem);
             this.gbox_products.Controls.Add(this.lbl_prodDiscCash);
             this.gbox_products.Controls.Add(this.edt_prodDiscCash);
@@ -264,6 +195,7 @@
             this.gbox_products.Controls.Add(this.lbl_prodId);
             this.gbox_products.Controls.Add(this.edt_prodId);
             this.gbox_products.Controls.Add(this.DGV_PurchasesProducts);
+            this.gbox_products.Enabled = false;
             this.gbox_products.Location = new System.Drawing.Point(12, 264);
             this.gbox_products.Name = "gbox_products";
             this.gbox_products.Size = new System.Drawing.Size(1129, 298);
@@ -285,7 +217,7 @@
             // lbl_prodDiscCash
             // 
             this.lbl_prodDiscCash.AutoSize = true;
-            this.lbl_prodDiscCash.Location = new System.Drawing.Point(821, 22);
+            this.lbl_prodDiscCash.Location = new System.Drawing.Point(900, 22);
             this.lbl_prodDiscCash.Name = "lbl_prodDiscCash";
             this.lbl_prodDiscCash.Size = new System.Drawing.Size(62, 13);
             this.lbl_prodDiscCash.TabIndex = 15;
@@ -294,7 +226,7 @@
             // edt_prodDiscCash
             // 
             this.edt_prodDiscCash.DecimalPlaces = 2;
-            this.edt_prodDiscCash.Location = new System.Drawing.Point(824, 37);
+            this.edt_prodDiscCash.Location = new System.Drawing.Point(903, 37);
             this.edt_prodDiscCash.Maximum = new decimal(new int[] {
             999999,
             0,
@@ -328,16 +260,16 @@
             // lbl_prodUnCost
             // 
             this.lbl_prodUnCost.AutoSize = true;
-            this.lbl_prodUnCost.Location = new System.Drawing.Point(759, 22);
+            this.lbl_prodUnCost.Location = new System.Drawing.Point(844, 22);
             this.lbl_prodUnCost.Name = "lbl_prodUnCost";
-            this.lbl_prodUnCost.Size = new System.Drawing.Size(53, 13);
+            this.lbl_prodUnCost.Size = new System.Drawing.Size(54, 13);
             this.lbl_prodUnCost.TabIndex = 10;
-            this.lbl_prodUnCost.Text = "Custo UN";
+            this.lbl_prodUnCost.Text = "Preço UN";
             // 
             // lbl_prodqtd
             // 
             this.lbl_prodqtd.AutoSize = true;
-            this.lbl_prodqtd.Location = new System.Drawing.Point(690, 22);
+            this.lbl_prodqtd.Location = new System.Drawing.Point(776, 22);
             this.lbl_prodqtd.Name = "lbl_prodqtd";
             this.lbl_prodqtd.Size = new System.Drawing.Size(62, 13);
             this.lbl_prodqtd.TabIndex = 9;
@@ -363,7 +295,8 @@
             // 
             // edt_prodUnCost
             // 
-            this.edt_prodUnCost.Location = new System.Drawing.Point(762, 37);
+            this.edt_prodUnCost.DecimalPlaces = 2;
+            this.edt_prodUnCost.Location = new System.Drawing.Point(844, 37);
             this.edt_prodUnCost.Maximum = new decimal(new int[] {
             999999999,
             0,
@@ -373,10 +306,11 @@
             this.edt_prodUnCost.Size = new System.Drawing.Size(56, 20);
             this.edt_prodUnCost.TabIndex = 6;
             this.edt_prodUnCost.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edt_prodUnCost.Leave += new System.EventHandler(this.edt_prodUnCost_Leave);
             // 
             // edt_prodQtd
             // 
-            this.edt_prodQtd.Location = new System.Drawing.Point(693, 37);
+            this.edt_prodQtd.Location = new System.Drawing.Point(775, 37);
             this.edt_prodQtd.Maximum = new decimal(new int[] {
             1410065407,
             2,
@@ -396,6 +330,7 @@
             0,
             0,
             0});
+            this.edt_prodQtd.Leave += new System.EventHandler(this.edt_prodQtd_Leave);
             // 
             // edt_prodBarCode
             // 
@@ -865,6 +800,7 @@
             this.gbox_info.Controls.Add(this.edt_insurance);
             this.gbox_info.Controls.Add(this.lbl_extraExpenses);
             this.gbox_info.Controls.Add(this.edt_extraExpenses);
+            this.gbox_info.Enabled = false;
             this.gbox_info.Location = new System.Drawing.Point(391, 11);
             this.gbox_info.Name = "gbox_info";
             this.gbox_info.Size = new System.Drawing.Size(396, 124);
@@ -917,6 +853,7 @@
             this.gbox_payCond.Controls.Add(this.edt_payCondName);
             this.gbox_payCond.Controls.Add(this.lbl_payCondId);
             this.gbox_payCond.Controls.Add(this.lbl_payCondName);
+            this.gbox_payCond.Enabled = false;
             this.gbox_payCond.Location = new System.Drawing.Point(300, 568);
             this.gbox_payCond.Name = "gbox_payCond";
             this.gbox_payCond.Size = new System.Drawing.Size(293, 69);
@@ -1040,38 +977,22 @@
             this.DGV_PurchSummary.AllowUserToDeleteRows = false;
             this.DGV_PurchSummary.AllowUserToResizeColumns = false;
             this.DGV_PurchSummary.AllowUserToResizeRows = false;
-            this.DGV_PurchSummary.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.DGV_PurchSummary.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.DGV_PurchSummary.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.DGV_PurchSummary.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_PurchSummary.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PurchSubTotal,
             this.PurchTotal});
             this.DGV_PurchSummary.Enabled = false;
-            this.DGV_PurchSummary.Location = new System.Drawing.Point(985, 217);
+            this.DGV_PurchSummary.Location = new System.Drawing.Point(940, 204);
             this.DGV_PurchSummary.MultiSelect = false;
             this.DGV_PurchSummary.Name = "DGV_PurchSummary";
             this.DGV_PurchSummary.ReadOnly = true;
             this.DGV_PurchSummary.RowHeadersVisible = false;
             this.DGV_PurchSummary.RowHeadersWidth = 51;
             this.DGV_PurchSummary.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_PurchSummary.Size = new System.Drawing.Size(156, 41);
+            this.DGV_PurchSummary.Size = new System.Drawing.Size(201, 54);
             this.DGV_PurchSummary.TabIndex = 52;
-            // 
-            // PurchSubTotal
-            // 
-            this.PurchSubTotal.HeaderText = "Sub-Total";
-            this.PurchSubTotal.MinimumWidth = 6;
-            this.PurchSubTotal.Name = "PurchSubTotal";
-            this.PurchSubTotal.ReadOnly = true;
-            this.PurchSubTotal.Width = 80;
-            // 
-            // PurchTotal
-            // 
-            this.PurchTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PurchTotal.HeaderText = "Total";
-            this.PurchTotal.MinimumWidth = 6;
-            this.PurchTotal.Name = "PurchTotal";
-            this.PurchTotal.ReadOnly = true;
             // 
             // gbox_status
             // 
@@ -1108,6 +1029,135 @@
             this.check_Active.Text = "Ativo";
             this.check_Active.UseVisualStyleBackColor = true;
             this.check_Active.CheckedChanged += new System.EventHandler(this.check_Active_CheckedChanged);
+            // 
+            // edt_prodTotal
+            // 
+            this.edt_prodTotal.DecimalPlaces = 2;
+            this.edt_prodTotal.Enabled = false;
+            this.edt_prodTotal.Location = new System.Drawing.Point(985, 37);
+            this.edt_prodTotal.Name = "edt_prodTotal";
+            this.edt_prodTotal.Size = new System.Drawing.Size(55, 20);
+            this.edt_prodTotal.TabIndex = 17;
+            // 
+            // edt_prodUnd
+            // 
+            this.edt_prodUnd.Enabled = false;
+            this.edt_prodUnd.Location = new System.Drawing.Point(670, 37);
+            this.edt_prodUnd.Name = "edt_prodUnd";
+            this.edt_prodUnd.Size = new System.Drawing.Size(100, 20);
+            this.edt_prodUnd.TabIndex = 18;
+            // 
+            // lbl_und
+            // 
+            this.lbl_und.AutoSize = true;
+            this.lbl_und.Location = new System.Drawing.Point(670, 22);
+            this.lbl_und.Name = "lbl_und";
+            this.lbl_und.Size = new System.Drawing.Size(31, 13);
+            this.lbl_und.TabIndex = 19;
+            this.lbl_und.Text = "UND";
+            // 
+            // lbl_totalProduct
+            // 
+            this.lbl_totalProduct.AutoSize = true;
+            this.lbl_totalProduct.Location = new System.Drawing.Point(982, 22);
+            this.lbl_totalProduct.Name = "lbl_totalProduct";
+            this.lbl_totalProduct.Size = new System.Drawing.Size(31, 13);
+            this.lbl_totalProduct.TabIndex = 20;
+            this.lbl_totalProduct.Text = "Total";
+            // 
+            // PurchSubTotal
+            // 
+            this.PurchSubTotal.HeaderText = "Valor Total dos Produtos";
+            this.PurchSubTotal.MinimumWidth = 6;
+            this.PurchSubTotal.Name = "PurchSubTotal";
+            this.PurchSubTotal.ReadOnly = true;
+            this.PurchSubTotal.Width = 120;
+            // 
+            // PurchTotal
+            // 
+            this.PurchTotal.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PurchTotal.HeaderText = "Total";
+            this.PurchTotal.MinimumWidth = 6;
+            this.PurchTotal.Name = "PurchTotal";
+            this.PurchTotal.ReadOnly = true;
+            // 
+            // ProdId
+            // 
+            this.ProdId.HeaderText = "ID";
+            this.ProdId.MinimumWidth = 6;
+            this.ProdId.Name = "ProdId";
+            this.ProdId.ReadOnly = true;
+            this.ProdId.Width = 50;
+            // 
+            // ProdName
+            // 
+            this.ProdName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.ProdName.HeaderText = "Produto";
+            this.ProdName.MinimumWidth = 6;
+            this.ProdName.Name = "ProdName";
+            this.ProdName.ReadOnly = true;
+            // 
+            // ProdQtd
+            // 
+            this.ProdQtd.HeaderText = "Quantidade";
+            this.ProdQtd.MinimumWidth = 6;
+            this.ProdQtd.Name = "ProdQtd";
+            this.ProdQtd.ReadOnly = true;
+            this.ProdQtd.Width = 65;
+            // 
+            // ProdCurrentUnCost
+            // 
+            this.ProdCurrentUnCost.HeaderText = "Preço Unitário Atual";
+            this.ProdCurrentUnCost.MinimumWidth = 6;
+            this.ProdCurrentUnCost.Name = "ProdCurrentUnCost";
+            this.ProdCurrentUnCost.Width = 125;
+            // 
+            // ProdDiscountCash
+            // 
+            this.ProdDiscountCash.HeaderText = "Desconto";
+            this.ProdDiscountCash.MinimumWidth = 6;
+            this.ProdDiscountCash.Name = "ProdDiscountCash";
+            this.ProdDiscountCash.ReadOnly = true;
+            this.ProdDiscountCash.Width = 70;
+            // 
+            // ProdNewBaseUnCost
+            // 
+            this.ProdNewBaseUnCost.HeaderText = "Preço Unitário Sugerido";
+            this.ProdNewBaseUnCost.MinimumWidth = 6;
+            this.ProdNewBaseUnCost.Name = "ProdNewBaseUnCost";
+            this.ProdNewBaseUnCost.Width = 125;
+            // 
+            // ProdCurrentSalePrice
+            // 
+            this.ProdCurrentSalePrice.HeaderText = "Preço de Venda Atual";
+            this.ProdCurrentSalePrice.MinimumWidth = 6;
+            this.ProdCurrentSalePrice.Name = "ProdCurrentSalePrice";
+            this.ProdCurrentSalePrice.ReadOnly = true;
+            this.ProdCurrentSalePrice.Width = 125;
+            // 
+            // ProdCurrentStock
+            // 
+            this.ProdCurrentStock.HeaderText = "Estoque Atual";
+            this.ProdCurrentStock.MinimumWidth = 6;
+            this.ProdCurrentStock.Name = "ProdCurrentStock";
+            this.ProdCurrentStock.ReadOnly = true;
+            this.ProdCurrentStock.Width = 60;
+            // 
+            // ProdPurchPerc
+            // 
+            this.ProdPurchPerc.HeaderText = "Porcentagem da Compra";
+            this.ProdPurchPerc.MinimumWidth = 6;
+            this.ProdPurchPerc.Name = "ProdPurchPerc";
+            this.ProdPurchPerc.ReadOnly = true;
+            this.ProdPurchPerc.Width = 125;
+            // 
+            // ProdWeightedAvg
+            // 
+            this.ProdWeightedAvg.HeaderText = "Média Ponderada";
+            this.ProdWeightedAvg.MinimumWidth = 6;
+            this.ProdWeightedAvg.Name = "ProdWeightedAvg";
+            this.ProdWeightedAvg.ReadOnly = true;
+            this.ProdWeightedAvg.Width = 125;
             // 
             // Frm_Create_Purchases
             // 
@@ -1161,6 +1211,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchSummary)).EndInit();
             this.gbox_status.ResumeLayout(false);
             this.gbox_status.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_prodTotal)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1232,6 +1283,23 @@
         private System.Windows.Forms.DateTimePicker dateTime_emissionDate;
         private System.Windows.Forms.Label lbl_prodDiscCash;
         private System.Windows.Forms.NumericUpDown edt_prodDiscCash;
+        private System.Windows.Forms.DataGridView DGV_Instalments;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentDays;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentPercentage;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentMethod;
+        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentValue;
+        private System.Windows.Forms.Button btn_removeItem;
+        private System.Windows.Forms.DataGridView DGV_PurchSummary;
+        private System.Windows.Forms.GroupBox gbox_status;
+        private System.Windows.Forms.CheckBox check_Cancelled;
+        private System.Windows.Forms.CheckBox check_Active;
+        private System.Windows.Forms.Label lbl_totalProduct;
+        private System.Windows.Forms.Label lbl_und;
+        private System.Windows.Forms.TextBox edt_prodUnd;
+        private System.Windows.Forms.NumericUpDown edt_prodTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchSubTotal;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchTotal;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProdId;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProdName;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProdQtd;
@@ -1242,18 +1310,5 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ProdCurrentStock;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProdPurchPerc;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProdWeightedAvg;
-        private System.Windows.Forms.DataGridView DGV_Instalments;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentDays;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentPercentage;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentMethod;
-        private System.Windows.Forms.DataGridViewTextBoxColumn InstalmentValue;
-        private System.Windows.Forms.Button btn_removeItem;
-        private System.Windows.Forms.DataGridView DGV_PurchSummary;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PurchSubTotal;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PurchTotal;
-        private System.Windows.Forms.GroupBox gbox_status;
-        private System.Windows.Forms.CheckBox check_Cancelled;
-        private System.Windows.Forms.CheckBox check_Active;
     }
 }

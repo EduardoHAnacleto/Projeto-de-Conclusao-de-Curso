@@ -103,7 +103,8 @@
         city_id int not null foreign key references CITIES(id_city),
         client_type int not null,
         date_creation datetime not null,
-        date_last_update datetime not null
+        date_last_update datetime not null,
+        payCond_id int not null foreign key references PAYMENTCONDITIONS(id_paycondition)
     );
 	
 		create table EMPLOYEES(
@@ -169,6 +170,7 @@
         city_id int not null foreign key references Cities(id_city),
         date_creation datetime not null,
         date_last_update datetime not null,
+        payCond_id int not null foreign key references PAYMENTCONDITIONS(id_paycondition)
     );
 
     create table PRODUCTS(
@@ -181,7 +183,8 @@
         product_cost decimal (10,2) not null,
         product_barcode bigint,
         date_creation datetime not null,
-        date_last_update datetime not null
+        date_last_update datetime not null,
+        product_und varchar(15) not null
     );
 
     create table SUPPLIERPRODUCTS(
@@ -244,7 +247,7 @@
 
 	create table BILLSTORECEIVE(
         sale_id int not null references SALES(id_sale),
-        instalmentNumber int not null, 
+        instalmentNumber int not null, w
         instalmentValue decimal not null,
         isPaid int not null,
         paidDate datetime,
@@ -345,7 +348,6 @@
         PRODUCT_ID int not null references PRODUCTS(id_product),
         QUANTITY int not null,
         PRODUCT_COST decimal not null,
-        CANCEL_DATE date,
         PURCHASE_PERCENTAGE decimal not null,
         DISCOUNT_CASH decimal not null,
         WEIGHTED_AVG decimal(10,4) not null,

@@ -1,4 +1,5 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
 using System;
@@ -20,6 +21,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             base.PopulatePhoneClassificationsComboBox();
         }
 
+        private PaymentConditions_Controller _payController = new PaymentConditions_Controller();
         private Suppliers_Controller controller = new Suppliers_Controller();
         Suppliers auxObj = null;
 
@@ -48,7 +50,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             if (CheckPeopleCamps())
             {
                 Suppliers supplier = new Suppliers();
-
+                //
+                if (edt_payCondId.Value != 0)
+                {
+                    supplier.PaymentCondition = _payController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
+                }
+                else
+                {
+                    supplier.PaymentCondition = new PaymentConditions();
+                    supplier.PaymentCondition.id = 1;
+                }
                 //Supplier
 
                 supplier.socialReason = edt_socialReason.Text;
@@ -108,6 +119,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_stateInscription.Text = supplier.stateInscription;
             edt_socialReason.Text = supplier.socialReason;
 
+            edt_payCondId.Value = supplier.PaymentCondition.id;
+            edt_payCondName.Text = supplier.PaymentCondition.conditionName;
             //Personal
             edt_id.Value = supplier.id;
             edt_Name.Text = supplier.name;
@@ -177,6 +190,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             base.UnlockCamps();
             edt_stateInscription.Enabled = true;
             edt_socialReason.Enabled = true;
+            gbox_payCondition.Enabled = true;
         }
 
         public override void LockCamps()
@@ -184,6 +198,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             base.LockCamps();
             edt_stateInscription.Enabled = false;
             edt_socialReason.Enabled = false;
+            gbox_payCondition.Enabled = false;
         }
 
         public override void ClearCamps()
@@ -191,6 +206,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             base.ClearCamps();
             edt_stateInscription.Clear();
             edt_socialReason.Clear();
+            edt_payCondId.Value = 0;
+            edt_payCondName.Text = string.Empty;
         }
 
         //
@@ -265,5 +282,27 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             UnlockCamps();
         }
 
+        private void btn_findCondition_Click(object sender, EventArgs e)
+        {
+            SearchPaymentCondition();
+        }
+
+        public void SearchPaymentCondition()
+        {
+            Frm_Find_PaymentConditions formPayCondition = new Frm_Find_PaymentConditions();
+            formPayCondition.hasFather = true;
+            formPayCondition.ShowDialog();
+            if (!formPayCondition.ActiveControl.ContainsFocus)
+            {
+                PaymentConditions payCondition = new PaymentConditions();
+                payCondition = formPayCondition.GetObject();
+                if (payCondition != null)
+                {
+                    edt_payCondName.Text = payCondition.conditionName;
+                    edt_payCondId.Value = payCondition.id;
+                }
+            }
+            formPayCondition.Close();
+        }
     }
 }

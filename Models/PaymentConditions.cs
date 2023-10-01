@@ -27,17 +27,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             decimal fine = 0;
             if (cond.paymentFees > 0)
             {
-                feePerInst = cond.paymentFees / instalmentQtd;
+                feePerInst = cond.paymentFees / 100;
             }
             if (dueDate < DateTime.Now.Date)
             {
-                fine = cond.fineValue;
+                fine = cond.fineValue/100;
             }
             else if (dueDate > DateTime.Now.Date)
             {
                 discount = cond.fineValue;
             }
-            return value + feePerInst + discount + fine;
+            return value + ( value * feePerInst) + discount + (fine * value);
         }
     }
 }

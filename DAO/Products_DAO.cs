@@ -51,14 +51,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "INSERT INTO PRODUCTS ( PRODUCT_NAME, PRODUCT_SALE_PRICE, PRODUCT_GROUP_ID, BRAND_ID, STOCK, PRODUCT_COST, PRODUCT_BARCODE, DATE_CREATION, DATE_LAST_UPDATE) "
-                         + " VALUES (@NAME, @SALE, @GROUPID, @BRANDID, @STOCK, @COST, @BARCODE, @DC, @DU)";
+            string sql = "INSERT INTO PRODUCTS ( PRODUCT_NAME, PRODUCT_SALE_PRICE, PRODUCT_GROUP_ID, BRAND_ID, STOCK, PRODUCT_COST, PRODUCT_BARCODE, DATE_CREATION, DATE_LAST_UPDATE, product_UND) "
+                         + " VALUES (@NAME, @SALE, @GROUPID, @BRANDID, @STOCK, @COST, @BARCODE, @DC, @DU, @UND)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@NAME", obj.productName);
+                    command.Parameters.AddWithValue("@UND", obj.UND);
                     command.Parameters.AddWithValue("@SALE", (decimal)obj.salePrice);
                     command.Parameters.AddWithValue("@GROUPID", obj.productGroup.id);
                     command.Parameters.AddWithValue("@BRANDID", obj.brand.id);
@@ -101,7 +102,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             bool status = false;
 
             string sql = "UPDATE PRODUCTS SET PRODUCT_NAME = @NAME, PRODUCT_SALE_PRICE = @SALEPRICE, PRODUCT_GROUP_ID = @PGID," +
-                "BRAND_ID = @BRANDID, STOCK = @STOCK, PRODUCT_COST = @PCOST, PRODUCT_BARCODE = @BARCODE, DATE_LAST_UPDATE = @DU " +
+                "BRAND_ID = @BRANDID, STOCK = @STOCK, PRODUCT_COST = @PCOST, PRODUCT_BARCODE = @BARCODE, DATE_LAST_UPDATE = @DU, PRODUCT_UND = @UND " +
                 "WHERE ID_PRODUCT = @ID ; ";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -109,6 +110,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", obj.id);
+                    command.Parameters.AddWithValue("@UND", obj.UND);
                     command.Parameters.AddWithValue("@NAME", obj.productName);
                     command.Parameters.AddWithValue("@SALEPRICE", (decimal)obj.salePrice);
                     command.Parameters.AddWithValue("@PGID", obj.productGroup.id);
@@ -199,6 +201,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                 Products obj = new Products
                                 {
                                     id = Convert.ToInt32(reader["id_product"]),
+                                    UND = reader["product_UND"].ToString(),
                                     productName = Convert.ToString(reader["product_name"]),
                                     salePrice = Convert.ToDecimal(reader["product_sale_price"]),
                                     productCost = Convert.ToDecimal(reader["product_cost"]),
@@ -246,6 +249,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                 Products obj = new Products
                                 {
                                     id = Convert.ToInt32(reader["id_product"]),
+                                    UND = reader["product_UND"].ToString(),
                                     productName = Convert.ToString(reader["product_name"]),
                                     salePrice = Convert.ToDecimal(reader["product_sale_price"]),
                                     productCost = Convert.ToDecimal(reader["product_cost"]),
@@ -293,6 +297,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                 Products obj = new Products
                                 {
                                     id = Convert.ToInt32(reader["id_product"]),
+                                    UND = reader["product_UND"].ToString(),
                                     productName = Convert.ToString(reader["product_name"]),
                                     salePrice = Convert.ToDecimal(reader["product_sale_price"]),
                                     productCost = Convert.ToDecimal(reader["product_cost"]),

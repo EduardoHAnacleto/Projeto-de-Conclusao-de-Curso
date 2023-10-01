@@ -31,12 +31,20 @@
             this.check_LegalClient = new System.Windows.Forms.CheckBox();
             this.check_NaturalClient = new System.Windows.Forms.CheckBox();
             this.gbox_clientType = new System.Windows.Forms.GroupBox();
+            this.gbox_payCondition = new System.Windows.Forms.GroupBox();
+            this.lbl_payCondId = new System.Windows.Forms.Label();
+            this.edt_payCondName = new System.Windows.Forms.TextBox();
+            this.lbl_condName = new System.Windows.Forms.Label();
+            this.btn_findCondition = new System.Windows.Forms.Button();
+            this.edt_payCondId = new System.Windows.Forms.NumericUpDown();
             this.gbox_gender.SuspendLayout();
             this.gbox_address.SuspendLayout();
             this.gbox_phones.SuspendLayout();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_clientType.SuspendLayout();
+            this.gbox_payCondition.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_payCondId)).BeginInit();
             this.SuspendLayout();
             // 
             // medt_regNumber
@@ -144,10 +152,69 @@
             this.gbox_clientType.TabStop = false;
             this.gbox_clientType.Text = "* Tipo de Cliente";
             // 
+            // gbox_payCondition
+            // 
+            this.gbox_payCondition.Controls.Add(this.edt_payCondId);
+            this.gbox_payCondition.Controls.Add(this.btn_findCondition);
+            this.gbox_payCondition.Controls.Add(this.lbl_condName);
+            this.gbox_payCondition.Controls.Add(this.edt_payCondName);
+            this.gbox_payCondition.Controls.Add(this.lbl_payCondId);
+            this.gbox_payCondition.Location = new System.Drawing.Point(346, 82);
+            this.gbox_payCondition.Name = "gbox_payCondition";
+            this.gbox_payCondition.Size = new System.Drawing.Size(315, 56);
+            this.gbox_payCondition.TabIndex = 37;
+            this.gbox_payCondition.TabStop = false;
+            this.gbox_payCondition.Text = "Condição de Pagamento";
+            // 
+            // lbl_payCondId
+            // 
+            this.lbl_payCondId.AutoSize = true;
+            this.lbl_payCondId.Location = new System.Drawing.Point(3, 14);
+            this.lbl_payCondId.Name = "lbl_payCondId";
+            this.lbl_payCondId.Size = new System.Drawing.Size(18, 13);
+            this.lbl_payCondId.TabIndex = 1;
+            this.lbl_payCondId.Text = "ID";
+            // 
+            // edt_payCondName
+            // 
+            this.edt_payCondName.Enabled = false;
+            this.edt_payCondName.Location = new System.Drawing.Point(50, 30);
+            this.edt_payCondName.Name = "edt_payCondName";
+            this.edt_payCondName.Size = new System.Drawing.Size(183, 20);
+            this.edt_payCondName.TabIndex = 2;
+            // 
+            // lbl_condName
+            // 
+            this.lbl_condName.AutoSize = true;
+            this.lbl_condName.Location = new System.Drawing.Point(47, 14);
+            this.lbl_condName.Name = "lbl_condName";
+            this.lbl_condName.Size = new System.Drawing.Size(52, 13);
+            this.lbl_condName.TabIndex = 3;
+            this.lbl_condName.Text = "Condição";
+            // 
+            // btn_findCondition
+            // 
+            this.btn_findCondition.Location = new System.Drawing.Point(239, 30);
+            this.btn_findCondition.Name = "btn_findCondition";
+            this.btn_findCondition.Size = new System.Drawing.Size(63, 21);
+            this.btn_findCondition.TabIndex = 4;
+            this.btn_findCondition.Text = "Buscar";
+            this.btn_findCondition.UseVisualStyleBackColor = true;
+            this.btn_findCondition.Click += new System.EventHandler(this.btn_findCondition_Click);
+            // 
+            // edt_payCondId
+            // 
+            this.edt_payCondId.Location = new System.Drawing.Point(6, 30);
+            this.edt_payCondId.Name = "edt_payCondId";
+            this.edt_payCondId.Size = new System.Drawing.Size(38, 20);
+            this.edt_payCondId.TabIndex = 5;
+            this.edt_payCondId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
             // Frm_Create_Clients
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(672, 379);
+            this.Controls.Add(this.gbox_payCondition);
             this.Controls.Add(this.gbox_clientType);
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Frm_Create_Clients";
@@ -171,6 +238,7 @@
             this.Controls.SetChildIndex(this.medt_dob, 0);
             this.Controls.SetChildIndex(this.lbl_regNumber, 0);
             this.Controls.SetChildIndex(this.medt_regNumber, 0);
+            this.Controls.SetChildIndex(this.gbox_payCondition, 0);
             this.gbox_gender.ResumeLayout(false);
             this.gbox_gender.PerformLayout();
             this.gbox_address.ResumeLayout(false);
@@ -182,6 +250,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             this.gbox_clientType.ResumeLayout(false);
             this.gbox_clientType.PerformLayout();
+            this.gbox_payCondition.ResumeLayout(false);
+            this.gbox_payCondition.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_payCondId)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -192,5 +263,11 @@
         public System.Windows.Forms.CheckBox check_LegalClient;
         public System.Windows.Forms.CheckBox check_NaturalClient;
         public System.Windows.Forms.GroupBox gbox_clientType;
+        private System.Windows.Forms.GroupBox gbox_payCondition;
+        private System.Windows.Forms.Label lbl_condName;
+        private System.Windows.Forms.TextBox edt_payCondName;
+        private System.Windows.Forms.Label lbl_payCondId;
+        private System.Windows.Forms.Button btn_findCondition;
+        private System.Windows.Forms.NumericUpDown edt_payCondId;
     }
 }

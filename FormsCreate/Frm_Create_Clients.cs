@@ -1,4 +1,5 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
 using System;
@@ -18,9 +19,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         {
             InitializeComponent();
             base.PopulatePhoneClassificationsComboBox();
+            edt_payCondId.Controls[0].Visible = false;
         }
 
         private Clients_Controller controller = new Clients_Controller();
+        private PaymentConditions_Controller _payController = new PaymentConditions_Controller();
         Clients auxObj = null;
 
         public override void SetNewId()
@@ -150,6 +153,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 client.registrationNumber = regN;
                 client.dateOfBirth = Convert.ToDateTime(medt_dob.Text);
 
+                if (edt_payCondId.Value != 0)
+                {
+                    client.PaymentCondition = _payController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
+                }
+                else
+                {
+                    client.PaymentCondition = new PaymentConditions();
+                    client.PaymentCondition.id = 1;
+                }
+
                 //Phones
                 client.phoneNumber1 = Utilities.RemoveRegMask(medt_phone1.Text);
                 client.phoneClass1 = TakePhoneClass(cbox_phone1.SelectedItem.ToString());
@@ -245,6 +258,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 SetFormToLegal();
                 check_LegalClient.Checked = true;
             }
+
+            edt_payCondId.Value = client.PaymentCondition.id;
+            edt_payCondName.Text = client.PaymentCondition.conditionName;
             //Personal
             edt_id.Value = client.id;
             edt_Name.Text = client.name;
@@ -293,6 +309,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         {
             base.UnlockCamps();
             gbox_clientType.Enabled = true;
+            gbox_payCondition.Enabled = true;   
             if (check_LegalClient.Checked)
             {
                 gbox_gender.Enabled = false;
@@ -305,6 +322,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         {
             base.LockCamps();
             gbox_clientType.Enabled = false;
+            gbox_payCondition.Enabled = false;
         }
 
         public override void ClearCamps()
@@ -312,6 +330,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             base.ClearCamps();
             check_LegalClient.Checked = false;
             check_NaturalClient.Checked = false;
+            edt_payCondName.Text = string.Empty;
+            edt_payCondId.Value = 0;
         }
 
         //
@@ -385,6 +405,29 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 }
             }
             UnlockCamps();
+        }
+
+        private void btn_findCondition_Click(object sender, EventArgs e)
+        {
+            SearchPaymentCondition();
+        }
+
+        public void SearchPaymentCondition()
+        {
+            Frm_Find_PaymentConditions formPayCondition = new Frm_Find_PaymentConditions();
+            formPayCondition.hasFather = true;
+            formPayCondition.ShowDialog();
+            if (!formPayCondition.ActiveControl.ContainsFocus)
+            {
+                PaymentConditions payCondition = new PaymentConditions();
+                payCondition = formPayCondition.GetObject();
+                if (payCondition != null)
+                {
+                    edt_payCondName.Text = payCondition.conditionName;
+                    edt_payCondId.Value = payCondition.id;
+                }
+            }
+            formPayCondition.Close();
         }
     }
 }

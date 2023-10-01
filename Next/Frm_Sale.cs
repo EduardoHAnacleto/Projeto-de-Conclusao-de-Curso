@@ -145,6 +145,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                         medt_registrationNumber.Mask = "000.000.000-00";
                     }
                     medt_registrationNumber.Text = client.registrationNumber;
+                    PopulatePaymentCondition(client.PaymentCondition);
                 }
             }
             formClient.Close();
@@ -409,6 +410,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         private void btn_FindClient_Click(object sender, EventArgs e)
         {
             SearchClient();
+        }
+
+        public void PopulatePaymentCondition(PaymentConditions payCondition)
+        {
+            edt_payCondition.Text = payCondition.conditionName;
+            edt_payConditionDiscount.Value = (decimal)payCondition.discountPerc;
+            edt_payConditionFees.Value = (decimal)payCondition.paymentFees;
+            edt_payConditionFine.Value = (decimal)payCondition.fineValue;
+            edt_payConditionQnt.Value = payCondition.instalmentQuantity;
+            edt_payConditionId.Value = payCondition.id;
+            SetBillInstalmentsToDGV(payCondition.id);
         }
 
         public void SearchPaymentCondition()

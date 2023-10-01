@@ -17,6 +17,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public People person { get; set; }
         public string socialReason { get; set; }
         public string stateInscription { get; set; }
+        public PaymentConditions PaymentCondition { get; set; }
 
 
     }

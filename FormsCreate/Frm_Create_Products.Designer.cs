@@ -46,6 +46,8 @@
             this.lbl_profitPerc = new System.Windows.Forms.Label();
             this.edt_productCost = new System.Windows.Forms.NumericUpDown();
             this.edt_barCode = new System.Windows.Forms.TextBox();
+            this.edt_und = new System.Windows.Forms.TextBox();
+            this.lbl_und = new System.Windows.Forms.Label();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_stock)).BeginInit();
@@ -104,7 +106,7 @@
             // 
             // edt_productSalePrice
             // 
-            this.edt_productSalePrice.Location = new System.Drawing.Point(507, 67);
+            this.edt_productSalePrice.Location = new System.Drawing.Point(567, 66);
             this.edt_productSalePrice.MaxLength = 6;
             this.edt_productSalePrice.Name = "edt_productSalePrice";
             this.edt_productSalePrice.Size = new System.Drawing.Size(73, 20);
@@ -133,7 +135,7 @@
             // lbl_salePrice
             // 
             this.lbl_salePrice.AutoSize = true;
-            this.lbl_salePrice.Location = new System.Drawing.Point(504, 54);
+            this.lbl_salePrice.Location = new System.Drawing.Point(564, 53);
             this.lbl_salePrice.Name = "lbl_salePrice";
             this.lbl_salePrice.Size = new System.Drawing.Size(86, 13);
             this.lbl_salePrice.TabIndex = 23;
@@ -142,7 +144,7 @@
             // lbl_productCost
             // 
             this.lbl_productCost.AutoSize = true;
-            this.lbl_productCost.Location = new System.Drawing.Point(333, 8);
+            this.lbl_productCost.Location = new System.Drawing.Point(340, 51);
             this.lbl_productCost.Name = "lbl_productCost";
             this.lbl_productCost.Size = new System.Drawing.Size(41, 13);
             this.lbl_productCost.TabIndex = 22;
@@ -170,7 +172,7 @@
             // edt_stock
             // 
             this.edt_stock.Enabled = false;
-            this.edt_stock.Location = new System.Drawing.Point(401, 24);
+            this.edt_stock.Location = new System.Drawing.Point(408, 67);
             this.edt_stock.Margin = new System.Windows.Forms.Padding(2);
             this.edt_stock.Maximum = new decimal(new int[] {
             9999,
@@ -185,7 +187,7 @@
             // lbl_stock
             // 
             this.lbl_stock.AutoSize = true;
-            this.lbl_stock.Location = new System.Drawing.Point(398, 9);
+            this.lbl_stock.Location = new System.Drawing.Point(405, 52);
             this.lbl_stock.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_stock.Name = "lbl_stock";
             this.lbl_stock.Size = new System.Drawing.Size(53, 13);
@@ -204,7 +206,7 @@
             // edt_ProfitPerc
             // 
             this.edt_ProfitPerc.DecimalPlaces = 2;
-            this.edt_ProfitPerc.Location = new System.Drawing.Point(401, 69);
+            this.edt_ProfitPerc.Location = new System.Drawing.Point(469, 67);
             this.edt_ProfitPerc.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -219,7 +221,7 @@
             // lbl_profitPerc
             // 
             this.lbl_profitPerc.AutoSize = true;
-            this.lbl_profitPerc.Location = new System.Drawing.Point(399, 54);
+            this.lbl_profitPerc.Location = new System.Drawing.Point(467, 52);
             this.lbl_profitPerc.Name = "lbl_profitPerc";
             this.lbl_profitPerc.Size = new System.Drawing.Size(94, 13);
             this.lbl_profitPerc.TabIndex = 38;
@@ -229,7 +231,7 @@
             // 
             this.edt_productCost.DecimalPlaces = 2;
             this.edt_productCost.Enabled = false;
-            this.edt_productCost.Location = new System.Drawing.Point(336, 24);
+            this.edt_productCost.Location = new System.Drawing.Point(343, 67);
             this.edt_productCost.Maximum = new decimal(new int[] {
             99999999,
             0,
@@ -249,10 +251,30 @@
             this.edt_barCode.TabIndex = 41;
             this.edt_barCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // edt_und
+            // 
+            this.edt_und.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_und.Location = new System.Drawing.Point(336, 24);
+            this.edt_und.MaxLength = 15;
+            this.edt_und.Name = "edt_und";
+            this.edt_und.Size = new System.Drawing.Size(111, 20);
+            this.edt_und.TabIndex = 42;
+            // 
+            // lbl_und
+            // 
+            this.lbl_und.AutoSize = true;
+            this.lbl_und.Location = new System.Drawing.Point(333, 8);
+            this.lbl_und.Name = "lbl_und";
+            this.lbl_und.Size = new System.Drawing.Size(31, 13);
+            this.lbl_und.TabIndex = 43;
+            this.lbl_und.Text = "UND";
+            // 
             // Frm_Create_Products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(672, 379);
+            this.Controls.Add(this.lbl_und);
+            this.Controls.Add(this.edt_und);
             this.Controls.Add(this.edt_barCode);
             this.Controls.Add(this.edt_productCost);
             this.Controls.Add(this.lbl_profitPerc);
@@ -299,6 +321,8 @@
             this.Controls.SetChildIndex(this.lbl_profitPerc, 0);
             this.Controls.SetChildIndex(this.edt_productCost, 0);
             this.Controls.SetChildIndex(this.edt_barCode, 0);
+            this.Controls.SetChildIndex(this.edt_und, 0);
+            this.Controls.SetChildIndex(this.lbl_und, 0);
             this.gbox_dates.ResumeLayout(false);
             this.gbox_dates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
@@ -330,5 +354,7 @@
         private System.Windows.Forms.Label lbl_profitPerc;
         private System.Windows.Forms.NumericUpDown edt_productCost;
         private System.Windows.Forms.TextBox edt_barCode;
+        private System.Windows.Forms.TextBox edt_und;
+        private System.Windows.Forms.Label lbl_und;
     }
 }

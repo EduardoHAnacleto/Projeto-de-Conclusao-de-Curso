@@ -125,7 +125,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
                 }
                 formMethods.Close();
-            }
+            }          
             PopulateComboBox();
         }
 
@@ -331,6 +331,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public void PopulateComboBox()
         {
+            cbox_payMethods.Items.Clear();
             ComboBox comboBox = new ComboBox();
             PaymentMethods_Controller pController = new PaymentMethods_Controller();
             DataTable dt = pController.PopulateDGV();

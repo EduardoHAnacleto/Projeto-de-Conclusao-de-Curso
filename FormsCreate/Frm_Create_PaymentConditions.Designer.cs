@@ -300,9 +300,9 @@
             this.lbl_paymentFee.AutoSize = true;
             this.lbl_paymentFee.Location = new System.Drawing.Point(118, 51);
             this.lbl_paymentFee.Name = "lbl_paymentFee";
-            this.lbl_paymentFee.Size = new System.Drawing.Size(38, 13);
+            this.lbl_paymentFee.Size = new System.Drawing.Size(49, 13);
             this.lbl_paymentFee.TabIndex = 26;
-            this.lbl_paymentFee.Text = "* Taxa";
+            this.lbl_paymentFee.Text = "* Taxa %";
             // 
             // lbl_paymentFine
             // 

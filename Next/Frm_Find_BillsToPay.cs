@@ -111,9 +111,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             DataTable dt = this._controller.PopulateDGV();
             if (dt != null)
             {
+                PaymentMethods_Controller metController = new PaymentMethods_Controller();
                 foreach (DataRow dr in dt.Rows)
                 {
-                    var supplierName = _controller.FindSupplierId(Convert.ToInt32(dr["supplier_id"])).FirstOrDefault().Supplier.name;
+                    var supplier = _controller.FindSupplierId(Convert.ToInt32(dr["supplier_id"])).FirstOrDefault().Supplier;
                     var billNum = dr["billNumber"].ToString();
                     var billModel = dr["billModel"].ToString();
                     var billSeries = dr["billSeries"].ToString(); 
@@ -121,6 +122,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     var emissionDate = Convert.ToDateTime(dr["emissionDate"]).ToShortDateString();
                     var dueDate = Convert.ToDateTime(dr["dueDate"].ToString()).ToShortDateString();
                     var isPaid = dr["billStatus"].ToString();
+                    var paymentMethod = metController.FindItemId(Convert.ToInt32(dr["payMethod_id"]));
+                    var totalValue = dr["BillValue"].ToString();
                     if (isPaid == "0")
                     {
                         isPaid = "ATIVO";
@@ -133,7 +136,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     {
                         isPaid = "CANCELADO";
                     }
-                    DGV_BillsToPay.Rows.Add(supplierName, billNum,billModel,billSeries,instalmentNumber,emissionDate,dueDate,isPaid);                     
+                    DGV_BillsToPay.Rows.Add(
+                        supplier.id,
+                        supplier.name,
+                        paymentMethod.id,
+                        paymentMethod.paymentMethod,
+                        billNum,
+                        billModel,
+                        billSeries,
+                        instalmentNumber,
+                        totalValue,
+                        emissionDate,
+                        dueDate,
+                        isPaid);                     
                 }
             }
         }

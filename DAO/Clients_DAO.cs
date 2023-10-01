@@ -52,15 +52,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             string sql = "INSERT INTO CLIENTS ( CLIENT_NAME, CLIENT_GENDER, CLIENT_REGISTRATION, CLIENT_AGE, CLIENT_DOB, CLIENT_EMAIL," +
                 "CLIENT_PHONE1, CLIENT_PHONE2, CLIENT_PHONE3, CLIENT_PHONE_CLASS1, CLIENT_PHONE_CLASS2, CLIENT_PHONE_CLASS3," +
                 "CLIENT_STREET_NAME, CLIENT_DISTRICT, CLIENT_HOUSE_NUMBER, CLIENT_HOME_TYPE, CLIENT_COMPLEMENT, CLIENT_ZIP_CODE," +
-                "CITY_ID, CLIENT_TYPE, DATE_CREATION, DATE_LAST_UPDATE) VALUES " +
+                "CITY_ID, CLIENT_TYPE, DATE_CREATION, DATE_LAST_UPDATE, PAYCOND_ID) VALUES " +
                 "(@NAME, @GENDER, @REGISTRATION, @AGE, @DOB, @EMAIL, @PHONE1, @PHONE2, @PHONE3, @PCLASS1, @PCLASS2, @PCLASS3," +
-                "@STREET, @DISTRICT, @HOUSENUMBER, @HOMETYPE, @COMPLEMENT, @ZIPCODE, @CITYID, @TYPE, @DC, @DU)";
+                "@STREET, @DISTRICT, @HOUSENUMBER, @HOMETYPE, @COMPLEMENT, @ZIPCODE, @CITYID, @TYPE, @DC, @DU, @PAYCONDID)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@NAME", obj.name);
+                    command.Parameters.AddWithValue("PAYCONDID", obj.PaymentCondition.id);
                     command.Parameters.AddWithValue("@GENDER", obj.gender);
                     command.Parameters.AddWithValue("@REGISTRATION", obj.registrationNumber);
                     command.Parameters.AddWithValue("@AGE", obj.age);
@@ -113,7 +114,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 "CLIENT_AGE = @AGE, CLIENT_DOB = @DOB, CLIENT_EMAIL = @EMAIL, CLIENT_PHONE1 = @PHONE1, CLIENT_PHONE2 = @PHONE2, " +
                 "CLIENT_PHONE3 = @PHONE3, CLIENT_PHONE_CLASS1 = @PCLASS1, CLIENT_PHONE_CLASS2 = @PCLASS2, CLIENT_PHONE_CLASS3 = @PCLASS3," +
                 "CLIENT_STREET_NAME = @STREET, CLIENT_DISTRICT = @DISTRICT, CLIENT_HOUSE_NUMBER = @HNUMBER, CLIENT_HOME_TYPE = @HTYPE," +
-                "CLIENT_COMPLEMENT = @COMPLEMENT, CLIENT_ZIP_CODE = @ZIPCODE, CITY_ID = @CITYID, CLIENT_TYPE = @CTYPE ,DATE_LAST_UPDATE = @DU " +
+                "CLIENT_COMPLEMENT = @COMPLEMENT, CLIENT_ZIP_CODE = @ZIPCODE, CITY_ID = @CITYID, CLIENT_TYPE = @CTYPE ,DATE_LAST_UPDATE = @DU," +
+                " PAYCOND_ID = @PAYCONDID " +
                 "WHERE ID_CLIENT = @ID ; ";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -122,6 +124,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", obj.id);
                     command.Parameters.AddWithValue("@NAME", obj.name);
+                    command.Parameters.AddWithValue("PAYCONDID", obj.PaymentCondition.id);
                     command.Parameters.AddWithValue("@REGISTRATION", obj.registrationNumber);
                     command.Parameters.AddWithValue("@GENDER", obj.gender);
                     command.Parameters.AddWithValue("@AGE", obj.age);
@@ -214,10 +217,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                             {
                                 Cities_Controller _SController = new Cities_Controller();
                                 PhoneClassifications_Controller _PCController = new PhoneClassifications_Controller();
+                                PaymentConditions_Controller _payController = new PaymentConditions_Controller();
                                 Clients obj = new Clients
                                 {
                                     id = Convert.ToInt32(reader["id_client"]),
                                     name = Convert.ToString(reader["client_name"]),
+                                    PaymentCondition = _payController.FindItemId(Convert.ToInt32(reader["paycond_id"])),
                                     gender = Convert.ToInt32(reader["client_gender"]),
                                     registrationNumber = Convert.ToString(reader["client_registration"]),
                                     age = Convert.ToInt32(reader["client_age"]),
@@ -275,10 +280,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                             {
                                 Cities_Controller _SController = new Cities_Controller();
                                 PhoneClassifications_Controller _PCController = new PhoneClassifications_Controller();
+                                PaymentConditions_Controller _payController = new PaymentConditions_Controller();
                                 Clients obj = new Clients
                                 {
                                     id = Convert.ToInt32(reader["id_client"]),
                                     name = Convert.ToString(reader["client_name"]),
+                                    PaymentCondition = _payController.FindItemId(Convert.ToInt32(reader["paycond_id"])),
                                     gender = Convert.ToInt32(reader["client_gender"]),
                                     registrationNumber = Convert.ToString(reader["client_registration"]),
                                     age = Convert.ToInt32(reader["client_age"]),
@@ -335,10 +342,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                             {
                                 Cities_Controller _SController = new Cities_Controller();
                                 PhoneClassifications_Controller _PCController = new PhoneClassifications_Controller();
+                                PaymentConditions_Controller _payController = new PaymentConditions_Controller();
                                 Clients obj = new Clients
                                 {
                                     id = Convert.ToInt32(reader["id_client"]),
                                     name = Convert.ToString(reader["client_name"]),
+                                    PaymentCondition = _payController.FindItemId(Convert.ToInt32(reader["paycond_id"])),
                                     gender = Convert.ToInt32(reader["client_gender"]),
                                     registrationNumber = Convert.ToString(reader["client_registration"]),
                                     age = Convert.ToInt32(reader["client_age"]),

@@ -19,6 +19,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public decimal salePrice { get; set; }
         public int stock { get; set; }
         public long BarCode { get; set; }
+        public string UND {  get; set; }
         public Brands brand { get; set; }
         public ProductGroups productGroup { get; set; }
     }

@@ -55,14 +55,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 cbox_brands.Focus();
                 return false;
             }
+            else if (edt_und.Text == string.Empty)
+            {
+                string message = "UND é obrigatório.";
+                string caption = "Campo inválido.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                edt_und.Focus();
+                return false;
+            }
             else if (Utilities.IsNotSelected(cbox_ProductGroup.SelectedItem, "Grupo de Produto"))
             {
                 cbox_ProductGroup.Focus();
-                return false;
-            }
-            else if (!Utilities.HasOnlyDigits((edt_barCode.Text), "Código de Barras") || Utilities.HasOnlySpaces(edt_barCode.Text,"Código de Barras"))
-            {
-                edt_barCode.Focus();
                 return false;
             }
             else if ((Convert.ToDecimal(edt_productCost.Text) >= Convert.ToDecimal(edt_productSalePrice.Text)) && edt_productCost.Value != 0)
@@ -90,6 +95,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             btn_SearchPGroup.Enabled = false;
             edt_barCode.Enabled = false;
             edt_ProfitPerc.Enabled = false;
+            edt_und.Enabled = false;
         }
 
         public override void UnlockCamps()
@@ -103,6 +109,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             btn_SearchPGroup.Enabled = true;
             edt_barCode.Enabled = true;
             edt_ProfitPerc.Enabled = true;
+            edt_und.Enabled = true;
         }
 
         public override void ClearCamps()
@@ -116,6 +123,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_stock.Value = 0;
             edt_barCode.Clear();
             edt_ProfitPerc.Value = 0;
+            edt_und.Text = string.Empty;
         }
 
         public void PopulateCamps(Products product)
@@ -130,6 +138,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             cbox_brands.SelectedItem = product.brand.brandName;
             cbox_ProductGroup.SelectedItem = product.productGroup.productGroup;
             edt_barCode.Text = product.BarCode.ToString();
+            edt_und.Text = product.UND;
             if (product.productCost != 0)
             {
                 edt_ProfitPerc.Value = ((product.salePrice / product.productCost) - 1) *100;
@@ -150,6 +159,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             product.salePrice = Convert.ToDecimal(edt_productSalePrice.Text);
             product.stock = Convert.ToInt32(edt_stock.Value);
             product.BarCode = Convert.ToInt64(edt_barCode.Text);
+            product.UND = edt_und.Text;
 
             ProductGroups pGroups = this.TakePGroup(cbox_ProductGroup.SelectedItem.ToString());
             product.productGroup = pGroups;
