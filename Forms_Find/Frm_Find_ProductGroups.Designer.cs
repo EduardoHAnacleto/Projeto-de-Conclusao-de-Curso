@@ -75,6 +75,9 @@
             // 
             this.DGV_ProdGroups.AllowUserToAddRows = false;
             this.DGV_ProdGroups.AllowUserToDeleteRows = false;
+            this.DGV_ProdGroups.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_ProdGroups.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_ProdGroups.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.PGroupId,

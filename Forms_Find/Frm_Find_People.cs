@@ -20,7 +20,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
         public Frm_Find_People()
         {
             InitializeComponent();
-            
+            DGV_People.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+
         }
 
         private void DGV_People_CellContentClick(object sender, DataGridViewCellEventArgs e)

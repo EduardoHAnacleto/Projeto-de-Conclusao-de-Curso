@@ -19,6 +19,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public Frm_Find_BillsToReceive()
         {
             InitializeComponent();
+            DGV_BillsToReceive.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToReceive.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToReceive.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToReceive.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToReceive.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             SetBillsToReceiveDataSourceToDGV();
             lbl_id.Visible = false;
             edt_id.Visible = false;
@@ -198,6 +203,35 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             this.SetDataSourceToDGV();
         }
 
+        private void btn_SetPaidBill_Click(object sender, EventArgs e)
+        {
+            PayBill();
+        }
 
+        private void PayBill()
+        {
+            var obj = GetObject();
+            if (obj != null)
+            {
+                if (AskToPay())
+                {
+                    _controller.SetPaidBillsFromDb(obj.id);
+                }
+            }         
+        }
+
+        public static bool AskToPay()
+        {
+            string message = "Deseja baixar essa nota?";
+            string caption = "Confirmação.";
+            MessageBoxIcon icon = MessageBoxIcon.Error;
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
+            if (dialogResult == DialogResult.Yes)
+            {
+                return true;
+            }
+            else return false;
+        }
     }
 }

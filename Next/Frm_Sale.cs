@@ -36,6 +36,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_ProdDiscCash.Controls[0].Visible = false;
             edt_ProdUnValue.Controls[0].Visible = false;
             edt_totalPValue.Controls[0].Visible = false;
+            DGV_SaleProducts.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_SaleProducts.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_SaleProducts.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_SaleProducts.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_SaleProducts.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             SetUser(user);
         }
 

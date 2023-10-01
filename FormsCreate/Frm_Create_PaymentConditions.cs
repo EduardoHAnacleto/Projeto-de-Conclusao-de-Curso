@@ -27,6 +27,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_valuePercentage.Controls[0].Visible = false;
             PopulateComboBox();
             btn_NewSave.Enabled = false;
+            DGV_Instalments.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private PaymentConditions_Controller controller = new PaymentConditions_Controller();

@@ -80,6 +80,9 @@
             // 
             // gbox_Instalments
             // 
+            this.gbox_Instalments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbox_Instalments.Controls.Add(this.edt_valuePercentage);
             this.gbox_Instalments.Controls.Add(this.lbl_totalPercentage);
             this.gbox_Instalments.Controls.Add(this.edt_totalPercentage);
@@ -92,11 +95,11 @@
             this.gbox_Instalments.Controls.Add(this.lbl_Number);
             this.gbox_Instalments.Controls.Add(this.btn_AddInstalment);
             this.gbox_Instalments.Controls.Add(this.cbox_payMethods);
-            this.gbox_Instalments.Location = new System.Drawing.Point(66, 104);
+            this.gbox_Instalments.Location = new System.Drawing.Point(12, 104);
             this.gbox_Instalments.Margin = new System.Windows.Forms.Padding(2);
             this.gbox_Instalments.Name = "gbox_Instalments";
             this.gbox_Instalments.Padding = new System.Windows.Forms.Padding(2);
-            this.gbox_Instalments.Size = new System.Drawing.Size(529, 62);
+            this.gbox_Instalments.Size = new System.Drawing.Size(583, 62);
             this.gbox_Instalments.TabIndex = 29;
             this.gbox_Instalments.TabStop = false;
             this.gbox_Instalments.Text = "* Parcelas";
@@ -235,21 +238,25 @@
             // DGV_Instalments
             // 
             this.DGV_Instalments.AllowUserToAddRows = false;
+            this.DGV_Instalments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_Instalments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Instalments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.InstalmentNumber,
             this.IntalmentDays,
             this.InstalmentPercentage,
             this.InstalmentPayMethod});
-            this.DGV_Instalments.Location = new System.Drawing.Point(66, 170);
+            this.DGV_Instalments.Location = new System.Drawing.Point(12, 170);
             this.DGV_Instalments.Margin = new System.Windows.Forms.Padding(2);
             this.DGV_Instalments.MultiSelect = false;
             this.DGV_Instalments.Name = "DGV_Instalments";
             this.DGV_Instalments.ReadOnly = true;
+            this.DGV_Instalments.RowHeadersVisible = false;
             this.DGV_Instalments.RowHeadersWidth = 51;
             this.DGV_Instalments.RowTemplate.Height = 24;
             this.DGV_Instalments.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_Instalments.Size = new System.Drawing.Size(529, 147);
+            this.DGV_Instalments.Size = new System.Drawing.Size(583, 147);
             this.DGV_Instalments.TabIndex = 28;
             this.DGV_Instalments.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_Instalments_RowsRemoved);
             this.DGV_Instalments.UserDeletedRow += new System.Windows.Forms.DataGridViewRowEventHandler(this.DGV_Instalments_UserDeletedRow);

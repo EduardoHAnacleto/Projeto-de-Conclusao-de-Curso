@@ -147,7 +147,7 @@
             this.gbox_country.Controls.Add(this.btn_SearchCountry);
             this.gbox_country.Controls.Add(this.lbl_Country);
             this.gbox_country.Controls.Add(this.edt_country);
-            this.gbox_country.Location = new System.Drawing.Point(66, 65);
+            this.gbox_country.Location = new System.Drawing.Point(12, 64);
             this.gbox_country.Name = "gbox_country";
             this.gbox_country.Size = new System.Drawing.Size(344, 71);
             this.gbox_country.TabIndex = 24;

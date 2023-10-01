@@ -94,6 +94,7 @@
             // 
             // btn_Edit
             // 
+            this.btn_Edit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_Edit.Enabled = false;
             this.btn_Edit.Location = new System.Drawing.Point(489, 351);
             this.btn_Edit.Margin = new System.Windows.Forms.Padding(2);
@@ -106,6 +107,7 @@
             // 
             // btn_SelectDelete
             // 
+            this.btn_SelectDelete.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_SelectDelete.Enabled = false;
             this.btn_SelectDelete.Location = new System.Drawing.Point(549, 351);
             this.btn_SelectDelete.Margin = new System.Windows.Forms.Padding(2);
@@ -118,6 +120,7 @@
             // 
             // btn_NewSave
             // 
+            this.btn_NewSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_NewSave.Location = new System.Drawing.Point(429, 351);
             this.btn_NewSave.Margin = new System.Windows.Forms.Padding(2);
             this.btn_NewSave.Name = "btn_NewSave";
@@ -129,6 +132,7 @@
             // 
             // btn_exit
             // 
+            this.btn_exit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_exit.Location = new System.Drawing.Point(609, 351);
             this.btn_exit.Margin = new System.Windows.Forms.Padding(2);
             this.btn_exit.Name = "btn_exit";

@@ -152,6 +152,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms_Find
         public override void SetDataSourceToDGV() //Cria DataTable, chama Controller para trazer o DataTable e colocar na DGV como DataSource, linka db com DGV
         {
             DGV_Services.Rows.Clear();
+            DGV_Services.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Services.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DataTable dt = this.controller.PopulateDGV();
             if (dt != null)
             {

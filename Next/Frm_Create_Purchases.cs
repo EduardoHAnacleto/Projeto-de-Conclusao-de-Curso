@@ -40,6 +40,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             dateTime_emissionDate.Text = DateTime.Today.ToString();
             User = user;
             SetUser(User);
+            DGV_Instalments.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private void SetUser(Users user)
@@ -161,11 +168,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     DGV_PurchasesProducts.Rows.Add(
                         product.id,
                         product.productName,
+                        product.UND,
                         amount,
-                        product.productCost,
                         discountCash,
                         newUnCost,
-                        product.salePrice,
+                        newUnCost * amount,
                         product.stock,
                         purchPerc,
                         newUnCost

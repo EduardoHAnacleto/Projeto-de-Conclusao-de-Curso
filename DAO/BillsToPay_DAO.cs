@@ -523,5 +523,45 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 return status;
             }
         }
+
+        public bool SetPaidBillsFromDb(int billNum, int billModel, int billSeries, int supplierId, int instalmentNumber)
+        {
+            bool status = false;
+
+            string sql = "UPDATE BILLSTOPAY SET PAIDDATE = @PAIDDATE, DATE_LAST_UPDATE = @DU " +
+                "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND SUPPLIER_ID = @SUPPLIERID AND INSTALMENTNUMBER = @INUM; ";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@PAIDDATE", DateTime.Now);
+                    command.Parameters.AddWithValue("@INUM", instalmentNumber);
+                    command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
+                    command.Parameters.AddWithValue("@BNUMBER", billNum);
+                    command.Parameters.AddWithValue("@BSERIES", billSeries);
+                    command.Parameters.AddWithValue("@BMODEL", billSeries);
+                    command.Parameters.AddWithValue("@DU", DateTime.Now);
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro : " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
     }
 }

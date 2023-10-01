@@ -77,6 +77,9 @@
             // 
             this.DGV_Instalments.AllowUserToAddRows = false;
             this.DGV_Instalments.AllowUserToDeleteRows = false;
+            this.DGV_Instalments.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_Instalments.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Instalments.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Instalment_Number,
@@ -266,6 +269,9 @@
             // 
             // gbox_billDates
             // 
+            this.gbox_billDates.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbox_billDates.Controls.Add(this.lbl_paidDate);
             this.gbox_billDates.Controls.Add(this.datePicker_PaidDate);
             this.gbox_billDates.Controls.Add(this.lbl_DueDate);
@@ -337,6 +343,7 @@
             // 
             // gbox_isPaid
             // 
+            this.gbox_isPaid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbox_isPaid.Controls.Add(this.check_Cancelled);
             this.gbox_isPaid.Controls.Add(this.check_Active);
             this.gbox_isPaid.Controls.Add(this.check_Paid);

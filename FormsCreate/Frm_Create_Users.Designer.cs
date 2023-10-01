@@ -194,6 +194,7 @@
             this.edt_idEmployee.Name = "edt_idEmployee";
             this.edt_idEmployee.Size = new System.Drawing.Size(45, 20);
             this.edt_idEmployee.TabIndex = 18;
+            this.edt_idEmployee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // Frm_Create_Users
             // 

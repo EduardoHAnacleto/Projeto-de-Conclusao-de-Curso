@@ -26,6 +26,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_id.Visible = false;
             lbl_id.Visible = false;
             check_Cancelled.Enabled = false;
+            DGV_Instalments.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private readonly BillsToReceive_Controller _controller = new BillsToReceive_Controller();

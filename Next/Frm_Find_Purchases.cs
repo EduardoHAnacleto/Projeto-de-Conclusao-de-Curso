@@ -18,6 +18,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public Frm_Find_Purchases()
         {
             InitializeComponent();
+            DGV_Purchases.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Purchases.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Purchases.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Purchases.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Purchases.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Purchases.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Purchases.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             PopulateDGVPurchases();
             edt_id.Visible = false;
             lbl_id.Visible = false;

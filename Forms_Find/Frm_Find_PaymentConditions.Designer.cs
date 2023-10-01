@@ -50,6 +50,9 @@
             // 
             this.DGV_PayConditions.AllowUserToAddRows = false;
             this.DGV_PayConditions.AllowUserToDeleteRows = false;
+            this.DGV_PayConditions.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_PayConditions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_PayConditions.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID_PayCond,

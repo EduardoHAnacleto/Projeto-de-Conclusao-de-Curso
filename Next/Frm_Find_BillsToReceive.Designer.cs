@@ -39,27 +39,31 @@
             this.edt_clientName = new System.Windows.Forms.TextBox();
             this.lbl_clientName = new System.Windows.Forms.Label();
             this.btn_Find = new System.Windows.Forms.Button();
+            this.SetPaidBill = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_BillsToReceive)).BeginInit();
             this.SuspendLayout();
             // 
             // btn_Select
             // 
-            this.btn_Select.Location = new System.Drawing.Point(580, 366);
+            this.btn_Select.Location = new System.Drawing.Point(671, 419);
             // 
             // btn_exit
             // 
-            this.btn_exit.Location = new System.Drawing.Point(649, 366);
+            this.btn_exit.Location = new System.Drawing.Point(740, 419);
             // 
             // btn_New
             // 
-            this.btn_New.Location = new System.Drawing.Point(520, 366);
+            this.btn_New.Location = new System.Drawing.Point(611, 419);
             // 
             // DGV_BillsToReceive
             // 
             this.DGV_BillsToReceive.AllowUserToAddRows = false;
             this.DGV_BillsToReceive.AllowUserToDeleteRows = false;
             this.DGV_BillsToReceive.AllowUserToResizeRows = false;
+            this.DGV_BillsToReceive.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_BillsToReceive.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_BillsToReceive.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SaleNumberBillsReceive,
@@ -76,7 +80,7 @@
             this.DGV_BillsToReceive.RowHeadersVisible = false;
             this.DGV_BillsToReceive.RowHeadersWidth = 51;
             this.DGV_BillsToReceive.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_BillsToReceive.Size = new System.Drawing.Size(695, 312);
+            this.DGV_BillsToReceive.Size = new System.Drawing.Size(783, 360);
             this.DGV_BillsToReceive.TabIndex = 8;
             // 
             // SaleNumberBillsReceive
@@ -160,10 +164,21 @@
             this.btn_Find.UseVisualStyleBackColor = true;
             this.btn_Find.Click += new System.EventHandler(this.btn_Find_Click);
             // 
+            // SetPaidBill
+            // 
+            this.SetPaidBill.Location = new System.Drawing.Point(519, 417);
+            this.SetPaidBill.Name = "SetPaidBill";
+            this.SetPaidBill.Size = new System.Drawing.Size(75, 23);
+            this.SetPaidBill.TabIndex = 12;
+            this.SetPaidBill.Text = "Baixar Conta";
+            this.SetPaidBill.UseVisualStyleBackColor = true;
+            this.SetPaidBill.Click += new System.EventHandler(this.btn_SetPaidBill_Click);
+            // 
             // Frm_Find_BillsToReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.ClientSize = new System.Drawing.Size(714, 392);
+            this.ClientSize = new System.Drawing.Size(805, 445);
+            this.Controls.Add(this.SetPaidBill);
             this.Controls.Add(this.btn_Find);
             this.Controls.Add(this.lbl_clientName);
             this.Controls.Add(this.edt_clientName);
@@ -179,6 +194,7 @@
             this.Controls.SetChildIndex(this.edt_clientName, 0);
             this.Controls.SetChildIndex(this.lbl_clientName, 0);
             this.Controls.SetChildIndex(this.btn_Find, 0);
+            this.Controls.SetChildIndex(this.SetPaidBill, 0);
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_BillsToReceive)).EndInit();
             this.ResumeLayout(false);
@@ -199,5 +215,6 @@
         private System.Windows.Forms.TextBox edt_clientName;
         private System.Windows.Forms.Label lbl_clientName;
         private System.Windows.Forms.Button btn_Find;
+        private System.Windows.Forms.Button SetPaidBill;
     }
 }

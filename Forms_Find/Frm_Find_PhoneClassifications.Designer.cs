@@ -74,6 +74,9 @@
             // 
             this.DGV_PhoneClassification.AllowUserToAddRows = false;
             this.DGV_PhoneClassification.AllowUserToDeleteRows = false;
+            this.DGV_PhoneClassification.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_PhoneClassification.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_PhoneClassification.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ID,

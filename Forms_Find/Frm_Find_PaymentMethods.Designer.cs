@@ -65,6 +65,9 @@
             // 
             this.DGV_PayMethods.AllowUserToAddRows = false;
             this.DGV_PayMethods.AllowUserToDeleteRows = false;
+            this.DGV_PayMethods.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_PayMethods.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_PayMethods.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IDPayMethod,
@@ -100,7 +103,7 @@
             // 
             // btn_Search
             // 
-            this.btn_Search.Location = new System.Drawing.Point(320, 23);
+            this.btn_Search.Location = new System.Drawing.Point(311, 23);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(75, 20);
             this.btn_Search.TabIndex = 20;

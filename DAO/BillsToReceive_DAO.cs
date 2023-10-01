@@ -561,6 +561,43 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
             }
         }
+
+        public bool SetPaidBillsFromDb(int id)
+        {
+            {
+                bool status = false;
+
+                string sql = "UPDATE BILLSTORECEIVE SET PAIDDATE = @PAIDDATE, ISPAID = 1 " +
+                    "WHERE SALE_ID = @SALEID; ";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.Parameters.AddWithValue("@PAIDDATE", DateTime.Today.Date);
+                        command.Parameters.AddWithValue("@SALEID", id);
+                        connection.Open();
+                        int i = command.ExecuteNonQuery();
+                        if (i > 0)
+                        {
+                            status = true;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro : " + ex.Message);
+                        return status;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                    return status;
+                }
+            }
+        }
     }
 }
 

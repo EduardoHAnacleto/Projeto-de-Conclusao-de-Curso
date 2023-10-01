@@ -91,6 +91,7 @@
             // 
             // gbox_address
             // 
+            this.gbox_address.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.gbox_address.Controls.Add(this.edt_homeType);
             this.gbox_address.Controls.Add(this.edt_StateFU);
             this.gbox_address.Controls.Add(this.edt_countryAcronym);

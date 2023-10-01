@@ -135,6 +135,9 @@
             this.DGV_SaleProducts.AllowUserToAddRows = false;
             this.DGV_SaleProducts.AllowUserToResizeColumns = false;
             this.DGV_SaleProducts.AllowUserToResizeRows = false;
+            this.DGV_SaleProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_SaleProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_SaleProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdProduct,
@@ -143,14 +146,14 @@
             this.ProductDiscoutCash,
             this.UnValueProduct,
             this.ProductTotalValue});
-            this.DGV_SaleProducts.Location = new System.Drawing.Point(15, 225);
+            this.DGV_SaleProducts.Location = new System.Drawing.Point(3, 67);
             this.DGV_SaleProducts.MultiSelect = false;
             this.DGV_SaleProducts.Name = "DGV_SaleProducts";
             this.DGV_SaleProducts.ReadOnly = true;
             this.DGV_SaleProducts.RowHeadersVisible = false;
             this.DGV_SaleProducts.RowHeadersWidth = 51;
             this.DGV_SaleProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_SaleProducts.Size = new System.Drawing.Size(1116, 221);
+            this.DGV_SaleProducts.Size = new System.Drawing.Size(1168, 215);
             this.DGV_SaleProducts.TabIndex = 5;
             this.DGV_SaleProducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_SaleProducts_CellValueChanged);
             this.DGV_SaleProducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_SaleProducts_RowsRemoved);
@@ -206,11 +209,12 @@
             // 
             // gbox_Salesman
             // 
+            this.gbox_Salesman.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.gbox_Salesman.Controls.Add(this.edt_userId);
             this.gbox_Salesman.Controls.Add(this.edt_userName);
             this.gbox_Salesman.Controls.Add(this.lbl_userSalesman);
             this.gbox_Salesman.Controls.Add(this.lbl_userId);
-            this.gbox_Salesman.Location = new System.Drawing.Point(19, 563);
+            this.gbox_Salesman.Location = new System.Drawing.Point(12, 502);
             this.gbox_Salesman.Name = "gbox_Salesman";
             this.gbox_Salesman.Size = new System.Drawing.Size(259, 100);
             this.gbox_Salesman.TabIndex = 7;
@@ -362,6 +366,7 @@
             // 
             // gbox_options
             // 
+            this.gbox_options.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.gbox_options.Controls.Add(this.lbl_findClient);
             this.gbox_options.Controls.Add(this.lbl_new);
             this.gbox_options.Controls.Add(this.lbl_Save);
@@ -369,7 +374,7 @@
             this.gbox_options.Controls.Add(this.btn_Save);
             this.gbox_options.Controls.Add(this.btn_FindClient);
             this.gbox_options.Controls.Add(this.btn_new);
-            this.gbox_options.Location = new System.Drawing.Point(19, 457);
+            this.gbox_options.Location = new System.Drawing.Point(12, 408);
             this.gbox_options.Name = "gbox_options";
             this.gbox_options.Size = new System.Drawing.Size(261, 88);
             this.gbox_options.TabIndex = 11;
@@ -501,6 +506,9 @@
             // 
             // gbox_Product
             // 
+            this.gbox_Product.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gbox_Product.Controls.Add(this.lbl_prodUnValue);
             this.gbox_Product.Controls.Add(this.btn_DeleteItem);
             this.gbox_Product.Controls.Add(this.lbl_ProdDiscCash);
@@ -509,6 +517,7 @@
             this.gbox_Product.Controls.Add(this.edt_barCode);
             this.gbox_Product.Controls.Add(this.edt_amount);
             this.gbox_Product.Controls.Add(this.edt_totalPValue);
+            this.gbox_Product.Controls.Add(this.DGV_SaleProducts);
             this.gbox_Product.Controls.Add(this.edt_productId);
             this.gbox_Product.Controls.Add(this.btn_FindProduct);
             this.gbox_Product.Controls.Add(this.lbl_TotalCost);
@@ -518,9 +527,9 @@
             this.gbox_Product.Controls.Add(this.btn_AddProduct);
             this.gbox_Product.Controls.Add(this.lbl_productId);
             this.gbox_Product.Controls.Add(this.lbl_qntdAmount);
-            this.gbox_Product.Location = new System.Drawing.Point(15, 153);
+            this.gbox_Product.Location = new System.Drawing.Point(12, 114);
             this.gbox_Product.Name = "gbox_Product";
-            this.gbox_Product.Size = new System.Drawing.Size(1168, 66);
+            this.gbox_Product.Size = new System.Drawing.Size(1168, 288);
             this.gbox_Product.TabIndex = 25;
             this.gbox_Product.TabStop = false;
             this.gbox_Product.Text = "Produtos";
@@ -709,6 +718,7 @@
             // 
             // gbox_paymentCondition
             // 
+            this.gbox_paymentCondition.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.gbox_paymentCondition.Controls.Add(this.DGV_Instalments);
             this.gbox_paymentCondition.Controls.Add(this.lbl_payConditionInstalments);
             this.gbox_paymentCondition.Controls.Add(this.lbl_payConditionDiscount);
@@ -723,7 +733,7 @@
             this.gbox_paymentCondition.Controls.Add(this.edt_payCondition);
             this.gbox_paymentCondition.Controls.Add(this.edt_payConditionId);
             this.gbox_paymentCondition.Controls.Add(this.lbl_payConditionID);
-            this.gbox_paymentCondition.Location = new System.Drawing.Point(344, 513);
+            this.gbox_paymentCondition.Location = new System.Drawing.Point(366, 408);
             this.gbox_paymentCondition.Name = "gbox_paymentCondition";
             this.gbox_paymentCondition.Size = new System.Drawing.Size(817, 166);
             this.gbox_paymentCondition.TabIndex = 27;
@@ -928,7 +938,7 @@
             this.SaleSubTotal,
             this.SaleTotal});
             this.DGV_SaleSummary.Enabled = false;
-            this.DGV_SaleSummary.Location = new System.Drawing.Point(978, 16);
+            this.DGV_SaleSummary.Location = new System.Drawing.Point(1027, 16);
             this.DGV_SaleSummary.MultiSelect = false;
             this.DGV_SaleSummary.Name = "DGV_SaleSummary";
             this.DGV_SaleSummary.ReadOnly = true;
@@ -959,7 +969,7 @@
             this.gbox_Status.Controls.Add(this.check_Active);
             this.gbox_Status.Controls.Add(this.check_Cancelled);
             this.gbox_Status.Enabled = false;
-            this.gbox_Status.Location = new System.Drawing.Point(620, 12);
+            this.gbox_Status.Location = new System.Drawing.Point(620, 16);
             this.gbox_Status.Name = "gbox_Status";
             this.gbox_Status.Size = new System.Drawing.Size(83, 59);
             this.gbox_Status.TabIndex = 30;
@@ -994,7 +1004,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1187, 684);
+            this.ClientSize = new System.Drawing.Size(1187, 613);
             this.Controls.Add(this.gbox_Status);
             this.Controls.Add(this.DGV_SaleSummary);
             this.Controls.Add(this.gbox_paymentCondition);
@@ -1003,7 +1013,6 @@
             this.Controls.Add(this.gbox_options);
             this.Controls.Add(this.gbox_client);
             this.Controls.Add(this.gbox_Salesman);
-            this.Controls.Add(this.DGV_SaleProducts);
             this.Name = "Frm_Sale";
             this.Text = "Vendas";
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Frm_Sale_KeyPress);

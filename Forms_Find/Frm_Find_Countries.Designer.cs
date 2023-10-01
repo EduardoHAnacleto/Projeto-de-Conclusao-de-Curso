@@ -58,6 +58,7 @@
             // 
             // lbl_countryName
             // 
+            this.lbl_countryName.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_countryName.AutoSize = true;
             this.lbl_countryName.Location = new System.Drawing.Point(47, 7);
             this.lbl_countryName.Name = "lbl_countryName";
@@ -67,6 +68,7 @@
             // 
             // lbl_countryAcronym
             // 
+            this.lbl_countryAcronym.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_countryAcronym.AutoSize = true;
             this.lbl_countryAcronym.Location = new System.Drawing.Point(349, 7);
             this.lbl_countryAcronym.Name = "lbl_countryAcronym";
@@ -76,6 +78,7 @@
             // 
             // lbl_phonePrefix
             // 
+            this.lbl_phonePrefix.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_phonePrefix.AutoSize = true;
             this.lbl_phonePrefix.Location = new System.Drawing.Point(402, 7);
             this.lbl_phonePrefix.Name = "lbl_phonePrefix";
@@ -85,6 +88,7 @@
             // 
             // lbl_currency
             // 
+            this.lbl_currency.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.lbl_currency.AutoSize = true;
             this.lbl_currency.Location = new System.Drawing.Point(454, 6);
             this.lbl_currency.Name = "lbl_currency";
@@ -94,6 +98,7 @@
             // 
             // edt_countryName
             // 
+            this.edt_countryName.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.edt_countryName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_countryName.Location = new System.Drawing.Point(50, 23);
             this.edt_countryName.Name = "edt_countryName";
@@ -103,6 +108,7 @@
             // 
             // edt_acronym
             // 
+            this.edt_acronym.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.edt_acronym.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_acronym.Location = new System.Drawing.Point(352, 23);
             this.edt_acronym.Name = "edt_acronym";
@@ -112,6 +118,7 @@
             // 
             // edt_phonePrefix
             // 
+            this.edt_phonePrefix.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.edt_phonePrefix.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_phonePrefix.Enabled = false;
             this.edt_phonePrefix.Location = new System.Drawing.Point(403, 23);
@@ -121,6 +128,7 @@
             // 
             // edt_currency
             // 
+            this.edt_currency.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.edt_currency.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_currency.Enabled = false;
             this.edt_currency.Location = new System.Drawing.Point(456, 22);
@@ -132,6 +140,9 @@
             // 
             this.DGV_Countries.AllowUserToAddRows = false;
             this.DGV_Countries.AllowUserToDeleteRows = false;
+            this.DGV_Countries.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_Countries.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Countries.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.IdCountry,
@@ -194,6 +205,7 @@
             // 
             // btn_Search
             // 
+            this.btn_Search.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.btn_Search.Location = new System.Drawing.Point(508, 21);
             this.btn_Search.Name = "btn_Search";
             this.btn_Search.Size = new System.Drawing.Size(66, 21);

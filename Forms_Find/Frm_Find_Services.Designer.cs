@@ -67,6 +67,9 @@
             // 
             this.DGV_Services.AllowUserToAddRows = false;
             this.DGV_Services.AllowUserToDeleteRows = false;
+            this.DGV_Services.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_Services.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_Services.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ServiceId,

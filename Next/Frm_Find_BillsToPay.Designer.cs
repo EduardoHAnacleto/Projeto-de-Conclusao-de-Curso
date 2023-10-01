@@ -33,9 +33,6 @@
             this.edt_billSeries = new System.Windows.Forms.NumericUpDown();
             this.btn_search = new System.Windows.Forms.Button();
             this.DGV_BillsToPay = new System.Windows.Forms.DataGridView();
-            this.lbl_billNumber = new System.Windows.Forms.Label();
-            this.lbl_billModel = new System.Windows.Forms.Label();
-            this.lbl_billSeries = new System.Windows.Forms.Label();
             this.SupplierId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PaymentMethodId = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -48,6 +45,11 @@
             this.EmissionDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.isPaid = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lbl_billNumber = new System.Windows.Forms.Label();
+            this.lbl_billModel = new System.Windows.Forms.Label();
+            this.lbl_billSeries = new System.Windows.Forms.Label();
+            this.SetPaidBill = new System.Windows.Forms.Button();
+            this.btn_CancelBill = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billNumber)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billModel)).BeginInit();
@@ -128,6 +130,9 @@
             // 
             this.DGV_BillsToPay.AllowUserToAddRows = false;
             this.DGV_BillsToPay.AllowUserToDeleteRows = false;
+            this.DGV_BillsToPay.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_BillsToPay.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_BillsToPay.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.SupplierId,
@@ -150,33 +155,6 @@
             this.DGV_BillsToPay.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_BillsToPay.Size = new System.Drawing.Size(893, 342);
             this.DGV_BillsToPay.TabIndex = 12;
-            // 
-            // lbl_billNumber
-            // 
-            this.lbl_billNumber.AutoSize = true;
-            this.lbl_billNumber.Location = new System.Drawing.Point(54, 7);
-            this.lbl_billNumber.Name = "lbl_billNumber";
-            this.lbl_billNumber.Size = new System.Drawing.Size(44, 13);
-            this.lbl_billNumber.TabIndex = 13;
-            this.lbl_billNumber.Text = "Número";
-            // 
-            // lbl_billModel
-            // 
-            this.lbl_billModel.AutoSize = true;
-            this.lbl_billModel.Location = new System.Drawing.Point(130, 7);
-            this.lbl_billModel.Name = "lbl_billModel";
-            this.lbl_billModel.Size = new System.Drawing.Size(42, 13);
-            this.lbl_billModel.TabIndex = 14;
-            this.lbl_billModel.Text = "Modelo";
-            // 
-            // lbl_billSeries
-            // 
-            this.lbl_billSeries.AutoSize = true;
-            this.lbl_billSeries.Location = new System.Drawing.Point(203, 7);
-            this.lbl_billSeries.Name = "lbl_billSeries";
-            this.lbl_billSeries.Size = new System.Drawing.Size(31, 13);
-            this.lbl_billSeries.TabIndex = 15;
-            this.lbl_billSeries.Text = "Série";
             // 
             // SupplierId
             // 
@@ -260,10 +238,59 @@
             this.isPaid.ReadOnly = true;
             this.isPaid.Width = 90;
             // 
+            // lbl_billNumber
+            // 
+            this.lbl_billNumber.AutoSize = true;
+            this.lbl_billNumber.Location = new System.Drawing.Point(54, 7);
+            this.lbl_billNumber.Name = "lbl_billNumber";
+            this.lbl_billNumber.Size = new System.Drawing.Size(44, 13);
+            this.lbl_billNumber.TabIndex = 13;
+            this.lbl_billNumber.Text = "Número";
+            // 
+            // lbl_billModel
+            // 
+            this.lbl_billModel.AutoSize = true;
+            this.lbl_billModel.Location = new System.Drawing.Point(130, 7);
+            this.lbl_billModel.Name = "lbl_billModel";
+            this.lbl_billModel.Size = new System.Drawing.Size(42, 13);
+            this.lbl_billModel.TabIndex = 14;
+            this.lbl_billModel.Text = "Modelo";
+            // 
+            // lbl_billSeries
+            // 
+            this.lbl_billSeries.AutoSize = true;
+            this.lbl_billSeries.Location = new System.Drawing.Point(203, 7);
+            this.lbl_billSeries.Name = "lbl_billSeries";
+            this.lbl_billSeries.Size = new System.Drawing.Size(31, 13);
+            this.lbl_billSeries.TabIndex = 15;
+            this.lbl_billSeries.Text = "Série";
+            // 
+            // SetPaidBill
+            // 
+            this.SetPaidBill.Location = new System.Drawing.Point(529, 397);
+            this.SetPaidBill.Name = "SetPaidBill";
+            this.SetPaidBill.Size = new System.Drawing.Size(75, 23);
+            this.SetPaidBill.TabIndex = 16;
+            this.SetPaidBill.Text = "Baixar Nota";
+            this.SetPaidBill.UseVisualStyleBackColor = true;
+            this.SetPaidBill.Click += new System.EventHandler(this.SetPaidBill_Click);
+            // 
+            // btn_CancelBill
+            // 
+            this.btn_CancelBill.Location = new System.Drawing.Point(610, 397);
+            this.btn_CancelBill.Name = "btn_CancelBill";
+            this.btn_CancelBill.Size = new System.Drawing.Size(91, 23);
+            this.btn_CancelBill.TabIndex = 17;
+            this.btn_CancelBill.Text = "Cancelar Nota";
+            this.btn_CancelBill.UseVisualStyleBackColor = true;
+            this.btn_CancelBill.Click += new System.EventHandler(this.btn_CancelBill_Click);
+            // 
             // Frm_Find_BillsToPay
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(915, 425);
+            this.Controls.Add(this.btn_CancelBill);
+            this.Controls.Add(this.SetPaidBill);
             this.Controls.Add(this.lbl_billSeries);
             this.Controls.Add(this.lbl_billModel);
             this.Controls.Add(this.lbl_billNumber);
@@ -287,6 +314,8 @@
             this.Controls.SetChildIndex(this.lbl_billNumber, 0);
             this.Controls.SetChildIndex(this.lbl_billModel, 0);
             this.Controls.SetChildIndex(this.lbl_billSeries, 0);
+            this.Controls.SetChildIndex(this.SetPaidBill, 0);
+            this.Controls.SetChildIndex(this.btn_CancelBill, 0);
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billNumber)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billModel)).EndInit();
@@ -319,5 +348,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn EmissionDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn dueDate;
         private System.Windows.Forms.DataGridViewTextBoxColumn isPaid;
+        private System.Windows.Forms.Button SetPaidBill;
+        private System.Windows.Forms.Button btn_CancelBill;
     }
 }

@@ -22,6 +22,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_billModel.Controls[0].Visible = false;
             edt_billNumber.Controls[0].Visible = false;
             edt_billSeries.Controls[0].Visible = false;
+            DGV_BillsToPay.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToPay.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToPay.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToPay.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToPay.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToPay.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToPay.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             this.SetDataSourceToDGV();
         }
 
@@ -160,6 +167,66 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             frmCreateBillsToPay.LockCancelled();
             frmCreateBillsToPay.ShowDialog();
             this.SetDataSourceToDGV();
+        }
+
+        private void SetPaidBill_Click(object sender, EventArgs e)
+        {
+            PayBill();
+        }
+
+        private void PayBill()
+        {
+            var obj = GetObject();
+            if (obj != null)
+            {
+                if (AskToPay())
+                {
+                    _controller.SetPaidBillsFromDb(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id, obj.InstalmentNumber);
+                }
+            }
+        }
+
+        public static bool AskToPay()
+        {
+            string message = $"Deseja baixar essa nota?";
+            string caption = "Confirmação.";
+            MessageBoxIcon icon = MessageBoxIcon.Error;
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
+            if (dialogResult == DialogResult.Yes)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        private void btn_CancelBill_Click(object sender, EventArgs e)
+        {
+            CancelInstalment();
+        }
+
+        public static bool AskToCancel()
+        {
+            string message = $"Deseja cancelar essa nota?";
+            string caption = "Confirmação.";
+            MessageBoxIcon icon = MessageBoxIcon.Error;
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
+            if (dialogResult == DialogResult.Yes)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        private void CancelInstalment()
+        {
+            var obj = GetObject();
+            if (obj != null)
+            {
+
+            }
+
         }
     }
 }

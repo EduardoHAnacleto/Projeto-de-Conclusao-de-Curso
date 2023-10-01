@@ -71,6 +71,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             return ds;
         }
 
+        public bool SetPaidBillsFromDb(int billNum, int billModel, int billSeries, int supplierId, int instalmentNumber)
+        {
+            return _billToPaysDAO.SetPaidBillsFromDb(billNum, billModel, billSeries, supplierId, instalmentNumber);
+        }
 
     }
 }

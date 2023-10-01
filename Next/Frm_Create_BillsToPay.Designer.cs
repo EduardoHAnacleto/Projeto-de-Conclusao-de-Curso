@@ -306,6 +306,7 @@
             // 
             // gbox_billDates
             // 
+            this.gbox_billDates.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.gbox_billDates.Controls.Add(this.datePicker_paid);
             this.gbox_billDates.Controls.Add(this.lbl_paidDate);
             this.gbox_billDates.Controls.Add(this.lbl_DueDate);
@@ -357,6 +358,7 @@
             // 
             // gbox_isPaid
             // 
+            this.gbox_isPaid.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbox_isPaid.Controls.Add(this.check_Cancelled);
             this.gbox_isPaid.Controls.Add(this.check_Active);
             this.gbox_isPaid.Controls.Add(this.check_Paid);

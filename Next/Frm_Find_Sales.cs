@@ -19,6 +19,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public Frm_Find_Sales()
         {
             InitializeComponent();
+            DGV_Sales.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Sales.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Sales.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             SetDataSourceToDGV();
             edt_id.Visible = false;
             lbl_id.Visible = false;
