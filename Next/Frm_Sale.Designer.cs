@@ -105,6 +105,8 @@
             this.gbox_Status = new System.Windows.Forms.GroupBox();
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.check_Cancelled = new System.Windows.Forms.CheckBox();
+            this.edt_und = new System.Windows.Forms.TextBox();
+            this.lbl_und = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -361,7 +363,7 @@
             this.edt_productName.Location = new System.Drawing.Point(48, 41);
             this.edt_productName.MaxLength = 50;
             this.edt_productName.Name = "edt_productName";
-            this.edt_productName.Size = new System.Drawing.Size(336, 20);
+            this.edt_productName.Size = new System.Drawing.Size(189, 20);
             this.edt_productName.TabIndex = 1;
             // 
             // gbox_options
@@ -451,7 +453,7 @@
             // lbl_barCode
             // 
             this.lbl_barCode.AutoSize = true;
-            this.lbl_barCode.Location = new System.Drawing.Point(387, 25);
+            this.lbl_barCode.Location = new System.Drawing.Point(240, 24);
             this.lbl_barCode.Name = "lbl_barCode";
             this.lbl_barCode.Size = new System.Drawing.Size(88, 13);
             this.lbl_barCode.TabIndex = 13;
@@ -469,7 +471,7 @@
             // lbl_qntdAmount
             // 
             this.lbl_qntdAmount.AutoSize = true;
-            this.lbl_qntdAmount.Location = new System.Drawing.Point(694, 24);
+            this.lbl_qntdAmount.Location = new System.Drawing.Point(474, 25);
             this.lbl_qntdAmount.Name = "lbl_qntdAmount";
             this.lbl_qntdAmount.Size = new System.Drawing.Size(62, 13);
             this.lbl_qntdAmount.TabIndex = 18;
@@ -477,7 +479,7 @@
             // 
             // btn_FindProduct
             // 
-            this.btn_FindProduct.Location = new System.Drawing.Point(622, 41);
+            this.btn_FindProduct.Location = new System.Drawing.Point(342, 40);
             this.btn_FindProduct.Name = "btn_FindProduct";
             this.btn_FindProduct.Size = new System.Drawing.Size(58, 20);
             this.btn_FindProduct.TabIndex = 3;
@@ -509,6 +511,8 @@
             this.gbox_Product.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbox_Product.Controls.Add(this.lbl_und);
+            this.gbox_Product.Controls.Add(this.edt_und);
             this.gbox_Product.Controls.Add(this.lbl_prodUnValue);
             this.gbox_Product.Controls.Add(this.btn_DeleteItem);
             this.gbox_Product.Controls.Add(this.lbl_ProdDiscCash);
@@ -537,7 +541,7 @@
             // lbl_prodUnValue
             // 
             this.lbl_prodUnValue.AutoSize = true;
-            this.lbl_prodUnValue.Location = new System.Drawing.Point(951, 24);
+            this.lbl_prodUnValue.Location = new System.Drawing.Point(608, 25);
             this.lbl_prodUnValue.Name = "lbl_prodUnValue";
             this.lbl_prodUnValue.Size = new System.Drawing.Size(50, 13);
             this.lbl_prodUnValue.TabIndex = 35;
@@ -556,7 +560,7 @@
             // lbl_ProdDiscCash
             // 
             this.lbl_ProdDiscCash.AutoSize = true;
-            this.lbl_ProdDiscCash.Location = new System.Drawing.Point(756, 25);
+            this.lbl_ProdDiscCash.Location = new System.Drawing.Point(540, 25);
             this.lbl_ProdDiscCash.Name = "lbl_ProdDiscCash";
             this.lbl_ProdDiscCash.Size = new System.Drawing.Size(62, 13);
             this.lbl_ProdDiscCash.TabIndex = 33;
@@ -566,7 +570,7 @@
             // 
             this.edt_ProdUnValue.DecimalPlaces = 2;
             this.edt_ProdUnValue.Enabled = false;
-            this.edt_ProdUnValue.Location = new System.Drawing.Point(954, 41);
+            this.edt_ProdUnValue.Location = new System.Drawing.Point(608, 39);
             this.edt_ProdUnValue.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -580,27 +584,27 @@
             // edt_ProdDiscCash
             // 
             this.edt_ProdDiscCash.DecimalPlaces = 2;
-            this.edt_ProdDiscCash.Location = new System.Drawing.Point(759, 41);
+            this.edt_ProdDiscCash.Location = new System.Drawing.Point(539, 39);
             this.edt_ProdDiscCash.Maximum = new decimal(new int[] {
             99999,
             0,
             0,
             0});
             this.edt_ProdDiscCash.Name = "edt_ProdDiscCash";
-            this.edt_ProdDiscCash.Size = new System.Drawing.Size(59, 20);
+            this.edt_ProdDiscCash.Size = new System.Drawing.Size(63, 20);
             this.edt_ProdDiscCash.TabIndex = 5;
             this.edt_ProdDiscCash.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_barCode
             // 
-            this.edt_barCode.Location = new System.Drawing.Point(390, 41);
+            this.edt_barCode.Location = new System.Drawing.Point(243, 40);
             this.edt_barCode.Maximum = new decimal(new int[] {
             -559939585,
             902409669,
             54,
             0});
             this.edt_barCode.Name = "edt_barCode";
-            this.edt_barCode.Size = new System.Drawing.Size(226, 20);
+            this.edt_barCode.Size = new System.Drawing.Size(93, 20);
             this.edt_barCode.TabIndex = 2;
             this.edt_barCode.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_barCode.ValueChanged += new System.EventHandler(this.edt_barCode_ValueChanged);
@@ -608,14 +612,14 @@
             // 
             // edt_amount
             // 
-            this.edt_amount.Location = new System.Drawing.Point(697, 41);
+            this.edt_amount.Location = new System.Drawing.Point(477, 39);
             this.edt_amount.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.edt_amount.Name = "edt_amount";
-            this.edt_amount.Size = new System.Drawing.Size(44, 20);
+            this.edt_amount.Size = new System.Drawing.Size(52, 20);
             this.edt_amount.TabIndex = 4;
             this.edt_amount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_amount.Value = new decimal(new int[] {
@@ -1000,6 +1004,23 @@
             this.check_Cancelled.UseVisualStyleBackColor = true;
             this.check_Cancelled.CheckedChanged += new System.EventHandler(this.check_Cancelled_CheckedChanged);
             // 
+            // edt_und
+            // 
+            this.edt_und.Enabled = false;
+            this.edt_und.Location = new System.Drawing.Point(406, 39);
+            this.edt_und.Name = "edt_und";
+            this.edt_und.Size = new System.Drawing.Size(61, 20);
+            this.edt_und.TabIndex = 36;
+            // 
+            // lbl_und
+            // 
+            this.lbl_und.AutoSize = true;
+            this.lbl_und.Location = new System.Drawing.Point(403, 25);
+            this.lbl_und.Name = "lbl_und";
+            this.lbl_und.Size = new System.Drawing.Size(31, 13);
+            this.lbl_und.TabIndex = 37;
+            this.lbl_und.Text = "UND";
+            // 
             // Frm_Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1128,5 +1149,7 @@
         private System.Windows.Forms.GroupBox gbox_Status;
         private System.Windows.Forms.CheckBox check_Active;
         private System.Windows.Forms.CheckBox check_Cancelled;
+        private System.Windows.Forms.Label lbl_und;
+        private System.Windows.Forms.TextBox edt_und;
     }
 }

@@ -29,9 +29,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             bool status = false;
 
             string sql = "INSERT INTO PURCHASES (BILLMODEL, BILLNUMBER, BILLSERIES, SUPPLIER_ID, EMISSIONDATE, ARRIVALDATE, FREIGHTCOST, PURCHASE_TOTALCOST, " +
-                " PURCHASE_EXTRAEXPENSES, PURCHASE_INSURANCECOST, USER_ID, DATE_CREATION, DATE_LAST_UPDATE, PAYCONDITION_ID ) "
+                " PURCHASE_EXTRAEXPENSES, PURCHASE_INSURANCECOST, USER_ID, DATE_CREATION, DATE_LAST_UPDATE, PAYCONDITION_ID, USER_ID ) "
                          + " VALUES (@BMODEL, @BNUM, @BSERIES, @SUPPLIERID, @EMDATE, @ARRIVALDATE, @FREIGHT, @TOTALCOST, @EXPENSES," +
-                         " @INSURANCE, @USERID, @DC, @DU, @PAYCONDID);";
+                         " @INSURANCE, @USERID, @DC, @DU, @PAYCONDID, @USERID);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -51,6 +51,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@USERID", obj.User.id);
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+                    command.Parameters.AddWithValue("@USERID", obj.User.id);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     connection.Close();
@@ -73,7 +74,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
         }
 
-        public bool EditFromDB(Purchases obj)
+        public bool EditFromDB(Purchases obj, string cancelMotive)
         {
             bool status = false;
 
@@ -97,7 +98,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     if (i > 0)
                     {                                           
                         status = true;
-                        status = _billsToPayController.CancelPurchaseBills(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
+                        status = _billsToPayController.CancelPurchaseBills(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id, (DateTime)obj.CancelledDate, cancelMotive);
                         if (status)
                         {
                             Products_Controller pController = new Products_Controller();
@@ -554,7 +555,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "UPDATE PURCHASES SET CANCELLEDDATE = @CANCELDATE, DATE_LAST_UPDATE = @DU " +
+            string sql = "UPDATE PURCHASES SET CANCELLEDDATE = @CANCELDATE, DATE_LAST_UPDATE = @DU, USER_ID = @USERID  " +
                 " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -566,6 +567,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@BNUM", obj.BillNumber);
                     command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                    command.Parameters.AddWithValue("@USERID", obj.User.id);
 
                     command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
                     command.Parameters.AddWithValue("@DU", DateTime.Now.Date);

@@ -40,6 +40,7 @@
             this.lbl_clientName = new System.Windows.Forms.Label();
             this.btn_Find = new System.Windows.Forms.Button();
             this.SetPaidBill = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_BillsToReceive)).BeginInit();
             this.SuspendLayout();
@@ -174,10 +175,21 @@
             this.SetPaidBill.UseVisualStyleBackColor = true;
             this.SetPaidBill.Click += new System.EventHandler(this.btn_SetPaidBill_Click);
             // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(422, 417);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Cancelar Conta";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Frm_Find_BillsToReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(805, 445);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.SetPaidBill);
             this.Controls.Add(this.btn_Find);
             this.Controls.Add(this.lbl_clientName);
@@ -195,6 +207,7 @@
             this.Controls.SetChildIndex(this.lbl_clientName, 0);
             this.Controls.SetChildIndex(this.btn_Find, 0);
             this.Controls.SetChildIndex(this.SetPaidBill, 0);
+            this.Controls.SetChildIndex(this.button1, 0);
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_BillsToReceive)).EndInit();
             this.ResumeLayout(false);
@@ -216,5 +229,6 @@
         private System.Windows.Forms.Label lbl_clientName;
         private System.Windows.Forms.Button btn_Find;
         private System.Windows.Forms.Button SetPaidBill;
+        private System.Windows.Forms.Button button1;
     }
 }

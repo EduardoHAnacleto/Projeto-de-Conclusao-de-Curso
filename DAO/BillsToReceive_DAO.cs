@@ -27,8 +27,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             bool status = false;
 
             string sql = "INSERT INTO BILLSTORECEIVE ( SALE_ID, INSTALMENTVALUE, ISPAID, CLIENT_ID, PAYMETHOD_ID, INSTALMENTNUMBER, " +
-                "INSTALMENTSQTD, DUEDATE, EMISSIONDATE, PAIDDATE, DATE_CREATION, DATE_LAST_UPDATE, DATE_CANCELLED, PAYCOND_ID ) "
-                         + " VALUES (@SALEID, @IVALUE, @ISPAID, @CLIENTID, @METHODID, @INUM, @IQTD, @DUEDATE, @EMDATE, @PDATE, @DC, @DU, @DCANCEL, @PAYCONDID);";
+                "INSTALMENTSQTD, DUEDATE, EMISSIONDATE, PAIDDATE, DATE_CREATION, DATE_LAST_UPDATE, DATE_CANCELLED, PAYCOND_ID, USER_ID ) "
+                         + " VALUES (@SALEID, @IVALUE, @ISPAID, @CLIENTID, @METHODID, @INUM, @IQTD, @DUEDATE, @EMDATE, @PDATE, @DC, @DU, @DCANCEL, @PAYCONDID, @USERID);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -44,6 +44,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
                     command.Parameters.AddWithValue("@PAYCONDID", obj.PaymentCondition.id);
                     command.Parameters.AddWithValue("@DUEDATE", obj.DueDate);
+                    command.Parameters.AddWithValue("@USERID", obj.User.id);
                     if (obj.PaidDate.HasValue)
                     {
                         command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
@@ -69,91 +70,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     {
                         status = true;
                     }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro : " + ex.Message);
-                    return status;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-                return status;
-            }
-        }
-
-        public bool EditFromDB(BillsToReceive obj)
-        {
-            bool status = false;
-
-            string sql = "UPDATE BILLSTORECEIVE SET INSTALMENTVALUE = @IVALUE, ISPAID = @ISPAID, CLIENT_ID = @CLIENTID," +
-                " PAYMETHOD_ID = @METHODID, INSTALMENTSQTD = @IQTD, DUEDATE = @DUEDATE, EMISSIONDATE = @EMDATE, PAIDDATE = @PDATE , DATE_LAST_UPDATE = @DU " +
-                "WHERE SALEID = @SALEID AND INSTALMENTNUMBER = @INUM; ";
-
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
-                    command.Parameters.AddWithValue("@CLIENTID", obj.Client.id);
-                    command.Parameters.AddWithValue("@SALEID", obj.Sale.id);
-                    command.Parameters.AddWithValue("@METHODID", obj.PaymentMethod.id);
-                    command.Parameters.AddWithValue("@INUM", obj.InstalmentNumber);
-                    command.Parameters.AddWithValue("@IQTD", obj.InstalmentsQtd);
-                    command.Parameters.AddWithValue("@IVALUE", obj.InstalmentValue);
-                    command.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
-                    command.Parameters.AddWithValue("@DUEDATE", obj.DueDate);
-                    if (obj.PaidDate.HasValue)
-                    {
-                        command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@PDATE", DBNull.Value);
-                    }
-                    command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
-                    command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
-                    connection.Open();
-                    int i = command.ExecuteNonQuery();
-                    if (i > 0)
-                    {
-                        status = true;
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro : " + ex.Message);
-                    return status;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-                return status;
-            }
-        }
-
-        public bool DeleteFromDb(int saleId, int InstalmentNum)
-        {
-            bool status = false;
-            string sql = "DELETE FROM BILLSTORECEIVE WHERE SALE_ID = @SALEID AND INSTALMENTNUMBER = @INUM ;";
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@SALEID", saleId);
-                    command.Parameters.AddWithValue("@INUM", InstalmentNum);
-                    connection.Open();
-                    int i = command.ExecuteNonQuery();
-                    if (i > 0)
-                    {
-                        status = true;
-                    }
-
                 }
                 catch (Exception ex)
                 {
@@ -525,12 +441,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             return dt;
         }
 
-        public bool CancelBillsFromDb(int id)
+        public bool CancelBillsFromDb(int id, int userId)
         {
             {
                 bool status = false;
 
-                string sql = "UPDATE BILLSTORECEIVE SET DATE_CANCELLED = @CANCELDATE " +
+                string sql = "UPDATE BILLSTORECEIVE SET DATE_CANCELLED = @CANCELDATE, USER_ID = @USERID " +
                     "WHERE SALE_ID = @SALEID; ";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -540,6 +456,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         SqlCommand command = new SqlCommand(sql, connection);
                         command.Parameters.AddWithValue("@CANCELDATE", DateTime.Today.Date);
                         command.Parameters.AddWithValue("@SALEID", id);
+                        command.Parameters.AddWithValue("@USERID", userId);
                         connection.Open();
                         int i = command.ExecuteNonQuery();
                         if (i > 0)
@@ -562,13 +479,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
-        public bool SetPaidBillsFromDb(int id)
+        public bool SetPaidBillsFromDb(int id, int userId)
         {
             {
                 bool status = false;
 
-                string sql = "UPDATE BILLSTORECEIVE SET PAIDDATE = @PAIDDATE, ISPAID = 1 " +
-                    "WHERE SALE_ID = @SALEID; ";
+                string sql = "UPDATE BILLSTORECEIVE SET PAIDDATE = @PAIDDATE, ISPAID = 1, USER_ID = @USERID " +
+                    "WHERE ID_BILL = @ID; ";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -576,7 +493,87 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     {
                         SqlCommand command = new SqlCommand(sql, connection);
                         command.Parameters.AddWithValue("@PAIDDATE", DateTime.Today.Date);
-                        command.Parameters.AddWithValue("@SALEID", id);
+                        command.Parameters.AddWithValue("@ID", id);
+                        command.Parameters.AddWithValue("@USERID", userId);
+                        connection.Open();
+                        int i = command.ExecuteNonQuery();
+                        if (i > 0)
+                        {
+                            status = true;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro : " + ex.Message);
+                        return status;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                    return status;
+                }
+            }
+        }
+
+        internal bool PayBill(BillsToReceive obj)
+        {
+            {
+                bool status = false;
+
+                string sql = "UPDATE BILLSTORECEIVE SET PAIDDATE = @PAIDDATE, ISPAID = 1, DATE_LAST_UPDATE = @UPDATE " +
+                    "WHERE ID_BILL = @ID AND INSTALMENTNUMBER = @INUM; ";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.Parameters.AddWithValue("@PAIDDATE", (DateTime)obj.PaidDate);
+                        command.Parameters.AddWithValue("@ID", obj.id);
+                        command.Parameters.AddWithValue("@UPDATE", DateTime.Today.Date);
+                        command.Parameters.AddWithValue("@INUM", obj.InstalmentNumber);
+                        command.Parameters.AddWithValue("@USERID", obj.User.id);
+                        connection.Open();
+                        int i = command.ExecuteNonQuery();
+                        if (i > 0)
+                        {
+                            status = true;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro : " + ex.Message);
+                        return status;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                    return status;
+                }
+            }
+        }
+
+        internal bool CancelBill(BillsToReceive obj)
+        {
+            {
+                bool status = false;
+
+                string sql = "UPDATE BILLSTORECEIVE SET DATE_CANCELLED = @CANCEL, ISPAID = 2, DATE_LAST_UPDATE = @UPDATE, USER_ID = @USERID " +
+                    "WHERE ID_BILL = @ID; ";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.Parameters.AddWithValue("@PAIDDATE", (DateTime)obj.PaidDate);
+                        command.Parameters.AddWithValue("@UPDATE", DateTime.Today.Date);
+                        command.Parameters.AddWithValue("@ID", obj.id);
+                        command.Parameters.AddWithValue("@USERID", obj.User.id);
                         connection.Open();
                         int i = command.ExecuteNonQuery();
                         if (i > 0)

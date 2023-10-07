@@ -239,9 +239,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             medt_phone1.Text = string.Empty;
             medt_phone2.Text = string.Empty;
             medt_phone3.Text = string.Empty;
-            cbox_phone1.SelectedIndex = 1;
-            cbox_phone2.SelectedIndex = 1;
-            cbox_phone3.SelectedIndex = 1;
+            cbox_phone1.SelectedIndex = 0;
+            cbox_phone2.SelectedIndex = 0;
+            cbox_phone3.SelectedIndex = 0;
             medt_regNumber.Text = string.Empty;
             medt_zipCode.Clear();
             check_female.Checked = false;
@@ -285,7 +285,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         private void medt_regNumber_Leave(object sender, EventArgs e)
         {
-            if (!Validator.IsCpf(Utilities.RemoveRegMask(medt_regNumber.Text)) || !Validator.IsCnpj(Utilities.RemoveRegMask(medt_regNumber.Text)))
+            if (!Validator.IsCpf(Utilities.RemoveRegMask(medt_regNumber.Text)) && !Validator.IsCnpj(Utilities.RemoveRegMask(medt_regNumber.Text)))
             {
                 string message = "CPF/CNPJ inválido.";
                 string caption = "Campo é requerido.";

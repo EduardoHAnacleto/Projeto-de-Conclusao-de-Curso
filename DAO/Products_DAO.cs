@@ -51,8 +51,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "INSERT INTO PRODUCTS ( PRODUCT_NAME, PRODUCT_SALE_PRICE, PRODUCT_GROUP_ID, BRAND_ID, STOCK, PRODUCT_COST, PRODUCT_BARCODE, DATE_CREATION, DATE_LAST_UPDATE, product_UND) "
-                         + " VALUES (@NAME, @SALE, @GROUPID, @BRANDID, @STOCK, @COST, @BARCODE, @DC, @DU, @UND)";
+            string sql = "INSERT INTO PRODUCTS ( PRODUCT_NAME, PRODUCT_SALE_PRICE, PRODUCT_GROUP_ID, BRAND_ID, STOCK, PRODUCT_COST," +
+                " PRODUCT_BARCODE, DATE_CREATION, DATE_LAST_UPDATE, product_UND, age_restricted) "
+                         + " VALUES (@NAME, @SALE, @GROUPID, @BRANDID, @STOCK, @COST, @BARCODE, @DC, @DU, @UND, @AGERES)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -60,14 +61,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@NAME", obj.productName);
                     command.Parameters.AddWithValue("@UND", obj.UND);
-                    command.Parameters.AddWithValue("@SALE", (decimal)obj.salePrice);
+                    command.Parameters.AddWithValue("@SALE", obj.salePrice);
                     command.Parameters.AddWithValue("@GROUPID", obj.productGroup.id);
                     command.Parameters.AddWithValue("@BRANDID", obj.brand.id);
                     command.Parameters.AddWithValue("@STOCK", obj.stock);
-                    command.Parameters.AddWithValue("@COST", (decimal)obj.productCost);
+                    command.Parameters.AddWithValue("@COST", obj.productCost);
                     command.Parameters.AddWithValue("@BARCODE", obj.productCost);
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+                    command.Parameters.AddWithValue("@AGERES", obj.AgeRestricted);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
@@ -102,7 +104,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             bool status = false;
 
             string sql = "UPDATE PRODUCTS SET PRODUCT_NAME = @NAME, PRODUCT_SALE_PRICE = @SALEPRICE, PRODUCT_GROUP_ID = @PGID," +
-                "BRAND_ID = @BRANDID, STOCK = @STOCK, PRODUCT_COST = @PCOST, PRODUCT_BARCODE = @BARCODE, DATE_LAST_UPDATE = @DU, PRODUCT_UND = @UND " +
+                "BRAND_ID = @BRANDID, STOCK = @STOCK, PRODUCT_COST = @PCOST, PRODUCT_BARCODE = @BARCODE, DATE_LAST_UPDATE = @DU," +
+                " PRODUCT_UND = @UND, AGE_RESTRICTED = @AGERES " +
                 "WHERE ID_PRODUCT = @ID ; ";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -112,13 +115,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@ID", obj.id);
                     command.Parameters.AddWithValue("@UND", obj.UND);
                     command.Parameters.AddWithValue("@NAME", obj.productName);
-                    command.Parameters.AddWithValue("@SALEPRICE", (decimal)obj.salePrice);
+                    command.Parameters.AddWithValue("@SALEPRICE", obj.salePrice);
                     command.Parameters.AddWithValue("@PGID", obj.productGroup.id);
                     command.Parameters.AddWithValue("@BRANDID", obj.brand.id);
                     command.Parameters.AddWithValue("@STOCK", obj.stock);
-                    command.Parameters.AddWithValue("@PCOST", (decimal)obj.productCost);
+                    command.Parameters.AddWithValue("@PCOST", obj.productCost);
                     command.Parameters.AddWithValue("@BARCODE", obj.BarCode);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+                    command.Parameters.AddWithValue("@AGERES", obj.AgeRestricted);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
@@ -210,7 +214,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     BarCode = Convert.ToInt64(reader["product_barCode"]),
                                     brand = _BController.FindItemId(Convert.ToInt32(reader["brand_id"])),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
-                                    dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
+                                    dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                    AgeRestricted = Convert.ToInt32(reader["age_restricted"])
                                 };
                                 return obj;
                             }
@@ -258,7 +263,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     BarCode = Convert.ToInt64(reader["product_barCode"]),
                                     brand = _BController.FindItemId(Convert.ToInt32(reader["brand_id"])),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
-                                    dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
+                                    dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                    AgeRestricted = Convert.ToInt32(reader["age_restricted"])
                                 };
                                 return obj;
                             }
@@ -306,6 +312,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     productGroup = _PController.FindItemId(Convert.ToInt32(reader["product_group_id"])),
                                     brand = _BController.FindItemId(Convert.ToInt32(reader["brand_id"])),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                                    AgeRestricted = Convert.ToInt32(reader["age_restricted"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                                 };
                                 return obj;

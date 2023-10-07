@@ -17,20 +17,23 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 {
     public partial class Frm_Create_BillsToPay : ProjetoEduardoAnacletoWindowsForm1.InheritForms.Frm_Create_Master
     {
-        public Frm_Create_BillsToPay()
+        public Frm_Create_BillsToPay(string use, BillsToPay bill)
         {
             InitializeComponent();
-            edt_instalmentNumber.Controls[0].Visible = false;
             edt_supplierId.Controls[0].Visible = false;
             edt_BillNum.Controls[0].Visible = false;
             edt_BillSeries.Controls[0].Visible = false;
-            edt_totalValue.Controls[0].Visible = false;
             edt_BillModel.Controls[0].Visible = false;
             btn_SelectDelete.Visible = false;
-            lbl_Sign_LastUpdate.Text = "Cancelado em :";
+            DGV_Instalments.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             PopulateComboBox();
+            SetFormToUse(use, bill);
         }
 
+        public string _FormFunction { get; set; }
         public bool FromPurchase = false;
         public bool HasSaved = false;
         public List<BillsToPay> _auxObjList = new List<BillsToPay>();
@@ -39,66 +42,259 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private readonly Suppliers_Controller _supplierController = new Suppliers_Controller();
         private readonly PaymentMethods_Controller _pMController = new PaymentMethods_Controller();
 
-
-        public override bool CheckCamps()   //Valida Campos
+        private void SetFormToUse(string use, BillsToPay obj)
         {
-            if (edt_BillModel.Value <= 0 && edt_BillNum.Value <= 0 && edt_BillSeries.Value <= 0)
+            _FormFunction = use;
+            if (_FormFunction == "New")
             {
-                string message = "Nota fiscal deve ser inserida.";
-                string caption = "Campo inválido.";
-                MessageBoxIcon icon = MessageBoxIcon.Error;
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                Utilities.Msgbox(message, caption, buttons, icon);
-                return false;
+                SetFormToNew();
             }
-            else if (datePicker_due.Value <= datePicker_due.MinDate)
+            else if (_FormFunction == "Pay")
             {
-                string message = "Data de vencimento deve ser selecionada.";
-                string caption = "Data de vencimento inválida.";
-                MessageBoxIcon icon = MessageBoxIcon.Error;
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                Utilities.Msgbox(message, caption, buttons, icon);
-                return false;
+                SetFormToPay();
+                PopulateCamps(obj);
             }
-            else if (Utilities.IsNotSelected(cbox_payMethod.SelectedItem, "Método de pagamento"))
+            else if (_FormFunction == "Cancel")
             {
-                cbox_payMethod.Focus();
-                return false;
+                SetFormToCancel();
+                PopulateCamps(obj);
             }
-            else if (!Utilities.HasOnlyDigits(edt_instalmentNumber.Text, "Número da Parcela"))
+            else if (_FormFunction == "Check")
             {
-                edt_instalmentNumber.Focus();
-                return false;
+                LockCamps();
+                PopulateCamps(obj);
             }
-            else if (edt_instalmentNumber.Value <= 0)
+        }
+
+        private void SetFormToCancel()
+        {
+            check_Active.Checked = false;
+            check_Cancelled.Checked = true;
+            check_Paid.Checked = false;
+
+            gbox_billInstalment.Visible = true;
+            gbox_billInstalment.Enabled = false;
+            gbox_newBill.Enabled = false;
+            gbox_newBill.Visible = false;
+            gbox_paymentCondition.Enabled = false;
+            gbox_billInstalment.Enabled = false;
+            gbox_billInstalment.Visible = false;
+            gbox_cancelReason.Enabled = true;
+            gbox_cancelReason.Visible = true;
+
+            datePicker_due.Enabled = false;
+            datePicker_emission.Enabled = false;
+            datePicker_PaidDate.Enabled = false;
+            date_cancelled.Value = DateTime.Now.Date;
+        }
+
+        private void SetFormToPay()
+        {
+            check_Active.Checked = false;
+            check_Cancelled.Checked = false;
+            check_Paid.Checked = true;
+
+            gbox_billInstalment.Visible = true;
+            gbox_billInstalment.Enabled = false;
+            gbox_newBill.Enabled = false;
+            gbox_newBill.Visible = false;
+            gbox_paymentCondition.Enabled = false;
+            gbox_billInstalment.Enabled = false;
+            gbox_cancelReason.Enabled = false;
+            gbox_cancelReason.Visible = false;
+
+            datePicker_due.Enabled = false;
+            datePicker_emission.Enabled = false;
+            datePicker_PaidDate.Enabled = true;
+            date_cancelled.Enabled = false;
+        }
+
+        private void SetFormToNew()
+        {
+            check_Active.Checked = true;
+            check_Cancelled.Checked = false;
+            check_Paid.Checked = false;
+
+            gbox_billInstalment.Visible = true;
+            gbox_billInstalment.Enabled = false;
+            gbox_newBill.Enabled = true;
+            gbox_paymentCondition.Enabled = true;
+            gbox_billInstalment.Enabled = false;
+            gbox_billInstalment.Visible = false;
+            gbox_cancelReason.Enabled = false;
+            gbox_cancelReason.Visible = false;
+
+            datePicker_due.Enabled = false;
+            datePicker_emission.Enabled = true;
+            datePicker_PaidDate.Enabled = false;
+            date_cancelled.Enabled = false;
+        }
+
+        private PaymentMethods GetPaymentMethod(string payMethod)
+        {
+            return _pMController.FindItemName(payMethod);
+        }
+
+        private Suppliers GetSupplier(int supplierId)
+        {
+            return _supplierController.FindItemId(supplierId);
+        }
+
+        private PaymentConditions GetPaymentCondition(int id)
+        {
+            PaymentConditions_Controller pcController = new PaymentConditions_Controller();
+            return pcController.FindItemId(id);
+        }
+
+        public void PopulateCamps(BillsToPay bill)
+        {
+            _auxObj = bill;
+            edt_BillModel.Value = bill.BillModel;
+            edt_BillNum.Value = bill.BillNumber;
+            edt_BillSeries.Value = bill.BillSeries;
+            edt_instalmentId.Value = bill.InstalmentNumber;
+            lbl_CreationDate.Text = bill.dateOfCreation.ToString();
+
+            cbox_paymentMethod.SelectedItem = bill.PaymentMethod.paymentMethod;
+            datePicker_due.Value = bill.DueDate;
+            lbl_CreationDate.Text = bill.dateOfCreation.ToShortDateString();
+            edt_supplierId.Value = bill.Supplier.id;
+            edt_supplierName.Text = bill.Supplier.name;
+
+            if (bill.dateOfLastUpdate != null)
             {
-                string message = "Número de parcela deve ser maior que 0.";
-                string caption = "Campo inválido.";
-                MessageBoxIcon icon = MessageBoxIcon.Error;
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                Utilities.Msgbox(message, caption, buttons, icon);
-                return false;
+                lbl_LastUpdate.Text = bill.dateOfLastUpdate.ToShortDateString();
+                lbl_LastUpdate.Visible = true;
             }
-            else if (edt_totalValue.Value <= 0)
+            if (bill.PaidDate.HasValue)
             {
-                string message = "Valor total deve ser maior que 0.";
-                string caption = "Campo inválido.";
-                MessageBoxIcon icon = MessageBoxIcon.Error;
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                Utilities.Msgbox(message, caption, buttons, icon);
-                return false;
+                datePicker_PaidDate.Value = (DateTime)bill.PaidDate;
             }
-            else if (!(check_Active.Checked) && !(check_Paid.Checked) && !(check_Cancelled.Checked))
+
+            if (bill.CancelledDate.HasValue)
             {
-                string message = "Status deve ser selecionado.";
-                string caption = "Campo inválido.";
-                MessageBoxIcon icon = MessageBoxIcon.Error;
-                MessageBoxButtons buttons = MessageBoxButtons.OK;
-                Utilities.Msgbox(message, caption, buttons, icon);
-                gbox_isPaid.Focus();
-                return false;
+                txt_cancelMot.Text = bill.CancelMotive;
+                date_cancelled.Value = (DateTime)bill.CancelledDate;
+                LockCamps();
             }
-            return true;
+
+            edt_finalValue.Value = PaymentConditions.CalcValue(bill.TotalValue, bill.PaymentCondition, bill.DueDate);
+            edt_instalmentValue.Value = bill.TotalValue;
+                                  
+            var obj = _controller.FindItemId(bill.BillNumber, bill.BillModel, bill.BillSeries, bill.Supplier.id);
+            
+            PopulateDGV(obj);
+        }
+
+        public void PopulateDGV(List<BillsToPay> obj)
+        {
+            DGV_Instalments.Rows.Clear();
+            PaymentConditions_Controller pcController = new PaymentConditions_Controller();
+            var payCond = pcController.FindItemId(Convert.ToInt32(edt_payConditionId.Value));
+            PopulatePaymentCondition(payCond);
+
+            if (obj != null)
+            {
+                int k = 0;
+                foreach (DataGridViewRow row in DGV_Instalments.Rows)
+                {
+                    row.Cells["InstalmentValue"].Value = obj[k].TotalValue;
+                }
+            }
+        }
+
+        public override void LockCamps()
+        {
+            gbox_danfe.Enabled = false;
+            gbox_supplier.Enabled = false;
+            gbox_billInstalment.Enabled = false;
+            gbox_cancelReason.Enabled = false;
+            gbox_billDates.Enabled = false;
+            gbox_dates.Enabled = false;
+            gbox_newBill.Enabled = false;
+            btn_Edit.Enabled = false;
+            btn_NewSave.Enabled = false;
+            btn_SelectDelete.Enabled = false;
+        }
+
+        public override void UnlockCamps()
+        {
+
+        }
+
+        public override void ClearCamps()
+        {
+            edt_supplierId.Value = 0;
+            edt_supplierName.Text = string.Empty;
+            edt_BillModel.Value = 0;
+            edt_BillNum.Value = 0;
+            edt_BillSeries.Value = 0;
+            edt_finalValue.Value = 0;
+            datePicker_due.Value = datePicker_due.MinDate;
+            datePicker_PaidDate.Value = datePicker_PaidDate.MinDate;
+            check_Active.Checked = false;
+            check_Paid.Checked = false;
+            lbl_CreationDate.Text = DateTime.Now.ToShortDateString();
+            if (cbox_paymentMethod.Items.Count > 0)
+            {
+                cbox_paymentMethod.SelectedIndex = 0;
+            }
+            lbl_LastUpdate.Visible = false;
+        }
+
+        public override void Save()
+        {
+            LockCamps();
+            try
+            {
+                if (CheckCamps())
+                {
+                    if (_FormFunction == "New")
+                    {
+                        _controller.SaveItem(this.GetObject());
+                        ClearCamps();
+                        UnlockCamps();
+                    }
+                    else if (_FormFunction == "Pay")
+                    {
+                        _controller.PayBill(this.GetObject());
+                        UnlockCamps();
+                    }
+                    else if (_FormFunction == "Cancel")
+                    {
+                        _controller.CancelBill(this.GetObject());
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
+        }
+
+        public static bool AskToPay()
+        {
+            string message = "Deseja baixar essa nota?";
+            string caption = "Confirmação.";
+            MessageBoxIcon icon = MessageBoxIcon.Error;
+            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
+            DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
+            if (dialogResult == DialogResult.Yes)
+            {
+                return true;
+            }
+            else return false;
+        }
+
+        public override bool CheckCamps() //Validacao de campos
+        {
+            if (ValidateBillValue() && ValidateCancelMotive()
+                && ValidateSupplier() && ValidateDates() && ValidatePaymentCondition() && ValidateNFe())
+            {
+                return true;
+            }
+            else return false;
         }
 
         public void PopulateComboBox()
@@ -112,7 +308,265 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             foreach (string text in comboBox.Items)
             {
-                cbox_payMethod.Items.Add(text);
+                cbox_paymentMethod.Items.Add(text);
+            }
+        }
+
+        public void PopulateToPay()
+        {
+            check_Paid.Checked = true;
+            check_Cancelled.Checked = false;
+            check_Active.Checked = false;
+        }
+
+        public void PopulateToCancel()
+        {
+            check_Paid.Checked = false;
+            check_Cancelled.Checked = true;
+            check_Active.Checked = false;
+        }
+
+        private void PopulatePaymentCondition(PaymentConditions payCondition)
+        {
+            if (payCondition != null)
+            {
+                edt_payCondition.Text = payCondition.conditionName;
+                edt_payConditionDiscount.Value = (decimal)payCondition.discountPerc;
+                edt_payConditionFees.Value = (decimal)payCondition.paymentFees;
+                edt_payConditionFine.Value = (decimal)payCondition.fineValue;
+                edt_payConditionQnt.Value = payCondition.instalmentQuantity;
+                edt_payConditionId.Value = payCondition.id;
+                SetBillInstalmentsToDGV(payCondition.id);
+            }
+        }
+
+        public void SetBillInstalmentsToDGV(int condId) //OK -Cria DataTable, chama Controller para trazer o DataTable e colocar na DGV como DataSource, linka db com DGV
+        {
+            PaymentConditions_Controller pCController = new PaymentConditions_Controller();
+            PaymentMethods_Controller pMController = new PaymentMethods_Controller();
+            DGV_Instalments.Rows.Clear();
+            var obj = pCController.FindItemId(condId).BillsInstalments;
+            foreach (BillsInstalments bill in obj)
+            {
+                string method = pMController.FindItemId(Convert.ToInt32(bill.PaymentMethod.id)).paymentMethod;
+                DGV_Instalments.Rows.Add(
+                    bill.InstalmentNumber.ToString(),
+                    bill.TotalDays.ToString(),
+                    bill.ValuePercentage.ToString(),
+                    method
+                    );
+            }
+        }
+
+
+        private bool ValidateSupplier()
+        {
+            if (edt_supplierId.Value == 0 && _FormFunction == "New")
+            {
+                string message = "Fornecedor deve ser selecionado.";
+                string caption = "Item obrigatório.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            else if (_FormFunction == "New" && edt_BillModel.Value > 0 && edt_BillNum.Value > 0
+                && edt_BillSeries.Value > 0 && edt_supplierId.Value > 0)
+            {
+                int billNum = (int)edt_BillNum.Value;
+                int billMod = (int)edt_BillModel.Value;
+                int billSer = (int)edt_BillSeries.Value;
+                int suppId = (int)edt_supplierId.Value;
+                var obj = _controller.FindItemId(billNum, billMod, billSer, suppId);
+                if (obj != null)
+                {
+                    string message = "Conta já existente.";
+                    string caption = "Conta encontrada.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool ValidateBillValue()
+        {
+            if (edt_instalmentValue.Value == 0 && _FormFunction == "New")
+            {
+                string message = "Valor deve ser inserido.";
+                string caption = "Item obrigatório.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateCancelMotive()
+        {
+            if ((txt_cancelMot.Text == string.Empty || txt_cancelMot.Text.Length < 5)
+                && _FormFunction == "Cancel")
+            {
+                string message = "Motivo de cancelamento deve ser inserido com o mínimo de 5 caractéres.";
+                string caption = "Item obrigatório.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidatePaymentCondition()
+        {
+            if (edt_payConditionId.Value == 0 && _FormFunction == "New")
+            {
+                string message = "Condição de pagamento deve ser selecionada.";
+                string caption = "Item obrigatório.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            return true;
+        }
+
+        private bool ValidateDates()
+        {
+            if (_FormFunction == "New")
+            {
+                if (datePicker_emission.Value > DateTime.Today)
+                {
+                    string message = "Data de emissão não pode ser após hoje.";
+                    string caption = "Item inválido.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+                else if (datePicker_emission.Value == datePicker_emission.MinDate)
+                {
+                    string message = "Data de emissão deve ser selecionada.";
+                    string caption = "Item inválido.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+            }
+            else if (_FormFunction == "Pay")
+            {
+                if (datePicker_PaidDate.Value > DateTime.Today)
+                {
+                    string message = "Data de pagamento não pode ser após hoje.";
+                    string caption = "Item inválido.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+                else if (datePicker_PaidDate.Value == datePicker_PaidDate.MinDate)
+                {
+                    string message = "Data de pagamento deve ser selecionada.";
+                    string caption = "Item inválido.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+                else if (datePicker_PaidDate.Value < datePicker_emission.Value)
+                {
+                    string message = "Data de pagamento não deve ser menor que a data de emissão.";
+                    string caption = "Item inválido.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+            }
+            else if (_FormFunction == "Cancel")
+            {
+                if (date_cancelled.Value > DateTime.Today)
+                {
+                    string message = "Data de cancelamento não pode ser após hoje.";
+                    string caption = "Item inválido.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+                else if (date_cancelled.Value < datePicker_emission.Value)
+                {
+                    string message = "Data de cancelamento não deve ser menor que a data de emissão.";
+                    string caption = "Item inválido.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+                else if (date_cancelled.Value == date_cancelled.MinDate)
+                {
+                    string message = "Data de cancelamento deve ser selecionada.";
+                    string caption = "Item inválido.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        private bool ValidateNFe()
+        {
+            if ( _FormFunction == "New" && edt_BillModel.Value < 0 && edt_BillNum.Value < 0
+                && edt_BillSeries.Value < 0)
+            {
+                string message = "Campos de Número, Modelo e Série são obrigatórios.";
+                string caption = "Item obrigatório.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            else if (_FormFunction == "New" && edt_BillModel.Value > 0 && edt_BillNum.Value > 0
+                && edt_BillSeries.Value > 0 && edt_supplierId.Value > 0)
+            {
+                int billNum = (int)edt_BillNum.Value;
+                int billMod = (int)edt_BillModel.Value;
+                int billSer = (int)edt_BillSeries.Value;
+                int suppId = (int)edt_supplierId.Value;
+                var obj = _controller.FindItemId(billNum, billMod, billSer, suppId);
+                if (obj != null)
+                {
+                    string message = "Conta já existente.";
+                    string caption = "Conta encontrada.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public void PopulateDGV(List<BillsToReceive> obj)
+        {
+            DGV_Instalments.Rows.Clear();
+            PaymentConditions_Controller pcController = new PaymentConditions_Controller();
+            var payCond = pcController.FindItemId(Convert.ToInt32(edt_payConditionId.Value));
+            PopulatePaymentCondition(payCond);
+
+            if (obj != null)
+            {
+                int k = 0;
+                foreach (DataGridViewRow row in DGV_Instalments.Rows)
+                {
+                    row.Cells["InstalmentValue"].Value = obj[k].InstalmentValue;
+                }
             }
         }
 
@@ -124,16 +578,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.BillNumber = (int)edt_BillNum.Value;
             obj.BillModel = (int)edt_BillModel.Value;
             obj.BillSeries = (int)edt_BillSeries.Value;
-            obj.PaymentMethod = _pMController.FindItemName(cbox_payMethod.SelectedItem.ToString());
+            obj.PaymentMethod = _pMController.FindItemName(cbox_paymentMethod.SelectedItem.ToString());
             obj.Purchase = new Purchases();
             obj.Purchase.id = 0;
-            obj.InstalmentNumber = (int)edt_instalmentNumber.Value;
-            obj.TotalValue = edt_totalValue.Value;
+            obj.InstalmentNumber = (int)edt_instalmentId.Value;
+            obj.TotalValue = edt_instalmentValue.Value;
             obj.DueDate = datePicker_due.Value;
             obj.EmissionDate = DateTime.Now;
             if (check_Paid.Checked)
             {
-                obj.PaidDate = datePicker_paid.Value;
+                obj.PaidDate = date_cancelled.Value;
                 obj.Status = 1;
             }
             else if (check_Active.Checked) 
@@ -149,97 +603,48 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             return obj;
         }
 
-        public override void LockCamps()
-        {
-            gbox_supplier.Enabled = false;
-            gbox_isPaid.Enabled = false;
-            gbox_dates.Enabled = false;
-            gbox_danfe.Enabled = false;
-            gbox_billInfo.Enabled = false;
-            check_Active.Enabled = false;
-            check_Paid.Enabled = false;
-            gbox_dates.Enabled = false;
-            datePicker_due.Enabled = false;
-            datePicker_paid.Enabled = false;
-            gbox_billDates.Enabled = false;
-        }
 
-        public override void UnlockCamps()
-        {
-            gbox_supplier.Enabled = true;
-            gbox_isPaid.Enabled = true;
-            gbox_dates.Enabled = true;
-            //gbox_danfe.Enabled = true;
-            gbox_billDates.Enabled = true;
-            gbox_billInfo.Enabled = true;
-            check_Active.Enabled = true;
-            check_Paid.Enabled = true;
-            gbox_dates.Enabled = true;
-            datePicker_due.Enabled = true;
-            datePicker_paid.Enabled = true;
 
-        }
 
-        public override void ClearCamps()
-        {
-            edt_supplierId.Value = 0;
-            edt_supplierName.Text = string.Empty;
-            edt_BillModel.Value = 0;
-            edt_BillNum.Value = 0;
-            edt_BillSeries.Value = 0;
-            edt_instalmentNumber.Value = 0;
-            edt_totalValue.Value = 0;
-            datePicker_due.Value = datePicker_due.MinDate;
-            datePicker_paid.Value = datePicker_paid.MinDate;
-            check_Active.Checked = false;
-            check_Paid.Checked = false;
-            lbl_CreationDate.Text = DateTime.Now.ToShortDateString();
-            if (cbox_payMethod.Items.Count > 0 )
-            {
-                cbox_payMethod.SelectedIndex = 0;
-            }
-            lbl_LastUpdate.Visible = false;
-        }
-
-        public override void Save()
-        {
-            if (CheckCamps())
-            {
-                LockCamps();
-                try
-                {
-                    if (btn_Edit.Text == "&Alterar")
-                    {   
-                        _controller.SaveItem(this.GetObject());
-                        if (FromPurchase)
-                        {
-                            HasSaved = true;
-                            _auxObjList.Add(this.GetObject());
-                        }
-                        ClearCamps();
-                        Populated(false);
-                    }
-                    else if (btn_Edit.Text == "Cancelar")
-                    {
-                        if (RightInstalment())
-                        {
-                            var obj = GetObject();
-                            _controller.CancelPurchaseBills(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
-                            Purchases_Controller purchController = new Purchases_Controller();
-                            var purchase = purchController.FindItemId(obj.BillModel, obj.BillNumber, obj.BillSeries, obj.Supplier.id);
-                            purchController.CancelPurchase(purchase); //Cancela a compra
-                            btn_Edit.Text = "&Alterar";
-                            btn_NewSave.Enabled = false;
-                            btn_SelectDelete.Enabled = false;
-                        }
-                    }
-                }
-                catch (Exception ex)
-                {
-                    throw new Exception(ex.Message);
-                }
-            }
-        }
+        //public override void Save()
+        //{
+        //    if (CheckCamps())
+        //    {
+        //        LockCamps();
+        //        try
+        //        {
+        //            if (btn_Edit.Text == "&Alterar")
+        //            {   
+        //                _controller.SaveItem(this.GetObject());
+        //                if (FromPurchase)
+        //                {
+        //                    HasSaved = true;
+        //                    _auxObjList.Add(this.GetObject());
+        //                }
+        //                ClearCamps();
+        //                Populated(false);
+        //            }
+        //            else if (btn_Edit.Text == "Cancelar")
+        //            {
+        //                if (RightInstalment())
+        //                {
+        //                    var obj = GetObject();
+        //                    _controller.CancelPurchaseBills(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
+        //                    Purchases_Controller purchController = new Purchases_Controller();
+        //                    var purchase = purchController.FindItemId(obj.BillModel, obj.BillNumber, obj.BillSeries, obj.Supplier.id);
+        //                    purchController.CancelPurchase(purchase); //Cancela a compra
+        //                    btn_Edit.Text = "&Alterar";
+        //                    btn_NewSave.Enabled = false;
+        //                    btn_SelectDelete.Enabled = false;
+        //                }
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception(ex.Message);
+        //        }
+        //    }
+        //}
 
         private bool RightInstalment()
         {
@@ -247,7 +652,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             var billModel = Convert.ToInt32(edt_BillModel.Value);
             var billSeries = Convert.ToInt32(edt_BillSeries.Value);
             var supplierId = Convert.ToInt32(edt_supplierId.Value);
-            var instalmentNum = Convert.ToInt32(edt_instalmentNumber.Value);
+            var instalmentNum = Convert.ToInt32(edt_instalmentId.Value);
             var obj = _controller.FindItemId(billNumber,billModel,billSeries,supplierId);
             if (instalmentNum > 1)
             {
@@ -304,7 +709,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 btn_Edit.Text = "Cancelar";
                 btn_NewSave.Enabled = true;
                 btn_SelectDelete.Enabled = true;
-                gbox_billInfo.Enabled = false;
                 _auxObj = GetObject();
             }
             else if (btn_Edit.Text == "Cancelar")
@@ -317,65 +721,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
-        public void PopulateCamps(BillsToPay bill)
-        {
-            edt_BillModel.Value = bill.BillModel;
-            edt_BillNum.Value = bill.BillNumber;
-            edt_BillSeries.Value = bill.BillSeries;
-            edt_instalmentNumber.Value = bill.InstalmentNumber;
-            lbl_CreationDate.Text = bill.dateOfCreation.ToString();
 
-      
-
-            cbox_payMethod.SelectedItem = bill.PaymentMethod.paymentMethod;
-            datePicker_due.Value = bill.DueDate;
-            lbl_CreationDate.Text = bill.dateOfCreation.ToShortDateString();
-            edt_supplierId.Value = bill.Supplier.id;
-            edt_supplierName.Text = bill.Supplier.name;
-            if (bill.dateOfLastUpdate != null)
-            {
-                lbl_Sign_LastUpdate.Text = "Atualizado em :";
-                lbl_LastUpdate.Text = bill.dateOfLastUpdate.ToShortDateString();
-                lbl_LastUpdate.Visible = true;
-            }
-            if (bill.PaidDate != null)
-            {
-                datePicker_paid.Value = (DateTime)bill.PaidDate;
-                datePicker_paid.Visible = true; //
-            }
-            
-            if (bill.Status == 1)
-            {
-                check_Paid.Checked = true;
-                check_Active.Checked = false;
-                check_Cancelled.Checked = false;
-            }
-            else if (bill.Status == 0)
-            {
-                check_Active.Checked = true;
-                check_Paid.Checked = false;
-                check_Cancelled.Checked = false;
-            }
-            else if (bill.Status == 2)
-            {             
-                check_Active.Checked = false;
-                check_Paid.Checked = false;
-                btn_NewSave.Visible = false;
-                btn_Edit.Visible = false;
-                check_Cancelled.Checked = true;
-                lbl_Sign_LastUpdate.Text = "Cancelado em :";
-            }
-
-            if (bill.Supplier.id <= 1 || bill.PaidDate.HasValue)
-            {
-                edt_totalValue.Value = (decimal)bill.TotalValue;
-            }
-            else
-            {
-                var obj = _controller.FindItemId(bill.BillNumber, bill.BillModel, bill.BillSeries, bill.InstalmentNumber, bill.Supplier.id);
-                edt_totalValue.Value = PaymentConditions.CalcValue(bill.TotalValue, obj.PaymentCondition, bill.DueDate);
-            }
-        }
 
         public override void DeleteObject() //DeleteObject
         {
@@ -387,7 +733,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     int billNum = Convert.ToInt32(edt_BillNum.Value);
                     int billModel = Convert.ToInt32(edt_BillModel.Value);
                     int billSeries = Convert.ToInt32(edt_BillSeries.Value);
-                    int instalmentNum = Convert.ToInt32(edt_instalmentNumber.Value);
+                    int instalmentNum = Convert.ToInt32(edt_instalmentId.Value);
                     int supplierId = Convert.ToInt32(edt_supplierId.Value);
 
                     _controller.DeleteItem(billNum, billModel, billSeries, instalmentNum, supplierId);
@@ -404,33 +750,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
             }
             UnlockCamps();
-        }
-
-
-        private void check_Active_CheckedChanged(object sender, EventArgs e)
-        {
-            if (check_Active.Checked)
-            {
-                check_Paid.Checked = false;
-                check_Cancelled.Checked = false;
-                lbl_paidDate.Visible = false;
-                datePicker_paid.Visible = false;
-                check_Cancelled.Checked = false;
-                lbl_LastUpdate.Text = string.Empty;
-            }
-        }
-
-        private void check_Paid_CheckedChanged(object sender, EventArgs e)
-        {
-            if (check_Paid.Checked)
-            {
-                check_Cancelled.Checked = false;
-                check_Active.Checked = false;
-                check_Cancelled.Checked = false;
-                lbl_paidDate.Visible = true;
-                datePicker_paid.Visible = true;
-                lbl_LastUpdate.Text = string.Empty;
-            }
         }
 
         public override void Exit()
@@ -508,19 +827,37 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void check_Completed_CheckedChanged(object sender, EventArgs e)
         {
-            if (check_Cancelled.Checked)
-            {
-                check_Paid.Checked = false;
-                check_Active.Checked = false;
-                lbl_paidDate.Visible = true;
-                datePicker_paid.Visible = true;
-                lbl_LastUpdate.Text = DateTime.Now.Date.ToString();
-            }
+
         }
 
         public void LockCancelled()
         {
             check_Cancelled.Enabled = false;
+        }
+
+        private void gbox_newBill_Leave(object sender, EventArgs e)
+        {
+            ValidateBillValue();
+        }
+
+        private void gbox_billDates_Leave(object sender, EventArgs e)
+        {
+            ValidateDates();
+        }
+
+        private void gbox_paymentCondition_Leave(object sender, EventArgs e)
+        {
+            ValidatePaymentCondition();
+        }
+
+        private void gbox_supplier_Leave(object sender, EventArgs e)
+        {
+            ValidateSupplier();
+        }
+
+        private void gbox_cancelReason_Leave(object sender, EventArgs e)
+        {
+            ValidateCancelMotive();
         }
     }
 }

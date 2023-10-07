@@ -1,6 +1,8 @@
-﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+﻿using ProjetoEduardoAnacletoWindowsForm1.Authorization;
+using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using ProjetoEduardoAnacletoWindowsForm1.Forms;
 using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
+using ProjetoEduardoAnacletoWindowsForm1.FormsCreate;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
 using System;
@@ -16,7 +18,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 {
     public partial class Frm_Find_BillsToReceive : ProjetoEduardoAnacletoWindowsForm1.InheritForms.Frm_Find_Master
     {
-        public Frm_Find_BillsToReceive()
+        public Frm_Find_BillsToReceive(Users user)
         {
             InitializeComponent();
             DGV_BillsToReceive.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -27,8 +29,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             SetBillsToReceiveDataSourceToDGV();
             lbl_id.Visible = false;
             edt_id.Visible = false;
+            SetUser(user);
         }
 
+        private void SetUser(Users user)
+        {
+            _User = user;
+        }
+
+        public Users _User { get; private set; }
         private BillsToReceive_Controller _controller = new BillsToReceive_Controller();
 
         public void SetBillsToReceiveDataSourceToDGV() //Popula DGV Bills
@@ -155,23 +164,30 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public override void SelectObject()
         {
-            var obj = GetObject();
-            if (obj != null)
+            try
             {
-                if (hasFather)
+                var obj = GetObject();
+                if (obj != null)
                 {
-                    base.item = obj;
-                    this.Hide();
+                    if (hasFather)
+                    {
+                        base.item = obj;
+                        this.Hide();
+                    }
+                    else
+                    {
+                        NewPopulatedForm(obj, "Check");
+                        SetDataSourceToDGV();
+                    }
                 }
                 else
                 {
-                    NewPopulatedForm(obj);
-                    SetDataSourceToDGV();
+                    Utilities.IsNotSelected(obj, "Conta");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Utilities.IsNotSelected(obj, "A Linha");
+                MessageBox.Show("Erro : " + ex.Message);
             }
         }
 
@@ -187,51 +203,86 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             return null;
         }
 
-        public void NewPopulatedForm(BillsToReceive obj)
+        public void NewPopulatedForm(BillsToReceive obj, string formFunc)
         {
-            Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive();
-            frmBillsToReceive.PopulateCamps(obj);
-            frmBillsToReceive.Populated(true);
+            Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, obj);
             frmBillsToReceive.ShowDialog();
+            this.SetDataSourceToDGV();
         }
 
         public override void NewObject()
         {
-            Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive();
-            //frmBillsToReceive.Populated(false);
+            string formFunc = "New";
+            Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, null);
             frmBillsToReceive.ShowDialog();
             this.SetDataSourceToDGV();
         }
 
         private void btn_SetPaidBill_Click(object sender, EventArgs e)
         {
-            PayBill();
+            NewPopulatedToPayForm();
         }
 
-        private void PayBill()
+        private void NewPopulatedToPayForm()
         {
             var obj = GetObject();
             if (obj != null)
             {
-                if (AskToPay())
-                {
-                    _controller.SetPaidBillsFromDb(obj.id);
-                }
-            }         
+                string formFunc = "Pay";
+                Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, obj);
+                frmBillsToReceive.ShowDialog();
+                SetDataSourceToDGV();              
+            }
+            else
+            {
+                Utilities.IsNotSelected(obj, "Conta");
+            }
         }
 
-        public static bool AskToPay()
+        private void NewPopulatedToCancelForm()
         {
-            string message = "Deseja baixar essa nota?";
-            string caption = "Confirmação.";
-            MessageBoxIcon icon = MessageBoxIcon.Error;
-            MessageBoxButtons buttons = MessageBoxButtons.YesNo;
-            DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
-            if (dialogResult == DialogResult.Yes)
+            var obj = GetObject();
+            if (obj != null)
             {
-                return true;
+                string formFunc = "Cancel";
+                Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, obj);
+                frmBillsToReceive.ShowDialog();
+                SetDataSourceToDGV();
             }
-            else return false;
+            else
+            {
+                Utilities.IsNotSelected(obj, "Conta");
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (Authentication.Authenticate(_User.AccessLevel, 3))
+            {
+                if (AbleToCancel())
+                {
+                    NewPopulatedToCancelForm();
+                }
+            }
+        }
+
+        private bool AbleToCancel()
+        {
+           var obj = GetObject();
+            if (obj != null)
+            {
+                if (obj.Sale == null || obj.Sale.id < 2)
+                {
+                    string message = "Não é possível cancelar contas relacionadas a vendas, cancelamento deve ser feito pelo formulário de Vendas.";
+                    string caption = "Conta a receber relacionada com Venda.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
+                else return true;
+            }
+            else return true;
         }
     }
 }

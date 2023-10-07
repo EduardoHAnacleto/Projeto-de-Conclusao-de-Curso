@@ -96,6 +96,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_barCode.Enabled = false;
             edt_ProfitPerc.Enabled = false;
             edt_und.Enabled = false;
+            check_ageRescrict.Enabled = false;
         }
 
         public override void UnlockCamps()
@@ -110,6 +111,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_barCode.Enabled = true;
             edt_ProfitPerc.Enabled = true;
             edt_und.Enabled = true;
+            check_ageRescrict.Enabled = true;
         }
 
         public override void ClearCamps()
@@ -124,6 +126,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_barCode.Clear();
             edt_ProfitPerc.Value = 0;
             edt_und.Text = string.Empty;
+            check_ageRescrict.Checked = false;
         }
 
         public void PopulateCamps(Products product)
@@ -148,6 +151,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 edt_ProfitPerc.Value = 0;
             }
 
+            if (product.AgeRestricted == 1)
+            {
+                check_ageRescrict.Checked = true;
+            }
+            else { check_ageRescrict.Checked = false; }
+
         }
 
         public Products GetObject()
@@ -155,10 +164,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             Products product = new Products();
             product.id = Convert.ToInt32(edt_id.Value);
             product.productName = edt_productName.Text;
-            product.productCost = Convert.ToDecimal(edt_productCost.Text);
+            product.productCost = edt_productCost.Value;
+
+            
             product.salePrice = Convert.ToDecimal(edt_productSalePrice.Text);
-            product.stock = Convert.ToInt32(edt_stock.Value);
-            product.BarCode = Convert.ToInt64(edt_barCode.Text);
+
+            if (edt_barCode.Text.Length > 0)
+            {
+                product.BarCode = Convert.ToInt64(edt_barCode.Text);
+            }
+            else
+            {
+                product.BarCode = product.id;
+            }
+
             product.UND = edt_und.Text;
 
             ProductGroups pGroups = this.TakePGroup(cbox_ProductGroup.SelectedItem.ToString());
@@ -166,6 +185,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
             Brands brand = this.TakeBrand(cbox_brands.SelectedItem.ToString());
             product.brand = brand;
+
+            if (check_ageRescrict.Checked)
+            {
+                product.AgeRestricted = 1;
+            }
+            else { product.AgeRestricted = 0; }
 
             return product;
         }

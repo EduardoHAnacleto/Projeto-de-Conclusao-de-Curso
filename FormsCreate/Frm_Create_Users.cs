@@ -17,7 +17,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
         public Frm_Create_Users()
         {
             InitializeComponent();
-            edt_idEmployee.Controls[0].Visible = false;
             edt_id.Enabled = false;
             SetNewId(); //?
         }
@@ -37,39 +36,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public void UnlockUser()
         {
-            btn_Search.Enabled = true;
             edt_userLogin.Enabled = true;
             cbox_levelAccess.Enabled = true;
         }
 
         public void LockUser()
-        {
-            btn_Search.Enabled = false;       
+        {    
             edt_userLogin.Enabled = false;
             cbox_levelAccess.Enabled = false;
-        }
-
-        public void SearchEmployee()
-        {
-            Frm_Find_Employees formEmployee = new Frm_Find_Employees();
-            formEmployee.hasFather = true;
-            formEmployee.ShowDialog();
-            if (!formEmployee.ActiveControl.ContainsFocus)
-            {
-                Employees employee = new Employees();
-                employee = formEmployee.GetObject();
-                if (employee != null)
-                {
-                    edt_employeeName.Text = employee.name;
-                    edt_idEmployee.Value = employee.id;
-                }
-            }
-            formEmployee.Close();
-        }
-
-        private void btn_Search_Click(object sender, EventArgs e)
-        {
-            SearchEmployee();
         }
 
         public Employees TakeEmployee(int id)
@@ -86,8 +60,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             user.id = Convert.ToInt32(edt_id.Value);
             user.userLogin = edt_userLogin.Text;
             user.userPassword = medt_userPassword.Text;
-            Employees employee = this.TakeEmployee(Convert.ToInt32(edt_idEmployee.Text));
-            user.employee = employee ;
             return user;
         }
 
@@ -128,7 +100,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public void PopulateCamps(Users user)
         {
-            edt_employeeName.Text = user.name;
             edt_id.Value = user.id;
             edt_userLogin.Text = user.userLogin;
             medt_userPassword.Text = user.userPassword;

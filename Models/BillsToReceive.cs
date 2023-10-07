@@ -21,6 +21,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public bool IsPaid { get; set; }
         public Clients Client { get; set; }
         public Sales Sale { get; set; }
+        public Users User { get; set; }
         public PaymentMethods PaymentMethod { get; set; }    
         public int InstalmentNumber { get; set; }
         public int InstalmentsQtd { get; set; }
@@ -30,8 +31,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public DateTime? CancelledDate { get; set; }
         public decimal InstalmentValue { get; set; }
         public PaymentConditions PaymentCondition { get; set; }
+        public string CancelMotive { get; set; }
 
-        public static List<BillsToReceive> MakeBills(Sales sale, int saleId)
+        public static List<BillsToReceive> MakeBills(Sales sale, int saleId, Users user)
         {
             PaymentConditions_Controller condController = new PaymentConditions_Controller();
             DateTime emDate = DateTime.Now;
@@ -42,6 +44,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             foreach (BillsInstalments instalments in cond.BillsInstalments)
             {
                 BillsToReceive bill = new BillsToReceive();
+                bill.User = user;
                 bill.PaymentCondition = cond;
                 bill.InstalmentNumber = instalments.InstalmentNumber;
                 bill.PaidDate = null;

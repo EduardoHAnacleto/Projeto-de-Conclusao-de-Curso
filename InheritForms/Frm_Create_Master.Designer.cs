@@ -46,6 +46,7 @@
             // 
             // gbox_dates
             // 
+            this.gbox_dates.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.gbox_dates.Controls.Add(this.lbl_LastUpdate);
             this.gbox_dates.Controls.Add(this.lbl_CreationDate);
             this.gbox_dates.Controls.Add(this.lbl_Sign_LastUpdate);
@@ -163,6 +164,7 @@
             // 
             // lbl_requiredSymbol
             // 
+            this.lbl_requiredSymbol.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbl_requiredSymbol.AutoSize = true;
             this.lbl_requiredSymbol.Location = new System.Drawing.Point(192, 357);
             this.lbl_requiredSymbol.Name = "lbl_requiredSymbol";
@@ -206,6 +208,6 @@
         public System.Windows.Forms.Button btn_exit;
         public System.Windows.Forms.Label lbl_id;
         public System.Windows.Forms.NumericUpDown edt_id;
-        private System.Windows.Forms.Label lbl_requiredSymbol;
+        public System.Windows.Forms.Label lbl_requiredSymbol;
     }
 }

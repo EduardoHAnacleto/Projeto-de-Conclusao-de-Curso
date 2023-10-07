@@ -485,11 +485,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             return dt;
         }
 
-        public bool CancelPurchaseBills(int billNum, int billModel, int billSeries, int supplierId)
+        public bool CancelPurchaseBills(int billNum, int billModel, int billSeries, int supplierId, DateTime cancelDate, string cancelMotive)
         {
             bool status = false;
 
-            string sql = "UPDATE BILLSTOPAY SET billStatus = @STATUS, DATE_LAST_UPDATE = @DU " +
+            string sql = "UPDATE BILLSTOPAY SET billStatus = @STATUS, DATE_CANCELLED = @DATECANCEL, MOTIVE_CANCELLED = @MOTCANCEL, DATE_LAST_UPDATE = @DU " +
                 "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND SUPPLIER_ID = @SUPPLIERID; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -499,9 +499,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@STATUS", 2); // 2 == Cancelado
                     command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
+                    command.Parameters.AddWithValue("@DATECANCEL", cancelDate);
                     command.Parameters.AddWithValue("@BNUMBER", billNum);
                     command.Parameters.AddWithValue("@BSERIES", billSeries);
                     command.Parameters.AddWithValue("@BMODEL", billSeries);
+                    command.Parameters.AddWithValue("@MOTCANCEL", cancelMotive);
                     command.Parameters.AddWithValue("@DU", DateTime.Now.Date);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
@@ -561,6 +563,93 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     connection.Close();
                 }
                 return status;
+            }
+        }
+
+        internal bool PayBill(BillsToPay obj)
+        {
+            {
+                bool status = false;
+
+                string sql = "UPDATE BILLSTOPAY SET PAIDDATE = @PAIDDATE, DATE_LAST_UPDATE = @UPDATE " +
+                    "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND SUPPLIER_ID = @SUPPLIERID AND INSTALMENTNUMBER = @INUM; ";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.Parameters.AddWithValue("@PAIDDATE", DateTime.Today.Date);
+                        command.Parameters.AddWithValue("@ID", obj.id);
+                        command.Parameters.AddWithValue("@UPDATE", DateTime.Today.Date);
+                        command.Parameters.AddWithValue("@INUM", obj.InstalmentNumber);
+                        command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                        command.Parameters.AddWithValue("@BNUMBER", obj.BillNumber);
+                        command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                        command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+
+                        connection.Open();
+                        int i = command.ExecuteNonQuery();
+                        if (i > 0)
+                        {
+                            status = true;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro : " + ex.Message);
+                        return status;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                    return status;
+                }
+            }
+        }
+
+        internal bool CancelBill(BillsToPay obj)
+        {
+            {
+                bool status = false;
+
+                string sql = "UPDATE BILLSTOPAY SET DATE_CANCELLED = @CANCEL, MOTIVE_CANCELLED = @MOTCANCEL, DATE_LAST_UPDATE = @UPDATE " +
+                    "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND SUPPLIER_ID = @SUPPLIERID; ";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    try
+                    {
+                        SqlCommand command = new SqlCommand(sql, connection);
+                        command.Parameters.AddWithValue("@PAIDDATE", DateTime.Today.Date);
+                        command.Parameters.AddWithValue("@UPDATE", DateTime.Today.Date);
+                        command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                        command.Parameters.AddWithValue("@BNUMBER", obj.BillNumber);
+                        command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                        command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                        command.Parameters.AddWithValue("@DATECANCEL", obj.CancelledDate);
+                        command.Parameters.AddWithValue("@MOTCANCEL", obj.CancelMotive);
+                        connection.Open();
+                        int i = command.ExecuteNonQuery();
+                        if (i > 0)
+                        {
+                            status = true;
+                        }
+
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Erro : " + ex.Message);
+                        return status;
+                    }
+                    finally
+                    {
+                        connection.Close();
+                    }
+                    return status;
+                }
             }
         }
     }

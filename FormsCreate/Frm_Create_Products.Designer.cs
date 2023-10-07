@@ -48,6 +48,7 @@
             this.edt_barCode = new System.Windows.Forms.TextBox();
             this.edt_und = new System.Windows.Forms.TextBox();
             this.lbl_und = new System.Windows.Forms.Label();
+            this.check_ageRescrict = new System.Windows.Forms.CheckBox();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_stock)).BeginInit();
@@ -255,9 +256,9 @@
             // 
             this.edt_und.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.edt_und.Location = new System.Drawing.Point(336, 24);
-            this.edt_und.MaxLength = 15;
+            this.edt_und.MaxLength = 5;
             this.edt_und.Name = "edt_und";
-            this.edt_und.Size = new System.Drawing.Size(111, 20);
+            this.edt_und.Size = new System.Drawing.Size(54, 20);
             this.edt_und.TabIndex = 42;
             // 
             // lbl_und
@@ -269,10 +270,21 @@
             this.lbl_und.TabIndex = 43;
             this.lbl_und.Text = "UND";
             // 
+            // check_ageRescrict
+            // 
+            this.check_ageRescrict.AutoSize = true;
+            this.check_ageRescrict.Location = new System.Drawing.Point(271, 122);
+            this.check_ageRescrict.Name = "check_ageRescrict";
+            this.check_ageRescrict.Size = new System.Drawing.Size(143, 17);
+            this.check_ageRescrict.TabIndex = 44;
+            this.check_ageRescrict.Text = "Restrição de Idade (18+)";
+            this.check_ageRescrict.UseVisualStyleBackColor = true;
+            // 
             // Frm_Create_Products
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.ClientSize = new System.Drawing.Size(672, 379);
+            this.Controls.Add(this.check_ageRescrict);
             this.Controls.Add(this.lbl_und);
             this.Controls.Add(this.edt_und);
             this.Controls.Add(this.edt_barCode);
@@ -296,6 +308,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_Products";
             this.Text = "Criar Produto";
+            this.Controls.SetChildIndex(this.lbl_requiredSymbol, 0);
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);
@@ -323,6 +336,7 @@
             this.Controls.SetChildIndex(this.edt_barCode, 0);
             this.Controls.SetChildIndex(this.edt_und, 0);
             this.Controls.SetChildIndex(this.lbl_und, 0);
+            this.Controls.SetChildIndex(this.check_ageRescrict, 0);
             this.gbox_dates.ResumeLayout(false);
             this.gbox_dates.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
@@ -356,5 +370,6 @@
         private System.Windows.Forms.TextBox edt_barCode;
         private System.Windows.Forms.TextBox edt_und;
         private System.Windows.Forms.Label lbl_und;
+        private System.Windows.Forms.CheckBox check_ageRescrict;
     }
 }

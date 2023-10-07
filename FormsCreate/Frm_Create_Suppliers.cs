@@ -58,7 +58,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 else
                 {
                     supplier.PaymentCondition = new PaymentConditions();
-                    supplier.PaymentCondition.id = 1;
+                    supplier.PaymentCondition.id = 2;
                 }
                 //Supplier
 

@@ -10,10 +10,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
     {
         public Users()
         {
-            Employees employee = new Employees();
+
         }
 
-        public Employees employee { get; set; }
         public string userLogin { get; set; }
         public string userPassword { get; set; }
         public int AccessLevel { get; set; }

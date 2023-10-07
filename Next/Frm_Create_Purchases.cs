@@ -40,13 +40,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             dateTime_emissionDate.Text = DateTime.Today.ToString();
             User = user;
             SetUser(User);
+            DGV_PurchasesProducts.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_PurchasesProducts.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_PurchasesProducts.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_PurchasesProducts.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_PurchasesProducts.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_PurchasesProducts.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_PurchasesProducts.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_Instalments.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            DGV_Instalments.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_Instalments.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_Instalments.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            DGV_Instalments.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            DGV_Instalments.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            DGV_Instalments.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            DGV_Instalments.Columns[8].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
         private void SetUser(Users user)
@@ -61,6 +65,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private readonly PurchaseItems_Controller _pIController = new PurchaseItems_Controller();
         private Purchases BackupPurchase = null;
         private bool ValidatedBill = false;
+        public string _cancelMotive { get; set; }
 
         public void NewFormSearchProduct() //Abre form para encontrar e levar PRODUTO
         {
@@ -327,7 +332,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 purchase.CancelledDate = DateTime.Now.Date;
                                 check_Active.Checked = false;
                                 check_Cancelled.Checked = true;
-                                status = _controller.UpdateItem(purchase);
+                                status = _controller.UpdateItem(purchase, _cancelMotive);
                             }
                             if (status)
                             {
@@ -642,6 +647,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 Utilities.Msgbox(message, caption, buttons, icon);
                 return false;
             }
+            else if (check_Cancelled.Checked && ValidateCancelMotive())
+            {
+                return true;
+            }
             return true;
         }
 
@@ -821,6 +830,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 check_Cancelled.Checked = false;
                 medt_CancelDate.Text = string.Empty;
+                gbox_cancelReason.Visible = false;
             }
         }
 
@@ -830,7 +840,23 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 check_Active.Checked = false;
                 medt_CancelDate.Text = DateTime.Now.ToString();
+                gbox_cancelReason.Visible = true;
             }
+        }
+
+        private bool ValidateCancelMotive()
+        {
+            if (txt_cancelMot.Text == string.Empty || txt_cancelMot.Text.Length < 5)
+            {
+                string message = "Motivo de cancelamento deve ser inserido com o mínimo de 5 caractéres.";
+                string caption = "Item obrigatório.";
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
+            _cancelMotive = txt_cancelMot.Text;
+            return true;
         }
 
         private void gbox_supplier_Leave(object sender, EventArgs e)
@@ -860,6 +886,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void edt_prodQtd_Leave(object sender, EventArgs e)
         {
             CalcProdTotal();
+        }
+
+        private void gbox_cancelReason_Leave(object sender, EventArgs e)
+        {
+            ValidateCancelMotive();
         }
     }
 }

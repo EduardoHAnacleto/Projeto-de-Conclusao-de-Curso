@@ -32,11 +32,11 @@
             this.check_NaturalClient = new System.Windows.Forms.CheckBox();
             this.gbox_clientType = new System.Windows.Forms.GroupBox();
             this.gbox_payCondition = new System.Windows.Forms.GroupBox();
-            this.lbl_payCondId = new System.Windows.Forms.Label();
-            this.edt_payCondName = new System.Windows.Forms.TextBox();
-            this.lbl_condName = new System.Windows.Forms.Label();
-            this.btn_findCondition = new System.Windows.Forms.Button();
             this.edt_payCondId = new System.Windows.Forms.NumericUpDown();
+            this.btn_findCondition = new System.Windows.Forms.Button();
+            this.lbl_condName = new System.Windows.Forms.Label();
+            this.edt_payCondName = new System.Windows.Forms.TextBox();
+            this.lbl_payCondId = new System.Windows.Forms.Label();
             this.gbox_gender.SuspendLayout();
             this.gbox_address.SuspendLayout();
             this.gbox_phones.SuspendLayout();
@@ -166,31 +166,14 @@
             this.gbox_payCondition.TabStop = false;
             this.gbox_payCondition.Text = "Condição de Pagamento";
             // 
-            // lbl_payCondId
+            // edt_payCondId
             // 
-            this.lbl_payCondId.AutoSize = true;
-            this.lbl_payCondId.Location = new System.Drawing.Point(3, 14);
-            this.lbl_payCondId.Name = "lbl_payCondId";
-            this.lbl_payCondId.Size = new System.Drawing.Size(18, 13);
-            this.lbl_payCondId.TabIndex = 1;
-            this.lbl_payCondId.Text = "ID";
-            // 
-            // edt_payCondName
-            // 
-            this.edt_payCondName.Enabled = false;
-            this.edt_payCondName.Location = new System.Drawing.Point(50, 30);
-            this.edt_payCondName.Name = "edt_payCondName";
-            this.edt_payCondName.Size = new System.Drawing.Size(183, 20);
-            this.edt_payCondName.TabIndex = 2;
-            // 
-            // lbl_condName
-            // 
-            this.lbl_condName.AutoSize = true;
-            this.lbl_condName.Location = new System.Drawing.Point(47, 14);
-            this.lbl_condName.Name = "lbl_condName";
-            this.lbl_condName.Size = new System.Drawing.Size(52, 13);
-            this.lbl_condName.TabIndex = 3;
-            this.lbl_condName.Text = "Condição";
+            this.edt_payCondId.Enabled = false;
+            this.edt_payCondId.Location = new System.Drawing.Point(6, 30);
+            this.edt_payCondId.Name = "edt_payCondId";
+            this.edt_payCondId.Size = new System.Drawing.Size(38, 20);
+            this.edt_payCondId.TabIndex = 5;
+            this.edt_payCondId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // btn_findCondition
             // 
@@ -202,13 +185,31 @@
             this.btn_findCondition.UseVisualStyleBackColor = true;
             this.btn_findCondition.Click += new System.EventHandler(this.btn_findCondition_Click);
             // 
-            // edt_payCondId
+            // lbl_condName
             // 
-            this.edt_payCondId.Location = new System.Drawing.Point(6, 30);
-            this.edt_payCondId.Name = "edt_payCondId";
-            this.edt_payCondId.Size = new System.Drawing.Size(38, 20);
-            this.edt_payCondId.TabIndex = 5;
-            this.edt_payCondId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.lbl_condName.AutoSize = true;
+            this.lbl_condName.Location = new System.Drawing.Point(47, 14);
+            this.lbl_condName.Name = "lbl_condName";
+            this.lbl_condName.Size = new System.Drawing.Size(52, 13);
+            this.lbl_condName.TabIndex = 3;
+            this.lbl_condName.Text = "Condição";
+            // 
+            // edt_payCondName
+            // 
+            this.edt_payCondName.Enabled = false;
+            this.edt_payCondName.Location = new System.Drawing.Point(50, 30);
+            this.edt_payCondName.Name = "edt_payCondName";
+            this.edt_payCondName.Size = new System.Drawing.Size(183, 20);
+            this.edt_payCondName.TabIndex = 2;
+            // 
+            // lbl_payCondId
+            // 
+            this.lbl_payCondId.AutoSize = true;
+            this.lbl_payCondId.Location = new System.Drawing.Point(3, 14);
+            this.lbl_payCondId.Name = "lbl_payCondId";
+            this.lbl_payCondId.Size = new System.Drawing.Size(18, 13);
+            this.lbl_payCondId.TabIndex = 1;
+            this.lbl_payCondId.Text = "ID";
             // 
             // Frm_Create_Clients
             // 
@@ -219,6 +220,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Frm_Create_Clients";
             this.Text = "Criar Clientes";
+            this.Controls.SetChildIndex(this.lbl_requiredSymbol, 0);
             this.Controls.SetChildIndex(this.gbox_clientType, 0);
             this.Controls.SetChildIndex(this.gbox_gender, 0);
             this.Controls.SetChildIndex(this.lbl_Name, 0);

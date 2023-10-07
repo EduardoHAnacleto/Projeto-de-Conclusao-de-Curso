@@ -362,12 +362,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         private void NewBillToReceiveForm(int saleId, int instalmentNumber)
         {
-            var formBillsToReceive = new Frm_Create_BillsToReceive();
-            var obj = _billsController.FindItemId(saleId, instalmentNumber);
-            formBillsToReceive.PopulateCamps(obj);
-            formBillsToReceive.Populated(true);
-            formBillsToReceive.ShowDialog();
-            SetBillsToReceiveDataSourceToDGV();
+            //var formBillsToReceive = new Frm_Create_BillsToReceive();
+            //var obj = _billsController.FindItemId(saleId, instalmentNumber);
+            //formBillsToReceive.PopulateCamps(obj);
+            //formBillsToReceive.Populated(true);
+            //formBillsToReceive.ShowDialog();
+            //SetBillsToReceiveDataSourceToDGV();
         }
 
         private void DGV_Clients_CellContentClick(object sender, DataGridViewCellEventArgs e)

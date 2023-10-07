@@ -59,9 +59,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             _billToPay.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
             _billToPaysDAO.EditFromDB(_billToPay);
         }
-        public bool CancelPurchaseBills(int billNum, int billModel, int billSeries, int supplierId) 
+        public bool CancelPurchaseBills(int billNum, int billModel, int billSeries, int supplierId, DateTime cancelDate, string cancelMotive) 
         {
-            return _billToPaysDAO.CancelPurchaseBills(billNum, billModel, billSeries, supplierId);
+            return _billToPaysDAO.CancelPurchaseBills(billNum, billModel, billSeries, supplierId, cancelDate, cancelMotive);
         }
 
         public DataTable PopulateDGV() 
@@ -76,5 +76,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             return _billToPaysDAO.SetPaidBillsFromDb(billNum, billModel, billSeries, supplierId, instalmentNumber);
         }
 
+
+        internal bool PayBill(BillsToPay bill)
+        {
+            return _billToPaysDAO.PayBill(bill);
+        }
+
+        internal bool CancelBill(BillsToPay bill)
+        {
+            return _billToPaysDAO.CancelBill(bill);
+        }
     }
 }

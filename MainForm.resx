@@ -118,17 +118,65 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="consultsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>71, 20</value>
-  </data>
-  <data name="consultsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Consultas</value>
-  </data>
   <data name="peopleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
   <data name="peopleToolStripMenuItem.Text" xml:space="preserve">
     <value>Pessoas</value>
+  </data>
+  <data name="productsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="productsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Produtos</value>
+  </data>
+  <data name="locationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="locationsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Localizações</value>
+  </data>
+  <data name="paymentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="paymentToolStripMenuItem.Text" xml:space="preserve">
+    <value>Pagamentos</value>
+  </data>
+  <data name="addNewBillToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="addNewBillToolStripMenuItem1.Text" xml:space="preserve">
+    <value>Contas à Pagar</value>
+  </data>
+  <data name="findBillsToPayToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>191, 22</value>
+  </data>
+  <data name="findBillsToPayToolStripMenuItem.Text" xml:space="preserve">
+    <value>Buscar Contas à Pagar</value>
+  </data>
+  <data name="billsToPayToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="billsToPayToolStripMenuItem.Text" xml:space="preserve">
+    <value>Contas à Pagar</value>
+  </data>
+  <data name="billsToReceiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="billsToReceiveToolStripMenuItem.Text" xml:space="preserve">
+    <value>Contas à Receber</value>
+  </data>
+  <data name="financesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>180, 22</value>
+  </data>
+  <data name="financesToolStripMenuItem.Text" xml:space="preserve">
+    <value>Finanças</value>
+  </data>
+  <data name="consultsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>71, 20</value>
+  </data>
+  <data name="consultsToolStripMenuItem.Text" xml:space="preserve">
+    <value>Consultas</value>
   </data>
   <data name="customerToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>175, 22</value>
@@ -154,12 +202,6 @@
   <data name="phoneClassificationToolStripMenuItem.Text" xml:space="preserve">
     <value>Classe de Telefones</value>
   </data>
-  <data name="productsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="productsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Produtos</value>
-  </data>
   <data name="productToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>174, 22</value>
   </data>
@@ -184,12 +226,6 @@
   <data name="servicesToolStripMenuItem.Text" xml:space="preserve">
     <value>Serviços</value>
   </data>
-  <data name="locationsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="locationsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Localizações</value>
-  </data>
   <data name="citiesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>116, 22</value>
   </data>
@@ -208,12 +244,6 @@
   <data name="countriesToolStripMenuItem.Text" xml:space="preserve">
     <value>Países</value>
   </data>
-  <data name="paymentToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="paymentToolStripMenuItem.Text" xml:space="preserve">
-    <value>Pagamentos</value>
-  </data>
   <data name="methodsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>130, 22</value>
   </data>
@@ -226,47 +256,11 @@
   <data name="conditionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Condições</value>
   </data>
-  <data name="financesToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="financesToolStripMenuItem.Text" xml:space="preserve">
-    <value>Finanças</value>
-  </data>
-  <data name="billsToPayToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="billsToPayToolStripMenuItem.Text" xml:space="preserve">
-    <value>Contas à Pagar</value>
-  </data>
-  <data name="addNewBillToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="addNewBillToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Nova Conta à Pagar</value>
-  </data>
-  <data name="findBillsToPayToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="findBillsToPayToolStripMenuItem.Text" xml:space="preserve">
-    <value>Buscar Contas à Pagar</value>
-  </data>
-  <data name="billsToReceiveToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="billsToReceiveToolStripMenuItem.Text" xml:space="preserve">
-    <value>Contas à Receber</value>
-  </data>
   <data name="addNewBillToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 22</value>
+    <value>180, 22</value>
   </data>
   <data name="addNewBillToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nova Conta à Receber</value>
-  </data>
-  <data name="findBillsToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>203, 22</value>
-  </data>
-  <data name="findBillsToolStripMenuItem.Text" xml:space="preserve">
-    <value>Buscar Contas à Receber</value>
+    <value>Contas à Receber</value>
   </data>
   <data name="manageUserToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 20</value>
@@ -287,26 +281,20 @@
     <value>Vendas</value>
   </data>
   <data name="newSaleToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+    <value>149, 22</value>
   </data>
   <data name="newSaleToolStripMenuItem.Text" xml:space="preserve">
     <value>Nova Venda</value>
   </data>
+  <data name="buscarVendasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>149, 22</value>
+  </data>
+  <data name="buscarVendasToolStripMenuItem.Text" xml:space="preserve">
+    <value>Buscar Vendas</value>
+  </data>
   <metadata name="menuStrip2.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>132, 17</value>
   </metadata>
-  <data name="novaCompraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="novaCompraToolStripMenuItem.Text" xml:space="preserve">
-    <value>Nova Compra</value>
-  </data>
-  <data name="buscarComprasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="buscarComprasToolStripMenuItem.Text" xml:space="preserve">
-    <value>Buscar Compras</value>
-  </data>
   <data name="comprasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>67, 20</value>
   </data>
@@ -338,11 +326,17 @@
   <data name="&gt;&gt;menuStrip2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
-  <data name="buscarVendasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
+  <data name="novaCompraToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
   </data>
-  <data name="buscarVendasToolStripMenuItem.Text" xml:space="preserve">
-    <value>Buscar Vendas</value>
+  <data name="novaCompraToolStripMenuItem.Text" xml:space="preserve">
+    <value>Nova Compra</value>
+  </data>
+  <data name="buscarComprasToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
+    <value>160, 22</value>
+  </data>
+  <data name="buscarComprasToolStripMenuItem.Text" xml:space="preserve">
+    <value>Buscar Compras</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>
@@ -504,12 +498,6 @@
   <data name="&gt;&gt;addNewBillToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;findBillsToolStripMenuItem.Name" xml:space="preserve">
-    <value>findBillsToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;findBillsToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;manageUserToolStripMenuItem.Name" xml:space="preserve">
     <value>manageUserToolStripMenuItem</value>
   </data>
@@ -534,16 +522,16 @@
   <data name="&gt;&gt;newSaleToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;comprasToolStripMenuItem.Name" xml:space="preserve">
-    <value>comprasToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;comprasToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;buscarVendasToolStripMenuItem.Name" xml:space="preserve">
     <value>buscarVendasToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;buscarVendasToolStripMenuItem.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;comprasToolStripMenuItem.Name" xml:space="preserve">
+    <value>comprasToolStripMenuItem</value>
+  </data>
+  <data name="&gt;&gt;comprasToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;novaCompraToolStripMenuItem.Name" xml:space="preserve">

@@ -170,6 +170,7 @@
             // 
             // edt_payCondId
             // 
+            this.edt_payCondId.Enabled = false;
             this.edt_payCondId.Location = new System.Drawing.Point(6, 30);
             this.edt_payCondId.Name = "edt_payCondId";
             this.edt_payCondId.Size = new System.Drawing.Size(38, 20);
@@ -224,6 +225,7 @@
             this.Margin = new System.Windows.Forms.Padding(5);
             this.Name = "Frm_Create_Suppliers";
             this.Text = "Create Supplier";
+            this.Controls.SetChildIndex(this.lbl_requiredSymbol, 0);
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);

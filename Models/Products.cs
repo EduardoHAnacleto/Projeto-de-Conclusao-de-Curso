@@ -22,5 +22,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public string UND {  get; set; }
         public Brands brand { get; set; }
         public ProductGroups productGroup { get; set; }
+        public int AgeRestricted { get; set; }
     }
 }

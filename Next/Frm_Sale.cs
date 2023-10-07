@@ -50,6 +50,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         public Sales Sale { get; private set; }
         private Sales BackupSale = new Sales();
         private Products product = null;
+        public Users _User { get; set; }
         private Products_Controller _pController = new Products_Controller();
         private Sales_Controller _controller = new Sales_Controller();
         private BillsToReceive_Controller _BTRController = new BillsToReceive_Controller();
@@ -64,6 +65,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         {
             edt_userId.Value = user.id;
             edt_userName.Text = user.name;
+            _User = user;
         }
 
         public void NewSale() //Limpa todos campos exceto User
@@ -126,6 +128,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     edt_barCode.Value = product.BarCode;
                     edt_ProdUnValue.Value = (decimal)product.salePrice;
                     edt_totalPValue.Value = edt_ProdUnValue.Value;
+                    edt_und.Text = product.UND;
                 }
             }
             formProducts.Close();
@@ -183,7 +186,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             decimal discountCash = (decimal)edt_ProdDiscCash.Value;
             decimal totalValue = (decimal)edt_totalPValue.Value;
 
-            if (!CheckEqualDGVProduct(product.id, amount, discountCash, totalValue))
+            if (!CheckEqualDGVProduct(product.id, amount, discountCash, totalValue) && LegalAge(product.AgeRestricted))
             {
                 DGV_SaleProducts.Rows.Add(
                     product.id,
@@ -195,6 +198,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
 
             CalculateSubTotal();
+        }
+
+        private bool LegalAge(int ageRestricted)
+        {
+            var client = GetClient();
+            if (ageRestricted == 1 && client.age > 18)
+            {
+                return true;
+            }
+            else
+            {
+                string message = "Proibida a venda desse produto para menores de idade.";
+                string caption = "Venda proibida.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                return false;
+            }
         }
 
         public void UpdateDGVSummary(decimal subtotal, decimal total)
@@ -529,7 +550,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                             {
                                 int saleId = _controller.GetLastId();
                                 List<BillsToReceive> billsToReceiveList = new List<BillsToReceive>();
-                                billsToReceiveList = BillsToReceive.MakeBills(sale,saleId);
+                                billsToReceiveList = BillsToReceive.MakeBills(sale,saleId, _User);
                                 foreach (BillsToReceive bill in billsToReceiveList)
                                 {
                                     status = _BTRController.SaveItem(bill);
@@ -566,7 +587,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                                 status = _controller.CancelSale(cancelledSale);
                                 if (status)
                                 {
-                                    status = _BTRController.CancelBills(sale.id);
+                                    status = _BTRController.CancelBills(sale.id, _User.id);
                                     if (status)
                                     {
                                         //foreach (var item in cancelledSale.SaleItems)
@@ -863,6 +884,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             edt_totalPValue.Value = 0;
             medt_CancelDate.Visible = false;
             lbl_CancelDate.Visible = false;
+            edt_und.Text = string.Empty;
         }
 
         private void UnlockCamps()

@@ -160,7 +160,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 else
                 {
                     client.PaymentCondition = new PaymentConditions();
-                    client.PaymentCondition.id = 1;
+                    client.PaymentCondition.id = 2;
                 }
 
                 //Phones

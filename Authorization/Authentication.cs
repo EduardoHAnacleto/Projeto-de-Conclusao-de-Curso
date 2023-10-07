@@ -9,26 +9,22 @@ using System.Windows.Forms;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.Authorization
 {
-    public class Authentication : IAuthentication
+    public abstract class Authentication : IAuthentication
     {
         private string Login { get; set; }
         private string Secret { get; set; }
         public Users User { get; set; }
-        private int AccessLevel { get; set; }
         public bool IsAuthenticated { get; set; }
 
-        public Authentication()
-        {
-            
-        }
 
-        public bool IsPermitted (int accessLevel, int requiredLevel)
+
+        public static bool Authenticate (int accessLevel, int requiredLevel)
         {
-            if (accessLevel >= AccessLevel)
+            if (accessLevel >= requiredLevel)
             {
                 return true;
             }
-            MessageBox.Show("Not authorized.");
+            MessageBox.Show("Usuário não autorizado.");
             return false;
         }
 
@@ -47,7 +43,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Authorization
             return User;
         }
 
-        public bool LogUser (string login, string secret)
+        public static bool LogUser (string login, string secret)
         {
             try
             {
@@ -55,15 +51,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Authorization
                 Users user = uController.LogUser(login, secret);
                 if (user != null)
                 {
-                    IsAuthenticated = true;
-                    User = user;
                     return true;
                 }
                 return false;
             }
             catch (Exception ex)
             {
-                MessageBox.Show("User not found.");
+                MessageBox.Show("Login ou senha estão incorretos.");
                 return false;
             }            
         }

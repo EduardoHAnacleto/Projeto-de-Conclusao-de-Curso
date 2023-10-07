@@ -66,11 +66,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             _purchasesDAO.DeleteFromDb(bModel, bNum, bSeries, supplierId);
         }
-        public bool UpdateItem(Purchases purchase)
+        public bool UpdateItem(Purchases purchase, string cancelMotive)
         {
             _purchase = purchase;
             _purchase.dateOfLastUpdate = DateTime.Now.Date;
-            return _purchasesDAO.EditFromDB(_purchase);
+            return _purchasesDAO.EditFromDB(_purchase, cancelMotive);
         }
 
         public DataTable PopulateDGV() //Cria obj DataTable chama a DAO para trazer a conexao da tabela da DB

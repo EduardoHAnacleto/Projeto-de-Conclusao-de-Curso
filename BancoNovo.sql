@@ -184,7 +184,8 @@
         product_barcode bigint,
         date_creation datetime not null,
         date_last_update datetime not null,
-        product_und varchar(15) not null
+        product_und varchar(15) not null,
+        age_restricted int not null
     );
 
     create table SUPPLIERPRODUCTS(
@@ -229,10 +230,6 @@
 		primary key (serviceOrder_id,numberInstalment)
     );
 
-
-
-
-
     create table SALES(
         id_sale int identity(2,1) primary key,
         CLIENT_ID int not null references CLIENTS(id_client),
@@ -246,8 +243,9 @@
     );
 
 	create table BILLSTORECEIVE(
-        sale_id int not null references SALES(id_sale),
-        instalmentNumber int not null, w
+        id_bill int identity(2,1),
+        sale_id int references SALES(id_sale),
+        instalmentNumber int not null, 
         instalmentValue decimal not null,
         isPaid int not null,
         paidDate datetime,
@@ -259,9 +257,12 @@
         emissionDate date not null,
         date_creation date not null,
         DATE_CANCELLED date,
+        MOTIVE_CANCELLED varchar(150),
         date_last_update date not null,
-        primary key(sale_id,instalmentNumber),
-		foreign key(sale_id) references SALES(id_sale)
+        user_id int not null,
+        primary key(id_bill,instalmentNumber),
+		foreign key(sale_id) references SALES(id_sale),
+        foreign key(user_id) references USERS(id_user)
     );
 
 
@@ -326,6 +327,8 @@
         payCond_id int not null foreign key references PAYMENTCONDITIONS(id_paycondition),
         date_creation datetime not null,
         date_last_update datetime not null,
+        date_cancelled datetime,
+        MOTIVE_CANCELLED varchar(150),
         primary key (billNumber, billModel, billSeries, instalmentNumber, supplier_id)
         );
 

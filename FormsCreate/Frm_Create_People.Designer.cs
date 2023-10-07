@@ -422,7 +422,7 @@
             this.medt_regNumber.Margin = new System.Windows.Forms.Padding(2);
             this.medt_regNumber.Mask = "000.000.000-00";
             this.medt_regNumber.Name = "medt_regNumber";
-            this.medt_regNumber.Size = new System.Drawing.Size(116, 20);
+            this.medt_regNumber.Size = new System.Drawing.Size(105, 20);
             this.medt_regNumber.TabIndex = 30;
             this.medt_regNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.medt_regNumber.ValidatingType = typeof(int);
@@ -460,6 +460,7 @@
             // 
             // edt_age
             // 
+            this.edt_age.Enabled = false;
             this.edt_age.Location = new System.Drawing.Point(237, 75);
             this.edt_age.Margin = new System.Windows.Forms.Padding(2);
             this.edt_age.MaxLength = 3;
@@ -572,6 +573,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Frm_Create_People";
             this.Text = "Criar Pessoa";
+            this.Controls.SetChildIndex(this.lbl_requiredSymbol, 0);
             this.Controls.SetChildIndex(this.lbl_id, 0);
             this.Controls.SetChildIndex(this.btn_exit, 0);
             this.Controls.SetChildIndex(this.btn_NewSave, 0);

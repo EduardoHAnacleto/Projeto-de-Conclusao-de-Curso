@@ -53,17 +53,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToReceivesDAO.SelectIsPaidFromDb(isPaid);
         }
-        public void DeleteItem(int saleId, int InstalmentNum)
-        {
-            _billToReceivesDAO.DeleteFromDb(saleId, InstalmentNum);
-        }
-        public void UpdateItem(BillsToReceive billToReceive)
-        {
-            _billToReceive = billToReceive;
-            string format = "yyyy-MM-dd";
-            _billToReceive.dateOfLastUpdate = DateTime.Parse(DateTime.Now.ToString(format));
-            _billToReceivesDAO.EditFromDB(_billToReceive);
-        }
+
         public DataTable PopulateDGV() //Cria obj DataTable chama a DAO para trazer a conexao da tabela da DB
         {
             DataTable ds = new DataTable();
@@ -71,14 +61,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             return ds;
         }
         
-        public bool CancelBills(int id)
+        public bool CancelBills(int id, int userId)
         {
-            return _billToReceivesDAO.CancelBillsFromDb(id);
+            return _billToReceivesDAO.CancelBillsFromDb(id, userId);
         }
 
-        public bool SetPaidBillsFromDb(int id)
+        public bool SetPaidBillsFromDb(int id, int userId)
         {
-            return _billToReceivesDAO.SetPaidBillsFromDb(id);
+            return _billToReceivesDAO.SetPaidBillsFromDb(id, userId);
+        }
+
+        internal bool PayBill(BillsToReceive billsToReceive)
+        {
+            return _billToReceivesDAO.PayBill(billsToReceive);
+        }
+
+        internal bool CancelBill(BillsToReceive billsToReceive)
+        {
+            return _billToReceivesDAO.CancelBill(billsToReceive);
         }
     }
 }

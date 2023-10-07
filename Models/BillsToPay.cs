@@ -29,6 +29,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public DateTime DueDate { get; set; }
         public int Status { get; set; }
         public DateTime? PaidDate { get; set; }
+        public DateTime? CancelledDate { get; set; }
+        public string CancelMotive { get; set; }
 
         //public int PurchaseId { get; set; }
         public Purchases Purchase { get; set; }

@@ -49,14 +49,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "INSERT INTO USERS ( EMPLOYEE_ID, USERLOGIN, USERPASSWORD, LEVELACCESS , DATE_CREATION, DATE_LAST_UPDATE) " +
-                "VALUES (@EMPID, @LOGIN, @PASSWORD, @LVLACCESS, @DC, @DU)";
+            string sql = "INSERT INTO USERS ( USERLOGIN, USERPASSWORD, LEVELACCESS , DATE_CREATION, DATE_LAST_UPDATE) " +
+                "VALUES (@LOGIN, @PASSWORD, @LVLACCESS, @DC, @DU)";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@EMPID", obj.employee.id);
                     command.Parameters.AddWithValue("@LOGIN", obj.userLogin);
                     command.Parameters.AddWithValue("@PASSWORD", obj.userPassword);
                     command.Parameters.AddWithValue("@LVLACCESS", obj.AccessLevel);
@@ -176,7 +175,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     userLogin = Convert.ToString(reader["userLogin"]),
                                     userPassword = Convert.ToString(reader["userPassword"]),
                                     AccessLevel = Convert.ToInt32(reader["levelAccess"]),
-                                    employee = _EController.FindItemId(Convert.ToInt32(reader["employee_id"])),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                                 };
@@ -219,7 +217,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     userLogin = Convert.ToString(reader["userLogin"]),
                                     userPassword = Convert.ToString(reader["userPassword"]),
                                     AccessLevel = Convert.ToInt32(reader["levelAccess"]),
-                                    employee = _EController.FindItemId(Convert.ToInt32(reader["employee_id"])),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                                 };
@@ -263,7 +260,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     userLogin = Convert.ToString(reader["userLogin"]),
                                     userPassword = Convert.ToString(reader["userPassword"]),
                                     AccessLevel = Convert.ToInt32(reader["levelAccess"]),
-                                    employee = _EController.FindItemId(Convert.ToInt32(reader["employee_id"])),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"])
                                 };
