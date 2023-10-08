@@ -108,7 +108,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             catch (Exception ex) {
                 MessageBox.Show("Erro : " + ex.Message);
             }
-
         }
 
         public void NewPopulatedForm(BillsToPay obj, string formFunc)
@@ -177,9 +176,50 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void SetPaidBill_Click(object sender, EventArgs e)
         {
-            NewPopulatedToPayForm();
+            if (DGV_BillsToPay.Rows.Count > 1)
+            {
+                if (RightInstalment())
+                {
+                    NewPopulatedToPayForm();
+                }
+            }
         }
-        
+
+        private bool RightInstalment()
+        {
+            var billNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["BillNumber"].Value);
+            var billModel = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billModel"].Value);
+            var billSeries = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billSeries"].Value);
+            var supplierId = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["SupplierId"].Value);
+            var instalmentNum = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["InstalmentNumber"].Value);
+            var obj = _controller.FindItemId(billNumber, billModel, billSeries, supplierId);
+            if (instalmentNum > 1)
+            {
+                for (int i = 0; i < instalmentNum; i++)
+                {
+                    if (obj[i].CancelledDate.HasValue) //Confirmar
+                    {
+                        string message = "As contas referente a essa nota foram canceladas, não é possível alterar.";
+                        string caption = "Não é possível alterar a parcela.";
+                        MessageBoxIcon icon = MessageBoxIcon.Error;
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        MessageBox.Show(message, caption, buttons, icon);
+                        return false;
+                    }
+                    else if (obj[i].PaidDate.HasValue)
+                    {
+                        string message = "Existem parcelas anteriores referente a essa compra em aberto.";
+                        string caption = "Não é possível alterar essa parcela.";
+                        MessageBoxIcon icon = MessageBoxIcon.Error;
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        MessageBox.Show(message, caption, buttons, icon);
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         public static bool AskToPay()
         {
             string message = $"Deseja baixar essa nota?";
@@ -196,11 +236,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void btn_CancelBill_Click(object sender, EventArgs e)
         {
-            if (Authentication.Authenticate(_User.AccessLevel, 3))
+            if (DGV_BillsToPay.Rows.Count > 1)
             {
-                if (AbleToCancel())
+                if (Authentication.Authenticate(_User.AccessLevel, 3))
                 {
-                    NewPopulatedToCancelForm();
+                    if (AbleToCancel())
+                    {
+                        NewPopulatedToCancelForm();
+                    }
                 }
             }
         }

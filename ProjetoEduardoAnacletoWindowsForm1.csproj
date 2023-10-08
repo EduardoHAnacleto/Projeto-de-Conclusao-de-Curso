@@ -435,7 +435,6 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\Validator.cs" />
-    <Compile Include="Utility\TaxesCalculator.cs" />
     <Compile Include="Utility\Utilities.cs" />
     <EmbeddedResource Include="FormsCreate\Frm_Create_Services.resx">
       <DependentUpon>Frm_Create_Services.cs</DependentUpon>

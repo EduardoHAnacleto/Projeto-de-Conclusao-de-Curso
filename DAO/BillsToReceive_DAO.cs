@@ -121,7 +121,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 }
                                 BillsToReceive obj = new BillsToReceive()
                                 {
-                                    id = Convert.ToInt32(reader["sale_id"]),
+                                    id = Convert.ToInt32(reader["id_bill"]),
                                     Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
                                     Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
                                     IsPaid = Convert.ToBoolean(reader["isPaid"]),
@@ -138,6 +138,69 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
                                 };
                                 return obj;
+                            }
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    MessageBox.Show("Erro : " + ex.Message);
+                }
+                finally
+                {
+                    connection.Close();
+                }
+            }
+            return null;
+        }
+
+        public List<BillsToReceive> SelectFromDb(int billId)
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    connection.Open();
+                    string sql = "SELECT * FROM BILLSTORECEIVE WHERE id_bill = @ID ; ";
+                    using (SqlCommand command = new SqlCommand(sql, connection))
+                    {
+                        command.Parameters.AddWithValue("@ID", billId);
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (reader.Read())
+                            {
+                                List<BillsToReceive> list = new List<BillsToReceive>();
+                                foreach (var row in reader)
+                                {
+                                    BillsToReceive obj = new BillsToReceive()
+                                    {
+                                        id = Convert.ToInt32(reader["id_bill"]),
+                                        Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
+                                        Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
+                                        //IsPaid = Convert.ToBoolean(reader["isPaid"]),
+                                        PaidDate = null,
+                                        DueDate = Convert.ToDateTime(reader["dueDate"]),
+                                        EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
+                                        InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
+                                        InstalmentValue = Convert.ToDecimal(reader["instalmentValue"]),
+                                        PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
+                                        InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
+                                        PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
+                                        dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
+                                        dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                        CancelledDate = null
+                                    };
+                                    if (reader["paidDate"] != DBNull.Value)
+                                    {
+                                        obj.PaidDate = Convert.ToDateTime(reader["paidDate"]);
+                                    }
+                                    if (reader["date_cancelled"] != DBNull.Value)
+                                    {
+                                        obj.CancelledDate = Convert.ToDateTime(reader["date_cancelled"]);
+                                    }
+                                    list.Add(obj);
+                                }
+                                return list;
                             }
                         }
                     }
@@ -174,7 +237,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 {
                                     BillsToReceive obj = new BillsToReceive()
                                     {
-                                        id = Convert.ToInt32(reader["sale_id"]),
+                                        id = Convert.ToInt32(reader["id_bill"]),
                                         Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
                                         Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
                                         //IsPaid = Convert.ToBoolean(reader["isPaid"]),
@@ -237,7 +300,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 {
                                     BillsToReceive obj = new BillsToReceive()
                                     {
-                                        id = Convert.ToInt32(reader["sale_id"]),
+                                        id = Convert.ToInt32(reader["id_bill"]),
                                         Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
                                         Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
                                         IsPaid = Convert.ToBoolean(reader["isPaid"]),
@@ -328,7 +391,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 {
                                     BillsToReceive obj = new BillsToReceive()
                                     {
-                                        id = Convert.ToInt32(reader["sale_id"]),
+                                        id = Convert.ToInt32(reader["id_bill"]),
                                         Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
                                         Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
                                         IsPaid = Convert.ToBoolean(reader["isPaid"]),

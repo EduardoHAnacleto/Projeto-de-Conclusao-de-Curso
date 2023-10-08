@@ -337,6 +337,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 edt_payConditionQnt.Value = payCondition.instalmentQuantity;
                 edt_payConditionId.Value = payCondition.id;
                 SetBillInstalmentsToDGV(payCondition.id);
+                PopulateValueToDGV();
             }
         }
 
@@ -838,6 +839,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void gbox_newBill_Leave(object sender, EventArgs e)
         {
             ValidateBillValue();
+            PopulateValueToDGV();
         }
 
         private void gbox_billDates_Leave(object sender, EventArgs e)
@@ -850,6 +852,38 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             ValidatePaymentCondition();
         }
 
+        public void SearchPaymentCondition()
+        {
+            Frm_Find_PaymentConditions formPayCondition = new Frm_Find_PaymentConditions();
+            formPayCondition.hasFather = true;
+            formPayCondition.ShowDialog();
+            if (!formPayCondition.ActiveControl.ContainsFocus)
+            {
+                PaymentConditions payCondition = new PaymentConditions();
+                payCondition = formPayCondition.GetObject();
+                if (payCondition != null)
+                {
+                    FoundPaymentCondition(payCondition);
+                }
+            }
+            formPayCondition.Close();
+        }
+
+        private void FoundPaymentCondition(PaymentConditions payCondition)
+        {
+            if (payCondition != null)
+            {
+                edt_payCondition.Text = payCondition.conditionName;
+                edt_payConditionDiscount.Value = (decimal)payCondition.discountPerc;
+                edt_payConditionFees.Value = (decimal)payCondition.paymentFees;
+                edt_payConditionFine.Value = (decimal)payCondition.fineValue;
+                edt_payConditionQnt.Value = payCondition.instalmentQuantity;
+                edt_payConditionId.Value = payCondition.id;
+                SetBillInstalmentsToDGV(payCondition.id);
+                PopulateValueToDGV();
+            }
+        }
+
         private void gbox_supplier_Leave(object sender, EventArgs e)
         {
             ValidateSupplier();
@@ -858,6 +892,32 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void gbox_cancelReason_Leave(object sender, EventArgs e)
         {
             ValidateCancelMotive();
+        }
+
+        private void PopulateValueToDGV()
+        {
+            if (DGV_Instalments.Rows.Count > 0 && edt_instalmentValue.Value > 0)
+            {
+                PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
+                var payCond = payCondController.FindItemId(Convert.ToInt32(edt_payConditionId.Value));
+                decimal billValue = (decimal)edt_instalmentValue.Value;
+                foreach (DataGridViewRow row in DGV_Instalments.Rows)
+                {
+                    decimal percentage = payCond.BillsInstalments[row.Index].ValuePercentage;
+                    row.Cells["InstalmentValue"].Value = Math.Round((billValue * (percentage / 100)), 2);
+                }
+            }
+        }
+
+        private void btn_SearchPayCondition_Click(object sender, EventArgs e)
+        {
+
+
+        }
+
+        private void edt_instalmentValue_ValueChanged(object sender, EventArgs e)
+        {
+            PopulateValueToDGV();
         }
     }
 }

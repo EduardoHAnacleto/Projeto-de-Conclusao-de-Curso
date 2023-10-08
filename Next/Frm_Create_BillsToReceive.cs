@@ -119,6 +119,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             datePicker_emission.Enabled = true;
             datePicker_PaidDate.Enabled = false;
             date_cancelled.Enabled = false;
+            datePicker_emission.Value = DateTime.Now;           
         }
 
         private PaymentMethods GetPaymentMethod(string payMethod)
@@ -444,6 +445,22 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 edt_payConditionQnt.Value = payCondition.instalmentQuantity;
                 edt_payConditionId.Value = payCondition.id;
                 SetBillInstalmentsToDGV(payCondition.id);
+                PopulateValueToDGV();
+            }
+        }
+
+        private void PopulateValueToDGV()
+        {
+            if (DGV_Instalments.Rows.Count > 0 && edt_instalmentValue.Value > 0)
+            {
+                PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
+                var payCond = payCondController.FindItemId(Convert.ToInt32(edt_payConditionId.Value));
+                decimal billValue = (decimal)edt_instalmentValue.Value;
+                foreach (DataGridViewRow row in DGV_Instalments.Rows)
+                {
+                    decimal percentage = payCond.BillsInstalments[row.Index].ValuePercentage;
+                    row.Cells["InstalmentValue"].Value = Math.Round((billValue * (percentage/100)),2);
+                }
             }
         }
 
@@ -487,6 +504,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void gbox_newBill_Leave(object sender, EventArgs e)
         {
             ValidateBillValue();
+            PopulateValueToDGV();
         }
 
         private bool ValidateBillValue()
@@ -526,6 +544,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void gbox_paymentCondition_Leave(object sender, EventArgs e)
         {
             ValidatePaymentCondition();
+            PopulateValueToDGV();
         }
 
         private bool ValidatePaymentCondition()
@@ -558,6 +577,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
+                    datePicker_emission.Value = DateTime.Now;
                     return false;
                 }
                 else if (datePicker_emission.Value == datePicker_emission.MinDate)
@@ -567,7 +587,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
-                    return false;
+                    datePicker_emission.Value = DateTime.Now;
+                    return false;                 
                 }
             }
             else if (_FormFunction == "Pay")
@@ -579,6 +600,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
+                    datePicker_PaidDate.Value = datePicker_emission.Value;
                     return false;
                 }
                 else if (datePicker_PaidDate.Value == datePicker_PaidDate.MinDate)
@@ -588,6 +610,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
+                    datePicker_PaidDate.Value = datePicker_emission.Value;
                     return false;
                 }
                 else if (datePicker_PaidDate.Value < datePicker_emission.Value)
@@ -597,6 +620,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
+                    datePicker_PaidDate.Value = datePicker_emission.Value;
                     return false;
                 }
             }
@@ -609,6 +633,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
+                    date_cancelled.Value = datePicker_emission.Value;
                     return false;
                 }
                 else if (date_cancelled.Value < datePicker_emission.Value)
@@ -618,6 +643,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
+                    date_cancelled.Value = datePicker_emission.Value;
                     return false;
                 }
                 else if (date_cancelled.Value == date_cancelled.MinDate)
@@ -627,10 +653,21 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
+                    date_cancelled.Value = datePicker_emission.Value;
                     return false;
                 }
             }
             return true;
+        }
+
+        private void edt_instalmentValue_ValueChanged(object sender, EventArgs e)
+        {
+            PopulateValueToDGV();
+        }
+
+        private void edt_payCondition_TextChanged(object sender, EventArgs e)
+        {
+            PopulateValueToDGV();
         }
     }
 }

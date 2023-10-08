@@ -121,6 +121,7 @@
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.gbox_cancelReason = new System.Windows.Forms.GroupBox();
             this.txt_cancelMot = new System.Windows.Forms.RichTextBox();
+            this.btn_checkBill = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).BeginInit();
             this.gbox_products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodTotal)).BeginInit();
@@ -154,6 +155,9 @@
             // DGV_PurchasesProducts
             // 
             this.DGV_PurchasesProducts.AllowUserToAddRows = false;
+            this.DGV_PurchasesProducts.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.DGV_PurchasesProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DGV_PurchasesProducts.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProdId,
@@ -716,6 +720,7 @@
             this.edt_supplierId.Size = new System.Drawing.Size(38, 20);
             this.edt_supplierId.TabIndex = 34;
             this.edt_supplierId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edt_supplierId.ValueChanged += new System.EventHandler(this.edt_supplierId_ValueChanged);
             // 
             // lbl_supplierId
             // 
@@ -803,6 +808,7 @@
             // 
             // gbox_supplier
             // 
+            this.gbox_supplier.Controls.Add(this.btn_checkBill);
             this.gbox_supplier.Controls.Add(this.edt_supplierName);
             this.gbox_supplier.Controls.Add(this.gbox_billInfo);
             this.gbox_supplier.Controls.Add(this.btn_findSupplier);
@@ -844,6 +850,7 @@
             this.edt_billSeries.Size = new System.Drawing.Size(58, 20);
             this.edt_billSeries.TabIndex = 52;
             this.edt_billSeries.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edt_billSeries.ValueChanged += new System.EventHandler(this.edt_billSeries_ValueChanged);
             // 
             // edt_billModel
             // 
@@ -857,6 +864,7 @@
             this.edt_billModel.Size = new System.Drawing.Size(58, 20);
             this.edt_billModel.TabIndex = 51;
             this.edt_billModel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edt_billModel.ValueChanged += new System.EventHandler(this.edt_billModel_ValueChanged);
             // 
             // edt_billNumber
             // 
@@ -870,6 +878,7 @@
             this.edt_billNumber.Size = new System.Drawing.Size(58, 20);
             this.edt_billNumber.TabIndex = 50;
             this.edt_billNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edt_billNumber.ValueChanged += new System.EventHandler(this.edt_billNumber_ValueChanged);
             // 
             // lbl_billNumber
             // 
@@ -900,7 +909,7 @@
             // 
             // gbox_info
             // 
-            this.gbox_info.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbox_info.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.gbox_info.Controls.Add(this.lbl_emissionDate);
             this.gbox_info.Controls.Add(this.dateTime_emissionDate);
             this.gbox_info.Controls.Add(this.lbl_arrivalDate);
@@ -1162,9 +1171,7 @@
             // 
             // gbox_cancelReason
             // 
-            this.gbox_cancelReason.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbox_cancelReason.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.gbox_cancelReason.Controls.Add(this.txt_cancelMot);
             this.gbox_cancelReason.Location = new System.Drawing.Point(584, 12);
             this.gbox_cancelReason.Name = "gbox_cancelReason";
@@ -1187,6 +1194,16 @@
             this.txt_cancelMot.Size = new System.Drawing.Size(231, 121);
             this.txt_cancelMot.TabIndex = 0;
             this.txt_cancelMot.Text = "";
+            // 
+            // btn_checkBill
+            // 
+            this.btn_checkBill.Location = new System.Drawing.Point(256, 102);
+            this.btn_checkBill.Name = "btn_checkBill";
+            this.btn_checkBill.Size = new System.Drawing.Size(98, 23);
+            this.btn_checkBill.TabIndex = 50;
+            this.btn_checkBill.Text = "Autenticar Nota";
+            this.btn_checkBill.UseVisualStyleBackColor = true;
+            this.btn_checkBill.Click += new System.EventHandler(this.btn_checkBill_Click);
             // 
             // Frm_Create_Purchases
             // 
@@ -1342,5 +1359,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn ProdWeightedAvg;
         private System.Windows.Forms.GroupBox gbox_cancelReason;
         private System.Windows.Forms.RichTextBox txt_cancelMot;
+        private System.Windows.Forms.Button btn_checkBill;
     }
 }

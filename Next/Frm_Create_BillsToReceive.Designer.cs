@@ -29,9 +29,21 @@
         private void InitializeComponent()
         {
             this.gbox_billInstalment = new System.Windows.Forms.GroupBox();
-            this.edt_instalmentValue = new System.Windows.Forms.NumericUpDown();
+            this.lbl_finalValue = new System.Windows.Forms.Label();
+            this.edt_finalValue = new System.Windows.Forms.NumericUpDown();
+            this.lbl_instFirstValue = new System.Windows.Forms.Label();
+            this.edt_instValue = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.edt_instDisc = new System.Windows.Forms.NumericUpDown();
+            this.edt_instFine = new System.Windows.Forms.NumericUpDown();
+            this.edt_instFee = new System.Windows.Forms.NumericUpDown();
             this.edt_instalmentId = new System.Windows.Forms.NumericUpDown();
             this.lbl_instalmentNumber = new System.Windows.Forms.Label();
+            this.cbox_paymentMethod = new System.Windows.Forms.ComboBox();
+            this.lbl_PaymentForm = new System.Windows.Forms.Label();
+            this.edt_instalmentValue = new System.Windows.Forms.NumericUpDown();
             this.lbl_instalment = new System.Windows.Forms.Label();
             this.gbox_client = new System.Windows.Forms.GroupBox();
             this.edt_clientId = new System.Windows.Forms.NumericUpDown();
@@ -40,6 +52,8 @@
             this.lbl_clientName = new System.Windows.Forms.Label();
             this.lbl_clientId = new System.Windows.Forms.Label();
             this.gbox_billDates = new System.Windows.Forms.GroupBox();
+            this.lbl_cancelDate = new System.Windows.Forms.Label();
+            this.date_cancelled = new System.Windows.Forms.DateTimePicker();
             this.lbl_paidDate = new System.Windows.Forms.Label();
             this.datePicker_PaidDate = new System.Windows.Forms.DateTimePicker();
             this.lbl_DueDate = new System.Windows.Forms.Label();
@@ -70,28 +84,19 @@
             this.edt_payCondition = new System.Windows.Forms.TextBox();
             this.edt_payConditionId = new System.Windows.Forms.NumericUpDown();
             this.lbl_payConditionID = new System.Windows.Forms.Label();
-            this.lbl_PaymentForm = new System.Windows.Forms.Label();
-            this.cbox_paymentMethod = new System.Windows.Forms.ComboBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.edt_instDisc = new System.Windows.Forms.NumericUpDown();
-            this.edt_instFine = new System.Windows.Forms.NumericUpDown();
-            this.edt_instFee = new System.Windows.Forms.NumericUpDown();
-            this.edt_instValue = new System.Windows.Forms.NumericUpDown();
-            this.lbl_instFirstValue = new System.Windows.Forms.Label();
-            this.edt_finalValue = new System.Windows.Forms.NumericUpDown();
-            this.lbl_finalValue = new System.Windows.Forms.Label();
             this.gbox_newBill = new System.Windows.Forms.GroupBox();
             this.gbox_cancelReason = new System.Windows.Forms.GroupBox();
             this.txt_cancelMot = new System.Windows.Forms.RichTextBox();
-            this.lbl_cancelDate = new System.Windows.Forms.Label();
-            this.date_cancelled = new System.Windows.Forms.DateTimePicker();
             this.gbox_dates.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             this.gbox_billInstalment.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_finalValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_instValue)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_instDisc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_instFine)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_instFee)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentId)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentValue)).BeginInit();
             this.gbox_client.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).BeginInit();
             this.gbox_billDates.SuspendLayout();
@@ -103,11 +108,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFine)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_instDisc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_instFine)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_instFee)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_instValue)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_finalValue)).BeginInit();
             this.gbox_newBill.SuspendLayout();
             this.gbox_cancelReason.SuspendLayout();
             this.SuspendLayout();
@@ -159,19 +159,101 @@
             this.gbox_billInstalment.TabStop = false;
             this.gbox_billInstalment.Text = "* Parcela";
             // 
-            // edt_instalmentValue
+            // lbl_finalValue
             // 
-            this.edt_instalmentValue.DecimalPlaces = 2;
-            this.edt_instalmentValue.Location = new System.Drawing.Point(6, 33);
-            this.edt_instalmentValue.Maximum = new decimal(new int[] {
-            999999999,
+            this.lbl_finalValue.AutoSize = true;
+            this.lbl_finalValue.Location = new System.Drawing.Point(136, 74);
+            this.lbl_finalValue.Name = "lbl_finalValue";
+            this.lbl_finalValue.Size = new System.Drawing.Size(56, 13);
+            this.lbl_finalValue.TabIndex = 41;
+            this.lbl_finalValue.Text = "Valor Final";
+            // 
+            // edt_finalValue
+            // 
+            this.edt_finalValue.DecimalPlaces = 2;
+            this.edt_finalValue.Location = new System.Drawing.Point(139, 90);
+            this.edt_finalValue.Name = "edt_finalValue";
+            this.edt_finalValue.Size = new System.Drawing.Size(75, 20);
+            this.edt_finalValue.TabIndex = 40;
+            this.edt_finalValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // lbl_instFirstValue
+            // 
+            this.lbl_instFirstValue.AutoSize = true;
+            this.lbl_instFirstValue.Location = new System.Drawing.Point(61, 19);
+            this.lbl_instFirstValue.Name = "lbl_instFirstValue";
+            this.lbl_instFirstValue.Size = new System.Drawing.Size(60, 13);
+            this.lbl_instFirstValue.TabIndex = 39;
+            this.lbl_instFirstValue.Text = "Valor inicial";
+            // 
+            // edt_instValue
+            // 
+            this.edt_instValue.Location = new System.Drawing.Point(63, 35);
+            this.edt_instValue.Name = "edt_instValue";
+            this.edt_instValue.Size = new System.Drawing.Size(60, 20);
+            this.edt_instValue.TabIndex = 38;
+            this.edt_instValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(261, 19);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(64, 13);
+            this.label1.TabIndex = 37;
+            this.label1.Text = "Desconto %";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(194, 19);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 13);
+            this.label2.TabIndex = 36;
+            this.label2.Text = "Multa";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(130, 19);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(31, 13);
+            this.label3.TabIndex = 35;
+            this.label3.Text = "Taxa";
+            // 
+            // edt_instDisc
+            // 
+            this.edt_instDisc.DecimalPlaces = 2;
+            this.edt_instDisc.Enabled = false;
+            this.edt_instDisc.Location = new System.Drawing.Point(264, 35);
+            this.edt_instDisc.Name = "edt_instDisc";
+            this.edt_instDisc.Size = new System.Drawing.Size(61, 20);
+            this.edt_instDisc.TabIndex = 34;
+            this.edt_instDisc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // edt_instFine
+            // 
+            this.edt_instFine.DecimalPlaces = 2;
+            this.edt_instFine.Enabled = false;
+            this.edt_instFine.Location = new System.Drawing.Point(197, 35);
+            this.edt_instFine.Maximum = new decimal(new int[] {
+            1000,
             0,
             0,
             0});
-            this.edt_instalmentValue.Name = "edt_instalmentValue";
-            this.edt_instalmentValue.Size = new System.Drawing.Size(71, 20);
-            this.edt_instalmentValue.TabIndex = 27;
-            this.edt_instalmentValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edt_instFine.Name = "edt_instFine";
+            this.edt_instFine.Size = new System.Drawing.Size(61, 20);
+            this.edt_instFine.TabIndex = 33;
+            this.edt_instFine.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            // 
+            // edt_instFee
+            // 
+            this.edt_instFee.Enabled = false;
+            this.edt_instFee.Location = new System.Drawing.Point(133, 35);
+            this.edt_instFee.Name = "edt_instFee";
+            this.edt_instFee.Size = new System.Drawing.Size(58, 20);
+            this.edt_instFee.TabIndex = 32;
+            this.edt_instFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // edt_instalmentId
             // 
@@ -195,6 +277,40 @@
             this.lbl_instalmentNumber.Size = new System.Drawing.Size(44, 13);
             this.lbl_instalmentNumber.TabIndex = 23;
             this.lbl_instalmentNumber.Text = "Número";
+            // 
+            // cbox_paymentMethod
+            // 
+            this.cbox_paymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbox_paymentMethod.FormattingEnabled = true;
+            this.cbox_paymentMethod.Location = new System.Drawing.Point(9, 89);
+            this.cbox_paymentMethod.MaxDropDownItems = 20;
+            this.cbox_paymentMethod.Name = "cbox_paymentMethod";
+            this.cbox_paymentMethod.Size = new System.Drawing.Size(114, 21);
+            this.cbox_paymentMethod.TabIndex = 31;
+            // 
+            // lbl_PaymentForm
+            // 
+            this.lbl_PaymentForm.AutoSize = true;
+            this.lbl_PaymentForm.Location = new System.Drawing.Point(1, 73);
+            this.lbl_PaymentForm.Name = "lbl_PaymentForm";
+            this.lbl_PaymentForm.Size = new System.Drawing.Size(122, 13);
+            this.lbl_PaymentForm.TabIndex = 26;
+            this.lbl_PaymentForm.Text = "* Método de Pagamento";
+            // 
+            // edt_instalmentValue
+            // 
+            this.edt_instalmentValue.DecimalPlaces = 2;
+            this.edt_instalmentValue.Location = new System.Drawing.Point(6, 33);
+            this.edt_instalmentValue.Maximum = new decimal(new int[] {
+            999999999,
+            0,
+            0,
+            0});
+            this.edt_instalmentValue.Name = "edt_instalmentValue";
+            this.edt_instalmentValue.Size = new System.Drawing.Size(71, 20);
+            this.edt_instalmentValue.TabIndex = 27;
+            this.edt_instalmentValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edt_instalmentValue.ValueChanged += new System.EventHandler(this.edt_instalmentValue_ValueChanged);
             // 
             // lbl_instalment
             // 
@@ -283,6 +399,25 @@
             this.gbox_billDates.TabStop = false;
             this.gbox_billDates.Text = "* Data de Movimento";
             this.gbox_billDates.Leave += new System.EventHandler(this.gbox_billDates_Leave);
+            // 
+            // lbl_cancelDate
+            // 
+            this.lbl_cancelDate.AutoSize = true;
+            this.lbl_cancelDate.Location = new System.Drawing.Point(4, 170);
+            this.lbl_cancelDate.Name = "lbl_cancelDate";
+            this.lbl_cancelDate.Size = new System.Drawing.Size(75, 13);
+            this.lbl_cancelDate.TabIndex = 7;
+            this.lbl_cancelDate.Text = "Cancelamento";
+            // 
+            // date_cancelled
+            // 
+            this.date_cancelled.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.date_cancelled.Location = new System.Drawing.Point(7, 186);
+            this.date_cancelled.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
+            this.date_cancelled.Name = "date_cancelled";
+            this.date_cancelled.Size = new System.Drawing.Size(96, 20);
+            this.date_cancelled.TabIndex = 6;
+            this.date_cancelled.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
             // 
             // lbl_paidDate
             // 
@@ -580,6 +715,7 @@
             this.edt_payCondition.Name = "edt_payCondition";
             this.edt_payCondition.Size = new System.Drawing.Size(271, 20);
             this.edt_payCondition.TabIndex = 2;
+            this.edt_payCondition.TextChanged += new System.EventHandler(this.edt_payCondition_TextChanged);
             // 
             // edt_payConditionId
             // 
@@ -603,121 +739,6 @@
             this.lbl_payConditionID.Size = new System.Drawing.Size(18, 13);
             this.lbl_payConditionID.TabIndex = 0;
             this.lbl_payConditionID.Text = "ID";
-            // 
-            // lbl_PaymentForm
-            // 
-            this.lbl_PaymentForm.AutoSize = true;
-            this.lbl_PaymentForm.Location = new System.Drawing.Point(1, 73);
-            this.lbl_PaymentForm.Name = "lbl_PaymentForm";
-            this.lbl_PaymentForm.Size = new System.Drawing.Size(122, 13);
-            this.lbl_PaymentForm.TabIndex = 26;
-            this.lbl_PaymentForm.Text = "* Método de Pagamento";
-            // 
-            // cbox_paymentMethod
-            // 
-            this.cbox_paymentMethod.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbox_paymentMethod.FormattingEnabled = true;
-            this.cbox_paymentMethod.Location = new System.Drawing.Point(9, 89);
-            this.cbox_paymentMethod.MaxDropDownItems = 20;
-            this.cbox_paymentMethod.Name = "cbox_paymentMethod";
-            this.cbox_paymentMethod.Size = new System.Drawing.Size(114, 21);
-            this.cbox_paymentMethod.TabIndex = 31;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(261, 19);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(64, 13);
-            this.label1.TabIndex = 37;
-            this.label1.Text = "Desconto %";
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(194, 19);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(33, 13);
-            this.label2.TabIndex = 36;
-            this.label2.Text = "Multa";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(130, 19);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(31, 13);
-            this.label3.TabIndex = 35;
-            this.label3.Text = "Taxa";
-            // 
-            // edt_instDisc
-            // 
-            this.edt_instDisc.DecimalPlaces = 2;
-            this.edt_instDisc.Enabled = false;
-            this.edt_instDisc.Location = new System.Drawing.Point(264, 35);
-            this.edt_instDisc.Name = "edt_instDisc";
-            this.edt_instDisc.Size = new System.Drawing.Size(61, 20);
-            this.edt_instDisc.TabIndex = 34;
-            this.edt_instDisc.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // edt_instFine
-            // 
-            this.edt_instFine.DecimalPlaces = 2;
-            this.edt_instFine.Enabled = false;
-            this.edt_instFine.Location = new System.Drawing.Point(197, 35);
-            this.edt_instFine.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.edt_instFine.Name = "edt_instFine";
-            this.edt_instFine.Size = new System.Drawing.Size(61, 20);
-            this.edt_instFine.TabIndex = 33;
-            this.edt_instFine.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // edt_instFee
-            // 
-            this.edt_instFee.Enabled = false;
-            this.edt_instFee.Location = new System.Drawing.Point(133, 35);
-            this.edt_instFee.Name = "edt_instFee";
-            this.edt_instFee.Size = new System.Drawing.Size(58, 20);
-            this.edt_instFee.TabIndex = 32;
-            this.edt_instFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // edt_instValue
-            // 
-            this.edt_instValue.Location = new System.Drawing.Point(63, 35);
-            this.edt_instValue.Name = "edt_instValue";
-            this.edt_instValue.Size = new System.Drawing.Size(60, 20);
-            this.edt_instValue.TabIndex = 38;
-            this.edt_instValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_instFirstValue
-            // 
-            this.lbl_instFirstValue.AutoSize = true;
-            this.lbl_instFirstValue.Location = new System.Drawing.Point(61, 19);
-            this.lbl_instFirstValue.Name = "lbl_instFirstValue";
-            this.lbl_instFirstValue.Size = new System.Drawing.Size(60, 13);
-            this.lbl_instFirstValue.TabIndex = 39;
-            this.lbl_instFirstValue.Text = "Valor inicial";
-            // 
-            // edt_finalValue
-            // 
-            this.edt_finalValue.DecimalPlaces = 2;
-            this.edt_finalValue.Location = new System.Drawing.Point(139, 90);
-            this.edt_finalValue.Name = "edt_finalValue";
-            this.edt_finalValue.Size = new System.Drawing.Size(75, 20);
-            this.edt_finalValue.TabIndex = 40;
-            this.edt_finalValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            // 
-            // lbl_finalValue
-            // 
-            this.lbl_finalValue.AutoSize = true;
-            this.lbl_finalValue.Location = new System.Drawing.Point(136, 74);
-            this.lbl_finalValue.Name = "lbl_finalValue";
-            this.lbl_finalValue.Size = new System.Drawing.Size(56, 13);
-            this.lbl_finalValue.TabIndex = 41;
-            this.lbl_finalValue.Text = "Valor Final";
             // 
             // gbox_newBill
             // 
@@ -758,25 +779,6 @@
             this.txt_cancelMot.TabIndex = 0;
             this.txt_cancelMot.Text = "";
             // 
-            // lbl_cancelDate
-            // 
-            this.lbl_cancelDate.AutoSize = true;
-            this.lbl_cancelDate.Location = new System.Drawing.Point(4, 170);
-            this.lbl_cancelDate.Name = "lbl_cancelDate";
-            this.lbl_cancelDate.Size = new System.Drawing.Size(75, 13);
-            this.lbl_cancelDate.TabIndex = 7;
-            this.lbl_cancelDate.Text = "Cancelamento";
-            // 
-            // date_cancelled
-            // 
-            this.date_cancelled.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.date_cancelled.Location = new System.Drawing.Point(7, 186);
-            this.date_cancelled.MinDate = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            this.date_cancelled.Name = "date_cancelled";
-            this.date_cancelled.Size = new System.Drawing.Size(96, 20);
-            this.date_cancelled.TabIndex = 6;
-            this.date_cancelled.Value = new System.DateTime(2000, 1, 1, 0, 0, 0, 0);
-            // 
             // Frm_Create_BillsToReceive
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -810,8 +812,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).EndInit();
             this.gbox_billInstalment.ResumeLayout(false);
             this.gbox_billInstalment.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_finalValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_instValue)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_instDisc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_instFine)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_instFee)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentId)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.edt_instalmentValue)).EndInit();
             this.gbox_client.ResumeLayout(false);
             this.gbox_client.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_clientId)).EndInit();
@@ -827,11 +834,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFine)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionFees)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_instDisc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_instFine)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_instFee)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_instValue)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.edt_finalValue)).EndInit();
             this.gbox_newBill.ResumeLayout(false);
             this.gbox_newBill.PerformLayout();
             this.gbox_cancelReason.ResumeLayout(false);

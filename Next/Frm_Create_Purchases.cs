@@ -82,6 +82,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     edt_productName.Text = product.productName;
                     edt_productName.Text = product.productName;
                     edt_prodBarCode.Value = product.BarCode;
+                    edt_prodUnd.Text = product.UND;
                 }
             }
             formProducts.Close();
@@ -126,79 +127,91 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
-        private void CalculateSetNewUnCost()
+        private void CalculateSetNewUnCost(Products prod)
         {
-            decimal transportFee = edt_transportFee.Value;
-            if (transportFee <= 0)
+            decimal insurance = 0;
+            decimal extraExp = 0;
+            decimal transportFee = 0;
+            if (edt_transportFee.Value > 0)
             {
-                transportFee = 1;
+                transportFee = edt_transportFee.Value;
             }
+            if (edt_extraExpenses.Value > 0)
+            {
+                extraExp = edt_extraExpenses.Value;
+            }
+            if (edt_insurance.Value > 0)
+            {
+                insurance = edt_insurance.Value;
+            }
+
+            
+
             foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
             {
                 if (row != null)
                 {
-                    var prodCurCost = Convert.ToDecimal( row.Cells["ProdCurrentUnCost"].Value);
-                    var prodCurStock = Convert.ToInt32( row.Cells["ProdCurrentStock"].Value);
-                    var prodPurchPerc = Convert.ToDecimal( row.Cells["ProdPurchPerc"].Value) /100;
-                    var prodNewBaseUnCost = Convert.ToDecimal(row.Cells["ProdNewBaseUnCost"].Value);
-                    var prodQtd = Convert.ToInt32(row.Cells["ProdQtd"].Value);
-                    var prodDisc = Convert.ToDecimal(row.Cells["ProdDiscountCash"].Value);
+                    decimal weightedAvg = 0;
+                    
+                    var product = _pController.FindItemId(Convert.ToInt32(row.Cells["ProdId"].Value));
+                    decimal originCost = product.stock * product.productCost;
+                    
 
-                    var percFee = prodPurchPerc * transportFee;
-                    var newUnCost = (percFee/100) + (prodNewBaseUnCost - prodDisc);
-                    var weightedAverage = ((prodCurStock * prodCurCost) + ( prodQtd * newUnCost)) 
-                                                    / (prodCurStock + prodQtd);
-                    row.Cells["ProdWeightedAvg"].Value = Math.Round(weightedAverage,8);                   
+                    int itemQtd = Convert.ToInt32(row.Cells["ProdQtd"].Value);
+                    decimal newCost = (decimal)row.Cells["ProdNewBaseUnCost"].Value * itemQtd;
+
+                    decimal itemDisc = (decimal)row.Cells["ProdDiscountCash"].Value;
+
+                    weightedAvg = 0;
+
+
+
+                    row.Cells["ProdWeightedAvg"].Value = Math.Round(weightedAvg, 8);                   
                 }
             }
 
         }
 
-        public void AddProductToDGV() 
+
+        public void AddProductToDGV()
         {
-            if (!ValidatedBill)
+            Products product = GetProduct();
+            int amount = (int)edt_prodQtd.Value;
+            decimal purchPerc = 0;
+            decimal newUnCost = edt_prodUnCost.Value;
+            decimal discountCash = edt_prodDiscCash.Value;
+            bool validated = (discountCash < newUnCost);
+            if (!FindEqualDGVProduct(product.id) && validated)
             {
-                ValidateBill();
+                DGV_PurchasesProducts.Rows.Add(
+                    product.id,
+                    product.productName,
+                    product.UND,
+                    amount,
+                    discountCash,
+                    newUnCost,
+                    newUnCost * amount,
+                    product.stock,
+                    purchPerc,
+                    newUnCost
+                    );
+                ClearProductCamps();
             }
-            if (ValidatedBill)
+            if (!validated)
             {
-                Products product = GetProduct();
-                int amount = (int)edt_prodQtd.Value;
-                decimal purchPerc = 0;
-                decimal newUnCost = edt_prodUnCost.Value;
-                decimal discountCash = edt_prodDiscCash.Value;
-                bool validated = (discountCash < newUnCost);
-                if (!FindEqualDGVProduct(product.id) && validated)
-                {
-                    DGV_PurchasesProducts.Rows.Add(
-                        product.id,
-                        product.productName,
-                        product.UND,
-                        amount,
-                        discountCash,
-                        newUnCost,
-                        newUnCost * amount,
-                        product.stock,
-                        purchPerc,
-                        newUnCost
-                        );
-                    ClearProductCamps();
-                }
-                if (!validated)
-                {
-                    string message = "Desconto não pode ser maior que o valor do produto";
-                    string caption = "Valor de desconto inválido.";
-                    MessageBoxButtons buttons = MessageBoxButtons.OK;
-                    MessageBoxIcon icon = MessageBoxIcon.Error;
-                    Utilities.Msgbox(message, caption, buttons, icon);
-                    edt_prodDiscCash.Focus();
-                }
-                else
-                {
-                    CalculateSetDGVPurchasePerc();
-                    CalculateSetNewUnCost();
-                }
+                string message = "Desconto não pode ser maior que o valor do produto";
+                string caption = "Valor de desconto inválido.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                edt_prodDiscCash.Focus();
             }
+            else
+            {
+                CalculateSetDGVPurchasePerc();
+                CalculateSetNewUnCost(product);
+            }
+
         }
 
         private void ClearProductCamps()
@@ -206,7 +219,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_prodId.Value = 0;
             edt_prodDiscCash.Value = 0;
             edt_prodBarCode.Value = 0;
-            edt_prodQtd.Value = 0;
+            edt_prodQtd.Value = 1;
             edt_prodTotal.Value = 0;
             edt_prodUnCost.Value = 0;
             edt_prodUnd.Text = string.Empty;
@@ -241,7 +254,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 gbox_supplier.Enabled = false;
                 gbox_products.Enabled = true;
                 gbox_payCond.Enabled = true;
-                gbox_billInfo.Enabled = true;
+                gbox_info.Enabled = true;
+
             }
             else
             {
@@ -256,7 +270,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void btn_AddProduct_Click(object sender, EventArgs e)
         {
-            if (edt_prodId.Value >= 1)
+            if (edt_prodId.Value > 1)
             {
                 AddProductToDGV();
                 SetSummary();
@@ -891,6 +905,61 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void gbox_cancelReason_Leave(object sender, EventArgs e)
         {
             ValidateCancelMotive();
+        }
+
+        private void edt_billSeries_ValueChanged(object sender, EventArgs e)
+        {
+            if (edt_billModel.Value != 0
+                && edt_billNumber.Value != 0
+                && edt_billSeries.Value != 0
+                && edt_supplierId.Value != 0)
+            {
+                ValidateBill();
+            }
+        }
+
+        private void edt_billModel_ValueChanged(object sender, EventArgs e)
+        {
+            if (edt_billModel.Value != 0
+                && edt_billNumber.Value != 0
+                && edt_billSeries.Value != 0
+                && edt_supplierId.Value != 0)
+            {
+                ValidateBill();
+            }
+        }
+
+        private void edt_billNumber_ValueChanged(object sender, EventArgs e)
+        {
+            if (edt_billModel.Value != 0
+                && edt_billNumber.Value != 0
+                && edt_billSeries.Value != 0
+                && edt_supplierId.Value != 0)
+            {
+                ValidateBill();
+            }
+        }
+
+        private void edt_supplierId_ValueChanged(object sender, EventArgs e)
+        {
+            if (edt_billModel.Value != 0
+                && edt_billNumber.Value != 0
+                && edt_billSeries.Value != 0
+                && edt_supplierId.Value != 0)
+            {
+                ValidateBill();
+            }
+        }
+
+        private void btn_checkBill_Click(object sender, EventArgs e)
+        {
+            if (edt_billModel.Value != 0
+                && edt_billNumber.Value != 0
+                && edt_billSeries.Value != 0
+                && edt_supplierId.Value != 0)
+            {
+                ValidateBill();
+            }
         }
     }
 }

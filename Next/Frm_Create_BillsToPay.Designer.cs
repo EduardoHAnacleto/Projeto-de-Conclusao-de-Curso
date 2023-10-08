@@ -399,6 +399,7 @@
             this.edt_instalmentValue.Size = new System.Drawing.Size(71, 20);
             this.edt_instalmentValue.TabIndex = 27;
             this.edt_instalmentValue.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.edt_instalmentValue.ValueChanged += new System.EventHandler(this.edt_instalmentValue_ValueChanged);
             // 
             // lbl_instalment
             // 
@@ -630,6 +631,7 @@
             this.btn_SearchPayCondition.TabIndex = 8;
             this.btn_SearchPayCondition.Text = "Search";
             this.btn_SearchPayCondition.UseVisualStyleBackColor = true;
+            this.btn_SearchPayCondition.Click += new System.EventHandler(this.btn_SearchPayCondition_Click);
             // 
             // edt_payConditionQnt
             // 

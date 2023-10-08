@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.Models
 {
-    public class Users : Employees
+    public class Users : People
     {
         public Users()
         {
