@@ -144,32 +144,33 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 insurance = edt_insurance.Value;
             }
-
-            
+            decimal totalCost = Convert.ToDecimal(DGV_PurchSummary.Rows[0].Cells["PurchTotal"].Value);
 
             foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
             {
                 if (row != null)
-                {
-                    decimal weightedAvg = 0;
-                    
+                {                                       
                     var product = _pController.FindItemId(Convert.ToInt32(row.Cells["ProdId"].Value));
-                    decimal originCost = product.stock * product.productCost;
-                    
-
                     int itemQtd = Convert.ToInt32(row.Cells["ProdQtd"].Value);
-                    decimal newCost = (decimal)row.Cells["ProdNewBaseUnCost"].Value * itemQtd;
+                    decimal originCost = product.stock * product.productCost;
+                    decimal prodTotalCost = (decimal)row.Cells["ProdTotalValue"].Value;
+                    decimal newCost = (decimal)row.Cells["ProdNewBaseUnCost"].Value;
 
-                    decimal itemDisc = (decimal)row.Cells["ProdDiscountCash"].Value;
-
-                    weightedAvg = 0;
-
-
+                    decimal weight = prodTotalCost / totalCost;
+                    decimal totalExtraRat = 0;
+                    if (insurance == 0 && extraExp == 0 && transportFee == 0)
+                    {
+                        totalExtraRat = weight;
+                    }
+                    else
+                    {
+                        totalExtraRat = weight * (insurance + extraExp + transportFee);
+                    }                    
+                    decimal weightedAvg = newCost + (totalExtraRat / itemQtd);
 
                     row.Cells["ProdWeightedAvg"].Value = Math.Round(weightedAvg, 8);                   
                 }
             }
-
         }
 
 
@@ -190,7 +191,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     amount,
                     discountCash,
                     newUnCost,
-                    newUnCost * amount,
+                    ((newUnCost * amount) - discountCash),
                     product.stock,
                     purchPerc,
                     newUnCost

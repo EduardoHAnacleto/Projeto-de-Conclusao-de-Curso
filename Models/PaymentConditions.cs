@@ -35,9 +35,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             }
             else if (dueDate > DateTime.Now.Date)
             {
-                discount = cond.fineValue;
+                discount = cond.discountPerc/100;
             }
-            return value + ( value * feePerInst) + discount + (fine * value);
+            return value + ( value * feePerInst) + (discount * value) + (fine * value);
         }
     }
 }

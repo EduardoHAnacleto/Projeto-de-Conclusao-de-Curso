@@ -65,6 +65,8 @@
             this.btn_AddProduct = new System.Windows.Forms.Button();
             this.lbl_TotalCost = new System.Windows.Forms.Label();
             this.gbox_Product = new System.Windows.Forms.GroupBox();
+            this.lbl_und = new System.Windows.Forms.Label();
+            this.edt_und = new System.Windows.Forms.TextBox();
             this.lbl_prodUnValue = new System.Windows.Forms.Label();
             this.btn_DeleteItem = new System.Windows.Forms.Button();
             this.lbl_ProdDiscCash = new System.Windows.Forms.Label();
@@ -105,8 +107,6 @@
             this.gbox_Status = new System.Windows.Forms.GroupBox();
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.check_Cancelled = new System.Windows.Forms.CheckBox();
-            this.edt_und = new System.Windows.Forms.TextBox();
-            this.lbl_und = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -538,6 +538,23 @@
             this.gbox_Product.TabStop = false;
             this.gbox_Product.Text = "Produtos";
             // 
+            // lbl_und
+            // 
+            this.lbl_und.AutoSize = true;
+            this.lbl_und.Location = new System.Drawing.Point(403, 25);
+            this.lbl_und.Name = "lbl_und";
+            this.lbl_und.Size = new System.Drawing.Size(31, 13);
+            this.lbl_und.TabIndex = 37;
+            this.lbl_und.Text = "UND";
+            // 
+            // edt_und
+            // 
+            this.edt_und.Enabled = false;
+            this.edt_und.Location = new System.Drawing.Point(406, 39);
+            this.edt_und.Name = "edt_und";
+            this.edt_und.Size = new System.Drawing.Size(61, 20);
+            this.edt_und.TabIndex = 36;
+            // 
             // lbl_prodUnValue
             // 
             this.lbl_prodUnValue.AutoSize = true;
@@ -799,7 +816,7 @@
             // lbl_payConditionInstalments
             // 
             this.lbl_payConditionInstalments.AutoSize = true;
-            this.lbl_payConditionInstalments.Location = new System.Drawing.Point(172, 66);
+            this.lbl_payConditionInstalments.Location = new System.Drawing.Point(213, 66);
             this.lbl_payConditionInstalments.Name = "lbl_payConditionInstalments";
             this.lbl_payConditionInstalments.Size = new System.Drawing.Size(48, 13);
             this.lbl_payConditionInstalments.TabIndex = 12;
@@ -808,7 +825,7 @@
             // lbl_payConditionDiscount
             // 
             this.lbl_payConditionDiscount.AutoSize = true;
-            this.lbl_payConditionDiscount.Location = new System.Drawing.Point(111, 66);
+            this.lbl_payConditionDiscount.Location = new System.Drawing.Point(138, 66);
             this.lbl_payConditionDiscount.Name = "lbl_payConditionDiscount";
             this.lbl_payConditionDiscount.Size = new System.Drawing.Size(64, 13);
             this.lbl_payConditionDiscount.TabIndex = 11;
@@ -817,7 +834,7 @@
             // lbl_payConditionFine
             // 
             this.lbl_payConditionFine.AutoSize = true;
-            this.lbl_payConditionFine.Location = new System.Drawing.Point(60, 66);
+            this.lbl_payConditionFine.Location = new System.Drawing.Point(76, 66);
             this.lbl_payConditionFine.Name = "lbl_payConditionFine";
             this.lbl_payConditionFine.Size = new System.Drawing.Size(33, 13);
             this.lbl_payConditionFine.TabIndex = 10;
@@ -845,7 +862,7 @@
             // edt_payConditionQnt
             // 
             this.edt_payConditionQnt.Enabled = false;
-            this.edt_payConditionQnt.Location = new System.Drawing.Point(175, 82);
+            this.edt_payConditionQnt.Location = new System.Drawing.Point(216, 82);
             this.edt_payConditionQnt.Maximum = new decimal(new int[] {
             300,
             0,
@@ -860,9 +877,9 @@
             // 
             this.edt_payConditionDiscount.DecimalPlaces = 2;
             this.edt_payConditionDiscount.Enabled = false;
-            this.edt_payConditionDiscount.Location = new System.Drawing.Point(114, 82);
+            this.edt_payConditionDiscount.Location = new System.Drawing.Point(141, 82);
             this.edt_payConditionDiscount.Name = "edt_payConditionDiscount";
-            this.edt_payConditionDiscount.Size = new System.Drawing.Size(44, 20);
+            this.edt_payConditionDiscount.Size = new System.Drawing.Size(61, 20);
             this.edt_payConditionDiscount.TabIndex = 6;
             this.edt_payConditionDiscount.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -870,14 +887,14 @@
             // 
             this.edt_payConditionFine.DecimalPlaces = 2;
             this.edt_payConditionFine.Enabled = false;
-            this.edt_payConditionFine.Location = new System.Drawing.Point(63, 82);
+            this.edt_payConditionFine.Location = new System.Drawing.Point(79, 82);
             this.edt_payConditionFine.Maximum = new decimal(new int[] {
             1000,
             0,
             0,
             0});
             this.edt_payConditionFine.Name = "edt_payConditionFine";
-            this.edt_payConditionFine.Size = new System.Drawing.Size(45, 20);
+            this.edt_payConditionFine.Size = new System.Drawing.Size(56, 20);
             this.edt_payConditionFine.TabIndex = 5;
             this.edt_payConditionFine.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -886,7 +903,7 @@
             this.edt_payConditionFees.Enabled = false;
             this.edt_payConditionFees.Location = new System.Drawing.Point(14, 82);
             this.edt_payConditionFees.Name = "edt_payConditionFees";
-            this.edt_payConditionFees.Size = new System.Drawing.Size(43, 20);
+            this.edt_payConditionFees.Size = new System.Drawing.Size(59, 20);
             this.edt_payConditionFees.TabIndex = 4;
             this.edt_payConditionFees.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
@@ -973,9 +990,9 @@
             this.gbox_Status.Controls.Add(this.check_Active);
             this.gbox_Status.Controls.Add(this.check_Cancelled);
             this.gbox_Status.Enabled = false;
-            this.gbox_Status.Location = new System.Drawing.Point(620, 16);
+            this.gbox_Status.Location = new System.Drawing.Point(620, 11);
             this.gbox_Status.Name = "gbox_Status";
-            this.gbox_Status.Size = new System.Drawing.Size(83, 59);
+            this.gbox_Status.Size = new System.Drawing.Size(87, 59);
             this.gbox_Status.TabIndex = 30;
             this.gbox_Status.TabStop = false;
             this.gbox_Status.Text = "* Status";
@@ -1003,23 +1020,6 @@
             this.check_Cancelled.Text = "Cancelado";
             this.check_Cancelled.UseVisualStyleBackColor = true;
             this.check_Cancelled.CheckedChanged += new System.EventHandler(this.check_Cancelled_CheckedChanged);
-            // 
-            // edt_und
-            // 
-            this.edt_und.Enabled = false;
-            this.edt_und.Location = new System.Drawing.Point(406, 39);
-            this.edt_und.Name = "edt_und";
-            this.edt_und.Size = new System.Drawing.Size(61, 20);
-            this.edt_und.TabIndex = 36;
-            // 
-            // lbl_und
-            // 
-            this.lbl_und.AutoSize = true;
-            this.lbl_und.Location = new System.Drawing.Point(403, 25);
-            this.lbl_und.Name = "lbl_und";
-            this.lbl_und.Size = new System.Drawing.Size(31, 13);
-            this.lbl_und.TabIndex = 37;
-            this.lbl_und.Text = "UND";
             // 
             // Frm_Sale
             // 

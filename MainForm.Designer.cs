@@ -49,10 +49,7 @@
             this.conditionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.financesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billsToPayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNewBillToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.findBillsToPayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billsToReceiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.addNewBillToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.formTesteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -201,35 +198,15 @@
             // 
             // billsToPayToolStripMenuItem
             // 
-            this.billsToPayToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNewBillToolStripMenuItem1,
-            this.findBillsToPayToolStripMenuItem});
             this.billsToPayToolStripMenuItem.Name = "billsToPayToolStripMenuItem";
             resources.ApplyResources(this.billsToPayToolStripMenuItem, "billsToPayToolStripMenuItem");
-            // 
-            // addNewBillToolStripMenuItem1
-            // 
-            this.addNewBillToolStripMenuItem1.Name = "addNewBillToolStripMenuItem1";
-            resources.ApplyResources(this.addNewBillToolStripMenuItem1, "addNewBillToolStripMenuItem1");
-            this.addNewBillToolStripMenuItem1.Click += new System.EventHandler(this.addNewBillToolStripMenuItem1_Click);
-            // 
-            // findBillsToPayToolStripMenuItem
-            // 
-            this.findBillsToPayToolStripMenuItem.Name = "findBillsToPayToolStripMenuItem";
-            resources.ApplyResources(this.findBillsToPayToolStripMenuItem, "findBillsToPayToolStripMenuItem");
+            this.billsToPayToolStripMenuItem.Click += new System.EventHandler(this.billsToPayToolStripMenuItem_Click);
             // 
             // billsToReceiveToolStripMenuItem
             // 
-            this.billsToReceiveToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.addNewBillToolStripMenuItem});
             this.billsToReceiveToolStripMenuItem.Name = "billsToReceiveToolStripMenuItem";
             resources.ApplyResources(this.billsToReceiveToolStripMenuItem, "billsToReceiveToolStripMenuItem");
-            // 
-            // addNewBillToolStripMenuItem
-            // 
-            this.addNewBillToolStripMenuItem.Name = "addNewBillToolStripMenuItem";
-            resources.ApplyResources(this.addNewBillToolStripMenuItem, "addNewBillToolStripMenuItem");
-            this.addNewBillToolStripMenuItem.Click += new System.EventHandler(this.addNewBillToolStripMenuItem_Click);
+            this.billsToReceiveToolStripMenuItem.Click += new System.EventHandler(this.billsToReceiveToolStripMenuItem_Click);
             // 
             // manageUserToolStripMenuItem
             // 
@@ -330,10 +307,7 @@
         private System.Windows.Forms.ToolStripMenuItem conditionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem financesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem billsToPayToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addNewBillToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem findBillsToPayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem billsToReceiveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem addNewBillToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageUserToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem formTesteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saleToolStripMenuItem;

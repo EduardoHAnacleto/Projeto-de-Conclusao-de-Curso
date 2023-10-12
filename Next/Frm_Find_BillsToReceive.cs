@@ -195,9 +195,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (DGV_BillsToReceive.SelectedRows[0] != null)
             {
-                var instalment = Convert.ToInt32(DGV_BillsToReceive.SelectedRows[0].Cells["InstalmentNumber"].Value);
-                var saleId = Convert.ToInt32(DGV_BillsToReceive.SelectedRows[0].Cells["SaleNumberBillsReceive"].Value);
-                var obj = _controller.FindItemId(saleId, instalment);
+                var billId = Convert.ToInt32(DGV_BillsToReceive.SelectedRows[0].Cells["BillId"].Value);
+                var obj = _controller.FindItemId(billId);
                 return obj;
             }
             return null;

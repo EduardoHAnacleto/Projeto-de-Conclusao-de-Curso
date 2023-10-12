@@ -142,18 +142,6 @@
   <data name="paymentToolStripMenuItem.Text" xml:space="preserve">
     <value>Pagamentos</value>
   </data>
-  <data name="addNewBillToolStripMenuItem1.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="addNewBillToolStripMenuItem1.Text" xml:space="preserve">
-    <value>Contas à Pagar</value>
-  </data>
-  <data name="findBillsToPayToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>191, 22</value>
-  </data>
-  <data name="findBillsToPayToolStripMenuItem.Text" xml:space="preserve">
-    <value>Buscar Contas à Pagar</value>
-  </data>
   <data name="billsToPayToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>180, 22</value>
   </data>
@@ -255,12 +243,6 @@
   </data>
   <data name="conditionsToolStripMenuItem.Text" xml:space="preserve">
     <value>Condições</value>
-  </data>
-  <data name="addNewBillToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
-    <value>180, 22</value>
-  </data>
-  <data name="addNewBillToolStripMenuItem.Text" xml:space="preserve">
-    <value>Contas à Receber</value>
   </data>
   <data name="manageUserToolStripMenuItem.Size" type="System.Drawing.Size, System.Drawing">
     <value>129, 20</value>
@@ -474,28 +456,10 @@
   <data name="&gt;&gt;billsToPayToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
-  <data name="&gt;&gt;addNewBillToolStripMenuItem1.Name" xml:space="preserve">
-    <value>addNewBillToolStripMenuItem1</value>
-  </data>
-  <data name="&gt;&gt;addNewBillToolStripMenuItem1.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;findBillsToPayToolStripMenuItem.Name" xml:space="preserve">
-    <value>findBillsToPayToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;findBillsToPayToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
   <data name="&gt;&gt;billsToReceiveToolStripMenuItem.Name" xml:space="preserve">
     <value>billsToReceiveToolStripMenuItem</value>
   </data>
   <data name="&gt;&gt;billsToReceiveToolStripMenuItem.Type" xml:space="preserve">
-    <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;addNewBillToolStripMenuItem.Name" xml:space="preserve">
-    <value>addNewBillToolStripMenuItem</value>
-  </data>
-  <data name="&gt;&gt;addNewBillToolStripMenuItem.Type" xml:space="preserve">
     <value>System.Windows.Forms.ToolStripMenuItem, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="&gt;&gt;manageUserToolStripMenuItem.Name" xml:space="preserve">

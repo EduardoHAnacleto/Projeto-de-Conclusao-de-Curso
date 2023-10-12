@@ -188,15 +188,23 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
             if (!CheckEqualDGVProduct(product.id, amount, discountCash, totalValue) && LegalAge(product.AgeRestricted))
             {
+                if (amount > product.stock)
+                {
+                    string message = "Não há estoque suficiente desse produto.";
+                    string caption = "Estoque insuficiente.";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    amount = product.stock;
+                }
                 DGV_SaleProducts.Rows.Add(
-                    product.id,
-                    product.productName,
-                    amount,
-                    discountCash,
-                    product.salePrice,
-                    totalValue);
+                            product.id,
+                            product.productName,
+                            amount,
+                            discountCash,
+                            product.salePrice,
+                            totalValue);
             }
-
             CalculateSubTotal();
         }
 

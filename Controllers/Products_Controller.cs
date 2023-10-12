@@ -85,5 +85,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
             return _productsDAO.RemoveStock(prodId, qtd);
         }
 
+        public bool CancelPurchaseReturnCost(int prodId, decimal prePurchCost)
+        {
+            return _productsDAO.CancelPurchaseReturnCost(prodId, prePurchCost);
+        }
+
     }
 }

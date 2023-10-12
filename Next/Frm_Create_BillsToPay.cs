@@ -178,6 +178,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 LockCamps();
             }
 
+            edt_instValue.Value = bill.TotalValue;
+            edt_instFee.Value = bill.PaymentCondition.paymentFees;
+            edt_instFine.Value = bill.PaymentCondition.fineValue;
+            edt_instDisc.Value = bill.PaymentCondition.discountPerc;
+
             edt_finalValue.Value = PaymentConditions.CalcValue(bill.TotalValue, bill.PaymentCondition, bill.DueDate);
             edt_instalmentValue.Value = bill.TotalValue;
                                   

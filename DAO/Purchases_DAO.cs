@@ -105,6 +105,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                             foreach (var items in obj.PurchasedItems)
                             {
                                 status = pController.RemoveStock(items.id, items.Quantity);
+                                status = pController.CancelPurchaseReturnCost(items.id, items.PreUnCost);
                             }
                         }
                         if (status)

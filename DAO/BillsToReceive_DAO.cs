@@ -154,7 +154,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             return null;
         }
 
-        public List<BillsToReceive> SelectFromDb(int billId)
+        public BillsToReceive SelectFromDb(int billId)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -169,9 +169,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         {
                             if (reader.Read())
                             {
-                                List<BillsToReceive> list = new List<BillsToReceive>();
-                                foreach (var row in reader)
-                                {
+
                                     BillsToReceive obj = new BillsToReceive()
                                     {
                                         id = Convert.ToInt32(reader["id_bill"]),
@@ -198,9 +196,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     {
                                         obj.CancelledDate = Convert.ToDateTime(reader["date_cancelled"]);
                                     }
-                                    list.Add(obj);
-                                }
-                                return list;
+                                    
+                                
+                                return obj;
                             }
                         }
                     }

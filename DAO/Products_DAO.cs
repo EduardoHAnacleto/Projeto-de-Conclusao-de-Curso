@@ -534,5 +534,40 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 return status;
             }
         }
+
+        internal bool CancelPurchaseReturnCost(int prodId,decimal prePurchCost)
+        {
+            bool status = false;
+
+            string sql = "UPDATE PRODUCTS SET product_cost = @product_cost " +
+                "WHERE ID_PRODUCT = @ID ; ";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@ID", prodId);
+                    command.Parameters.AddWithValue("@product_cost", prePurchCost);
+
+                    connection.Open();
+                    int i = command.ExecuteNonQuery();
+                    if (i > 0)
+                    {
+                        status = true;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Erro: " + ex.Message);
+                    return status;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
     }
 }

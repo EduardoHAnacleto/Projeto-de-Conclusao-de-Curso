@@ -223,7 +223,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1
             frmCreatePurchases.ShowDialog();
         }
 
-        private void addNewBillToolStripMenuItem_Click(object sender, EventArgs e)
+        private void addNewBillToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            MasterDetails_PurchasesBillsToPay frmPurchaseBillsToPay = new MasterDetails_PurchasesBillsToPay(_user);
+            frmPurchaseBillsToPay.ShowDialog();
+        }
+
+        private void billsToReceiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
             user.id = 2;
@@ -233,10 +239,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1
             frmFindBillsToReceive.ShowDialog();
         }
 
-        private void addNewBillToolStripMenuItem1_Click(object sender, EventArgs e)
+        private void billsToPayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            MasterDetails_PurchasesBillsToPay frmPurchaseBillsToPay = new MasterDetails_PurchasesBillsToPay(_user);
-            frmPurchaseBillsToPay.ShowDialog();
+            Users user = new Users();
+            user.id = 2;
+            user.AccessLevel = 3;
+            user.name = "teste";
+            Frm_Find_BillsToPay frmFindBillsToPay = new Frm_Find_BillsToPay(user);
+            frmFindBillsToPay.ShowDialog();
         }
     }
 }

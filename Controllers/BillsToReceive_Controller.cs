@@ -37,7 +37,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToReceivesDAO.SelectFromDb(saleId, instalmentNum);
         }
-        public List<BillsToReceive> FindItemId(int billId)
+        public BillsToReceive FindItemId(int billId)
         {
             return _billToReceivesDAO.SelectFromDb(billId);
         }

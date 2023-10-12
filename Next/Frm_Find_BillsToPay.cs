@@ -72,14 +72,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private BillsToPay GetObject()
         {
-            Suppliers_Controller supController = new Suppliers_Controller();
-            int billNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["BillNumber"].Value);
-            int billSeries = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billSeries"].Value);
-            int billModel = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billModel"].Value);
-            int instalmentNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["InstalmentNumber"].Value);
-            int supplierId = supController.FindItemName(DGV_BillsToPay.SelectedRows[0].Cells["SupplierName"].Value.ToString()).id;
-            BillsToPay obj = _controller.FindItemId(billNumber,billModel,billSeries,instalmentNumber, supplierId);
-            return obj;
+            if (DGV_BillsToPay.SelectedRows[0] != null)
+            {
+                Suppliers_Controller supController = new Suppliers_Controller();
+                int billNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["BillNumber"].Value);
+                int billSeries = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billSeries"].Value);
+                int billModel = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["billModel"].Value);
+                int instalmentNumber = Convert.ToInt32(DGV_BillsToPay.SelectedRows[0].Cells["InstalmentNumber"].Value);
+                int supplierId = supController.FindItemName(DGV_BillsToPay.SelectedRows[0].Cells["SupplierName"].Value.ToString()).id;
+                BillsToPay obj = _controller.FindItemId(billNumber, billModel, billSeries, instalmentNumber, supplierId);
+                return obj;
+            }
+            return null;            
         }
 
         public override void SelectObject()
