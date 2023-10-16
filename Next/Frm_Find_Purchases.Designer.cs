@@ -29,14 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_Purchases = new System.Windows.Forms.DataGridView();
-            this.BillNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BillModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.BillSeries = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PurchaseSupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PurchaseTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PurchaseDateCreation = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PurchaseDueDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.PurchaseCancelDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.lbl_billSeries = new System.Windows.Forms.Label();
             this.lbl_billModel = new System.Windows.Forms.Label();
             this.lbl_billNumber = new System.Windows.Forms.Label();
@@ -44,6 +36,13 @@
             this.edt_billSeries = new System.Windows.Forms.NumericUpDown();
             this.edt_billModel = new System.Windows.Forms.NumericUpDown();
             this.edt_billNumber = new System.Windows.Forms.NumericUpDown();
+            this.BillNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BillModel = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.BillSeries = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchaseSupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchaseTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchaseDateCreation = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchaseCancelDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_Purchases)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.edt_billSeries)).BeginInit();
@@ -78,7 +77,6 @@
             this.PurchaseSupplierName,
             this.PurchaseTotalValue,
             this.PurchaseDateCreation,
-            this.PurchaseDueDate,
             this.PurchaseCancelDate});
             this.DGV_Purchases.Location = new System.Drawing.Point(10, 49);
             this.DGV_Purchases.MultiSelect = false;
@@ -88,60 +86,6 @@
             this.DGV_Purchases.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_Purchases.Size = new System.Drawing.Size(733, 302);
             this.DGV_Purchases.TabIndex = 7;
-            // 
-            // BillNumber
-            // 
-            this.BillNumber.HeaderText = "Número";
-            this.BillNumber.Name = "BillNumber";
-            this.BillNumber.ReadOnly = true;
-            this.BillNumber.Width = 65;
-            // 
-            // BillModel
-            // 
-            this.BillModel.HeaderText = "Modelo";
-            this.BillModel.Name = "BillModel";
-            this.BillModel.ReadOnly = true;
-            this.BillModel.Width = 65;
-            // 
-            // BillSeries
-            // 
-            this.BillSeries.HeaderText = "Série";
-            this.BillSeries.Name = "BillSeries";
-            this.BillSeries.ReadOnly = true;
-            this.BillSeries.Width = 65;
-            // 
-            // PurchaseSupplierName
-            // 
-            this.PurchaseSupplierName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.PurchaseSupplierName.HeaderText = "Fornecedor";
-            this.PurchaseSupplierName.Name = "PurchaseSupplierName";
-            this.PurchaseSupplierName.ReadOnly = true;
-            // 
-            // PurchaseTotalValue
-            // 
-            this.PurchaseTotalValue.HeaderText = "Valor Total";
-            this.PurchaseTotalValue.Name = "PurchaseTotalValue";
-            this.PurchaseTotalValue.ReadOnly = true;
-            // 
-            // PurchaseDateCreation
-            // 
-            this.PurchaseDateCreation.HeaderText = "Data de Emissão";
-            this.PurchaseDateCreation.Name = "PurchaseDateCreation";
-            this.PurchaseDateCreation.ReadOnly = true;
-            this.PurchaseDateCreation.Width = 85;
-            // 
-            // PurchaseDueDate
-            // 
-            this.PurchaseDueDate.HeaderText = "Data de Vencimento";
-            this.PurchaseDueDate.Name = "PurchaseDueDate";
-            this.PurchaseDueDate.ReadOnly = true;
-            // 
-            // PurchaseCancelDate
-            // 
-            this.PurchaseCancelDate.HeaderText = "Cancelamento";
-            this.PurchaseCancelDate.Name = "PurchaseCancelDate";
-            this.PurchaseCancelDate.ReadOnly = true;
-            this.PurchaseCancelDate.Width = 90;
             // 
             // lbl_billSeries
             // 
@@ -219,6 +163,54 @@
             this.edt_billNumber.TabIndex = 16;
             this.edt_billNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
+            // BillNumber
+            // 
+            this.BillNumber.HeaderText = "Número";
+            this.BillNumber.Name = "BillNumber";
+            this.BillNumber.ReadOnly = true;
+            this.BillNumber.Width = 65;
+            // 
+            // BillModel
+            // 
+            this.BillModel.HeaderText = "Modelo";
+            this.BillModel.Name = "BillModel";
+            this.BillModel.ReadOnly = true;
+            this.BillModel.Width = 65;
+            // 
+            // BillSeries
+            // 
+            this.BillSeries.HeaderText = "Série";
+            this.BillSeries.Name = "BillSeries";
+            this.BillSeries.ReadOnly = true;
+            this.BillSeries.Width = 65;
+            // 
+            // PurchaseSupplierName
+            // 
+            this.PurchaseSupplierName.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.PurchaseSupplierName.HeaderText = "Fornecedor";
+            this.PurchaseSupplierName.Name = "PurchaseSupplierName";
+            this.PurchaseSupplierName.ReadOnly = true;
+            // 
+            // PurchaseTotalValue
+            // 
+            this.PurchaseTotalValue.HeaderText = "Valor Total";
+            this.PurchaseTotalValue.Name = "PurchaseTotalValue";
+            this.PurchaseTotalValue.ReadOnly = true;
+            // 
+            // PurchaseDateCreation
+            // 
+            this.PurchaseDateCreation.HeaderText = "Data de Emissão";
+            this.PurchaseDateCreation.Name = "PurchaseDateCreation";
+            this.PurchaseDateCreation.ReadOnly = true;
+            this.PurchaseDateCreation.Width = 85;
+            // 
+            // PurchaseCancelDate
+            // 
+            this.PurchaseCancelDate.HeaderText = "Cancelamento";
+            this.PurchaseCancelDate.Name = "PurchaseCancelDate";
+            this.PurchaseCancelDate.ReadOnly = true;
+            this.PurchaseCancelDate.Width = 90;
+            // 
             // Frm_Find_Purchases
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -259,14 +251,6 @@
         #endregion
 
         private System.Windows.Forms.DataGridView DGV_Purchases;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BillNumber;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BillModel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn BillSeries;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseSupplierName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseTotalValue;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseDateCreation;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseDueDate;
-        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseCancelDate;
         private System.Windows.Forms.Label lbl_billSeries;
         private System.Windows.Forms.Label lbl_billModel;
         private System.Windows.Forms.Label lbl_billNumber;
@@ -274,5 +258,12 @@
         private System.Windows.Forms.NumericUpDown edt_billSeries;
         private System.Windows.Forms.NumericUpDown edt_billModel;
         private System.Windows.Forms.NumericUpDown edt_billNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BillNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BillModel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn BillSeries;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseSupplierName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseTotalValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseDateCreation;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseCancelDate;
     }
 }

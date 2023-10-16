@@ -15,7 +15,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 {
     public partial class Frm_Create_BillsToReceive : ProjetoEduardoAnacletoWindowsForm1.InheritForms.Frm_Create_Master
     {
-        public Frm_Create_BillsToReceive(string use, BillsToReceive bill )
+        public Frm_Create_BillsToReceive(string use, BillsToReceive bill, Users user )
         {
             InitializeComponent();
             edt_clientId.Controls[0].Visible = false;
@@ -30,6 +30,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             DGV_Instalments.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_Instalments.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             SetFormToUse(use, bill);
+            SetUser(user);
         }
 
         private readonly BillsToReceive_Controller _controller = new BillsToReceive_Controller();
@@ -37,7 +38,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private readonly Sales_Controller _salesController = new Sales_Controller();
         private readonly PaymentMethods_Controller _payMethodController = new PaymentMethods_Controller();
         private BillsToReceive _auxObj;
+        public Users User { get; private set; }
         public string _FormFunction { get; set; }
+
+        private void SetUser(Users user)
+        {
+            User = user;
+        }
 
         private void SetFormToUse(string use, BillsToReceive obj)
         {
@@ -119,7 +126,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             datePicker_emission.Enabled = true;
             datePicker_PaidDate.Enabled = false;
             date_cancelled.Enabled = false;
-            datePicker_emission.Value = DateTime.Now;           
+            datePicker_emission.Value = DateTime.Today.Date;           
         }
 
         private PaymentMethods GetPaymentMethod(string payMethod)
@@ -143,15 +150,21 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             var obj = new BillsToReceive();
 
             obj.Client = GetClient(Convert.ToInt32(edt_clientId.Value));
-            obj.PaymentMethod = GetPaymentMethod(DGV_Instalments.Rows[0].Cells["PaymentMethod_Name"].Value.ToString());
+            if (_FormFunction != "New")
+            {
+                obj.PaymentMethod = GetPaymentMethod(DGV_Instalments.Rows[0].Cells["PaymentMethod_Name"].Value.ToString());
+            }
+            else { obj.PaymentMethod = null; }
+            
             obj.PaymentCondition = GetPaymentCondition(Convert.ToInt32(edt_payConditionId.Value));
-
-            obj.Sale = null;
+            obj.User = User;
+            obj.Sale = new Sales();
+            obj.Sale.id = 0;
+            obj.InstalmentValue = edt_instalmentValue.Value;
 
             obj.EmissionDate = datePicker_emission.Value;
             obj.InstalmentsQtd = DGV_Instalments.Rows.Count;
 
-            //Fazer que funcao retone lista, colocar MakeBills()
             return obj;
         }
 
@@ -255,7 +268,21 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 {
                     if (_FormFunction == "New")
                     {
-                        _controller.SaveItem(this.GetObject());
+                        bool status = false;
+                        var obj = GetObject();
+                        var list = BillsToReceive.MakeBills(obj, obj.PaymentCondition);
+                        int billId = _controller.GetNewId();
+                        foreach (var bill in list)
+                        {
+                            bill.id = billId;
+                            status = _controller.SaveItem(bill);
+                        }
+                        if (status)
+                        {
+                            MessageBox.Show("Conta criada com sucesso.");
+                        }
+                        else { MessageBox.Show("Erro."); }
+                        
                         ClearCamps();
                         UnlockCamps();
                     }

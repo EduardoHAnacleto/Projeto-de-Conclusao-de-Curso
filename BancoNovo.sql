@@ -140,7 +140,6 @@
 
 	    create table USERS(
         id_user int identity(2,1) primary key,
-        employee_id int FOREIGN KEY references EMPLOYEES(id_employee),
         userLogin varchar(15) not null,
 		userPassword varchar(15) not null,
         levelAccess int not null,
@@ -179,12 +178,12 @@
         product_sale_price decimal(10,2) not null,
         product_group_id int references ProductGroups(id_product_group),        
         brand_id int references Brands(id_brand),
-        stock int not null,
+        stock int not null default 0,
         product_cost decimal (10,2) not null,
         product_barcode bigint,
         date_creation datetime not null,
         date_last_update datetime not null,
-        product_und varchar(15) not null,
+        product_und varchar(5) not null,
         age_restricted int not null
     );
 
@@ -243,8 +242,8 @@
     );
 
 	create table BILLSTORECEIVE(
-        id_bill int identity(2,1),
-        sale_id int references SALES(id_sale),
+        id_bill int not null,
+        sale_id int not null,
         instalmentNumber int not null, 
         instalmentValue decimal not null,
         isPaid int not null,
@@ -261,7 +260,6 @@
         date_last_update date not null,
         user_id int not null,
         primary key(id_bill,instalmentNumber),
-		foreign key(sale_id) references SALES(id_sale),
         foreign key(user_id) references USERS(id_user)
     );
 
@@ -329,6 +327,7 @@
         date_last_update datetime not null,
         date_cancelled datetime,
         MOTIVE_CANCELLED varchar(150),
+        user_id int not null references USERS(id_user),
         primary key (billNumber, billModel, billSeries, instalmentNumber, supplier_id)
         );
 
@@ -354,6 +353,7 @@
         PURCHASE_PERCENTAGE decimal not null,
         DISCOUNT_CASH decimal not null,
         WEIGHTED_AVG decimal(10,4) not null,
+        PRE_ITEMCOST decimal(10,2) not null,
         DATE_CREATION date not null,
         DATE_CANCELLED date,
         primary key (billModel, billNumber, billSeries, supplier_id, PRODUCT_ID),

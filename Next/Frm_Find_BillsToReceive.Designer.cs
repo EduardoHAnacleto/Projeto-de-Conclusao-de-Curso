@@ -29,11 +29,6 @@
         private void InitializeComponent()
         {
             this.DGV_BillsToReceive = new System.Windows.Forms.DataGridView();
-            this.edt_clientName = new System.Windows.Forms.TextBox();
-            this.lbl_clientName = new System.Windows.Forms.Label();
-            this.btn_Find = new System.Windows.Forms.Button();
-            this.SetPaidBill = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.BillId = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.SaleNumberBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.ClientName = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -42,6 +37,11 @@
             this.EmissionDateBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.DueDateBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.StatusBillsReceive = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.edt_clientName = new System.Windows.Forms.TextBox();
+            this.lbl_clientName = new System.Windows.Forms.Label();
+            this.btn_Find = new System.Windows.Forms.Button();
+            this.SetPaidBill = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_BillsToReceive)).BeginInit();
             this.SuspendLayout();
@@ -85,54 +85,6 @@
             this.DGV_BillsToReceive.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DGV_BillsToReceive.Size = new System.Drawing.Size(783, 360);
             this.DGV_BillsToReceive.TabIndex = 8;
-            // 
-            // edt_clientName
-            // 
-            this.edt_clientName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
-            this.edt_clientName.Location = new System.Drawing.Point(48, 22);
-            this.edt_clientName.MaxLength = 50;
-            this.edt_clientName.Name = "edt_clientName";
-            this.edt_clientName.Size = new System.Drawing.Size(226, 20);
-            this.edt_clientName.TabIndex = 9;
-            // 
-            // lbl_clientName
-            // 
-            this.lbl_clientName.AutoSize = true;
-            this.lbl_clientName.Location = new System.Drawing.Point(45, 7);
-            this.lbl_clientName.Name = "lbl_clientName";
-            this.lbl_clientName.Size = new System.Drawing.Size(39, 13);
-            this.lbl_clientName.TabIndex = 10;
-            this.lbl_clientName.Text = "Cliente";
-            // 
-            // btn_Find
-            // 
-            this.btn_Find.Location = new System.Drawing.Point(280, 22);
-            this.btn_Find.Name = "btn_Find";
-            this.btn_Find.Size = new System.Drawing.Size(75, 20);
-            this.btn_Find.TabIndex = 11;
-            this.btn_Find.Text = "Buscar";
-            this.btn_Find.UseVisualStyleBackColor = true;
-            this.btn_Find.Click += new System.EventHandler(this.btn_Find_Click);
-            // 
-            // SetPaidBill
-            // 
-            this.SetPaidBill.Location = new System.Drawing.Point(519, 417);
-            this.SetPaidBill.Name = "SetPaidBill";
-            this.SetPaidBill.Size = new System.Drawing.Size(75, 23);
-            this.SetPaidBill.TabIndex = 12;
-            this.SetPaidBill.Text = "Baixar Conta";
-            this.SetPaidBill.UseVisualStyleBackColor = true;
-            this.SetPaidBill.Click += new System.EventHandler(this.btn_SetPaidBill_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(422, 417);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(91, 23);
-            this.button1.TabIndex = 13;
-            this.button1.Text = "Cancelar Conta";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // BillId
             // 
@@ -193,6 +145,54 @@
             this.StatusBillsReceive.MinimumWidth = 6;
             this.StatusBillsReceive.Name = "StatusBillsReceive";
             this.StatusBillsReceive.ReadOnly = true;
+            // 
+            // edt_clientName
+            // 
+            this.edt_clientName.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
+            this.edt_clientName.Location = new System.Drawing.Point(48, 22);
+            this.edt_clientName.MaxLength = 50;
+            this.edt_clientName.Name = "edt_clientName";
+            this.edt_clientName.Size = new System.Drawing.Size(226, 20);
+            this.edt_clientName.TabIndex = 9;
+            // 
+            // lbl_clientName
+            // 
+            this.lbl_clientName.AutoSize = true;
+            this.lbl_clientName.Location = new System.Drawing.Point(45, 7);
+            this.lbl_clientName.Name = "lbl_clientName";
+            this.lbl_clientName.Size = new System.Drawing.Size(39, 13);
+            this.lbl_clientName.TabIndex = 10;
+            this.lbl_clientName.Text = "Cliente";
+            // 
+            // btn_Find
+            // 
+            this.btn_Find.Location = new System.Drawing.Point(280, 22);
+            this.btn_Find.Name = "btn_Find";
+            this.btn_Find.Size = new System.Drawing.Size(75, 20);
+            this.btn_Find.TabIndex = 11;
+            this.btn_Find.Text = "Buscar";
+            this.btn_Find.UseVisualStyleBackColor = true;
+            this.btn_Find.Click += new System.EventHandler(this.btn_Find_Click);
+            // 
+            // SetPaidBill
+            // 
+            this.SetPaidBill.Location = new System.Drawing.Point(424, 417);
+            this.SetPaidBill.Name = "SetPaidBill";
+            this.SetPaidBill.Size = new System.Drawing.Size(75, 23);
+            this.SetPaidBill.TabIndex = 12;
+            this.SetPaidBill.Text = "Baixar Conta";
+            this.SetPaidBill.UseVisualStyleBackColor = true;
+            this.SetPaidBill.Click += new System.EventHandler(this.btn_SetPaidBill_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(505, 417);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(91, 23);
+            this.button1.TabIndex = 13;
+            this.button1.Text = "Cancelar Conta";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Frm_Find_BillsToReceive
             // 

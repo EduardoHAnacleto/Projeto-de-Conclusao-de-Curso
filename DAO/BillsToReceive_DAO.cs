@@ -22,18 +22,36 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private readonly Sales_Controller _salesController = new Sales_Controller();
         private readonly PaymentConditions_Controller _pcController = new PaymentConditions_Controller();
 
+        public int GetNewId()
+        {
+            string sql = "SELECT IDENT_CURRENT ('BILLSTORECEIVE');";
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand command = new SqlCommand(sql, connection);
+                connection.Open();
+                string i = command.ExecuteScalar().ToString();
+                connection.Close();
+                if (i == "")
+                {
+                    return 1;
+                }
+                return Convert.ToInt32(i)+1;
+            }
+        }
+
         public bool SaveToDb(BillsToReceive obj)
         {
             bool status = false;
 
-            string sql = "INSERT INTO BILLSTORECEIVE ( SALE_ID, INSTALMENTVALUE, ISPAID, CLIENT_ID, PAYMETHOD_ID, INSTALMENTNUMBER, " +
+            string sql = "INSERT INTO BILLSTORECEIVE (ID_BILL, SALE_ID, INSTALMENTVALUE, ISPAID, CLIENT_ID, PAYMETHOD_ID, INSTALMENTNUMBER, " +
                 "INSTALMENTSQTD, DUEDATE, EMISSIONDATE, PAIDDATE, DATE_CREATION, DATE_LAST_UPDATE, DATE_CANCELLED, PAYCOND_ID, USER_ID ) "
-                         + " VALUES (@SALEID, @IVALUE, @ISPAID, @CLIENTID, @METHODID, @INUM, @IQTD, @DUEDATE, @EMDATE, @PDATE, @DC, @DU, @DCANCEL, @PAYCONDID, @USERID);";
+                         + " VALUES (@BILLID, @SALEID, @IVALUE, @ISPAID, @CLIENTID, @METHODID, @INUM, @IQTD, @DUEDATE, @EMDATE, @PDATE, @DC, @DU, @DCANCEL, @PAYCONDID, @USERID);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
+                    command.Parameters.AddWithValue("@BILLID", obj.id);
                     command.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
                     command.Parameters.AddWithValue("@CLIENTID", obj.Client.id);
                     command.Parameters.AddWithValue("@SALEID", obj.Sale.id);
@@ -154,7 +172,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             return null;
         }
 
-        public BillsToReceive SelectFromDb(int billId)
+        public List<BillsToReceive> SelectFromDb(int billId)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -169,7 +187,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         {
                             if (reader.Read())
                             {
-
+                                List<BillsToReceive> list = new List<BillsToReceive>();
+                                foreach (var row in reader)
+                                {
                                     BillsToReceive obj = new BillsToReceive()
                                     {
                                         id = Convert.ToInt32(reader["id_bill"]),
@@ -196,9 +216,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     {
                                         obj.CancelledDate = Convert.ToDateTime(reader["date_cancelled"]);
                                     }
-                                    
+                                    list.Add(obj);
+                                }
                                 
-                                return obj;
+                                return list;
                             }
                         }
                     }

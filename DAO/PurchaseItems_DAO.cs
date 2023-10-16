@@ -23,8 +23,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             bool status = false;
 
             string sql = "INSERT INTO PURCHASEITEMS ( BILLMODEL, BILLNUMBER, BILLSERIES, SUPPLIER_ID, PRODUCT_ID, QUANTITY, PRODUCT_COST, PURCHASE_PERCENTAGE," +
-                "DISCOUNT_CASH , WEIGHTED_AVG , DATE_CREATION, DATE_CANCELLED ) "
-                         + " VALUES (@BILLMOD, @BILLNUM, @BILLSER, @SUPPLIERID, @PRODID, @QTD, @PRODCOST, @PURCHPERC, @DISCOUNT, @WEIGHTEDAVG, @DC, @DC);";
+                "DISCOUNT_CASH , WEIGHTED_AVG , DATE_CREATION, DATE_CANCELLED, PRE_ITEMCOST ) "
+                         + " VALUES (@BILLMOD, @BILLNUM, @BILLSER, @SUPPLIERID, @PRODID, @QTD, @PRODCOST, @PURCHPERC, @DISCOUNT, @WEIGHTEDAVG, @DC, @DC, @PRECOST);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -40,6 +40,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@PURCHPERC", obj.PurchasePercentage);
                     command.Parameters.AddWithValue("@WEIGHTEDAVG", obj.WeightedCostAverage);
                     command.Parameters.AddWithValue("@DISCOUNT", obj.DiscountCash);
+                    command.Parameters.AddWithValue("@PRECOST", obj.PreUnCost);
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     if (obj.CancelledDate != null)
                     {
@@ -101,6 +102,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                             NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
                             PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
                             WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
+                            PreUnCost = Convert.ToDecimal(reader["PRE_ITEMCOST"]),
                             dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                             CancelledDate = null
                         };
@@ -150,6 +152,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 SupplierId = Convert.ToInt32(reader["supplier_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
+                                PreUnCost = Convert.ToDecimal(reader["PRE_ITEMCOST"]),
                                 NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
                                 PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
                                 WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
@@ -199,6 +202,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 SupplierId = Convert.ToInt32(reader["supplier_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
+                                PreUnCost = Convert.ToDecimal(reader["PRE_ITEMCOST"]),
                                 NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
                                 PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
                                 WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),
@@ -251,6 +255,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 SupplierId = Convert.ToInt32(reader["supplier_id"]),
                                 Product = _prodController.FindItemId(Convert.ToInt32(reader["product_id"])),
                                 Quantity = Convert.ToInt32(reader["quantity"]),
+                                PreUnCost = Convert.ToDecimal(reader["PRE_ITEMCOST"]),
                                 NewBaseUnCost = Convert.ToDecimal(reader["product_cost"]),
                                 PurchasePercentage = Convert.ToDecimal(reader["purchase_percentage"]),
                                 WeightedCostAverage = Convert.ToDecimal(reader["weighted_avg"]),

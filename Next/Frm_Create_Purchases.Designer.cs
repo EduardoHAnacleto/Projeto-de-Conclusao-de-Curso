@@ -89,6 +89,7 @@
             this.lbl_supplierName = new System.Windows.Forms.Label();
             this.edt_supplierName = new System.Windows.Forms.TextBox();
             this.gbox_supplier = new System.Windows.Forms.GroupBox();
+            this.btn_checkBill = new System.Windows.Forms.Button();
             this.gbox_billInfo = new System.Windows.Forms.GroupBox();
             this.edt_billSeries = new System.Windows.Forms.NumericUpDown();
             this.edt_billModel = new System.Windows.Forms.NumericUpDown();
@@ -121,7 +122,6 @@
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.gbox_cancelReason = new System.Windows.Forms.GroupBox();
             this.txt_cancelMot = new System.Windows.Forms.RichTextBox();
-            this.btn_checkBill = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_PurchasesProducts)).BeginInit();
             this.gbox_products.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_prodTotal)).BeginInit();
@@ -310,6 +310,11 @@
             this.edt_prodTotal.DecimalPlaces = 2;
             this.edt_prodTotal.Enabled = false;
             this.edt_prodTotal.Location = new System.Drawing.Point(980, 38);
+            this.edt_prodTotal.Maximum = new decimal(new int[] {
+            1410065407,
+            2,
+            0,
+            0});
             this.edt_prodTotal.Name = "edt_prodTotal";
             this.edt_prodTotal.Size = new System.Drawing.Size(69, 20);
             this.edt_prodTotal.TabIndex = 17;
@@ -697,6 +702,7 @@
             this.edt_transportFee.TabIndex = 32;
             this.edt_transportFee.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_transportFee.ValueChanged += new System.EventHandler(this.edt_transportFee_ValueChanged);
+            this.edt_transportFee.Leave += new System.EventHandler(this.edt_transportFee_Leave);
             // 
             // lbl_transportFee
             // 
@@ -754,6 +760,7 @@
             this.edt_extraExpenses.TabIndex = 39;
             this.edt_extraExpenses.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_extraExpenses.ValueChanged += new System.EventHandler(this.edt_extraExpenses_ValueChanged);
+            this.edt_extraExpenses.Leave += new System.EventHandler(this.edt_extraExpenses_Leave);
             // 
             // edt_insurance
             // 
@@ -769,6 +776,7 @@
             this.edt_insurance.TabIndex = 40;
             this.edt_insurance.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.edt_insurance.ValueChanged += new System.EventHandler(this.edt_insurance_ValueChanged);
+            this.edt_insurance.Leave += new System.EventHandler(this.edt_insurance_Leave);
             // 
             // lbl_insurance
             // 
@@ -822,6 +830,16 @@
             this.gbox_supplier.TabStop = false;
             this.gbox_supplier.Text = "* Fornecedor";
             this.gbox_supplier.Leave += new System.EventHandler(this.gbox_supplier_Leave);
+            // 
+            // btn_checkBill
+            // 
+            this.btn_checkBill.Location = new System.Drawing.Point(256, 102);
+            this.btn_checkBill.Name = "btn_checkBill";
+            this.btn_checkBill.Size = new System.Drawing.Size(98, 23);
+            this.btn_checkBill.TabIndex = 50;
+            this.btn_checkBill.Text = "Autenticar Nota";
+            this.btn_checkBill.UseVisualStyleBackColor = true;
+            this.btn_checkBill.Click += new System.EventHandler(this.btn_checkBill_Click);
             // 
             // gbox_billInfo
             // 
@@ -1175,7 +1193,7 @@
             this.gbox_cancelReason.Controls.Add(this.txt_cancelMot);
             this.gbox_cancelReason.Location = new System.Drawing.Point(584, 12);
             this.gbox_cancelReason.Name = "gbox_cancelReason";
-            this.gbox_cancelReason.Size = new System.Drawing.Size(243, 143);
+            this.gbox_cancelReason.Size = new System.Drawing.Size(295, 163);
             this.gbox_cancelReason.TabIndex = 54;
             this.gbox_cancelReason.TabStop = false;
             this.gbox_cancelReason.Text = "* Motivo de Cancelamento";
@@ -1191,19 +1209,9 @@
             this.txt_cancelMot.Location = new System.Drawing.Point(6, 16);
             this.txt_cancelMot.MaxLength = 150;
             this.txt_cancelMot.Name = "txt_cancelMot";
-            this.txt_cancelMot.Size = new System.Drawing.Size(231, 121);
+            this.txt_cancelMot.Size = new System.Drawing.Size(283, 142);
             this.txt_cancelMot.TabIndex = 0;
             this.txt_cancelMot.Text = "";
-            // 
-            // btn_checkBill
-            // 
-            this.btn_checkBill.Location = new System.Drawing.Point(256, 102);
-            this.btn_checkBill.Name = "btn_checkBill";
-            this.btn_checkBill.Size = new System.Drawing.Size(98, 23);
-            this.btn_checkBill.TabIndex = 50;
-            this.btn_checkBill.Text = "Autenticar Nota";
-            this.btn_checkBill.UseVisualStyleBackColor = true;
-            this.btn_checkBill.Click += new System.EventHandler(this.btn_checkBill_Click);
             // 
             // Frm_Create_Purchases
             // 

@@ -29,9 +29,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             bool status = false;
 
             string sql = "INSERT INTO PURCHASES (BILLMODEL, BILLNUMBER, BILLSERIES, SUPPLIER_ID, EMISSIONDATE, ARRIVALDATE, FREIGHTCOST, PURCHASE_TOTALCOST, " +
-                " PURCHASE_EXTRAEXPENSES, PURCHASE_INSURANCECOST, USER_ID, DATE_CREATION, DATE_LAST_UPDATE, PAYCONDITION_ID, USER_ID ) "
+                " PURCHASE_EXTRAEXPENSES, PURCHASE_INSURANCECOST, USER_ID, DATE_CREATION, DATE_LAST_UPDATE, PAYCONDITION_ID ) "
                          + " VALUES (@BMODEL, @BNUM, @BSERIES, @SUPPLIERID, @EMDATE, @ARRIVALDATE, @FREIGHT, @TOTALCOST, @EXPENSES," +
-                         " @INSURANCE, @USERID, @DC, @DU, @PAYCONDID, @USERID);";
+                         " @INSURANCE, @USERID, @DC, @DU, @PAYCONDID);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -51,7 +51,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@USERID", obj.User.id);
                     command.Parameters.AddWithValue("@DC", obj.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
-                    command.Parameters.AddWithValue("@USERID", obj.User.id);
                     connection.Open();
                     int i = command.ExecuteNonQuery();
                     connection.Close();
@@ -97,15 +96,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     int i = command.ExecuteNonQuery();
                     if (i > 0)
                     {                                           
-                        status = true;
-                        status = _billsToPayController.CancelPurchaseBills(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id, (DateTime)obj.CancelledDate, cancelMotive);
+                        status = _billsToPayController.CancelPurchaseBills(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id, (DateTime)obj.CancelledDate, cancelMotive, obj.User);
                         if (status)
                         {
                             Products_Controller pController = new Products_Controller();
                             foreach (var items in obj.PurchasedItems)
                             {
-                                status = pController.RemoveStock(items.id, items.Quantity);
-                                status = pController.CancelPurchaseReturnCost(items.id, items.PreUnCost);
+                                status = pController.RemoveStock(items.Product.id, items.Quantity);
+                                status = pController.CancelPurchaseReturnCost(items.Product.id, items.PreUnCost);
                             }
                         }
                         if (status)

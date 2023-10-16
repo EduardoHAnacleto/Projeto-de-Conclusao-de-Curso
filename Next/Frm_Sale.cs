@@ -64,7 +64,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         public void SetUser(Users user)
         {
             edt_userId.Value = user.id;
-            edt_userName.Text = user.name;
+            edt_userName.Text = user.userLogin;
             _User = user;
         }
 
@@ -211,19 +211,32 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         private bool LegalAge(int ageRestricted)
         {
             var client = GetClient();
-            if (ageRestricted == 1 && client.age > 18)
+            if (client != null)
             {
-                return true;
+                if (ageRestricted == 1 && client.age > 18)
+                {
+                    return true;
+                }
+                else
+                {
+                    string message = "Proibida a venda desse produto para menores de idade.";
+                    string caption = "Venda proibida.";
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    Utilities.Msgbox(message, caption, buttons, icon);
+                    return false;
+                }
             }
-            else
+            else if (ageRestricted == 1)
             {
-                string message = "Proibida a venda desse produto para menores de idade.";
+                string message = "Insira o cliente para permitir a venda desse produto.";
                 string caption = "Venda proibida.";
                 MessageBoxButtons buttons = MessageBoxButtons.OK;
                 MessageBoxIcon icon = MessageBoxIcon.Error;
                 Utilities.Msgbox(message, caption, buttons, icon);
                 return false;
             }
+            return false;
         }
 
         public void UpdateDGVSummary(decimal subtotal, decimal total)
@@ -561,6 +574,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                                 billsToReceiveList = BillsToReceive.MakeBills(sale,saleId, _User);
                                 foreach (BillsToReceive bill in billsToReceiveList)
                                 {
+                                    int billId = _BTRController.GetNewId();
+                                    bill.id = billId;
                                     status = _BTRController.SaveItem(bill);
                                     if (!status)
                                     {
@@ -851,7 +866,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         public void PopulateUser(Sales sale)
         {
             edt_userId.Value = sale.User.id;
-            edt_userName.Text = sale.User.name;
+            edt_userName.Text = sale.User.userLogin;
         }
 
         public void PopulateDGV(Sales sale)

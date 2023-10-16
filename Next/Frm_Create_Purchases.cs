@@ -18,7 +18,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 {
     public partial class Frm_Create_Purchases : Form
     {
-        public Frm_Create_Purchases(Users user)
+        public Frm_Create_Purchases()
         {
             InitializeComponent();
             edt_prodBarCode.Controls[0].Visible = false;
@@ -38,8 +38,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             medt_date.Text = DateTime.Now.ToString();
             dateTime_ArrivalDate.Text = DateTime.Today.ToString();
             dateTime_emissionDate.Text = DateTime.Today.ToString();
-            User = user;
-            SetUser(User);
             DGV_PurchasesProducts.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_PurchasesProducts.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_PurchasesProducts.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -53,13 +51,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             DGV_Instalments.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
         }
 
-        private void SetUser(Users user)
+        public void SetUser(Users user)
         {
             edt_userId.Value = user.id;
-            edt_userName.Text = user.name;
+            edt_userName.Text = user.userLogin;
+            User = user;
         }
 
-        private readonly Users User;
+        public Users User { get; set; }
         private readonly Products_Controller _pController = new Products_Controller();
         private readonly Purchases_Controller _controller = new Purchases_Controller();
         private readonly PurchaseItems_Controller _pIController = new PurchaseItems_Controller();
@@ -127,7 +126,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
-        private void CalculateSetNewUnCost(Products prod)
+        private void CalculateSetNewUnCost()
         {
             decimal insurance = 0;
             decimal extraExp = 0;
@@ -144,7 +143,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 insurance = edt_insurance.Value;
             }
-            decimal totalCost = Convert.ToDecimal(DGV_PurchSummary.Rows[0].Cells["PurchTotal"].Value);
+            decimal totalCost = 1;
+            if (DGV_PurchSummary.Rows[0].Cells["PurchTotal"].Value != null && (decimal)DGV_PurchSummary.Rows[0].Cells["PurchTotal"].Value > 0)
+            {
+                totalCost = Convert.ToDecimal(DGV_PurchSummary.Rows[0].Cells["PurchTotal"].Value);
+            }
 
             foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
             {
@@ -210,7 +213,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             else
             {
                 CalculateSetDGVPurchasePerc();
-                CalculateSetNewUnCost(product);
+                CalculateSetNewUnCost();
             }
 
         }
@@ -423,8 +426,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             Purchases obj = new Purchases();
             Suppliers_Controller _sController = new Suppliers_Controller();
             PaymentConditions_Controller _pCController = new PaymentConditions_Controller();
+            Users_Controller users_Controller = new Users_Controller();
             obj.PaymentCondition = _pCController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
-            obj.User = User;
+            obj.User = users_Controller.FindItemId(Convert.ToInt32(edt_userId.Value));
             obj.Supplier = _sController.FindItemId( Convert.ToInt32(edt_supplierId.Value));
             obj.Freight_Cost = Convert.ToDecimal(edt_transportFee.Value);
 
@@ -463,6 +467,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 item.BillSeriesId = supId;
                 item.SupplierId = supId;
                 item.Product = _pController.FindItemId(Convert.ToInt32(row.Cells["ProdId"].Value));
+                item.PreUnCost = item.Product.productCost;
                 item.Quantity = Convert.ToInt32(row.Cells["ProdQtd"].Value);
                 item.DiscountCash = Convert.ToDecimal(row.Cells["ProdDiscountCash"].Value);
                 item.NewBaseUnCost = Convert.ToDecimal(row.Cells["ProdNewBaseUnCost"].Value);
@@ -542,16 +547,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
             PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
             var payCond = payCondController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
-            SetBillInstalmentsToDGV(payCond);
-            SetSummary();
-            
+            SetBillInstalmentsToDGV();
+            SetSummary();            
         }
 
         public void PopulatePaymentCondition(PaymentConditions payCondition)
         {
             edt_payCondId.Value = payCondition.id;
             edt_payCondName.Text = payCondition.conditionName;
-            SetBillInstalmentsToDGV(payCondition);
+            SetBillInstalmentsToDGV();
         }
 
         private void PopulatePaymentInfo(Purchases purchase)
@@ -583,14 +587,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             foreach (PurchaseItems item in purchase.PurchasedItems)
             {
                 DGV_PurchasesProducts.Rows.Add(
-                    item.id,
+                    item.Product.id,
                     item.Product.productName,
+                    item.Product.UND,
                     item.Quantity,
-                    item.NewBaseUnCost,
                     item.DiscountCash,
                     item.NewBaseUnCost,
                     item.Product.salePrice,
-                    item.Product.stock,
                     item.PurchasePercentage,
                     item.WeightedCostAverage
                     );
@@ -715,7 +718,23 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             else
             {
-                Save();
+                if (gbox_cancelReason.Visible == false)
+                {
+                    gbox_cancelReason.Visible = true;
+                    MessageBox.Show("Digite o motivo de cancelamento.");
+                }
+                else
+                {
+                    if (txt_cancelMot.Text.Trim().Length > 5)
+                    {
+                        Save();
+                        MessageBox.Show("Compra cancelada.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Motivo de cancelamento deve ter mais de 5 caractéres.");
+                    }
+                }                               
             }
         }
 
@@ -747,17 +766,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 {
                     edt_payCondName.Text = payCondition.conditionName;
                     edt_payCondId.Value = (decimal)payCondition.id;
-                    SetBillInstalmentsToDGV(payCondition);
+                    SetBillInstalmentsToDGV();
                 }
             }
             formPayCondition.Close();
-
         }
 
-        public void SetBillInstalmentsToDGV(PaymentConditions payCond) //OK -Cria DataTable, chama Controller para trazer o DataTable e colocar na DGV como DataSource, linka db com DGV
+        public void SetBillInstalmentsToDGV()
         {
             DGV_Instalments.Rows.Clear();
             decimal totalCost = GetTotalCost();
+            PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
+            var payCond = payCondController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
             foreach (BillsInstalments bill in payCond.BillsInstalments)
             {
                 decimal instalmentCost = totalCost * (Convert.ToDecimal(bill.ValuePercentage) / 100);
@@ -778,14 +798,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
                 {
-                    totalCost += Convert.ToDecimal(row.Cells["ProdQtd"].Value) * Convert.ToDecimal(row.Cells["ProdNewBaseUnCost"].Value);
+                    totalCost += Convert.ToDecimal(row.Cells["ProdTotalValue"].Value);
                 }
             }
             return totalCost;
         }
 
         private void btn_removeItem_Click(object sender, EventArgs e)
-        {
+        {            
             RemoveItem();
             SetSummary();
         }
@@ -827,16 +847,22 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void edt_transportFee_ValueChanged(object sender, EventArgs e)
         {
             SetSummary();
+            CalculateSetNewUnCost();
+            SetBillInstalmentsToDGV();
         }
 
         private void edt_extraExpenses_ValueChanged(object sender, EventArgs e)
         {
             SetSummary();
+            CalculateSetNewUnCost();
+            SetBillInstalmentsToDGV();
         }
 
         private void edt_insurance_ValueChanged(object sender, EventArgs e)
         {
             SetSummary();
+            CalculateSetNewUnCost();
+            SetBillInstalmentsToDGV();
         }
 
         private void check_Active_CheckedChanged(object sender, EventArgs e)
@@ -894,7 +920,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (edt_prodQtd.Value > 0 && edt_prodUnCost.Value > 0)
             {
-                edt_prodTotal.Value = edt_prodQtd.Value + edt_prodUnCost.Value;
+                edt_prodTotal.Value = edt_prodQtd.Value * edt_prodUnCost.Value;
             }
         }
 
@@ -961,6 +987,28 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 ValidateBill();
             }
+        }
+
+        private void edt_transportFee_Leave(object sender, EventArgs e)
+        {
+            SetSummary();
+            CalculateSetNewUnCost();
+            SetBillInstalmentsToDGV();
+
+        }
+
+        private void edt_insurance_Leave(object sender, EventArgs e)
+        {
+            SetSummary();
+            CalculateSetNewUnCost();
+            SetBillInstalmentsToDGV();
+        }
+
+        private void edt_extraExpenses_Leave(object sender, EventArgs e)
+        {
+            SetSummary();
+            CalculateSetNewUnCost();
+            SetBillInstalmentsToDGV();
         }
     }
 }

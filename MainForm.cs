@@ -1,10 +1,10 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
+using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using ProjetoEduardoAnacletoWindowsForm1.DAO;
 using ProjetoEduardoAnacletoWindowsForm1.Forms;
 using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.FormsCreate;
 using ProjetoEduardoAnacletoWindowsForm1.InheritForms;
-using ProjetoEduardoAnacletoWindowsForm1.MasterDetails;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
 using ProjetoEduardoAnacletoWindowsForm1.Next;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
@@ -36,8 +36,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         private void SetUser()
         {
             Users user = new Users();
-            user.id = 2;
-            user.name = "Usuario Teste";
+            user.id = 3;
+            user.userLogin = "Usuario Teste";
             _user = user;
         }
         //string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
@@ -144,9 +144,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         private void findBillsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
-            user.id = 2;
+            user.id = 3;
             user.AccessLevel = 3;
-            user.name = "teste";
+            user.userLogin = "teste";
             Frm_Find_BillsToReceive frmFindBillsToReceive = new Frm_Find_BillsToReceive(user);
             frmFindBillsToReceive.ShowDialog();
         }
@@ -155,50 +155,28 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         private void newSaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
-            user.id = 2;
-            user.name = "teste";
+            user.id = 3;
+            user.userLogin = "teste";
             Frm_Sale frmSale = new Frm_Sale(user);
             frmSale.ShowDialog();
-        }
-
-        private void findSalesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MasterDetails_Sales frmMasterDetailsSales = new MasterDetails_Sales();
-            frmMasterDetailsSales.ShowDialog();
-        }
-
-        private void buscarVendasProdutosToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MasterDetails_SaleProducts masterDetails_SaleProducts = new MasterDetails_SaleProducts();
-            masterDetails_SaleProducts.ShowDialog();
         }
 
         private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
-            user.id = 2;
-            user.name = "teste";
-            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases(user);
+            Users_Controller userController = new Users_Controller();
+            user = userController.FindItemId(3);
+            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases();
+            frmCreatePurchases.SetUser(user);
             frmCreatePurchases.ShowDialog();
         }
 
-        private void mestreDetalhesCompraProdutoToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MasterDetails_PurchasesProducts frmPurchasesProducts = new MasterDetails_PurchasesProducts(_user);
-            frmPurchasesProducts.ShowDialog();
-        }
-
-        private void mDComprasContasToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            MasterDetails_PurchasesBillsToPay frmPurchaseBillsToPay = new MasterDetails_PurchasesBillsToPay(_user);
-            frmPurchaseBillsToPay.ShowDialog();
-        }
 
         private void buscarVendasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
-            user.id = 2;
-            user.name = "teste";
+            user.id = 3;
+            user.userLogin = "teste";
             Frm_Find_Sales frmFindSales = new Frm_Find_Sales();
             frmFindSales.SetUser(user);
             frmFindSales.ShowDialog();
@@ -207,8 +185,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         private void buscarComprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
-            user.id = 2;
-            user.name = "teste";
+            Users_Controller userController = new Users_Controller();
+            user = userController.FindItemId(3);
             Frm_Find_Purchases frmFindPurchases = new Frm_Find_Purchases();
             frmFindPurchases.SetUser(user);
             frmFindPurchases.ShowDialog();
@@ -217,24 +195,23 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         private void novaCompraToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
-            user.id = 2;
-            user.name = "teste";
-            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases(user);
+            Users_Controller userController = new Users_Controller();
+            user = userController.FindItemId(3);
+            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases();
+            frmCreatePurchases.SetUser(user);
             frmCreatePurchases.ShowDialog();
+
         }
 
         private void addNewBillToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            MasterDetails_PurchasesBillsToPay frmPurchaseBillsToPay = new MasterDetails_PurchasesBillsToPay(_user);
-            frmPurchaseBillsToPay.ShowDialog();
         }
 
         private void billsToReceiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
-            user.id = 2;
-            user.AccessLevel = 3;
-            user.name = "teste";
+            Users_Controller userController = new Users_Controller();
+            user = userController.FindItemId(3);
             Frm_Find_BillsToReceive frmFindBillsToReceive = new Frm_Find_BillsToReceive(user);
             frmFindBillsToReceive.ShowDialog();
         }
@@ -242,9 +219,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         private void billsToPayToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Users user = new Users();
-            user.id = 2;
-            user.AccessLevel = 3;
-            user.name = "teste";
+            Users_Controller userController = new Users_Controller();
+            user = userController.FindItemId(3);
             Frm_Find_BillsToPay frmFindBillsToPay = new Frm_Find_BillsToPay(user);
             frmFindBillsToPay.ShowDialog();
         }

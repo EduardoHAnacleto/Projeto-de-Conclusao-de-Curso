@@ -23,6 +23,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             PopulateBrandsComboBox();
             edt_stock.Controls[0].Visible = false;
             edt_productCost.Controls[0].Visible = false;
+            edt_ProfitPerc.Controls[0].Visible = false;
         }
 
         private Products_Controller controller = new Products_Controller();
@@ -142,7 +143,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             cbox_ProductGroup.SelectedItem = product.productGroup.productGroup;
             edt_barCode.Text = product.BarCode.ToString();
             edt_und.Text = product.UND;
-            if (product.productCost != 0)
+            if (product.productCost != 0 && product.salePrice != 0)
             {
                 edt_ProfitPerc.Value = ((product.salePrice / product.productCost) - 1) *100;
             }
@@ -165,7 +166,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             product.id = Convert.ToInt32(edt_id.Value);
             product.productName = edt_productName.Text;
             product.productCost = edt_productCost.Value;
-
+            product.stock = Convert.ToInt32(edt_stock.Value);
             
             product.salePrice = Convert.ToDecimal(edt_productSalePrice.Text);
 

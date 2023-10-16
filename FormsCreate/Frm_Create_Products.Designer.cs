@@ -176,8 +176,8 @@
             this.edt_stock.Location = new System.Drawing.Point(408, 67);
             this.edt_stock.Margin = new System.Windows.Forms.Padding(2);
             this.edt_stock.Maximum = new decimal(new int[] {
-            9999,
-            0,
+            1410065407,
+            2,
             0,
             0});
             this.edt_stock.Name = "edt_stock";
@@ -209,7 +209,7 @@
             this.edt_ProfitPerc.DecimalPlaces = 2;
             this.edt_ProfitPerc.Location = new System.Drawing.Point(469, 67);
             this.edt_ProfitPerc.Maximum = new decimal(new int[] {
-            1000,
+            10000,
             0,
             0,
             0});

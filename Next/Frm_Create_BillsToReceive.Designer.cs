@@ -172,6 +172,11 @@
             // 
             this.edt_finalValue.DecimalPlaces = 2;
             this.edt_finalValue.Location = new System.Drawing.Point(139, 90);
+            this.edt_finalValue.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
             this.edt_finalValue.Name = "edt_finalValue";
             this.edt_finalValue.Size = new System.Drawing.Size(75, 20);
             this.edt_finalValue.TabIndex = 40;
@@ -189,6 +194,11 @@
             // edt_instValue
             // 
             this.edt_instValue.Location = new System.Drawing.Point(63, 35);
+            this.edt_instValue.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
             this.edt_instValue.Name = "edt_instValue";
             this.edt_instValue.Size = new System.Drawing.Size(60, 20);
             this.edt_instValue.TabIndex = 38;
@@ -226,6 +236,11 @@
             this.edt_instDisc.DecimalPlaces = 2;
             this.edt_instDisc.Enabled = false;
             this.edt_instDisc.Location = new System.Drawing.Point(264, 35);
+            this.edt_instDisc.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
             this.edt_instDisc.Name = "edt_instDisc";
             this.edt_instDisc.Size = new System.Drawing.Size(61, 20);
             this.edt_instDisc.TabIndex = 34;
@@ -237,8 +252,8 @@
             this.edt_instFine.Enabled = false;
             this.edt_instFine.Location = new System.Drawing.Point(197, 35);
             this.edt_instFine.Maximum = new decimal(new int[] {
-            1000,
-            0,
+            -727379969,
+            232,
             0,
             0});
             this.edt_instFine.Name = "edt_instFine";
@@ -250,6 +265,11 @@
             // 
             this.edt_instFee.Enabled = false;
             this.edt_instFee.Location = new System.Drawing.Point(133, 35);
+            this.edt_instFee.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
             this.edt_instFee.Name = "edt_instFee";
             this.edt_instFee.Size = new System.Drawing.Size(58, 20);
             this.edt_instFee.TabIndex = 32;
@@ -259,6 +279,11 @@
             // 
             this.edt_instalmentId.Enabled = false;
             this.edt_instalmentId.Location = new System.Drawing.Point(6, 35);
+            this.edt_instalmentId.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
             this.edt_instalmentId.Name = "edt_instalmentId";
             this.edt_instalmentId.Size = new System.Drawing.Size(39, 20);
             this.edt_instalmentId.TabIndex = 26;
@@ -302,8 +327,8 @@
             this.edt_instalmentValue.DecimalPlaces = 2;
             this.edt_instalmentValue.Location = new System.Drawing.Point(6, 33);
             this.edt_instalmentValue.Maximum = new decimal(new int[] {
-            999999999,
-            0,
+            -727379969,
+            232,
             0,
             0});
             this.edt_instalmentValue.Name = "edt_instalmentValue";
@@ -357,6 +382,7 @@
             // 
             // edt_clientName
             // 
+            this.edt_clientName.Enabled = false;
             this.edt_clientName.Location = new System.Drawing.Point(53, 32);
             this.edt_clientName.MaxLength = 30;
             this.edt_clientName.Name = "edt_clientName";
@@ -655,8 +681,8 @@
             this.edt_payConditionQnt.Enabled = false;
             this.edt_payConditionQnt.Location = new System.Drawing.Point(175, 82);
             this.edt_payConditionQnt.Maximum = new decimal(new int[] {
-            300,
-            0,
+            -727379969,
+            232,
             0,
             0});
             this.edt_payConditionQnt.Name = "edt_payConditionQnt";
@@ -669,6 +695,11 @@
             this.edt_payConditionDiscount.DecimalPlaces = 2;
             this.edt_payConditionDiscount.Enabled = false;
             this.edt_payConditionDiscount.Location = new System.Drawing.Point(114, 82);
+            this.edt_payConditionDiscount.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
             this.edt_payConditionDiscount.Name = "edt_payConditionDiscount";
             this.edt_payConditionDiscount.Size = new System.Drawing.Size(44, 20);
             this.edt_payConditionDiscount.TabIndex = 6;
@@ -680,8 +711,8 @@
             this.edt_payConditionFine.Enabled = false;
             this.edt_payConditionFine.Location = new System.Drawing.Point(63, 82);
             this.edt_payConditionFine.Maximum = new decimal(new int[] {
-            1000,
-            0,
+            -727379969,
+            232,
             0,
             0});
             this.edt_payConditionFine.Name = "edt_payConditionFine";
@@ -693,6 +724,11 @@
             // 
             this.edt_payConditionFees.Enabled = false;
             this.edt_payConditionFees.Location = new System.Drawing.Point(14, 82);
+            this.edt_payConditionFees.Maximum = new decimal(new int[] {
+            -727379969,
+            232,
+            0,
+            0});
             this.edt_payConditionFees.Name = "edt_payConditionFees";
             this.edt_payConditionFees.Size = new System.Drawing.Size(43, 20);
             this.edt_payConditionFees.TabIndex = 4;
@@ -722,8 +758,8 @@
             this.edt_payConditionId.Enabled = false;
             this.edt_payConditionId.Location = new System.Drawing.Point(13, 35);
             this.edt_payConditionId.Maximum = new decimal(new int[] {
-            99999,
-            0,
+            -727379969,
+            232,
             0,
             0});
             this.edt_payConditionId.Name = "edt_payConditionId";

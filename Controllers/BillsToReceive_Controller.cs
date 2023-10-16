@@ -37,7 +37,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         {
             return _billToReceivesDAO.SelectFromDb(saleId, instalmentNum);
         }
-        public BillsToReceive FindItemId(int billId)
+        public List<BillsToReceive> FindItemId(int billId)
         {
             return _billToReceivesDAO.SelectFromDb(billId);
         }
@@ -83,6 +83,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         internal bool CancelBill(BillsToReceive billsToReceive)
         {
             return _billToReceivesDAO.CancelBill(billsToReceive);
+        }
+
+        public int GetNewId()
+        {
+            return _billToReceivesDAO.GetNewId();
         }
     }
 }

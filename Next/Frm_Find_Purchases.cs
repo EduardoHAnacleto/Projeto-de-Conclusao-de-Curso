@@ -24,7 +24,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             DGV_Purchases.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_Purchases.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_Purchases.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            DGV_Purchases.Columns[7].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             PopulateDGVPurchases();
             edt_id.Visible = false;
             lbl_id.Visible = false;
@@ -61,13 +60,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     var billSer = Convert.ToInt32(dr["billSeries"]);
                     var supplierName = supController.FindItemId(Convert.ToInt32(dr["supplier_id"])).name;
 
-                    var idUser = Convert.ToInt32(dr["user_id"]);
+                    //var idUser = Convert.ToInt32(dr["user_id"]);
                     var totalValue = Convert.ToDecimal(dr["purchase_TotalCost"]);
                     var emissionDate = Convert.ToDateTime(dr["emissionDate"]);
                     string cancelDate = null;
                     if (dr["cancelledDate"] != DBNull.Value)
                     {
-                        cancelDate = Convert.ToDateTime(dr["cancelledDate"]).Date.ToShortDateString();
+                        cancelDate = Convert.ToDateTime(dr["cancelledDate"]).ToShortDateString();
                     }
 
                     DGV_Purchases.Rows.Add(
@@ -127,10 +126,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void NewPopulatedForm(Purchases obj)
         {
-            Frm_Create_Purchases frmPurchases = new Frm_Create_Purchases(obj.User);
+            Frm_Create_Purchases frmPurchases = new Frm_Create_Purchases();
+            frmPurchases.SetUser(obj.User);
             frmPurchases.PopulateCamps(obj);
             frmPurchases.Populated(true);
             frmPurchases.ShowDialog();
+            SetDataSourceToDGV();
         }
 
         private Purchases GetObject()
@@ -151,8 +152,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public override void NewObject()
         {
-            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases(_user);
-            frmCreatePurchases.Populated(false);
+            Users user = new Users();
+            Users_Controller userController = new Users_Controller();
+            user = userController.FindItemId(3);
+            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases();
+            //frmCreatePurchases.Populated(false);
+            frmCreatePurchases.SetUser(user);
             frmCreatePurchases.ShowDialog();
             this.SetDataSourceToDGV();
         }

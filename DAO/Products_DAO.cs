@@ -539,7 +539,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
         {
             bool status = false;
 
-            string sql = "UPDATE PRODUCTS SET product_cost = @product_cost " +
+            string sql = "UPDATE PRODUCTS SET product_cost = @PRODCOST " +
                 "WHERE ID_PRODUCT = @ID ; ";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
@@ -547,7 +547,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                 {
                     SqlCommand command = new SqlCommand(sql, connection);
                     command.Parameters.AddWithValue("@ID", prodId);
-                    command.Parameters.AddWithValue("@product_cost", prePurchCost);
+                    command.Parameters.AddWithValue("@PRODCOST", prePurchCost);
 
                     connection.Open();
                     int i = command.ExecuteNonQuery();

@@ -16,6 +16,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             PaymentMethods PaymentMethod = new PaymentMethods();
             Sales Sale = new Sales();
             PaymentConditions PaymentCondition = new PaymentConditions();
+            Users User = new Users();
     }
 
         public bool IsPaid { get; set; }
@@ -56,6 +57,38 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
                 bill.EmissionDate = emDate;
                 bill.DueDate = emDate.AddDays(instalments.TotalDays);
                 bill.InstalmentValue = ((instalments.ValuePercentage/100) * sale.TotalValue) + (cond.paymentFees / cond.BillsInstalments.Count);
+                bill.PaymentMethod = instalments.PaymentMethod;
+                bill.InstalmentsQtd = instalmentQtd;
+                bill.CancelledDate = null;
+
+                list.Add(bill);
+            }
+            return list;
+        }
+
+        public static List<BillsToReceive> MakeBills(BillsToReceive obj, PaymentConditions cond)
+        {
+            PaymentConditions_Controller condController = new PaymentConditions_Controller();
+            DateTime emDate = DateTime.Now;
+            List<BillsToReceive> list = new List<BillsToReceive>();
+            int instalmentQtd = cond.BillsInstalments.Count;
+
+            foreach (BillsInstalments instalments in cond.BillsInstalments)
+            {
+                BillsToReceive bill = new BillsToReceive();
+                bill.Client = obj.Client;
+                bill.User = obj.User;
+                bill.InstalmentNumber = instalments.InstalmentNumber;
+                bill.InstalmentsQtd = instalmentQtd;
+                bill.PaidDate = null;
+                bill.IsPaid = false;
+                bill.Sale = new Sales();
+                bill.Sale.id = 0;
+
+                bill.PaymentCondition = cond;
+                bill.EmissionDate = obj.EmissionDate;
+                bill.DueDate = obj.EmissionDate.AddDays(instalments.TotalDays);
+                bill.InstalmentValue = ((instalments.ValuePercentage / 100) * obj.InstalmentValue) + (cond.paymentFees / cond.BillsInstalments.Count);
                 bill.PaymentMethod = instalments.PaymentMethod;
                 bill.InstalmentsQtd = instalmentQtd;
                 bill.CancelledDate = null;

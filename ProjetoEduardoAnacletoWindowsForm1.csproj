@@ -157,12 +157,6 @@
     <Compile Include="Next\Frm_Find_Sales.Designer.cs">
       <DependentUpon>Frm_Find_Sales.cs</DependentUpon>
     </Compile>
-    <Compile Include="Next\NaoUtilizado\MasterDetails_BillsToReceive.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Next\NaoUtilizado\MasterDetails_BillsToReceive.Designer.cs">
-      <DependentUpon>MasterDetails_BillsToReceive.cs</DependentUpon>
-    </Compile>
     <Compile Include="Controllers\Clients_Controller.cs" />
     <Compile Include="Controllers\Countries_Controller.cs" />
     <Compile Include="Controllers\Products_Controller.cs" />
@@ -385,30 +379,6 @@
     <Compile Include="Authorization\Frm_UserControl_Login.Designer.cs">
       <DependentUpon>Frm_UserControl_Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Next\NaoUtilizado\MasterDetails_PurchasesBillsToPay.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Next\NaoUtilizado\MasterDetails_PurchasesBillsToPay.Designer.cs">
-      <DependentUpon>MasterDetails_PurchasesBillsToPay.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Next\NaoUtilizado\MasterDetails_PurchasesProducts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Next\NaoUtilizado\MasterDetails_PurchasesProducts.Designer.cs">
-      <DependentUpon>MasterDetails_PurchasesProducts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Next\NaoUtilizado\MasterDetails_SaleProducts.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Next\NaoUtilizado\MasterDetails_SaleProducts.Designer.cs">
-      <DependentUpon>MasterDetails_SaleProducts.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Next\NaoUtilizado\MasterDetails_Sales.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Next\NaoUtilizado\MasterDetails_Sales.Designer.cs">
-      <DependentUpon>MasterDetails_Sales.cs</DependentUpon>
-    </Compile>
     <Compile Include="Models\BillsInstalments.cs" />
     <Compile Include="Models\BillsToPay.cs" />
     <Compile Include="Models\BillsToReceive.cs" />
@@ -471,9 +441,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Next\Frm_Find_Sales.resx">
       <DependentUpon>Frm_Find_Sales.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Next\NaoUtilizado\MasterDetails_BillsToReceive.resx">
-      <DependentUpon>MasterDetails_BillsToReceive.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsCreate\Frm_Create_Brands.resx">
       <DependentUpon>Frm_Create_Brands.cs</DependentUpon>
@@ -564,18 +531,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Authorization\Frm_UserControl_Login.resx">
       <DependentUpon>Frm_UserControl_Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Next\NaoUtilizado\MasterDetails_PurchasesBillsToPay.resx">
-      <DependentUpon>MasterDetails_PurchasesBillsToPay.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Next\NaoUtilizado\MasterDetails_PurchasesProducts.resx">
-      <DependentUpon>MasterDetails_PurchasesProducts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Next\NaoUtilizado\MasterDetails_SaleProducts.resx">
-      <DependentUpon>MasterDetails_SaleProducts.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Next\NaoUtilizado\MasterDetails_Sales.resx">
-      <DependentUpon>MasterDetails_Sales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

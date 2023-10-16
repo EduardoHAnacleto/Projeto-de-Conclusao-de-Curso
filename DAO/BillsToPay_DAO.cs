@@ -29,9 +29,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             bool status = false;
 
             string sql = "INSERT INTO BILLSTOPAY ( BILLNUMBER, BILLSERIES, BILLMODEL, INSTALMENTNUMBER, DUEDATE, billStatus, PAIDDATE," +
-                "BILLVALUE, PAYMETHOD_ID, SUPPLIER_ID, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE, PAYCOND_ID ) "
+                "BILLVALUE, PAYMETHOD_ID, SUPPLIER_ID, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE, PAYCOND_ID, USER_ID ) "
                          + " VALUES (@BNUMBER, @BSERIES, @BMODEL, @INUMBER, @DUEDATE, @billStatus, @PDATE, @BVALUE, @METHODID, " +
-                         " @SUPPLIERID, @EMISSIONDATE, @DC, @DU, @PAYCONDID);";
+                         " @SUPPLIERID, @EMISSIONDATE, @DC, @DU, @PAYCONDID, @USERID);";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
@@ -45,6 +45,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@EMISSIONDATE", obj.EmissionDate);
                     command.Parameters.AddWithValue("@PAYCONDID", obj.PaymentCondition.id);
                     command.Parameters.AddWithValue("@billStatus", obj.Status);
+                    command.Parameters.AddWithValue("@USERID", obj.User.id);
                     if (obj.PaidDate.HasValue)
                     {
                         command.Parameters.AddWithValue("@PDATE", obj.PaidDate);
@@ -281,16 +282,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                 }
                                 else
                                 {
+                                    obj.PaidDate = null;
                                     Purchases_Controller purchController = new Purchases_Controller();
                                     var purch = purchController.FindItemId(obj.BillModel, obj.BillNumber, obj.BillSeries, obj.Supplier.id);
-                                    if (purch.CancelledDate == null)
+                                    if (purch != null)
                                     {
-                                        obj.PaidDate = null;
-                                        obj.Status = 0;
-                                    }
-                                    else
-                                    {
-                                        obj.Status = 2;
+                                        if (purch.CancelledDate == null)
+                                        {
+                                            obj.PaidDate = null;
+                                            obj.Status = 0;
+                                        }
+                                        else
+                                        {
+                                            obj.Status = 2;
+                                        }
                                     }
                                 }
                                 return obj;
@@ -485,11 +490,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             return dt;
         }
 
-        public bool CancelPurchaseBills(int billNum, int billModel, int billSeries, int supplierId, DateTime cancelDate, string cancelMotive)
+        public bool CancelPurchaseBills(int billNum, int billModel, int billSeries, int supplierId, DateTime cancelDate, string cancelMotive, Users user)
         {
             bool status = false;
 
-            string sql = "UPDATE BILLSTOPAY SET billStatus = @STATUS, DATE_CANCELLED = @DATECANCEL, MOTIVE_CANCELLED = @MOTCANCEL, DATE_LAST_UPDATE = @DU " +
+            string sql = "UPDATE BILLSTOPAY SET billStatus = @STATUS, DATE_CANCELLED = @DATECANCEL, USER_ID = @USERID , MOTIVE_CANCELLED = @MOTCANCEL, DATE_LAST_UPDATE = @DU " +
                 "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND SUPPLIER_ID = @SUPPLIERID; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -501,6 +506,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
                     command.Parameters.AddWithValue("@DATECANCEL", cancelDate);
                     command.Parameters.AddWithValue("@BNUMBER", billNum);
+                    command.Parameters.AddWithValue("@USERID", user.id);
                     command.Parameters.AddWithValue("@BSERIES", billSeries);
                     command.Parameters.AddWithValue("@BMODEL", billSeries);
                     command.Parameters.AddWithValue("@MOTCANCEL", cancelMotive);
@@ -526,11 +532,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             }
         }
 
-        public bool SetPaidBillsFromDb(int billNum, int billModel, int billSeries, int supplierId, int instalmentNumber)
+        public bool SetPaidBillsFromDb(int billNum, int billModel, int billSeries, int supplierId, int instalmentNumber, Users user)
         {
             bool status = false;
 
-            string sql = "UPDATE BILLSTOPAY SET PAIDDATE = @PAIDDATE, DATE_LAST_UPDATE = @DU " +
+            string sql = "UPDATE BILLSTOPAY SET PAIDDATE = @PAIDDATE, DATE_LAST_UPDATE = @DU, USER_ID = @USERID " +
                 "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND SUPPLIER_ID = @SUPPLIERID AND INSTALMENTNUMBER = @INUM; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -541,6 +547,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     command.Parameters.AddWithValue("@PAIDDATE", DateTime.Now);
                     command.Parameters.AddWithValue("@INUM", instalmentNumber);
                     command.Parameters.AddWithValue("@SUPPLIERID", supplierId);
+                    command.Parameters.AddWithValue("@USERID", user.id);
                     command.Parameters.AddWithValue("@BNUMBER", billNum);
                     command.Parameters.AddWithValue("@BSERIES", billSeries);
                     command.Parameters.AddWithValue("@BMODEL", billSeries);
@@ -571,7 +578,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             {
                 bool status = false;
 
-                string sql = "UPDATE BILLSTOPAY SET PAIDDATE = @PAIDDATE, DATE_LAST_UPDATE = @UPDATE " +
+                string sql = "UPDATE BILLSTOPAY SET PAIDDATE = @PAIDDATE, DATE_LAST_UPDATE = @UPDATE , USER_ID = @USERID " +
                     "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND SUPPLIER_ID = @SUPPLIERID AND INSTALMENTNUMBER = @INUM; ";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -583,6 +590,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         command.Parameters.AddWithValue("@ID", obj.id);
                         command.Parameters.AddWithValue("@UPDATE", DateTime.Today.Date);
                         command.Parameters.AddWithValue("@INUM", obj.InstalmentNumber);
+                        command.Parameters.AddWithValue("@USERID", obj.User.id);
                         command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
                         command.Parameters.AddWithValue("@BNUMBER", obj.BillNumber);
                         command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
@@ -593,6 +601,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                         if (i > 0)
                         {
                             status = true;
+                            MessageBox.Show("Conta paga com sucesso.");
                         }
 
                     }
@@ -615,7 +624,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
             {
                 bool status = false;
 
-                string sql = "UPDATE BILLSTOPAY SET DATE_CANCELLED = @CANCEL, MOTIVE_CANCELLED = @MOTCANCEL, DATE_LAST_UPDATE = @UPDATE " +
+                string sql = "UPDATE BILLSTOPAY SET DATE_CANCELLED = @DATECANCEL, USER_ID = @USERID, MOTIVE_CANCELLED = @MOTCANCEL, DATE_LAST_UPDATE = @UPDATE " +
                     "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND SUPPLIER_ID = @SUPPLIERID; ";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -623,13 +632,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     try
                     {
                         SqlCommand command = new SqlCommand(sql, connection);
-                        command.Parameters.AddWithValue("@PAIDDATE", DateTime.Today.Date);
                         command.Parameters.AddWithValue("@UPDATE", DateTime.Today.Date);
                         command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                        command.Parameters.AddWithValue("@USERID", obj.User.id);
                         command.Parameters.AddWithValue("@BNUMBER", obj.BillNumber);
                         command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
                         command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
-                        command.Parameters.AddWithValue("@DATECANCEL", obj.CancelledDate);
+                        command.Parameters.AddWithValue("@DATECANCEL", (DateTime)obj.CancelledDate);
                         command.Parameters.AddWithValue("@MOTCANCEL", obj.CancelMotive);
                         connection.Open();
                         int i = command.ExecuteNonQuery();

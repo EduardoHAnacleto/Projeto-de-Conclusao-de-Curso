@@ -22,10 +22,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             InitializeComponent();
             DGV_BillsToReceive.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-            DGV_BillsToReceive.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToReceive.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_BillsToReceive.Columns[3].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_BillsToReceive.Columns[4].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_BillsToReceive.Columns[5].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            DGV_BillsToReceive.Columns[6].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             SetBillsToReceiveDataSourceToDGV();
             lbl_id.Visible = false;
             edt_id.Visible = false;
@@ -55,7 +56,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 {
                     if (dr[0] != null)
                     {
-                        DGV_BillsToReceive.Rows.Add();
+                        DGV_BillsToReceive.Rows.Add(BillId);
+                        DGV_BillsToReceive.Rows[i].Cells["BillId"].Value = dr["id_bill"].ToString();
                         DGV_BillsToReceive.Rows[i].Cells["ClientName"].Value = _clientsController.FindItemId(Convert.ToInt32(dr["client_id"])).name;
                         DGV_BillsToReceive.Rows[i].Cells["SaleNumberBillsReceive"].Value = dr["sale_id"].ToString();
                         //DGV_BillsToReceive.Rows[i].Cells["PaymentMethodBillsToReceive"].Value = _payMethodsController.FindItemId(Convert.ToInt32(dr["paymethod_id"])).paymentMethod;
@@ -197,24 +199,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 var billId = Convert.ToInt32(DGV_BillsToReceive.SelectedRows[0].Cells["BillId"].Value);
                 var obj = _controller.FindItemId(billId);
-                return obj;
+                return obj[0];
             }
             return null;
         }
 
         public void NewPopulatedForm(BillsToReceive obj, string formFunc)
         {
-            Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, obj);
+            Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, obj, _User);
             frmBillsToReceive.ShowDialog();
-            this.SetDataSourceToDGV();
+            this.SetBillsToReceiveDataSourceToDGV();
         }
 
         public override void NewObject()
         {
             string formFunc = "New";
-            Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, null);
+            Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, null, _User);
             frmBillsToReceive.ShowDialog();
-            this.SetDataSourceToDGV();
+            this.SetBillsToReceiveDataSourceToDGV();
         }
 
         private void btn_SetPaidBill_Click(object sender, EventArgs e)
@@ -226,7 +228,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     NewPopulatedToPayForm();
                 }
             }
-
         }
 
         private bool RightInstalment()
@@ -236,7 +237,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             var obj = _controller.FindItemId(billId);
             if (instalmentNum > 1)
             {
-                for (int i = 0; i < instalmentNum; i++)
+                for (int i = 0; i < instalmentNum-1; i++)
                 {
                     if (obj[i].CancelledDate.HasValue) //Confirmar
                     {
@@ -247,7 +248,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         MessageBox.Show(message, caption, buttons, icon);
                         return false;
                     }
-                    else if (obj[i].PaidDate.HasValue)
+                    else if (!obj[i].PaidDate.HasValue)
                     {
                         string message = "Existem parcelas anteriores referente a essa conta em aberto.";
                         string caption = "Não é possível alterar essa parcela.";
@@ -267,9 +268,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (obj != null)
             {
                 string formFunc = "Pay";
-                Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, obj);
+                Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, obj, _User);
                 frmBillsToReceive.ShowDialog();
-                SetDataSourceToDGV();              
+                SetBillsToReceiveDataSourceToDGV();              
             }
             else
             {
@@ -283,9 +284,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (obj != null)
             {
                 string formFunc = "Cancel";
-                Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, obj);
+                Frm_Create_BillsToReceive frmBillsToReceive = new Frm_Create_BillsToReceive(formFunc, obj, _User);
                 frmBillsToReceive.ShowDialog();
-                SetDataSourceToDGV();
+                SetBillsToReceiveDataSourceToDGV();
             }
             else
             {
