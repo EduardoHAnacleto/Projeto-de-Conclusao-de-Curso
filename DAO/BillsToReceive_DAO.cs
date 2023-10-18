@@ -21,10 +21,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private readonly Clients_Controller _clientsController = new Clients_Controller();
         private readonly Sales_Controller _salesController = new Sales_Controller();
         private readonly PaymentConditions_Controller _pcController = new PaymentConditions_Controller();
+        private readonly Users_Controller _userController = new Users_Controller();
 
         public int GetNewId()
         {
-            string sql = "SELECT IDENT_CURRENT ('BILLSTORECEIVE');";
+            string sql = "SELECT MAX(ID_BILL) FROM BILLSTORECEIVE;";
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand command = new SqlCommand(sql, connection);
@@ -102,17 +103,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
         }
 
-        public BillsToReceive SelectFromDb(int saleId, int instalmentNum)
+        public BillsToReceive SelectFromDb(int billId, int instalmentNum)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 try
                 {
                     connection.Open();
-                    string sql = "SELECT * FROM BILLSTORECEIVE WHERE SALE_ID = @SALEID AND INSTALMENTNUMBER = @INSTALMENT ; ";
+                    string sql = "SELECT * FROM BILLSTORECEIVE WHERE ID_BILL = @BILLID AND INSTALMENTNUMBER = @INSTALMENT ; ";
                     using (SqlCommand command = new SqlCommand(sql, connection))
                     {
-                        command.Parameters.AddWithValue("@SALEID", saleId);
+                        command.Parameters.AddWithValue("@BILLID", billId);
                         command.Parameters.AddWithValue("@INSTALMENT", instalmentNum);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
@@ -141,7 +142,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 {
                                     id = Convert.ToInt32(reader["id_bill"]),
                                     Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
-                                    Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
+                                    Sale = null,
                                     IsPaid = Convert.ToBoolean(reader["isPaid"]),
                                     PaidDate = paidDate,
                                     CancelledDate = cancelDate,
@@ -154,7 +155,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                     dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                     dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                    User = _userController.FindItemId(Convert.ToInt32(reader["user_id"])),
+                                    CancelMotive = reader["motive_cancelled"].ToString()
                                 };
+                                if (Convert.ToInt32(reader["sale_id"]) != 0)
+                                {
+                                    obj.Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"]));
+                                }
+                                else
+                                {
+                                    obj.Sale = new Sales();
+                                    obj.Sale.id = 0;
+                                }
                                 return obj;
                             }
                         }
@@ -185,7 +197,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         command.Parameters.AddWithValue("@ID", billId);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.Read())
+                            if (reader.HasRows)
                             {
                                 List<BillsToReceive> list = new List<BillsToReceive>();
                                 foreach (var row in reader)
@@ -193,21 +205,31 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     BillsToReceive obj = new BillsToReceive()
                                     {
                                         id = Convert.ToInt32(reader["id_bill"]),
-                                        Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
-                                        Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
-                                        //IsPaid = Convert.ToBoolean(reader["isPaid"]),
-                                        PaidDate = null,
-                                        DueDate = Convert.ToDateTime(reader["dueDate"]),
-                                        EmissionDate = Convert.ToDateTime(reader["emissionDate"]),
+                                        Sale = null,
                                         InstalmentNumber = Convert.ToInt32(reader["instalmentNumber"]),
                                         InstalmentValue = Convert.ToDecimal(reader["instalmentValue"]),
+                                        PaidDate = null,
+                                        Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
-                                        InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
                                         PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
+                                        InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
+                                        DueDate = Convert.ToDateTime(reader["dueDate"]),
+                                        EmissionDate = Convert.ToDateTime(reader["emissionDate"]),                                                                                                                                                                                                      
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
-                                        dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
-                                        CancelledDate = null
+                                        CancelledDate = null,
+                                        CancelMotive = reader["motive_cancelled"].ToString(),
+                                        dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),                                        
+                                        User = _userController.FindItemId(Convert.ToInt32(reader["user_id"])),                                       
                                     };
+                                    if (Convert.ToInt32(reader["sale_id"]) > 0)
+                                    {
+                                        obj.Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"]));
+                                    }
+                                    else
+                                    {
+                                        obj.Sale = new Sales();
+                                        obj.Sale.id = 0;
+                                    }
                                     if (reader["paidDate"] != DBNull.Value)
                                     {
                                         obj.PaidDate = Convert.ToDateTime(reader["paidDate"]);
@@ -217,8 +239,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         obj.CancelledDate = Convert.ToDateTime(reader["date_cancelled"]);
                                     }
                                     list.Add(obj);
-                                }
-                                
+                                }                              
                                 return list;
                             }
                         }
@@ -270,7 +291,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
-                                        CancelledDate = null
+                                        CancelledDate = null,
+                                        CancelMotive = reader["motive_cancelled"].ToString(),
+                                        User = _userController.FindItemId(Convert.ToInt32(reader["user_id"]))
                                     };
                                     if (reader["paidDate"] != DBNull.Value)
                                     {
@@ -321,7 +344,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                     {
                                         id = Convert.ToInt32(reader["id_bill"]),
                                         Client = _clientsController.FindItemId(Convert.ToInt32(reader["client_id"])),
-                                        Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"])),
+                                        Sale = null,
                                         IsPaid = Convert.ToBoolean(reader["isPaid"]),
                                         PaidDate = Convert.ToDateTime(reader["paidDate"]),
                                         DueDate = Convert.ToDateTime(reader["dueDate"]),
@@ -330,9 +353,30 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                         InstalmentValue = Convert.ToDecimal(reader["instalmentValue"]),
                                         PaymentMethod = _paymentMethodsController.FindItemId(Convert.ToInt32(reader["payMethod_id"])),
                                         InstalmentsQtd = Convert.ToInt32(reader["instalmentsQtd"]),
+                                        PaymentCondition = _pcController.FindItemId(Convert.ToInt32(reader["payCond_id"])),
                                         dateOfCreation = Convert.ToDateTime(reader["date_creation"]),
                                         dateOfLastUpdate = Convert.ToDateTime(reader["date_last_update"]),
+                                        CancelMotive = reader["motive_cancelled"].ToString(),
+                                        User = _userController.FindItemId(Convert.ToInt32(reader["user_id"]))
                                     };
+                                    if (Convert.ToInt32(reader["sale_id"]) > 0)
+                                    {
+                                        obj.Sale = _salesController.FindItemId(Convert.ToInt32(reader["sale_id"]));
+                                    }
+                                    else
+                                    {
+                                        obj.Sale = new Sales();
+                                        obj.Sale.id = 0;
+                                    }
+                                    if (reader["date_cancelled"] != DBNull.Value)
+                                    {
+                                        obj.CancelledDate = (DateTime)reader["date_cancelled"];
+                                    }
+                                    if (reader["paidDate"] != DBNull.Value)
+                                    {
+                                        obj.PaidDate = (DateTime)reader["paidDate"];
+                                    }
+
                                     list.Add(obj);
                                 }
                                 return list;
@@ -604,7 +648,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 bool status = false;
 
-                string sql = "UPDATE BILLSTORECEIVE SET PAIDDATE = @PAIDDATE, ISPAID = 1, DATE_LAST_UPDATE = @UPDATE " +
+                string sql = "UPDATE BILLSTORECEIVE SET PAIDDATE = @PAIDDATE, ISPAID = 1, USER_ID = @USERID, DATE_LAST_UPDATE = @UPDATE " +
                     "WHERE ID_BILL = @ID AND INSTALMENTNUMBER = @INUM; ";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -622,6 +666,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         if (i > 0)
                         {
                             status = true;
+                            MessageBox.Show("Conta paga com sucesso.");
                         }
 
                     }
@@ -644,7 +689,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 bool status = false;
 
-                string sql = "UPDATE BILLSTORECEIVE SET DATE_CANCELLED = @CANCEL, ISPAID = 2, DATE_LAST_UPDATE = @UPDATE, USER_ID = @USERID " +
+                string sql = "UPDATE BILLSTORECEIVE SET DATE_CANCELLED = @CANCEL, ISPAID = 2, MOTIVE_CANCELLED = @MOTIVE, DATE_LAST_UPDATE = @UPDATE, USER_ID = @USERID " +
                     "WHERE ID_BILL = @ID; ";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
@@ -652,8 +697,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     try
                     {
                         SqlCommand command = new SqlCommand(sql, connection);
-                        command.Parameters.AddWithValue("@PAIDDATE", (DateTime)obj.PaidDate);
+                        command.Parameters.AddWithValue("@MOTIVE", obj.CancelMotive);
                         command.Parameters.AddWithValue("@UPDATE", DateTime.Today.Date);
+                        command.Parameters.AddWithValue("@CANCEL", DateTime.Today.Date);
                         command.Parameters.AddWithValue("@ID", obj.id);
                         command.Parameters.AddWithValue("@USERID", obj.User.id);
                         connection.Open();

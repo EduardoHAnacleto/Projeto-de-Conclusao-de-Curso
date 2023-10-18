@@ -301,36 +301,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         var billsToPay = BillsToPay.MakeBills(purchase, purchase.PaymentCondition);
                         if (billsToPay != null)
                         {
-                            
-                            status = _controller.SaveItem(purchase);
+                            status = _controller.SaveItem(purchase, billsToPay);
                             if (status)
                             {
-                                foreach (PurchaseItems item in purchase.PurchasedItems)
-                                {
-                                    item.BillNumberId = purchase.BillNumber;
-                                    item.BillModelId = purchase.BillModel;
-                                    item.BillSeriesId = purchase.BillSeries;
-                                    item.SupplierId = purchase.Supplier.id;
-                                    status = _pIController.SaveItem(item);
-                                    status = _pController.UpdatePriceNStock(item.Product.id, item.Quantity, item.WeightedCostAverage);
-                                    if (!status)
-                                    {
-                                        break;
-                                    }
-                                }
-                                if (status)
-                                {
-                                    var _billsToPayController = new BillsToPay_Controller();
-                                    foreach (BillsToPay bill in billsToPay) 
-                                    {
-                                        status = _billsToPayController.SaveItem(bill);
-                                        if (!status) { break; }
-                                    }
-                                }
-                                if (status)
-                                {
-                                    Populated(false);
-                                }
+                                string caption = "Registro criado.";
+                                string message = "Compra criada com sucesso";
+
+                                MessageBoxIcon icon = MessageBoxIcon.Information;
+                                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                                MessageBox.Show(message, caption, buttons, icon);
+                                Populated(false);
                             }
                         }
                         UnlockCamps();
@@ -350,7 +330,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 purchase.CancelledDate = DateTime.Now.Date;
                                 check_Active.Checked = false;
                                 check_Cancelled.Checked = true;
-                                status = _controller.UpdateItem(purchase, _cancelMotive);
+                                status = _controller.CancelPurchase(purchase);
                             }
                             if (status)
                             {
@@ -442,6 +422,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.BillSeries = Convert.ToInt32(edt_billSeries.Value);
             obj.PurchasedItems = GetDGVList(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
             obj.Total_Cost = this.GetTotalCost(obj.PurchasedItems, obj.ExtraExpenses, obj.InsuranceCost);
+            obj.CancelledMotive = txt_cancelMot.Text;
             return obj;
         }
 
@@ -493,6 +474,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             btn_new.Enabled = false;
             btn_FindSup.Enabled = false;
             btn_findSupplier.Enabled = false;
+            gbox_cancelReason.Enabled = false;
+            txt_cancelMot.Enabled = false;
         }
 
         private void UnlockCamps()
@@ -548,7 +531,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
             var payCond = payCondController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
             SetBillInstalmentsToDGV();
-            SetSummary();            
+            SetSummary(); 
+            if (purchase.CancelledDate.HasValue)
+            {
+                SetFormToCancelled(purchase.CancelledMotive);
+            }
+        }
+
+        private void SetFormToCancelled(string motive)
+        {
+            LockCamps();
+            btn_new.Enabled = false;
+            gbox_cancelReason.Visible = true;
+            gbox_cancelReason.Enabled = false;
+            txt_cancelMot.Text = motive;
         }
 
         public void PopulatePaymentCondition(PaymentConditions payCondition)
@@ -934,50 +930,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             ValidateCancelMotive();
         }
 
-        private void edt_billSeries_ValueChanged(object sender, EventArgs e)
-        {
-            if (edt_billModel.Value != 0
-                && edt_billNumber.Value != 0
-                && edt_billSeries.Value != 0
-                && edt_supplierId.Value != 0)
-            {
-                ValidateBill();
-            }
-        }
-
-        private void edt_billModel_ValueChanged(object sender, EventArgs e)
-        {
-            if (edt_billModel.Value != 0
-                && edt_billNumber.Value != 0
-                && edt_billSeries.Value != 0
-                && edt_supplierId.Value != 0)
-            {
-                ValidateBill();
-            }
-        }
-
-        private void edt_billNumber_ValueChanged(object sender, EventArgs e)
-        {
-            if (edt_billModel.Value != 0
-                && edt_billNumber.Value != 0
-                && edt_billSeries.Value != 0
-                && edt_supplierId.Value != 0)
-            {
-                ValidateBill();
-            }
-        }
-
-        private void edt_supplierId_ValueChanged(object sender, EventArgs e)
-        {
-            if (edt_billModel.Value != 0
-                && edt_billNumber.Value != 0
-                && edt_billSeries.Value != 0
-                && edt_supplierId.Value != 0)
-            {
-                ValidateBill();
-            }
-        }
-
         private void btn_checkBill_Click(object sender, EventArgs e)
         {
             if (edt_billModel.Value != 0
@@ -1009,6 +961,50 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             SetSummary();
             CalculateSetNewUnCost();
             SetBillInstalmentsToDGV();
+        }
+
+        private void edt_billNumber_Leave(object sender, EventArgs e)
+        {
+            if (edt_billModel.Value != 0
+                && edt_billNumber.Value != 0
+                && edt_billSeries.Value != 0
+                && edt_supplierId.Value != 0)
+            {
+                ValidateBill();
+            }
+        }
+
+        private void edt_billModel_Leave(object sender, EventArgs e)
+        {
+            if (edt_billModel.Value != 0
+                && edt_billNumber.Value != 0
+                && edt_billSeries.Value != 0
+                && edt_supplierId.Value != 0)
+            {
+                ValidateBill();
+            }
+        }
+
+        private void edt_billSeries_Leave(object sender, EventArgs e)
+        {
+            if (edt_billModel.Value != 0
+                && edt_billNumber.Value != 0
+                && edt_billSeries.Value != 0
+                && edt_supplierId.Value != 0)
+            {
+                ValidateBill();
+            }
+        }
+
+        private void gbox_billInfo_Leave(object sender, EventArgs e)
+        {
+            if (edt_billModel.Value != 0
+                && edt_billNumber.Value != 0
+                && edt_billSeries.Value != 0
+                && edt_supplierId.Value != 0)
+            {
+                ValidateBill();
+            }
         }
     }
 }

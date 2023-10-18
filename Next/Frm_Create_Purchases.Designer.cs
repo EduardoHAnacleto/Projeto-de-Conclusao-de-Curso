@@ -726,7 +726,6 @@
             this.edt_supplierId.Size = new System.Drawing.Size(38, 20);
             this.edt_supplierId.TabIndex = 34;
             this.edt_supplierId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.edt_supplierId.ValueChanged += new System.EventHandler(this.edt_supplierId_ValueChanged);
             // 
             // lbl_supplierId
             // 
@@ -855,6 +854,7 @@
             this.gbox_billInfo.TabIndex = 49;
             this.gbox_billInfo.TabStop = false;
             this.gbox_billInfo.Text = "Informação da NFe";
+            this.gbox_billInfo.Leave += new System.EventHandler(this.gbox_billInfo_Leave);
             // 
             // edt_billSeries
             // 
@@ -868,7 +868,7 @@
             this.edt_billSeries.Size = new System.Drawing.Size(58, 20);
             this.edt_billSeries.TabIndex = 52;
             this.edt_billSeries.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.edt_billSeries.ValueChanged += new System.EventHandler(this.edt_billSeries_ValueChanged);
+            this.edt_billSeries.Leave += new System.EventHandler(this.edt_billSeries_Leave);
             // 
             // edt_billModel
             // 
@@ -882,7 +882,7 @@
             this.edt_billModel.Size = new System.Drawing.Size(58, 20);
             this.edt_billModel.TabIndex = 51;
             this.edt_billModel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.edt_billModel.ValueChanged += new System.EventHandler(this.edt_billModel_ValueChanged);
+            this.edt_billModel.Leave += new System.EventHandler(this.edt_billModel_Leave);
             // 
             // edt_billNumber
             // 
@@ -896,7 +896,7 @@
             this.edt_billNumber.Size = new System.Drawing.Size(58, 20);
             this.edt_billNumber.TabIndex = 50;
             this.edt_billNumber.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.edt_billNumber.ValueChanged += new System.EventHandler(this.edt_billNumber_ValueChanged);
+            this.edt_billNumber.Leave += new System.EventHandler(this.edt_billNumber_Leave);
             // 
             // lbl_billNumber
             // 
@@ -1207,7 +1207,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.txt_cancelMot.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_cancelMot.Location = new System.Drawing.Point(6, 16);
-            this.txt_cancelMot.MaxLength = 150;
+            this.txt_cancelMot.MaxLength = 50;
             this.txt_cancelMot.Name = "txt_cancelMot";
             this.txt_cancelMot.Size = new System.Drawing.Size(283, 142);
             this.txt_cancelMot.TabIndex = 0;

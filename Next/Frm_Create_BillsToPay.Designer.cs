@@ -183,7 +183,6 @@
             this.edt_BillModel.Size = new System.Drawing.Size(65, 20);
             this.edt_BillModel.TabIndex = 37;
             this.edt_BillModel.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.edt_BillModel.ValueChanged += new System.EventHandler(this.edt_BillModel_ValueChanged);
             this.edt_BillModel.Leave += new System.EventHandler(this.edt_BillModel_Leave);
             // 
             // edt_BillSeries
@@ -198,7 +197,6 @@
             this.edt_BillSeries.Size = new System.Drawing.Size(60, 20);
             this.edt_BillSeries.TabIndex = 36;
             this.edt_BillSeries.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.edt_BillSeries.ValueChanged += new System.EventHandler(this.edt_BillSeries_ValueChanged);
             this.edt_BillSeries.Leave += new System.EventHandler(this.edt_BillSeries_Leave);
             // 
             // edt_BillNum
@@ -213,7 +211,6 @@
             this.edt_BillNum.Size = new System.Drawing.Size(73, 20);
             this.edt_BillNum.TabIndex = 36;
             this.edt_BillNum.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.edt_BillNum.ValueChanged += new System.EventHandler(this.edt_BillNum_ValueChanged);
             this.edt_BillNum.Leave += new System.EventHandler(this.edt_BillNum_Leave);
             // 
             // lbl_serieDanfe
@@ -281,7 +278,6 @@
             this.edt_supplierId.Size = new System.Drawing.Size(48, 20);
             this.edt_supplierId.TabIndex = 36;
             this.edt_supplierId.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.edt_supplierId.ValueChanged += new System.EventHandler(this.edt_supplierId_ValueChanged);
             // 
             // edt_supplierName
             // 
@@ -316,6 +312,7 @@
             this.gbox_isPaid.Controls.Add(this.check_Cancelled);
             this.gbox_isPaid.Controls.Add(this.check_Active);
             this.gbox_isPaid.Controls.Add(this.check_Paid);
+            this.gbox_isPaid.Enabled = false;
             this.gbox_isPaid.Location = new System.Drawing.Point(795, 8);
             this.gbox_isPaid.Name = "gbox_isPaid";
             this.gbox_isPaid.Size = new System.Drawing.Size(95, 86);
@@ -363,7 +360,7 @@
             this.gbox_cancelReason.Controls.Add(this.txt_cancelMot);
             this.gbox_cancelReason.Location = new System.Drawing.Point(368, 91);
             this.gbox_cancelReason.Name = "gbox_cancelReason";
-            this.gbox_cancelReason.Size = new System.Drawing.Size(296, 127);
+            this.gbox_cancelReason.Size = new System.Drawing.Size(296, 150);
             this.gbox_cancelReason.TabIndex = 43;
             this.gbox_cancelReason.TabStop = false;
             this.gbox_cancelReason.Text = "* Motivo de Cancelamento";
@@ -374,11 +371,11 @@
             this.txt_cancelMot.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txt_cancelMot.Font = new System.Drawing.Font("Arial", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_cancelMot.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_cancelMot.Location = new System.Drawing.Point(6, 16);
             this.txt_cancelMot.MaxLength = 150;
             this.txt_cancelMot.Name = "txt_cancelMot";
-            this.txt_cancelMot.Size = new System.Drawing.Size(284, 105);
+            this.txt_cancelMot.Size = new System.Drawing.Size(284, 128);
             this.txt_cancelMot.TabIndex = 0;
             this.txt_cancelMot.Text = "";
             // 

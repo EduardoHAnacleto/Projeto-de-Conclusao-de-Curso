@@ -22,6 +22,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         public int BillNumber { get; set; }
         public int BillSeries { get; set; }
         public int BillModel { get; set; }
+        public string CancelledMotive { get; set; }
 
         public PaymentConditions PaymentCondition { get; set; }
         public Users User { get; set; }

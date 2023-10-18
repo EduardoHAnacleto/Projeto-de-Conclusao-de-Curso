@@ -220,6 +220,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                     {
                                         obj.PaidDate = Convert.ToDateTime(reader["paidDate"]);
                                     }
+                                    if (reader["date_cancelled"] != DBNull.Value)
+                                    {
+                                        obj.CancelledDate = (DateTime)reader["date_cancelled"];
+                                        obj.CancelMotive = reader["motive_cancelled"].ToString();
+                                    }
                                     list.Add(obj);
                                 }
                             }
@@ -297,6 +302,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                                             obj.Status = 2;
                                         }
                                     }
+                                }
+                                if (reader["date_cancelled"] != DBNull.Value)
+                                {
+                                    obj.CancelledDate = (DateTime)reader["date_cancelled"];
+                                    obj.CancelMotive = reader["motive_cancelled"].ToString();
                                 }
                                 return obj;
                             }

@@ -198,8 +198,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (DGV_BillsToReceive.SelectedRows[0] != null)
             {
                 var billId = Convert.ToInt32(DGV_BillsToReceive.SelectedRows[0].Cells["BillId"].Value);
-                var obj = _controller.FindItemId(billId);
-                return obj[0];
+                var iNum = Convert.ToInt32(DGV_BillsToReceive.SelectedRows[0].Cells["InstalmentNumber"].Value);
+                var obj = _controller.FindItemId(billId, iNum);
+                return obj;
             }
             return null;
         }
@@ -223,7 +224,24 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (DGV_BillsToReceive.Rows.Count > 1)
             {
-                if (RightInstalment())
+                var obj = GetObject();
+                if (obj.PaidDate != null || DGV_BillsToReceive.SelectedRows[0].Cells["StatusBillsReceive"].Value.ToString() == "PAGO")
+                {
+                    string message = "Conta já foi paga.";
+                    string caption = "Não é possível alterar a parcela.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show(message, caption, buttons, icon);
+                }
+                else if (obj.CancelledDate != null || DGV_BillsToReceive.SelectedRows[0].Cells["StatusBillsReceive"].Value.ToString() == "CANCELADO")
+                {
+                    string message = "Está conta já foi cancelada.";
+                    string caption = "Não é possível alterar a parcela.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show(message, caption, buttons, icon);
+                }
+                else if (RightInstalment())
                 {
                     NewPopulatedToPayForm();
                 }
@@ -313,7 +331,29 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
            var obj = GetObject();
             if (obj != null)
             {
-                if (obj.Sale == null || obj.Sale.id < 2)
+                var list = _controller.FindItemId(obj.id);
+                for (int i = 0; i < obj.InstalmentNumber; i++)
+                {
+                    if (list[i].PaidDate != null || list[i].PaidDate.HasValue)
+                    {
+                        string message = "Não é possível cancelar essa conta pois já existem notas pagas relacionadas a essa venda.";
+                        string caption = "Conta já paga.";
+                        MessageBoxIcon icon = MessageBoxIcon.Error;
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        Utilities.Msgbox(message, caption, buttons, icon);
+                        return false;
+                    }
+                    else if (list[i].CancelledDate != null || list[i].CancelledDate.HasValue)
+                    {
+                        string message = "Conta já cancelada.";
+                        string caption = "Conta cancelada.";
+                        MessageBoxIcon icon = MessageBoxIcon.Error;
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        Utilities.Msgbox(message, caption, buttons, icon);
+                        return false;
+                    }
+                }
+                if (obj.Sale.id < 0)
                 {
                     string message = "Não é possível cancelar contas relacionadas a vendas, cancelamento deve ser feito pelo formulário de Vendas.";
                     string caption = "Conta a receber relacionada com Venda.";
@@ -324,7 +364,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 }
                 else return true;
             }
-            else return true;
+            else return false;
         }
     }
 }

@@ -267,6 +267,7 @@
             // 
             // SetPaidBill
             // 
+            this.SetPaidBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.SetPaidBill.Location = new System.Drawing.Point(529, 397);
             this.SetPaidBill.Name = "SetPaidBill";
             this.SetPaidBill.Size = new System.Drawing.Size(75, 23);
@@ -277,6 +278,7 @@
             // 
             // btn_CancelBill
             // 
+            this.btn_CancelBill.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btn_CancelBill.Location = new System.Drawing.Point(610, 397);
             this.btn_CancelBill.Name = "btn_CancelBill";
             this.btn_CancelBill.Size = new System.Drawing.Size(91, 23);

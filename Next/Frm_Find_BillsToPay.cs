@@ -125,6 +125,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public override void SetDataSourceToDGV() //Cria DataTable, chama Controller para trazer o DataTable e colocar na DGV como DataSource, linka db com DGV
         {
             DGV_BillsToPay.Rows.Clear();
+            PaymentConditions_Controller pcController = new PaymentConditions_Controller();
             DataTable dt = this._controller.PopulateDGV();
             if (dt != null)
             {
@@ -132,15 +133,19 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 foreach (DataRow dr in dt.Rows)
                 {
                     var supplier = _controller.FindSupplierId(Convert.ToInt32(dr["supplier_id"])).FirstOrDefault().Supplier;
-                    var billNum = dr["billNumber"].ToString();
-                    var billModel = dr["billModel"].ToString();
-                    var billSeries = dr["billSeries"].ToString(); 
-                    var instalmentNumber = dr["instalmentNumber"].ToString();
+                    var billNum = Convert.ToInt32(dr["billNumber"]);
+                    var billModel = Convert.ToInt32(dr["billModel"]);
+                    var billSeries = Convert.ToInt32(dr["billSeries"]); 
+                    var instalmentNumber = Convert.ToInt32(dr["instalmentNumber"]);
                     var emissionDate = Convert.ToDateTime(dr["emissionDate"]).ToShortDateString();
                     var dueDate = Convert.ToDateTime(dr["dueDate"].ToString()).ToShortDateString();
                     var status = string.Empty;
                     var paymentMethod = metController.FindItemId(Convert.ToInt32(dr["payMethod_id"]));
-                    var totalValue = dr["BillValue"].ToString();
+
+                    var totalValue = (decimal)dr["BillValue"];
+                    //var paymentCondition = _controller.FindItemId(billNum, billModel, billSeries, instalmentNumber, supplier.id).PaymentCondition;
+                    //string instalmentValue = (totalValue * (paymentCondition.BillsInstalments[instalmentNumber-1].ValuePercentage / 100)).ToString("#.##");
+
                     if (dr["paidDate"] == DBNull.Value && dr["date_cancelled"] == DBNull.Value)
                     {
                         status = "ATIVO";
@@ -162,6 +167,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         billModel,
                         billSeries,
                         instalmentNumber,
+                        //instalmentValue,
                         totalValue,
                         emissionDate,
                         dueDate,
@@ -182,20 +188,26 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (DGV_BillsToPay.Rows.Count > 1)
             {
-                if (RightInstalment())
+                var obj = GetObject();
+                if (obj.PaidDate != null || DGV_BillsToPay.SelectedRows[0].Cells["isPaid"].Value.ToString() == "PAGO")
                 {
-                    if (GetObject().PaidDate != null)
-                    {
-                        string message = "Conta já foi paga.";
-                        string caption = "Não é possível alterar a parcela.";
-                        MessageBoxIcon icon = MessageBoxIcon.Error;
-                        MessageBoxButtons buttons = MessageBoxButtons.OK;
-                        MessageBox.Show(message, caption, buttons, icon);
-                    }
-                    else
-                    {
-                        NewPopulatedToPayForm();
-                    }
+                    string message = "Conta já foi paga.";
+                    string caption = "Não é possível alterar a parcela.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show(message, caption, buttons, icon);
+                }
+                else if (obj.CancelledDate != null || DGV_BillsToPay.SelectedRows[0].Cells["isPaid"].Value.ToString() == "CANCELADO")
+                {
+                    string message = "Está conta já foi cancelada.";
+                    string caption = "Não é possível alterar a parcela.";
+                    MessageBoxIcon icon = MessageBoxIcon.Error;
+                    MessageBoxButtons buttons = MessageBoxButtons.OK;
+                    MessageBox.Show(message, caption, buttons, icon);
+                }
+                else if (RightInstalment())
+                {
+                    NewPopulatedToPayForm();
                 }
             }
         }
@@ -268,12 +280,34 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             var obj = GetObject();
             if (obj != null)
             {
+                var list = _controller.FindItemId(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
+                for (int i = 0; i < obj.InstalmentNumber; i++)
+                {
+                    if (list[i].PaidDate != null || list[i].PaidDate.HasValue)
+                    {
+                        string message = "Não é possível cancelar essa conta pois já existem notas pagas relacionadas a essa compra.";
+                        string caption = "Conta já paga.";
+                        MessageBoxIcon icon = MessageBoxIcon.Error;
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        Utilities.Msgbox(message, caption, buttons, icon);
+                        return false;
+                    }
+                    else if (list[i].CancelledDate != null || list[i].CancelledDate.HasValue)
+                    {
+                        string message = "Conta já cancelada.";
+                        string caption = "Conta cancelada.";
+                        MessageBoxIcon icon = MessageBoxIcon.Error;
+                        MessageBoxButtons buttons = MessageBoxButtons.OK;
+                        Utilities.Msgbox(message, caption, buttons, icon);
+                        return false;
+                    }
+                }
                 if (obj.Purchase != null)
                 {
                     if (obj.Purchase.id > 2)
                     {
                         string message = "Não é possível cancelar contas relacionadas a compras, cancelamento deve ser feito pelo formulário de Compras.";
-                        string caption = "Conta a receber relacionada com Compra.";
+                        string caption = "Conta relacionada com Compra.";
                         MessageBoxIcon icon = MessageBoxIcon.Error;
                         MessageBoxButtons buttons = MessageBoxButtons.OK;
                         Utilities.Msgbox(message, caption, buttons, icon);
@@ -281,9 +315,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     }
                     else return true;
                 }
-                else return true;
+                //
+
+                //
+                return true;
+
             }
-            else return true;
+            else return false;
         }
 
         private void NewPopulatedToPayForm()

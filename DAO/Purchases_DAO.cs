@@ -11,6 +11,7 @@ using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using System.Configuration;
 using System.Drawing.Drawing2D;
 using Microsoft.Win32;
+using System.Transactions;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 {
@@ -77,7 +78,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "UPDATE PURCHASES SET CANCELLEDDATE = @CANCELDATE, DATE_LAST_UPDATE = @DU " +
+            string sql = "UPDATE PURCHASES SET CANCELLEDDATE = @CANCELDATE, CANCELLEDMOTIVE = @CANCELMOTIVE, DATE_LAST_UPDATE = @DU " +
                 " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -90,6 +91,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
                     command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
 
+                    command.Parameters.AddWithValue("@CANCELMOTIVE", obj.CancelledMotive);
                     command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
                     command.Parameters.AddWithValue("@DU", DateTime.Now.Date) ;
                     connection.Open();
@@ -193,6 +195,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                     Total_Cost = Convert.ToDecimal(reader["purchase_TotalCost"]),
                                     ExtraExpenses = Convert.ToDecimal(reader["purchase_ExtraExpenses"]),
                                     InsuranceCost = Convert.ToDecimal(reader["purchase_InsuranceCost"]),
+                                    CancelledMotive = reader["cancelledMotive"].ToString(),
                                     User = _userController.FindItemId(Convert.ToInt32(reader["user_id"])),
                                     PurchasedItems = _purchaseItemsController.FindItemId(billModel, billNumber, billSeries, supplierId),
                                     Supplier = _suppliersController.FindItemId(Convert.ToInt32(reader["supplier_id"]))
@@ -554,45 +557,228 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         {
             bool status = false;
 
-            string sql = "UPDATE PURCHASES SET CANCELLEDDATE = @CANCELDATE, DATE_LAST_UPDATE = @DU, USER_ID = @USERID  " +
+            string sqlPurch = "UPDATE PURCHASES SET CANCELLEDDATE = @CANCELDATE, CANCELLEDMOTIVE = @CANCELMOTIVE, DATE_LAST_UPDATE = @DU, USER_ID = @USERID  " +
                 " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
+
+            string sqlBills = "UPDATE BILLSTOPAY SET DATE_CANCELLED = @DATECANCEL, USER_ID = @USERID, MOTIVE_CANCELLED = @MOTCANCEL, DATE_LAST_UPDATE = @UPDATE " +
+                    "WHERE BILLNUMBER = @BNUMBER AND BILLSERIES = @BSERIES AND BILLMODEL = @BMODEL AND SUPPLIER_ID = @SUPPLIERID; ";
+
+            string sqlProdStock = "UPDATE PRODUCTS SET STOCK = @RESTOCK, PRODUCT_COST = @PRODCOST WHERE ID_PRODUCT = @ID ; ";
+
+            string sqlPurchItems = "UPDATE PURCHASEITEMS SET DATE_CANCELLED = @CANCELDATE, DATE_LAST_UPDATE = @DU" +
+                    " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM, BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+                SqlTransaction tran = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@BMODEL", obj.BillModel);
-                    command.Parameters.AddWithValue("@BNUM", obj.BillNumber);
-                    command.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
-                    command.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
-                    command.Parameters.AddWithValue("@USERID", obj.User.id);
+                    SqlCommand commandPurch = new SqlCommand(sqlPurch, connection);
+                    commandPurch.Transaction = tran;
+                    SqlCommand commandBills = new SqlCommand(sqlBills, connection);
+                    commandBills.Transaction = tran;
 
-                    command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
-                    command.Parameters.AddWithValue("@DU", DateTime.Now.Date);
-                    connection.Open();
-                    int i = command.ExecuteNonQuery();
-                    if (i > 0)
+                    // <Purchases
+                    commandPurch.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                    commandPurch.Parameters.AddWithValue("@BNUM", obj.BillNumber);
+                    commandPurch.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                    commandPurch.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                    commandPurch.Parameters.AddWithValue("@USERID", obj.User.id);
+                    commandPurch.Parameters.AddWithValue("@CANCELMOTIVE", obj.CancelledMotive);
+                    commandPurch.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
+                    commandPurch.Parameters.AddWithValue("@DU", DateTime.Now.Date);
+
+                    commandPurch.ExecuteNonQuery();
+                    // >Purchases
+
+                    // <BillsToPay
+                    commandBills.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                    commandBills.Parameters.AddWithValue("@BNUMBER", obj.BillNumber);
+                    commandBills.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                    commandBills.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                    commandBills.Parameters.AddWithValue("@MOTCANCEL", obj.CancelledMotive);
+                    commandBills.Parameters.AddWithValue("@USERID", obj.User.id);
+                    commandBills.Parameters.AddWithValue("@DATECANCEL", DateTime.Now.Date);
+                    commandBills.Parameters.AddWithValue("@UPDATE", DateTime.Now.Date);
+
+                    commandBills.ExecuteNonQuery();
+                    // >BillsToPay
+
+                    // <PurchaseItems
+                    foreach (var prod in obj.PurchasedItems)
                     {
-                        status = true;
-                        if (status)
-                        {
-                            Products_Controller pController = new Products_Controller();
-                            foreach (var items in obj.PurchasedItems)
-                            {
-                                status = pController.RemoveStock(items.Product.id, items.Quantity);
-                            }
-                        }
-                        if (status)
-                        {
-                            MessageBox.Show("Compra cancelada com sucesso.");
-                        }
+                        SqlCommand commandPurchItems = new SqlCommand(sqlPurchItems, connection);
+                        commandPurchItems.Transaction = tran;
+
+                        commandPurchItems.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
+                        commandPurchItems.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                        commandPurchItems.Parameters.AddWithValue("@BNUM", obj.BillNumber);
+                        commandPurchItems.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                        commandPurchItems.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+
+                        commandPurchItems.ExecuteNonQuery();
                     }
+                    // >PurchaseItems
+
+                    // <Product Stock
+                    foreach (var prod in obj.PurchasedItems)
+                    {
+                        SqlCommand commandProdStock = new SqlCommand(sqlProdStock, connection);
+                        commandProdStock.Transaction = tran;
+
+                        commandProdStock.Parameters.AddWithValue("@ID", prod.Product.id);
+                        commandProdStock.Parameters.AddWithValue("@PRODCOST", prod.PreUnCost);
+                        commandProdStock.Parameters.AddWithValue("@RESTOCK", prod.Product.stock - prod.Quantity);
+
+                        commandProdStock.ExecuteNonQuery();
+                    }
+                    // >ProductStock
+
+                    tran.Commit();
+                    status = true;
                 }
-                catch (Exception ex)
+                catch (SqlException ex)
                 {
-                    MessageBox.Show("Erro: " + ex.Message);
-                    return status;
+                    tran.Rollback();
+                    MessageBox.Show("Erro: " + ex.Message,
+                        "Erro.",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    status = false;
+                }
+                finally
+                {
+                    connection.Close();
+                }
+                return status;
+            }
+        }
+
+        internal bool NewPurchase(Purchases obj, List<BillsToPay> billList)
+        {
+            bool status = false;
+
+            string sqlPurch = "INSERT INTO PURCHASES (BILLMODEL, BILLNUMBER, BILLSERIES, SUPPLIER_ID, EMISSIONDATE, ARRIVALDATE, FREIGHTCOST, PURCHASE_TOTALCOST, " +
+                " PURCHASE_EXTRAEXPENSES, PURCHASE_INSURANCECOST, USER_ID, DATE_CREATION, DATE_LAST_UPDATE, PAYCONDITION_ID ) "
+                         + " VALUES (@BMODEL, @BNUM, @BSERIES, @SUPPLIERID, @EMDATE, @ARRIVALDATE, @FREIGHT, @TOTALCOST, @EXPENSES," +
+                         " @INSURANCE, @USERID, @DC, @DU, @PAYCONDID);";
+
+            string sqlBills = "INSERT INTO BILLSTOPAY ( BILLNUMBER, BILLSERIES, BILLMODEL, INSTALMENTNUMBER, DUEDATE, billStatus, PAIDDATE," +
+                "BILLVALUE, PAYMETHOD_ID, SUPPLIER_ID, EMISSIONDATE, DATE_CREATION, DATE_LAST_UPDATE, PAYCOND_ID, USER_ID ) "
+                         + " VALUES (@BNUMBER, @BSERIES, @BMODEL, @INUMBER, @DUEDATE, @billStatus, @PDATE, @BVALUE, @METHODID, " +
+                         " @SUPPLIERID, @EMISSIONDATE, @DC, @DU, @PAYCONDID, @USERID);";
+
+            string sqlProdStock = "UPDATE PRODUCTS SET STOCK = @STOCK, PRODUCT_COST = @PCOST " +
+                "WHERE ID_PRODUCT = @ID ; ";
+
+            string sqlPurchItems = "INSERT INTO PURCHASEITEMS ( BILLMODEL, BILLNUMBER, BILLSERIES, SUPPLIER_ID, PRODUCT_ID, QUANTITY, PRODUCT_COST, PURCHASE_PERCENTAGE," +
+                "DISCOUNT_CASH , WEIGHTED_AVG , DATE_CREATION, DATE_CANCELLED, PRE_ITEMCOST ) "
+                         + " VALUES (@BILLMOD, @BILLNUM, @BILLSER, @SUPPLIERID, @PRODID, @QTD, @PRODCOST, @PURCHPERC, @DISCOUNT, @WEIGHTEDAVG, @DC, @DC, @PRECOST);";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlTransaction tran = connection.BeginTransaction();
+                try
+                {
+                    SqlCommand commandPurch = new SqlCommand(sqlPurch, connection);
+                    commandPurch.Transaction = tran;
+
+                    // <Purchases
+                    commandPurch.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                    commandPurch.Parameters.AddWithValue("@BNUM", obj.BillNumber);
+                    commandPurch.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                    commandPurch.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                    commandPurch.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
+                    commandPurch.Parameters.AddWithValue("@PAYCONDID", obj.PaymentCondition.id);
+                    commandPurch.Parameters.AddWithValue("@ARRIVALDATE", obj.ArrivalDate);
+                    commandPurch.Parameters.AddWithValue("@FREIGHT", (decimal)obj.Freight_Cost);
+                    commandPurch.Parameters.AddWithValue("@TOTALCOST", (decimal)obj.Total_Cost);
+                    commandPurch.Parameters.AddWithValue("@EXPENSES", (decimal)obj.ExtraExpenses);
+                    commandPurch.Parameters.AddWithValue("@INSURANCE", (decimal)obj.InsuranceCost);
+                    commandPurch.Parameters.AddWithValue("@USERID", obj.User.id);
+                    commandPurch.Parameters.AddWithValue("@DC", obj.dateOfCreation);
+                    commandPurch.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+
+                    commandPurch.ExecuteNonQuery();
+                    // >Purchases
+
+                    // <BillsToPay
+                    foreach (var bill in billList)
+                    {
+                        SqlCommand commandBills = new SqlCommand(sqlBills, connection);
+                        commandBills.Transaction = tran;
+
+                        commandBills.Parameters.AddWithValue("@BNUMBER", obj.BillNumber);
+                        commandBills.Parameters.AddWithValue("@BSERIES", obj.BillSeries);
+                        commandBills.Parameters.AddWithValue("@BMODEL", obj.BillModel);
+                        commandBills.Parameters.AddWithValue("@INUMBER", bill.InstalmentNumber);
+                        commandBills.Parameters.AddWithValue("@DUEDATE", bill.DueDate);
+                        commandBills.Parameters.AddWithValue("@EMISSIONDATE", obj.EmissionDate);
+                        commandBills.Parameters.AddWithValue("@PAYCONDID", obj.PaymentCondition.id);
+                        commandBills.Parameters.AddWithValue("@billStatus", bill.Status);
+                        commandBills.Parameters.AddWithValue("@USERID", obj.User.id);
+                        commandBills.Parameters.AddWithValue("@PDATE", DBNull.Value);
+                        commandBills.Parameters.AddWithValue("@BVALUE", bill.TotalValue);
+                        commandBills.Parameters.AddWithValue("@METHODID", bill.PaymentMethod.id);
+                        commandBills.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                        commandBills.Parameters.AddWithValue("@DC", obj.dateOfCreation);
+                        commandBills.Parameters.AddWithValue("@DU", obj.dateOfLastUpdate);
+
+                        commandBills.ExecuteNonQuery();
+                    }
+                    // >BillsToPay
+
+                    // <PurchaseItems
+                    foreach (var prod in obj.PurchasedItems)
+                    {
+                        SqlCommand commandPurchItems = new SqlCommand(sqlPurchItems, connection);
+                        commandPurchItems.Transaction = tran;
+
+                        commandPurchItems.Parameters.AddWithValue("@BILLNUM", obj.BillNumber);
+                        commandPurchItems.Parameters.AddWithValue("@BILLMOD", obj.BillModel);
+                        commandPurchItems.Parameters.AddWithValue("@BILLSER", obj.BillSeries);
+                        commandPurchItems.Parameters.AddWithValue("@SUPPLIERID", obj.Supplier.id);
+                        commandPurchItems.Parameters.AddWithValue("@PRODID", prod.Product.id);
+                        commandPurchItems.Parameters.AddWithValue("@QTD", prod.Quantity);
+                        commandPurchItems.Parameters.AddWithValue("@PRODCOST", prod.NewBaseUnCost);
+                        commandPurchItems.Parameters.AddWithValue("@PURCHPERC", prod.PurchasePercentage);
+                        commandPurchItems.Parameters.AddWithValue("@WEIGHTEDAVG", prod.WeightedCostAverage);
+                        commandPurchItems.Parameters.AddWithValue("@DISCOUNT", prod.DiscountCash);
+                        commandPurchItems.Parameters.AddWithValue("@PRECOST", prod.PreUnCost);
+                        commandPurchItems.Parameters.AddWithValue("@DC", obj.dateOfCreation);
+                        commandPurchItems.Parameters.AddWithValue("@DU", DBNull.Value);
+
+                        commandPurchItems.ExecuteNonQuery();
+                    }
+                    // >PurchaseItems
+
+                    // <Product Stock
+                    foreach (var prod in obj.PurchasedItems)
+                    {
+                        SqlCommand commandProdStock = new SqlCommand(sqlProdStock, connection);
+                        commandProdStock.Transaction = tran;
+
+                        commandProdStock.Parameters.AddWithValue("@ID", prod.Product.id);
+                        commandProdStock.Parameters.AddWithValue("@PCOST", prod.WeightedCostAverage);
+                        commandProdStock.Parameters.AddWithValue("@STOCK", prod.Product.stock + prod.Quantity);
+
+                        commandProdStock.ExecuteNonQuery();
+                    }
+                    // >ProductStock
+
+                    tran.Commit();
+                    status = true;
+                }
+                catch (SqlException ex)
+                {
+                    tran.Rollback();
+                    MessageBox.Show("Erro: " + ex.Message,
+                        "Erro.",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                    status = false;
                 }
                 finally
                 {

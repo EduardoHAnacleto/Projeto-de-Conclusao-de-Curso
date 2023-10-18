@@ -20,12 +20,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
         }
 
-        public bool SaveItem(Purchases purchase)
+        public bool SaveItem(Purchases purchase, List<BillsToPay> billList)
         {
             _purchase = purchase;
             _purchase.dateOfCreation = DateTime.Now;
-            _purchase.dateOfLastUpdate = _purchase.dateOfCreation;
-            return _purchasesDAO.SaveToDb(_purchase);
+            _purchase.dateOfLastUpdate = _purchase.dateOfCreation.Date;
+            return _purchasesDAO.NewPurchase(_purchase, billList);
         }
         public List<Purchases> LoadItems()
         {

@@ -84,10 +84,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_billInstalment.Visible = true;
             gbox_billInstalment.Enabled = false;
             gbox_newBill.Enabled = false;
+            btn_SearchSupplier.Enabled = false;
             gbox_newBill.Visible = false;
+            gbox_isPaid.Enabled = false;
             gbox_paymentCondition.Enabled = false;
             gbox_billInstalment.Enabled = false;
             gbox_billInstalment.Visible = false;
+            edt_instalmentValue.Enabled = false;
             gbox_cancelReason.Enabled = true;
             gbox_cancelReason.Visible = true;
 
@@ -105,6 +108,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_isPaid.Enabled = false;
             gbox_billInstalment.Visible = true;
             gbox_billInstalment.Enabled = false;
+            btn_SearchSupplier.Enabled = false;
             gbox_newBill.Enabled = false;
             gbox_newBill.Visible = false;
             gbox_paymentCondition.Enabled = false;
@@ -112,6 +116,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_cancelReason.Enabled = false;
             gbox_cancelReason.Visible = false;
             gbox_danfe.Enabled = false;
+            edt_instalmentValue.Enabled = false;
 
             datePicker_due.Enabled = false;
             datePicker_emission.Enabled = false;
@@ -231,6 +236,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
             if (bill.CancelledDate.HasValue)
             {
+                gbox_cancelReason.Visible = true;
+                gbox_cancelReason.Enabled = false;
                 txt_cancelMot.Text = bill.CancelMotive;
                 date_cancelled.Value = (DateTime)bill.CancelledDate;
                 LockCamps();
@@ -240,7 +247,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_instFee.Value = bill.PaymentCondition.paymentFees;
             edt_instFine.Value = bill.PaymentCondition.fineValue;
             edt_instDisc.Value = bill.PaymentCondition.discountPerc;
-
+            //decimal instalmentValue = bill.TotalValue * (bill.PaymentCondition.BillsInstalments[bill.InstalmentNumber].ValuePercentage /100);
             edt_finalValue.Value = PaymentConditions.CalcValue(bill.TotalValue, bill.PaymentCondition, bill.DueDate);
             edt_instalmentValue.Value = bill.TotalValue;
                                   
@@ -255,7 +262,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_supplier.Enabled = false;
             gbox_billInstalment.Enabled = false;
             gbox_cancelReason.Enabled = false;
-            
+            btn_SearchSupplier.Enabled = false;
             gbox_dates.Enabled = false;
             gbox_newBill.Enabled = false;
             edt_instalmentValue.Enabled = false;
@@ -327,12 +334,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     else if (_FormFunction == "Pay")
                     {
                         _controller.PayBill(this.GetObject());
-                        UnlockCamps();
+                        LockCamps();
                     }
                     else if (_FormFunction == "Cancel")
                     {
-                        _controller.CancelBill(this.GetObject());
-                        MessageBox.Show("Contas canceladas com sucesso.");
+                        bool status = _controller.CancelBill(this.GetObject());
+                        if (status)
+                        {
+                            MessageBox.Show("Contas canceladas com sucesso.");
+                            LockCamps();
+                        }
+                        else { MessageBox.Show("Erro."); }
                     }
 
                 }
@@ -937,13 +949,30 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             if (DGV_Instalments.Rows.Count > 0 && edt_instalmentValue.Value > 0)
             {
-                PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
-                var payCond = payCondController.FindItemId(Convert.ToInt32(edt_payConditionId.Value));
-                decimal billValue = (decimal)edt_instalmentValue.Value;
-                foreach (DataGridViewRow row in DGV_Instalments.Rows)
+                if (_FormFunction == "New")
                 {
-                    decimal percentage = payCond.BillsInstalments[row.Index].ValuePercentage;
-                    row.Cells["InstalmentValue"].Value = Math.Round((billValue * (percentage / 100)), 2);
+                    PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
+                    var payCond = payCondController.FindItemId(Convert.ToInt32(edt_payConditionId.Value));
+                    decimal billValue = (decimal)edt_instalmentValue.Value;
+                    foreach (DataGridViewRow row in DGV_Instalments.Rows)
+                    {
+                        decimal percentage = payCond.BillsInstalments[row.Index].ValuePercentage;
+                        row.Cells["InstalmentValue"].Value = Math.Round((billValue * (percentage / 100)), 2);
+                    }
+                }
+                else
+                {
+                    var billNum = (int)edt_BillNum.Value;
+                    var billMod = (int)edt_BillModel.Value;
+                    var billSer = (int)edt_BillSeries.Value;
+                    var suppId = (int)edt_supplierId.Value;
+                    var list = _controller.FindItemId(billNum, billMod, billSer, suppId);
+                    int i = 0;
+                    foreach (DataGridViewRow row in DGV_Instalments.Rows)
+                    {
+                        row.Cells["InstalmentValue"].Value = Math.Round(list[i].TotalValue, 2);
+                        i++;
+                    }
                 }
             }
         }

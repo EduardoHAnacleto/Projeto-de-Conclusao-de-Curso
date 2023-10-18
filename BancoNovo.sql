@@ -301,6 +301,7 @@
         purchase_ExtraExpenses decimal,
         purchase_InsuranceCost decimal,
         cancelledDate date,
+        cancelledReason varchar[50],
         paidDate date,
         paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition),
         supplier_id int not null references SUPPLIERS(id_supplier),

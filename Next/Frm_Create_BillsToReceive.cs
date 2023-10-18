@@ -23,8 +23,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             edt_instalmentValue.Controls[0].Visible = false;
             PopulateComboBox();
             btn_SelectDelete.Visible = false;
-            edt_id.Visible = false;
-            lbl_id.Visible = false;
             DGV_Instalments.Columns[0].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_Instalments.Columns[1].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
             DGV_Instalments.Columns[2].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
@@ -82,6 +80,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             gbox_billInstalment.Enabled = false;
             gbox_billInstalment.Visible = false;
             gbox_cancelReason.Enabled = true;
+            txt_cancelMot.Enabled = true;
             gbox_cancelReason.Visible = true;
 
             datePicker_due.Enabled = false;
@@ -107,6 +106,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             datePicker_emission.Enabled = false;
             datePicker_PaidDate.Enabled = true;
             date_cancelled.Enabled = false;
+            datePicker_PaidDate.Value = DateTime.Now.Date;
         }
 
         private void SetFormToNew()
@@ -126,7 +126,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             datePicker_emission.Enabled = true;
             datePicker_PaidDate.Enabled = false;
             date_cancelled.Enabled = false;
-            datePicker_emission.Value = DateTime.Today.Date;           
+            datePicker_emission.Value = DateTime.Today.Date;
+            edt_id.Value = _controller.GetNewId();
         }
 
         private PaymentMethods GetPaymentMethod(string payMethod)
@@ -152,10 +153,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             obj.Client = GetClient(Convert.ToInt32(edt_clientId.Value));
             if (_FormFunction != "New")
             {
-                obj.PaymentMethod = GetPaymentMethod(DGV_Instalments.Rows[0].Cells["PaymentMethod_Name"].Value.ToString());
+                obj.PaymentMethod = GetPaymentMethod(DGV_Instalments.Rows[0].Cells["InstalmentMethod"].Value.ToString());
             }
             else { obj.PaymentMethod = null; }
-            
+            if (_FormFunction == "Pay")
+            {
+                obj.PaidDate = datePicker_PaidDate.Value;
+            }
+            if (_FormFunction == "Cancel")
+            {
+                obj.CancelledDate = date_cancelled.Value;
+                obj.CancelMotive = txt_cancelMot.Text;
+            }
+            obj.InstalmentNumber = Convert.ToInt32(edt_instalmentId.Value);
+
             obj.PaymentCondition = GetPaymentCondition(Convert.ToInt32(edt_payConditionId.Value));
             obj.User = User;
             obj.Sale = new Sales();
@@ -164,12 +175,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
             obj.EmissionDate = datePicker_emission.Value;
             obj.InstalmentsQtd = DGV_Instalments.Rows.Count;
+            if (edt_id.Value > 0)
+            {
+                obj.id = Convert.ToInt32(edt_id.Value);
+            }
 
             return obj;
         }
 
         public void PopulateCamps(BillsToReceive obj)
         {
+            edt_id.Value = obj.id;
             _auxObj = obj;
             if (obj.dateOfLastUpdate != null)
             {
@@ -190,6 +206,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
             if (obj.CancelledDate.HasValue)
             {
+                gbox_cancelReason.Visible = true;
+                gbox_cancelReason.Enabled = false;
                 txt_cancelMot.Text = obj.CancelMotive;
                 date_cancelled.Value = (DateTime)obj.CancelledDate;
                 LockCamps();
@@ -197,14 +215,31 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
             edt_finalValue.Value = PaymentConditions.CalcValue(obj.InstalmentValue, obj.PaymentCondition, obj.DueDate);
             edt_instalmentValue.Value = obj.InstalmentValue;
-            
-            List<BillsToReceive> listBills = null;
-            if (obj.Sale.id != 0)
-            {
-                listBills = _controller.FindSaleId(obj.Sale.id);
-            }
 
+            edt_instDisc.Value = obj.PaymentCondition.discountPerc;
+            edt_instFee.Value = obj.PaymentCondition.paymentFees;
+            edt_instFine.Value = obj.PaymentCondition.fineValue;
+            edt_instValue.Value = obj.InstalmentValue;
+
+            List<BillsToReceive> listBills = null;
+            listBills = _controller.FindItemId(obj.id);
+            FoundPaymentCondition(obj.PaymentCondition);
             PopulateDGV(listBills);
+        }
+
+        private void FoundPaymentCondition(PaymentConditions payCondition)
+        {
+            if (payCondition != null)
+            {
+                edt_payCondition.Text = payCondition.conditionName;
+                edt_payConditionDiscount.Value = (decimal)payCondition.discountPerc;
+                edt_payConditionFees.Value = (decimal)payCondition.paymentFees;
+                edt_payConditionFine.Value = (decimal)payCondition.fineValue;
+                edt_payConditionQnt.Value = payCondition.instalmentQuantity;
+                edt_payConditionId.Value = payCondition.id;
+                SetBillInstalmentsToDGV(payCondition.id);
+                PopulateValueToDGV();
+            }
         }
 
         public void PopulateDGV(List<BillsToReceive> obj)
@@ -282,18 +317,22 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                             MessageBox.Show("Conta criada com sucesso.");
                         }
                         else { MessageBox.Show("Erro."); }
-                        
-                        ClearCamps();
-                        UnlockCamps();
+
+                        LockCamps();                  
                     }
                     else if (_FormFunction == "Pay")
                     {
                         _controller.PayBill(this.GetObject());
-                        UnlockCamps();
+                        LockCamps();
                     }
                     else if (_FormFunction == "Cancel")
                     {
-                        _controller.CancelBill(this.GetObject());
+                        bool status = _controller.CancelBill(this.GetObject());
+                        if (status)
+                        {
+                            MessageBox.Show("Conta cancelada com sucesso.");
+                        }
+                        LockCamps();
                     }
 
                 }
