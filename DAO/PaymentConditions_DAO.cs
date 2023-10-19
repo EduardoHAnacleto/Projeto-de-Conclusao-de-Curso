@@ -70,47 +70,55 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
 
             string sql = "INSERT INTO PAYMENTCONDITIONS ( CONDITION_NAME, PAYMENT_FEES, FINE_VALUE, DISCOUNT_PERC, INSTALMENT_QUANTITY , DATE_CREATION, DATE_LAST_UPDATE ) "
                          + " VALUES (@CONDNAME, @FEES, @FINE, @DISCOUNT, @QNT, @DC, @DU);";
+
+            string sqlInstalments = "INSERT INTO BILLSINSTALMENTS ( PAYCONDITION_ID, INSTALMENT_NUMBER, PAYMETHOD_ID, TOTAL_DAYS, VALUE_PERCENTAGE," +
+                        " DATE_CREATION, DATE_LAST_UPDATE) VALUES (@ID, @INSTALNUMBER, @METHODID, @DAYS, @VALUEPERC, @DC, @DU)";
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+                SqlTransaction tran = connection.BeginTransaction();
                 try
                 {
+                    //<Payment Condition
                     SqlCommand command = new SqlCommand(sql, connection);
+                    command.Transaction = tran;
+
                     command.Parameters.AddWithValue("@CONDNAME", cond.conditionName);
-                    command.Parameters.AddWithValue("@FEES", (decimal)cond.paymentFees);
-                    command.Parameters.AddWithValue("@FINE", (decimal)cond.fineValue);
-                    command.Parameters.AddWithValue("@DISCOUNT", (decimal)cond.discountPerc);
+                    command.Parameters.AddWithValue("@FEES", cond.paymentFees);
+                    command.Parameters.AddWithValue("@FINE", cond.fineValue);
+                    command.Parameters.AddWithValue("@DISCOUNT", cond.discountPerc);
                     command.Parameters.AddWithValue("@QNT", cond.instalmentQuantity);
                     command.Parameters.AddWithValue("@DC", cond.dateOfCreation);
                     command.Parameters.AddWithValue("@DU", cond.dateOfLastUpdate);
-                    connection.Open();
-                    //int i = command.ExecuteNonQuery();
-                    var i = Convert.ToInt32(command.ExecuteNonQuery());
-                    connection.Close();
-                    int id = GetLastId();
-                    if (i > 0)
+                    command.ExecuteNonQuery();
+                    //>PaymentCondition
+                    //<BillsInstalments
+                    foreach (var instalment in cond.BillsInstalments)
                     {
-                        foreach (BillsInstalments instalment in cond.BillsInstalments)
-                        {
-                            if (instalment != null)
-                            {
-                                instalment.id = id;
-                                status = _billsInstalmentsController.SaveItem(instalment);
-                                if (!status)
-                                {
-                                    break;
-                                }
-                            }
-                        }
-                        if (status)
-                        {
-                            MessageBox.Show("Registro salvo com sucesso.");
-                        }
+                        SqlCommand instalmentsCommand = new SqlCommand(sqlInstalments, connection);
+                        instalmentsCommand.Transaction = tran;
+
+                        instalmentsCommand.Parameters.AddWithValue("@ID", cond.id);
+                        instalmentsCommand.Parameters.AddWithValue("@INSTALNUMBER", instalment.InstalmentNumber);
+                        instalmentsCommand.Parameters.AddWithValue("@METHODID", instalment.PaymentMethod.id);
+                        instalmentsCommand.Parameters.AddWithValue("@DAYS", instalment.TotalDays);
+                        instalmentsCommand.Parameters.AddWithValue("@VALUEPERC", instalment.ValuePercentage);
+                        instalmentsCommand.Parameters.AddWithValue("@DC", instalment.dateOfCreation);
+                        instalmentsCommand.Parameters.AddWithValue("@DU", instalment.dateOfLastUpdate);
+
+                        instalmentsCommand.ExecuteNonQuery();
                     }
+                    //>BillsInstalments
+
+                    tran.Commit();
+                    status = true;
                 }
-                catch (Exception ex)
+                catch (SqlException ex)
                 {
+                    tran.Rollback();
                     MessageBox.Show("Erro: " + ex.Message);
-                    return status;
+                    status = false;
                 }
                 finally
                 {

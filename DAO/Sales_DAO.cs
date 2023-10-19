@@ -130,69 +130,108 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
         //        return status;
         //    }
         //}
-        public bool SaveToDb(Sales sale)
+        public bool SaveToDb(Sales sale, List<BillsToReceive> billList)
         {
             bool status = false;
 
-            string sql = "INSERT INTO SALES (CLIENT_ID, USER_ID, SALE_TOTAL_COST, SALE_TOTAL_VALUE, " +
+            string sqlSale = "INSERT INTO SALES (CLIENT_ID, USER_ID, SALE_TOTAL_COST, SALE_TOTAL_VALUE, " +
                 "TOTAL_ITEMS_QUANTITY, DATE_CREATION, SALE_CANCEL_DATE, paycondition_id ) "
                          + " VALUES (@CLIENTID, @USERID, @SALECOST, @SALEVALUE, @TOTALQTD, @DC, @CANCELDATE, @PAYCONDID);";
+
+            string sqlItemsSale = "INSERT INTO SALEITEMS ( SALE_ID, PRODUCT_ID, QUANTITY, ITEM_VALUE, ITEM_COST, DISCOUNT_CASH," +
+                "TOTAL_VALUE , DATE_CREATION, DATE_LAST_UPDATE ) "
+                         + " VALUES (@ID, @PRODID, @QTD, @PRODVALUE, @PRODCOST, @DISCCASH, @TOTALVALUE, @DC, @DU);";
+            string sqlBillsToReceive = "INSERT INTO BILLSTORECEIVE (ID_BILL, SALE_ID, INSTALMENTVALUE, ISPAID, CLIENT_ID, PAYMETHOD_ID, INSTALMENTNUMBER, " +
+                "INSTALMENTSQTD, DUEDATE, EMISSIONDATE, PAIDDATE, DATE_CREATION, DATE_LAST_UPDATE, DATE_CANCELLED, PAYCOND_ID, USER_ID ) "
+                         + " VALUES (@BILLID, @SALEID, @IVALUE, @ISPAID, @CLIENTID, @METHODID, @INUM, @IQTD, @DUEDATE, @EMDATE, @PDATE, @DC, @DU, @DCANCEL, @PAYCONDID, @USERID);";
+            string sqlStockChange = "UPDATE PRODUCTS SET STOCK = @RESTOCK WHERE ID_PRODUCT = @ID ; ";
+
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+                SqlTransaction tran = connection.BeginTransaction();
                 try
-                {
-                    SqlCommand command = new SqlCommand(sql, connection);
+                {                
+                    //<Sale
+                    SqlCommand command = new SqlCommand(sqlSale, connection);
+                    command.Transaction = tran;
                     command.Parameters.AddWithValue("@CLIENTID", sale.Client.id);
                     command.Parameters.AddWithValue("@USERID", sale.User.id);
-                    command.Parameters.AddWithValue("@SALECOST", (decimal)sale.TotalCost);
-                    command.Parameters.AddWithValue("@SALEVALUE", (decimal)sale.TotalValue);
+                    command.Parameters.AddWithValue("@SALECOST", sale.TotalCost);
+                    command.Parameters.AddWithValue("@SALEVALUE", sale.TotalValue);
                     command.Parameters.AddWithValue("@TOTALQTD", sale.TotalItemsQuantity);
                     command.Parameters.AddWithValue("@PAYCONDID", sale.PaymentCondition.id);
-                    command.Parameters.AddWithValue("@DC", sale.dateOfCreation);
-                    if (sale.CancelDate == null)
-                    {
-                        command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@CANCELDATE", sale.CancelDate);
-                    }
+                    command.Parameters.AddWithValue("@DC", DateTime.Now);
+                    command.Parameters.AddWithValue("@CANCELDATE", DBNull.Value);
 
-                    connection.Open();
-                    //int i = command.ExecuteNonQuery();
-                    var i = command.ExecuteNonQuery();
-                    connection.Close();
-                    if (i > 0)
+                    command.ExecuteNonQuery();
+                    //>Sale
+
+                    //<ProductStock
+                    foreach (var prod in sale.SaleItems)
                     {
-                        Products_Controller prodController = new Products_Controller();
-                        foreach (SaleItems item in sale.SaleItems)
-                        {
-                            if (item != null)
-                            {
-                                status = _saleItemsController.SaveItem(item);
-                                status = prodController.RemoveStock(item.Product.id, item.Quantity);
-                                if (!status)
-                                {
-                                    break;
-                                }
-                            }
-                        }
-                        if (status)
-                        {
-                            MessageBox.Show("Venda salva com sucesso.");
-                        }
+                        SqlCommand commandStockChange = new SqlCommand(sqlStockChange, connection);
+                        commandStockChange.Transaction = tran;
+                        commandStockChange.Parameters.AddWithValue("@ID", prod.Product.id);
+                        commandStockChange.Parameters.AddWithValue("@RESTOCK", prod.Product.stock - prod.Quantity);
+
+                        commandStockChange.ExecuteNonQuery();
                     }
-                }
-                catch (SqlException ex)
-                {
-                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+                    //>ProductStock
+
+                    int newId = this.GetLastId();
+
+                    //<ItemsSale
+                    foreach (var obj in sale.SaleItems)
                     {
-                        MessageBox.Show("Erro: " + ex.Message);
-                        return false;
+                        SqlCommand commandItemsSale = new SqlCommand(sqlItemsSale, connection);
+                        commandItemsSale.Transaction = tran;
+                        commandItemsSale.Parameters.AddWithValue("@ID", newId);
+                        commandItemsSale.Parameters.AddWithValue("@PRODID", obj.Product.id);
+                        commandItemsSale.Parameters.AddWithValue("@PRODVALUE", obj.ProductValue);
+                        commandItemsSale.Parameters.AddWithValue("@PRODCOST", obj.ProductCost);
+                        commandItemsSale.Parameters.AddWithValue("@TOTALVALUE", obj.TotalValue);
+                        commandItemsSale.Parameters.AddWithValue("@DISCCASH", obj.ItemDiscountCash);
+                        commandItemsSale.Parameters.AddWithValue("@QTD", obj.Quantity);
+                        commandItemsSale.Parameters.AddWithValue("@DC", DateTime.Now.Date);
+                        commandItemsSale.Parameters.AddWithValue("@DU", DateTime.Now.Date);
+
+                        commandItemsSale.ExecuteNonQuery();
                     }
+                    //>ItemsSale
+
+                    //<BillsToReceive
+                    foreach (var obj in billList)
+                    {
+                        SqlCommand commandBills = new SqlCommand(sqlBillsToReceive, connection);
+                        commandBills.Transaction = tran;
+                        commandBills.Parameters.AddWithValue("@BILLID", newId);
+                        commandBills.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
+                        commandBills.Parameters.AddWithValue("@CLIENTID", obj.Client.id);
+                        commandBills.Parameters.AddWithValue("@SALEID", obj.Sale.id);
+                        commandBills.Parameters.AddWithValue("@METHODID", obj.PaymentMethod.id);
+                        commandBills.Parameters.AddWithValue("@INUM", obj.InstalmentNumber);
+                        commandBills.Parameters.AddWithValue("@IQTD", obj.InstalmentsQtd);
+                        commandBills.Parameters.AddWithValue("@IVALUE", obj.InstalmentValue);
+                        commandBills.Parameters.AddWithValue("@EMDATE", obj.EmissionDate);
+                        commandBills.Parameters.AddWithValue("@PAYCONDID", obj.PaymentCondition.id);
+                        commandBills.Parameters.AddWithValue("@DUEDATE", obj.DueDate);
+                        commandBills.Parameters.AddWithValue("@USERID", obj.User.id);
+                        commandBills.Parameters.AddWithValue("@PDATE", DBNull.Value);
+                        commandBills.Parameters.AddWithValue("@DCANCEL", DBNull.Value);
+                        commandBills.Parameters.AddWithValue("@DC", DateTime.Now);
+                        commandBills.Parameters.AddWithValue("@DU", DateTime.Now.Date);
+
+                        commandBills.ExecuteNonQuery();
+                    }
+                    //>BillsToReceive
+                    tran.Commit();
+                    status = true;
+                    MessageBox.Show("Venda salva com sucesso.");
                 }
                 catch (Exception ex)
                 {
+                    tran.Rollback();
                     MessageBox.Show("Erro: " + ex.Message);
                     return status;
                 }
@@ -668,105 +707,141 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
             }
         }
 
-        public bool CancelSale(int id)
-        {
-            bool status = false;
-            string sql;
-            sql = "UPDATE SALES SET SALE_CANCEL_DATE = @CANCELDATE " +
-                  "WHERE ID_SALE = @ID ; ";
+        //public bool CancelSale(int id)
+        //{
+        //    bool status = false;
+        //    string sql;
+        //    sql = "UPDATE SALES SET SALE_CANCEL_DATE = @CANCELDATE " +
+        //          "WHERE ID_SALE = @ID ; ";
 
-            using (SqlConnection connection = new SqlConnection(connectionString))
-            {
-                try
-                {
-                    SqlCommand command = new SqlCommand(sql, connection);
-                    command.Parameters.AddWithValue("@ID", id);
-                    command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
+        //    using (SqlConnection connection = new SqlConnection(connectionString))
+        //    {
+        //        try
+        //        {
+        //            SqlCommand command = new SqlCommand(sql, connection);
+        //            command.Parameters.AddWithValue("@ID", id);
+        //            command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
 
-                    connection.Open();
-                    int i = command.ExecuteNonQuery();
-                    connection.Close();
-                    if (i > 0)
-                    {
-                        status = true;
-                        if (status)
-                        {
-                            Products_Controller prodController = new Products_Controller();
-                            var obj = this.SelectFromDb(id);
-                            foreach (var prod in obj.SaleItems)
-                            {
-                                status = prodController.RestoreStock(prod.id, prod.Quantity);
-                            }
-                        }
-                        if (status)
-                        {
-                            MessageBox.Show("Venda Cancelada com sucesso.");
-                        }
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
-                    {
-                        Console.WriteLine(ex.Message);
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Erro: " + ex.Message);
-                    return false;
-                }
-                finally
-                {
-                    connection.Close();
-                }
-                return status;
-            }
-        }
+        //            connection.Open();
+        //            int i = command.ExecuteNonQuery();
+        //            connection.Close();
+        //            if (i > 0)
+        //            {
+        //                status = true;
+        //                if (status)
+        //                {
+        //                    Products_Controller prodController = new Products_Controller();
+        //                    var obj = this.SelectFromDb(id);
+        //                    foreach (var prod in obj.SaleItems)
+        //                    {
+        //                        status = prodController.RestoreStock(prod.id, prod.Quantity);
+        //                    }
+        //                }
+        //                if (status)
+        //                {
+        //                    MessageBox.Show("Venda Cancelada com sucesso.");
+        //                }
+        //            }
+        //        }
+        //        catch (SqlException ex)
+        //        {
+        //            if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
+        //            {
+        //                Console.WriteLine(ex.Message);
+        //            }
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            MessageBox.Show("Erro: " + ex.Message);
+        //            return false;
+        //        }
+        //        finally
+        //        {
+        //            connection.Close();
+        //        }
+        //        return status;
+        //    }
+        //}
 
         public bool CancelSale(Sales sale)
         {
             bool status = false;
-            string sql;
-            sql = "UPDATE SALES SET SALE_CANCEL_DATE = @CANCELDATE " +
+            string sqlSale = "UPDATE SALES SET SALE_CANCEL_DATE = @CANCELDATE, CANCEL_MOTIVE = @CANCELMOT, USER_ID = @USER " +
                   "WHERE ID_SALE = @ID ; ";
+            string sqlBills = "UPDATE BILLSTORECEIVE SET DATE_CANCELLED = @CANCELDATE, MOTIVE_CANCELLED = @CANCELMOT, USER_ID = @USERID, DATE_LAST_UPDATE = @UPDATE " +
+                    "WHERE SALE_ID = @SALEID; ";
+            string sqlAddStock = "UPDATE PRODUCTS SET STOCK = STOCK + @RESTOCK " +
+                    "WHERE ID_PRODUCT = @ID ; ";
+            string sqlItemsSale = "UPDATE SALEITEMS SET CANCEL_DATE = @CANCELDATE WHERE SALE_ID = @SALEID; ";
+
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
+                connection.Open();
+                SqlTransaction tran = connection.BeginTransaction();
                 try
                 {
-                    SqlCommand command = new SqlCommand(sql, connection);
+                    //<Sale
+                    SqlCommand command = new SqlCommand(sqlSale, connection);
+                    command.Transaction = tran;
                     command.Parameters.AddWithValue("@ID", sale.id);
+                    command.Parameters.AddWithValue("@USER", sale.User.id);
+                    command.Parameters.AddWithValue("@CANCELMOT", sale.CancelMotive);
                     command.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
 
-                    connection.Open();
-                    int i = command.ExecuteNonQuery();
-                    connection.Close();
-                    if (i > 0)
+                    command.ExecuteNonQuery();
+                    //>Sale
+
+                    //<Bills
+                    SqlCommand commandBills = new SqlCommand(sqlBills, connection);
+                    commandBills.Transaction = tran;
+                    commandBills.Parameters.AddWithValue("@USER", sale.User.id);
+                    commandBills.Parameters.AddWithValue("@CANCELMOT", sale.CancelMotive);
+                    commandBills.Parameters.AddWithValue("@CANCELDATE", DateTime.Today.Date);
+                    commandBills.Parameters.AddWithValue("@UPDATE", DateTime.Today.Date);
+                    commandBills.Parameters.AddWithValue("@SALEID", sale.id);
+                    commandBills.Parameters.AddWithValue("@USERID", sale.User.id);
+
+                    commandBills.ExecuteNonQuery();
+                    //>Bills
+
+                    //<SaleItems
+                    SqlCommand commandItemsSale = new SqlCommand(sqlItemsSale, connection);
+                    commandItemsSale.Transaction = tran;
+                    commandItemsSale.Parameters.AddWithValue("@ID", sale.id);
+
+                    commandItemsSale.ExecuteNonQuery();
+                    //>SaleItems
+
+                    //<Stock
+                    foreach (var obj in sale.SaleItems)
                     {
-                        status = true;
-                        Products_Controller prodController = new Products_Controller();
-                        foreach (var prod in sale.SaleItems)
-                        {
-                            status = prodController.RestoreStock(prod.Product.id, prod.Quantity);
-                        }
-                        if (status)
-                        {
-                            MessageBox.Show("Venda Cancelada com sucesso!");
-                        }
+                        SqlCommand commandStock = new SqlCommand(sqlAddStock, connection);
+                        commandStock.Transaction = tran;
+                        commandStock.Parameters.AddWithValue("@RESTOCK", obj.Quantity);
+                        commandStock.Parameters.AddWithValue("@ID", obj.Product.id);
+
+                        commandStock.ExecuteNonQuery();
                     }
+                    //>Stock
+
+                    tran.Commit();
+                    status = true;                  
                 }
                 catch (SqlException ex)
                 {
+                    tran.Rollback();
                     if (ex.Number == 50000 && ex.Class == 16 && ex.State == 1)
                     {
                         Console.WriteLine(ex.Message);
+                        return status;
                     }
                 }
                 catch (Exception ex)
                 {
+                    tran.Rollback();
                     MessageBox.Show("Erro: " + ex.Message);
-                    return false;
+                    return status;
                 }
                 finally
                 {

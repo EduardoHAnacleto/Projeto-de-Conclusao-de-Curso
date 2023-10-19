@@ -41,6 +41,7 @@
             this.BillSeries = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchaseSupplierName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchaseTotalValue = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.PurchasePaymentCondition = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchaseDateCreation = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.PurchaseCancelDate = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.edt_id)).BeginInit();
@@ -76,6 +77,7 @@
             this.BillSeries,
             this.PurchaseSupplierName,
             this.PurchaseTotalValue,
+            this.PurchasePaymentCondition,
             this.PurchaseDateCreation,
             this.PurchaseCancelDate});
             this.DGV_Purchases.Location = new System.Drawing.Point(10, 49);
@@ -168,21 +170,21 @@
             this.BillNumber.HeaderText = "Número";
             this.BillNumber.Name = "BillNumber";
             this.BillNumber.ReadOnly = true;
-            this.BillNumber.Width = 65;
+            this.BillNumber.Width = 60;
             // 
             // BillModel
             // 
             this.BillModel.HeaderText = "Modelo";
             this.BillModel.Name = "BillModel";
             this.BillModel.ReadOnly = true;
-            this.BillModel.Width = 65;
+            this.BillModel.Width = 60;
             // 
             // BillSeries
             // 
             this.BillSeries.HeaderText = "Série";
             this.BillSeries.Name = "BillSeries";
             this.BillSeries.ReadOnly = true;
-            this.BillSeries.Width = 65;
+            this.BillSeries.Width = 60;
             // 
             // PurchaseSupplierName
             // 
@@ -196,6 +198,14 @@
             this.PurchaseTotalValue.HeaderText = "Valor Total";
             this.PurchaseTotalValue.Name = "PurchaseTotalValue";
             this.PurchaseTotalValue.ReadOnly = true;
+            this.PurchaseTotalValue.Width = 70;
+            // 
+            // PurchasePaymentCondition
+            // 
+            this.PurchasePaymentCondition.HeaderText = "Condição de Pagamento";
+            this.PurchasePaymentCondition.Name = "PurchasePaymentCondition";
+            this.PurchasePaymentCondition.ReadOnly = true;
+            this.PurchasePaymentCondition.Width = 150;
             // 
             // PurchaseDateCreation
             // 
@@ -263,6 +273,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn BillSeries;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseSupplierName;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseTotalValue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn PurchasePaymentCondition;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseDateCreation;
         private System.Windows.Forms.DataGridViewTextBoxColumn PurchaseCancelDate;
     }

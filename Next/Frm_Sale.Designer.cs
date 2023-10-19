@@ -107,6 +107,8 @@
             this.gbox_Status = new System.Windows.Forms.GroupBox();
             this.check_Active = new System.Windows.Forms.CheckBox();
             this.check_Cancelled = new System.Windows.Forms.CheckBox();
+            this.gbox_motive = new System.Windows.Forms.GroupBox();
+            this.txt_cancelMotive = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleProducts)).BeginInit();
             this.gbox_Salesman.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.edt_userId)).BeginInit();
@@ -130,6 +132,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.edt_payConditionId)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleSummary)).BeginInit();
             this.gbox_Status.SuspendLayout();
+            this.gbox_motive.SuspendLayout();
             this.SuspendLayout();
             // 
             // DGV_SaleProducts
@@ -148,14 +151,14 @@
             this.ProductDiscoutCash,
             this.UnValueProduct,
             this.ProductTotalValue});
-            this.DGV_SaleProducts.Location = new System.Drawing.Point(3, 67);
+            this.DGV_SaleProducts.Location = new System.Drawing.Point(3, 56);
             this.DGV_SaleProducts.MultiSelect = false;
             this.DGV_SaleProducts.Name = "DGV_SaleProducts";
             this.DGV_SaleProducts.ReadOnly = true;
             this.DGV_SaleProducts.RowHeadersVisible = false;
             this.DGV_SaleProducts.RowHeadersWidth = 51;
             this.DGV_SaleProducts.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DGV_SaleProducts.Size = new System.Drawing.Size(1168, 215);
+            this.DGV_SaleProducts.Size = new System.Drawing.Size(1201, 225);
             this.DGV_SaleProducts.TabIndex = 5;
             this.DGV_SaleProducts.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.DGV_SaleProducts_CellValueChanged);
             this.DGV_SaleProducts.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.DGV_SaleProducts_RowsRemoved);
@@ -216,7 +219,7 @@
             this.gbox_Salesman.Controls.Add(this.edt_userName);
             this.gbox_Salesman.Controls.Add(this.lbl_userSalesman);
             this.gbox_Salesman.Controls.Add(this.lbl_userId);
-            this.gbox_Salesman.Location = new System.Drawing.Point(12, 502);
+            this.gbox_Salesman.Location = new System.Drawing.Point(12, 534);
             this.gbox_Salesman.Name = "gbox_Salesman";
             this.gbox_Salesman.Size = new System.Drawing.Size(259, 100);
             this.gbox_Salesman.TabIndex = 7;
@@ -352,7 +355,7 @@
             // lbl_productName
             // 
             this.lbl_productName.AutoSize = true;
-            this.lbl_productName.Location = new System.Drawing.Point(45, 25);
+            this.lbl_productName.Location = new System.Drawing.Point(45, 16);
             this.lbl_productName.Name = "lbl_productName";
             this.lbl_productName.Size = new System.Drawing.Size(44, 13);
             this.lbl_productName.TabIndex = 9;
@@ -360,7 +363,7 @@
             // 
             // edt_productName
             // 
-            this.edt_productName.Location = new System.Drawing.Point(48, 41);
+            this.edt_productName.Location = new System.Drawing.Point(48, 32);
             this.edt_productName.MaxLength = 50;
             this.edt_productName.Name = "edt_productName";
             this.edt_productName.Size = new System.Drawing.Size(189, 20);
@@ -376,7 +379,7 @@
             this.gbox_options.Controls.Add(this.btn_Save);
             this.gbox_options.Controls.Add(this.btn_FindClient);
             this.gbox_options.Controls.Add(this.btn_new);
-            this.gbox_options.Location = new System.Drawing.Point(12, 408);
+            this.gbox_options.Location = new System.Drawing.Point(12, 440);
             this.gbox_options.Name = "gbox_options";
             this.gbox_options.Size = new System.Drawing.Size(261, 88);
             this.gbox_options.TabIndex = 11;
@@ -386,7 +389,7 @@
             // lbl_findClient
             // 
             this.lbl_findClient.AutoSize = true;
-            this.lbl_findClient.Location = new System.Drawing.Point(77, 72);
+            this.lbl_findClient.Location = new System.Drawing.Point(85, 72);
             this.lbl_findClient.Name = "lbl_findClient";
             this.lbl_findClient.Size = new System.Drawing.Size(39, 13);
             this.lbl_findClient.TabIndex = 6;
@@ -395,7 +398,7 @@
             // lbl_new
             // 
             this.lbl_new.AutoSize = true;
-            this.lbl_new.Location = new System.Drawing.Point(18, 73);
+            this.lbl_new.Location = new System.Drawing.Point(6, 72);
             this.lbl_new.Name = "lbl_new";
             this.lbl_new.Size = new System.Drawing.Size(33, 13);
             this.lbl_new.TabIndex = 5;
@@ -404,7 +407,7 @@
             // lbl_Save
             // 
             this.lbl_Save.AutoSize = true;
-            this.lbl_Save.Location = new System.Drawing.Point(139, 73);
+            this.lbl_Save.Location = new System.Drawing.Point(147, 73);
             this.lbl_Save.Name = "lbl_Save";
             this.lbl_Save.Size = new System.Drawing.Size(37, 13);
             this.lbl_Save.TabIndex = 4;
@@ -412,7 +415,7 @@
             // 
             // btn_Close
             // 
-            this.btn_Close.Location = new System.Drawing.Point(192, 19);
+            this.btn_Close.Location = new System.Drawing.Point(200, 19);
             this.btn_Close.Name = "btn_Close";
             this.btn_Close.Size = new System.Drawing.Size(57, 51);
             this.btn_Close.TabIndex = 3;
@@ -422,7 +425,7 @@
             // 
             // btn_Save
             // 
-            this.btn_Save.Location = new System.Drawing.Point(129, 19);
+            this.btn_Save.Location = new System.Drawing.Point(137, 19);
             this.btn_Save.Name = "btn_Save";
             this.btn_Save.Size = new System.Drawing.Size(57, 51);
             this.btn_Save.TabIndex = 2;
@@ -432,7 +435,7 @@
             // 
             // btn_FindClient
             // 
-            this.btn_FindClient.Location = new System.Drawing.Point(66, 19);
+            this.btn_FindClient.Location = new System.Drawing.Point(74, 19);
             this.btn_FindClient.Name = "btn_FindClient";
             this.btn_FindClient.Size = new System.Drawing.Size(57, 51);
             this.btn_FindClient.TabIndex = 1;
@@ -453,7 +456,7 @@
             // lbl_barCode
             // 
             this.lbl_barCode.AutoSize = true;
-            this.lbl_barCode.Location = new System.Drawing.Point(240, 24);
+            this.lbl_barCode.Location = new System.Drawing.Point(240, 15);
             this.lbl_barCode.Name = "lbl_barCode";
             this.lbl_barCode.Size = new System.Drawing.Size(88, 13);
             this.lbl_barCode.TabIndex = 13;
@@ -462,7 +465,7 @@
             // lbl_productId
             // 
             this.lbl_productId.AutoSize = true;
-            this.lbl_productId.Location = new System.Drawing.Point(3, 24);
+            this.lbl_productId.Location = new System.Drawing.Point(3, 15);
             this.lbl_productId.Name = "lbl_productId";
             this.lbl_productId.Size = new System.Drawing.Size(18, 13);
             this.lbl_productId.TabIndex = 16;
@@ -471,7 +474,7 @@
             // lbl_qntdAmount
             // 
             this.lbl_qntdAmount.AutoSize = true;
-            this.lbl_qntdAmount.Location = new System.Drawing.Point(474, 25);
+            this.lbl_qntdAmount.Location = new System.Drawing.Point(474, 16);
             this.lbl_qntdAmount.Name = "lbl_qntdAmount";
             this.lbl_qntdAmount.Size = new System.Drawing.Size(62, 13);
             this.lbl_qntdAmount.TabIndex = 18;
@@ -479,7 +482,7 @@
             // 
             // btn_FindProduct
             // 
-            this.btn_FindProduct.Location = new System.Drawing.Point(342, 40);
+            this.btn_FindProduct.Location = new System.Drawing.Point(342, 31);
             this.btn_FindProduct.Name = "btn_FindProduct";
             this.btn_FindProduct.Size = new System.Drawing.Size(58, 20);
             this.btn_FindProduct.TabIndex = 3;
@@ -489,9 +492,9 @@
             // 
             // btn_AddProduct
             // 
-            this.btn_AddProduct.Location = new System.Drawing.Point(1109, 41);
+            this.btn_AddProduct.Location = new System.Drawing.Point(1061, 30);
             this.btn_AddProduct.Name = "btn_AddProduct";
-            this.btn_AddProduct.Size = new System.Drawing.Size(59, 20);
+            this.btn_AddProduct.Size = new System.Drawing.Size(59, 22);
             this.btn_AddProduct.TabIndex = 7;
             this.btn_AddProduct.Text = "Adicionar";
             this.btn_AddProduct.UseVisualStyleBackColor = true;
@@ -500,7 +503,7 @@
             // lbl_TotalCost
             // 
             this.lbl_TotalCost.AutoSize = true;
-            this.lbl_TotalCost.Location = new System.Drawing.Point(1030, 25);
+            this.lbl_TotalCost.Location = new System.Drawing.Point(982, 16);
             this.lbl_TotalCost.Name = "lbl_TotalCost";
             this.lbl_TotalCost.Size = new System.Drawing.Size(58, 13);
             this.lbl_TotalCost.TabIndex = 24;
@@ -531,9 +534,9 @@
             this.gbox_Product.Controls.Add(this.btn_AddProduct);
             this.gbox_Product.Controls.Add(this.lbl_productId);
             this.gbox_Product.Controls.Add(this.lbl_qntdAmount);
-            this.gbox_Product.Location = new System.Drawing.Point(12, 114);
+            this.gbox_Product.Location = new System.Drawing.Point(12, 147);
             this.gbox_Product.Name = "gbox_Product";
-            this.gbox_Product.Size = new System.Drawing.Size(1168, 288);
+            this.gbox_Product.Size = new System.Drawing.Size(1204, 287);
             this.gbox_Product.TabIndex = 25;
             this.gbox_Product.TabStop = false;
             this.gbox_Product.Text = "Produtos";
@@ -541,7 +544,7 @@
             // lbl_und
             // 
             this.lbl_und.AutoSize = true;
-            this.lbl_und.Location = new System.Drawing.Point(403, 25);
+            this.lbl_und.Location = new System.Drawing.Point(403, 16);
             this.lbl_und.Name = "lbl_und";
             this.lbl_und.Size = new System.Drawing.Size(31, 13);
             this.lbl_und.TabIndex = 37;
@@ -550,7 +553,7 @@
             // edt_und
             // 
             this.edt_und.Enabled = false;
-            this.edt_und.Location = new System.Drawing.Point(406, 39);
+            this.edt_und.Location = new System.Drawing.Point(406, 30);
             this.edt_und.Name = "edt_und";
             this.edt_und.Size = new System.Drawing.Size(61, 20);
             this.edt_und.TabIndex = 36;
@@ -558,7 +561,7 @@
             // lbl_prodUnValue
             // 
             this.lbl_prodUnValue.AutoSize = true;
-            this.lbl_prodUnValue.Location = new System.Drawing.Point(608, 25);
+            this.lbl_prodUnValue.Location = new System.Drawing.Point(608, 16);
             this.lbl_prodUnValue.Name = "lbl_prodUnValue";
             this.lbl_prodUnValue.Size = new System.Drawing.Size(50, 13);
             this.lbl_prodUnValue.TabIndex = 35;
@@ -566,9 +569,9 @@
             // 
             // btn_DeleteItem
             // 
-            this.btn_DeleteItem.Location = new System.Drawing.Point(1093, 6);
+            this.btn_DeleteItem.Location = new System.Drawing.Point(1126, 31);
             this.btn_DeleteItem.Name = "btn_DeleteItem";
-            this.btn_DeleteItem.Size = new System.Drawing.Size(75, 23);
+            this.btn_DeleteItem.Size = new System.Drawing.Size(75, 19);
             this.btn_DeleteItem.TabIndex = 30;
             this.btn_DeleteItem.Text = "Excluir Item";
             this.btn_DeleteItem.UseVisualStyleBackColor = true;
@@ -577,7 +580,7 @@
             // lbl_ProdDiscCash
             // 
             this.lbl_ProdDiscCash.AutoSize = true;
-            this.lbl_ProdDiscCash.Location = new System.Drawing.Point(540, 25);
+            this.lbl_ProdDiscCash.Location = new System.Drawing.Point(540, 16);
             this.lbl_ProdDiscCash.Name = "lbl_ProdDiscCash";
             this.lbl_ProdDiscCash.Size = new System.Drawing.Size(62, 13);
             this.lbl_ProdDiscCash.TabIndex = 33;
@@ -587,7 +590,7 @@
             // 
             this.edt_ProdUnValue.DecimalPlaces = 2;
             this.edt_ProdUnValue.Enabled = false;
-            this.edt_ProdUnValue.Location = new System.Drawing.Point(608, 39);
+            this.edt_ProdUnValue.Location = new System.Drawing.Point(608, 30);
             this.edt_ProdUnValue.Maximum = new decimal(new int[] {
             9999999,
             0,
@@ -601,7 +604,7 @@
             // edt_ProdDiscCash
             // 
             this.edt_ProdDiscCash.DecimalPlaces = 2;
-            this.edt_ProdDiscCash.Location = new System.Drawing.Point(539, 39);
+            this.edt_ProdDiscCash.Location = new System.Drawing.Point(539, 30);
             this.edt_ProdDiscCash.Maximum = new decimal(new int[] {
             99999,
             0,
@@ -614,7 +617,7 @@
             // 
             // edt_barCode
             // 
-            this.edt_barCode.Location = new System.Drawing.Point(243, 40);
+            this.edt_barCode.Location = new System.Drawing.Point(243, 31);
             this.edt_barCode.Maximum = new decimal(new int[] {
             -559939585,
             902409669,
@@ -629,7 +632,7 @@
             // 
             // edt_amount
             // 
-            this.edt_amount.Location = new System.Drawing.Point(477, 39);
+            this.edt_amount.Location = new System.Drawing.Point(477, 30);
             this.edt_amount.Maximum = new decimal(new int[] {
             1000,
             0,
@@ -650,7 +653,7 @@
             // 
             this.edt_totalPValue.DecimalPlaces = 2;
             this.edt_totalPValue.Enabled = false;
-            this.edt_totalPValue.Location = new System.Drawing.Point(1033, 41);
+            this.edt_totalPValue.Location = new System.Drawing.Point(985, 32);
             this.edt_totalPValue.Maximum = new decimal(new int[] {
             1410065407,
             2,
@@ -663,7 +666,7 @@
             // 
             // edt_productId
             // 
-            this.edt_productId.Location = new System.Drawing.Point(6, 40);
+            this.edt_productId.Location = new System.Drawing.Point(6, 31);
             this.edt_productId.Maximum = new decimal(new int[] {
             1410065407,
             2,
@@ -754,7 +757,7 @@
             this.gbox_paymentCondition.Controls.Add(this.edt_payCondition);
             this.gbox_paymentCondition.Controls.Add(this.edt_payConditionId);
             this.gbox_paymentCondition.Controls.Add(this.lbl_payConditionID);
-            this.gbox_paymentCondition.Location = new System.Drawing.Point(366, 408);
+            this.gbox_paymentCondition.Location = new System.Drawing.Point(402, 468);
             this.gbox_paymentCondition.Name = "gbox_paymentCondition";
             this.gbox_paymentCondition.Size = new System.Drawing.Size(817, 166);
             this.gbox_paymentCondition.TabIndex = 27;
@@ -959,7 +962,7 @@
             this.SaleSubTotal,
             this.SaleTotal});
             this.DGV_SaleSummary.Enabled = false;
-            this.DGV_SaleSummary.Location = new System.Drawing.Point(1027, 16);
+            this.DGV_SaleSummary.Location = new System.Drawing.Point(1063, 16);
             this.DGV_SaleSummary.MultiSelect = false;
             this.DGV_SaleSummary.Name = "DGV_SaleSummary";
             this.DGV_SaleSummary.ReadOnly = true;
@@ -1021,11 +1024,37 @@
             this.check_Cancelled.UseVisualStyleBackColor = true;
             this.check_Cancelled.CheckedChanged += new System.EventHandler(this.check_Cancelled_CheckedChanged);
             // 
+            // gbox_motive
+            // 
+            this.gbox_motive.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.gbox_motive.Controls.Add(this.txt_cancelMotive);
+            this.gbox_motive.Location = new System.Drawing.Point(713, 8);
+            this.gbox_motive.Name = "gbox_motive";
+            this.gbox_motive.Size = new System.Drawing.Size(344, 139);
+            this.gbox_motive.TabIndex = 31;
+            this.gbox_motive.TabStop = false;
+            this.gbox_motive.Text = "Motivo de cancelamento";
+            this.gbox_motive.Visible = false;
+            // 
+            // txt_cancelMotive
+            // 
+            this.txt_cancelMotive.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.txt_cancelMotive.Font = new System.Drawing.Font("Arial", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_cancelMotive.Location = new System.Drawing.Point(6, 19);
+            this.txt_cancelMotive.MaxLength = 50;
+            this.txt_cancelMotive.Name = "txt_cancelMotive";
+            this.txt_cancelMotive.Size = new System.Drawing.Size(332, 114);
+            this.txt_cancelMotive.TabIndex = 0;
+            this.txt_cancelMotive.Text = "";
+            // 
             // Frm_Sale
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1187, 613);
+            this.ClientSize = new System.Drawing.Size(1223, 645);
+            this.Controls.Add(this.gbox_motive);
             this.Controls.Add(this.gbox_Status);
             this.Controls.Add(this.DGV_SaleSummary);
             this.Controls.Add(this.gbox_paymentCondition);
@@ -1067,6 +1096,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.DGV_SaleSummary)).EndInit();
             this.gbox_Status.ResumeLayout(false);
             this.gbox_Status.PerformLayout();
+            this.gbox_motive.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -1151,5 +1181,7 @@
         private System.Windows.Forms.CheckBox check_Cancelled;
         private System.Windows.Forms.Label lbl_und;
         private System.Windows.Forms.TextBox edt_und;
+        private System.Windows.Forms.GroupBox gbox_motive;
+        private System.Windows.Forms.RichTextBox txt_cancelMotive;
     }
 }

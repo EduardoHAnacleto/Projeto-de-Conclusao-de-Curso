@@ -24,8 +24,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Authorization
             {
                 return true;
             }
-            MessageBox.Show("Usuário não autorizado.");
-            return false;
+            else
+            {
+                MessageBox.Show("Usuário não autorizado.");
+                return false;
+            }
         }
 
         public void WriteUserLogin()

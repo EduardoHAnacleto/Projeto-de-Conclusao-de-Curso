@@ -101,8 +101,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
             else if (btn_new.Text == "Cancelar")
             {
-                medt_CancelDate.Text = DateTime.Now.ToString();
-                this.Save();
+                if (txt_cancelMotive.Text.Length < 5)
+                {
+                    gbox_motive.Visible = true;
+                    txt_cancelMotive.Enabled = true;
+                    MessageBox.Show("Digite o motivo de cancelamento na caixa de texto com mais de 5 caractéres.");
+                }
+                else
+                {
+                    medt_CancelDate.Text = DateTime.Now.ToString();
+                    this.Save();
+                }
             }
         }
 
@@ -126,7 +135,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     edt_productName.Text = product.productName;
                     edt_productName.Text = product.productName;
                     edt_barCode.Value = product.BarCode;
-                    edt_ProdUnValue.Value = (decimal)product.salePrice;
+                    edt_ProdUnValue.Value = product.salePrice;
                     edt_totalPValue.Value = edt_ProdUnValue.Value;
                     edt_und.Text = product.UND;
                 }
@@ -213,11 +222,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             var client = GetClient();
             if (client != null)
             {
+                if (ageRestricted == 0)
+                {
+                    return true;
+                }
                 if (ageRestricted == 1 && client.age > 18)
                 {
                     return true;
                 }
-                else
+                else 
                 {
                     string message = "Proibida a venda desse produto para menores de idade.";
                     string caption = "Venda proibida.";
@@ -566,26 +579,12 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                         if (ConfirmSale(sale))
                         {
                             sale.dateOfCreation = DateTime.Now;
-                            status = _controller.SaveItem(sale);
+                            List<BillsToReceive> billsToReceiveList = new List<BillsToReceive>();
+                            billsToReceiveList = BillsToReceive.MakeBills(sale, _User);
+                            status = _controller.SaveItem(sale, billsToReceiveList);
                             if (status)
                             {
-                                int saleId = _controller.GetLastId();
-                                List<BillsToReceive> billsToReceiveList = new List<BillsToReceive>();
-                                billsToReceiveList = BillsToReceive.MakeBills(sale,saleId, _User);
-                                foreach (BillsToReceive bill in billsToReceiveList)
-                                {
-                                    int billId = _BTRController.GetNewId();
-                                    bill.id = billId;
-                                    status = _BTRController.SaveItem(bill);
-                                    if (!status)
-                                    {
-                                        break;
-                                    }
-                                }
-                                if (status)
-                                {
-                                    Populated(false);
-                                }
+                                Populated(false);
                             }
                         }
                     }
@@ -602,7 +601,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                             DialogResult dialogResult = MessageBox.Show(message, caption, buttons, icon);
                             if (dialogResult == DialogResult.Yes)
                             {
-
                                 cancelledSale.CancelDate = DateTime.Now.Date;
                                 check_Active.Checked = false;
                                 check_Cancelled.Checked = true;
@@ -610,23 +608,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                                 status = _controller.CancelSale(cancelledSale);
                                 if (status)
                                 {
-                                    status = _BTRController.CancelBills(sale.id, _User.id);
-                                    if (status)
-                                    {
-                                        //foreach (var item in cancelledSale.SaleItems)
-                                        //{
-                                        //    _pController.RestoreStock(item.Product.id, item.Quantity);
-                                        //}
-                                        LockCamps();
-                                    }
-
+                                    LockCamps();
                                 }
                             }
                             else
                             {
                                 btn_new.Enabled = true;
                             }
-
                         }
                         else
                         {
@@ -686,6 +674,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             sale.SaleItems = this.GetSaleItems(idSale);
             sale.TotalCost = this.GetTotalCost(sale.SaleItems);
             sale.TotalItemsQuantity = DGV_SaleProducts.Rows.Count;
+            sale.CancelMotive = txt_cancelMotive.Text;
 
             return sale;
         }
@@ -791,8 +780,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
         public void SetFormToEdit()
         {
             var edit = "Cancelar";
+            var lblEdit = "Cancelar Venda";
             btn_new.Text = edit;
-            lbl_new.Text = edit;
+            lbl_new.Text = lblEdit;
             btn_new.Enabled = true;
             btn_Save.Enabled = false;
             btn_FindClient.Enabled = false;

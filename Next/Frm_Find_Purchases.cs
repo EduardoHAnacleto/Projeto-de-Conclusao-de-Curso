@@ -49,6 +49,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void PopulateDGVPurchases()
         {
             Suppliers_Controller supController = new Suppliers_Controller();
+            PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
             DGV_Purchases.Rows.Clear();
             DataTable dt = _controller.PopulateDGV();
             if (dt != null)
@@ -63,6 +64,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     //var idUser = Convert.ToInt32(dr["user_id"]);
                     var totalValue = Convert.ToDecimal(dr["purchase_TotalCost"]);
                     var emissionDate = Convert.ToDateTime(dr["emissionDate"]);
+                    var payCondName = payCondController.FindItemId(Convert.ToInt32(dr["paycondition_id"])).conditionName;
                     string cancelDate = null;
                     if (dr["cancelledDate"] != DBNull.Value)
                     {
@@ -75,6 +77,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         billSer,
                         supplierName,
                         totalValue,
+                        payCondName,
                         emissionDate.ToShortDateString(),
                         cancelDate
                         );
@@ -115,7 +118,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 else
                 {
                     NewPopulatedForm(obj);
-                    SetDataSourceToDGV();
+                    PopulateDGVPurchases();
                 }
             }
             else

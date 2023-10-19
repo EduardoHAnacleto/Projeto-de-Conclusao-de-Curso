@@ -34,7 +34,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public PaymentConditions PaymentCondition { get; set; }
         public string CancelMotive { get; set; }
 
-        public static List<BillsToReceive> MakeBills(Sales sale, int saleId, Users user)
+        public static List<BillsToReceive> MakeBills(Sales sale, Users user)
         {
             PaymentConditions_Controller condController = new PaymentConditions_Controller();
             DateTime emDate = DateTime.Now;
@@ -52,7 +52,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
                 bill.IsPaid = false;           
                 bill.Client = sale.Client;
                 bill.Sale = sale;
-                bill.Sale.id = saleId;
+                bill.Sale.id = sale.id;
                 bill.PaymentCondition = sale.PaymentCondition;
                 bill.EmissionDate = emDate;
                 bill.DueDate = emDate.AddDays(instalments.TotalDays);

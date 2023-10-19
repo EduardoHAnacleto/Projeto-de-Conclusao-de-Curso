@@ -25,5 +25,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public decimal TotalValue { get; set; }
         public List<SaleItems> SaleItems { get; set; }
         public int TotalItemsQuantity { get; set;}
+        public string CancelMotive { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
+using ProjetoEduardoAnacletoWindowsForm1.Authorization;
 using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
@@ -714,23 +715,26 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             }
             else
             {
-                if (gbox_cancelReason.Visible == false)
+                if (Authentication.Authenticate(User.AccessLevel, 3))
                 {
-                    gbox_cancelReason.Visible = true;
-                    MessageBox.Show("Digite o motivo de cancelamento.");
-                }
-                else
-                {
-                    if (txt_cancelMot.Text.Trim().Length > 5)
+                    if (gbox_cancelReason.Visible == false)
                     {
-                        Save();
-                        MessageBox.Show("Compra cancelada.");
+                        gbox_cancelReason.Visible = true;
+                        MessageBox.Show("Digite o motivo de cancelamento.");
                     }
                     else
                     {
-                        MessageBox.Show("Motivo de cancelamento deve ter mais de 5 caractéres.");
+                        if (txt_cancelMot.Text.Trim().Length > 5)
+                        {
+                            Save();
+                            MessageBox.Show("Compra cancelada.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Motivo de cancelamento deve ter mais de 5 caractéres.");
+                        }
                     }
-                }                               
+                }
             }
         }
 

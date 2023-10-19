@@ -20,11 +20,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
 
         }
 
-        public bool SaveItem(Sales sale)
+        public bool SaveItem(Sales sale, List<BillsToReceive> billList)
         {
             _sale = sale;
             _sale.dateOfLastUpdate = DateTime.Now;
-            return _salesDAO.SaveToDb(_sale);
+            return _salesDAO.SaveToDb(_sale, billList);
         }
         public new List<Sales> LoadItems()
         {
@@ -72,11 +72,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Controllers
         public int GetLastId()
         {
            return _salesDAO.GetLastId();
-        }
-
-        public bool CancelSale(int id)
-        {
-            return _salesDAO.CancelSale(id);
         }
 
         public bool CancelSale(Sales sale)

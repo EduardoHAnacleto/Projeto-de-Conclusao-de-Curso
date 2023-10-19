@@ -19,5 +19,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
         public decimal TotalValue { get; set; }
         public decimal ProductCost { get; set; }
         public decimal ItemDiscountCash { get; set; }
+        public DateTime? CancelDate { get; set; }
     }
 }
