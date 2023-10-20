@@ -208,7 +208,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         commandBills.Parameters.AddWithValue("@BILLID", newId);
                         commandBills.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
                         commandBills.Parameters.AddWithValue("@CLIENTID", obj.Client.id);
-                        commandBills.Parameters.AddWithValue("@SALEID", obj.Sale.id);
+                        commandBills.Parameters.AddWithValue("@SALEID", newId);
                         commandBills.Parameters.AddWithValue("@METHODID", obj.PaymentMethod.id);
                         commandBills.Parameters.AddWithValue("@INUM", obj.InstalmentNumber);
                         commandBills.Parameters.AddWithValue("@IQTD", obj.InstalmentsQtd);
@@ -826,7 +826,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     //>Stock
 
                     tran.Commit();
-                    status = true;                  
+                    status = true;
+                    MessageBox.Show("Venda cancelada com sucesso.");
                 }
                 catch (SqlException ex)
                 {

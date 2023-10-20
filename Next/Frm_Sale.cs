@@ -591,6 +591,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     else if (btn_new.Text == "Cancelar")
                     {
                         var cancelledSale = _controller.FindItemId(Sale.id);
+                        cancelledSale.CancelMotive = txt_cancelMotive.Text;
                         if (CheckInstalmentsForCancel(cancelledSale.id))
                         {
                             string caption = "Confirme o cancelamento.";

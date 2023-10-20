@@ -353,7 +353,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         return false;
                     }
                 }
-                if (obj.Sale.id < 0)
+                if (obj.Sale.id > 0)
                 {
                     string message = "Não é possível cancelar contas relacionadas a vendas, cancelamento deve ser feito pelo formulário de Vendas.";
                     string caption = "Conta a receber relacionada com Venda.";

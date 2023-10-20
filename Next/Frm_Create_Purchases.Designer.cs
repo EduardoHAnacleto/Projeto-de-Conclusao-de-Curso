@@ -498,9 +498,9 @@
             this.gbox_User.Controls.Add(this.edt_userName);
             this.gbox_User.Controls.Add(this.lbl_userSalesman);
             this.gbox_User.Controls.Add(this.lbl_userId);
-            this.gbox_User.Location = new System.Drawing.Point(17, 487);
+            this.gbox_User.Location = new System.Drawing.Point(10, 542);
             this.gbox_User.Name = "gbox_User";
-            this.gbox_User.Size = new System.Drawing.Size(131, 100);
+            this.gbox_User.Size = new System.Drawing.Size(155, 100);
             this.gbox_User.TabIndex = 8;
             this.gbox_User.TabStop = false;
             this.gbox_User.Text = "* Usuário";
@@ -525,7 +525,7 @@
             this.edt_userName.Location = new System.Drawing.Point(9, 74);
             this.edt_userName.MaxLength = 30;
             this.edt_userName.Name = "edt_userName";
-            this.edt_userName.Size = new System.Drawing.Size(105, 20);
+            this.edt_userName.Size = new System.Drawing.Size(139, 20);
             this.edt_userName.TabIndex = 2;
             // 
             // lbl_userSalesman
@@ -939,7 +939,7 @@
             this.gbox_info.Controls.Add(this.lbl_extraExpenses);
             this.gbox_info.Controls.Add(this.edt_extraExpenses);
             this.gbox_info.Enabled = false;
-            this.gbox_info.Location = new System.Drawing.Point(154, 487);
+            this.gbox_info.Location = new System.Drawing.Point(202, 486);
             this.gbox_info.Name = "gbox_info";
             this.gbox_info.Size = new System.Drawing.Size(311, 124);
             this.gbox_info.TabIndex = 47;
