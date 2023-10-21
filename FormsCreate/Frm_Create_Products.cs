@@ -145,7 +145,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             edt_und.Text = product.UND;
             if (product.productCost != 0 && product.salePrice != 0)
             {
-                edt_ProfitPerc.Value = ((product.salePrice / product.productCost) - 1) *100;
+                decimal profit = (product.salePrice/100) / (product.productCost/100);
+                edt_ProfitPerc.Value = profit * 100;
             }
             else
             {

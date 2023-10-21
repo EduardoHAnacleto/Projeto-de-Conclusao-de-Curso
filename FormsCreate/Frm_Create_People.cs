@@ -211,7 +211,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
 
         public override void UnlockCamps()
         {
-            edt_age.Enabled = true;
             edt_email.Enabled = true;
             edt_Name.Enabled = true;
             medt_dob.Enabled = true;

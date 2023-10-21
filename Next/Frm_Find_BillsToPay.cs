@@ -302,24 +302,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         return false;
                     }
                 }
-                if (obj.Purchase != null)
+                if (list[0].BillModel > 0)
                 {
-                    if (obj.Purchase.id > 2)
-                    {
                         string message = "Não é possível cancelar contas relacionadas a compras, cancelamento deve ser feito pelo formulário de Compras.";
                         string caption = "Conta relacionada com Compra.";
                         MessageBoxIcon icon = MessageBoxIcon.Error;
                         MessageBoxButtons buttons = MessageBoxButtons.OK;
                         Utilities.Msgbox(message, caption, buttons, icon);
                         return false;
-                    }
-                    else return true;
+
                 }
-                //
-
-                //
                 return true;
-
             }
             else return false;
         }

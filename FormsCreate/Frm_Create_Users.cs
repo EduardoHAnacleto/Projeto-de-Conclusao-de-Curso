@@ -60,6 +60,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             user.id = Convert.ToInt32(edt_id.Value);
             user.userLogin = edt_userLogin.Text;
             user.userPassword = medt_userPassword.Text;
+            user.AccessLevel = Convert.ToInt32(cbox_levelAccess.SelectedItem);
             return user;
         }
 

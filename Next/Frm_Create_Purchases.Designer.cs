@@ -697,6 +697,11 @@
             // 
             this.edt_transportFee.DecimalPlaces = 2;
             this.edt_transportFee.Location = new System.Drawing.Point(124, 41);
+            this.edt_transportFee.Maximum = new decimal(new int[] {
+            999999,
+            0,
+            0,
+            0});
             this.edt_transportFee.Name = "edt_transportFee";
             this.edt_transportFee.Size = new System.Drawing.Size(84, 20);
             this.edt_transportFee.TabIndex = 32;

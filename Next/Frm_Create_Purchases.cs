@@ -506,6 +506,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
             DGV_Instalments.Rows.Clear();
             DGV_PurchSummary.Rows.Clear();
+            DGV_PurchSummary.Rows.Add(0, 0);
             DGV_PurchasesProducts.Rows.Clear();
 
             edt_payCondId.Value = 0;
@@ -518,6 +519,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             medt_date.Text = DateTime.Now.ToString();
             medt_CancelDate.Text = string.Empty;
             edt_productName.Text = string.Empty;
+            edt_insurance.Value = 0;
         }
 
         public void PopulateCamps(Purchases purchase)
@@ -775,19 +777,22 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         public void SetBillInstalmentsToDGV()
         {
             DGV_Instalments.Rows.Clear();
-            decimal totalCost = GetTotalCost();
-            PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
-            var payCond = payCondController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
-            foreach (BillsInstalments bill in payCond.BillsInstalments)
+            if (edt_billModel.Value > 0)
             {
-                decimal instalmentCost = totalCost * (Convert.ToDecimal(bill.ValuePercentage) / 100);
-                DGV_Instalments.Rows.Add(
-                    bill.InstalmentNumber.ToString(),
-                    bill.TotalDays.ToString(),
-                    bill.ValuePercentage.ToString(),
-                    bill.PaymentMethod.paymentMethod,
-                    instalmentCost.ToString("#.##")
-                    );
+                decimal totalCost = GetTotalCost();
+                PaymentConditions_Controller payCondController = new PaymentConditions_Controller();
+                var payCond = payCondController.FindItemId(Convert.ToInt32(edt_payCondId.Value));
+                foreach (BillsInstalments bill in payCond.BillsInstalments)
+                {
+                    decimal instalmentCost = (totalCost * bill.ValuePercentage) / 100;
+                    DGV_Instalments.Rows.Add(
+                        bill.InstalmentNumber.ToString(),
+                        bill.TotalDays.ToString(),
+                        bill.ValuePercentage.ToString(),
+                        bill.PaymentMethod.paymentMethod,
+                        instalmentCost.ToString("#.##")
+                        );
+                }
             }
         }
 
@@ -799,6 +804,18 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
                 {
                     totalCost += Convert.ToDecimal(row.Cells["ProdTotalValue"].Value);
+                }
+                if (edt_extraExpenses.Value > 0)
+                {
+                    totalCost += edt_extraExpenses.Value;
+                }
+                if (edt_insurance.Value > 0)
+                {
+                    totalCost += edt_insurance.Value;
+                }
+                if (edt_transportFee.Value > 0)
+                {
+                    totalCost += edt_transportFee.Value;
                 }
             }
             return totalCost;

@@ -140,9 +140,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.DAO
                     }
 
                 }
-                catch (Exception ex)
+                catch (SqlException ex)
                 {
-                    MessageBox.Show("Erro: " + ex.Message);
+                    if (ex.Number == 547 || ex.Number == 2061)
+                    {
+                        MessageBox.Show("Não é possível apagar esse registro pois ele está ligado a outro registro.", "Não é possível apagar registro.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erro: " + ex.Message);
+                    }
                     return status;
                 }
                 finally

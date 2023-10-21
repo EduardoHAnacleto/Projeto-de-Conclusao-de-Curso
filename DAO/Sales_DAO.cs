@@ -201,11 +201,13 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     //>ItemsSale
 
                     //<BillsToReceive
+                    BillsToReceive_Controller billsController = new BillsToReceive_Controller();
+                    int newBillId = billsController.GetNewId();
                     foreach (var obj in billList)
                     {
                         SqlCommand commandBills = new SqlCommand(sqlBillsToReceive, connection);
                         commandBills.Transaction = tran;
-                        commandBills.Parameters.AddWithValue("@BILLID", newId);
+                        commandBills.Parameters.AddWithValue("@BILLID", newBillId);
                         commandBills.Parameters.AddWithValue("@ISPAID", obj.IsPaid);
                         commandBills.Parameters.AddWithValue("@CLIENTID", obj.Client.id);
                         commandBills.Parameters.AddWithValue("@SALEID", newId);
@@ -317,9 +319,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     }
 
                 }
-                catch (Exception ex)
+                catch (SqlException ex)
                 {
-                    MessageBox.Show("Erro: " + ex.Message);
+                    if (ex.Number == 547 || ex.Number == 2061)
+                    {
+                        MessageBox.Show("Não é possível apagar esse registro pois ele está ligado a outro registro.", "Não é possível apagar registro.");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Erro: " + ex.Message);
+                    }
                     return status;
                 }
                 finally

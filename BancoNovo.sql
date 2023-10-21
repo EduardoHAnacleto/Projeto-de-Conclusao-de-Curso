@@ -51,34 +51,34 @@
     create table PAYMENTCONDITIONS(
         id_paycondition int identity(2,1) primary key,
         condition_name varchar(30) not null,
-        payment_fees decimal(10,2) not null,
-        fine_value decimal(10,2) not null,
-        discount_perc decimal(10,2) null,
+        payment_fees decimal (10,2) not null,
+        fine_value decimal (10,2) not null,
+        discount_perc decimal (10,2) null,
         instalment_quantity int not null,
         date_creation datetime not null,
         date_last_update datetime not null
     );
 	
     create table BILLSINSTALMENTS(
-    paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition) ON DELETE CASCADE,
-    instalment_number int not null,
-    paymethod_id int not null references PaymentMethods(id_payment_method),
-    total_days int not null,
-    value_percentage decimal(5,2) not null,
-    date_creation datetime not null,
-    date_last_update datetime not null,
-    primary key (paycondition_id, instalment_number)
+        paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition) ON DELETE CASCADE,
+        instalment_number int not null,
+        paymethod_id int not null references PaymentMethods(id_payment_method),
+        total_days int not null,
+        value_percentage decimal (5,2) not null,
+        date_creation datetime not null,
+        date_last_update datetime not null,
+        primary key (paycondition_id, instalment_number)
     );
 
 
     create table PHONECLASSIFICATIONS(
 	    id_phoneClassification int identity(2,1) primary key,
-	    phoneClassification_name varchar(20) not null,
+	    phoneClassification_name varchar(15) not null,
 	    date_creation datetime not null,
 	    date_last_update datetime not null
 	);
 
-    Insert into PHONECLASSIFICATIONS (phoneClassification_name, date_creation,date_last_update) values ('NULL','01/01/2000','01/01/2000');
+    Insert into PHONECLASSIFICATIONS (phoneClassification_name, date_creation,date_last_update) values ('NULO','01/01/2000','01/01/2000');
 
     create table CLIENTS(
         id_client int identity(2,1) primary key,
@@ -128,7 +128,7 @@
         zipcode varchar(10) not null,
         id_city int foreign key references Cities(id_city),
 		jobRole varchar(30) not null,
-		baseSalary decimal(10,2) not null,
+		baseSalary decimal (10,2) not null,
 		weeklyHours int not null,
         employee_status int not null,
 		admission_date datetime not null,
@@ -175,7 +175,7 @@
     create table PRODUCTS(
         id_product int identity(2,1) primary key,
         product_name varchar(50) not null,
-        product_sale_price decimal(10,2) not null,
+        product_sale_price decimal (10,2) not null,
         product_group_id int references ProductGroups(id_product_group),        
         brand_id int references Brands(id_brand),
         stock int not null default 0,
@@ -187,57 +187,24 @@
         age_restricted int not null
     );
 
-    create table SUPPLIERPRODUCTS(
-        id_product int not null references Products(id_product),
-        id_supplier int not null references Suppliers(id_supplier),
-        primary key (id_product, id_supplier)
-    );
-
-
-
     create table SERVICES(
         id_service int identity(2,1) primary key,
         desc_service varchar(100) not null,
-        service_value decimal(10,2) not null,
+        service_value decimal (10,2) not null,
         date_creation datetime not null,
         date_last_update datetime not null
-    );
-
-    create table SERVICEORDERS(
-        id_serviceOrder int identity(2,1) primary key,
-        so_equipment varchar(50) not null,
-        service_id int not null references Services(id_service),
-        client_id int not null references CLIENTS(id_client),
-        userid int not null references USERS(id_user),
-        extra_details varchar(250),
-        so_cost decimal,
-        so_value decimal,
-        so_completedate datetime,
-        so_canceldate datetime,
-        so_discount_cash decimal,
-        so_discount_perc decimal,
-        date_creation datetime not null,
-        date_last_update datetime not null
-    );
-
-	    create table SOINSTALMENTS(
-        paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition),
-		numberInstalment int,
-        serviceOrder_id int not null references SERVICEORDERS(id_serviceOrder),
-        instalment_value decimal not null,
-        pay_status int not null
-		primary key (serviceOrder_id,numberInstalment)
     );
 
     create table SALES(
         id_sale int identity(2,1) primary key,
         CLIENT_ID int not null references CLIENTS(id_client),
         user_id int not null references USERS(id_user),        
-        sale_total_cost decimal not null,
-        sale_total_value decimal not null,
+        sale_total_cost decimal (10,2) not null,
+        sale_total_value decimal (10,2) not null,
         total_Items_Quantity int not null,      
         paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition),
         sale_cancel_date datetime DEFAULT NULL,
+        cancel_motive varchar[50] DEFAULT NULL,
         date_creation datetime not null,
     );
 
@@ -245,7 +212,7 @@
         id_bill int not null,
         sale_id int not null,
         instalmentNumber int not null, 
-        instalmentValue decimal not null,
+        instalmentValue decimal (10,2) not null,
         isPaid int not null,
         paidDate datetime,
         client_id int not null foreign key references CLIENTS(id_client),
@@ -263,27 +230,14 @@
         foreign key(user_id) references USERS(id_user)
     );
 
-
-	    create table OSITEMS(
-        ID_OSITEM int identity(2,1) primary key,
-		OS_ID int REFERENCES Sales(id_sale),
-        PRODUCT_ID int not null references Products(id_product),
-        QUANTITY int not null,
-        SALE_VALUE decimal not null,
-        DISCOUNT decimal not null,
-        TOTAL_VALUE decimal not null,
-        DATE_CREATION date not null,
-        DATE_LAST_UPDATE date not null
-    );
-
     create table SALEITEMS(
 		SALE_ID int REFERENCES Sales(id_sale),
         PRODUCT_ID int not null references Products(id_product),
         QUANTITY int not null,
-        ITEM_VALUE decimal not null,
-        ITEM_COST decimal not null,
-        DISCOUNT_CASH decimal not null,
-        TOTAL_VALUE decimal not null,
+        ITEM_VALUE decimal (10,2)not null,
+        ITEM_COST decimal (10,2) not null,
+        DISCOUNT_CASH decimal (10,2) not null,
+        TOTAL_VALUE decimal (10,2) not null,
         CANCEL_DATE date,
         DATE_CREATION date not null,
         DATE_LAST_UPDATE date not null,
@@ -296,12 +250,12 @@
         billSeries int not null,
         emissionDate date not null,
         arrivalDate date,
-        freightCost decimal,
-        purchase_TotalCost decimal not null,
-        purchase_ExtraExpenses decimal,
-        purchase_InsuranceCost decimal,
+        freightCost decimal (10,2),
+        purchase_TotalCost decimal (10,2) not null,
+        purchase_ExtraExpenses decimal (10,2),
+        purchase_InsuranceCost decimal (10,2),
         cancelledDate date,
-        cancelledReason varchar[50],
+        cancelledMotive varchar[50],
         paidDate date,
         paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition),
         supplier_id int not null references SUPPLIERS(id_supplier),
@@ -320,7 +274,7 @@
         emissionDate date not null,
         billStatus int not null,
         paidDate date,
-        BillValue decimal(10,2) not null,
+        BillValue decimal (10,2) not null,
         payMethod_id int not null references PaymentMethods(id_payment_method),
         supplier_id int not null references Suppliers(id_supplier),
         payCond_id int not null foreign key references PAYMENTCONDITIONS(id_paycondition),
@@ -330,7 +284,7 @@
         MOTIVE_CANCELLED varchar(150),
         user_id int not null references USERS(id_user),
         primary key (billNumber, billModel, billSeries, instalmentNumber, supplier_id)
-        );
+    );
 
         CREATE TABLE PURCHASEBILLS (
         billNumber int not null,
@@ -341,7 +295,7 @@
         PRIMARY KEY (supplier_id, billNumber, billModel, billSeries, instalmentNumber),
         FOREIGN KEY (billNumber, billModel, billSeries, instalmentNumber, supplier_id)
         REFERENCES BILLSTOPAY (billNumber, billModel, billSeries, instalmentNumber, supplier_id)
-        );
+    );
 
     	create table PURCHASEITEMS(
         billModel int not null,
@@ -350,14 +304,24 @@
         supplier_id int not null,
         PRODUCT_ID int not null references PRODUCTS(id_product),
         QUANTITY int not null,
-        PRODUCT_COST decimal not null,
-        PURCHASE_PERCENTAGE decimal not null,
-        DISCOUNT_CASH decimal not null,
-        WEIGHTED_AVG decimal(10,4) not null,
-        PRE_ITEMCOST decimal(10,2) not null,
+        PRODUCT_COST decimal (10,2)  not null,
+        PURCHASE_PERCENTAGE decimal (10,2) not null,
+        DISCOUNT_CASH decimal (10,2) not null,
+        WEIGHTED_AVG decimal (10,2) not null,
+        PRE_ITEMCOST decimal (10,2) not null,
         DATE_CREATION date not null,
         DATE_CANCELLED date,
         primary key (billModel, billNumber, billSeries, supplier_id, PRODUCT_ID),
 		FOREIGN KEY (billModel, billNumber, billSeries, supplier_id)
         REFERENCES PURCHASES (billModel, billNumber, billSeries, supplier_id)
     );
+
+    INSERT INTO PHONECLASSIFICATIONS ( PHONECLASSIFICATION_NAME, DATE_CREATION, DATE_LAST_UPDATE) VALUES ('PESSOAL', '01/01/2020', '01/01/2020');
+    INSERT INTO USERS ( USERLOGIN, USERPASSWORD, LEVELACCESS , DATE_CREATION, DATE_LAST_UPDATE) VALUES ('admin', 'admin', 3, '10/10/2020', '10/10/2020');
+    INSERT INTO PAYMENTMETHODS ( PAYMENT_METHOD, DATE_CREATION, DATE_LAST_UPDATE) VALUES ('DINHEIRO', '10/10/2020', '10/10/2020');
+    INSERT INTO PAYMENTCONDITIONS ( CONDITION_NAME, PAYMENT_FEES, FINE_VALUE, DISCOUNT_PERC, INSTALMENT_QUANTITY , DATE_CREATION, DATE_LAST_UPDATE ) VALUES ('A VISTA', 0, 0, 0, 1, '01/01/2020', '01/01/2020');
+    DECLARE @METHODID INT;
+	SET @METHODID = IDENT_CURRENT ('PAYMENTMETHODS');
+    DECLARE @PAYCONDID INT;
+	SET @PAYCONDID = IDENT_CURRENT ('PAYMENTCONDITIONS');
+    INSERT INTO BILLSINSTALMENTS ( PAYCONDITION_ID, INSTALMENT_NUMBER, PAYMETHOD_ID, TOTAL_DAYS, VALUE_PERCENTAGE, DATE_CREATION, DATE_LAST_UPDATE) VALUES (@PAYCONDID, 1, @METHODID, 0, 100, '10/10/2020', '10/10/2020');
