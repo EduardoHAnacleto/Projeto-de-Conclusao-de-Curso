@@ -129,7 +129,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             {
                 Products product = new Products();
                 product = formProducts.GetObject();
-                if (product != null)
+                if (product != null && product.salePrice > 0)
                 {
                     edt_productId.Value = product.id;
                     edt_productName.Text = product.productName;
@@ -138,6 +138,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     edt_ProdUnValue.Value = product.salePrice;
                     edt_totalPValue.Value = edt_ProdUnValue.Value;
                     edt_und.Text = product.UND;
+                }
+                if (product != null && product.salePrice <= 0)
+                {
+                    MessageBox.Show("Produto não foi cadastrado por completo, não é possível vender.");
                 }
             }
             formProducts.Close();
@@ -169,6 +173,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 }
             }
             formClient.Close();
+            DGV_SaleProducts.Rows.Clear();
         }
 
         public bool CheckEqualDGVProduct(int prodId, int amount, decimal discountCash, decimal totalValue)
@@ -206,13 +211,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     Utilities.Msgbox(message, caption, buttons, icon);
                     amount = product.stock;
                 }
-                DGV_SaleProducts.Rows.Add(
-                            product.id,
-                            product.productName,
-                            amount,
-                            discountCash,
-                            product.salePrice,
-                            totalValue);
+                else
+                {
+                    DGV_SaleProducts.Rows.Add(
+                                product.id,
+                                product.productName,
+                                amount,
+                                discountCash,
+                                product.salePrice,
+                                totalValue);
+                }
             }
             CalculateSubTotal();
         }

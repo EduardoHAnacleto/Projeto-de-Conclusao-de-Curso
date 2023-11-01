@@ -795,6 +795,7 @@
             // 
             // edt_instValue
             // 
+            this.edt_instValue.DecimalPlaces = 2;
             this.edt_instValue.Location = new System.Drawing.Point(63, 35);
             this.edt_instValue.Maximum = new decimal(new int[] {
             1410065407,
@@ -865,6 +866,7 @@
             // 
             // edt_instFee
             // 
+            this.edt_instFee.DecimalPlaces = 2;
             this.edt_instFee.Enabled = false;
             this.edt_instFee.Location = new System.Drawing.Point(133, 35);
             this.edt_instFee.Maximum = new decimal(new int[] {
