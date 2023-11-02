@@ -1,4 +1,5 @@
 ﻿using ProjetoEduardoAnacletoWindowsForm1.A_To_do;
+using ProjetoEduardoAnacletoWindowsForm1.Authorization;
 using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using ProjetoEduardoAnacletoWindowsForm1.DAO;
 using ProjetoEduardoAnacletoWindowsForm1.Forms;
@@ -28,19 +29,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1
         public Frm_Main()
         {   
             InitializeComponent();
-
         }
 
-        private Users _user = new Users();
+        public Users _User { get; private set; }
 
-        private void SetUser()
+        private void SetUser(Users user)
         {
-            Users user = new Users();
-            user.id = 3;
-            user.userLogin = "Usuario Teste";
-            _user = user;
+            _User = user;
         }
-        //string connectionString = "Server = localhost; Database = PraticaProfissional1; Trusted_Connection = True;";
 
         private void btn_close_Click(object sender, EventArgs e)
         {
@@ -119,16 +115,6 @@ namespace ProjetoEduardoAnacletoWindowsForm1
             formFindClient.ShowDialog();
         }
 
-        private void formTesteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Botao pra teste de Formularios
-
-            //PaymentConditions_DAO dao = new PaymentConditions_DAO();
-            //dao.testando();
-            Products_DAO dao = new Products_DAO();
-            dao.RestoreStock(2, 1);
-        }
-
         private void suppliersToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Frm_Find_Suppliers frmFindSuppliers = new Frm_Find_Suppliers();
@@ -143,64 +129,86 @@ namespace ProjetoEduardoAnacletoWindowsForm1
 
         private void findBillsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Users user = new Users();
-            user.id = 3;
-            user.AccessLevel = 3;
-            user.userLogin = "teste";
-            Frm_Find_BillsToReceive frmFindBillsToReceive = new Frm_Find_BillsToReceive(user);
-            frmFindBillsToReceive.ShowDialog();
+            if (_User != null)
+            {
+                Frm_Find_BillsToReceive frmFindBillsToReceive = new Frm_Find_BillsToReceive(_User);
+                frmFindBillsToReceive.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para acessar o formulário, um usuário deve estar autenticado.");
+            }
         }
 
 
         private void newSaleToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Users user = new Users();
-            user.id = 3;
-            user.userLogin = "teste";
-            Frm_Sale frmSale = new Frm_Sale(user);
-            frmSale.ShowDialog();
+            if (_User != null)
+            {
+                Frm_Sale frmSale = new Frm_Sale(_User);
+                frmSale.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para acessar o formulário, um usuário deve estar autenticado.");
+            }
         }
 
         private void comprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Users user = new Users();
-            Users_Controller userController = new Users_Controller();
-            user = userController.FindItemId(3);
-            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases();
-            frmCreatePurchases.SetUser(user);
-            frmCreatePurchases.ShowDialog();
+            if (_User != null)
+            {
+                Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases();
+                frmCreatePurchases.SetUser(_User);
+                frmCreatePurchases.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para acessar o formulário, um usuário deve estar autenticado.");
+            }
         }
 
 
         private void buscarVendasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Users user = new Users();
-            user.id = 3;
-            user.userLogin = "teste";
-            Frm_Find_Sales frmFindSales = new Frm_Find_Sales();
-            frmFindSales.SetUser(user);
-            frmFindSales.ShowDialog();
+            if (_User != null)
+            {
+                Frm_Find_Sales frmFindSales = new Frm_Find_Sales();
+                frmFindSales.SetUser(_User);
+                frmFindSales.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para acessar o formulário, um usuário deve estar autenticado.");
+            }
         }
 
         private void buscarComprasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Users user = new Users();
-            Users_Controller userController = new Users_Controller();
-            user = userController.FindItemId(3);
-            Frm_Find_Purchases frmFindPurchases = new Frm_Find_Purchases();
-            frmFindPurchases.SetUser(user);
-            frmFindPurchases.ShowDialog();
+            if (_User != null)
+            {
+                Frm_Find_Purchases frmFindPurchases = new Frm_Find_Purchases();
+                frmFindPurchases.SetUser(_User);
+                frmFindPurchases.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para acessar o formulário, um usuário deve estar autenticado.");
+            }
         }
 
         private void novaCompraToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Users user = new Users();
-            Users_Controller userController = new Users_Controller();
-            user = userController.FindItemId(3);
-            Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases();
-            frmCreatePurchases.SetUser(user);
-            frmCreatePurchases.ShowDialog();
-
+            if (_User != null)
+            {
+                Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases();
+                frmCreatePurchases.SetUser(_User);
+                frmCreatePurchases.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para acessar o formulário, um usuário deve estar autenticado.");
+            }
         }
 
         private void addNewBillToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -209,21 +217,45 @@ namespace ProjetoEduardoAnacletoWindowsForm1
 
         private void billsToReceiveToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Users user = new Users();
-            Users_Controller userController = new Users_Controller();
-            user = userController.FindItemId(3);
-            Frm_Find_BillsToReceive frmFindBillsToReceive = new Frm_Find_BillsToReceive(user);
-            frmFindBillsToReceive.ShowDialog();
+            if (_User != null)
+            {
+                Frm_Find_BillsToReceive frmFindBillsToReceive = new Frm_Find_BillsToReceive(_User);
+                frmFindBillsToReceive.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para acessar o formulário, um usuário deve estar autenticado.");
+            }
+
         }
 
         private void billsToPayToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Users user = new Users();
-            Users_Controller userController = new Users_Controller();
-            user = userController.FindItemId(3);
-            Frm_Find_BillsToPay frmFindBillsToPay = new Frm_Find_BillsToPay(user);
-            frmFindBillsToPay.ShowDialog();
+            if (_User != null)
+            {
+                Frm_Find_BillsToPay frmFindBillsToPay = new Frm_Find_BillsToPay(_User);
+                frmFindBillsToPay.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Para acessar o formulário, um usuário deve estar autenticado.");
+            }
         }
+
+        private void loginDeUsuárioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Frm_Login frmLogin = new Frm_Login();
+            frmLogin.ShowDialog();
+            if (!frmLogin.ActiveControl.ContainsFocus)
+            {
+                if (frmLogin.LoggedIn)
+                {
+                    this.SetUser(frmLogin.GetLoggedUser());
+                }
+
+            }
+        }
+
     }
 }
 

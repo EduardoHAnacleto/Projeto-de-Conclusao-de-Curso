@@ -51,7 +51,6 @@
             this.billsToPayToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.billsToReceiveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageUserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.formTesteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newSaleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buscarVendasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,6 +58,7 @@
             this.comprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.novaCompraToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buscarComprasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.loginDeUsuárioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -214,12 +214,6 @@
             resources.ApplyResources(this.manageUserToolStripMenuItem, "manageUserToolStripMenuItem");
             this.manageUserToolStripMenuItem.Click += new System.EventHandler(this.manageUserToolStripMenuItem_Click);
             // 
-            // formTesteToolStripMenuItem
-            // 
-            this.formTesteToolStripMenuItem.Name = "formTesteToolStripMenuItem";
-            resources.ApplyResources(this.formTesteToolStripMenuItem, "formTesteToolStripMenuItem");
-            this.formTesteToolStripMenuItem.Click += new System.EventHandler(this.formTesteToolStripMenuItem_Click);
-            // 
             // saleToolStripMenuItem
             // 
             this.saleToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -245,9 +239,9 @@
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.consultsToolStripMenuItem,
             this.manageUserToolStripMenuItem,
-            this.formTesteToolStripMenuItem,
             this.saleToolStripMenuItem,
-            this.comprasToolStripMenuItem});
+            this.comprasToolStripMenuItem,
+            this.loginDeUsuárioToolStripMenuItem});
             resources.ApplyResources(this.menuStrip2, "menuStrip2");
             this.menuStrip2.Name = "menuStrip2";
             // 
@@ -270,6 +264,15 @@
             this.buscarComprasToolStripMenuItem.Name = "buscarComprasToolStripMenuItem";
             resources.ApplyResources(this.buscarComprasToolStripMenuItem, "buscarComprasToolStripMenuItem");
             this.buscarComprasToolStripMenuItem.Click += new System.EventHandler(this.buscarComprasToolStripMenuItem_Click);
+            // 
+            // loginDeUsuárioToolStripMenuItem
+            // 
+            this.loginDeUsuárioToolStripMenuItem.Name = "loginDeUsuárioToolStripMenuItem";
+            resources.ApplyResources(this.loginDeUsuárioToolStripMenuItem, "loginDeUsuárioToolStripMenuItem");
+            this.loginDeUsuárioToolStripMenuItem.Click += new System.EventHandler(this.loginDeUsuárioToolStripMenuItem_Click);
+            // 
+            // UserControl
+            // 
             // 
             // Frm_Main
             // 
@@ -309,7 +312,6 @@
         private System.Windows.Forms.ToolStripMenuItem billsToPayToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem billsToReceiveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageUserToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem formTesteToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saleToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newSaleToolStripMenuItem;
         private System.Windows.Forms.MenuStrip menuStrip2;
@@ -317,6 +319,7 @@
         private System.Windows.Forms.ToolStripMenuItem buscarVendasToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem novaCompraToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem buscarComprasToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem loginDeUsuárioToolStripMenuItem;
     }
 }
 

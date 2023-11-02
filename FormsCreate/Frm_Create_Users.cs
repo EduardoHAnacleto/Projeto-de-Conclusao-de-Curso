@@ -8,6 +8,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
@@ -60,7 +61,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
             user.id = Convert.ToInt32(edt_id.Value);
             user.userLogin = edt_userLogin.Text;
             user.userPassword = medt_userPassword.Text;
-            user.AccessLevel = Convert.ToInt32(cbox_levelAccess.SelectedItem);
+            if (cbox_levelAccess.SelectedItem.ToString() == "Usuário")
+            {
+                user.AccessLevel = 1;
+            }
+            else if (cbox_levelAccess.SelectedItem.ToString() == "Administrador")
+            {
+                user.AccessLevel = 3;
+            }
             return user;
         }
 
@@ -96,7 +104,44 @@ namespace ProjetoEduardoAnacletoWindowsForm1.FormsCreate
                 cbox_levelAccess.Focus();
                 return false;
             }
+            else if (medt_userPassword.TextLength < 6)
+            {
+                string message = "Senha deve ter ao menos 6 caractéres.";
+                string caption = "Senha inválida.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                medt_userPassword.Focus();
+                return false;
+            }
+            else if (edt_userLogin.TextLength < 5)
+            {
+                string message = "Nome do usuário deve ter ao menos 5 caractéres.";
+                string caption = "Nome de usuário inválido.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                edt_userLogin.Focus();
+                return false;
+            }
+            else if (!ValidatePassword(medt_userPassword.Text))
+            {
+                string message = "Senha deve conter no mínimo uma letra, um número e um caractére especial.";
+                string caption = "Senha inválida.";
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                Utilities.Msgbox(message, caption, buttons, icon);
+                medt_userPassword.Focus();
+                return false;
+            }
             else return true;
+        }
+
+        private bool ValidatePassword(string password)
+        {
+            string pattern = @"^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@#$%^&+=!]).*$";
+            Regex regex = new Regex(pattern);
+            return regex.IsMatch(password);
         }
 
         public void PopulateCamps(Users user)

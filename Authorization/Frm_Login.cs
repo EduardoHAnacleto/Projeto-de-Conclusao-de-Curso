@@ -1,5 +1,4 @@
-﻿using ProjetoEduardoAnacletoWindowsForm1.Authorization;
-using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
 using ProjetoEduardoAnacletoWindowsForm1.Utility;
 using System;
@@ -12,17 +11,17 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProjetoEduardoAnacletoWindowsForm1.InheritForms
+namespace ProjetoEduardoAnacletoWindowsForm1.Authorization
 {
-    public partial class Frm_UserControl_Login : UserControl
+    public partial class Frm_Login : Form
     {
-        public Frm_UserControl_Login()
+        public Frm_Login()
         {
             InitializeComponent();
-
         }
 
         public Users _User = new Users();
+        public bool LoggedIn { get; set; } = false;
 
         private void btn_Enter_Click(object sender, EventArgs e)
         {
@@ -32,12 +31,17 @@ namespace ProjetoEduardoAnacletoWindowsForm1.InheritForms
                 {
                     Users_Controller userController = new Users_Controller();
                     _User = userController.LogUser(edt_login.Text, edt_secret.Text);
-                    this.Hide();
+                    if (_User != null)
+                    {
+                        Users usuario = _User;
+                        LoggedIn = true;
+                        this.Hide();
+                    }
                 }
                 else
                 {
                     string message = "Usuário não encontrado.";
-                    string caption = "Login inválido.";
+                    string caption = "Login falhou.";
                     MessageBoxIcon icon = MessageBoxIcon.Error;
                     MessageBoxButtons buttons = MessageBoxButtons.OK;
                     Utilities.Msgbox(message, caption, buttons, icon);
@@ -47,12 +51,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.InheritForms
             {
                 MessageBox.Show(ex.ToString());
             }
+        }
 
+        public Users GetLoggedUser()
+        {
+            return _User;
         }
 
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
-            this.FindForm().Close();           
+            this.Close();
         }
     }
 }
