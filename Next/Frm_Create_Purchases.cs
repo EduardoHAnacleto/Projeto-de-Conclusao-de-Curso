@@ -332,6 +332,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                                 check_Active.Checked = false;
                                 check_Cancelled.Checked = true;
                                 status = _controller.CancelPurchase(purchase);
+                                if (status)
+                                {
+                                    MessageBox.Show("Compra cancelada com sucesso.");
+                                }
                             }
                             if (status)
                             {
@@ -359,6 +363,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public bool CheckInstalmentsForCancel()
         {
+            bool status = true;
             var obj = this.GetObject();
             BillsToPay_Controller btpController = new BillsToPay_Controller();
             var bills = btpController.FindItemId(obj.BillNumber, obj.BillModel, obj.BillSeries, obj.Supplier.id);
@@ -366,14 +371,22 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 foreach (var b in bills)
                 {
-                    if (b.PaidDate.HasValue)
+                    if (b.PaidDate.HasValue || b.CancelledDate.HasValue)
                     {
-                        return false;
+                        status = false;
                     }
                 }
             }
+            if (!status)
+            {
+                string caption = "Erro ao cancelar Compra.";
+                string message = "Uma ou mais parcelas já foram pagas, não é possível cancelar.";
 
-            return true;
+                MessageBoxIcon icon = MessageBoxIcon.Error;
+                MessageBoxButtons buttons = MessageBoxButtons.OK;
+                MessageBox.Show(message, caption, buttons, icon);
+            }
+            return status;
         }
 
         private void SetFormToEdit()
@@ -393,6 +406,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                 this.LockCamps();
                 this.SetFormToEdit();
                 gbox_status.Enabled = false;
+                gbox_supplier.Enabled = false;
             }
             else if (!populated)
             {
@@ -538,13 +552,16 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             if (purchase.CancelledDate.HasValue)
             {
                 SetFormToCancelled(purchase.CancelledMotive);
+                LockCamps();
             }
         }
 
         private void SetFormToCancelled(string motive)
         {
             LockCamps();
-            btn_new.Enabled = false;
+            btn_new.Enabled = true;
+            btn_new.Visible = false;
+            gbox_supplier.Enabled = false;
             gbox_cancelReason.Visible = true;
             gbox_cancelReason.Enabled = false;
             txt_cancelMot.Text = motive;
@@ -592,7 +609,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                     item.Quantity,
                     item.DiscountCash,
                     item.NewBaseUnCost,
-                    item.Product.salePrice,
+                    item.NewBaseUnCost * item.Quantity,
                     item.PurchasePercentage,
                     item.WeightedCostAverage
                     );
@@ -719,23 +736,28 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             {
                 if (Authentication.Authenticate(User.AccessLevel, 3))
                 {
-                    if (gbox_cancelReason.Visible == false)
+                    if (gbox_cancelReason.Visible == false && CheckInstalmentsForCancel())
                     {
                         gbox_cancelReason.Visible = true;
+                        gbox_cancelReason.Enabled = true;
+                        txt_cancelMot.Enabled = true;
                         MessageBox.Show("Digite o motivo de cancelamento.");
                     }
-                    else
+                    else if (gbox_cancelReason.Visible == true)
                     {
                         if (txt_cancelMot.Text.Trim().Length > 5)
                         {
                             Save();
-                            MessageBox.Show("Compra cancelada.");
                         }
-                        else
+                        else 
                         {
-                            MessageBox.Show("Motivo de cancelamento deve ter mais de 5 caractéres.");
+                            MessageBox.Show("Motivo de cancelamento deve ter mais de 5 caracteres.");
                         }
                     }
+                }
+                else
+                {
+                    MessageBox.Show("Usuário não possui autorização para cancelar compras.");
                 }
             }
         }
@@ -848,17 +870,28 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         private void SetSummary()
         {
             DGV_PurchSummary.Rows.Clear();
-            decimal subTotal = 0;
-            decimal total = 0;
             decimal extra = edt_extraExpenses.Value;
             decimal insur = edt_insurance.Value;
             decimal transFee = edt_transportFee.Value;
-            subTotal += GetTotalCost();
-            total = subTotal + extra + insur + transFee;
+            decimal subTotal = GetSubTotal();
+            decimal total = GetTotalCost();
             DGV_PurchSummary.Rows.Add(
                 subTotal,
                 total
                 );
+        }
+
+        private decimal GetSubTotal()
+        {
+            decimal subTotal = 0;
+            if (DGV_PurchasesProducts.Rows.Count > 0)
+            {
+                foreach (DataGridViewRow row in DGV_PurchasesProducts.Rows)
+                {
+                    subTotal = (decimal)row.Cells["ProdTotalValue"].Value;
+                }
+            }
+            return subTotal;
         }
 
         private void edt_transportFee_ValueChanged(object sender, EventArgs e)

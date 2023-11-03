@@ -572,8 +572,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
 
             string sqlProdStock = "UPDATE PRODUCTS SET STOCK = @RESTOCK, PRODUCT_COST = @PRODCOST WHERE ID_PRODUCT = @ID ; ";
 
-            string sqlPurchItems = "UPDATE PURCHASEITEMS SET DATE_CANCELLED = @CANCELDATE, DATE_LAST_UPDATE = @DU" +
-                    " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM, BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
+            string sqlPurchItems = "UPDATE PURCHASEITEMS SET DATE_CANCELLED = @CANCELDATE" +
+                    " WHERE BILLMODEL = @BMODEL AND BILLNUMBER = @BNUM AND BILLSERIES = @BSERIES AND SUPPLIER_ID = @SUPPLIERID; ";
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {

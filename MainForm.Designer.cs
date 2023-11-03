@@ -39,7 +39,6 @@
             this.productToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.productGroupsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.brandsToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.servicesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.locationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.citiesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -112,8 +111,7 @@
             this.productsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.productToolStripMenuItem,
             this.productGroupsToolStripMenuItem,
-            this.brandsToolStripMenuItem1,
-            this.servicesToolStripMenuItem});
+            this.brandsToolStripMenuItem1});
             this.productsToolStripMenuItem.Name = "productsToolStripMenuItem";
             resources.ApplyResources(this.productsToolStripMenuItem, "productsToolStripMenuItem");
             // 
@@ -134,12 +132,6 @@
             this.brandsToolStripMenuItem1.Name = "brandsToolStripMenuItem1";
             resources.ApplyResources(this.brandsToolStripMenuItem1, "brandsToolStripMenuItem1");
             this.brandsToolStripMenuItem1.Click += new System.EventHandler(this.brandsToolStripMenuItem1_Click);
-            // 
-            // servicesToolStripMenuItem
-            // 
-            this.servicesToolStripMenuItem.Name = "servicesToolStripMenuItem";
-            resources.ApplyResources(this.servicesToolStripMenuItem, "servicesToolStripMenuItem");
-            this.servicesToolStripMenuItem.Click += new System.EventHandler(this.servicesToolStripMenuItem_Click);
             // 
             // locationsToolStripMenuItem
             // 
@@ -271,9 +263,6 @@
             resources.ApplyResources(this.loginDeUsuárioToolStripMenuItem, "loginDeUsuárioToolStripMenuItem");
             this.loginDeUsuárioToolStripMenuItem.Click += new System.EventHandler(this.loginDeUsuárioToolStripMenuItem_Click);
             // 
-            // UserControl
-            // 
-            // 
             // Frm_Main
             // 
             resources.ApplyResources(this, "$this");
@@ -300,7 +289,6 @@
         private System.Windows.Forms.ToolStripMenuItem productToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem productGroupsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem brandsToolStripMenuItem1;
-        private System.Windows.Forms.ToolStripMenuItem servicesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem locationsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem citiesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem statesToolStripMenuItem;

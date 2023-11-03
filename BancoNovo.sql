@@ -204,7 +204,7 @@
         total_Items_Quantity int not null,      
         paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition),
         sale_cancel_date datetime DEFAULT NULL,
-        cancel_motive varchar[50] DEFAULT NULL,
+        cancel_motive varchar(50) DEFAULT NULL,
         date_creation datetime not null,
     );
 
@@ -255,7 +255,7 @@
         purchase_ExtraExpenses decimal (10,2),
         purchase_InsuranceCost decimal (10,2),
         cancelledDate date,
-        cancelledMotive varchar[50],
+        cancelledMotive varchar(50),
         paidDate date,
         paycondition_id int not null references PAYMENTCONDITIONS(id_paycondition),
         supplier_id int not null references SUPPLIERS(id_supplier),

@@ -29,15 +29,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Models
             {
                 feePerInst = cond.paymentFees / 100;
             }
-            if (dueDate < DateTime.Now.Date)
+            if (dueDate.Date < DateTime.Now.Date)
             {
                 fine = cond.fineValue/100;
             }
-            else if (dueDate > DateTime.Now.Date)
+            else if (dueDate.Date > DateTime.Now.Date)
             {
                 discount = cond.discountPerc/100;
             }
-            return value + ( value * feePerInst) + (discount * value) + (fine * value);
+            return value + ( value * feePerInst) - (discount * value) + (fine * value);
         }
     }
 }

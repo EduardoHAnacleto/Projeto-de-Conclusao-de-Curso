@@ -85,6 +85,7 @@
             this.edt_secret.Size = new System.Drawing.Size(200, 20);
             this.edt_secret.TabIndex = 10;
             this.edt_secret.UseSystemPasswordChar = true;
+            this.edt_secret.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_secret_KeyPress);
             // 
             // edt_login
             // 
@@ -96,6 +97,7 @@
             this.edt_login.Name = "edt_login";
             this.edt_login.Size = new System.Drawing.Size(200, 20);
             this.edt_login.TabIndex = 9;
+            this.edt_login.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.edt_login_KeyPress);
             // 
             // lbl_Password
             // 
@@ -134,7 +136,8 @@
             this.Controls.Add(this.lbl_Password);
             this.Controls.Add(this.lbl_User);
             this.Name = "Frm_Login";
-            this.Text = "Frm_Login";
+            this.Text = "Autenticação de Usuário";
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Frm_Login_KeyPress);
             this.ResumeLayout(false);
             this.PerformLayout();
 

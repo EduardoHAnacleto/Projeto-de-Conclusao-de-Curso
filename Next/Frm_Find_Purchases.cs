@@ -90,9 +90,9 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
             bool foundStatus = false;
             foreach (DataGridViewRow row in DGV_Purchases.Rows)
             {
-                if (!(row.Cells["billNumber"].Value.ToString() == edt_billNumber.Value.ToString()) &&
-                    !(row.Cells["billModel"].Value.ToString() == edt_billModel.Value.ToString()) &&
-                    !(row.Cells["billSeries"].Value.ToString() == edt_billSeries.Value.ToString()))
+                if ((row.Cells["billNumber"].Value.ToString() == edt_billNumber.Value.ToString()) &&
+                    (row.Cells["billModel"].Value.ToString() == edt_billModel.Value.ToString()) &&
+                    (row.Cells["billSeries"].Value.ToString() == edt_billSeries.Value.ToString()))
                 {
                     DGV_Purchases.Rows[row.Index].Selected = true;
                     foundStatus = true;
@@ -155,14 +155,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         public override void NewObject()
         {
-            Users user = new Users();
-            Users_Controller userController = new Users_Controller();
-            user = userController.FindItemId(3);
             Frm_Create_Purchases frmCreatePurchases = new Frm_Create_Purchases();
-            //frmCreatePurchases.Populated(false);
-            frmCreatePurchases.SetUser(user);
+            frmCreatePurchases.SetUser(_user);
             frmCreatePurchases.ShowDialog();
-            this.SetDataSourceToDGV();
+            this.PopulateDGVPurchases();
         }
     }
 }

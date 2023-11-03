@@ -25,6 +25,11 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Authorization
 
         private void btn_Enter_Click(object sender, EventArgs e)
         {
+            LogUser();
+        }
+
+        private void LogUser()
+        {
             try
             {
                 if (Authentication.LogUser(edt_login.Text, edt_secret.Text))
@@ -61,6 +66,37 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Authorization
         private void btn_Cancel_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        private void Frm_Login_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (e.KeyChar == (char)13)
+            {
+                LogUser();
+            }
+        }
+
+        private void edt_secret_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((edt_login.Text.Length > 0) && (edt_secret.Text.Length > 0))
+            {
+                if (e.KeyChar == (char)13)
+                {
+                    LogUser();
+                }
+            }
+
+        }
+
+        private void edt_login_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if ((edt_login.Text.Length > 0) && (edt_secret.Text.Length > 0))
+            {
+                if (e.KeyChar == (char)13)
+                {
+                    LogUser();
+                }
+            }
         }
     }
 }

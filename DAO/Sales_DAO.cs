@@ -370,6 +370,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                                 if (reader["sale_cancel_date"].ToString() != string.Empty)
                                 {
                                     obj.CancelDate = Convert.ToDateTime(reader["sale_cancel_date"]);
+                                    obj.CancelMotive = reader["cancel_motive"].ToString();
                                 }
                                 else
                                 {
@@ -817,7 +818,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     //<SaleItems
                     SqlCommand commandItemsSale = new SqlCommand(sqlItemsSale, connection);
                     commandItemsSale.Transaction = tran;
-                    commandItemsSale.Parameters.AddWithValue("@ID", sale.id);
+                    commandItemsSale.Parameters.AddWithValue("@SALEID", sale.id);
+                    commandItemsSale.Parameters.AddWithValue("@CANCELDATE", DateTime.Now.Date);
 
                     commandItemsSale.ExecuteNonQuery();
                     //>SaleItems
@@ -829,6 +831,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                         commandStock.Transaction = tran;
                         commandStock.Parameters.AddWithValue("@RESTOCK", obj.Quantity);
                         commandStock.Parameters.AddWithValue("@ID", obj.Product.id);
+                        commandStock.Parameters.AddWithValue("@SALEID", sale.id);
 
                         commandStock.ExecuteNonQuery();
                     }
@@ -845,6 +848,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.A_To_do
                     {
                         Console.WriteLine(ex.Message);
                         return status;
+                    }
+                    else
+                    {
+                        MessageBox.Show(ex.Message);
                     }
                 }
                 catch (Exception ex)

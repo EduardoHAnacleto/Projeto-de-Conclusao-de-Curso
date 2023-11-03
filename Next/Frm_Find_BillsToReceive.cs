@@ -59,7 +59,15 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         DGV_BillsToReceive.Rows.Add(BillId);
                         DGV_BillsToReceive.Rows[i].Cells["BillId"].Value = dr["id_bill"].ToString();
                         DGV_BillsToReceive.Rows[i].Cells["ClientName"].Value = _clientsController.FindItemId(Convert.ToInt32(dr["client_id"])).name;
-                        DGV_BillsToReceive.Rows[i].Cells["SaleNumberBillsReceive"].Value = dr["sale_id"].ToString();
+                        if (dr["sale_id"].ToString() != "0")
+                        {
+                            DGV_BillsToReceive.Rows[i].Cells["SaleNumberBillsReceive"].Value = dr["sale_id"].ToString();
+                        }
+                        else
+                        {
+                            DGV_BillsToReceive.Rows[i].Cells["SaleNumberBillsReceive"].Value = string.Empty;
+                        }
+
                         //DGV_BillsToReceive.Rows[i].Cells["PaymentMethodBillsToReceive"].Value = _payMethodsController.FindItemId(Convert.ToInt32(dr["paymethod_id"])).paymentMethod;
                         DGV_BillsToReceive.Rows[i].Cells["InstalmentNumber"].Value = dr["instalmentNumber"].ToString();
                         DGV_BillsToReceive.Rows[i].Cells["TotalValueBillsReceive"].Value = dr["instalmentValue"].ToString();

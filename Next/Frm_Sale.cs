@@ -1,4 +1,5 @@
-﻿using ProjetoEduardoAnacletoWindowsForm1.Controllers;
+﻿using ProjetoEduardoAnacletoWindowsForm1.Authorization;
+using ProjetoEduardoAnacletoWindowsForm1.Controllers;
 using ProjetoEduardoAnacletoWindowsForm1.Forms_Find;
 using ProjetoEduardoAnacletoWindowsForm1.FormsCreate;
 using ProjetoEduardoAnacletoWindowsForm1.Models;
@@ -101,17 +102,38 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             }
             else if (btn_new.Text == "Cancelar")
             {
-                if (txt_cancelMotive.Text.Length < 5)
+                if (Authentication.Authenticate(_User.AccessLevel, 3) && CheckInstalmentsForCancel(Sale.id))
                 {
-                    gbox_motive.Visible = true;
-                    txt_cancelMotive.Enabled = true;
-                    MessageBox.Show("Digite o motivo de cancelamento na caixa de texto com mais de 5 caractéres.");
+                    if (gbox_motive.Visible == false)
+                    {
+                        gbox_motive.Visible = true;
+                        gbox_motive.Enabled = true;
+                        txt_cancelMotive.Enabled = true;
+                        MessageBox.Show("Digite o motivo de cancelamento na caixa de texto com mais de 5 caracteres.");
+                    }
+                    else if (gbox_motive.Visible == true)
+                    {
+                        if (txt_cancelMotive.Text.Length > 5)
+                        {
+                            medt_CancelDate.Text = DateTime.Now.ToString();
+                            this.Save();
+                        }
+                        else if (txt_cancelMotive.Text.Length < 5)
+                        {
+                            MessageBox.Show("Motivo de cancelamento deve ter mais que 5 caracteres");
+                        }
+
+                    }
                 }
-                else
+                else if (!Authentication.Authenticate(_User.AccessLevel, 3))
                 {
-                    medt_CancelDate.Text = DateTime.Now.ToString();
-                    this.Save();
+                    MessageBox.Show("Usuário não possui autorização para cancelar vendas.");
                 }
+                else if (!CheckInstalmentsForCancel(GetObject().id))
+                {
+                    MessageBox.Show("Uma ou mais parcelas já foram pagas, não é possível cancelar.");
+                }
+
             }
         }
 
@@ -352,22 +374,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         private void btn_FindProduct_Click(object sender, EventArgs e) 
         {                  
-            //if (!CheckProductCamps())                                     
-            //{
                 NewFormSearchProduct();
-            //}
-            //else if (edt_productId.Value > 0)
-            //{
-
-            //    if (Convert.ToInt32(edt_productId.Value) == (Convert.ToInt32(GetSelectLastProdRow().Cells["IdProduct"].Value)))
-            //    {
-            //        NewFormSearchProduct();
-            //    }
-            //    else
-            //    {
-            //        SearchProduct();
-            //    }
-            //}
         }
 
         public void PopulateProduct(Products prod) //Popula campos do produto
@@ -645,19 +652,20 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
 
         public bool CheckInstalmentsForCancel(int saleId)
         {
-            var obj = this.GetObject();
-            var bills = _BTRController.FindSaleId(saleId);
+            bool status = true;
+            var obj = _controller.FindItemId(Sale.id);
+            var bills = _BTRController.FindSaleId(Sale.id);
             if (bills != null)
             {
                 foreach (var b in bills)
                 {
-                    if (b.PaidDate.HasValue)
+                    if (b.PaidDate.HasValue || b.CancelledDate.HasValue)
                     {
-                        return false;
+                        status = false;
                     }
                 }
             }
-            return true;
+            return status;
         }
 
         private Sales GetObject()
@@ -828,6 +836,10 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                 lbl_findClient.Visible = false;
                 btn_Save.Visible = false;
                 lbl_Save.Visible = false;
+                gbox_motive.Visible = true;
+                gbox_motive.Enabled = false;
+                txt_cancelMotive.Enabled = false;
+                txt_cancelMotive.Text = sale.CancelMotive;
             }
             
         }
@@ -879,8 +891,8 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
                     item.Product.productName,
                     item.Quantity,
                     item.ItemDiscountCash,
-                    item.ProductValue,
-                    totalValue
+                    Math.Round(item.ProductValue,2),
+                    Math.Round(totalValue,2)
                     );
             }
         }
@@ -944,6 +956,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Forms
             btn_Save.Enabled = false;
             btn_DeleteItem.Enabled = false;
             btn_find.Enabled = false;
+            txt_cancelMotive.Enabled = false;
             
         }
 

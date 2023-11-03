@@ -270,7 +270,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
                         command.Parameters.AddWithValue("@SALEID", saleId);
                         using (SqlDataReader reader = command.ExecuteReader())
                         {
-                            if (reader.Read())
+                            if (reader.HasRows)
                             {
                                 List<BillsToReceive> list = new List<BillsToReceive>();
                                 foreach (var row in reader)
