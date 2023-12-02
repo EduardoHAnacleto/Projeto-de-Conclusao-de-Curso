@@ -121,46 +121,46 @@
       <DependentUpon>Frm_Find_Suppliers.cs</DependentUpon>
     </Compile>
     <Compile Include="DAO\BillsToReceive_DAO.cs" />
-    <Compile Include="Next\Frm_Create_BillsToPay.cs">
+    <Compile Include="FormsCreate\Frm_Create_BillsToPay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Next\Frm_Create_BillsToPay.Designer.cs">
+    <Compile Include="FormsCreate\Frm_Create_BillsToPay.Designer.cs">
       <DependentUpon>Frm_Create_BillsToPay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Next\Frm_Create_BillsToReceive.cs">
+    <Compile Include="FormsCreate\Frm_Create_BillsToReceive.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Next\Frm_Create_BillsToReceive.Designer.cs">
+    <Compile Include="FormsCreate\Frm_Create_BillsToReceive.Designer.cs">
       <DependentUpon>Frm_Create_BillsToReceive.cs</DependentUpon>
     </Compile>
-    <Compile Include="Next\Frm_Create_Purchases.cs">
+    <Compile Include="FormsCreate\Frm_Create_Purchases.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Next\Frm_Create_Purchases.Designer.cs">
+    <Compile Include="FormsCreate\Frm_Create_Purchases.Designer.cs">
       <DependentUpon>Frm_Create_Purchases.cs</DependentUpon>
     </Compile>
-    <Compile Include="Next\Frm_Find_BillsToPay.cs">
+    <Compile Include="Forms_Find\Frm_Find_BillsToPay.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Next\Frm_Find_BillsToPay.Designer.cs">
+    <Compile Include="Forms_Find\Frm_Find_BillsToPay.Designer.cs">
       <DependentUpon>Frm_Find_BillsToPay.cs</DependentUpon>
     </Compile>
-    <Compile Include="Next\Frm_Find_BillsToReceive.cs">
+    <Compile Include="Forms_Find\Frm_Find_BillsToReceive.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Next\Frm_Find_BillsToReceive.Designer.cs">
+    <Compile Include="Forms_Find\Frm_Find_BillsToReceive.Designer.cs">
       <DependentUpon>Frm_Find_BillsToReceive.cs</DependentUpon>
     </Compile>
-    <Compile Include="Next\Frm_Find_Purchases.cs">
+    <Compile Include="Forms_Find\Frm_Find_Purchases.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Next\Frm_Find_Purchases.Designer.cs">
+    <Compile Include="Forms_Find\Frm_Find_Purchases.Designer.cs">
       <DependentUpon>Frm_Find_Purchases.cs</DependentUpon>
     </Compile>
-    <Compile Include="Next\Frm_Find_Sales.cs">
+    <Compile Include="Forms_Find\Frm_Find_Sales.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Next\Frm_Find_Sales.Designer.cs">
+    <Compile Include="Forms_Find\Frm_Find_Sales.Designer.cs">
       <DependentUpon>Frm_Find_Sales.cs</DependentUpon>
     </Compile>
     <Compile Include="Controllers\Clients_Controller.cs" />
@@ -365,10 +365,10 @@
     <Compile Include="Forms_Find\Frm_Find_States.Designer.cs">
       <DependentUpon>Frm_Find_States.cs</DependentUpon>
     </Compile>
-    <Compile Include="Next\Frm_Sale.cs">
+    <Compile Include="FormsCreate\Frm_Sale.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Next\Frm_Sale.Designer.cs">
+    <Compile Include="FormsCreate\Frm_Sale.Designer.cs">
       <DependentUpon>Frm_Sale.cs</DependentUpon>
     </Compile>
     <Compile Include="InheritForms\Frm_Find_Master.cs">
@@ -420,25 +420,25 @@
     <EmbeddedResource Include="Forms_Find\Frm_Find_Suppliers.resx">
       <DependentUpon>Frm_Find_Suppliers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Next\Frm_Create_BillsToPay.resx">
+    <EmbeddedResource Include="FormsCreate\Frm_Create_BillsToPay.resx">
       <DependentUpon>Frm_Create_BillsToPay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Next\Frm_Create_BillsToReceive.resx">
+    <EmbeddedResource Include="FormsCreate\Frm_Create_BillsToReceive.resx">
       <DependentUpon>Frm_Create_BillsToReceive.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Next\Frm_Create_Purchases.resx">
+    <EmbeddedResource Include="FormsCreate\Frm_Create_Purchases.resx">
       <DependentUpon>Frm_Create_Purchases.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Next\Frm_Find_BillsToPay.resx">
+    <EmbeddedResource Include="Forms_Find\Frm_Find_BillsToPay.resx">
       <DependentUpon>Frm_Find_BillsToPay.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Next\Frm_Find_BillsToReceive.resx">
+    <EmbeddedResource Include="Forms_Find\Frm_Find_BillsToReceive.resx">
       <DependentUpon>Frm_Find_BillsToReceive.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Next\Frm_Find_Purchases.resx">
+    <EmbeddedResource Include="Forms_Find\Frm_Find_Purchases.resx">
       <DependentUpon>Frm_Find_Purchases.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Next\Frm_Find_Sales.resx">
+    <EmbeddedResource Include="Forms_Find\Frm_Find_Sales.resx">
       <DependentUpon>Frm_Find_Sales.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormsCreate\Frm_Create_Brands.resx">
@@ -522,7 +522,7 @@
     <EmbeddedResource Include="Forms_Find\Frm_Find_States.resx">
       <DependentUpon>Frm_Find_States.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Next\Frm_Sale.resx">
+    <EmbeddedResource Include="FormsCreate\Frm_Sale.resx">
       <DependentUpon>Frm_Sale.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="InheritForms\Frm_Find_Master.resx">

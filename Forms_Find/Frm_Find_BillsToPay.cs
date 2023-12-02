@@ -126,13 +126,14 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
         {
             DGV_BillsToPay.Rows.Clear();
             PaymentConditions_Controller pcController = new PaymentConditions_Controller();
+            Suppliers_Controller supController = new Suppliers_Controller();
             DataTable dt = this._controller.PopulateDGV();
             if (dt != null)
             {
                 PaymentMethods_Controller metController = new PaymentMethods_Controller();
                 foreach (DataRow dr in dt.Rows)
                 {
-                    var supplier = _controller.FindSupplierId(Convert.ToInt32(dr["supplier_id"])).FirstOrDefault().Supplier;
+                    var supplier = supController.FindItemId(Convert.ToInt32(dr["supplier_id"]));
                     var billNum = Convert.ToInt32(dr["billNumber"]);
                     var billModel = Convert.ToInt32(dr["billModel"]);
                     var billSeries = Convert.ToInt32(dr["billSeries"]); 
@@ -186,7 +187,7 @@ namespace ProjetoEduardoAnacletoWindowsForm1.Next
 
         private void SetPaidBill_Click(object sender, EventArgs e)
         {
-            if (DGV_BillsToPay.Rows.Count > 1)
+            if (DGV_BillsToPay.Rows.Count > 0)
             {
                 var obj = GetObject();
                 if (obj.PaidDate != null || DGV_BillsToPay.SelectedRows[0].Cells["isPaid"].Value.ToString() == "PAGO")
